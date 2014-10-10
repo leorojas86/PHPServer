@@ -1,5 +1,5 @@
 <?php 
-	require_once "utils/MySQLManager.php";
+	require_once "utils/php/MySQLManager.php";
 
 	MySQLManager::Connect();
 
