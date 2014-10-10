@@ -4,16 +4,16 @@
 	{
 		private static $_mysqli = null;
 
-		public static function Connect()
+		public static function Connect($server, $user, $pass, $db)
 		{
-			MySQLManager::$_mysqli = new mysqli('localhost', 'root', 'root');
+			MySQLManager::$_mysqli = new mysqli($server, $user, $pass);
 
 			if(MySQLManager::$_mysqli->connect_errno)
     			echo "Failed to connect to MySQL error MySQLManager::$_mysqli->connect_errno, connect error 'MySQLManager::$_mysqli->connect_error'";
+    		//else
+				//echo "Connected to db successfully \n";
 
-			echo "Connected to db successfully \n";
-
-			MySQLManager::Execute("use mysql");
+			MySQLManager::Execute("use $db");
 		}
 
 		public static function Execute($query)
