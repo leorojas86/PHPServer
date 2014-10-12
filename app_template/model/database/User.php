@@ -1,12 +1,12 @@
 <?php 
 	class User
 	{
-		public function RegisterUser($username, $password, $fbId)
+		public function RegisterUser($name, $password, $fbId)
 		{
 
 		}
 
-		public function LoginUser($username, $password)
+		public function LoginUser($name, $password)
 		{
 
 		}

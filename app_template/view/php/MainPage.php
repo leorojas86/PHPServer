@@ -6,11 +6,12 @@
 		<script src="utils/js/utils.js" /> </script>
 		<script type="text/javascript">
 			
-			showAlert();
+			//showAlert();
 
 		</script>
 	</head>
 	<body>
-		<?php echo '<p>Hello World</p>'; ?> 
+		<?php //echo '<p>Hello World</p>'; ?> 
+		<a href="http://localhost:8888?page=TestCases">Test Cases</a>
 	</body>
 </html>
