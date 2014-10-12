@@ -1,5 +1,6 @@
 <?php 
 	require_once "utils/php/MySQLManager.php";
+	require_once "app_template/model/Session.php";
 
 	$server = 'localhost';
 	$user   = 'root';
@@ -7,6 +8,8 @@
 	$db     = 'mysql';
 
 	MySQLManager::Connect($server, $user, $pass, $db);
+
+	Session::Start();
 
 	$result = MySQLManager::Execute("SELECT name FROM event LIMIT 10");
 
