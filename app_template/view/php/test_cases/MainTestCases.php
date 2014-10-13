@@ -12,7 +12,15 @@ require_once "app_template/model/Session.php";
 		<script src="utils/js/utils.js" /> </script>
 		<script type="text/javascript">
 			
-			//showAlert();
+			function onLoginButtonClick()
+			{
+				alert("Login");
+			}
+
+			function onRegisterButtonClick()
+			{
+				alert("Register");
+			}
 
 		</script>
 	</head>
@@ -22,7 +30,15 @@ require_once "app_template/model/Session.php";
 		if(Session::IsUserLoggedIn())
 			echo '<p>User is logged in</p>'; 
 		else
-			echo '<p>User is NOT logged in</p>'; 
+		{
+			echo '<p>User Name</p>
+				  <input type="text" name="user_name">
+				  <p>User Password</p>
+				  <input type="text" name="user_password"> <br/><br/>
+				  <button type="button" onclick="onLoginButtonClick()">Login</button>
+				  <br/><br/>
+				  <button type="button" onclick="onRegisterButtonClick()">Register</button>';
+		}
 
 		?> 
 	</body>
