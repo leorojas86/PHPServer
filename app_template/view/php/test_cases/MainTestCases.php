@@ -19,7 +19,12 @@ require_once "app_template/model/Session.php";
 
 			function onRegisterButtonClick()
 			{
-				alert("Register");
+				request("http://localhost:8888?service=User,method=Register,username=test,password=test", "POST", onRegisterCallback);
+			}
+
+			function onRegisterCallback(xmlhttp)
+			{
+				alert("result = " + xmlhttp.responseText);
 			}
 
 		</script>
