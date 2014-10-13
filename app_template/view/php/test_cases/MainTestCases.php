@@ -24,7 +24,8 @@ require_once "app_template/model/Session.php";
 
 			function onRegisterCallback(xmlhttp)
 			{
-				alert("result = " + xmlhttp.responseText);
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+					alert("result = " + xmlhttp.responseText);
 			}
 
 		</script>
