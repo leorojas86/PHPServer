@@ -7,10 +7,8 @@ class UsersController
 	{
 		switch ($method) 
 		{
-			case "Register":
-				User::Register($_POST["username"], $_POST["password"]);
-			break;
-			default:     echo "Unknown user service method '$service'"; break;
+			case "Register": User::Register($_POST["username"], $_POST["password"]); break;
+			default: echo "Unsupported user service method '$service'"; break;
 		}
 	}
 }

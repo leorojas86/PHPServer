@@ -9,12 +9,38 @@ function ajax(url, elementId)
 	request(url, "GET", ajaxCallbackFunction);
 }
 
-function request(url, method, callback) 
+function request(url, params, method, callback) 
 {
 	var xmlhttp 			   = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function() { callback(xmlhttp) };
-	xmlhttp.open(method, url, true);
-	xmlhttp.send();
+
+	switch(method)
+	{
+		case "POST":
+
+			xmlhttp.open(method, url, true);
+
+			//Send the proper header information along with the request
+			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xmlhttp.setRequestHeader("Content-length", params.length);
+			xmlhttp.setRequestHeader("Connection", "close");
+
+			xmlhttp.send(params);
+			
+		break;
+		case "GET":
+
+			if(params.length > 0)
+				url += "?" + params;
+
+			xmlhttp.open(method, url, true);
+			xmlhttp.send();
+
+		break;
+		default:
+			alert("Unsupported request method '" + method + "'");
+		break;
+	}
 }
 
 //http://stackoverflow.com/questions/133925/javascript-post-request-like-a-form-submit
