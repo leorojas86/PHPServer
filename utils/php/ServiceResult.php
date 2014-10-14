@@ -16,11 +16,11 @@
 
 		public function toJSON()
 		{
-			$data = array('success' => $this->success, 
-						  'data' => $this->data, 
+			$data = array('success' 	 => $this->success, 
+						  'data' 	     => $this->data, 
 						  'errorMessage' => $this->errorMessage, 
-						  'errorCode' => $this->errorCode);
-			
+						  'errorCode' 	 => $this->errorCode);
+
 			return json_encode($data);
 		}
 	} 
