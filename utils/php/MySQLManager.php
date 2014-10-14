@@ -18,12 +18,22 @@
 
 		public static function Execute($query)
 		{
-			$result = MySQLManager::$_mysqli->query($query);
+			if(MySQLManager::$_mysqli != null)
+			{
+				$result = MySQLManager::$_mysqli->query($query);
 
-			if(!$result) 
-		    	echo "Error executing query '$query', MySQLManager::$_mysqli->error";
+				if(!$result) 
+				{
+					$error = MySQLManager::$_mysqli->error;
+			    	error_log("Error executing query '$query', error '$error'");
+				}
 
-			return $result;
+				return $result;
+			}
+			else
+			{
+				error_log("Calling MySQLManager::Execute without calling MySQLManager::Connect before, mysql connection is null");
+			}
 		}
 	} 
 ?>

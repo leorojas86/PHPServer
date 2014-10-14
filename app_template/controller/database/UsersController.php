@@ -1,4 +1,5 @@
 <?php 
+require_once "app_template/model/Environment.php";
 require_once "app_template/model/database/User.php";
 
 class UsersController

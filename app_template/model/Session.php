@@ -1,7 +1,7 @@
 <?php 
 	class Session
 	{
-		const USER_LOGGED_IN = "USER_LOGGED_IN";
+		private static $USER_LOGGED_IN = "USER_LOGGED_IN";
 
 		public static function Start()
 		{
@@ -10,12 +10,12 @@
 
 		public static function IsUserLoggedIn()
 		{
-			return isset($_SESSION[USER_LOGGED_IN]) ? $_SESSION[USER_LOGGED_IN] : false;
+			return isset($_SESSION[Session::$USER_LOGGED_IN]) ? $_SESSION[Session::$USER_LOGGED_IN] : false;
 		}
 
 		public static function SetUserLoggedIn($loggedIn)
 		{
-			$_SESSION[USER_LOGGED_IN] = $loggedIn;
+			$_SESSION[Session::$USER_LOGGED_IN] = $loggedIn;
 		}
 	} 
 ?>
