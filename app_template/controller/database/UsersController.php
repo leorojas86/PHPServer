@@ -8,9 +8,20 @@ class UsersController
 	{
 		switch ($method) 
 		{
-			case "Register": User::Register($_POST["username"], $_POST["password"]); break;
-			default: echo "Unsupported user service method '$service'"; break;
+			case "Register": 
+				$result = UsersController::Register();
+			break;
+			default: 		 
+				$result = new ServiceResult(false, null, "Unsupported user service method '$method'", Constants::UNSUPPORTED_SERVICE_METHOD); 
+			break;
 		}
+
+		echo $result->toJSON();
+	}
+
+	private static function Register()
+	{
+		 return User::Register($_POST["username"], $_POST["password"]);
 	}
 }
 ?>

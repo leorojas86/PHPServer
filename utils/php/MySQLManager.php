@@ -35,5 +35,10 @@
 				error_log("Calling MySQLManager::Execute without calling MySQLManager::Connect before, mysql connection is null");
 			}
 		}
+
+		public static function GetLastInsertId()
+		{
+			return mysqli_insert_id(MySQLManager::$_mysqli);
+		}
 	} 
 ?>

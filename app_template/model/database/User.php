@@ -1,8 +1,9 @@
 <?php 
+	require_once "app_template/model/Constants.php";
+	require_once "utils/php/ServiceResult.php";
+
 	class User
 	{
-		private static $TABLE_NAME = "users";
-
 		public static function Register($name, $password)
 		{
 			#echo "RegisterUser name '$name' pass '$password'";
@@ -13,11 +14,12 @@
 
 			if($result)
 			{
-				echo "Success";
-		    	$result->close();
+				//$result->close(); Dont close because the result is 'true'
+				$resultData = array("new_user_id" => MySQLManager::GetLastInsertId());
+				return new ServiceResult(true, $resultData);
 			}
 			else
-				echo "Error";
+				return new ServiceResult(false, null, "Can not register user", Constants::MYSQL_ERROR_CODE);
 		}
 
 		public static function Login($name, $password)
