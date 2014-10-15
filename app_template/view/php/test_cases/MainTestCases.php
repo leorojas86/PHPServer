@@ -19,7 +19,7 @@ require_once "app_template/model/Session.php";
 
 			function onRegisterButtonClick()
 			{
-				var params = "service=User&method=Register&username=test&password=test";
+				var params = "service=User&method=Register&name=test&email=test@test.com&password=test";
 				request("http://localhost:8888", params, "POST", onRegisterCallback);
 			}
 
@@ -40,6 +40,8 @@ require_once "app_template/model/Session.php";
 		{
 			echo '<p>User Name</p>
 				  <input type="text" name="user_name">
+				  <p>User Email</p>
+				  <input type="text" name="user_email"> <br/><br/>
 				  <p>User Password</p>
 				  <input type="text" name="user_password"> <br/><br/>
 				  <button type="button" onclick="onLoginButtonClick()">Login</button>

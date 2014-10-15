@@ -21,7 +21,22 @@ class UsersController
 
 	private static function Register()
 	{
-		 return User::Register($_POST["username"], $_POST["password"]);
+		$email 	= $_POST["email"];//TODO: Validate email
+		$result = User::ExistsUserWithEmail($email);
+
+		if($result->success)
+		{
+			if($result->data["exists"])
+				$result = new ServiceResult(false, null, "User with email '$email' already exists", Constants::USER_ALREADY_EXISTS); 
+			else
+			{
+				$password = $_POST["password"];
+				$name     = $_POST["name"];
+				return User::Register($email, $password, $name);//TODO: send validation email
+			}
+		}
+
+		return $result;
 	}
 }
 ?>

@@ -4,7 +4,7 @@
 
 	class User
 	{
-		public static function Register($name, $password)
+		public static function Register($email, $password, $name)
 		{
 			#echo "RegisterUser name '$name' pass '$password'";
 			$sql = "INSERT INTO users (name, password)
@@ -20,6 +20,22 @@
 			}
 			else
 				return new ServiceResult(false, null, "Can not register user", Constants::MYSQL_ERROR_CODE);
+		}
+
+		public static function ExistsUserWithEmail($email)
+		{
+			$sql    = "SELECT count(id) FROM users WHERE email='$email'";
+			$result = MySQLManager::Execute($sql);
+
+			if($result)
+			{
+				$exists = $result->num_rows > 0;
+
+				$result->close();
+				return new ServiceResult(true, array("exists" => $exists));
+			}
+			else
+				return new ServiceResult(false, null, "Can not check if user exist", Constants::MYSQL_ERROR_CODE);
 		}
 
 		public static function Login($name, $password)

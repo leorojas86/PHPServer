@@ -1,17 +1,17 @@
 <?php 
 	class ServiceResult
 	{
-		private $success 	  = false;
-		private $data		  = null;
-		private $errorMessage = "None";
-		private $errorCode    = 0; 
+		public $success 	 = false;
+		public $data		 = null;
+		public $errorMessage = "None";
+		public $errorCode    = 0; 
 
 		public function __construct($success, $data, $errorMessage = "None", $errorCode = 0)
 		{
-			$this->$success 	 = $success;
-			$this->$data 		 = $data;
-			$this->$errorMessage = $errorMessage;
-			$this->$errorCode    = $errorCode;
+			$this->success 	    = $success;
+			$this->data 		= $data;
+			$this->errorMessage = $errorMessage;
+			$this->errorCode    = $errorCode;
 		}
 
 		public function toJSON()
