@@ -16,10 +16,9 @@ require_once "app_template/model/Session.php";
 			{
 				var userEmail    = document.getElementById('user_email');	
 				var userPassword = document.getElementById('user_password');	
+				var params 		 = "service=User&method=Login" + "&email=" + userEmail.value + "&password=" + userPassword.value;
 
-				var params = "service=User&method=Login" + "&email=" + userEmail.value + "&password=" + userPassword.value;
-
-				alert("params = " + params);
+				//alert("params = " + params);
 
 				request("http://localhost:8888", params, "POST", onRegisterCallback);
 			}
@@ -29,8 +28,7 @@ require_once "app_template/model/Session.php";
 				var userName     = document.getElementById('user_name');
 				var userEmail    = document.getElementById('user_email');	
 				var userPassword = document.getElementById('user_password');	
-
-				var params = "service=User&method=Register&name=" + userName.value + "&email=" + userEmail.value + "&password=" + userPassword.value;
+				var params 		 = "service=User&method=Register&name=" + userName.value + "&email=" + userEmail.value + "&password=" + userPassword.value;
 
 				//alert("params = " + params);
 

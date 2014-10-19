@@ -39,9 +39,26 @@
 				return new ServiceResult(false, null, "Can not check if user exist", Constants::MYSQL_ERROR_CODE);
 		}
 
-		public static function Login($name, $password)
+		public static function Login($email, $password)
 		{
+			$sql    = "SELECT * FROM users WHERE email='$email' and password='$password'";
+			$result = MySQLManager::Execute($sql);
+			
+			if($result)
+			{
+				$row = MySQLManager::FetchRow($result);
+				MySQLManager::Close($result);
 
+				if($row)
+				{
+					Session::SetUserLoggedInData($row);
+					return new ServiceResult(true, $row);
+				}
+				else
+					return new ServiceResult(false, null, "User name or password incorrect", Constants::USER_NAME_OR_PASSWORD_INCORRECT);
+			}
+			else
+				return new ServiceResult(false, null, "Can not login user", Constants::MYSQL_ERROR_CODE);
 		}
 
 		public static function UpdateData($userId, $userData)

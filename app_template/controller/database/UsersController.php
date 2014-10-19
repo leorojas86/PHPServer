@@ -11,6 +11,9 @@ class UsersController
 			case "Register": 
 				$result = UsersController::Register();
 			break;
+			case "Login": 
+				$result = UsersController::Login();
+			break;
 			default: 		 
 				$result = new ServiceResult(false, null, "Unsupported user service method '$method'", Constants::UNSUPPORTED_SERVICE_METHOD); 
 			break;
@@ -38,5 +41,15 @@ class UsersController
 
 		return $result;
 	}
+
+	private static function Login()
+	{
+		$email 	  = $_POST["email"];
+		$password = $_POST["password"];//TODO: send password securely
+		$result   = User::Login($email, $password);
+
+		return $result;
+	}
+
 }
 ?>

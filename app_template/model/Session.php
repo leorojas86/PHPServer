@@ -10,12 +10,12 @@
 
 		public static function IsUserLoggedIn()
 		{
-			return isset($_SESSION[Session::$USER_LOGGED_IN]) ? $_SESSION[Session::$USER_LOGGED_IN] : false;
+			return isset($_SESSION[Session::$USER_LOGGED_IN]);
 		}
 
-		public static function SetUserLoggedIn($loggedIn)
+		public static function SetUserLoggedInData($loggedInUserData)
 		{
-			$_SESSION[Session::$USER_LOGGED_IN] = $loggedIn;
+			$_SESSION[Session::$USER_LOGGED_IN] = $loggedInUserData;
 		}
 	} 
 ?>
