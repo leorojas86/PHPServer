@@ -1,6 +1,7 @@
 <?php 
 
 require_once "app_template/model/Session.php";
+require_once "app_template/model/database/Group.php";
 
 ?>
 
@@ -85,6 +86,7 @@ require_once "app_template/model/Session.php";
 		if(Session::IsUserLoggedIn())
 		{
 			$loggedInUserData = Session::GetLoggedIdUserData();
+			$userId   		  = $loggedInUserData["id"];
 			$userName 		  = $loggedInUserData["name"];
 			$userData         = $loggedInUserData["data"];
 
@@ -93,7 +95,18 @@ require_once "app_template/model/Session.php";
 			echo "<p>User Name</p> <p>$userName</p>
 			 	  <p>User Data</p>
 				  <input type='text' id='user_data'  value = '$userData'>
-				  <button type='button' onclick='onUpdateUserDataClick()'>Update</button>";
+				  <button type='button' onclick='onUpdateUserDataClick()'>Update</button><br/><br/>";
+
+			$rootGroupResult = Group::GetUserRootGroup($userId);
+
+			if($rootGroupResult->success)
+			{
+				$groupName = $rootGroupResult->data["name"];
+
+				echo "<div id='group_container'>
+						<p>$groupName</p>
+			 	  	</div>";
+		 	}
 		}
 		else
 		{
