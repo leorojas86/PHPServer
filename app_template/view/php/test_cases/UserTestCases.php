@@ -83,7 +83,7 @@ require_once "app_template/controller/database/GroupsController.php";
 				var groupData = document.getElementById('group_data');
 				var params    = "service=Group&method=UpdateData&id=" + groupId + "&data=" + groupData.value;
 
-				alert("params = " + params);
+				//alert("params = " + params);
 
 				request("http://localhost:8888", params, "POST", onUpdateGroupDataCallback);
 			}
