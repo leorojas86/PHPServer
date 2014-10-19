@@ -54,24 +54,36 @@ require_once "app_template/model/Session.php";
 					alert("result '" + xmlhttp.responseText + "'");
 			}
 
+
+			
+
 		</script>
 	</head>
 	<body>
 		<?php 
 
 		if(Session::IsUserLoggedIn())
-			echo '<p>User is logged in</p>'; 
+		{
+			$loggedInUserData = Session::GetLoggedIdUserData();
+			$userName 		  = $loggedInUserData["name"];
+			$userData         = $loggedInUserData["data"];
+
+			echo "<p>User Name</p> <p>$userName</p>
+			 	  <p>User Data</p>
+				  <input type='text' id='user_data'  value = '$userData'>
+				  <button type='button' onclick='onUpdateUserDataClick()'>Update</button>";
+		}
 		else
 		{
-			echo '<p>User Name</p>
-				  <input type="text" id="user_name"     value = "leo">
+			echo "<p>User Name</p>
+				  <input type='text' id='user_name'     value = 'leo'>
 				  <p>User Email</p>
-				  <input type="text" id="user_email"    value = "leo"> <br/><br/>
+				  <input type='text' id='user_email'    value = 'leo'> <br/><br/>
 				  <p>User Password</p>
-				  <input type="text" id="user_password" value = "leo"> <br/><br/>
-				  <button type="button" onclick="onLoginButtonClick()">Login</button>
+				  <input type='text' id='user_password' value = 'leo'> <br/><br/>
+				  <button type='button' onclick='onLoginButtonClick()''>Login</button>
 				  <br/><br/>
-				  <button type="button" onclick="onRegisterButtonClick()">Register</button>';
+				  <button type='button' onclick='onRegisterButtonClick()'>Register</button>";
 		}
 
 		?> 

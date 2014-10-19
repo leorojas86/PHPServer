@@ -17,5 +17,10 @@
 		{
 			$_SESSION[Session::$USER_LOGGED_IN] = $loggedInUserData;
 		}
+
+		public static function GetLoggedIdUserData()
+		{
+			return $_SESSION[Session::$USER_LOGGED_IN];
+		}
 	} 
 ?>
