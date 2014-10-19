@@ -20,7 +20,20 @@ require_once "app_template/model/Session.php";
 
 				//alert("params = " + params);
 
-				request("http://localhost:8888", params, "POST", onRegisterCallback);
+				request("http://localhost:8888", params, "POST", onLoginCallback);
+			}
+
+			function onLoginCallback(xmlhttp)
+			{
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+				{
+					alert("result '" + xmlhttp.responseText + "'");
+
+					var result = JSON.parse(xmlhttp.responseText);
+
+					if(result.success)
+						location.reload();
+				}
 			}
 
 			function onRegisterButtonClick()
