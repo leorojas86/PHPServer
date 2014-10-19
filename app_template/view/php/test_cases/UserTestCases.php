@@ -94,6 +94,12 @@ require_once "app_template/controller/database/GroupsController.php";
 					alert("result '" + xmlhttp.responseText + "'");
 			}
 
+			function onAddSubGroupClick()
+			{
+				var newGroupName = document.getElementById('new_group_name');
+				alert("newGroupName = " + newGroupName.value);
+			}
+
 		</script>
 	</head>
 	<body>

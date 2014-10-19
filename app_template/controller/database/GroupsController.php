@@ -41,7 +41,9 @@ class GroupsController
 						  <p>Group Data</p>
 						  <input type='text' id='group_data' value = '$groupData'>
 				  		  <button type='button' onclick='onUpdateGroupDataClick($groupId)'>Update</button><br/><br/>
-				  		  <p>Sub Groups</p>";
+				  		  <p>Sub Groups</p>
+				  		  <input type='text' id='new_group_name' value = 'New Group Name'>
+				  		  <button type='button' onclick='onAddSubGroupClick()'>Add</button>";
 
 			return new ServiceResult(true, $groupAjax);
 		}
