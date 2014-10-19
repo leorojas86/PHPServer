@@ -12,6 +12,6 @@
 	</head>
 	<body>
 		<?php //echo '<p>Hello World</p>'; ?> 
-		<a href="http://localhost:8888?page=TestCases">Test Cases</a>
+		<a href="http://localhost:8888?page=MainTestCases">Test Cases</a>
 	</body>
 </html>

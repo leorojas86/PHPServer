@@ -18,8 +18,10 @@
 
 		switch($page) //Generates the app content (html/js/etc) 
 		{
-	  		case "Home": 	  require_once "app_template/view/php/MainPage.php"; 				 break;
-	    	case "TestCases": require_once "app_template/view/php/test_cases/MainTestCases.php"; break;
+	  		case "Home": 	  	  require_once "app_template/view/php/MainPage.php"; 				 break;
+	    	case "MainTestCases": require_once "app_template/view/php/test_cases/MainTestCases.php"; break;
+	    	case "UserTestCases": require_once "app_template/view/php/test_cases/UserTestCases.php"; break;
+	    	default: 			  echo "Unknown page '" + $page + "'"; 								 break;
 		}
 	}
 ?>
