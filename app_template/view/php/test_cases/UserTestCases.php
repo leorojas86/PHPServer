@@ -59,7 +59,7 @@ require_once "app_template/model/Session.php";
 				var userData = document.getElementById('user_data');
 				var params   = "service=User&method=UpdateData&data=" + userData.value;
 
-				alert("params = " + params);
+				//alert("params = " + params);
 
 				request("http://localhost:8888", params, "POST", onUpdateUserDataCallback);
 			}
@@ -87,6 +87,8 @@ require_once "app_template/model/Session.php";
 			$loggedInUserData = Session::GetLoggedIdUserData();
 			$userName 		  = $loggedInUserData["name"];
 			$userData         = $loggedInUserData["data"];
+
+			//echo "userData = " . json_encode($loggedInUserData);
 
 			echo "<p>User Name</p> <p>$userName</p>
 			 	  <p>User Data</p>

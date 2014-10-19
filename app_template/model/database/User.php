@@ -16,7 +16,7 @@
 			{
 				MySQLManager::Close($result);
 				$resultData = array("new_user_id" => MySQLManager::GetLastInsertId());
-				
+
 				return new ServiceResult(true, $resultData);
 			}
 			else
@@ -76,7 +76,24 @@
 				MySQLManager::Close($result);
 
 				if($affectedRows == 1)
-					return new ServiceResult(true, array("user_id" => $userId));
+				{
+					$sql    = "SELECT * FROM users WHERE id='$userId'";
+					$result = MySQLManager::Execute($sql);
+
+					if($result)
+					{
+						$row = MySQLManager::FetchRow($result);
+						MySQLManager::Close($result);
+
+						if($row)
+						{
+							Session::SetUserLoggedInData($row);
+							return new ServiceResult(true, array("user_id" => $userId));
+						}
+						else
+							return new ServiceResult(false, null, "Could not update user data", Constants::MYSQL_ERROR_CODE);
+					}
+				}
 				else
 					return new ServiceResult(false, null, "Could not update user data", Constants::MYSQL_ERROR_CODE);
 			}
