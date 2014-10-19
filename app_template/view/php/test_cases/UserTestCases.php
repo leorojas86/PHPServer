@@ -54,8 +54,28 @@ require_once "app_template/model/Session.php";
 					alert("result '" + xmlhttp.responseText + "'");
 			}
 
+			function onUpdateUserDataClick()
+			{
+				var userData = document.getElementById('user_data');
+				var params   = "service=User&method=UpdateData&data=" + userData.value;
 
-			
+				alert("params = " + params);
+
+				request("http://localhost:8888", params, "POST", onUpdateUserDataCallback);
+			}
+
+			function onUpdateUserDataCallback(xmlhttp)
+			{
+				if(xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+				{
+					alert("result '" + xmlhttp.responseText + "'");
+
+					var result = JSON.parse(xmlhttp.responseText);
+
+					if(result.success)
+						location.reload();
+				}
+			}
 
 		</script>
 	</head>
