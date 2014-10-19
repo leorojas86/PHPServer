@@ -30,7 +30,7 @@ class UsersController
 				$result = new ServiceResult(false, null, "User with email '$email' already exists", Constants::USER_ALREADY_EXISTS); 
 			else
 			{
-				$password = $_POST["password"];
+				$password = $_POST["password"];//TODO: send password securely
 				$name     = $_POST["name"];
 				return User::Register($email, $password, $name);//TODO: send validation email
 			}

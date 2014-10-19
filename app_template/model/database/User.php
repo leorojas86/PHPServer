@@ -7,14 +7,14 @@
 		public static function Register($email, $password, $name)
 		{
 			#echo "RegisterUser name '$name' pass '$password'";
-			$sql = "INSERT INTO users (name, password)
-					VALUES ('$name', '$password')";
+			$sql = "INSERT INTO users (name, password, email)
+					VALUES ('$name', '$password', '$email')";
 
 			$result = MySQLManager::Execute($sql);
 
 			if($result)
 			{
-				//$result->close(); Dont close because the result is 'true'
+				MySQLManager::Close($result);
 				$resultData = array("new_user_id" => MySQLManager::GetLastInsertId());
 				return new ServiceResult(true, $resultData);
 			}
@@ -24,14 +24,15 @@
 
 		public static function ExistsUserWithEmail($email)
 		{
-			$sql    = "SELECT count(id) FROM users WHERE email='$email'";
+			$sql    = "SELECT count(id) as count FROM users WHERE email='$email'";
 			$result = MySQLManager::Execute($sql);
 
 			if($result)
 			{
-				$exists = $result->num_rows > 0;
+				$row    = MySQLManager::FetchRow($result);
+				$exists = $row["count"] > 0;
+				MySQLManager::Close($result);
 
-				$result->close();
 				return new ServiceResult(true, array("exists" => $exists));
 			}
 			else

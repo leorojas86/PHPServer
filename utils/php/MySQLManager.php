@@ -40,5 +40,15 @@
 		{
 			return mysqli_insert_id(MySQLManager::$_mysqli);
 		}
+
+		public static function FetchRow($result)
+		{
+			return $result->fetch_assoc();
+		}
+
+		public static function Close($result)
+		{
+			$result->close();
+		}
 	} 
 ?>
