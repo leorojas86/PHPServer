@@ -14,6 +14,9 @@ class UsersController
 			case "Login": 
 				$result = UsersController::Login();
 			break;
+			case "UpdateData": 
+				$result = UsersController::UpdateData();
+			break;
 			default: 		 
 				$result = new ServiceResult(false, null, "Unsupported user service method '$method'", Constants::UNSUPPORTED_SERVICE_METHOD); 
 			break;
@@ -49,6 +52,13 @@ class UsersController
 		$result   = User::Login($email, $password);
 
 		return $result;
+	}
+
+	private static function UpdateData()
+	{
+		$data = $_POST["data"];
+
+		return User::UpdateData($data);
 	}
 
 }

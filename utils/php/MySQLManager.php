@@ -51,5 +51,10 @@
 			if(!is_bool($result))
 				$result->close();
 		}
+
+		public static function AffectedRows()
+		{
+			return MySQLManager::$_mysqli->affected_rows;
+		}
 	} 
 ?>

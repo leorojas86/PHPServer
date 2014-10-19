@@ -16,6 +16,7 @@
 			{
 				MySQLManager::Close($result);
 				$resultData = array("new_user_id" => MySQLManager::GetLastInsertId());
+				
 				return new ServiceResult(true, $resultData);
 			}
 			else
@@ -61,9 +62,26 @@
 				return new ServiceResult(false, null, "Can not login user", Constants::MYSQL_ERROR_CODE);
 		}
 
-		public static function UpdateData($userId, $userData)
+		public static function UpdateData($userData)
 		{
+			$loggedInUserData = Session::GetLoggedIdUserData();
+			$userId 		  = $loggedInUserData["id"];
+
+			$sql    = "UPDATE users SET data='$userData' where id='$userId'";
+			$result = MySQLManager::Execute($sql);
 			
+			if($result)
+			{
+				$affectedRows = MySQLManager::AffectedRows();
+				MySQLManager::Close($result);
+
+				if($affectedRows == 1)
+					return new ServiceResult(true, array("user_id" => $userId));
+				else
+					return new ServiceResult(false, null, "Could not update user data", Constants::MYSQL_ERROR_CODE);
+			}
+			else
+				return new ServiceResult(false, null, "Can not login user", Constants::MYSQL_ERROR_CODE);
 		}
 	}
 ?>
