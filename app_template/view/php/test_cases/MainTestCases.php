@@ -14,19 +14,33 @@ require_once "app_template/model/Session.php";
 			
 			function onLoginButtonClick()
 			{
-				alert("Login");
+				var userEmail    = document.getElementById('user_email');	
+				var userPassword = document.getElementById('user_password');	
+
+				var params = "service=User&method=Login" + "&email=" + userEmail.value + "&password=" + userPassword.value;
+
+				alert("params = " + params);
+
+				request("http://localhost:8888", params, "POST", onRegisterCallback);
 			}
 
 			function onRegisterButtonClick()
 			{
-				var params = "service=User&method=Register&name=test&email=test@test.com&password=test";
+				var userName     = document.getElementById('user_name');
+				var userEmail    = document.getElementById('user_email');	
+				var userPassword = document.getElementById('user_password');	
+
+				var params = "service=User&method=Register&name=" + userName.value + "&email=" + userEmail.value + "&password=" + userPassword.value;
+
+				//alert("params = " + params);
+
 				request("http://localhost:8888", params, "POST", onRegisterCallback);
 			}
 
 			function onRegisterCallback(xmlhttp)
 			{
 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
-					alert("result = " + xmlhttp.responseText);
+					alert("result '" + xmlhttp.responseText + "'");
 			}
 
 		</script>
@@ -39,11 +53,11 @@ require_once "app_template/model/Session.php";
 		else
 		{
 			echo '<p>User Name</p>
-				  <input type="text" name="user_name">
+				  <input type="text" id="user_name"     value = "leo">
 				  <p>User Email</p>
-				  <input type="text" name="user_email"> <br/><br/>
+				  <input type="text" id="user_email"    value = "leo"> <br/><br/>
 				  <p>User Password</p>
-				  <input type="text" name="user_password"> <br/><br/>
+				  <input type="text" id="user_password" value = "leo"> <br/><br/>
 				  <button type="button" onclick="onLoginButtonClick()">Login</button>
 				  <br/><br/>
 				  <button type="button" onclick="onRegisterButtonClick()">Register</button>';

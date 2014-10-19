@@ -48,7 +48,8 @@
 
 		public static function Close($result)
 		{
-			$result->close();
+			if(!is_bool($result))
+				$result->close();
 		}
 	} 
 ?>
