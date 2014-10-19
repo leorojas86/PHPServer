@@ -1,5 +1,6 @@
 <?php 
 	require_once "app_template/controller/database/UsersController.php";
+	require_once "app_template/controller/database/GroupsController.php";
 
 	if(isset($_POST["service"]))
 	{
@@ -8,8 +9,9 @@
 
 		switch($service) //Generates the app content (html/js/etc) 
 		{
-			case "User": UsersController::Service($method); break;
-			default:     echo "Unknown service '$service'"; break;
+			case "User":  UsersController::Service($method);  break;
+			case "Group": GroupsController::Service($method); break;
+			default:      echo "Unknown service '$service'";  break;
 		}
 	}
 	else

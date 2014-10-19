@@ -78,6 +78,22 @@ require_once "app_template/controller/database/GroupsController.php";
 				}
 			}
 
+			function onUpdateGroupDataClick(groupId)
+			{
+				var groupData = document.getElementById('group_data');
+				var params    = "service=Group&method=UpdateData&id=" + groupId + "&data=" + groupData.value;
+
+				alert("params = " + params);
+
+				request("http://localhost:8888", params, "POST", onUpdateGroupDataCallback);
+			}
+
+			function onUpdateGroupDataCallback(xmlhttp)
+			{
+				if(xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+					alert("result '" + xmlhttp.responseText + "'");
+			}
+
 		</script>
 	</head>
 	<body>
@@ -95,7 +111,7 @@ require_once "app_template/controller/database/GroupsController.php";
 			echo "<p>User Name</p> <p>$userName</p>
 			 	  <p>User Data</p>
 				  <input type='text' id='user_data'  value = '$userData'>
-				  <button type='button' onclick='onUpdateUserDataClick()'>Update</button><br/><br/>";
+				  <button type='button' onclick='onUpdateUserDataClick()'>Update</button><br/><br/><br/><br/>";
 
 			$rootGroupResult = Group::GetUserRootGroup($userId);
 
@@ -107,7 +123,7 @@ require_once "app_template/controller/database/GroupsController.php";
 				if($groupAjaxResult->success)
 				{
 					$groupAjax = $groupAjaxResult->data;
-					
+
 					echo "<div id='group_container'>
 							$groupAjax
 				 	  	</div>";

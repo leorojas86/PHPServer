@@ -11,6 +11,9 @@ class GroupsController
 			case "GetTestingGroupAjax": 
 				$result = GroupsController::GetTestingGroupAjax();
 			break;
+			case "UpdateData":
+				$result = GroupsController::UpdateData();
+			break;
 			default: 		 
 				$result = new ServiceResult(false, null, "Unsupported user service method '$method'", Constants::UNSUPPORTED_SERVICE_METHOD); 
 			break;
@@ -32,10 +35,26 @@ class GroupsController
 		if($result->success)
 		{
 			$groupName = $result->data["name"];
-			return new ServiceResult(true, "<p>$groupName</p>");
+			$groupData = $result->data["data"]; 
+			$groupAjax = "<p>Group Name</p>
+						  <p>$groupName</p>
+						  <p>Group Data</p>
+						  <input type='text' id='group_data' value = '$groupData'>
+				  		  <button type='button' onclick='onUpdateGroupDataClick($groupId)'>Update</button><br/><br/>
+				  		  <p>Sub Groups</p>";
+
+			return new ServiceResult(true, $groupAjax);
 		}
 
 		return $result;
+	}
+
+	public static function UpdateData()
+	{
+		$groupId = $_POST["id"];
+		$data    = $_POST["data"];
+
+		return Group::UpdateData($groupId, $data);
 	}
 }
 ?>

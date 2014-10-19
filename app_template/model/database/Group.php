@@ -66,17 +66,31 @@
 				return new ServiceResult(false, null, "Couldn't add group to database", Constants::MYSQL_ERROR_CODE);
 		}
 
-		public static function AddNewGroup($name, $type, $userId, $parentGroupId, $isRoot)
+		public static function Add($name, $type, $userId, $parentGroupId, $isRoot)
 		{
 
 		}
 
-		public static function UpdateGroupData($groupId, $groupData)
+		public static function UpdateData($groupId, $groupData)
 		{
+			$sql    = "UPDATE groups SET data='$groupData' where id='$groupId'";
+			$result = MySQLManager::Execute($sql);
 			
+			if($result)
+			{
+				$affectedRows = MySQLManager::AffectedRows();
+				MySQLManager::Close($result);
+
+				if($affectedRows == 1)
+					return new ServiceResult(true, array("group_id" => $groupId));
+				else
+					return new ServiceResult(false, null, "Could not update user data", Constants::MYSQL_ERROR_CODE);
+			}
+			else
+				return new ServiceResult(false, null, "Can not login user", Constants::MYSQL_ERROR_CODE);
 		}
 
-		public static function DeleteGroup($groupId)
+		public static function Delete($groupId)
 		{
 
 		}
