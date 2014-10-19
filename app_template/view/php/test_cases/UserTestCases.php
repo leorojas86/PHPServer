@@ -1,7 +1,7 @@
 <?php 
 
 require_once "app_template/model/Session.php";
-require_once "app_template/model/database/Group.php";
+require_once "app_template/controller/database/GroupsController.php";
 
 ?>
 
@@ -101,11 +101,17 @@ require_once "app_template/model/database/Group.php";
 
 			if($rootGroupResult->success)
 			{
-				$groupName = $rootGroupResult->data["name"];
+				$groupId         = $rootGroupResult->data["id"];
+				$groupAjaxResult = GroupsController::GetTestingGroupAjax($groupId);
 
-				echo "<div id='group_container'>
-						<p>$groupName</p>
-			 	  	</div>";
+				if($groupAjaxResult->success)
+				{
+					$groupAjax = $groupAjaxResult->data;
+					
+					echo "<div id='group_container'>
+							$groupAjax
+				 	  	</div>";
+			 	}
 		 	}
 		}
 		else
