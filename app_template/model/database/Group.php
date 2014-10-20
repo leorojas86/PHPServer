@@ -18,15 +18,16 @@
 
 		public static function GetUserRootGroupInternal($userId)
 		{
-			$sql    = "SELECT * FROM groups WHERE is_root='1' and user_id='$userId'";
+			$sql    = "SELECT id FROM groups WHERE is_root='1' and user_id='$userId'";
 			$result = MySQLManager::Execute($sql);
 			
 			if($result)
 			{
-				$row = MySQLManager::FetchRow($result);
+				$row 		 = MySQLManager::FetchRow($result);
+				$rootGroupId = $row['id'];
 				MySQLManager::Close($result);
 
-				return new ServiceResult(true, $row);
+				return Group::GetGroup($rootGroupId);
 			}
 			else
 				return new ServiceResult(false, null, "Can not get group", Constants::MYSQL_ERROR_CODE);
@@ -42,16 +43,50 @@
 				$row = MySQLManager::FetchRow($result);
 				MySQLManager::Close($result);
 
-				return new ServiceResult(true, $row);
+				$result = Group::GetSubGroups($id);
+
+				if($result->success)
+				{
+					$row['sub_groups'] = $result->data;
+					return new ServiceResult(true, $row);
+				}
 			}
 			else
 				return new ServiceResult(false, null, "Can not get group", Constants::MYSQL_ERROR_CODE);
 		}
 
+
+		public static function GetSubGroups($id)
+		{
+			$sql    = "SELECT * FROM groups WHERE parent_group_id='$id'";
+			$result = MySQLManager::Execute($sql);
+			
+			if($result)
+			{
+				$groups = array();
+				$row    = MySQLManager::FetchRow($result);
+				
+				while($row != null)
+				{
+					$groups[] = $row;
+					$row 	  = MySQLManager::FetchRow($result);
+				}
+
+				return new ServiceResult(true, $groups);
+			}
+			else
+				return new ServiceResult(false, null, "Couldn't get sub groups", Constants::MYSQL_ERROR_CODE);
+		}
+
 		private static function AddRootGroupToUser($userId)
 		{
-			$sql = "INSERT INTO groups (name, type, user_id, is_root)
-					VALUES ('RootGroup', '0', '$userId', '1')";
+			return Group::AddSubGroup('RootGroup', null, $userId);
+		}
+
+		public static function AddSubGroup($name, $parentGroupId, $userId)
+		{
+			$sql = "INSERT INTO groups (name, type, user_id, is_root, parent_group_id)
+					VALUES ('$name', '0', '$userId', '0', '$parentGroupId')";
 
 			$result = MySQLManager::Execute($sql);
 
@@ -64,11 +99,6 @@
 			}
 			else
 				return new ServiceResult(false, null, "Couldn't add group to database", Constants::MYSQL_ERROR_CODE);
-		}
-
-		public static function Add($name, $type, $userId, $parentGroupId, $isRoot)
-		{
-
 		}
 
 		public static function UpdateData($groupId, $groupData)

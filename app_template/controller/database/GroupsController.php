@@ -9,10 +9,13 @@ class GroupsController
 		switch ($method) 
 		{
 			case "GetTestingGroupAjax": 
-				$result = GroupsController::GetTestingGroupAjax();
+				$result = GroupsController::GetTestingGroupInternal();
 			break;
 			case "UpdateData":
 				$result = GroupsController::UpdateData();
+			break;
+			case "AddSubGroup":
+				$result = GroupsController::AddSubGroup();
 			break;
 			default: 		 
 				$result = new ServiceResult(false, null, "Unsupported user service method '$method'", Constants::UNSUPPORTED_SERVICE_METHOD); 
@@ -43,7 +46,7 @@ class GroupsController
 				  		  <button type='button' onclick='onUpdateGroupDataClick($groupId)'>Update</button><br/><br/>
 				  		  <p>Sub Groups</p>
 				  		  <input type='text' id='new_group_name' value = 'New Group Name'>
-				  		  <button type='button' onclick='onAddSubGroupClick()'>Add</button>";
+				  		  <button type='button' onclick='onAddSubGroupClick($groupId)'>Add</button>";
 
 			return new ServiceResult(true, $groupAjax);
 		}
@@ -57,6 +60,17 @@ class GroupsController
 		$data    = $_POST["data"];
 
 		return Group::UpdateData($groupId, $data);
+	}
+
+	public static function AddSubGroup()
+	{
+		$loggedInUserData = Session::GetLoggedIdUserData();
+		$userId   		  = $loggedInUserData["id"];
+
+		$name 		   = $_POST["name"];
+		$parentGroupId = $_POST["parentGroupId"];
+
+		return Group::AddSubGroup($name, $parentGroupId, $userId);
 	}
 }
 ?>
