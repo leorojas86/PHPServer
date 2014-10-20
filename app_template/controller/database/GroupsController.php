@@ -48,6 +48,16 @@ class GroupsController
 				  		  <input type='text' id='new_group_name' value = 'New Group Name'>
 				  		  <button type='button' onclick='onAddSubGroupClick($groupId)'>Add</button>";
 
+			$subGroups = $result->data["sub_groups"];
+
+			foreach($subGroups as $subGroup)
+    		{
+    			$subGroupName = $subGroup["name"];
+
+    			$groupAjax .= "<p>Group Name</p>
+						  	   <p>$subGroupName</p>";
+    		}
+
 			return new ServiceResult(true, $groupAjax);
 		}
 
