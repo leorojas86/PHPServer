@@ -37,10 +37,16 @@ class GroupsController
 
 		if($result->success)
 		{
-			$groupPath = $result->data["path"];
-			$groupData = $result->data["data"]; 
-			$groupAjax = "<p>$groupPath</p>
-						  <p>Group Data</p>
+			$groupPath     = $result->data["path"];
+			$groupData     = $result->data["data"]; 
+			$parentGroupId = $result->data["parent_group_id"];
+
+			$groupAjax = "<p>$groupPath</p>";
+
+			if($parentGroupId != 0)
+				$groupAjax .= "<button type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button>";
+
+			$groupAjax .= "<p>Group Data</p>
 						  <input type='text' id='group_data' value = '$groupData'>
 				  		  <button type='button' onclick='onUpdateGroupDataClick($groupId)'>Update</button><br/><br/>
 				  		  <p>Sub Groups:</p>";

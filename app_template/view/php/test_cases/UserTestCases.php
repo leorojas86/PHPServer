@@ -148,6 +148,13 @@ require_once "app_template/controller/database/GroupsController.php";
 				request("http://localhost:8888", params, "POST", onGroupContainerAjaxCallback);
 			}
 
+			function onBackButtonClick(parentGroupId)
+			{
+				var params = "service=Group&method=GetTestingGroupAjax&id=" + parentGroupId;
+
+				request("http://localhost:8888", params, "POST", onGroupContainerAjaxCallback);
+			}
+
 		</script>
 	</head>
 	<body>
