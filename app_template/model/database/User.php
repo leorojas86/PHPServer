@@ -10,11 +10,11 @@
 			$sql = "INSERT INTO users (name, password, email)
 					VALUES ('$name', '$password', '$email')";
 
-			$result = MySQLManager::Execute($sql);
+			$sqlResult = MySQLManager::Execute($sql);
 
-			if($result)
+			if($sqlResult)
 			{
-				MySQLManager::Close($result);
+				MySQLManager::Close($sqlResult);
 				$resultData = array("new_user_id" => MySQLManager::GetLastInsertId());
 
 				return new ServiceResult(true, $resultData);
@@ -25,14 +25,14 @@
 
 		public static function ExistsUserWithEmail($email)
 		{
-			$sql    = "SELECT count(id) as count FROM users WHERE email='$email'";
-			$result = MySQLManager::Execute($sql);
+			$sql       = "SELECT count(id) as count FROM users WHERE email='$email'";
+			$sqlResult = MySQLManager::Execute($sql);
 
-			if($result)
+			if($sqlResult)
 			{
-				$row    = MySQLManager::FetchRow($result);
+				$row    = MySQLManager::FetchRow($sqlResult);
 				$exists = $row["count"] > 0;
-				MySQLManager::Close($result);
+				MySQLManager::Close($sqlResult);
 
 				return new ServiceResult(true, array("exists" => $exists));
 			}
@@ -42,13 +42,13 @@
 
 		public static function Login($email, $password)
 		{
-			$sql    = "SELECT * FROM users WHERE email='$email' and password='$password'";
-			$result = MySQLManager::Execute($sql);
+			$sql       = "SELECT * FROM users WHERE email='$email' and password='$password'";
+			$sqlResult = MySQLManager::Execute($sql);
 			
-			if($result)
+			if($sqlResult)
 			{
-				$row = MySQLManager::FetchRow($result);
-				MySQLManager::Close($result);
+				$row = MySQLManager::FetchRow($sqlResult);
+				MySQLManager::Close($sqlResult);
 
 				if($row)
 				{
@@ -67,23 +67,23 @@
 			$loggedInUserData = Session::GetLoggedIdUserData();
 			$userId 		  = $loggedInUserData["id"];
 
-			$sql    = "UPDATE users SET data='$userData' where id='$userId'";
-			$result = MySQLManager::Execute($sql);
+			$sql       = "UPDATE users SET data='$userData' where id='$userId'";
+			$sqlResult = MySQLManager::Execute($sql);
 			
-			if($result)
+			if($sqlResult)
 			{
 				$affectedRows = MySQLManager::AffectedRows();
-				MySQLManager::Close($result);
+				MySQLManager::Close($sqlResult);
 
 				if($affectedRows == 1)
 				{
-					$sql    = "SELECT * FROM users WHERE id='$userId'";
-					$result = MySQLManager::Execute($sql);
+					$sql       = "SELECT * FROM users WHERE id='$userId'";
+					$sqlResult = MySQLManager::Execute($sql);
 
-					if($result)
+					if($sqlResult)
 					{
-						$row = MySQLManager::FetchRow($result);
-						MySQLManager::Close($result);
+						$row = MySQLManager::FetchRow($sqlResult);
+						MySQLManager::Close($sqlResult);
 
 						if($row)
 						{
