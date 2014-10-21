@@ -124,11 +124,28 @@ require_once "app_template/controller/database/GroupsController.php";
 				}
 			}
 
+			function onSubGroupClick(groupId)
+			{
+				loadAjaxGroup(groupId);
+			}
+
+			function onBackButtonClick(parentGroupId)
+			{
+				loadAjaxGroup(parentGroupId);
+			}
+
+			function loadAjaxGroup(groupId)
+			{
+				var params = "service=Group&method=GetTestingGroupAjax&id=" + groupId;
+
+				request("http://localhost:8888", params, "POST", onGroupContainerAjaxCallback);
+			}
+
 			function onGroupContainerAjaxCallback(xmlhttp)
 			{
 				if(xmlhttp.readyState == 4 && xmlhttp.status == 200) 
 				{
-					alert("result '" + xmlhttp.responseText + "'");
+					//alert("result '" + xmlhttp.responseText + "'");
 
 					var result = JSON.parse(xmlhttp.responseText);
 
@@ -138,21 +155,6 @@ require_once "app_template/controller/database/GroupsController.php";
 						groupContaner.innerHTML = result.data;
 					}
 				}
-			}
-
-			function onSubGroupClick(groupId)
-			{
-				alert(groupId);
-				var params = "service=Group&method=GetTestingGroupAjax&id=" + groupId;
-
-				request("http://localhost:8888", params, "POST", onGroupContainerAjaxCallback);
-			}
-
-			function onBackButtonClick(parentGroupId)
-			{
-				var params = "service=Group&method=GetTestingGroupAjax&id=" + parentGroupId;
-
-				request("http://localhost:8888", params, "POST", onGroupContainerAjaxCallback);
 			}
 
 		</script>
