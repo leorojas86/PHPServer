@@ -35,6 +35,35 @@
 
 		public static function GetGroup($id)
 		{
+			$result = Group::GetGroupData($id);
+			
+			if($result->success)
+			{
+				$groupData = $result->data;
+
+				if($groupData != null)
+				{
+					$result = Group::GetSubGroups($id);
+
+					if($result->success)
+					{
+						$groupData['sub_groups'] = $result->data;
+						$result 		   		 = Group::GetGroupPath($groupData);
+
+						if($result->success)
+						{
+							$groupData['path'] = $result->data;
+							return new ServiceResult(true, $groupData);
+						}
+					}
+				}
+			}
+			
+			return $result;
+		}
+
+		public static function GetGroupData($id)
+		{
 			$sql       = "SELECT * FROM groups WHERE id='$id'";
 			$sqlResult = MySQLManager::Execute($sql);
 			
@@ -43,22 +72,36 @@
 				$row = MySQLManager::FetchRow($sqlResult);
 				MySQLManager::Close($sqlResult);
 
-				if($row != null)
-				{
-					$result = Group::GetSubGroups($id);
-
-					if($result->success)
-						$row['sub_groups'] = $result->data;
-					else
-						return $result;
-				}
-
 				return new ServiceResult(true, $row);
 			}
 			else
 				return new ServiceResult(false, null, "Can not get group", Constants::MYSQL_ERROR_CODE);
 		}
 
+		public static function GetGroupPath($groupData)
+		{
+			$id   		   = $groupData["id"];
+			$name 		   = $groupData["name"];
+			$parentGroupId = $groupData["parent_group_id"];
+
+			$groupPath = "$name/";
+
+			while($parentGroupId != 0)
+			{
+				$result = Group::GetGroupData($parentGroupId);
+
+				if($result->success)
+				{
+					$parentGroupId = $result->data["parent_group_id"];
+					$groupName     = $result->data["name"];
+					$groupPath     = $groupName . "/" .$groupPath;
+				}
+				else
+					return $result;
+			}
+
+			return new ServiceResult(true, $groupPath);
+		}
 
 		public static function GetSubGroups($id)
 		{

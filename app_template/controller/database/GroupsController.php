@@ -37,9 +37,9 @@ class GroupsController
 
 		if($result->success)
 		{
-			$groupName = $result->data["name"];
+			$groupPath = $result->data["path"];
 			$groupData = $result->data["data"]; 
-			$groupAjax = "<p>$groupName</p>
+			$groupAjax = "<p>$groupPath</p>
 						  <p>Group Data</p>
 						  <input type='text' id='group_data' value = '$groupData'>
 				  		  <button type='button' onclick='onUpdateGroupDataClick($groupId)'>Update</button><br/><br/>
