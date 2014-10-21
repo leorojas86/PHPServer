@@ -31,7 +31,7 @@ class GroupsController
 	private static function DeleteGroup()
 	{
 		$groupId = $_POST["id"];
-		Group::Delete($groupId);
+		return Group::Delete($groupId);
 	}
 
 	private static function GetTestingGroupInternal()

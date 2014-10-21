@@ -13,8 +13,8 @@ require_once "app_template/controller/database/GroupsController.php";
 		<script src="utils/js/utils.js" /> </script>
 		<script type="text/javascript">
 
-			var addingSubgroupParentId = null;
-			var copyingGroupId		   = null;
+			var _copyingGroupId		   = null;
+			var _parentGroupId		   = null;
 			
 			function onLoginButtonClick()
 			{
@@ -99,9 +99,9 @@ require_once "app_template/controller/database/GroupsController.php";
 
 			function onAddSubGroupClick(parentGroupId)
 			{
-				addingSubgroupParentId = parentGroupId;
-				var newGroupName 	   = document.getElementById('new_group_name');
-				var params    		   = "service=Group&method=AddSubGroup&parentGroupId=" + parentGroupId + "&name=" + newGroupName.value;
+				_parentGroupId 		= parentGroupId;
+				var newGroupName 	= document.getElementById('new_group_name');
+				var params    		= "service=Group&method=AddSubGroup&parentGroupId=" + parentGroupId + "&name=" + newGroupName.value;
 
 				//alert("params = " + params);
 
@@ -118,7 +118,7 @@ require_once "app_template/controller/database/GroupsController.php";
 
 					if(result.success)
 					{
-						var params = "service=Group&method=GetTestingGroupAjax&id=" + addingSubgroupParentId;
+						var params = "service=Group&method=GetTestingGroupAjax&id=" + _parentGroupId;
 
 						request("http://localhost:8888", params, "POST", onGroupContainerAjaxCallback);
 					}
@@ -163,9 +163,10 @@ require_once "app_template/controller/database/GroupsController.php";
 				copyingGroupId = groupId;
 			}
 
-			function onDeleteButtonClick(groupId)
+			function onDeleteButtonClick(groupId, parentGroupId)
 			{
-				var remove = confirm("Are you sure that you want to remove the current group");
+				_parentGroupId = parentGroupId;
+				var remove 	   = confirm("Are you sure that you want to remove the current group");
 
 				if(remove) 
 				{
@@ -177,9 +178,15 @@ require_once "app_template/controller/database/GroupsController.php";
 
 			function onDeleteGroupCallback(xmlhttp)
 			{
-				if(checkForValidResponse(xmlhttp)) 
+				if(checkForValidResponse(xmlhttp))
 				{
+					alert(xmlhttp.responseText);
+					var result = JSON.parse(xmlhttp.responseText);
 
+					if(result.success)
+					{
+						loadAjaxGroup(_parentGroupId);
+					}
 				}
 			}
 
