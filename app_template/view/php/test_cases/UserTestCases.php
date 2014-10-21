@@ -12,6 +12,9 @@ require_once "app_template/controller/database/GroupsController.php";
 		<title>PHP Test</title>
 		<script src="utils/js/utils.js" /> </script>
 		<script type="text/javascript">
+
+			var addingSubgroupParentId = null;
+			var copyingGroupId		   = null;
 			
 			function onLoginButtonClick()
 			{
@@ -26,7 +29,7 @@ require_once "app_template/controller/database/GroupsController.php";
 
 			function onLoginCallback(xmlhttp)
 			{
-				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+				if(checkForValidResponse(xmlhttp)) 
 				{
 					alert("result '" + xmlhttp.responseText + "'");
 
@@ -51,7 +54,7 @@ require_once "app_template/controller/database/GroupsController.php";
 
 			function onRegisterCallback(xmlhttp)
 			{
-				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+				if(checkForValidResponse(xmlhttp)) 
 					alert("result '" + xmlhttp.responseText + "'");
 			}
 
@@ -67,7 +70,7 @@ require_once "app_template/controller/database/GroupsController.php";
 
 			function onUpdateUserDataCallback(xmlhttp)
 			{
-				if(xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+				if(checkForValidResponse(xmlhttp)) 
 				{
 					alert("result '" + xmlhttp.responseText + "'");
 
@@ -90,11 +93,9 @@ require_once "app_template/controller/database/GroupsController.php";
 
 			function onUpdateGroupDataCallback(xmlhttp)
 			{
-				if(xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+				if(checkForValidResponse(xmlhttp)) 
 					alert("result '" + xmlhttp.responseText + "'");
 			}
-
-			var addingSubgroupParentId = null;
 
 			function onAddSubGroupClick(parentGroupId)
 			{
@@ -109,7 +110,7 @@ require_once "app_template/controller/database/GroupsController.php";
 
 			function onAddSubGroupCallback(xmlhttp)
 			{
-				if(xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+				if(checkForValidResponse(xmlhttp)) 
 				{
 					alert("result '" + xmlhttp.responseText + "'");
 
@@ -143,7 +144,7 @@ require_once "app_template/controller/database/GroupsController.php";
 
 			function onGroupContainerAjaxCallback(xmlhttp)
 			{
-				if(xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+				if(checkForValidResponse(xmlhttp)) 
 				{
 					//alert("result '" + xmlhttp.responseText + "'");
 
@@ -154,6 +155,31 @@ require_once "app_template/controller/database/GroupsController.php";
 						var groupContaner 	    = document.getElementById('group_container');
 						groupContaner.innerHTML = result.data;
 					}
+				}
+			}
+
+			function onCopyButtonClick(groupId)
+			{
+				copyingGroupId = groupId;
+			}
+
+			function onDeleteButtonClick(groupId)
+			{
+				var remove = confirm("Are you sure that you want to remove the current group");
+
+				if(remove) 
+				{
+					var params = "service=Group&method=Delete&id=" + groupId;
+
+					request("http://localhost:8888", params, "POST", onDeleteGroupCallback);
+				} 
+			}
+
+			function onDeleteGroupCallback(xmlhttp)
+			{
+				if(checkForValidResponse(xmlhttp)) 
+				{
+
 				}
 			}
 

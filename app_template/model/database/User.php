@@ -19,8 +19,8 @@
 
 				return new ServiceResult(true, $resultData);
 			}
-			else
-				return new ServiceResult(false, null, "Can not register user", Constants::MYSQL_ERROR_CODE);
+			
+			return new ServiceResult(false, null, "Can not register user", Constants::MYSQL_ERROR_CODE);
 		}
 
 		public static function ExistsUserWithEmail($email)
@@ -36,8 +36,8 @@
 
 				return new ServiceResult(true, array("exists" => $exists));
 			}
-			else
-				return new ServiceResult(false, null, "Can not check if user exist", Constants::MYSQL_ERROR_CODE);
+			
+			return new ServiceResult(false, null, "Can not check if user exist", Constants::MYSQL_ERROR_CODE);
 		}
 
 		public static function Login($email, $password)
@@ -55,11 +55,11 @@
 					Session::SetUserLoggedInData($row);
 					return new ServiceResult(true, $row);
 				}
-				else
-					return new ServiceResult(false, null, "User name or password incorrect", Constants::USER_NAME_OR_PASSWORD_INCORRECT);
+				
+				return new ServiceResult(false, null, "User name or password incorrect", Constants::USER_NAME_OR_PASSWORD_INCORRECT);
 			}
-			else
-				return new ServiceResult(false, null, "Can not login user", Constants::MYSQL_ERROR_CODE);
+			
+			return new ServiceResult(false, null, "Can not login user", Constants::MYSQL_ERROR_CODE);
 		}
 
 		public static function UpdateData($userData)
@@ -90,15 +90,11 @@
 							Session::SetUserLoggedInData($row);
 							return new ServiceResult(true, array("user_id" => $userId));
 						}
-						else
-							return new ServiceResult(false, null, "Could not update user data", Constants::MYSQL_ERROR_CODE);
 					}
 				}
-				else
-					return new ServiceResult(false, null, "Could not update user data", Constants::MYSQL_ERROR_CODE);
 			}
-			else
-				return new ServiceResult(false, null, "Can not login user", Constants::MYSQL_ERROR_CODE);
+			
+			return new ServiceResult(false, null, "Could not update user data", Constants::MYSQL_ERROR_CODE);
 		}
 	}
 ?>

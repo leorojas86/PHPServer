@@ -17,12 +17,21 @@ class GroupsController
 			case "AddSubGroup":
 				$result = GroupsController::AddSubGroup();
 			break;
+			case "Delete":
+				$result = GroupsController::DeleteGroup();
+			break;
 			default: 		 
 				$result = new ServiceResult(false, null, "Unsupported user service method '$method'", Constants::UNSUPPORTED_SERVICE_METHOD); 
 			break;
 		}
 
 		echo $result->toJSON();
+	}
+
+	private static function DeleteGroup()
+	{
+		$groupId = $_POST["id"];
+		Group::Delete($groupId);
 	}
 
 	private static function GetTestingGroupInternal()
@@ -44,7 +53,9 @@ class GroupsController
 			$groupAjax = "<p>$groupPath</p>";
 
 			if($parentGroupId != 0)
-				$groupAjax .= "<button type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button>";
+				$groupAjax .= "<button type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button>
+							   <button type='button' onclick='onCopyButtonClick($groupId)'>Copy</button>
+							   <button type='button' onclick='onDeleteButtonClick($groupId)'>Delete</button>";
 
 			$groupAjax .= "<p>Group Data</p>
 						  <input type='text' id='group_data' value = '$groupData'>

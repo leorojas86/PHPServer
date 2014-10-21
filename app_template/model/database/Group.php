@@ -29,8 +29,8 @@
 
 				return Group::GetGroup($rootGroupId);
 			}
-			else
-				return new ServiceResult(false, null, "Can not get group", Constants::MYSQL_ERROR_CODE);
+			
+			return new ServiceResult(false, null, "Can not get group", Constants::MYSQL_ERROR_CODE);
 		} 
 
 		public static function GetGroup($id)
@@ -74,8 +74,8 @@
 
 				return new ServiceResult(true, $row);
 			}
-			else
-				return new ServiceResult(false, null, "Can not get group", Constants::MYSQL_ERROR_CODE);
+			
+			return new ServiceResult(false, null, "Can not get group", Constants::MYSQL_ERROR_CODE);
 		}
 
 		public static function GetGroupPath($groupData)
@@ -123,8 +123,8 @@
 
 				return new ServiceResult(true, $groups);
 			}
-			else
-				return new ServiceResult(false, null, "Couldn't get sub groups", Constants::MYSQL_ERROR_CODE);
+			
+			return new ServiceResult(false, null, "Couldn't get sub groups", Constants::MYSQL_ERROR_CODE);
 		}
 
 		private static function AddRootGroupToUser($userId)
@@ -146,8 +146,8 @@
 
 				return new ServiceResult(true, $resultData);
 			}
-			else
-				return new ServiceResult(false, null, "Couldn't add group to database", Constants::MYSQL_ERROR_CODE);
+
+			return new ServiceResult(false, null, "Couldn't add group to database", Constants::MYSQL_ERROR_CODE);
 		}
 
 		public static function UpdateData($groupId, $groupData)
@@ -162,16 +162,44 @@
 
 				if($affectedRows == 1)
 					return new ServiceResult(true, array("group_id" => $groupId));
-				else
-					return new ServiceResult(false, null, "Could not update group data", Constants::MYSQL_ERROR_CODE);
 			}
-			else
-				return new ServiceResult(false, null, "Could not update group data", Constants::MYSQL_ERROR_CODE);
+			
+			return new ServiceResult(false, null, "Could not update group data", Constants::MYSQL_ERROR_CODE);
 		}
 
 		public static function Delete($groupId)
 		{
+			$result = Group::GetSubGroups($groupId);
 
+			if($result->success)
+			{
+				$subGroups = $result->data;
+
+				foreach($subGroups as $subGroup)
+	    		{
+	    			$subGroupId = $subGroup["id"];
+	    			$result 	= Group::Delete($subGroupId);
+
+	    			if(!$result->success)
+	    				return $result;
+				}
+
+				$sql 	   = "DELETE FROM groups WHERE id = '$groupId'";
+				$sqlResult = MySQLManager::Execute($sql);
+
+				if($sqlResult)
+				{
+					$affectedRows = MySQLManager::AffectedRows();
+					MySQLManager::Close($sqlResult);
+
+					if($affectedRows == 1)
+						return new ServiceResult(true, array("group_id" => $groupId));
+				}
+				
+				return new ServiceResult(false, null, "Could not delete group", Constants::MYSQL_ERROR_CODE);
+			}
+
+			return $result;
 		}
 	}
 ?>

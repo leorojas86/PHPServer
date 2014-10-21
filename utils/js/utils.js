@@ -43,4 +43,9 @@ function request(url, params, method, callback)
 	}
 }
 
+function checkForValidResponse(xmlhttp)
+{
+	return xmlhttp.readyState == 4 && xmlhttp.status == 200;
+}
+
 //http://stackoverflow.com/questions/133925/javascript-post-request-like-a-form-submit
