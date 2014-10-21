@@ -73,7 +73,7 @@ class GroupsController
 
 				if($copyingGroupId != "null")
 				{
-					$result = Group::IsInHierarchy($copyingGroupId, $groupId);
+					$result = Group::IsInHierarchy($groupId, $copyingGroupId);
 
 					if($result->success)
 					{
