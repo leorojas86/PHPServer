@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title>PHP Test</title>
-		<script src="utils/js/utils.js" /> </script>
+		<script src="utils/js/utils.js" > </script>
 		<script type="text/javascript">
 			
 			//showAlert();
