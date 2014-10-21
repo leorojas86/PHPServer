@@ -20,12 +20,23 @@ class GroupsController
 			case "Delete":
 				$result = GroupsController::DeleteGroup();
 			break;
+			case "Move":
+				$result = GroupsController::MoveGroup();
+			break;
 			default: 		 
 				$result = new ServiceResult(false, null, "Unsupported user service method '$method'", Constants::UNSUPPORTED_SERVICE_METHOD); 
 			break;
 		}
 
 		echo $result->toJSON();
+	}
+
+	private static function MoveGroup()
+	{
+		$groupId 	   = $_POST["id"];
+		$parentGroupId = $_POST["parentGroupId"];
+
+		return Group::Move($groupId, $parentGroupId);
 	}
 
 	private static function DeleteGroup()
@@ -36,11 +47,13 @@ class GroupsController
 
 	private static function GetTestingGroupInternal()
 	{
-		$groupId = $_POST["id"];
-		return GroupsController::GetTestingGroupAjax($groupId);
+		$groupId 		= $_POST["id"];
+		$copyingGroupId = $_POST["copyingGroupId"];
+
+		return GroupsController::GetTestingGroupAjax($groupId, $copyingGroupId);
 	}
 
-	public static function GetTestingGroupAjax($groupId)
+	public static function GetTestingGroupAjax($groupId, $copyingGroupId)
 	{
 		$result = Group::GetGroup($groupId);
 
@@ -49,20 +62,37 @@ class GroupsController
 			$groupPath     = $result->data["path"];
 			$groupData     = $result->data["data"]; 
 			$parentGroupId = $result->data["parent_group_id"];
+			$subGroups 	   = $result->data["sub_groups"];
 
 			$groupAjax = "<p>$groupPath</p>";
 
 			if($parentGroupId != 0)
+			{
 				$groupAjax .= "<button type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button>
-							   <button type='button' onclick='onCopyButtonClick($groupId)'>Copy</button>
-							   <button type='button' onclick='onDeleteButtonClick($groupId, $parentGroupId)'>Delete</button>";
+							   <button type='button' onclick='onCopyButtonClick($groupId)'>Copy</button>";
+
+				if($copyingGroupId != "null")
+				{
+					/*$result = Group::IsInHierarchy($copyingGroupId, $groupId);
+
+					if($result->success)
+					{
+						$isInHierarchy = $result->data;
+						
+						if(!$isInHierarchy)
+							$groupAjax .= "<button type='button' onclick='onPasteButtonClick($groupId)'>Paste</button>";
+					}
+					else
+						return $result;*/
+				}
+
+				$groupAjax .= "<button type='button' onclick='onDeleteButtonClick($groupId, $parentGroupId)'>Delete</button>";
+			}
 
 			$groupAjax .= "<p>Group Data</p>
 						  <input type='text' id='group_data' value = '$groupData'>
 				  		  <button type='button' onclick='onUpdateGroupDataClick($groupId)'>Update</button><br/><br/>
 				  		  <p>Sub Groups:</p>";
-
-			$subGroups = $result->data["sub_groups"];
 
 			foreach($subGroups as $subGroup)
     		{

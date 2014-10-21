@@ -201,5 +201,55 @@
 
 			return $result;
 		}
+
+		public static function Move($groupId, $parentGroupId)
+		{
+			$sql       = "UPDATE groups SET parent_group_id='$parentGroupId' where id='$groupId'";
+			$sqlResult = MySQLManager::Execute($sql);
+			
+			if($sqlResult)
+			{
+				$affectedRows = MySQLManager::AffectedRows();
+				MySQLManager::Close($sqlResult);
+
+				if($affectedRows == 1)
+					return new ServiceResult(true, array("group_id" => $groupId));
+			}
+			
+			return new ServiceResult(false, null, "Could not update group data", Constants::MYSQL_ERROR_CODE);
+		}
+
+		public static function IsInHierarchy($groupId, $hierarchyParentId)
+		{
+			if($hierarchyParentId != $groupId)
+			{
+				$result = Group::GetSubGroups($groupId);
+
+				if($result->success)
+				{
+					$subGroups = $result->data;
+
+					foreach($subGroups as $subGroup)
+		    		{
+		    			$subGroupId = $subGroup["id"];
+		    			$result 	= Group::IsInHierarchy($groupId, $subGroupId);
+
+		    			if($result->success)
+		    			{
+		    				$isInHierarchy = $result->data;
+
+		    				if($isInHierarchy)
+		    					return $result;
+		    			}
+		    			else
+		    				return $result;
+					}
+
+					return new ServiceResult(true, false);
+				}
+			}
+
+			return new ServiceResult(true, true);
+		}
 	}
 ?>

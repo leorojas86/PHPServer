@@ -137,8 +137,10 @@ require_once "app_template/controller/database/GroupsController.php";
 
 			function loadAjaxGroup(groupId)
 			{
-				var params = "service=Group&method=GetTestingGroupAjax&id=" + groupId;
+				var params = "service=Group&method=GetTestingGroupAjax&id=" + groupId + "&copyingGroupId=" + _copyingGroupId;
 
+				//alert("params " + params);
+				
 				request("http://localhost:8888", params, "POST", onGroupContainerAjaxCallback);
 			}
 
@@ -160,7 +162,13 @@ require_once "app_template/controller/database/GroupsController.php";
 
 			function onCopyButtonClick(groupId)
 			{
-				copyingGroupId = groupId;
+				_copyingGroupId = groupId;
+			}
+
+			function onPasteButtonClick(parentGroupId)
+			{
+				var params = "service=Group&method=Move&id=" + _copyingGroupId + "&parentGroupId=" + parentGroupId;
+				request("http://localhost:8888", params, "POST", onDeleteGroupCallback);
 			}
 
 			function onDeleteButtonClick(groupId, parentGroupId)
@@ -214,7 +222,7 @@ require_once "app_template/controller/database/GroupsController.php";
 			if($rootGroupResult->success)
 			{
 				$groupId         = $rootGroupResult->data["id"];
-				$groupAjaxResult = GroupsController::GetTestingGroupAjax($groupId);
+				$groupAjaxResult = GroupsController::GetTestingGroupAjax($groupId, null);
 
 				if($groupAjaxResult->success)
 				{
