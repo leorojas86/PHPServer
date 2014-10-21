@@ -73,7 +73,7 @@ class GroupsController
 
 				if($copyingGroupId != "null")
 				{
-					/*$result = Group::IsInHierarchy($copyingGroupId, $groupId);
+					$result = Group::IsInHierarchy($copyingGroupId, $groupId);
 
 					if($result->success)
 					{
@@ -83,7 +83,7 @@ class GroupsController
 							$groupAjax .= "<button type='button' onclick='onPasteButtonClick($groupId)'>Paste</button>";
 					}
 					else
-						return $result;*/
+						return $result;
 				}
 
 				$groupAjax .= "<button type='button' onclick='onDeleteButtonClick($groupId, $parentGroupId)'>Delete</button>";

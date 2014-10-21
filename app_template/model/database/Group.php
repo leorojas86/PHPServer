@@ -223,7 +223,7 @@
 		{
 			if($hierarchyParentId != $groupId)
 			{
-				$result = Group::GetSubGroups($groupId);
+				$result = Group::GetSubGroups($hierarchyParentId);
 
 				if($result->success)
 				{
