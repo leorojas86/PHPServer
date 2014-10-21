@@ -5,7 +5,7 @@
 		{
 			$result = Group::GetUserRootGroupInternal($userId);
 
-			if($result->success & $result->data == null)//User does not have a root folder yet
+			if($result->success && $result->data == null)//User does not have a root folder yet
 			{
 				$result = Group::AddRootGroupToUser($userId);
 
@@ -18,14 +18,14 @@
 
 		public static function GetUserRootGroupInternal($userId)
 		{
-			$sql    = "SELECT id FROM groups WHERE is_root='1' and user_id='$userId'";
-			$result = MySQLManager::Execute($sql);
+			$sql       = "SELECT id FROM groups WHERE is_root='1' and user_id='$userId'";
+			$sqlResult = MySQLManager::Execute($sql);
 			
-			if($result)
+			if($sqlResult)
 			{
-				$row 		 = MySQLManager::FetchRow($result);
+				$row 		 = MySQLManager::FetchRow($sqlResult);
 				$rootGroupId = $row['id'];
-				MySQLManager::Close($result);
+				MySQLManager::Close($sqlResult);
 
 				return Group::GetGroup($rootGroupId);
 			}
@@ -35,21 +35,25 @@
 
 		public static function GetGroup($id)
 		{
-			$sql    = "SELECT * FROM groups WHERE id='$id'";
-			$result = MySQLManager::Execute($sql);
+			$sql       = "SELECT * FROM groups WHERE id='$id'";
+			$sqlResult = MySQLManager::Execute($sql);
 			
-			if($result)
+			if($sqlResult)
 			{
-				$row = MySQLManager::FetchRow($result);
-				MySQLManager::Close($result);
+				$row = MySQLManager::FetchRow($sqlResult);
+				MySQLManager::Close($sqlResult);
 
-				$result = Group::GetSubGroups($id);
-
-				if($result->success)
+				if($row != null)
 				{
-					$row['sub_groups'] = $result->data;
-					return new ServiceResult(true, $row);
+					$result = Group::GetSubGroups($id);
+
+					if($result->success)
+						$row['sub_groups'] = $result->data;
+					else
+						return $result;
 				}
+
+				return new ServiceResult(true, $row);
 			}
 			else
 				return new ServiceResult(false, null, "Can not get group", Constants::MYSQL_ERROR_CODE);
@@ -58,19 +62,21 @@
 
 		public static function GetSubGroups($id)
 		{
-			$sql    = "SELECT * FROM groups WHERE parent_group_id='$id'";
-			$result = MySQLManager::Execute($sql);
+			$sql       = "SELECT * FROM groups WHERE parent_group_id='$id'";
+			$sqlResult = MySQLManager::Execute($sql);
 			
-			if($result)
+			if($sqlResult)
 			{
 				$groups = array();
-				$row    = MySQLManager::FetchRow($result);
+				$row    = MySQLManager::FetchRow($sqlResult);
 				
 				while($row != null)
 				{
 					$groups[] = $row;
-					$row 	  = MySQLManager::FetchRow($result);
+					$row 	  = MySQLManager::FetchRow($sqlResult);
 				}
+
+				MySQLManager::Close($sqlResult);
 
 				return new ServiceResult(true, $groups);
 			}
@@ -88,11 +94,11 @@
 			$sql = "INSERT INTO groups (name, type, user_id, is_root, parent_group_id)
 					VALUES ('$name', '0', '$userId', '0', '$parentGroupId')";
 
-			$result = MySQLManager::Execute($sql);
+			$sqlResult = MySQLManager::Execute($sql);
 
-			if($result)
+			if($sqlResult)
 			{
-				MySQLManager::Close($result);
+				MySQLManager::Close($sqlResult);
 				$resultData = array("new_group_id" => MySQLManager::GetLastInsertId());
 
 				return new ServiceResult(true, $resultData);
@@ -103,21 +109,21 @@
 
 		public static function UpdateData($groupId, $groupData)
 		{
-			$sql    = "UPDATE groups SET data='$groupData' where id='$groupId'";
-			$result = MySQLManager::Execute($sql);
+			$sql       = "UPDATE groups SET data='$groupData' where id='$groupId'";
+			$sqlResult = MySQLManager::Execute($sql);
 			
-			if($result)
+			if($sqlResult)
 			{
 				$affectedRows = MySQLManager::AffectedRows();
-				MySQLManager::Close($result);
+				MySQLManager::Close($sqlResult);
 
 				if($affectedRows == 1)
 					return new ServiceResult(true, array("group_id" => $groupId));
 				else
-					return new ServiceResult(false, null, "Could not update user data", Constants::MYSQL_ERROR_CODE);
+					return new ServiceResult(false, null, "Could not update group data", Constants::MYSQL_ERROR_CODE);
 			}
 			else
-				return new ServiceResult(false, null, "Can not login user", Constants::MYSQL_ERROR_CODE);
+				return new ServiceResult(false, null, "Could not update group data", Constants::MYSQL_ERROR_CODE);
 		}
 
 		public static function Delete($groupId)

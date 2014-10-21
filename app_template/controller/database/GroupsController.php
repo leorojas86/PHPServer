@@ -39,24 +39,22 @@ class GroupsController
 		{
 			$groupName = $result->data["name"];
 			$groupData = $result->data["data"]; 
-			$groupAjax = "<p>Group Name</p>
-						  <p>$groupName</p>
+			$groupAjax = "<p>$groupName</p>
 						  <p>Group Data</p>
 						  <input type='text' id='group_data' value = '$groupData'>
 				  		  <button type='button' onclick='onUpdateGroupDataClick($groupId)'>Update</button><br/><br/>
-				  		  <p>Sub Groups</p>
-				  		  <input type='text' id='new_group_name' value = 'New Group Name'>
-				  		  <button type='button' onclick='onAddSubGroupClick($groupId)'>Add</button>";
+				  		  <p>Sub Groups</p>";
 
 			$subGroups = $result->data["sub_groups"];
 
 			foreach($subGroups as $subGroup)
     		{
     			$subGroupName = $subGroup["name"];
-
-    			$groupAjax .= "<p>Group Name</p>
-						  	   <p>$subGroupName</p>";
+    			$groupAjax   .= "<p>$subGroupName</p>";
     		}
+
+    		$groupAjax .= "<input type='text' id='new_group_name' value = 'New Group'>
+				  		  <button type='button' onclick='onAddSubGroupClick($groupId)'>Add</button>";
 
 			return new ServiceResult(true, $groupAjax);
 		}
