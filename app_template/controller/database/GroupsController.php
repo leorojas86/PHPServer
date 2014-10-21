@@ -55,7 +55,7 @@ class GroupsController
 			if($parentGroupId != 0)
 				$groupAjax .= "<button type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button>
 							   <button type='button' onclick='onCopyButtonClick($groupId)'>Copy</button>
-							   <button type='button' onclick='onDeleteButtonClick($groupId)'>Delete</button>";
+							   <button type='button' onclick='onDeleteButtonClick($groupId, $parentGroupId)'>Delete</button>";
 
 			$groupAjax .= "<p>Group Data</p>
 						  <input type='text' id='group_data' value = '$groupData'>
