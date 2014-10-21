@@ -43,14 +43,15 @@ class GroupsController
 						  <p>Group Data</p>
 						  <input type='text' id='group_data' value = '$groupData'>
 				  		  <button type='button' onclick='onUpdateGroupDataClick($groupId)'>Update</button><br/><br/>
-				  		  <p>Sub Groups</p>";
+				  		  <p>Sub Groups:</p>";
 
 			$subGroups = $result->data["sub_groups"];
 
 			foreach($subGroups as $subGroup)
     		{
     			$subGroupName = $subGroup["name"];
-    			$groupAjax   .= "<p>$subGroupName</p>";
+    			$subGroupId	  = $subGroup["id"];
+    			$groupAjax   .= "<button type='button' onclick='onSubGroupClick($subGroupId)'>$subGroupName</button><br/><br/>";
     		}
 
     		$groupAjax .= "<input type='text' id='new_group_name' value = 'New Group'>
