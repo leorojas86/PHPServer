@@ -140,6 +140,14 @@ require_once "app_template/controller/database/GroupsController.php";
 				}
 			}
 
+			function onSubGroupClick(groupId)
+			{
+				alert(groupId);
+				var params = "service=Group&method=GetTestingGroupAjax&id=" + groupId;
+
+				request("http://localhost:8888", params, "POST", onGroupContainerAjaxCallback);
+			}
+
 		</script>
 	</head>
 	<body>
