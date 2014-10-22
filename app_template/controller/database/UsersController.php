@@ -1,6 +1,6 @@
 <?php 
-require_once "app_template/model/Environment.php";
-require_once "app_template/model/database/User.php";
+require_once "model/Environment.php";
+require_once "model/database/User.php";
 
 class UsersController
 {

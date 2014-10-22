@@ -1,6 +1,6 @@
 <?php 
 
-require_once "app_template/model/Session.php";
+require_once "model/Session.php";
 
 ?>
 

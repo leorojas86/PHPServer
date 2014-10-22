@@ -1,5 +1,5 @@
 <?php 
-	require_once "app_template/model/Constants.php";
+	require_once "model/Constants.php";
 	require_once "utils/php/ServiceResult.php";
 
 	class User

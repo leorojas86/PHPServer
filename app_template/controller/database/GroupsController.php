@@ -1,6 +1,6 @@
 <?php 
-require_once "app_template/model/Environment.php";
-require_once "app_template/model/database/Group.php";
+require_once "model/Environment.php";
+require_once "model/database/Group.php";
 
 class GroupsController
 {
