@@ -9,9 +9,7 @@
 			MySQLManager::$_mysqli = new mysqli($server, $user, $pass);
 
 			if(MySQLManager::$_mysqli->connect_errno)
-    			echo "Failed to connect to MySQL error MySQLManager::$_mysqli->connect_errno, connect error 'MySQLManager::$_mysqli->connect_error'";
-    		//else
-				//echo "Connected to db successfully \n";
+    			error_log("Failed to connect to MySQL error MySQLManager::$_mysqli->connect_errno, connect error 'MySQLManager::$_mysqli->connect_error'");
 
 			MySQLManager::Execute("use $db");
 		}
@@ -31,9 +29,7 @@
 				return $result;
 			}
 			else
-			{
 				error_log("Calling MySQLManager::Execute without calling MySQLManager::Connect before, mysql connection is null");
-			}
 		}
 
 		public static function GetLastInsertId()

@@ -125,8 +125,9 @@ class GroupsController
 
 		$name 		   = $_POST["name"];
 		$parentGroupId = $_POST["parentGroupId"];
+		$type	       = $_POST["type"];
 
-		return Group::AddSubGroup($name, $parentGroupId, $userId);
+		return Group::AddSubGroup($name, $parentGroupId, $userId, $type);
 	}
 }
 ?>

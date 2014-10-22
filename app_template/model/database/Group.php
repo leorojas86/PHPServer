@@ -18,7 +18,7 @@
 
 		public static function GetUserRootGroupInternal($userId)
 		{
-			$sql       = "SELECT id FROM groups WHERE is_root='1' and user_id='$userId'";
+			$sql       = "SELECT id FROM groups WHERE parent_group_id='0' and user_id='$userId'";
 			$sqlResult = MySQLManager::Execute($sql);
 			
 			if($sqlResult)
@@ -129,13 +129,13 @@
 
 		private static function AddRootGroupToUser($userId)
 		{
-			return Group::AddSubGroup('RootGroup', null, $userId);
+			return Group::AddSubGroup('RootGroup', null, $userId, Constants::DEFAULT_GROUP_TYPE);
 		}
 
-		public static function AddSubGroup($name, $parentGroupId, $userId)
+		public static function AddSubGroup($name, $parentGroupId, $userId, $type)
 		{
-			$sql = "INSERT INTO groups (name, type, user_id, is_root, parent_group_id)
-					VALUES ('$name', '0', '$userId', '0', '$parentGroupId')";
+			$sql = "INSERT INTO groups (name, user_id, parent_group_id, type)
+					VALUES ('$name', '$userId', '$parentGroupId', '$type')";
 
 			$sqlResult = MySQLManager::Execute($sql);
 

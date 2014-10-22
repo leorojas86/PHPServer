@@ -7,6 +7,6 @@
 		const USER_ALREADY_EXISTS		 	  = 3;
 		const USER_NAME_OR_PASSWORD_INCORRECT = 4;
 
-		const ROOT_GROUP_TYPE = 5;
+		const DEFAULT_GROUP_TYPE = 0;
 	} 
 ?>

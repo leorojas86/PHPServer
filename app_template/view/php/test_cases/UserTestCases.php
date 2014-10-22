@@ -99,9 +99,10 @@ require_once "controller/database/GroupsController.php";
 
 			function onAddSubGroupClick(parentGroupId)
 			{
-				_parentGroupId 		= parentGroupId;
-				var newGroupName 	= document.getElementById('new_group_name');
-				var params    		= "service=Group&method=AddSubGroup&parentGroupId=" + parentGroupId + "&name=" + newGroupName.value;
+				_parentGroupId 		 = parentGroupId;
+				var newGroupName 	 = document.getElementById('new_group_name');
+				var defaultGroupType = 0;
+				var params    		 = "service=Group&method=AddSubGroup&parentGroupId=" + parentGroupId + "&name=" + newGroupName.value + "&type=" + defaultGroupType;
 
 				//alert("params = " + params);
 
