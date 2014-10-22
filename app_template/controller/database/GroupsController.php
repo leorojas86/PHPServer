@@ -67,24 +67,32 @@ class GroupsController
 			$groupAjax = "<p>$groupPath</p>";
 
 			if($parentGroupId != 0)
-			{
-				$groupAjax .= "<button type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button>
-							   <button type='button' onclick='onCopyButtonClick($groupId)'>Copy</button>";
-			}
+				$groupAjax .= "<button type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button><button type='button' onclick='onCopyButtonClick($groupId)'>Copy</button>";
 
 			if($copyingGroupId != "null")
 			{
-				$result = Group::IsInHierarchy($groupId, $copyingGroupId);
+				$isChildGroup = false;
 
-				if($result->success)
-				{
-					$isInHierarchy = $result->data;
-					
-					if(!$isInHierarchy)
-						$groupAjax .= "<button type='button' onclick='onPasteButtonClick($groupId)'>Paste</button>";
+				foreach($subGroups as $subGroup)
+    			{
+    				$subGroupId	  = $subGroup["id"];
+    				$isChildGroup = $isChildGroup || $copyingGroupId == $subGroupId;
+    			}
+
+    			if(!$isChildGroup)
+    			{
+					$result = Group::IsInHierarchy($groupId, $copyingGroupId);
+
+					if($result->success)
+					{
+						$isInHierarchy = $result->data;
+						
+						if(!$isInHierarchy)
+							$groupAjax .= "<button type='button' onclick='onPasteButtonClick($groupId)'>Paste</button>";
+					}
+					else
+						return $result;
 				}
-				else
-					return $result;
 			}
 
 			if($parentGroupId != 0)
