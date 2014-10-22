@@ -70,24 +70,25 @@ class GroupsController
 			{
 				$groupAjax .= "<button type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button>
 							   <button type='button' onclick='onCopyButtonClick($groupId)'>Copy</button>";
-
-				if($copyingGroupId != "null")
-				{
-					$result = Group::IsInHierarchy($groupId, $copyingGroupId);
-
-					if($result->success)
-					{
-						$isInHierarchy = $result->data;
-						
-						if(!$isInHierarchy)
-							$groupAjax .= "<button type='button' onclick='onPasteButtonClick($groupId)'>Paste</button>";
-					}
-					else
-						return $result;
-				}
-
-				$groupAjax .= "<button type='button' onclick='onDeleteButtonClick($groupId, $parentGroupId)'>Delete</button>";
 			}
+
+			if($copyingGroupId != "null")
+			{
+				$result = Group::IsInHierarchy($groupId, $copyingGroupId);
+
+				if($result->success)
+				{
+					$isInHierarchy = $result->data;
+					
+					if(!$isInHierarchy)
+						$groupAjax .= "<button type='button' onclick='onPasteButtonClick($groupId)'>Paste</button>";
+				}
+				else
+					return $result;
+			}
+
+			if($parentGroupId != 0)
+				$groupAjax .= "<button type='button' onclick='onDeleteButtonClick($groupId, $parentGroupId)'>Delete</button>";
 
 			$groupAjax .= "<p>Group Data</p>
 						  <input type='text' id='group_data' value = '$groupData'>

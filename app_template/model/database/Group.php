@@ -216,7 +216,7 @@
 					return new ServiceResult(true, array("group_id" => $groupId));
 			}
 			
-			return new ServiceResult(false, null, "Could not update group data", Constants::MYSQL_ERROR_CODE);
+			return new ServiceResult(false, null, "Could not move group", Constants::MYSQL_ERROR_CODE);
 		}
 
 		public static function IsInHierarchy($groupId, $hierarchyParentId)

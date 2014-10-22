@@ -168,8 +168,23 @@ require_once "controller/database/GroupsController.php";
 
 			function onPasteButtonClick(parentGroupId)
 			{
-				var params = "service=Group&method=Move&id=" + _copyingGroupId + "&parentGroupId=" + parentGroupId;
-				request("http://localhost:8888", params, "POST", onDeleteGroupCallback);
+				_parentGroupId  = parentGroupId;
+				var params 	    = "service=Group&method=Move&id=" + _copyingGroupId + "&parentGroupId=" + parentGroupId;
+				_copyingGroupId = null;
+				request("http://localhost:8888", params, "POST", onMoveGroupCallback);
+			}
+
+			function onMoveGroupCallback(xmlhttp)
+			{
+				if(checkForValidResponse(xmlhttp))
+				{
+					alert(xmlhttp.responseText);
+
+					var result = JSON.parse(xmlhttp.responseText);
+
+					if(result.success)
+						loadAjaxGroup(_parentGroupId);
+				}
 			}
 
 			function onDeleteButtonClick(groupId, parentGroupId)
@@ -193,9 +208,7 @@ require_once "controller/database/GroupsController.php";
 					var result = JSON.parse(xmlhttp.responseText);
 
 					if(result.success)
-					{
 						loadAjaxGroup(_parentGroupId);
-					}
 				}
 			}
 
