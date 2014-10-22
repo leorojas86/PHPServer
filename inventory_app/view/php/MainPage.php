@@ -13,5 +13,6 @@
 	<body>
 		<?php //echo '<p>Hello World</p>'; ?> 
 		<a href="http://localhost:8888?page=MainTestCases">Test Cases</a>
+		<img src="view/images/Folder.png" onclick="alert('Test');" />
 	</body>
 </html>
