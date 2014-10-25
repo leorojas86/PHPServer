@@ -141,62 +141,65 @@ class GroupsController
 			$parentGroupId = $result->data["parent_group_id"];
 			$subGroups 	   = $result->data["sub_groups"];
 
-			if($parentGroupId != 0)
-				$groupAjax .= "<button type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button><button type='button' onclick='onCopyButtonClick($groupId)'>Copy</button>";
-
-			if($copyingGroupId != "null")
-			{
-				$isChildGroup = false;
-
-				foreach($subGroups as $subGroup)
-    			{
-    				$subGroupId	  = $subGroup["id"];
-    				$isChildGroup = $isChildGroup || $copyingGroupId == $subGroupId;
-    			}
-
-    			if(!$isChildGroup)
-    			{
-					$result = Group::IsInHierarchy($groupId, $copyingGroupId);
-
-					if($result->success)
-					{
-						$isInHierarchy = $result->data;
-						
-						if(!$isInHierarchy)
-							$groupAjax .= "<button type='button' onclick='onPasteButtonClick($groupId)'>Paste</button>";
-					}
-					else
-						return $result;
-				}
-			}
-
-			if($parentGroupId != 0)
-				$groupAjax .= "<button type='button' onclick='onDeleteButtonClick($groupId, $parentGroupId)'>Delete</button>";
-
 			$groupAjax .= "<div id='folders_area' align='center'>";
 			
-			$groupPath  = str_replace("RootGroup/", "Principal/", $groupPath);
-			
-			$groupAjax .= "<p>$groupPath</p>";
+				$groupPath  = str_replace("RootGroup/", "Principal/", $groupPath);
+				
+				$groupAjax .= "<p>$groupPath</p>";
 
-			$groupAjax .= "<div id='folders_scroll_panel' align='center' style='overflow:scroll; width:600px; height:400px;' >";
+				$groupAjax .= "<div id='folders_scroll_panel' align='center' style='overflow:scroll; width:600px; height:400px;' >";
 
-			foreach($subGroups as $subGroup)
-    		{
-    			$subGroupName = $subGroup["name"];
-    			$subGroupId	  = $subGroup["id"];
+				foreach($subGroups as $subGroup)
+	    		{
+	    			$subGroupName = $subGroup["name"];
+	    			$subGroupId	  = $subGroup["id"];
 
-    			$groupAjax .= "<div id='folder_icon' style='width:100px; height:120px; float: left;' oncontextmenu='ShowMenu(contextMenu,event);'>
-									<img src='view/images/Folder.png' onclick='onSubGroupClick($subGroupId)' style='cursor:pointer; cursor:hand;'/>
-									<label> $subGroupName </label>
-							   </div>";
-    			//$groupAjax   .= "<button type='button' onclick='onSubGroupClick($subGroupId)'>$subGroupName</button><br/><br/>";
-    		}
+	    			$groupAjax .= "<div id='folder_icon' style='width:100px; height:120px; float: left;' oncontextmenu='ShowMenu(contextMenu,event);'>
+										<img src='view/images/Folder.png' onclick='onSubGroupClick($subGroupId)' style='cursor:pointer; cursor:hand;'/>
+										<label> $subGroupName </label>
+								   </div>";
+	    			//$groupAjax   .= "<button type='button' onclick='onSubGroupClick($subGroupId)'>$subGroupName</button><br/><br/>";
+	    		}
 
-    		$groupAjax .= "</div></div>";
+	    		$groupAjax .= "</div>";
 
-    		$groupAjax .= "<input type='text' id='new_group_name' value = 'New Group'>
+
+				if($parentGroupId != 0)
+					$groupAjax .= "<button type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button><button type='button' onclick='onCopyButtonClick($groupId)'>Copy</button>";
+
+				if($copyingGroupId != "null")
+				{
+					$isChildGroup = false;
+
+					foreach($subGroups as $subGroup)
+	    			{
+	    				$subGroupId	  = $subGroup["id"];
+	    				$isChildGroup = $isChildGroup || $copyingGroupId == $subGroupId;
+	    			}
+
+	    			if(!$isChildGroup)
+	    			{
+						$result = Group::IsInHierarchy($groupId, $copyingGroupId);
+
+						if($result->success)
+						{
+							$isInHierarchy = $result->data;
+							
+							if(!$isInHierarchy)
+								$groupAjax .= "<button type='button' onclick='onPasteButtonClick($groupId)'>Paste</button>";
+						}
+						else
+							return $result;
+					}
+				}
+
+				if($parentGroupId != 0)
+					$groupAjax .= "<button type='button' onclick='onDeleteButtonClick($groupId, $parentGroupId)'>Delete</button>";
+
+			$groupAjax .= "<input type='text' id='new_group_name' value = 'New Group'>
 				  		  <button type='button' onclick='onAddSubGroupClick($groupId)'>Add</button>";
+
+    		$groupAjax .= "</div>";
 
 			return new ServiceResult(true, $groupAjax);
 		}

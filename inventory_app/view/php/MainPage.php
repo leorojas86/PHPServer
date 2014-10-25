@@ -11,12 +11,18 @@
 
 			onload = function() 
 		    {
-    			//disableDefaultContextMenu();
+    			disableDefaultContextMenu();
 			}
 
 		    function ShowMenu(control, e) 
 		    {
-		    	alert("ShowMenu");
+		    	alert("x = " + e.clientX + " y = " + e.clientY);
+
+		    	var contextMenu        = document.getElementById('context_menu_container');
+		    	contextMenu.innerHTML  = "<p> TEST </p>";	
+		    	contextMenu.style.position = "absolute";
+		    	contextMenu.style.left = e.clientX + "px";
+				contextMenu.style.top  = e.clientY + "px";
 		    }
 
 		    var _copyingGroupId		   = null;
@@ -254,6 +260,8 @@
 							$groupAjax
 				 	  	</div>";
 			 	}
+
+			 	echo "<div id='context_menu_container' style='position: absolute; left: 100px; top: 150px;' ></div>";
 		 	}
 		}
 		else
