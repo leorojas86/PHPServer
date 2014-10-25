@@ -141,8 +141,6 @@ class GroupsController
 			$parentGroupId = $result->data["parent_group_id"];
 			$subGroups 	   = $result->data["sub_groups"];
 
-			$groupAjax = "<p>$groupPath</p>";
-
 			if($parentGroupId != 0)
 				$groupAjax .= "<button type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button><button type='button' onclick='onCopyButtonClick($groupId)'>Copy</button>";
 
@@ -175,7 +173,13 @@ class GroupsController
 			if($parentGroupId != 0)
 				$groupAjax .= "<button type='button' onclick='onDeleteButtonClick($groupId, $parentGroupId)'>Delete</button>";
 
-			$groupAjax .= "<div style='overflow:scroll; width:450px; height:300px; margin-left: 300px;' >";
+			$groupAjax .= "<div id='folders_area' align='center'>";
+			
+			$groupPath  = str_replace("RootGroup/", "Principal/", $groupPath);
+			
+			$groupAjax .= "<p>$groupPath</p>";
+
+			$groupAjax .= "<div id='folders_scroll_panel' align='center' style='overflow:scroll; width:600px; height:400px;' >";
 
 			foreach($subGroups as $subGroup)
     		{
@@ -189,7 +193,7 @@ class GroupsController
     			//$groupAjax   .= "<button type='button' onclick='onSubGroupClick($subGroupId)'>$subGroupName</button><br/><br/>";
     		}
 
-    		$groupAjax .= "</div>";
+    		$groupAjax .= "</div></div>";
 
     		$groupAjax .= "<input type='text' id='new_group_name' value = 'New Group'>
 				  		  <button type='button' onclick='onAddSubGroupClick($groupId)'>Add</button>";

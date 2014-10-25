@@ -11,7 +11,7 @@
 
 			onload = function() 
 		    {
-    			disableDefaultContextMenu();
+    			//disableDefaultContextMenu();
 			}
 
 		    function ShowMenu(control, e) 
@@ -234,10 +234,10 @@
 
 			//echo "userData = " . json_encode($loggedInUserData);
 
-			echo "<p>User Name</p> <p>$userName</p>
+			/*echo "<p>User Name</p> <p>$userName</p>
 			 	  <p>User Data</p>
 				  <input type='text' id='user_data'  value = '$userData'>
-				  <button type='button' onclick='onUpdateUserDataClick()'>Update</button><br/><br/><br/><br/>";
+				  <button type='button' onclick='onUpdateUserDataClick()'>Update</button><br/><br/><br/><br/>";*/
 
 			$rootGroupResult = Group::GetUserRootGroup($userId);
 
