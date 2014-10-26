@@ -51,13 +51,16 @@
 				var addOption    = '"Add"';
 				var deleteOption = '"Delete"';
 
+				var target   = event.target;
+		    	var folderId = '"' + target.parentNode.id + '"';
+
 		    	switch(event.target.id)
 		    	{
 		    		case "folders_scroll_panel":
-		    			contextMenu.innerHTML  = "<button onclick='onContextMenuOptionSelected(" + addOption + ")'> Add </button>";	
+		    			contextMenu.innerHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + addOption + ")'> Add </button>";	
 		    		break;
 		    		default:
-		    			contextMenu.innerHTML  = "<button onclick='onContextMenuOptionSelected(" + deleteOption + ")'> Delete </button>";	
+		    			contextMenu.innerHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + deleteOption + ")'> Delete </button>";	
 		    		break;
 		    	}
 		    }
@@ -68,24 +71,21 @@
 		    	contextMenu.style.display = 'none';
 		    }
 
-		    function onContextMenuOptionSelected(option)
+		    function onContextMenuOptionSelected(folderId, option)
 		    {
 		    	hideContextMenu();
-		    	//alert(option);
 
 		    	switch(option)
 		    	{
 		    		case "Add":
+			    		var folderName = prompt("Nombre del folder", "");
 
-		    		var folderName = prompt("Nombre del folder", "");
-
-					if(folderName != null) 
-					{
-					    //alert(folderName);
-					    //alert(_currentGroupData.id);
-					    addSubGroup(folderName);
-					}
-
+						if(folderName != null && folderName != "") 
+						    onAddSubGroupClick(_currentGroupData.id);
+		    		break;
+		    		case "Delete":
+		    			folderId = folderId.replace("folder_", "");
+		    			removeSubgroupGroup(folderId);
 		    		break;
 		    	}
 		    }
@@ -269,26 +269,30 @@
 
 			function onDeleteButtonClick(groupId, parentGroupId)
 			{
-				_parentGroupId = parentGroupId;
-				var remove 	   = confirm("Are you sure that you want to remove the current group");
+				removeSubgroupGroup(groupId)
+			}
+
+			function removeSubgroupGroup(groupId)
+			{
+				var remove = confirm("Are you sure that you want to remove the current group");
 
 				if(remove) 
 				{
 					var params = "service=Group&method=Delete&id=" + groupId;
 
 					request("http://localhost:8888", params, "POST", onDeleteGroupCallback);
-				} 
+				}
 			}
 
 			function onDeleteGroupCallback(xmlhttp)
 			{
 				if(checkForValidResponse(xmlhttp))
 				{
-					alert(xmlhttp.responseText);
+					//alert(xmlhttp.responseText);
 					var result = JSON.parse(xmlhttp.responseText);
 
 					if(result.success)
-						loadAjaxGroup(_parentGroupId);
+						loadAjaxGroup(_currentGroupData.id);
 				}
 			}
 
