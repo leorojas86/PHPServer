@@ -112,7 +112,27 @@
 		    		case "Paste Folder":
 		    			pasteGroup();
 		    		break;
+		    		case "Rename Folder":
+		    			RenameFolder(folderId);
+		    		break;
 		    	}
+		    }
+
+		    function RenameFolder(folderId)
+		    {
+		    	var folderName = prompt("Escriba el nuevo nombre para el folder", "");
+
+				if(folderName != null && folderName != "") 
+				{
+					var params = "service=Group&method=Rename&id=" + folderId + "&name=" + folderName;
+
+					request("http://localhost:8888", params, "POST", onRenameCallback);
+				}
+		    }
+
+		    function onRenameCallback(xmlhttp)
+		    {
+		    	refreshCurrentGroup(xmlhttp);
 		    }
 			
 			function onLoginButtonClick()
@@ -265,6 +285,11 @@
 			}
 
 			function onMoveGroupCallback(xmlhttp)
+			{
+				refreshCurrentGroup(xmlhttp);
+			}
+
+			function refreshCurrentGroup(xmlhttp)
 			{
 				if(checkForValidResponse(xmlhttp))
 				{

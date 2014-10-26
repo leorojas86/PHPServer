@@ -26,12 +26,23 @@ class GroupsController
 			case "Move":
 				$result = GroupsController::MoveGroup();
 			break;
+			case "Rename":
+				$result = GroupsController::RenameGroup();
+			break;
 			default: 		 
 				$result = new ServiceResult(false, null, "Unsupported user service method '$method'", Constants::UNSUPPORTED_SERVICE_METHOD); 
 			break;
 		}
 
 		echo $result->toJSON();
+	}
+
+	private static function RenameGroup()
+	{
+		$groupId   = $_POST["id"];
+		$groupName = $_POST["name"];
+
+		return Group::Rename($groupId, $groupName);
 	}
 
 	private static function MoveGroup()

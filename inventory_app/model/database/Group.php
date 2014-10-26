@@ -167,6 +167,23 @@
 			return new ServiceResult(false, null, "Could not update group data", Constants::MYSQL_ERROR_CODE);
 		}
 
+		public static function Rename($groupId, $groupName)
+		{
+			$sql       = "UPDATE groups SET name='$groupName' where id='$groupId'";
+			$sqlResult = MySQLManager::Execute($sql);
+			
+			if($sqlResult)
+			{
+				$affectedRows = MySQLManager::AffectedRows();
+				MySQLManager::Close($sqlResult);
+
+				if($affectedRows == 1)
+					return new ServiceResult(true, array("group_id" => $groupId));
+			}
+			
+			return new ServiceResult(false, null, "Could not rename group", Constants::MYSQL_ERROR_CODE);
+		}
+
 		public static function Delete($groupId)
 		{
 			$result = Group::GetSubGroups($groupId);
