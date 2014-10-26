@@ -91,6 +91,7 @@ class GroupsController
 			$groupData     = $result->data;
 			$groupPath     = $groupData["path"];
 			$parentGroupId = $groupData["parent_group_id"];
+			$subGroupType  = $groupData["type"];
 			$subGroups 	   = $groupData["sub_groups"];
 
 			$groupAjax = "<div id='folders_area' align='center'>";
@@ -102,35 +103,45 @@ class GroupsController
 				else
 					$groupAjax .= "<p>$groupPath</p>";
 
-				$groupAjax .= "<div id='folders_scroll_panel' oncontextmenu='showContextMenu(event); return false;' align='center' style='overflow:scroll; width:600px; height:400px;' >";
-
-				foreach($subGroups as $subGroup)
-	    		{
-	    			$subGroupName = $subGroup["name"];
-	    			$subGroupId	  = $subGroup["id"];
-	    			$subGroupType = $subGroup["type"];
-
-	    			if($subGroupType == Constants::DEFAULT_GROUP_TYPE)
-	    				$icon = "view/images/Folder.png";
-	    			else
-	    				$icon = "view/images/File.png";
-
-	    			$groupAjax .= "<div id='folder_$subGroupId' style='width:100px; height:120px; float: left;'>
-										<img id='folder_image_$subGroupId' src='$icon' onclick='onSubGroupClick($subGroupId);' style='cursor:pointer; cursor:hand; width:100px; height:88px;'/>
-										<label id='folder_label_$subGroupId' > $subGroupName </label>
-								   </div>";
-	    		}
-
-	    		$groupAjax .= "</div>";
-
-				if($cuttingGroupId != "null")
+				if($subGroupType == Constants::DEFAULT_GROUP_TYPE)
 				{
-					$result = GroupsController::CanPasteGroup($cuttingGroupId, $subGroups, $groupId);
+					$groupAjax .= "<div id='folders_scroll_panel' oncontextmenu='showContextMenu(event); return false;' align='center' style='overflow:scroll; width:600px; height:400px;' >";
 
-					if($result->success)
-						$groupData["can_paste"] = $result->data;
-					else
-						return $result;
+					foreach($subGroups as $subGroup)
+		    		{
+		    			$subGroupName = $subGroup["name"];
+		    			$subGroupId	  = $subGroup["id"];
+		    			$subGroupType = $subGroup["type"];
+
+		    			if($subGroupType == Constants::DEFAULT_GROUP_TYPE)
+		    				$icon = "view/images/Folder.png";
+		    			else
+		    				$icon = "view/images/File.png";
+
+		    			$groupAjax .= "<div id='folder_$subGroupId' style='width:100px; height:120px; float: left;'>
+											<img id='folder_image_$subGroupId' src='$icon' onclick='onSubGroupClick($subGroupId);' style='cursor:pointer; cursor:hand; width:100px; height:88px;'/>
+											<label id='folder_label_$subGroupId' > $subGroupName </label>
+									   </div>";
+		    		}
+
+		    		$groupAjax .= "</div>";
+
+					if($cuttingGroupId != "null")
+					{
+						$result = GroupsController::CanPasteGroup($cuttingGroupId, $subGroups, $groupId);
+
+						if($result->success)
+							$groupData["can_paste"] = $result->data;
+						else
+							return $result;
+					}
+				}
+				else
+				{
+					$data 		= $groupData["data"];
+					$groupAjax .= "<p>Data</p>
+						  			<input type='text' id='group_data' value = '$data'>
+				  		  			<button type='button' onclick='onUpdateGroupDataClick($groupId)'>Update</button><br/><br/>";
 				}
 
     		$groupAjax .= "</div>";
