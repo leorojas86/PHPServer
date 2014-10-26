@@ -45,16 +45,17 @@
 		    	contextMenu.style.position = "absolute";
 		    	contextMenu.style.left 	   = event.clientX + "px";
 				contextMenu.style.top  	   = event.clientY + "px";
-				contextMenu.style.display = 'inline';
+				contextMenu.style.display  = 'inline';
 
 				var addOption    = '"Add Folder"';
 				var deleteOption = '"Delete Folder"';
 				var cutOption    = '"Cut Folder"';
 				var pasteOption  = '"Paste Folder"';
+				var renameOption = '"Rename Folder"';
 
 				var target      = event.target;
 		    	var folderId    = '"' + target.parentNode.id + '"';
-		    	var optionStyle = "style='width:100px; height:20px;'";
+		    	var optionStyle = "style='width:120px; height:20px;'";
 
 		    	switch(event.target.id)
 		    	{
@@ -69,9 +70,10 @@
 
 		    		break;
 		    		default:
+		    			var renameButtonHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + renameOption + ")' " + optionStyle +" > Renombrar Folder </button>";
 		    			var cutButtonHTML     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + cutOption + ")'    " + optionStyle +" > Cortar Folder </button>";
 		    			var deleteButtonHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + deleteOption + ")' " + optionStyle +"> Borrar Folder </button>";
-		    			contextMenu.innerHTML = cutButtonHTML + "<br>" + deleteButtonHTML;	
+		    			contextMenu.innerHTML = renameButtonHTML + "<br>" + cutButtonHTML + "<br>" + deleteButtonHTML;	
 		    		break;
 		    	}
 		    }
