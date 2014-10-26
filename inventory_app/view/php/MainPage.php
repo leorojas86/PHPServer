@@ -81,7 +81,7 @@
 			    		var folderName = prompt("Nombre del folder", "");
 
 						if(folderName != null && folderName != "") 
-						    onAddSubGroupClick(_currentGroupData.id);
+						    addSubGroup(folderName);
 		    		break;
 		    		case "Delete":
 		    			folderId = folderId.replace("folder_", "");

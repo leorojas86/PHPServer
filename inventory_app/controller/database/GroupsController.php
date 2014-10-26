@@ -209,9 +209,6 @@ class GroupsController
 					}
 				}
 
-				if($parentGroupId != 0)
-					$groupAjax .= "<button type='button' onclick='onDeleteButtonClick($groupId, $parentGroupId);'>Delete</button>";
-
     		$groupAjax .= "</div>";
 
 			return new ServiceResult(true, array("group_ajax" =>$groupAjax, "group_data" => $groupData));
