@@ -148,9 +148,9 @@ class GroupsController
 				$groupAjax .= "<p>$groupPath</p>";
 
 				if($parentGroupId != 0)
-					$groupAjax .= "<button id='back_button' type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button><button type='button' onclick='onCopyButtonClick($groupId)'>Copy</button>";
+					$groupAjax .= "<button id='back_button' type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button><button type='button' onclick='onCopyButtonClick($groupId);'>Copy</button>";
 
-				$groupAjax .= "<div id='folders_scroll_panel' oncontextmenu='ShowContextMenu(event);' align='center' style='overflow:scroll; width:600px; height:400px;' >";
+				$groupAjax .= "<div id='folders_scroll_panel' oncontextmenu='showContextMenu(event);' align='center' style='overflow:scroll; width:600px; height:400px;' >";
 
 				foreach($subGroups as $subGroup)
 	    		{
@@ -158,7 +158,7 @@ class GroupsController
 	    			$subGroupId	  = $subGroup["id"];
 
 	    			$groupAjax .= "<div id='folder_icon_$subGroupId' style='width:100px; height:120px; float: left;'>
-										<img id='folder_image_$subGroupId' src='view/images/Folder.png' onclick='onSubGroupClick($subGroupId)' style='cursor:pointer; cursor:hand;'/>
+										<img id='folder_image_$subGroupId' src='view/images/Folder.png' onclick='onSubGroupClick($subGroupId);' style='cursor:pointer; cursor:hand;'/>
 										<label id='folder_label_$subGroupId' > $subGroupName </label>
 								   </div>";
 	    		}
@@ -184,7 +184,7 @@ class GroupsController
 							$isInHierarchy = $result->data;
 							
 							if(!$isInHierarchy)
-								$groupAjax .= "<button type='button' onclick='onPasteButtonClick($groupId)'>Paste</button>";
+								$groupAjax .= "<button type='button' onclick='onPasteButtonClick($groupId);'>Paste</button>";
 						}
 						else
 							return $result;
@@ -192,10 +192,10 @@ class GroupsController
 				}
 
 				if($parentGroupId != 0)
-					$groupAjax .= "<button type='button' onclick='onDeleteButtonClick($groupId, $parentGroupId)'>Delete</button>";
+					$groupAjax .= "<button type='button' onclick='onDeleteButtonClick($groupId, $parentGroupId);'>Delete</button>";
 
 			$groupAjax .= "<input type='text' id='new_group_name' value = 'New Group'>
-				  		  <button type='button' onclick='onAddSubGroupClick($groupId)'>Add</button>";
+				  		  <button type='button' onclick='onAddSubGroupClick($groupId);'>Add</button>";
 
     		$groupAjax .= "</div>";
 

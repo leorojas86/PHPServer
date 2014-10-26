@@ -32,7 +32,7 @@
 				}
 			}
 
-		    function ShowContextMenu(event) 
+		    function showContextMenu(event) 
 		    {
 		    	var contextMenu        	   = document.getElementById('context_menu_container');
 		    	contextMenu.style.position = "absolute";
@@ -40,21 +40,29 @@
 				contextMenu.style.top  	   = event.clientY + "px";
 				contextMenu.style.display = 'inline';
 
+				var addOption    = "'Add'";
+				var deleteOption = "'Delete'";
+
 		    	switch(event.target.id)
 		    	{
 		    		case "folders_scroll_panel":
-		    			contextMenu.innerHTML  = "<p> Add </p>";	
+		    			contextMenu.innerHTML  = "<button onclick='onContextMenuOptionSelected(" + addOption + ")'> Add </button>";	
 		    		break;
 		    		default:
-		    			contextMenu.innerHTML  = "<p> Delete </p>";	
+		    			contextMenu.innerHTML  = "<button onclick='onContextMenuOptionSelected(" + deleteOption + ")'> Delete </button>";	
 		    		break;
 		    	}
 		    }
 
-		    function HideContextMenu()
+		    function hideContextMenu()
 		    {
 		    	var contextMenu           = document.getElementById('context_menu_container');
 		    	contextMenu.style.display = 'none';
+		    }
+
+		    function onContextMenuOptionSelected(option)
+		    {
+		    	alert(option);
 		    }
 
 		    var _copyingGroupId		   = null;
@@ -258,7 +266,7 @@
 
 		</script>
 	</head>
-	<body onmousedown='HideContextMenu();'>
+	<body onmousedown='hideContextMenu();'>
 
 
 		<?php 
@@ -310,47 +318,5 @@
 		}
 
 		?> 
-		<!--<div style="overflow:scroll; width:450px; height:300px; margin-left: 300px;" >
-			<div id="folder_icon" style="width:100px; height:120px; float: left;" oncontextmenu="ShowMenu('contextMenu',event);">
-				<img src="view/images/Folder.png" onclick="alert('Test');" style="cursor:pointer; cursor:hand;"/>
-				<label> Folder Name </label>
-			</div>
-			<div id="folder_icon" style="width:100px; height:120px; float: left;" oncontextmenu="ShowMenu('contextMenu',event);">
-				<img src="view/images/Folder.png" onclick="alert('Test');" style="cursor:pointer; cursor:hand;"/>
-				<label> Folder Name </label>
-			</div>
-			<div id="folder_icon" style="width:100px; height:120px; float: left;" oncontextmenu="ShowMenu('contextMenu',event);">
-				<img src="view/images/Folder.png" onclick="alert('Test');" style="cursor:pointer; cursor:hand;"/>
-				<label> Folder Name </label>
-			</div>
-			<div id="folder_icon" style="width:100px; height:120px; float: left;">
-				<img src="view/images/Folder.png" onclick="alert('Test');" style="cursor:pointer; cursor:hand;"/>
-				<label> Folder Name </label>
-			</div>
-			<div id="folder_icon" style="width:100px; height:120px; float: left;">
-				<img src="view/images/Folder.png" onclick="alert('Test');" style="cursor:pointer; cursor:hand;"/>
-				<label> Folder Name </label>
-			</div>
-			<div id="folder_icon" style="width:100px; height:120px; float: left;">
-				<img src="view/images/Folder.png" onclick="alert('Test');" style="cursor:pointer; cursor:hand;"/>
-				<label> Folder Name </label>
-			</div>
-			<div id="folder_icon" style="width:100px; height:120px; float: left;">
-				<img src="view/images/Folder.png" onclick="alert('Test');" style="cursor:pointer; cursor:hand;"/>
-				<label> Folder Name </label>
-			</div>
-			<div id="folder_icon" style="width:100px; height:120px; float: left;">
-				<img src="view/images/Folder.png" onclick="alert('Test');" style="cursor:pointer; cursor:hand;"/>
-				<label> Folder Name </label>
-			</div>
-			<div id="folder_icon" style="width:100px; height:120px; float: left;">
-				<img src="view/images/Folder.png" onclick="alert('Test');" style="cursor:pointer; cursor:hand;"/>
-				<label> Folder Name </label>
-			</div>
-			<div id="folder_icon" style="width:100px; height:120px; float: left;">
-				<img src="view/images/Folder.png" onclick="alert('Test');" style="cursor:pointer; cursor:hand;"/>
-				<label> Folder Name </label>
-			</div>
-		</div>-->
 	</body>
 </html>
