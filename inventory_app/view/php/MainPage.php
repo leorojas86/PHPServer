@@ -53,22 +53,35 @@
 				var addOption    = '"Add"';
 				var deleteOption = '"Delete"';
 				var cutOption    = '"Cut"';
+				var pasteOption  = '"Paste"';
 
-				var target   = event.target;
-		    	var folderId = '"' + target.parentNode.id + '"';
+				var target      = event.target;
+		    	var folderId    = '"' + target.parentNode.id + '"';
+		    	var optionStyle = "style='width:60px; height:20px;'";
 
 		    	switch(event.target.id)
 		    	{
 		    		case "folders_scroll_panel":
-		    			var addGroupButton     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + addOption + ")'> Add </button>";
-		    			contextMenu.innerHTML  = addGroupButton;	
+		    			var addGroupButton     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + addOption + ")'   " + optionStyle +" > Add </button>";
+		    			var pasteGroupButton   = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + pasteOption + ")' " + optionStyle +" > Paste </button>";
+
+		    			if(canPasteFolder())
+							contextMenu.innerHTML  = addGroupButton + "<br>" + pasteGroupButton;
+						else
+							contextMenu.innerHTML  = addGroupButton;
+
 		    		break;
 		    		default:
-		    			var deleteButtonHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + deleteOption + ")' style='width:60px; height:20px;'> Delete </button>";
-		    			var cutButtonHTML     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + cutOption + ")'    style='width:60px; height:20px;'> Cut </button>";
+		    			var deleteButtonHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + deleteOption + ")' " + optionStyle +"> Delete </button>";
+		    			var cutButtonHTML     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + cutOption + ")'    " + optionStyle +" > Cut </button>";
 		    			contextMenu.innerHTML = deleteButtonHTML + "<br>" + cutButtonHTML;	
 		    		break;
 		    	}
+		    }
+
+		    function canPasteFolder()
+		    {
+		    	return _currentGroupData != null && _currentGroupData.can_paste;
 		    }
 
 		    function hideContextMenu()
@@ -96,6 +109,9 @@
 		    		break;
 		    		case "Cut":
 		    			_cuttingGroupId = folderId;
+		    		break;
+		    		case "Paste":
+		    			pasteGroup();
 		    		break;
 		    	}
 		    }
@@ -256,7 +272,12 @@
 			function onPasteButtonClick(parentGroupId)
 			{
 				_parentGroupId  = parentGroupId;
-				var params 	    = "service=Group&method=Move&id=" + _cuttingGroupId + "&parentGroupId=" + parentGroupId;
+				pasteGroup();
+			}
+
+			function pasteGroup()
+			{
+				var params 	    = "service=Group&method=Move&id=" + _cuttingGroupId + "&parentGroupId=" + _currentGroupData.id;
 				_cuttingGroupId = null;
 				request("http://localhost:8888", params, "POST", onMoveGroupCallback);
 			}
@@ -270,7 +291,7 @@
 					var result = JSON.parse(xmlhttp.responseText);
 
 					if(result.success)
-						loadAjaxGroup(_parentGroupId);
+						loadAjaxGroup(_currentGroupData.id);
 				}
 			}
 

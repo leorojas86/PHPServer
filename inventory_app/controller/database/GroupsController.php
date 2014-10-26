@@ -185,28 +185,12 @@ class GroupsController
 
 				if($cuttingGroupId != "null")
 				{
-					$isChildGroup = false;
+					$result = GroupsController::CanPasteGroup($cuttingGroupId, $subGroups, $groupId);
 
-					foreach($subGroups as $subGroup)
-	    			{
-	    				$subGroupId	  = $subGroup["id"];
-	    				$isChildGroup = $isChildGroup || $cuttingGroupId == $subGroupId;
-	    			}
-
-	    			if(!$isChildGroup)
-	    			{
-						$result = Group::IsInHierarchy($groupId, $cuttingGroupId);
-
-						if($result->success)
-						{
-							$isInHierarchy = $result->data;
-							
-							if(!$isInHierarchy)
-								$groupAjax .= "<button type='button' onclick='onPasteButtonClick($groupId);'>Paste</button>";
-						}
-						else
-							return $result;
-					}
+					if($result->success)
+						$groupData["can_paste"] = $result->data;
+					else
+						return $result;
 				}
 
     		$groupAjax .= "</div>";
@@ -215,6 +199,32 @@ class GroupsController
 		}
 
 		return $result;
+	}
+
+	private function CanPasteGroup($cuttingGroupId, $subGroups, $groupId)
+	{
+		$isChildGroup = false;
+
+		foreach($subGroups as $subGroup)
+		{
+			$subGroupId	  = $subGroup["id"];
+			$isChildGroup = $isChildGroup || $cuttingGroupId == $subGroupId;
+		}
+
+		if(!$isChildGroup)
+		{
+			$result = Group::IsInHierarchy($groupId, $cuttingGroupId);
+
+			if($result->success)
+			{
+				$isInHierarchy = $result->data;
+				return new ServiceResult(true, !$isInHierarchy);
+			}
+			else
+				return $result;
+		}
+
+		return new ServiceResult(true, false);
 	}
 
 	public static function UpdateData()
