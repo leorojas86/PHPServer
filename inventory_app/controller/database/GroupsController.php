@@ -14,6 +14,9 @@ class GroupsController
 			case "GetGroupAjax": 
 				$result = GroupsController::GetGroupInternal();
 			break;
+			case "GetRootGroupAjax": 
+				$result = GroupsController::GetRootGroup();
+			break;
 			case "UpdateData":
 				$result = GroupsController::UpdateData();
 			break;
@@ -122,6 +125,21 @@ class GroupsController
 		return $result;
 	}
 
+	private static function GetRootGroup()
+	{
+		$loggedInUserData = Session::GetLoggedIdUserData();
+		$userId   		  = $loggedInUserData["id"];
+		$rootGroupResult  = Group::GetUserRootGroup($userId);
+
+		if($rootGroupResult->success)
+		{
+			$groupId         = $rootGroupResult->data["id"];
+			return GroupsController::GetGroupAjax($groupId, null);
+	 	}
+
+	 	return $rootGroupResult;
+	}
+
 	private static function GetGroupInternal()
 	{
 		$groupId 		= $_POST["id"];
@@ -136,10 +154,10 @@ class GroupsController
 
 		if($result->success)
 		{
-			$groupPath     = $result->data["path"];
-			$groupData     = $result->data["data"]; 
-			$parentGroupId = $result->data["parent_group_id"];
-			$subGroups 	   = $result->data["sub_groups"];
+			$groupData     = $result->data;
+			$groupPath     = $groupData["path"];
+			$parentGroupId = $groupData["parent_group_id"];
+			$subGroups 	   = $groupData["sub_groups"];
 
 			$groupAjax .= "<div id='folders_area' align='center'>";
 			
@@ -199,7 +217,7 @@ class GroupsController
 
     		$groupAjax .= "</div>";
 
-			return new ServiceResult(true, $groupAjax);
+			return new ServiceResult(true, array("group_ajax" =>$groupAjax, "group_data" => $groupData));
 		}
 
 		return $result;

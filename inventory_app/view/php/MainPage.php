@@ -9,10 +9,18 @@
 		<!-- http://www.codeproject.com/Tips/630793/Context-Menu-on-Right-Click-in-Webpage -->
 		<script type="text/javascript">
 
+			var _currentGroupData = null;
+
 			onload = function() 
 		    {
-    			//disableDefaultContextMenu();
-    			document.onkeyup = onKeyUp;
+    			document.onkeyup  = onKeyUp;
+    			var groupContaner = document.getElementById('group_container');
+
+    			if(groupContaner != null)//User is logged in
+    			{
+	    			var params = "service=Group&method=GetRootGroupAjax";
+					request("http://localhost:8888", params, "POST", onGroupContainerAjaxCallback);
+				}
 			}
 
 			function onKeyUp(event)
@@ -63,7 +71,7 @@
 		    function onContextMenuOptionSelected(option)
 		    {
 		    	hideContextMenu();
-		    	alert(option);
+		    	//alert(option);
 
 		    	switch(option)
 		    	{
@@ -71,9 +79,11 @@
 
 		    		var folderName = prompt("Nombre del folder", "");
 
-					if (folderName != null) 
+					if(folderName != null) 
 					{
-					    alert(folderName);
+					    //alert(folderName);
+					    //alert(_currentGroupData.id);
+					    addSubGroup(folderName);
 					}
 
 		    		break;
@@ -164,14 +174,16 @@
 					alert("result '" + xmlhttp.responseText + "'");
 			}
 
-			function onAddSubGroupClick(parentGroupId)
+			function onAddSubGroupClick()
 			{
-				_parentGroupId 		 = parentGroupId;
 				var newGroupName 	 = document.getElementById('new_group_name');
-				var defaultGroupType = 0;
-				var params    		 = "service=Group&method=AddSubGroup&parentGroupId=" + parentGroupId + "&name=" + newGroupName.value + "&type=" + defaultGroupType;
+				addSubGroup(newGroupName.value);
+			}
 
-				//alert("params = " + params);
+			function addSubGroup(newGroupName)
+			{
+				var defaultGroupType = 0;
+				var params    		 = "service=Group&method=AddSubGroup&parentGroupId=" + _currentGroupData.id + "&name=" + newGroupName + "&type=" + defaultGroupType;
 
 				request("http://localhost:8888", params, "POST", onAddSubGroupCallback);
 			}
@@ -180,13 +192,13 @@
 			{
 				if(checkForValidResponse(xmlhttp)) 
 				{
-					alert("result '" + xmlhttp.responseText + "'");
+					//alert("result '" + xmlhttp.responseText + "'");
 
 					var result = JSON.parse(xmlhttp.responseText);
 
 					if(result.success)
 					{
-						var params = "service=Group&method=GetGroupAjax&id=" + _parentGroupId;
+						var params = "service=Group&method=GetGroupAjax&id=" + _currentGroupData.id;
 
 						request("http://localhost:8888", params, "POST", onGroupContainerAjaxCallback);
 					}
@@ -223,7 +235,8 @@
 					if(result.success)
 					{
 						var groupContaner 	    = document.getElementById('group_container');
-						groupContaner.innerHTML = result.data;
+						groupContaner.innerHTML = result.data.group_ajax;
+						_currentGroupData		= result.data.group_data;
 					}
 				}
 			}
@@ -287,36 +300,8 @@
 
 		if(Session::IsUserLoggedIn())
 		{
-			$loggedInUserData = Session::GetLoggedIdUserData();
-			$userId   		  = $loggedInUserData["id"];
-			$userName 		  = $loggedInUserData["name"];
-			$userData         = $loggedInUserData["data"];
-
-			//echo "userData = " . json_encode($loggedInUserData);
-
-			/*echo "<p>User Name</p> <p>$userName</p>
-			 	  <p>User Data</p>
-				  <input type='text' id='user_data'  value = '$userData'>
-				  <button type='button' onclick='onUpdateUserDataClick()'>Update</button><br/><br/><br/><br/>";*/
-
-			$rootGroupResult = Group::GetUserRootGroup($userId);
-
-			if($rootGroupResult->success)
-			{
-				$groupId         = $rootGroupResult->data["id"];
-				$groupAjaxResult = GroupsController::GetGroupAjax($groupId, null);
-
-				if($groupAjaxResult->success)
-				{
-					$groupAjax = $groupAjaxResult->data;
-
-					echo "<div id='group_container'>
-							$groupAjax
-				 	  	</div>";
-			 	}
-
-			 	echo "<div id='context_menu_container' style='position: absolute; left: 100px; top: 150px;' ></div>";
-		 	}
+		 	echo "<div id='group_container'></div>";
+		 	echo "<div id='context_menu_container' style='position: absolute; left: 100px; top: 150px;' ></div>";
 		}
 		else
 		{
