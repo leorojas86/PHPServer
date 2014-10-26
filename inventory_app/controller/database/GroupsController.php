@@ -139,10 +139,14 @@ class GroupsController
 				else
 				{
 					$data 		= $groupData["data"];
-					$groupAjax .= "<p>Data</p>
-						  			<input type='text' id='group_data' value = '$data'>
-				  		  			<button type='button' onclick='onUpdateGroupDataClick($groupId)'>Update</button><br/><br/>";
+					$groupAjax .= "<p>Data 
+										<input type='text' id='group_data' value = '$data'>
+										<button type='button' onclick='onUpdateGroupDataClick($groupId)'>Update</button>
+								   </p>";
 				}
+
+			$groupAjax .= "<input type='text' id='search_input' value = ''>
+						   <button type='button' onclick='onUpdateGroupDataClick($groupId)'>Search</button>";
 
     		$groupAjax .= "</div>";
 
