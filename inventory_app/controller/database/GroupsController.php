@@ -159,7 +159,7 @@ class GroupsController
 			$parentGroupId = $groupData["parent_group_id"];
 			$subGroups 	   = $groupData["sub_groups"];
 
-			$groupAjax .= "<div id='folders_area' align='center'>";
+			$groupAjax = "<div id='folders_area' align='center'>";
 			
 				$groupPath  = str_replace("RootGroup/", "Principal/", $groupPath);
 				

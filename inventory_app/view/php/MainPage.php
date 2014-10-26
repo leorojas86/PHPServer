@@ -60,7 +60,8 @@
 		    	switch(event.target.id)
 		    	{
 		    		case "folders_scroll_panel":
-		    			contextMenu.innerHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + addOption + ")'> Add </button>";	
+		    			var addGroupButton     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + addOption + ")'> Add </button>";
+		    			contextMenu.innerHTML  = addGroupButton;	
 		    		break;
 		    		default:
 		    			var deleteButtonHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + deleteOption + ")' style='width:60px; height:20px;'> Delete </button>";
