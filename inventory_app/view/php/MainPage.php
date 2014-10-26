@@ -47,11 +47,12 @@
 				contextMenu.style.top  	   = event.clientY + "px";
 				contextMenu.style.display  = 'inline';
 
-				var addOption    = '"Add Folder"';
-				var deleteOption = '"Delete Folder"';
-				var cutOption    = '"Cut Folder"';
-				var pasteOption  = '"Paste Folder"';
-				var renameOption = '"Rename Folder"';
+				var addItemOption      = '"Add Item"';
+				var addFolderOption    = '"Add Folder"';
+				var deleteFolderOption = '"Delete Folder"';
+				var cutFolderOption    = '"Cut Folder"';
+				var pasteFolderOption  = '"Paste Folder"';
+				var renameFolderOption = '"Rename Folder"';
 
 				var target      = event.target;
 		    	var folderId    = '"' + target.parentNode.id + '"';
@@ -60,19 +61,19 @@
 		    	switch(event.target.id)
 		    	{
 		    		case "folders_scroll_panel":
-		    			var addGroupButton     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + addOption + ")'   " + optionStyle +" > Agregar Folder </button>";
-		    			var pasteGroupButton   = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + pasteOption + ")' " + optionStyle +" > Pegar Folder </button>";
+		    			var addItemButton      = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + addItemOption + ")'     " + optionStyle +" > Agregar Item </button>";
+		    			var addGroupButton     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + addFolderOption + ")'   " + optionStyle +" > Agregar Folder </button>";
+		    			var pasteGroupButton   = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + pasteFolderOption + ")' " + optionStyle +" > Pegar Folder </button>";
 
 		    			if(canPasteFolder())
-							contextMenu.innerHTML  = addGroupButton + "<br>" + pasteGroupButton;
+							contextMenu.innerHTML  = addItemButton + "<br>" + addGroupButton + "<br>" + pasteGroupButton;
 						else
-							contextMenu.innerHTML  = addGroupButton;
-
+							contextMenu.innerHTML  = addItemButton + "<br>" + addGroupButton;
 		    		break;
 		    		default:
-		    			var renameButtonHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + renameOption + ")' " + optionStyle +" > Renombrar Folder </button>";
-		    			var cutButtonHTML     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + cutOption + ")'    " + optionStyle +" > Cortar Folder </button>";
-		    			var deleteButtonHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + deleteOption + ")' " + optionStyle +"> Borrar Folder </button>";
+		    			var renameButtonHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + renameFolderOption + ")' " + optionStyle +" > Renombrar Folder </button>";
+		    			var cutButtonHTML     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + cutFolderOption + ")'    " + optionStyle +" > Cortar Folder </button>";
+		    			var deleteButtonHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + deleteFolderOption + ")' " + optionStyle +"> Borrar Folder </button>";
 		    			contextMenu.innerHTML = renameButtonHTML + "<br>" + cutButtonHTML + "<br>" + deleteButtonHTML;	
 		    		break;
 		    	}
@@ -98,10 +99,11 @@
 		    	switch(option)
 		    	{
 		    		case "Add Folder":
-			    		var folderName = prompt("Escriba el nombre del nuevo folder", "");
+			    		var folderName       = prompt("Escriba el nombre del nuevo folder", "");
+			    		var defaultGroupType = 0;
 
 						if(folderName != null && folderName != "") 
-						    addSubGroup(folderName);
+						    addSubGroup(folderName, defaultGroupType);
 		    		break;
 		    		case "Delete Folder":
 		    			removeSubgroupGroup(folderId);
@@ -115,7 +117,21 @@
 		    		case "Rename Folder":
 		    			RenameFolder(folderId);
 		    		break;
+		    		case "Add Item":
+		    			AddItem(folderId);
+		    		break;
 		    	}
+		    }
+
+		    function AddItem(folderId)
+		    {
+		    	var itemName = prompt("Escriba el nuevo nombre para el item", "");
+
+				if(itemName != null && itemName != "") 
+				{
+					var itemId = 1;
+					addSubGroup(itemName, itemId);
+				}
 		    }
 
 		    function RenameFolder(folderId)
@@ -216,10 +232,9 @@
 					alert("result '" + xmlhttp.responseText + "'");
 			}
 
-			function addSubGroup(newGroupName)
+			function addSubGroup(newGroupName, type)
 			{
-				var defaultGroupType = 0;
-				var params    		 = "service=Group&method=AddSubGroup&parentGroupId=" + _currentGroupData.id + "&name=" + newGroupName + "&type=" + defaultGroupType;
+				var params = "service=Group&method=AddSubGroup&parentGroupId=" + _currentGroupData.id + "&name=" + newGroupName + "&type=" + type;
 
 				request("http://localhost:8888", params, "POST", onAddSubGroupCallback);
 			}
@@ -293,7 +308,7 @@
 			{
 				if(checkForValidResponse(xmlhttp))
 				{
-					alert(xmlhttp.responseText);
+					//alert(xmlhttp.responseText);
 
 					var result = JSON.parse(xmlhttp.responseText);
 
