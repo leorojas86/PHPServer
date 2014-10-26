@@ -150,7 +150,7 @@ class GroupsController
 				if($parentGroupId != 0)
 					$groupAjax .= "<button id='back_button' type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button><button type='button' onclick='onCopyButtonClick($groupId);'>Copy</button>";
 
-				$groupAjax .= "<div id='folders_scroll_panel' oncontextmenu='showContextMenu(event);' align='center' style='overflow:scroll; width:600px; height:400px;' >";
+				$groupAjax .= "<div id='folders_scroll_panel' oncontextmenu='showContextMenu(event); return false;' align='center' style='overflow:scroll; width:600px; height:400px;' >";
 
 				foreach($subGroups as $subGroup)
 	    		{

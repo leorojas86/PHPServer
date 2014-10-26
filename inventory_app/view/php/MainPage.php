@@ -11,7 +11,7 @@
 
 			onload = function() 
 		    {
-    			disableDefaultContextMenu();
+    			//disableDefaultContextMenu();
     			document.onkeyup = onKeyUp;
 			}
 
@@ -40,8 +40,8 @@
 				contextMenu.style.top  	   = event.clientY + "px";
 				contextMenu.style.display = 'inline';
 
-				var addOption    = "'Add'";
-				var deleteOption = "'Delete'";
+				var addOption    = '"Add"';
+				var deleteOption = '"Delete"';
 
 		    	switch(event.target.id)
 		    	{
@@ -62,6 +62,7 @@
 
 		    function onContextMenuOptionSelected(option)
 		    {
+		    	hideContextMenu();
 		    	alert(option);
 		    }
 
@@ -266,8 +267,7 @@
 
 		</script>
 	</head>
-	<body onmousedown='hideContextMenu();'>
-
+	<body onclick='hideContextMenu();'>
 
 		<?php 
 
