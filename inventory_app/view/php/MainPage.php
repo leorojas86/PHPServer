@@ -15,9 +15,9 @@
     			document.onkeyup = onKeyUp;
 			}
 
-			function onKeyUp(e)
+			function onKeyUp(event)
 			{
-				switch(e.which) 
+				switch(event.which) 
 				{
 				    case 8://back button
 
@@ -32,26 +32,17 @@
 				}
 			}
 
-		    function ShowMenu(control, e, options) 
+		    function ShowMenu(event) 
 		    {
-		    	alert("x = " + e.clientX + " y = " + e.clientY);
+		    	var json = JSON.stringify(event.target.id);
+		    	alert(json);
+		    	//alert("x = " + e.clientX + " y = " + e.clientY);
 
-		    	if(options.indexOf("delete") > -1)
-		    	{
-		    		var contextMenu        = document.getElementById('context_menu_container');
-			    	contextMenu.innerHTML  = "<p> delete </p>";	
-			    	contextMenu.style.position = "absolute";
-			    	contextMenu.style.left = e.clientX + "px";
-					contextMenu.style.top  = e.clientY + "px";
-		    	}
-		    	else
-		    	{
-			    	var contextMenu        = document.getElementById('context_menu_container');
-			    	contextMenu.innerHTML  = "<p> TEST </p>";	
-			    	contextMenu.style.position = "absolute";
-			    	contextMenu.style.left = e.clientX + "px";
-					contextMenu.style.top  = e.clientY + "px";
-				}
+	    		/*var contextMenu        = document.getElementById('context_menu_container');
+		    	contextMenu.innerHTML  = "<p> " + options + " </p>";	
+		    	contextMenu.style.position = "absolute";
+		    	contextMenu.style.left = event.clientX + "px";
+				contextMenu.style.top  = event.clientY + "px";*/
 		    }
 
 		    var _copyingGroupId		   = null;
