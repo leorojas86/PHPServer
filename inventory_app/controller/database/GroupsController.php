@@ -147,6 +147,9 @@ class GroupsController
 				
 				$groupAjax .= "<p>$groupPath</p>";
 
+				if($parentGroupId != 0)
+					$groupAjax .= "<button id='back_button' type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button><button type='button' onclick='onCopyButtonClick($groupId)'>Copy</button>";
+
 				$groupAjax .= "<div id='folders_scroll_panel' align='center' style='overflow:scroll; width:600px; height:400px;' >";
 
 				foreach($subGroups as $subGroup)
@@ -154,7 +157,7 @@ class GroupsController
 	    			$subGroupName = $subGroup["name"];
 	    			$subGroupId	  = $subGroup["id"];
 
-	    			$groupAjax .= "<div id='folder_icon' style='width:100px; height:120px; float: left;' oncontextmenu='ShowMenu(contextMenu,event);'>
+	    			$groupAjax .= "<div id='folder_icon' style='width:100px; height:120px; float: left;' oncontextmenu='ShowMenu(contextMenu,event,'delete');'>
 										<img src='view/images/Folder.png' onclick='onSubGroupClick($subGroupId)' style='cursor:pointer; cursor:hand;'/>
 										<label> $subGroupName </label>
 								   </div>";
@@ -162,10 +165,6 @@ class GroupsController
 	    		}
 
 	    		$groupAjax .= "</div>";
-
-
-				if($parentGroupId != 0)
-					$groupAjax .= "<button type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button><button type='button' onclick='onCopyButtonClick($groupId)'>Copy</button>";
 
 				if($copyingGroupId != "null")
 				{

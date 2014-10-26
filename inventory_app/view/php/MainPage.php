@@ -12,17 +12,46 @@
 			onload = function() 
 		    {
     			disableDefaultContextMenu();
+    			document.onkeyup = onKeyUp;
 			}
 
-		    function ShowMenu(control, e) 
+			function onKeyUp(e)
+			{
+				switch(e.which) 
+				{
+				    case 8://back button
+
+				    	var backButton = document.getElementById("back_button");
+
+						if(backButton != null) 
+   							 backButton.onclick.apply(backButton);
+
+				    break;
+				    default:
+					break;
+				}
+			}
+
+		    function ShowMenu(control, e, options) 
 		    {
 		    	alert("x = " + e.clientX + " y = " + e.clientY);
 
-		    	var contextMenu        = document.getElementById('context_menu_container');
-		    	contextMenu.innerHTML  = "<p> TEST </p>";	
-		    	contextMenu.style.position = "absolute";
-		    	contextMenu.style.left = e.clientX + "px";
-				contextMenu.style.top  = e.clientY + "px";
+		    	if(options.indexOf("delete") > -1)
+		    	{
+		    		var contextMenu        = document.getElementById('context_menu_container');
+			    	contextMenu.innerHTML  = "<p> delete </p>";	
+			    	contextMenu.style.position = "absolute";
+			    	contextMenu.style.left = e.clientX + "px";
+					contextMenu.style.top  = e.clientY + "px";
+		    	}
+		    	else
+		    	{
+			    	var contextMenu        = document.getElementById('context_menu_container');
+			    	contextMenu.innerHTML  = "<p> TEST </p>";	
+			    	contextMenu.style.position = "absolute";
+			    	contextMenu.style.left = e.clientX + "px";
+					contextMenu.style.top  = e.clientY + "px";
+				}
 		    }
 
 		    var _copyingGroupId		   = null;
