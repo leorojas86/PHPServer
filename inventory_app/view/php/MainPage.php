@@ -32,17 +32,29 @@
 				}
 			}
 
-		    function ShowMenu(event) 
+		    function ShowContextMenu(event) 
 		    {
-		    	var json = JSON.stringify(event.target.id);
-		    	alert(json);
-		    	//alert("x = " + e.clientX + " y = " + e.clientY);
-
-	    		/*var contextMenu        = document.getElementById('context_menu_container');
-		    	contextMenu.innerHTML  = "<p> " + options + " </p>";	
+		    	var contextMenu        	   = document.getElementById('context_menu_container');
 		    	contextMenu.style.position = "absolute";
-		    	contextMenu.style.left = event.clientX + "px";
-				contextMenu.style.top  = event.clientY + "px";*/
+		    	contextMenu.style.left 	   = event.clientX + "px";
+				contextMenu.style.top  	   = event.clientY + "px";
+				contextMenu.style.display = 'inline';
+
+		    	switch(event.target.id)
+		    	{
+		    		case "folders_scroll_panel":
+		    			contextMenu.innerHTML  = "<p> Add </p>";	
+		    		break;
+		    		default:
+		    			contextMenu.innerHTML  = "<p> Delete </p>";	
+		    		break;
+		    	}
+		    }
+
+		    function HideContextMenu()
+		    {
+		    	var contextMenu           = document.getElementById('context_menu_container');
+		    	contextMenu.style.display = 'none';
 		    }
 
 		    var _copyingGroupId		   = null;
@@ -246,7 +258,7 @@
 
 		</script>
 	</head>
-	<body>
+	<body onmousedown='HideContextMenu();'>
 
 
 		<?php 
