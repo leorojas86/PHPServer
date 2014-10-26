@@ -8,9 +8,6 @@ class GroupsController
 	{
 		switch ($method) 
 		{
-			case "GetTestingGroupAjax": 
-				$result = GroupsController::GetTestingGroupInternal();
-			break;
 			case "GetGroupAjax": 
 				$result = GroupsController::GetGroupInternal();
 			break;
@@ -49,80 +46,6 @@ class GroupsController
 	{
 		$groupId = $_POST["id"];
 		return Group::Delete($groupId);
-	}
-
-	private static function GetTestingGroupInternal()
-	{
-		$groupId 		= $_POST["id"];
-		$cuttingGroupId = $_POST["cuttingGroupId"];
-
-		return GroupsController::GetTestingGroupAjax($groupId, $cuttingGroupId);
-	}
-
-	public static function GetTestingGroupAjax($groupId, $cuttingGroupId)
-	{
-		$result = Group::GetGroup($groupId);
-
-		if($result->success)
-		{
-			$groupPath     = $result->data["path"];
-			$groupData     = $result->data["data"]; 
-			$parentGroupId = $result->data["parent_group_id"];
-			$subGroups 	   = $result->data["sub_groups"];
-
-			$groupAjax = "<p>$groupPath</p>";
-
-			if($parentGroupId != 0)
-				$groupAjax .= "<button type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button><button type='button' onclick='onCopyButtonClick($groupId)'>Copy</button>";
-
-			if($cuttingGroupId != "null")
-			{
-				$isChildGroup = false;
-
-				foreach($subGroups as $subGroup)
-    			{
-    				$subGroupId	  = $subGroup["id"];
-    				$isChildGroup = $isChildGroup || $cuttingGroupId == $subGroupId;
-    			}
-
-    			if(!$isChildGroup)
-    			{
-					$result = Group::IsInHierarchy($groupId, $cuttingGroupId);
-
-					if($result->success)
-					{
-						$isInHierarchy = $result->data;
-						
-						if(!$isInHierarchy)
-							$groupAjax .= "<button type='button' onclick='onPasteButtonClick($groupId)'>Paste</button>";
-					}
-					else
-						return $result;
-				}
-			}
-
-			if($parentGroupId != 0)
-				$groupAjax .= "<button type='button' onclick='onDeleteButtonClick($groupId, $parentGroupId)'>Delete</button>";
-
-			$groupAjax .= "<p>Group Data</p>
-						  <input type='text' id='group_data' value = '$groupData'>
-				  		  <button type='button' onclick='onUpdateGroupDataClick($groupId)'>Update</button><br/><br/>
-				  		  <p>Sub Groups:</p>";
-
-			foreach($subGroups as $subGroup)
-    		{
-    			$subGroupName = $subGroup["name"];
-    			$subGroupId	  = $subGroup["id"];
-    			$groupAjax   .= "<button type='button' onclick='onSubGroupClick($subGroupId)'>$subGroupName</button><br/><br/>";
-    		}
-
-    		$groupAjax .= "<input type='text' id='new_group_name' value = 'New Group'>
-				  		  <button type='button' onclick='onAddSubGroupClick($groupId)'>Add</button>";
-
-			return new ServiceResult(true, $groupAjax);
-		}
-
-		return $result;
 	}
 
 	private static function GetRootGroup()
