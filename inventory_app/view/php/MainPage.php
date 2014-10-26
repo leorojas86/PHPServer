@@ -277,7 +277,8 @@
 
 			function removeSubgroupGroup(groupId)
 			{
-				var remove = confirm("Está seguro de que desea borrar el folder? \nTodos sus folders hijos y sus contenidos serán borrados.");
+				var folderLabel = document.getElementById('folder_label_' + groupId);
+				var remove      = confirm("Está seguro de que desea borrar el folder '" + folderLabel.textContent + "'? \nTodos sus folders hijos y sus contenidos serán borrados.");
 
 				if(remove) 
 				{
