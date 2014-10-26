@@ -47,10 +47,10 @@
 				contextMenu.style.top  	   = event.clientY + "px";
 				contextMenu.style.display = 'inline';
 
-				var addOption    = '"Add"';
-				var deleteOption = '"Delete"';
-				var cutOption    = '"Cut"';
-				var pasteOption  = '"Paste"';
+				var addOption    = '"Add Folder"';
+				var deleteOption = '"Delete Folder"';
+				var cutOption    = '"Cut Folder"';
+				var pasteOption  = '"Paste Folder"';
 
 				var target      = event.target;
 		    	var folderId    = '"' + target.parentNode.id + '"';
@@ -60,7 +60,7 @@
 		    	{
 		    		case "folders_scroll_panel":
 		    			var addGroupButton     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + addOption + ")'   " + optionStyle +" > Agregar Folder </button>";
-		    			var pasteGroupButton   = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + pasteOption + ")' " + optionStyle +" > Copiar Folder Paste </button>";
+		    			var pasteGroupButton   = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + pasteOption + ")' " + optionStyle +" > Pegar Folder </button>";
 
 		    			if(canPasteFolder())
 							contextMenu.innerHTML  = addGroupButton + "<br>" + pasteGroupButton;
@@ -95,19 +95,19 @@
 
 		    	switch(option)
 		    	{
-		    		case "Add":
+		    		case "Add Folder":
 			    		var folderName = prompt("Escriba el nombre del nuevo folder", "");
 
 						if(folderName != null && folderName != "") 
 						    addSubGroup(folderName);
 		    		break;
-		    		case "Delete":
+		    		case "Delete Folder":
 		    			removeSubgroupGroup(folderId);
 		    		break;
-		    		case "Cut":
+		    		case "Cut Folder":
 		    			_cuttingGroupId = folderId;
 		    		break;
-		    		case "Paste":
+		    		case "Paste Folder":
 		    			pasteGroup();
 		    		break;
 		    	}
