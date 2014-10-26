@@ -166,7 +166,7 @@ class GroupsController
 				$groupAjax .= "<p>$groupPath</p>";
 
 				if($parentGroupId != 0)
-					$groupAjax .= "<button id='back_button' type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button><button type='button' onclick='onCopyButtonClick($groupId);'>Copy</button>";
+					$groupAjax .= "<button id='back_button' type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button>";
 
 				$groupAjax .= "<div id='folders_scroll_panel' oncontextmenu='showContextMenu(event); return false;' align='center' style='overflow:scroll; width:600px; height:400px;' >";
 
@@ -201,7 +201,7 @@ class GroupsController
 		return $result;
 	}
 
-	private function CanPasteGroup($cuttingGroupId, $subGroups, $groupId)
+	private static function CanPasteGroup($cuttingGroupId, $subGroups, $groupId)
 	{
 		$isChildGroup = false;
 

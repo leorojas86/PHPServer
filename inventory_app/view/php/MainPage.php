@@ -11,7 +11,6 @@
 
 			var _currentGroupData = null;
 			var _cuttingGroupId   = null;
-			var _parentGroupId	  = null;
 
 			onload = function() 
 		    {
@@ -30,12 +29,10 @@
 				switch(event.which) 
 				{
 				    case 8://back button
-
 				    	var backButton = document.getElementById("back_button");
 
 						if(backButton != null) 
    							 backButton.onclick.apply(backButton);
-
 				    break;
 				    default:
 					break;
@@ -57,13 +54,13 @@
 
 				var target      = event.target;
 		    	var folderId    = '"' + target.parentNode.id + '"';
-		    	var optionStyle = "style='width:60px; height:20px;'";
+		    	var optionStyle = "style='width:100px; height:20px;'";
 
 		    	switch(event.target.id)
 		    	{
 		    		case "folders_scroll_panel":
-		    			var addGroupButton     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + addOption + ")'   " + optionStyle +" > Add </button>";
-		    			var pasteGroupButton   = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + pasteOption + ")' " + optionStyle +" > Paste </button>";
+		    			var addGroupButton     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + addOption + ")'   " + optionStyle +" > Agregar Folder </button>";
+		    			var pasteGroupButton   = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + pasteOption + ")' " + optionStyle +" > Copiar Folder Paste </button>";
 
 		    			if(canPasteFolder())
 							contextMenu.innerHTML  = addGroupButton + "<br>" + pasteGroupButton;
@@ -72,8 +69,8 @@
 
 		    		break;
 		    		default:
-		    			var deleteButtonHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + deleteOption + ")' " + optionStyle +"> Delete </button>";
-		    			var cutButtonHTML     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + cutOption + ")'    " + optionStyle +" > Cut </button>";
+		    			var deleteButtonHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + deleteOption + ")' " + optionStyle +"> Borrar Folder </button>";
+		    			var cutButtonHTML     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + cutOption + ")'    " + optionStyle +" > Cortar Folder </button>";
 		    			contextMenu.innerHTML = deleteButtonHTML + "<br>" + cutButtonHTML;	
 		    		break;
 		    	}
@@ -99,7 +96,7 @@
 		    	switch(option)
 		    	{
 		    		case "Add":
-			    		var folderName = prompt("Nombre del folder", "");
+			    		var folderName = prompt("Escriba el nombre del nuevo folder", "");
 
 						if(folderName != null && folderName != "") 
 						    addSubGroup(folderName);
@@ -197,12 +194,6 @@
 					alert("result '" + xmlhttp.responseText + "'");
 			}
 
-			function onAddSubGroupClick()
-			{
-				var newGroupName 	 = document.getElementById('new_group_name');
-				addSubGroup(newGroupName.value);
-			}
-
 			function addSubGroup(newGroupName)
 			{
 				var defaultGroupType = 0;
@@ -264,17 +255,6 @@
 				}
 			}
 
-			function onCopyButtonClick(groupId)
-			{
-				_cuttingGroupId = groupId;
-			}
-
-			function onPasteButtonClick(parentGroupId)
-			{
-				_parentGroupId  = parentGroupId;
-				pasteGroup();
-			}
-
 			function pasteGroup()
 			{
 				var params 	    = "service=Group&method=Move&id=" + _cuttingGroupId + "&parentGroupId=" + _currentGroupData.id;
@@ -293,11 +273,6 @@
 					if(result.success)
 						loadAjaxGroup(_currentGroupData.id);
 				}
-			}
-
-			function onDeleteButtonClick(groupId, parentGroupId)
-			{
-				removeSubgroupGroup(groupId)
 			}
 
 			function removeSubgroupGroup(groupId)
