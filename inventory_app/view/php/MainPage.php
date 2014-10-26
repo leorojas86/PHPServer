@@ -10,6 +10,8 @@
 		<script type="text/javascript">
 
 			var _currentGroupData = null;
+			var _cuttingGroupId   = null;
+			var _parentGroupId	  = null;
 
 			onload = function() 
 		    {
@@ -50,6 +52,7 @@
 
 				var addOption    = '"Add"';
 				var deleteOption = '"Delete"';
+				var cutOption    = '"Cut"';
 
 				var target   = event.target;
 		    	var folderId = '"' + target.parentNode.id + '"';
@@ -60,7 +63,9 @@
 		    			contextMenu.innerHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + addOption + ")'> Add </button>";	
 		    		break;
 		    		default:
-		    			contextMenu.innerHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + deleteOption + ")'> Delete </button>";	
+		    			var deleteButtonHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + deleteOption + ")'> Delete </button>";
+		    			var cutButtonHTML     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + cutOption + ")'> Cut </button>";
+		    			contextMenu.innerHTML = deleteButtonHTML;	
 		    		break;
 		    	}
 		    }
@@ -87,11 +92,11 @@
 		    			folderId = folderId.replace("folder_", "");
 		    			removeSubgroupGroup(folderId);
 		    		break;
+		    		case "Cut":
+
+		    		break;
 		    	}
 		    }
-
-		    var _copyingGroupId		   = null;
-			var _parentGroupId		   = null;
 			
 			function onLoginButtonClick()
 			{
@@ -217,7 +222,7 @@
 
 			function loadAjaxGroup(groupId)
 			{
-				var params = "service=Group&method=GetGroupAjax&id=" + groupId + "&copyingGroupId=" + _copyingGroupId;
+				var params = "service=Group&method=GetGroupAjax&id=" + groupId + "&cuttingGroupId=" + _cuttingGroupId;
 
 				//alert("params " + params);
 				
@@ -243,14 +248,14 @@
 
 			function onCopyButtonClick(groupId)
 			{
-				_copyingGroupId = groupId;
+				_cuttingGroupId = groupId;
 			}
 
 			function onPasteButtonClick(parentGroupId)
 			{
 				_parentGroupId  = parentGroupId;
-				var params 	    = "service=Group&method=Move&id=" + _copyingGroupId + "&parentGroupId=" + parentGroupId;
-				_copyingGroupId = null;
+				var params 	    = "service=Group&method=Move&id=" + _cuttingGroupId + "&parentGroupId=" + parentGroupId;
+				_cuttingGroupId = null;
 				request("http://localhost:8888", params, "POST", onMoveGroupCallback);
 			}
 
@@ -274,7 +279,7 @@
 
 			function removeSubgroupGroup(groupId)
 			{
-				var remove = confirm("Are you sure that you want to remove the current group");
+				var remove = confirm("Está seguro de que desea borrar el folder? \nTodos sus folders hijos y sus contenidos serán borrados.");
 
 				if(remove) 
 				{

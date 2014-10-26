@@ -54,12 +54,12 @@ class GroupsController
 	private static function GetTestingGroupInternal()
 	{
 		$groupId 		= $_POST["id"];
-		$copyingGroupId = $_POST["copyingGroupId"];
+		$cuttingGroupId = $_POST["cuttingGroupId"];
 
-		return GroupsController::GetTestingGroupAjax($groupId, $copyingGroupId);
+		return GroupsController::GetTestingGroupAjax($groupId, $cuttingGroupId);
 	}
 
-	public static function GetTestingGroupAjax($groupId, $copyingGroupId)
+	public static function GetTestingGroupAjax($groupId, $cuttingGroupId)
 	{
 		$result = Group::GetGroup($groupId);
 
@@ -75,19 +75,19 @@ class GroupsController
 			if($parentGroupId != 0)
 				$groupAjax .= "<button type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button><button type='button' onclick='onCopyButtonClick($groupId)'>Copy</button>";
 
-			if($copyingGroupId != "null")
+			if($cuttingGroupId != "null")
 			{
 				$isChildGroup = false;
 
 				foreach($subGroups as $subGroup)
     			{
     				$subGroupId	  = $subGroup["id"];
-    				$isChildGroup = $isChildGroup || $copyingGroupId == $subGroupId;
+    				$isChildGroup = $isChildGroup || $cuttingGroupId == $subGroupId;
     			}
 
     			if(!$isChildGroup)
     			{
-					$result = Group::IsInHierarchy($groupId, $copyingGroupId);
+					$result = Group::IsInHierarchy($groupId, $cuttingGroupId);
 
 					if($result->success)
 					{
@@ -143,12 +143,12 @@ class GroupsController
 	private static function GetGroupInternal()
 	{
 		$groupId 		= $_POST["id"];
-		$copyingGroupId = $_POST["copyingGroupId"];
+		$cuttingGroupId = $_POST["cuttingGroupId"];
 
-		return GroupsController::GetGroupAjax($groupId, $copyingGroupId);
+		return GroupsController::GetGroupAjax($groupId, $cuttingGroupId);
 	}
 
-	public static function GetGroupAjax($groupId, $copyingGroupId)
+	public static function GetGroupAjax($groupId, $cuttingGroupId)
 	{
 		$result = Group::GetGroup($groupId);
 
@@ -183,19 +183,19 @@ class GroupsController
 
 	    		$groupAjax .= "</div>";
 
-				if($copyingGroupId != "null")
+				if($cuttingGroupId != "null")
 				{
 					$isChildGroup = false;
 
 					foreach($subGroups as $subGroup)
 	    			{
 	    				$subGroupId	  = $subGroup["id"];
-	    				$isChildGroup = $isChildGroup || $copyingGroupId == $subGroupId;
+	    				$isChildGroup = $isChildGroup || $cuttingGroupId == $subGroupId;
 	    			}
 
 	    			if(!$isChildGroup)
 	    			{
-						$result = Group::IsInHierarchy($groupId, $copyingGroupId);
+						$result = Group::IsInHierarchy($groupId, $cuttingGroupId);
 
 						if($result->success)
 						{
