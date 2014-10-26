@@ -162,11 +162,11 @@ class GroupsController
 			$groupAjax = "<div id='folders_area' align='center'>";
 			
 				$groupPath  = str_replace("RootGroup/", "Principal/", $groupPath);
-				
-				$groupAjax .= "<p>$groupPath</p>";
 
 				if($parentGroupId != 0)
-					$groupAjax .= "<button id='back_button' type='button' onclick='onBackButtonClick($parentGroupId)'>Back</button>";
+					$groupAjax .= "<p>$groupPath <button id='back_button' type='button' onclick='onBackButtonClick($parentGroupId)'>Atras</button> </p>";
+				else
+					$groupAjax .= "<p>$groupPath</p>";
 
 				$groupAjax .= "<div id='folders_scroll_panel' oncontextmenu='showContextMenu(event); return false;' align='center' style='overflow:scroll; width:600px; height:400px;' >";
 
