@@ -63,9 +63,9 @@
 		    			contextMenu.innerHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + addOption + ")'> Add </button>";	
 		    		break;
 		    		default:
-		    			var deleteButtonHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + deleteOption + ")'> Delete </button>";
-		    			var cutButtonHTML     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + cutOption + ")'> Cut </button>";
-		    			contextMenu.innerHTML = deleteButtonHTML;	
+		    			var deleteButtonHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + deleteOption + ")' style='width:60px; height:20px;'> Delete </button>";
+		    			var cutButtonHTML     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + cutOption + ")'    style='width:60px; height:20px;'> Cut </button>";
+		    			contextMenu.innerHTML = deleteButtonHTML + "<br>" + cutButtonHTML;	
 		    		break;
 		    	}
 		    }
@@ -80,6 +80,8 @@
 		    {
 		    	hideContextMenu();
 
+		    	folderId = folderId.replace("folder_", "");
+
 		    	switch(option)
 		    	{
 		    		case "Add":
@@ -89,11 +91,10 @@
 						    addSubGroup(folderName);
 		    		break;
 		    		case "Delete":
-		    			folderId = folderId.replace("folder_", "");
 		    			removeSubgroupGroup(folderId);
 		    		break;
 		    		case "Cut":
-
+		    			_cuttingGroupId = folderId;
 		    		break;
 		    	}
 		    }
