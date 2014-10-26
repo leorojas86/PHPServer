@@ -69,9 +69,9 @@
 
 		    		break;
 		    		default:
-		    			var deleteButtonHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + deleteOption + ")' " + optionStyle +"> Borrar Folder </button>";
 		    			var cutButtonHTML     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + cutOption + ")'    " + optionStyle +" > Cortar Folder </button>";
-		    			contextMenu.innerHTML = deleteButtonHTML + "<br>" + cutButtonHTML;	
+		    			var deleteButtonHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + deleteOption + ")' " + optionStyle +"> Borrar Folder </button>";
+		    			contextMenu.innerHTML = cutButtonHTML + "<br>" + deleteButtonHTML;	
 		    		break;
 		    	}
 		    }
