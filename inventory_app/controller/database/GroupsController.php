@@ -108,9 +108,15 @@ class GroupsController
 	    		{
 	    			$subGroupName = $subGroup["name"];
 	    			$subGroupId	  = $subGroup["id"];
+	    			$subGroupType = $subGroup["type"];
+
+	    			if($subGroupType == Constants::DEFAULT_GROUP_TYPE)
+	    				$icon = "view/images/Folder.png";
+	    			else
+	    				$icon = "view/images/File.png";
 
 	    			$groupAjax .= "<div id='folder_$subGroupId' style='width:100px; height:120px; float: left;'>
-										<img id='folder_image_$subGroupId' src='view/images/Folder.png' onclick='onSubGroupClick($subGroupId);' style='cursor:pointer; cursor:hand;'/>
+										<img id='folder_image_$subGroupId' src='$icon' onclick='onSubGroupClick($subGroupId);' style='cursor:pointer; cursor:hand; width:100px; height:88px;'/>
 										<label id='folder_label_$subGroupId' > $subGroupName </label>
 								   </div>";
 	    		}
