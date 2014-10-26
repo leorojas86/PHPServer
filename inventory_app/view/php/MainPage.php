@@ -64,6 +64,20 @@
 		    {
 		    	hideContextMenu();
 		    	alert(option);
+
+		    	switch(option)
+		    	{
+		    		case "Add":
+
+		    		var folderName = prompt("Nombre del folder", "");
+
+					if (folderName != null) 
+					{
+					    alert(folderName);
+					}
+
+		    		break;
+		    	}
 		    }
 
 		    var _copyingGroupId		   = null;
