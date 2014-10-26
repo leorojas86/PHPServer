@@ -350,7 +350,7 @@
 
 		if(Session::IsUserLoggedIn())
 		{
-		 	echo "<div id='group_container' title='Haga click derecho para ver opciones'></div>";
+		 	echo "<div id='group_container'></div>";
 		 	echo "<div id='context_menu_container' style='position: absolute; left: 100px; top: 150px;' ></div>";
 		}
 		else
