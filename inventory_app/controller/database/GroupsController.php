@@ -105,7 +105,7 @@ class GroupsController
 
 				if($subGroupType == Constants::DEFAULT_GROUP_TYPE)
 				{
-					$groupAjax .= "<div id='folders_scroll_panel' oncontextmenu='showContextMenu(event); return false;' align='center' style='overflow:scroll; width:600px; height:400px;' title='Haga click derecho para ver opciones'>";
+					$groupAjax .= "<div id='folders_scroll_panel' oncontextmenu='showContextMenu(event); return false;' align='center' style='overflow:scroll; width:600px; height:400px; border:1px solid gray;' title='Haga click derecho para ver opciones'>";
 
 					foreach($subGroups as $subGroup)
 		    		{
