@@ -19,7 +19,7 @@
 
     			if(groupContaner != null)//User is logged in
     			{
-	    			var params = "service=Group&method=GetRootGroupAjax";
+	    			var params = "service=Group&method=GetRootGroupData";
 					request("http://localhost:8888", params, "POST", onGroupContainerAjaxCallback);
 				}
 			}
@@ -248,11 +248,7 @@
 					var result = JSON.parse(xmlhttp.responseText);
 
 					if(result.success)
-					{
-						var params = "service=Group&method=GetGroupAjax&id=" + _currentGroupData.id;
-
-						request("http://localhost:8888", params, "POST", onGroupContainerAjaxCallback);
-					}
+						loadAjaxGroup(_currentGroupData.id);
 				}
 			}
 
@@ -268,7 +264,7 @@
 
 			function loadAjaxGroup(groupId)
 			{
-				var params = "service=Group&method=GetGroupAjax&id=" + groupId + "&cuttingGroupId=" + _cuttingGroupId;
+				var params = "service=Group&method=GetGroupData&id=" + groupId + "&cuttingGroupId=" + _cuttingGroupId;
 
 				//alert("params " + params);
 				

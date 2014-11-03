@@ -8,11 +8,11 @@ class GroupsController
 	{
 		switch ($method) 
 		{
-			case "GetGroupAjax": 
-				$result = GroupsController::GetGroupInternal();
+			case "GetGroupData": 
+				$result = GroupsController::GetGroupData();
 			break;
-			case "GetRootGroupAjax": 
-				$result = GroupsController::GetRootGroup();
+			case "GetRootGroupData": 
+				$result = GroupsController::GetRootGroupData();
 			break;
 			case "UpdateData":
 				$result = GroupsController::UpdateData();
@@ -59,7 +59,7 @@ class GroupsController
 		return Group::Delete($groupId);
 	}
 
-	private static function GetRootGroup()
+	private static function GetRootGroupData()
 	{
 		$loggedInUserData = Session::GetLoggedIdUserData();
 		$userId   		  = $loggedInUserData["id"];
@@ -68,21 +68,21 @@ class GroupsController
 		if($rootGroupResult->success)
 		{
 			$groupId         = $rootGroupResult->data["id"];
-			return GroupsController::GetGroupAjax($groupId, null);
+			return GroupsController::GetGroupDataInternal($groupId);
 	 	}
 
 	 	return $rootGroupResult;
 	}
 
-	private static function GetGroupInternal()
+	private static function GetGroupData()
 	{
 		$groupId 		= $_POST["id"];
 		$cuttingGroupId = $_POST["cuttingGroupId"];
 
-		return GroupsController::GetGroupAjax($groupId, $cuttingGroupId);
+		return GroupsController::GetGroupDataInternal($groupId, $cuttingGroupId);
 	}
 
-	public static function GetGroupAjax($groupId, $cuttingGroupId)
+	private static function GetGroupDataInternal($groupId, $cuttingGroupId = null)
 	{
 		$result = Group::GetGroup($groupId);
 
@@ -126,7 +126,7 @@ class GroupsController
 
 		    		$groupAjax .= "</div>";
 
-					if($cuttingGroupId != "null")
+					if($cuttingGroupId != "null" && $cuttingGroupId != null)
 					{
 						$result = GroupsController::CanPasteGroup($cuttingGroupId, $subGroups, $groupId);
 
