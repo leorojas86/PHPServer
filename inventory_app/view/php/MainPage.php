@@ -303,7 +303,7 @@
 				var groupPath  = groupPath.replace("RootGroup/", "Principal/");
 
 				if(parentGroupId != 0)
-					groupAjax += "<p>" + groupPath + " <button id='back_button' type='button' onclick='onBackButtonClick(" + parentGroupId + ")'>Atras</button> </p>";
+					groupAjax += "<p>" + groupPath + " <button id='back_button' type='button' onclick='onBackButtonClick(" + parentGroupId + ");'>Atras</button> </p>";
 				else
 					groupAjax += "<p>" + groupPath + "</p>";
 
@@ -338,17 +338,33 @@
 				{
 					groupAjax += "<p>Data"+ 
 										"<input type='text' id='group_data' value = '" + groupData.data + "'>"+
-										"<button type='button' onclick='onUpdateGroupDataClick(" + groupId + ")'>Update</button>"+
+										"<button type='button' onclick='onUpdateGroupDataClick(" + groupId + ");'>Update</button>"+
 								   "</p>";
 				}
 
 				groupAjax += "<input type='text' id='search_input' value = ''>"+
-							   "<button type='button' onclick='onUpdateGroupDataClick(" + groupId + ")'>Search</button>";
+							   "<button type='button' onclick='onSearchButtonClick();'>Search</button>";
 
 	    		groupAjax += "</div>";
 
 	    		var groupContaner 	    = document.getElementById('group_container');
 				groupContaner.innerHTML = groupAjax;
+			}
+
+			function onSearchButtonClick()
+			{
+				var searchTesxtInput = document.getElementById('search_input');
+				var params 	    	 = "service=Group&method=Search&searchText=" + searchTesxtInput.value;
+				request("http://localhost:8888", params, "POST", onSearchCallback);
+
+			}
+
+			function onSearchCallback(xmlhttp)
+			{
+				if(checkForValidResponse(xmlhttp))
+				{
+					alert(xmlhttp.responseText);
+				}
 			}
 
 			function pasteGroup()

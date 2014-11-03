@@ -18,7 +18,7 @@
 
 		public static function GetUserRootGroupInternal($userId)
 		{
-			$sql       = "SELECT id FROM groups WHERE parent_group_id='0' and user_id='$userId'";
+			$sql       = "SELECT id FROM groups WHERE parent_group_id='0' AND user_id='$userId'";
 			$sqlResult = MySQLManager::Execute($sql);
 			
 			if($sqlResult)
@@ -152,7 +152,7 @@
 
 		public static function UpdateData($groupId, $groupData)
 		{
-			$sql       = "UPDATE groups SET data='$groupData' where id='$groupId'";
+			$sql       = "UPDATE groups SET data='$groupData' WHERE id='$groupId'";
 			$sqlResult = MySQLManager::Execute($sql);
 			
 			if($sqlResult)
@@ -169,7 +169,7 @@
 
 		public static function Rename($groupId, $groupName)
 		{
-			$sql       = "UPDATE groups SET name='$groupName' where id='$groupId'";
+			$sql       = "UPDATE groups SET name='$groupName' WHERE id='$groupId'";
 			$sqlResult = MySQLManager::Execute($sql);
 			
 			if($sqlResult)
@@ -221,7 +221,7 @@
 
 		public static function Move($groupId, $parentGroupId)
 		{
-			$sql       = "UPDATE groups SET parent_group_id='$parentGroupId' where id='$groupId'";
+			$sql       = "UPDATE groups SET parent_group_id='$parentGroupId' WHERE id='$groupId'";
 			$sqlResult = MySQLManager::Execute($sql);
 			
 			if($sqlResult)
@@ -268,5 +268,32 @@
 
 			return new ServiceResult(true, true);
 		}
+
+		public static function SearchGroupsByName($name)
+		{
+			$sql       = "SELECT * FROM groups WHERE name LIKE '$name'";
+			$sqlResult = MySQLManager::Execute($sql);
+			
+			if($sqlResult)
+			{
+				$groups = array();
+				$row    = MySQLManager::FetchRow($sqlResult);
+
+				while($row != null)
+				{
+					$groups[] = $row;
+					$row 	  = MySQLManager::FetchRow($sqlResult);
+				}
+
+				MySQLManager::Close($sqlResult);
+
+				return new ServiceResult(true, $groups);
+			}
+			
+			return new ServiceResult(false, null, "Could not perform group search", Constants::MYSQL_ERROR_CODE);
+		}
+
 	}
+
+
 ?>

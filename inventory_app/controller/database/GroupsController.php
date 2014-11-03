@@ -29,12 +29,22 @@ class GroupsController
 			case "Rename":
 				$result = GroupsController::RenameGroup();
 			break;
+			case "Search":
+				$result = GroupsController::Search();
+			break;
 			default: 		 
 				$result = new ServiceResult(false, null, "Unsupported user service method '$method'", Constants::UNSUPPORTED_SERVICE_METHOD); 
 			break;
 		}
 
 		echo $result->toJSON();
+	}
+
+	private static function Search()
+	{
+		$searchText = $_POST["searchText"];
+
+		return Group::SearchGroupsByName($searchText);	
 	}
 
 	private static function RenameGroup()

@@ -25,7 +25,7 @@
 
 		public static function ExistsUserWithEmail($email)
 		{
-			$sql       = "SELECT count(id) as count FROM users WHERE email='$email'";
+			$sql       = "SELECT count(id) AS count FROM users WHERE email='$email'";
 			$sqlResult = MySQLManager::Execute($sql);
 
 			if($sqlResult)
@@ -42,7 +42,7 @@
 
 		public static function Login($email, $password)
 		{
-			$sql       = "SELECT * FROM users WHERE email='$email' and password='$password'";
+			$sql       = "SELECT * FROM users WHERE email='$email' AND password='$password'";
 			$sqlResult = MySQLManager::Execute($sql);
 			
 			if($sqlResult)
@@ -67,7 +67,7 @@
 			$loggedInUserData = Session::GetLoggedIdUserData();
 			$userId 		  = $loggedInUserData["id"];
 
-			$sql       = "UPDATE users SET data='$userData' where id='$userId'";
+			$sql       = "UPDATE users SET data='$userData' WHERE id='$userId'";
 			$sqlResult = MySQLManager::Execute($sql);
 			
 			if($sqlResult)
