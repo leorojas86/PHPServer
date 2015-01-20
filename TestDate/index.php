@@ -15,8 +15,8 @@
 				var currentMonth = now.getMonth();
 				var currentDay   = now.getDate();
 
-				var initialDay = new Date(currentYear, currentMonth, currentDay - 30);
-				var lastDay    = new Date(currentYear, currentMonth, currentDay + 30);
+				var initialDay = new Date(currentYear, 7, 18);//now;//new Date(currentYear, currentMonth, currentDay - 31);
+				var lastDay    = new Date(initialDay.getFullYear(), initialDay.getMonth(), initialDay.getDate() + 34);
 
 				//alert("initialDay = " + initialDay.toDateString() + " lastDay = " + lastDay.toDateString());
 
@@ -37,7 +37,7 @@
 
 				var daysByDayOfWeek = arrangeDaysByDayOfWeek(days);
 
-				for(var dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++)
+				/*for(var dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++)
 				{
 					var currentDays = daysByDayOfWeek[dayOfWeek];
 
@@ -52,7 +52,51 @@
 					text += "\n\n";
 				}
 
-				console.log(text);
+				console.log(text);*/
+
+
+				var calendar = document.getElementById("calendar");
+				var html     = ""; 
+				//calendar.innerHTML = text;
+
+				var currentX = 0;
+				var currentY = 0;
+
+				for(var dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++)
+				{
+					var currentDays = daysByDayOfWeek[dayOfWeek];
+					var currentDay  = currentDays[0];
+
+					var dayText = currentDay.toDateString().substring(0, 4);
+					html += "<div style='position:absolute; left:" + currentX + "px; top:" + currentY + "px; width:100; height:50;'> " + dayText + " </div>"
+
+					currentX += 100;
+				}
+
+				currentX = 0;
+				currentY = 50;
+
+				for(var dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++)
+				{
+					var currentDays = daysByDayOfWeek[dayOfWeek];
+
+					//console.log("dayOfWeek = " + dayOfWeek + " currentDays = " + currentDays.length);
+
+					for(var x = 0; x < currentDays.length; x++)
+					{
+						var currentDay = currentDays[x];
+
+						var dayText = currentDay.toDateString().substring(4, currentDay.toDateString().length - 4);
+						html += "<div style='position:absolute; left:" + currentX + "px; top:" + currentY + "px; width:100; height:50;'> " + dayText + " </div>"
+
+						currentY += 50;
+					}
+
+					currentX += 100;
+					currentY  = 50;
+				}
+
+				calendar.innerHTML = html;
 			}
 
 			function arrangeDaysByDayOfWeek(days)
@@ -103,6 +147,6 @@
 		</script>
 	</head>
 	<body onload="onPageLoaded();">
-		<?php //echo '<p>Hello World</p>'; ?> 
+		<div id="calendar" >
 	</body>
 </html>
