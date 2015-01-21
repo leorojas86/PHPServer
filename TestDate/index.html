@@ -16,7 +16,7 @@
 				var currentDay      = now.getDate();
 
 				var initialDay = new Date(currentYear, 7, 16);
-				var lastDay    = new Date(initialDay.getFullYear(), initialDay.getMonth(), initialDay.getDate() + 48);
+				var lastDay    = new Date(initialDay.getFullYear(), initialDay.getMonth(), initialDay.getDate() + 83);
 				var days 	   = DateUtils.getInstance().getDays(initialDay, lastDay);
 
 				//var days = DateUtils.getInstance().getDaysOfMonth(currentYear, 2);
@@ -41,7 +41,7 @@
 				}
 
 				currentX = 0;
-				currentY = 50;
+				currentY = 40;
 
 				for(var dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++)
 				{
@@ -51,11 +51,11 @@
 					{
 						var currentDay = currentDays[x];
 						html 		  += getDayDivHTML(currentDay, currentX, currentY);
-						currentY 	  += 50;
+						currentY 	  += 40;
 					}
 
 					currentX += 100;
-					currentY  = 50;
+					currentY  = 40;
 				}
 
 				calendar.innerHTML = html;
@@ -71,7 +71,7 @@
 				var dateString = day == null ? "" : day.toDateString();
 				var dayText    = day == null ? "" : dateString.substring(4, dateString.length - 4);
 
-				return "<div id='" + dateString + "' style='position:absolute; left:" + x + "px; top:" + y + "px; width:100; height:50; border-style:groove;'> " + dayText + " </div>";
+				return "<div id='" + dateString + "' style='position:absolute; left:" + x + "px; top:" + y + "px; width:100; height:40; border-style:groove;'> " + dayText + " </div>";
 			}
 
 		</script>
