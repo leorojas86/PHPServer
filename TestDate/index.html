@@ -14,9 +14,12 @@
 				var currentYear     = now.getFullYear();
 				var currentMonth    = now.getMonth();
 				var currentDay      = now.getDate();
-				var initialDay      = new Date(currentYear, 7, 16);
-				var lastDay         = new Date(initialDay.getFullYear(), initialDay.getMonth(), initialDay.getDate() + 48);
-				var days 			= DateUtils.getInstance().getDays(initialDay, lastDay);
+
+				var initialDay = new Date(currentYear, 7, 16);
+				var lastDay    = new Date(initialDay.getFullYear(), initialDay.getMonth(), initialDay.getDate() + 48);
+				var days 	   = DateUtils.getInstance().getDays(initialDay, lastDay);
+
+				//var days = DateUtils.getInstance().getDaysOfMonth(currentYear, 2);
 				
 				updateCalendarDiv(days);
 			}
@@ -60,7 +63,7 @@
 
 			function getDayOfWeekDivHTML(dayOfWeek, x, y)
 			{
-				return "<div style='position:absolute; left:" + x + "px; top:" + y + "px; width:100; height:50;'> " + dayOfWeek + " </div>";
+				return "<div id='" + dayOfWeek + " 'style='position:absolute; left:" + x + "px; top:" + y + "px; width:100; height:50;'> " + dayOfWeek + " </div>";
 			}
 
 			function getDayDivHTML(day, x, y)
@@ -68,7 +71,7 @@
 				var dateString = day == null ? "" : day.toDateString();
 				var dayText    = day == null ? "" : dateString.substring(4, dateString.length - 4);
 
-				return "<div id='" + dateString + "' style='position:absolute; left:" + x + "px; top:" + y + "px; width:100; height:50;'> " + dayText + " </div>";
+				return "<div id='" + dateString + "' style='position:absolute; left:" + x + "px; top:" + y + "px; width:100; height:50; border-style:groove;'> " + dayText + " </div>";
 			}
 
 		</script>

@@ -52,6 +52,21 @@ DateUtilsClass.prototype.arrangeDaysByDayOfWeek = function(days)
 	return arrangedDays;
 }
 
+DateUtilsClass.prototype.getDaysOfMonth = function(year, month)
+{
+	var currentDay  = new Date(year, month, 1);
+	var daysOfMonth = new Array();
+
+	while(currentDay.getMonth() == month)
+	{
+		daysOfMonth.push(currentDay);
+		
+		currentDay = new Date(currentDay.getFullYear(), currentDay.getMonth(), currentDay.getDate() + 1);
+	}
+
+	return daysOfMonth;
+}
+
 DateUtilsClass.prototype.getDays = function(initialDay, lastDay)
 {
 	var days 	   = new Array();
