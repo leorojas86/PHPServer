@@ -15,60 +15,23 @@
 				var currentMonth = now.getMonth();
 				var currentDay   = now.getDate();
 
-				var initialDay = new Date(currentYear, 7, 18);//now;//new Date(currentYear, currentMonth, currentDay - 31);
-				var lastDay    = new Date(initialDay.getFullYear(), initialDay.getMonth(), initialDay.getDate() + 34);
+				var initialDay = new Date(currentYear, 7, 16);//now;//new Date(currentYear, currentMonth, currentDay - 31);
+				var lastDay    = new Date(initialDay.getFullYear(), initialDay.getMonth(), initialDay.getDate() + 48);
 
 				//alert("initialDay = " + initialDay.toDateString() + " lastDay = " + lastDay.toDateString());
 
-				var days = getDays(initialDay, lastDay);
-
-				//alert(days.length);
-
-				var text = "";
-
-				/*
-				for(var x = 0; x < days.length; x++)
-				{
-					var currentDay = days[x];
-
-					text += currentDay.toDateString() + ", ";
-				}
-				*/
-
+				var days 			= getDays(initialDay, lastDay);
 				var daysByDayOfWeek = arrangeDaysByDayOfWeek(days);
+				var calendar 		= document.getElementById("calendar");
+				var html     		= ""; 
+				var currentX 		= 0;
+				var currentY 		= 0;
+				var daysOfWeek 		= ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-				/*for(var dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++)
+				for(var x = 0; x < daysOfWeek.length; x++)
 				{
-					var currentDays = daysByDayOfWeek[dayOfWeek];
-
-					//console.log("dayOfWeek = " + dayOfWeek + " currentDays = " + currentDays.length);
-
-					for(var x = 0; x < currentDays.length; x++)
-					{
-						var currentDay = currentDays[x];
-						text += currentDay.toDateString() + ", ";
-					}
-
-					text += "\n\n";
-				}
-
-				console.log(text);*/
-
-
-				var calendar = document.getElementById("calendar");
-				var html     = ""; 
-				//calendar.innerHTML = text;
-
-				var currentX = 0;
-				var currentY = 0;
-
-				for(var dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++)
-				{
-					var currentDays = daysByDayOfWeek[dayOfWeek];
-					var currentDay  = currentDays[0];
-
-					var dayText = currentDay.toDateString().substring(0, 4);
-					html += "<div style='position:absolute; left:" + currentX + "px; top:" + currentY + "px; width:100; height:50;'> " + dayText + " </div>"
+					var currentDay = daysOfWeek[x];
+					html += "<div style='position:absolute; left:" + currentX + "px; top:" + currentY + "px; width:100; height:50;'> " + currentDay + " </div>"
 
 					currentX += 100;
 				}
@@ -86,7 +49,7 @@
 					{
 						var currentDay = currentDays[x];
 
-						var dayText = currentDay.toDateString().substring(4, currentDay.toDateString().length - 4);
+						var dayText = currentDay == null ? "" : currentDay.toDateString().substring(4, currentDay.toDateString().length - 4);
 						html += "<div style='position:absolute; left:" + currentX + "px; top:" + currentY + "px; width:100; height:50;'> " + dayText + " </div>"
 
 						currentY += 50;
@@ -101,23 +64,33 @@
 
 			function arrangeDaysByDayOfWeek(days)
 			{
+				var firstDay     = days[0];
 				var arrangedDays = new Array();
+
+				//Fill with empty days from sunday to first day
+				for(var dayOfWeek = 0; dayOfWeek < firstDay.getDay(); dayOfWeek++)
+				{
+					var currentDays 		= new Array();
+					arrangedDays[dayOfWeek] = currentDays;
+
+					currentDays.push(null);
+				}
 
 				for(var x = 0; x < days.length; x++)
 				{
 					var currentDay   = days[x];
-					var dayOfTheWeek = currentDay.getDay();
-					var currentDays  = arrangedDays[dayOfTheWeek];
+					var dayOfWeek    = currentDay.getDay();
+					var currentDays  = arrangedDays[dayOfWeek];
 
 					if(currentDays == null)
 					{
 						currentDays 			   = new Array();
-						arrangedDays[dayOfTheWeek] = currentDays;
+						arrangedDays[dayOfWeek] = currentDays;
 					}
 
 					currentDays.push(currentDay);
 
-					//console.log("currentDays = " + currentDays.length +", dayOfTheWeek = " + dayOfTheWeek);
+					//console.log("currentDays = " + currentDays.length +", dayOfWeek = " + dayOfWeek);
 				}
 
 				return arrangedDays;
