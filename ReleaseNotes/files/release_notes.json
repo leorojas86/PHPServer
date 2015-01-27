@@ -4,7 +4,7 @@
 		"JiraURL"		 : "https://mightyplay.atlassian.net",
 		"JiraProjectId"  : "CENDEVMATH",
 		"JiraTicketInfo" : "summary,url",
-		"JiraUser"       : { "username": "???", "password":"???" }
+		"JiraAPIURL"     : "http://localhost:8888/php/jira.php"
 	},
 	"Versions":
 	[

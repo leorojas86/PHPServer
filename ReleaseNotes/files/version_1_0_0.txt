@@ -2,6 +2,12 @@ New Features:
 
 Bug Fixing:
 
+	{"JiraTicketId":"930"}
+	
+	{"JiraTicketId":"932"}
+	
+	{"JiraTicketId":"920"}
+
 Known Issues:
 
 Additional Notes:

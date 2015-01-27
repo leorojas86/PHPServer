@@ -18,14 +18,15 @@ var JiraUtils =
 
 function JiraUtilsClass()
 {
-	this.jiraSettings = null;
-	this.jiraAPIURL   = null;
+	this.jiraSettings 		  = null;
+	this.requestIssuesInfoURL = null;
 }
 
+//http://localhost:8888/php/jira.php?jira_url=https://mightyplay.atlassian.net&project=CENDEVMATH&issue_ids=938,937,936,937,936,937,936,937,936,937,936,937,936
 JiraUtilsClass.prototype.initialize = function(jiraSettings)
 {
-	this.jiraSettings    = jiraSettings;
-	this.jiraAPIIssueURL = jiraSettings["JiraURL"] + "/rest/api/latest/issue/" + jiraSettings["JiraProjectId"] + "-[ISSUE_ID]?fields=summary";
+	this.jiraSettings    	  = jiraSettings;
+	this.requestIssuesInfoURL = jiraSettings["JiraAPIURL"] + "?jira_url=" + jiraSettings["JiraURL"] + "&project=" + jiraSettings["JiraProjectId"] + "&issue_ids=[ISSUE_IDS]";
 };
 
 JiraUtilsClass.prototype.replaceJiraTags = function(plainText, onAllTagsReplaced)
@@ -37,31 +38,58 @@ JiraUtilsClass.prototype.replaceJiraTags = function(plainText, onAllTagsReplaced
 //https://answers.atlassian.com/questions/69356/cross-origin-resource-sharing-with-jira-rest-api-and-javascript
 JiraUtilsClass.prototype.replaceJiraTagsAsyncronous = function(plainText, onAllTagsReplaced)
 {
+	var issueIds     = "";
+	var temporalText = plainText;
+	var nextJiraTag  = this.getNextJiraTag(temporalText);
+
+	while(nextJiraTag != null)
+	{
+		var tagJSON	 = JSON.parse(nextJiraTag);
+		var tickedId = tagJSON["JiraTicketId"];
+		issueIds 	 += issueIds == "" ? tickedId : "," + tickedId;
+		temporalText = temporalText.replace(nextJiraTag, tagJSON["JiraTicketId"]);
+		nextJiraTag  = this.getNextJiraTag(temporalText);
+	}
+
+	if(issueIds != "")//There are issues on the plain text
+	{
+		var requestURL = this.requestIssuesInfoURL.replace("[ISSUE_IDS]", issueIds);
+		var context    = this;
+		RequestUtils.getInstance().request(requestURL, "GET", function(xmlhttp) { context.onRequestIssuesInfoResponse(xmlhttp, plainText, onAllTagsReplaced); } );
+	}
+	else
+		onAllTagsReplaced(plainText);
+}
+
+JiraUtilsClass.prototype.getNextJiraTag = function(plainText)
+{
 	var tagFirstIndex = plainText.indexOf("{");
 
 	if(tagFirstIndex != -1)
 	{
-		var tagLastIndex    = plainText.indexOf("}");
-		var tag 		    = plainText.substring(tagFirstIndex, tagLastIndex + 1);
-		var tagJSON 	    = JSON.parse(tag);
-		var issueRestAPIURL = this.jiraAPIIssueURL.replace("[ISSUE_ID]", tagJSON["JiraTicketId"]);
-		var context 		= this;
-		var replaceText     = tagJSON["JiraTicketId"];
+		var tagLastIndex = plainText.indexOf("}");
+		var tag 		 = plainText.substring(tagFirstIndex, tagLastIndex + 1);
 
-		/*RequestUtils.getInstance().request(issueRestAPIURL, "GET", function(xmlhttp) 
-		{
-			if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
-			{
-				var apiResponseJSON = JSON.parse(xmlhttp.responseText);
-				var replaceText     = tagJSON["JiraTicketId"] + " - " + apiResponseJSON["fields"]["summary"];
-				plainText           = plainText.replace(tag, replaceText);
-			}
-			else
-				plainText  = plainText.replace(tag, "Could not get ticket '" + tagJSON["JiraTicketId"] + "' info, please check if you are authenticated on jira -> " + context.jiraSettings["JiraURL"]);
-
-			context.replaceJiraTagsAsyncronous(plainText, onAllTagsReplaced);
-		});*/
+		return tag;
 	}
-	//else
+
+	return null;
+}
+
+JiraUtilsClass.prototype.onRequestIssuesInfoResponse = function(xmlhttp, plainText, onAllTagsReplaced)
+{
+	if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
+	{
+		var issuesInfo = JSON.parse(xmlhttp.responseText);
+
+		for(var x = 0; x < issuesInfo.length; x++)
+		{
+			var currentIssueInfo    = issuesInfo[x];
+			var currentIssueSummary = currentIssueInfo["fields"]["summary"];
+			var nextJiraTag         = this.getNextJiraTag(plainText);
+			plainText 				= plainText.replace(nextJiraTag, currentIssueSummary);
+		}
+
 		onAllTagsReplaced(plainText);
+	}
 }

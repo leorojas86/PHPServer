@@ -1,6 +1,6 @@
 <?php 
 	
-	//http://localhost:8888/php/jira.php?jira_url=https://mightyplay.atlassian.net&project=CENDEVMATH&issue_ids=938,937,936
+	//http://localhost:8888/php/jira.php?jira_url=https://mightyplay.atlassian.net&project=CENDEVMATH&issue_ids=938,937,936,937,936,937,936,937,936,937,936,937,936
 
 	function CurlRequest($url)
 	{
@@ -24,14 +24,15 @@
 	$project       = $_GET["project"]; 
 	$issueIds      = $_GET["issue_ids"];
 	$issueIdsArray = explode(",", $issueIds);
-	$responseArray = array();
+	$issuesInfo    = "[";
 
 	foreach($issueIdsArray as $issueId)
     {
-    	$response 		 = CurlRequest("$jiraURL/rest/api/latest/issue/$project-$issueId?fields=summary");
-    	$responseArray[] = $response;
-    	
+    	$response   = CurlRequest("$jiraURL/rest/api/latest/issue/$project-$issueId?fields=summary");
+    	$issuesInfo .= $issuesInfo == "[" ? $response : "," . $response;
     }
 
-    echo "$response";
+    $issuesInfo .= "]";
+
+    echo "$issuesInfo";
 ?>

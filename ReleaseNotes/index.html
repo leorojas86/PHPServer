@@ -52,21 +52,17 @@
 			{
 				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
 				{
-					JiraUtils.getInstance().replaceJiraTags(xmlhttp.responseText, 
-					function(plainText) { onVersionPlainTextAllTagsReplaced(versionDiv, plainText); });
+					var versionTextPlainDiv 	     = document.createElement('textarea');
+					versionTextPlainDiv.innerHTML    = "Loading..."
+					versionTextPlainDiv.style.width  = "1000px";
+					versionTextPlainDiv.style.height = "300px";
+					versionDiv.appendChild(versionTextPlainDiv);
+
+					JiraUtils.getInstance().replaceJiraTags(xmlhttp.responseText, function(plainText) 
+					{ 
+						versionTextPlainDiv.innerHTML = plainText; 
+					});
 				}
-			}
-
-			function onVersionPlainTextAllTagsReplaced(versionDiv, plainText)
-			{
-				//alert("onVersionPlainTextAllTagsReplaced plainText = " + plainText);
-
-				var versionTextPlainDiv 	     = document.createElement('textarea');
-				versionTextPlainDiv.innerHTML    = plainText;
-				versionTextPlainDiv.style.width  = "1000px";
-				versionTextPlainDiv.style.height = "300px";
-
-				versionDiv.appendChild(versionTextPlainDiv);
 			}
 
 		</script>
