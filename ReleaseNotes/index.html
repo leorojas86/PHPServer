@@ -49,13 +49,19 @@
 			{
 				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
 				{
-					var versionTextPlainDiv 	     = document.createElement('textarea');
-					versionTextPlainDiv.innerHTML    = xmlhttp.responseText;
-					versionTextPlainDiv.style.width  = "1000px";
-					versionTextPlainDiv.style.height = "300px";
-
-					versionDiv.appendChild(versionTextPlainDiv);
+					JiraUtils.getInstance().replaceJiraTags(xmlhttp.responseText, 
+					function(plainText) { onVersionPlainTextAllTagsReplaced(versionDiv, plainText); });
 				}
+			}
+
+			function onVersionPlainTextAllTagsReplaced(versionDiv, plainText)
+			{
+				var versionTextPlainDiv 	     = document.createElement('textarea');
+				versionTextPlainDiv.innerHTML    = plainText;
+				versionTextPlainDiv.style.width  = "1000px";
+				versionTextPlainDiv.style.height = "300px";
+
+				versionDiv.appendChild(versionTextPlainDiv);
 			}
 
 		</script>

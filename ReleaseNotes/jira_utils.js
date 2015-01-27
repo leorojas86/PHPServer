@@ -18,10 +18,16 @@ var JiraUtils =
 
 function JiraUtilsClass()
 {
-	
+	this.jiraSettings = null;
 }
 
-JiraUtilsClass.prototype.arrangeDaysByDayOfWeek = function(days)
+JiraUtilsClass.prototype.initialize = function(jiraSettings)
+{
+	this.jiraSettings = jiraSettings;
+};
+
+JiraUtilsClass.prototype.replaceJiraTags = function(plainText, onAllTagsReplaced)
 {
 	
+	onAllTagsReplaced(plainText);
 };
