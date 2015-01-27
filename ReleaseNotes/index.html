@@ -18,8 +18,11 @@
 				{
 					//alert("responseText = " + xmlhttp.responseText);
 
+					
 					var releaseNotesElement = document.getElementById("ReleaseNotes");
 					var releaseNotesData    = JSON.parse(xmlhttp.responseText);
+
+					JiraUtils.getInstance().initialize(releaseNotesData.Settings);
 
 					for(var x = 0; x < releaseNotesData.Versions.length; x++)
 					{
