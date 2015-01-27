@@ -1,8 +1,8 @@
 New Features:
 
-         {JiraTicketId:"938",Include:"Summary,URL"}
+         {"JiraTicketId":"938"}
         
-         {JiraTicketId:"938",Include:"Summary,URL,Priority"}
+         {"JiraTicketId":"938"}
 
 Bug Fixing:
 

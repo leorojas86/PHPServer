@@ -1,8 +1,9 @@
 {
 	"Settings":
 	{
-		"JiraURL"		: "https://mightyplay.atlassian.net",
-		"JiraProjectId" : "CENDEVMATH"
+		"JiraURL"		 : "https://mightyplay.atlassian.net",
+		"JiraProjectId"  : "CENDEVMATH",
+		"JiraTicketInfo" : "Summary,URL"
 	},
 	"Versions":
 	[
