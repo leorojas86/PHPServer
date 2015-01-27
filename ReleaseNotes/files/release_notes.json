@@ -8,15 +8,15 @@
 	[
 		{
 			"Number" : "1.0.2",
-			"Text"   : "asdasd"
+			"File"   : "version_1_0_2.txt"
 		},
 		{
 			"Number" : "1.0.1",
-			"Text"   : "assd"
+			"File"   : "version_1_0_1.txt"
 		},
 		{
 			"Number" : "1.0.0",
-			"Text"   : "assd"
+			"File"   : "version_1_0_0.txt"
 		}
 	]
 }

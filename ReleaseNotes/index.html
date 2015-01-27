@@ -9,10 +9,10 @@
 			
 			function onPageLoaded()
 			{
-				RequestUtils.getInstance().request("release_notes.json", "GET", onJSONRequest);
+				RequestUtils.getInstance().request("files/release_notes.json", "GET", onReleseNotesJSONRequestResponse);
 			}
 
-			function onJSONRequest(xmlhttp)
+			function onReleseNotesJSONRequestResponse(xmlhttp)
 			{
 				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
 				{
@@ -25,18 +25,35 @@
 					{
 						var currentVersion = releaseNotesData.Versions[x];
 
-						AddNewVersion(currentVersion, releaseNotesElement);
+						addNewVersion(currentVersion, releaseNotesElement);
 					}
 				}
 			}
 
-			function AddNewVersion(versionData, releaseNotesElement)
+			function addNewVersion(versionData, releaseNotesElement)
 			{
-				var newVertionDiv 		 = document.createElement('div');
-				newVertionDiv.id         = versionData["Number"];
-				newVertionDiv.innerHTML  = "Version " + versionData["Number"] + ":<br><br>" + versionData["Text"] + "<br><br><br><br>";
+				var newVersionDiv = document.createElement('div');
+				newVersionDiv.id  = versionData["Number"];
 
-				releaseNotesElement.appendChild(newVertionDiv);
+				var versionNumberDiv 	   = document.createElement('div');
+				versionNumberDiv.innerHTML = "<br><br> Version " + versionData["Number"] + ": <br><br>";
+				newVersionDiv.appendChild(versionNumberDiv);
+
+				RequestUtils.getInstance().request("files/" + versionData["File"], "GET", 
+				function(xmlhttp) { onVersionPlainTextRequestResponse(xmlhttp, newVersionDiv) });
+
+				releaseNotesElement.appendChild(newVersionDiv);
+			}
+
+			function onVersionPlainTextRequestResponse(xmlhttp, versionDiv)
+			{
+				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
+				{
+					var versionTextPlainDiv 	  = document.createElement('div');
+					versionTextPlainDiv.innerHTML = xmlhttp.responseText;
+
+					versionDiv.appendChild(versionTextPlainDiv);
+				}
 			}
 
 		</script>

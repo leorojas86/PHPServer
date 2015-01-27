@@ -1,0 +1,13 @@
+New Features:
+
+         {JiraTicketId:"938",Include:"Summary,URL"}
+        
+         {JiraTicketId:"938",Include:"Summary,URL,Priority"}
+
+Bug Fixing:
+
+Known Issues:
+
+Additional Notes:
+
+Builds:

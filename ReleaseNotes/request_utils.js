@@ -34,8 +34,9 @@ RequestUtilsClass.prototype.ajaxCallbackFunction = function(elementId, xmlhttp)
 	  	document.getElementById(elementId).innerHTML = xmlhttp.responseText;
 };
 
-RequestUtilsClass.prototype.request = function(url, method, callback, params = "") 
+RequestUtilsClass.prototype.request = function(url, method, callback, params) 
 {
+	params 					   = params || "";//Default parameter = ""
 	var xmlhttp 			   = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function() { callback(xmlhttp) };
 
