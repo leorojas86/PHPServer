@@ -49,8 +49,10 @@
 			{
 				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
 				{
-					var versionTextPlainDiv 	  = document.createElement('div');
-					versionTextPlainDiv.innerHTML = xmlhttp.responseText;
+					var versionTextPlainDiv 	     = document.createElement('textarea');
+					versionTextPlainDiv.innerHTML    = xmlhttp.responseText;
+					versionTextPlainDiv.style.width  = "1000px";
+					versionTextPlainDiv.style.height = "300px";
 
 					versionDiv.appendChild(versionTextPlainDiv);
 				}
