@@ -52,14 +52,19 @@
 			{
 				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
 				{
-					var versionTextPlainDiv 	     = document.createElement('textarea');
-					versionTextPlainDiv.innerHTML    = "Loading..."
-					versionTextPlainDiv.style.width  = "1000px";
-					versionTextPlainDiv.style.height = "300px";
+					var versionTextPlainDiv 	       = document.createElement('div');
+					versionTextPlainDiv.style.overflow = "scroll";
+					versionTextPlainDiv.style.border   = "1px solid gray";
+					versionTextPlainDiv.innerHTML      = "Loading..."
+					versionTextPlainDiv.style.width    = "1000px";
+					versionTextPlainDiv.style.height   = "100%";
 					versionDiv.appendChild(versionTextPlainDiv);
 
 					JiraUtils.getInstance().replaceJiraTags(xmlhttp.responseText, function(plainText) 
 					{ 
+						while(plainText.indexOf("\n") != -1)
+							plainText = plainText.replace("\n", "<br>");
+
 						versionTextPlainDiv.innerHTML = plainText; 
 					});
 				}
