@@ -19,40 +19,48 @@ var JiraUtils =
 function JiraUtilsClass()
 {
 	this.jiraSettings = null;
+	this.jiraAPIURL   = null;
 }
 
 JiraUtilsClass.prototype.initialize = function(jiraSettings)
 {
-	this.jiraSettings = jiraSettings;
+	this.jiraSettings    = jiraSettings;
+	this.jiraAPIIssueURL = jiraSettings["JiraURL"] + "/rest/api/latest/issue/" + jiraSettings["JiraProjectId"] + "-[ISSUE_ID]?fields=summary";
 };
 
 JiraUtilsClass.prototype.replaceJiraTags = function(plainText, onAllTagsReplaced)
 {
-	while(this.replaceNextJiraTag(plainText, function(resultText) { plainText = resultText; }))
-	{
-
-	}
-
-	onAllTagsReplaced(plainText);
+	this.replaceJiraTagsAsyncronous(plainText, onAllTagsReplaced);
 };
 
-JiraUtilsClass.prototype.replaceNextJiraTag = function(plainText, onNextTagReplaced)
+//https://mightyplay.atlassian.net/rest/api/latest/issue/CENDEVMATH-938?fields=summary
+//https://answers.atlassian.com/questions/69356/cross-origin-resource-sharing-with-jira-rest-api-and-javascript
+JiraUtilsClass.prototype.replaceJiraTagsAsyncronous = function(plainText, onAllTagsReplaced)
 {
 	var tagFirstIndex = plainText.indexOf("{");
 
 	if(tagFirstIndex != -1)
 	{
-		var tagLastIndex = plainText.indexOf("}");
-		var tag 		 = plainText.substring(tagFirstIndex, tagLastIndex + 1);
-		var tagJSON 	 = JSON.parse(tag);
-		plainText 		 = plainText.replace(tag, tagJSON["JiraTicketId"]);
+		var tagLastIndex    = plainText.indexOf("}");
+		var tag 		    = plainText.substring(tagFirstIndex, tagLastIndex + 1);
+		var tagJSON 	    = JSON.parse(tag);
+		var issueRestAPIURL = this.jiraAPIIssueURL.replace("[ISSUE_ID]", tagJSON["JiraTicketId"]);
+		var context 		= this;
 
-		onNextTagReplaced(plainText);
+		RequestUtils.getInstance().request(issueRestAPIURL, "GET", function(xmlhttp) 
+		{
+			if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
+			{
+				var apiResponseJSON = JSON.parse(xmlhttp.responseText);
+				var replaceText     = tagJSON["JiraTicketId"] + " - " + apiResponseJSON["fields"]["summary"];
+				plainText           = plainText.replace(tag, replaceText);
+			}
+			else
+				plainText  = plainText.replace(tag, "Could not get ticket '" + tagJSON["JiraTicketId"] + "' info, please check if you are authenticated on jira -> " + context.jiraSettings["JiraURL"]);
 
-		return true;
+			context.replaceJiraTagsAsyncronous(plainText, onAllTagsReplaced);
+		});
 	}
-
-	onNextTagReplaced(plainText);
-
-	return false;
+	else
+		onAllTagsReplaced(plainText);
 }
