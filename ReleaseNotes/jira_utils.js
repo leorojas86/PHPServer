@@ -85,9 +85,12 @@ JiraUtilsClass.prototype.onRequestIssuesInfoResponse = function(xmlhttp, plainTe
 		for(var x = 0; x < issuesInfo.length; x++)
 		{
 			var currentIssueInfo    = issuesInfo[x];
+			var currentIssueId		= currentIssueInfo["id"];
+			var currentIssueKey		= currentIssueInfo["key"];
+			var currentIssueURL		= this.jiraSettings["JiraURL"] + "/browse/" + currentIssueKey;
 			var currentIssueSummary = currentIssueInfo["fields"]["summary"];
 			var nextJiraTag         = this.getNextJiraTag(plainText);
-			plainText 				= plainText.replace(nextJiraTag, currentIssueSummary);
+			plainText 				= plainText.replace(nextJiraTag, currentIssueId + " - " + currentIssueSummary + " \n " + currentIssueURL);
 		}
 
 		onAllTagsReplaced(plainText);
