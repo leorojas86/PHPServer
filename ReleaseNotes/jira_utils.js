@@ -46,8 +46,9 @@ JiraUtilsClass.prototype.replaceJiraTagsAsyncronous = function(plainText, onAllT
 		var tagJSON 	    = JSON.parse(tag);
 		var issueRestAPIURL = this.jiraAPIIssueURL.replace("[ISSUE_ID]", tagJSON["JiraTicketId"]);
 		var context 		= this;
+		var replaceText     = tagJSON["JiraTicketId"];
 
-		RequestUtils.getInstance().request(issueRestAPIURL, "GET", function(xmlhttp) 
+		/*RequestUtils.getInstance().request(issueRestAPIURL, "GET", function(xmlhttp) 
 		{
 			if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
 			{
@@ -59,8 +60,8 @@ JiraUtilsClass.prototype.replaceJiraTagsAsyncronous = function(plainText, onAllT
 				plainText  = plainText.replace(tag, "Could not get ticket '" + tagJSON["JiraTicketId"] + "' info, please check if you are authenticated on jira -> " + context.jiraSettings["JiraURL"]);
 
 			context.replaceJiraTagsAsyncronous(plainText, onAllTagsReplaced);
-		});
+		});*/
 	}
-	else
+	//else
 		onAllTagsReplaced(plainText);
 }

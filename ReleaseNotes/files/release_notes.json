@@ -3,7 +3,8 @@
 	{
 		"JiraURL"		 : "https://mightyplay.atlassian.net",
 		"JiraProjectId"  : "CENDEVMATH",
-		"JiraTicketInfo" : "summary,url"
+		"JiraTicketInfo" : "summary,url",
+		"JiraUser"       : { "username": "???", "password":"???" }
 	},
 	"Versions":
 	[
