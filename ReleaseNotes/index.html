@@ -24,13 +24,19 @@
 					for(var x = 0; x < releaseNotesData.Versions.length; x++)
 					{
 						var currentVersion = releaseNotesData.Versions[x];
-						var newDiv 		   = document.createElement('div');
-						newDiv.id          = currentVersion["Number"];
-						newDiv.innerHTML   = currentVersion["Text"];
 
-						releaseNotesElement.appendChild(newDiv);
+						AddNewVersion(currentVersion, releaseNotesElement);
 					}
 				}
+			}
+
+			function AddNewVersion(versionData, releaseNotesElement)
+			{
+				var newVertionDiv 		 = document.createElement('div');
+				newVertionDiv.id         = versionData["Number"];
+				newVertionDiv.innerHTML  = "Version " + versionData["Number"] + ":<br><br>" + versionData["Text"] + "<br><br><br><br>";
+
+				releaseNotesElement.appendChild(newVertionDiv);
 			}
 
 		</script>

@@ -1,17 +1,22 @@
 {
+	"Settings":
+	{
+		"JiraURL"		: "https://mightyplay.atlassian.net",
+		"JiraProjectId" : "CENDEVMATH"
+	},
 	"Versions":
 	[
 		{
-			"Number" : "1.0.0",
-			"Text"   : "Example 1"
+			"Number" : "1.0.2",
+			"Text"   : "asdasd"
 		},
 		{
 			"Number" : "1.0.1",
-			"Text"   : "Example 2"
+			"Text"   : "assd"
 		},
 		{
-			"Number" : "1.0.2",
-			"Text"   : "Example 3"
+			"Number" : "1.0.0",
+			"Text"   : "assd"
 		}
 	]
 }
