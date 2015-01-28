@@ -39,7 +39,7 @@
 				newVersionDiv.id  = versionData["Number"];
 
 				var versionNumberDiv 	   = document.createElement('div');
-				versionNumberDiv.innerHTML = "<br><br><p><b> Version " + versionData["Number"] + ": </b></p><br><br>";
+				versionNumberDiv.innerHTML = "<br><p><b> Version " + versionData["Number"] + ": </b></p>";
 				newVersionDiv.appendChild(versionNumberDiv);
 
 				RequestUtils.getInstance().request("files/" + versionData["File"], "GET", 
@@ -52,7 +52,7 @@
 			{
 				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
 				{
-					var versionTextPlainDiv 	       = document.createElement('div');
+					var versionTextPlainDiv 	       = document.createElement('pre');
 					versionTextPlainDiv.style.overflow = "scroll";
 					versionTextPlainDiv.style.border   = "1px solid gray";
 					versionTextPlainDiv.innerHTML      = "Loading..."
