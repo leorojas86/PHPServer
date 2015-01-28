@@ -62,9 +62,6 @@
 
 					JiraUtils.getInstance().replaceJiraTags(xmlhttp.responseText, function(plainText) 
 					{ 
-						while(plainText.indexOf("\n") != -1)
-							plainText = plainText.replace("\n", "<br>");
-
 						versionTextPlainDiv.innerHTML = plainText; 
 					});
 				}
