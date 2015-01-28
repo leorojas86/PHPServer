@@ -18,8 +18,9 @@ var JiraUtils =
 
 function JiraUtilsClass()
 {
-	this.jiraSettings 		  = null;
-	this.requestIssuesInfoURL = null;
+	this.jiraSettings 		  	 	  = null;
+	this.requestIssuesInfoURL 	 	  = null;
+	this.replaceJiraTagsRequestsQueue = new Array();
 }
 
 //http://localhost:8888/php/jira.php?jira_url=https://mightyplay.atlassian.net&project=CENDEVMATH&issue_ids=938,937,936,937,936,937,936,937,936,937,936,937,936
@@ -31,7 +32,11 @@ JiraUtilsClass.prototype.initialize = function(jiraSettings)
 
 JiraUtilsClass.prototype.replaceJiraTags = function(plainText, onAllTagsReplaced)
 {
-	this.replaceJiraTagsAsyncronous(plainText, onAllTagsReplaced);
+	var requestInfo = {text: plainText, callback: onAllTagsReplaced }; 
+	this.replaceJiraTagsRequestsQueue.push(requestInfo);
+
+	if(this.replaceJiraTagsRequestsQueue.length == 1)
+		this.replaceJiraTagsAsyncronous(plainText, onAllTagsReplaced);
 };
 
 //https://mightyplay.atlassian.net/rest/api/latest/issue/CENDEVMATH-938?fields=summary
@@ -58,7 +63,22 @@ JiraUtilsClass.prototype.replaceJiraTagsAsyncronous = function(plainText, onAllT
 		RequestUtils.getInstance().request(requestURL, "GET", function(xmlhttp) { context.onRequestIssuesInfoResponse(xmlhttp, plainText, onAllTagsReplaced); } );
 	}
 	else
+	{
 		onAllTagsReplaced(plainText);
+		this.checkForQueue();
+	}
+}
+
+JiraUtilsClass.prototype.checkForQueue = function()
+{
+	this.replaceJiraTagsRequestsQueue.splice(0, 1);
+
+	if(this.replaceJiraTagsRequestsQueue.length > 0)
+	{
+		var requestInfo = this.replaceJiraTagsRequestsQueue[0];
+
+		this.replaceJiraTagsAsyncronous(requestInfo.text, requestInfo.callback);
+	}
 }
 
 JiraUtilsClass.prototype.getNextJiraTag = function(plainText)
@@ -95,5 +115,6 @@ JiraUtilsClass.prototype.onRequestIssuesInfoResponse = function(xmlhttp, plainTe
 		}
 
 		onAllTagsReplaced(plainText);
+		this.checkForQueue();
 	}
 }
