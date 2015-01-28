@@ -6,6 +6,8 @@ New Features:
 
          {"JiraTicketId":"936"}
 
+         {"JiraTicketId":"1068"}
+
 Bug Fixing:
 
 Known Issues:
