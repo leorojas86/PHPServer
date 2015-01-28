@@ -39,7 +39,7 @@
 				newVersionDiv.id  = versionData["Number"];
 
 				var versionNumberDiv 	   = document.createElement('div');
-				versionNumberDiv.innerHTML = "<br><br> Version " + versionData["Number"] + ": <br><br>";
+				versionNumberDiv.innerHTML = "<br><br><p><b> Version " + versionData["Number"] + ": </b></p><br><br>";
 				newVersionDiv.appendChild(versionNumberDiv);
 
 				RequestUtils.getInstance().request("files/" + versionData["File"], "GET", 
