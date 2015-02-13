@@ -1,4 +1,5 @@
 <?php 
+
 	class Session
 	{
 		private static $USER_LOGGED_IN = "USER_LOGGED_IN";
@@ -23,4 +24,5 @@
 			return $_SESSION[Session::$USER_LOGGED_IN];
 		}
 	} 
+	
 ?>

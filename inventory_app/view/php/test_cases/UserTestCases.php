@@ -1,7 +1,7 @@
 <?php 
 
-require_once "model/Session.php";
-require_once "controller/database/GroupsController.php";
+require_once "inventory_app/model/Session.php";
+require_once "inventory_app/controller/database/GroupsController.php";
 
 ?>
 

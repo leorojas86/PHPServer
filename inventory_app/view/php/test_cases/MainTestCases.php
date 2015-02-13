@@ -1,6 +1,6 @@
 <?php 
 
-require_once "model/Session.php";
+require_once "inventory_app/model/Session.php";
 
 ?>
 

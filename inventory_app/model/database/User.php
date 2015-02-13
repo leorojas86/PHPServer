@@ -1,6 +1,6 @@
 <?php 
-	require_once "model/Constants.php";
-	require_once "utils/php/ServiceResult.php";
+	require_once "inventory_app/model/Constants.php";
+	require_once "inventory_app/utils/php/ServiceResult.php";
 
 	class User
 	{

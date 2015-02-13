@@ -9,4 +9,5 @@
 
 		const DEFAULT_GROUP_TYPE = 0;
 	} 
+	
 ?>

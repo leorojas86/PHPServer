@@ -3,8 +3,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title>PHP Test</title>
-		<link rel="stylesheet" href="view/css/main_page.css">
-		<script src="utils/js/utils.js" type="text/javascript" ></script>
+		<link rel="stylesheet" href="inventory_app/view/css/main_page.css">
+		<script src="utils/js/request_utils.js" type="text/javascript" ></script>
 		<!-- http://stackoverflow.com/questions/4909167/how-to-add-a-custom-right-click-menu-to-a-webpage -->
 		<!-- http://www.codeproject.com/Tips/630793/Context-Menu-on-Right-Click-in-Webpage -->
 		<script type="text/javascript">
@@ -20,7 +20,7 @@
     			if(groupContaner != null)//User is logged in
     			{
 	    			var params = "service=Group&method=GetRootGroupData";
-					request("http://localhost:8888", params, "POST", onGroupContainerAjaxCallback);
+					RequestUtils.getInstance().request("http://localhost:8888", "POST", onGroupContainerAjaxCallback, params);
 				}
 			}
 
@@ -142,7 +142,7 @@
 				{
 					var params = "service=Group&method=Rename&id=" + folderId + "&name=" + folderName;
 
-					request("http://localhost:8888", params, "POST", onRenameCallback);
+					RequestUtils.getInstance().request("http://localhost:8888", "POST", onRenameCallback, params);
 				}
 		    }
 
@@ -159,12 +159,12 @@
 
 				//alert("params = " + params);
 
-				request("http://localhost:8888", params, "POST", onLoginCallback);
+				RequestUtils.getInstance().request("http://localhost:8888", "POST", onLoginCallback, params);
 			}
 
 			function onLoginCallback(xmlhttp)
 			{
-				if(checkForValidResponse(xmlhttp)) 
+				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
 				{
 					alert("result '" + xmlhttp.responseText + "'");
 
@@ -184,12 +184,12 @@
 
 				//alert("params = " + params);
 
-				request("http://localhost:8888", params, "POST", onRegisterCallback);
+				RequestUtils.getInstance().request("http://localhost:8888", "POST", onRegisterCallback, params);
 			}
 
 			function onRegisterCallback(xmlhttp)
 			{
-				if(checkForValidResponse(xmlhttp)) 
+				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
 					alert("result '" + xmlhttp.responseText + "'");
 			}
 
@@ -200,12 +200,12 @@
 
 				//alert("params = " + params);
 
-				request("http://localhost:8888", params, "POST", onUpdateUserDataCallback);
+				RequestUtils.getInstance().request("http://localhost:8888", "POST", onUpdateUserDataCallback, params);
 			}
 
 			function onUpdateUserDataCallback(xmlhttp)
 			{
-				if(checkForValidResponse(xmlhttp)) 
+				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
 				{
 					alert("result '" + xmlhttp.responseText + "'");
 
@@ -223,12 +223,12 @@
 
 				//alert("params = " + params);
 
-				request("http://localhost:8888", params, "POST", onUpdateGroupDataCallback);
+				RequestUtils.getInstance().request("http://localhost:8888", "POST", onUpdateGroupDataCallback, params);
 			}
 
 			function onUpdateGroupDataCallback(xmlhttp)
 			{
-				if(checkForValidResponse(xmlhttp)) 
+				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
 					alert("result '" + xmlhttp.responseText + "'");
 			}
 
@@ -236,12 +236,12 @@
 			{
 				var params = "service=Group&method=AddSubGroup&parentGroupId=" + _currentGroupData.id + "&name=" + newGroupName + "&type=" + type;
 
-				request("http://localhost:8888", params, "POST", onAddSubGroupCallback);
+				RequestUtils.getInstance().request("http://localhost:8888", "POST", onAddSubGroupCallback, params);
 			}
 
 			function onAddSubGroupCallback(xmlhttp)
 			{
-				if(checkForValidResponse(xmlhttp)) 
+				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
 				{
 					//alert("result '" + xmlhttp.responseText + "'");
 
@@ -268,12 +268,12 @@
 
 				//alert("params " + params);
 				
-				request("http://localhost:8888", params, "POST", onGroupContainerAjaxCallback);
+				RequestUtils.getInstance().request("http://localhost:8888", "POST", onGroupContainerAjaxCallback, params);
 			}
 
 			function onGroupContainerAjaxCallback(xmlhttp)
 			{
-				if(checkForValidResponse(xmlhttp)) 
+				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
 				{
 					//alert("result '" + xmlhttp.responseText + "'");
 
@@ -322,9 +322,9 @@
 		    			var icon 		 = null;
 
 		    			if(subGroupType == 0)//Constants::DEFAULT_GROUP_TYPE)
-		    				 icon = "view/images/Folder.png";
+		    				 icon = "inventory_app/view/images/Folder.png";
 		    			else
-		    				 icon = "view/images/File.png";
+		    				 icon = "inventory_app/view/images/File.png";
 
 		    			groupAjax += "<div id='folder_" + subGroupId + "' style='width:100px; height:120px; float: left;'>"+
 											"<img id='folder_image_" + subGroupId + "' src='" + icon + "' onclick='onSubGroupClick(" + subGroupId + ");' style='cursor:pointer; cursor:hand; width:100px; height:88px;'/>"+
@@ -355,23 +355,20 @@
 			{
 				var searchTesxtInput = document.getElementById('search_input');
 				var params 	    	 = "service=Group&method=Search&searchText=" + searchTesxtInput.value;
-				request("http://localhost:8888", params, "POST", onSearchCallback);
-
+				RequestUtils.getInstance().request("http://localhost:8888", "POST", onSearchCallback, params);
 			}
 
 			function onSearchCallback(xmlhttp)
 			{
-				if(checkForValidResponse(xmlhttp))
-				{
+				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
 					alert(xmlhttp.responseText);
-				}
 			}
 
 			function pasteGroup()
 			{
 				var params 	    = "service=Group&method=Move&id=" + _cuttingGroupId + "&parentGroupId=" + _currentGroupData.id;
 				_cuttingGroupId = null;
-				request("http://localhost:8888", params, "POST", onMoveGroupCallback);
+				RequestUtils.getInstance().request("http://localhost:8888", "POST", onMoveGroupCallback, params);
 			}
 
 			function onMoveGroupCallback(xmlhttp)
@@ -381,7 +378,7 @@
 
 			function refreshCurrentGroup(xmlhttp)
 			{
-				if(checkForValidResponse(xmlhttp))
+				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
 				{
 					//alert(xmlhttp.responseText);
 
@@ -401,13 +398,13 @@
 				{
 					var params = "service=Group&method=Delete&id=" + groupId;
 
-					request("http://localhost:8888", params, "POST", onDeleteGroupCallback);
+					RequestUtils.getInstance().request("http://localhost:8888", "POST", onDeleteGroupCallback, params);
 				}
 			}
 
 			function onDeleteGroupCallback(xmlhttp)
 			{
-				if(checkForValidResponse(xmlhttp))
+				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
 				{
 					//alert(xmlhttp.responseText);
 					var result = JSON.parse(xmlhttp.responseText);

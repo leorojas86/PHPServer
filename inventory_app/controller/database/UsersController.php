@@ -1,6 +1,7 @@
 <?php 
-require_once "model/Environment.php";
-require_once "model/database/User.php";
+
+require_once "inventory_app/model/Environment.php";
+require_once "inventory_app/model/database/User.php";
 
 class UsersController
 {
@@ -62,4 +63,5 @@ class UsersController
 	}
 
 }
+
 ?>

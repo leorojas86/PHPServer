@@ -1,6 +1,6 @@
 <?php 
-	require_once "controller/database/UsersController.php";
-	require_once "controller/database/GroupsController.php";
+	require_once "inventory_app/controller/database/UsersController.php";
+	require_once "inventory_app/controller/database/GroupsController.php";
 
 	if(isset($_POST["service"]))
 	{
