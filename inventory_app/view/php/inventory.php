@@ -17,12 +17,9 @@
 		    {
     			document.onkeyup  = onKeyUp;
     			var groupContaner = document.getElementById('group_container');
+    			var params 		  = "service=Group&method=GetRootGroupData";
 
-    			if(groupContaner != null)//User is logged in
-    			{
-	    			var params = "service=Group&method=GetRootGroupData";
-					RequestUtils.getInstance().request("http://localhost:8888", "POST", onGroupContainerAjaxCallback, params);
-				}
+				RequestUtils.getInstance().request("http://localhost:8888", "POST", onGroupContainerAjaxCallback, params);
 			}
 
 			function onKeyUp(event)
@@ -36,6 +33,7 @@
    							 backButton.onclick.apply(backButton);
 				    break;
 				    default:
+				    	console.log("pressed key = " + event.which);
 					break;
 				}
 			}
@@ -47,13 +45,11 @@
 		    	switch(event.target.id)
 		    	{
 		    		case "folders_scroll_panel":
-
 		    			options.push(InventoryAppConstants.MENU_ITEM_ADD_ITEM);
 		    			options.push(InventoryAppConstants.MENU_ITEM_ADD_FOLDER);
 
 		    			if(canPasteFolder())
 							options.push(InventoryAppConstants.MENU_ITEM_PASTE);
-
 		    		break;
 		    		default:
 		    			options.push(InventoryAppConstants.MENU_ITEM_RENAME);
@@ -135,8 +131,6 @@
 				var userData = document.getElementById('user_data');
 				var params   = "service=User&method=UpdateData&data=" + userData.value;
 
-				//alert("params = " + params);
-
 				RequestUtils.getInstance().request("http://localhost:8888", "POST", onUpdateUserDataCallback, params);
 			}
 
@@ -158,8 +152,6 @@
 				var groupData = document.getElementById('group_data');
 				var params    = "service=Group&method=UpdateData&id=" + groupId + "&data=" + groupData.value;
 
-				//alert("params = " + params);
-
 				RequestUtils.getInstance().request("http://localhost:8888", "POST", onUpdateGroupDataCallback, params);
 			}
 
@@ -180,8 +172,6 @@
 			{
 				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
 				{
-					//alert("result '" + xmlhttp.responseText + "'");
-
 					var result = JSON.parse(xmlhttp.responseText);
 
 					if(result.success)
@@ -202,9 +192,6 @@
 			function loadAjaxGroup(groupId)
 			{
 				var params = "service=Group&method=GetGroupData&id=" + groupId + "&cuttingGroupId=" + _cuttingGroupId;
-
-				//alert("params " + params);
-				
 				RequestUtils.getInstance().request("http://localhost:8888", "POST", onGroupContainerAjaxCallback, params);
 			}
 
@@ -212,15 +199,10 @@
 			{
 				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
 				{
-					//alert("result '" + xmlhttp.responseText + "'");
-
 					var result = JSON.parse(xmlhttp.responseText);
 
 					if(result.success)
 					{
-
-						//var groupContaner 	    = document.getElementById('group_container');
-						//groupContaner.innerHTML = result.data.group_ajax;
 						_currentGroupData		= result.data.group_data;
 						populateGroupAjax(_currentGroupData);
 					}
@@ -247,8 +229,6 @@
 				if(subGroupType == 0)//Constants::DEFAULT_GROUP_TYPE)
 				{
 					groupAjax += "<div id='folders_scroll_panel' oncontextmenu='showContextMenu(event); return false;' align='center' style='overflow:scroll; width:600px; height:400px; border:1px solid gray;' title='Haga click derecho para ver opciones'>";
-
-					//alert(JSON.stringify(subGroups));
 
 					for (var index in subGroups)
 		    		{
@@ -317,8 +297,6 @@
 			{
 				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
 				{
-					//alert(xmlhttp.responseText);
-
 					var result = JSON.parse(xmlhttp.responseText);
 
 					if(result.success)
@@ -343,7 +321,6 @@
 			{
 				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
 				{
-					//alert(xmlhttp.responseText);
 					var result = JSON.parse(xmlhttp.responseText);
 
 					if(result.success)
