@@ -150,48 +150,6 @@
 		    {
 		    	refreshCurrentGroup(xmlhttp);
 		    }
-			
-			function onLoginButtonClick()
-			{
-				var userEmail    = document.getElementById('user_email');	
-				var userPassword = document.getElementById('user_password');	
-				var params 		 = "service=User&method=Login" + "&email=" + userEmail.value + "&password=" + userPassword.value;
-
-				//alert("params = " + params);
-
-				RequestUtils.getInstance().request("http://localhost:8888", "POST", onLoginCallback, params);
-			}
-
-			function onLoginCallback(xmlhttp)
-			{
-				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
-				{
-					alert("result '" + xmlhttp.responseText + "'");
-
-					var result = JSON.parse(xmlhttp.responseText);
-
-					if(result.success)
-						location.reload();
-				}
-			}
-
-			function onRegisterButtonClick()
-			{
-				var userName     = document.getElementById('user_name');
-				var userEmail    = document.getElementById('user_email');	
-				var userPassword = document.getElementById('user_password');	
-				var params 		 = "service=User&method=Register&name=" + userName.value + "&email=" + userEmail.value + "&password=" + userPassword.value;
-
-				//alert("params = " + params);
-
-				RequestUtils.getInstance().request("http://localhost:8888", "POST", onRegisterCallback, params);
-			}
-
-			function onRegisterCallback(xmlhttp)
-			{
-				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
-					alert("result '" + xmlhttp.responseText + "'");
-			}
 
 			function onUpdateUserDataClick()
 			{
@@ -417,27 +375,7 @@
 		</script>
 	</head>
 	<body onclick='hideContextMenu();'>
-
-		<?php 
-
-		if(Session::IsUserLoggedIn())
-		{
-		 	echo "<div id='group_container'></div>";
-		 	echo "<div id='context_menu_container' style='position: absolute; left: 100px; top: 150px;' ></div>";
-		}
-		else
-		{
-			echo "<p>User Name</p>
-				  <input type='text' id='user_name'     value = 'leo'>
-				  <p>User Email</p>
-				  <input type='text' id='user_email'    value = 'leo'> <br/><br/>
-				  <p>User Password</p>
-				  <input type='text' id='user_password' value = 'leo'> <br/><br/>
-				  <button type='button' onclick='onLoginButtonClick()''>Login</button>
-				  <br/><br/>
-				  <button type='button' onclick='onRegisterButtonClick()'>Register</button>";
-		}
-
-		?> 
+		<div id='group_container'></div>
+		<div id='context_menu_container' style='position: absolute; left: 100px; top: 150px;' ></div>
 	</body>
 </html>
