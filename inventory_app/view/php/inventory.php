@@ -2,7 +2,7 @@
 <html  lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-		<title>PHP Test</title>
+		<title>Inventory</title>
 		<link rel="stylesheet" href="inventory_app/view/css/main_page.css">
 		<script src="utils/js/request_utils.js" type="text/javascript" ></script>
 		<!-- http://stackoverflow.com/questions/4909167/how-to-add-a-custom-right-click-menu-to-a-webpage -->

@@ -2,7 +2,7 @@
 	require_once "inventory_app/controller/database/UsersController.php";
 	require_once "inventory_app/controller/database/GroupsController.php";
 
-	function includePage($page, $requiresLogin)
+	function includePage($page, $requiresLogin)//Generates the page content (html/js/etc) 
 	{
 		if(!$requiresLogin || Session::IsUserLoggedIn())
 			require_once $page;
@@ -26,10 +26,11 @@
 	{
 		$page = isset($_GET["page"]) ? $_GET["page"] : "Home";
 
-		switch($page) //Generates the app content (html/js/etc) 
+		switch($page)
 		{
-	  		case "Home": includePage("inventory_app/view/php/MainPage.php", true); break;
-	    	default: 	 echo "Unknown page '" + $page + "'"; 		 break;
+	  		case "Home":     includePage("inventory_app/view/php/inventory.php", true);    	break;
+	  		case "Register": includePage("inventory_app/view/php/register.php", false); 	break;
+	    	default: 	     echo "Unknown page '" + $page + "'"; 		 			   		break;
 		}
 	}
 ?>

@@ -5,7 +5,7 @@
 		<title>Login</title>
 		<link rel="stylesheet" href="inventory_app/view/css/main_page.css">
 		<script src="utils/js/request_utils.js" type="text/javascript" ></script>
-		<script src="utils/js/url_utils.js" type="text/javascript" ></script>
+		<script src="utils/js/url_utils.js"     type="text/javascript" ></script>
 		<script type="text/javascript">
 			
 			function onLoginButtonClick()
@@ -33,6 +33,12 @@
 				}
 			}
 
+			function onRegisterButtonClick()
+			{
+				var host = URLUtils.getInstance().getHostName();
+				URLUtils.getInstance().redirect(host + "?page=Register");
+			}
+
 		</script>
 	</head>
 	<body>
@@ -41,5 +47,9 @@
 	  	<p>User Password</p>
 	  	<input type='text' id='user_password' value = 'leo'> <br/><br/>
 	  	<button type='button' onclick='onLoginButtonClick();'>Login</button>
+	  	<br>
+	  	<br>
+	  	<br>
+	  	<button type='button' onclick='onRegisterButtonClick();'>Register</button>
 	</body>
 </html>
