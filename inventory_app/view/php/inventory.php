@@ -4,13 +4,14 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title>Inventory</title>
 		<link rel="stylesheet" href="inventory_app/view/css/main_page.css">
-		<script src="utils/js/request_utils.js" type="text/javascript" ></script>
-		<!-- http://stackoverflow.com/questions/4909167/how-to-add-a-custom-right-click-menu-to-a-webpage -->
-		<!-- http://www.codeproject.com/Tips/630793/Context-Menu-on-Right-Click-in-Webpage -->
+		<script src="utils/js/request_utils.js" 	 		type="text/javascript" ></script>
+		<script src="utils/js/context_menu_utils.js" 		type="text/javascript" ></script>
+		<script src="inventory_app/view/js/constants.js" 	type="text/javascript" ></script>
 		<script type="text/javascript">
 
 			var _currentGroupData = null;
 			var _cuttingGroupId   = null;
+			var _folderId         = null;
 
 			onload = function() 
 		    {
@@ -41,42 +42,30 @@
 
 		    function showContextMenu(event) 
 		    {
-		    	var contextMenu        	   = document.getElementById('context_menu_container');
-		    	contextMenu.style.position = "absolute";
-		    	contextMenu.style.left 	   = event.clientX + "px";
-				contextMenu.style.top  	   = event.clientY + "px";
-				contextMenu.style.display  = 'inline';
-
-				var addItemOption      = '"Add Item"';
-				var addFolderOption    = '"Add Folder"';
-				var deleteFolderOption = '"Delete Folder"';
-				var cutFolderOption    = '"Cut Folder"';
-				var pasteFolderOption  = '"Paste Folder"';
-				var renameFolderOption = '"Rename Folder"';
-
-				var target      = event.target;
-		    	var folderId    = '"' + target.parentNode.id + '"';
-		    	var optionStyle = "style='width:120px; height:20px;'";
+		    	var options = new Array();
 
 		    	switch(event.target.id)
 		    	{
 		    		case "folders_scroll_panel":
-		    			var addItemButton      = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + addItemOption + ")'     " + optionStyle +" > Agregar Item </button>";
-		    			var addGroupButton     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + addFolderOption + ")'   " + optionStyle +" > Agregar Folder </button>";
-		    			var pasteGroupButton   = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + pasteFolderOption + ")' " + optionStyle +" > Pegar Folder </button>";
+
+		    			options.push(InventoryAppConstants.MENU_ITEM_ADD_ITEM);
+		    			options.push(InventoryAppConstants.MENU_ITEM_ADD_FOLDER);
 
 		    			if(canPasteFolder())
-							contextMenu.innerHTML  = addItemButton + "<br>" + addGroupButton + "<br>" + pasteGroupButton;
-						else
-							contextMenu.innerHTML  = addItemButton + "<br>" + addGroupButton;
+							options.push(InventoryAppConstants.MENU_ITEM_PASTE);
+
 		    		break;
 		    		default:
-		    			var renameButtonHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + renameFolderOption + ")' " + optionStyle +" > Renombrar Folder </button>";
-		    			var cutButtonHTML     = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + cutFolderOption + ")'    " + optionStyle +" > Cortar Folder </button>";
-		    			var deleteButtonHTML  = "<button onclick='onContextMenuOptionSelected(" + folderId + ", " + deleteFolderOption + ")' " + optionStyle +"> Borrar Folder </button>";
-		    			contextMenu.innerHTML = renameButtonHTML + "<br>" + cutButtonHTML + "<br>" + deleteButtonHTML;	
+		    			options.push(InventoryAppConstants.MENU_ITEM_RENAME);
+		    			options.push(InventoryAppConstants.MENU_ITEM_CUT);
+		    			options.push(InventoryAppConstants.MENU_ITEM_DELETE);
 		    		break;
 		    	}
+
+		    	_folderId 		= event.target.parentNode.id.replace("folder_", "");
+		    	var contextMenu = document.getElementById('context_menu_container');
+
+		    	ContextMenuUtils.getInstance().showContextMenu(contextMenu, { "x" : event.clientX, "y" : event.clientY }, options, onContextMenuOptionSelected);
 		    }
 
 		    function canPasteFolder()
@@ -84,41 +73,31 @@
 		    	return _currentGroupData != null && _currentGroupData.can_paste;
 		    }
 
-		    function hideContextMenu()
+		    function onContextMenuOptionSelected(option)
 		    {
-		    	var contextMenu           = document.getElementById('context_menu_container');
-		    	contextMenu.style.display = 'none';
-		    }
-
-		    function onContextMenuOptionSelected(folderId, option)
-		    {
-		    	hideContextMenu();
-
-		    	folderId = folderId.replace("folder_", "");
-
 		    	switch(option)
 		    	{
-		    		case "Add Folder":
+		    		case InventoryAppConstants.MENU_ITEM_ADD_ITEM:
+		    			AddItem(_folderId);
+		    		break;
+		    		case InventoryAppConstants.MENU_ITEM_ADD_FOLDER:
 			    		var folderName       = prompt("Escriba el nombre del nuevo folder", "");
 			    		var defaultGroupType = 0;
 
 						if(folderName != null && folderName != "") 
 						    addSubGroup(folderName, defaultGroupType);
 		    		break;
-		    		case "Delete Folder":
-		    			removeSubgroupGroup(folderId);
-		    		break;
-		    		case "Cut Folder":
-		    			_cuttingGroupId = folderId;
-		    		break;
-		    		case "Paste Folder":
+		    		case InventoryAppConstants.MENU_ITEM_PASTE:
 		    			pasteGroup();
 		    		break;
-		    		case "Rename Folder":
-		    			RenameFolder(folderId);
+		    		case InventoryAppConstants.MENU_ITEM_RENAME:
+		    			RenameFolder(_folderId);
 		    		break;
-		    		case "Add Item":
-		    			AddItem(folderId);
+		    		case InventoryAppConstants.MENU_ITEM_CUT:
+		    			_cuttingGroupId = _folderId;
+		    		break;
+		    		case InventoryAppConstants.MENU_ITEM_DELETE:
+		    			removeSubgroupGroup(_folderId);
 		    		break;
 		    	}
 		    }
@@ -374,7 +353,7 @@
 
 		</script>
 	</head>
-	<body onclick='hideContextMenu();'>
+	<body>
 		<div id='group_container'></div>
 		<div id='context_menu_container' style='position: absolute; left: 100px; top: 150px;' ></div>
 	</body>
