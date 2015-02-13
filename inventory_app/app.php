@@ -2,6 +2,14 @@
 	require_once "inventory_app/controller/database/UsersController.php";
 	require_once "inventory_app/controller/database/GroupsController.php";
 
+	function includePage($page, $requiresLogin)
+	{
+		if(!$requiresLogin || Session::IsUserLoggedIn())
+			require_once $page;
+		else
+			require_once "inventory_app/view/php/login.php";
+	}
+
 	if(isset($_POST["service"]))
 	{
 		$service = $_POST["service"];
@@ -20,10 +28,8 @@
 
 		switch($page) //Generates the app content (html/js/etc) 
 		{
-	  		case "Home": 	  	  require_once "view/php/MainPage.php"; 				break;
-	    	case "MainTestCases": require_once "view/php/test_cases/MainTestCases.php"; break;
-	    	case "UserTestCases": require_once "view/php/test_cases/UserTestCases.php"; break;
-	    	default: 			  echo "Unknown page '" + $page + "'"; 					break;
+	  		case "Home": includePage("inventory_app/view/php/MainPage.php", true); break;
+	    	default: 	 echo "Unknown page '" + $page + "'"; 		 break;
 		}
 	}
 ?>
