@@ -4,7 +4,7 @@
 
 	function includePage($page, $requiresLogin)//Generates the page content (html/js/etc) 
 	{
-		if(!$requiresLogin || Session::IsUserLoggedIn())
+		if(!$requiresLogin || SessionManager::IsUserLoggedIn())
 			require_once $page;
 		else
 			require_once "inventory_app/view/php/login.php";

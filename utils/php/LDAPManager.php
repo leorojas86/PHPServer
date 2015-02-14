@@ -1,4 +1,5 @@
 <?php
+	require_once "utils/php/ServiceResult.php";
 
 class LDAPManager
 {

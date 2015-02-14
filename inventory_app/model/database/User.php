@@ -1,6 +1,5 @@
 <?php 
 	require_once "inventory_app/model/Constants.php";
-	require_once "inventory_app/utils/php/ServiceResult.php";
 
 	class User
 	{
@@ -52,7 +51,7 @@
 
 				if($row)
 				{
-					Session::SetUserLoggedInData($row);
+					SessionManager::SetUserData($row);
 					return new ServiceResult(true, $row);
 				}
 				
@@ -64,7 +63,7 @@
 
 		public static function UpdateData($userData)
 		{
-			$loggedInUserData = Session::GetLoggedIdUserData();
+			$loggedInUserData = SessionManager::GetUserData();
 			$userId 		  = $loggedInUserData["id"];
 
 			$sql       = "UPDATE users SET data='$userData' WHERE id='$userId'";
@@ -87,7 +86,7 @@
 
 						if($row)
 						{
-							Session::SetUserLoggedInData($row);
+							SessionManager::SetUserData($row);
 							return new ServiceResult(true, array("user_id" => $userId));
 						}
 					}

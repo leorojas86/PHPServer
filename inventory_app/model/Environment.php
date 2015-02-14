@@ -1,7 +1,7 @@
 <?php 
 
-	require_once "inventory_app/utils/php/MySQLManager.php";
-	require_once "inventory_app/model/Session.php";
+	require_once "utils/php/MySQLManager.php";
+	require_once "utils/php/SessionManager.php";
 
 	$server = 'localhost';
 	$user   = 'root';
@@ -10,6 +10,5 @@
 
 	MySQLManager::Connect($server, $user, $pass, $db);
 
-	Session::Start();
-	
+	SessionManager::StartSession();
 ?>

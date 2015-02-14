@@ -72,7 +72,7 @@ class GroupsController
 
 	private static function GetRootGroupData()
 	{
-		$loggedInUserData = Session::GetLoggedIdUserData();
+		$loggedInUserData = SessionManager::GetUserData();
 		$userId   		  = $loggedInUserData["id"];
 		$rootGroupResult  = Group::GetUserRootGroup($userId);
 
