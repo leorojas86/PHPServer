@@ -23,7 +23,7 @@ class UsersController
 			break;
 		}
 
-		echo $result->toJSON();
+		return $result;
 	}
 
 	private static function Register()

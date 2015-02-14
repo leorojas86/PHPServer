@@ -38,7 +38,7 @@ class GroupsController
 			break;
 		}
 
-		echo $result->toJSON();
+		return $result;
 	}
 
 	private static function Search()

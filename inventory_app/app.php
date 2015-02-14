@@ -1,4 +1,5 @@
 <?php 
+	require_once "inventory_app/model/Environment.php";
 	require_once "inventory_app/controller/database/UsersController.php";
 	require_once "inventory_app/controller/database/GroupsController.php";
 
@@ -10,17 +11,24 @@
 			require_once "inventory_app/view/php/login.php";
 	}
 
+	$result = Environment::Setup();
+
 	if(isset($_POST["service"]))
 	{
-		$service = $_POST["service"];
-		$method  = $_POST["method"]; 
-
-		switch($service) //Generates the app content (html/js/etc) 
+		if($result->success)
 		{
-			case "User":  UsersController::Service($method);  break;
-			case "Group": GroupsController::Service($method); break;
-			default:      echo "Unknown service '$service'";  break;
+			$service = $_POST["service"];
+			$method  = $_POST["method"]; 
+
+			switch($service) //Generates the app content (html/js/etc) 
+			{
+				case "User":  $result = UsersController::Service($method);  break;
+				case "Group": $result = GroupsController::Service($method); break;
+				default:      $result = new ServiceResult(false, null, "Unknown service '$service'", Constants::MYSQL_ERROR_CODE); break;
+			}
 		}
+			
+		echo $result->toJSON();
 	}
 	else
 	{
