@@ -18,14 +18,12 @@
 
 		public static function GetUserRootGroupInternal($userId)
 		{
-			$sql       = "SELECT id FROM groups WHERE parent_group_id='0' AND user_id='$userId'";
-			$sqlResult = MySQLManager::Execute($sql);
+			$sql    = "SELECT id FROM groups WHERE parent_group_id='0' AND user_id='$userId'";
+			$result = MySQLManager::ExecuteSelectRow($sql);
 			
-			if($sqlResult)
+			if($result->success)
 			{
-				$row 		 = MySQLManager::FetchRow($sqlResult);
-				$rootGroupId = $row['id'];
-				MySQLManager::Close($sqlResult);
+				$rootGroupId = $result->data['id'];
 
 				return Group::GetGroup($rootGroupId);
 			}
@@ -64,18 +62,10 @@
 
 		public static function GetGroupData($id)
 		{
-			$sql       = "SELECT * FROM groups WHERE id='$id'";
-			$sqlResult = MySQLManager::Execute($sql);
-			
-			if($sqlResult)
-			{
-				$row = MySQLManager::FetchRow($sqlResult);
-				MySQLManager::Close($sqlResult);
+			$sql    = "SELECT * FROM groups WHERE id='$id'";
+			$result = MySQLManager::ExecuteSelectRow($sql);
 
-				return new ServiceResult(true, $row);
-			}
-			
-			return new ServiceResult(false, null, "Can not get group", Constants::MYSQL_ERROR_CODE);
+			return $result;
 		}
 
 		public static function GetGroupPath($groupData)
@@ -137,17 +127,9 @@
 			$sql = "INSERT INTO groups (name, user_id, parent_group_id, type)
 					VALUES ('$name', '$userId', '$parentGroupId', '$type')";
 
-			$sqlResult = MySQLManager::Execute($sql);
+			$result = MySQLManager::ExecuteInsert($sql);
 
-			if($sqlResult)
-			{
-				MySQLManager::Close($sqlResult);
-				$resultData = array("new_group_id" => MySQLManager::GetLastInsertId());
-
-				return new ServiceResult(true, $resultData);
-			}
-
-			return new ServiceResult(false, null, "Couldn't add group to database", Constants::MYSQL_ERROR_CODE);
+			return $result;
 		}
 
 		public static function UpdateData($groupId, $groupData)

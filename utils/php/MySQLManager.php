@@ -67,8 +67,7 @@
 				return new ServiceResult(true, $row);
 			}
 			
-			error_log("Error Executing Mysql query -> $sql");
-			return new ServiceResult(false, null, "Error Executing Mysql query", Constants::MYSQL_ERROR_CODE);
+			return new ServiceResult(false, null, "Error executing Mysql query", Constants::MYSQL_ERROR_CODE);
 		}
 
 		public static function ExecuteInsert($sql)
@@ -83,7 +82,23 @@
 				return new ServiceResult(true, $resultData);
 			}
 			
-			return new ServiceResult(false, null, "Can not register user", Constants::MYSQL_ERROR_CODE);
+			return new ServiceResult(false, null, "Error executing Mysql query", Constants::MYSQL_ERROR_CODE);
+		}
+
+		public static function ExecuteUpdate($sql)
+		{
+			$sqlResult = MySQLManager::Execute($sql);
+			
+			if($sqlResult)
+			{
+				$affectedRows = MySQLManager::AffectedRows();
+				MySQLManager::Close($sqlResult);
+
+				if($affectedRows == 1)
+					return new ServiceResult(true);
+			}
+			
+			return new ServiceResult(false, null, "Error executing Mysql query", Constants::MYSQL_ERROR_CODE);
 		}
 
 	} 

@@ -6,7 +6,7 @@
 		public $errorMessage = "None";
 		public $errorCode    = 0; 
 
-		public function __construct($success, $data, $errorMessage = "None", $errorCode = 0)
+		public function __construct($success, $data = null, $errorMessage = "None", $errorCode = 0)
 		{
 			$this->success 	    = $success;
 			$this->data 		= $data;

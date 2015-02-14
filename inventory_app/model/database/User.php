@@ -10,22 +10,17 @@
 
 			$result = MySQLManager::ExecuteInsert($sql);
 
-			if($result->success)
-				return $result;
-			
-			return new ServiceResult(false, null, "Can not register user", Constants::MYSQL_ERROR_CODE);
+			return $result;
 		}
 
 		public static function ExistsUserWithEmail($email)
 		{
-			$sql       = "SELECT count(id) AS count FROM users WHERE email='$email'";
-			$sqlResult = MySQLManager::Execute($sql);
+			$sql    = "SELECT count(id) AS count FROM users WHERE email='$email'";
+			$result = MySQLManager::ExecuteSelectRow($sql);
 
-			if($sqlResult)
+			if($result->success)
 			{
-				$row    = MySQLManager::FetchRow($sqlResult);
-				$exists = $row["count"] > 0;
-				MySQLManager::Close($sqlResult);
+				$exists = $result->data["count"] > 0;
 
 				return new ServiceResult(true, array("exists" => $exists));
 			}
@@ -43,6 +38,7 @@
 				if($result->data)
 				{
 					SessionManager::SetUserData($result->data);
+
 					return new ServiceResult(true, $result->data);
 				}
 		
@@ -56,35 +52,10 @@
 		{
 			$loggedInUserData = SessionManager::GetUserData();
 			$userId 		  = $loggedInUserData["id"];
-
-			$sql       = "UPDATE users SET data='$userData' WHERE id='$userId'";
-			$sqlResult = MySQLManager::Execute($sql);
+			$sql    		  = "UPDATE users SET data='$userData' WHERE id='$userId'";
+			$result 		  = MySQLManager::ExecuteUpdate($sql);
 			
-			if($sqlResult)
-			{
-				$affectedRows = MySQLManager::AffectedRows();
-				MySQLManager::Close($sqlResult);
-
-				if($affectedRows == 1)
-				{
-					$sql       = "SELECT * FROM users WHERE id='$userId'";
-					$sqlResult = MySQLManager::Execute($sql);
-
-					if($sqlResult)
-					{
-						$row = MySQLManager::FetchRow($sqlResult);
-						MySQLManager::Close($sqlResult);
-
-						if($row)
-						{
-							SessionManager::SetUserData($row);
-							return new ServiceResult(true, array("user_id" => $userId));
-						}
-					}
-				}
-			}
-			
-			return new ServiceResult(false, null, "Could not update user data", Constants::MYSQL_ERROR_CODE);
+			return $result;
 		}
 	}
 ?>

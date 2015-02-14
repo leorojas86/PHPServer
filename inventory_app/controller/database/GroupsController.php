@@ -203,12 +203,11 @@ class GroupsController
 
 	public static function AddSubGroup()
 	{
-		$loggedInUserData = Session::GetLoggedIdUserData();
+		$loggedInUserData = SessionManager::GetUserData();
 		$userId   		  = $loggedInUserData["id"];
-
-		$name 		   = $_POST["name"];
-		$parentGroupId = $_POST["parentGroupId"];
-		$type	       = $_POST["type"];
+		$name 		      = $_POST["name"];
+		$parentGroupId    = $_POST["parentGroupId"];
+		$type	          = $_POST["type"];
 
 		return Group::AddSubGroup($name, $parentGroupId, $userId, $type);
 	}
