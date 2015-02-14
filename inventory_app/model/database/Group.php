@@ -22,13 +22,9 @@
 			$result = MySQLManager::ExecuteSelectRow($sql);
 			
 			if($result->success)
-			{
-				$rootGroupId = $result->data['id'];
-
-				return Group::GetGroup($rootGroupId);
-			}
+				return Group::GetGroup($result->data['id']);
 			
-			return new ServiceResult(false, null, "Can not get group", Constants::MYSQL_ERROR_CODE);
+			return $result;
 		} 
 
 		public static function GetGroup($id)
@@ -73,8 +69,7 @@
 			$id   		   = $groupData["id"];
 			$name 		   = $groupData["name"];
 			$parentGroupId = $groupData["parent_group_id"];
-
-			$groupPath = "$name/";
+			$groupPath     = "$name/";
 
 			while($parentGroupId != 0)
 			{
@@ -108,9 +103,8 @@
 
 		public static function AddSubGroup($name, $parentGroupId, $userId, $type)
 		{
-			$sql = "INSERT INTO groups (name, user_id, parent_group_id, type)
-					VALUES ('$name', '$userId', '$parentGroupId', '$type')";
-
+			$sql    = "INSERT INTO groups (name, user_id, parent_group_id, type)
+					   VALUES ('$name', '$userId', '$parentGroupId', '$type')";
 			$result = MySQLManager::ExecuteInsert($sql);
 
 			return $result;
@@ -126,7 +120,7 @@
 
 		public static function Rename($groupId, $groupName)
 		{
-			$sql       = "UPDATE groups SET name='$groupName' WHERE id='$groupId'";
+			$sql    = "UPDATE groups SET name='$groupName' WHERE id='$groupId'";
 			$result = MySQLManager::ExecuteUpdate($sql);
 			
 			return $result;
@@ -143,25 +137,13 @@
 				foreach($subGroups as $subGroup)
 	    		{
 	    			$subGroupId = $subGroup["id"];
-	    			$result 	= Group::Delete($subGroupId);
-
-	    			if(!$result->success)
-	    				return $result;
+	    			Group::Delete($subGroupId);
 				}
 
-				$sql 	   = "DELETE FROM groups WHERE id = '$groupId'";
-				$sqlResult = MySQLManager::Execute($sql);
+				$sql 	= "DELETE FROM groups WHERE id = '$groupId'";
+				$result = MySQLManager::ExecuteDelete($sql);
 
-				if($sqlResult)
-				{
-					$affectedRows = MySQLManager::AffectedRows();
-					MySQLManager::Close($sqlResult);
-
-					if($affectedRows == 1)
-						return new ServiceResult(true, array("group_id" => $groupId));
-				}
-				
-				return new ServiceResult(false, null, "Could not delete group", Constants::MYSQL_ERROR_CODE);
+				return $result;
 			}
 
 			return $result;
@@ -169,19 +151,10 @@
 
 		public static function Move($groupId, $parentGroupId)
 		{
-			$sql       = "UPDATE groups SET parent_group_id='$parentGroupId' WHERE id='$groupId'";
-			$sqlResult = MySQLManager::Execute($sql);
+			$sql    = "UPDATE groups SET parent_group_id='$parentGroupId' WHERE id='$groupId'";
+			$result = MySQLManager::ExecuteUpdate($sql);
 			
-			if($sqlResult)
-			{
-				$affectedRows = MySQLManager::AffectedRows();
-				MySQLManager::Close($sqlResult);
-
-				if($affectedRows == 1)
-					return new ServiceResult(true, array("group_id" => $groupId));
-			}
-			
-			return new ServiceResult(false, null, "Could not move group", Constants::MYSQL_ERROR_CODE);
+			return $result;
 		}
 
 		public static function IsInHierarchy($groupId, $hierarchyParentId)
@@ -196,8 +169,7 @@
 
 					foreach($subGroups as $subGroup)
 		    		{
-		    			$subGroupId = $subGroup["id"];
-		    			$result 	= Group::IsInHierarchy($groupId, $subGroupId);
+		    			$result = Group::IsInHierarchy($groupId, $subGroup["id"]);
 
 		    			if($result->success)
 		    			{
@@ -219,29 +191,11 @@
 
 		public static function SearchGroupsByName($name)
 		{
-			$sql       = "SELECT * FROM groups WHERE name LIKE '$name'";
-			$sqlResult = MySQLManager::Execute($sql);
+			$sql    = "SELECT * FROM groups WHERE name LIKE '$name'";
+			$result = MySQLManager::ExecuteSelectRows($sql);
 			
-			if($sqlResult)
-			{
-				$groups = array();
-				$row    = MySQLManager::FetchRow($sqlResult);
-
-				while($row != null)
-				{
-					$groups[] = $row;
-					$row 	  = MySQLManager::FetchRow($sqlResult);
-				}
-
-				MySQLManager::Close($sqlResult);
-
-				return new ServiceResult(true, $groups);
-			}
-			
-			return new ServiceResult(false, null, "Could not perform group search", Constants::MYSQL_ERROR_CODE);
+			return $result;
 		}
 
 	}
-
-
 ?>

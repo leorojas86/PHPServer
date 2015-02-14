@@ -124,5 +124,20 @@
 			return new ServiceResult(false, null, "Error executing Mysql query", Constants::MYSQL_ERROR_CODE);
 		}
 
+		public static function ExecuteDelete($sql)
+		{
+			$sqlResult = MySQLManager::Execute($sql);
+
+			if($sqlResult)
+			{
+				$affectedRows = MySQLManager::AffectedRows();
+				MySQLManager::Close($sqlResult);
+
+				if($affectedRows == 1)
+					return new ServiceResult(true);
+			}
+			
+			return new ServiceResult(false, null, "Error executing Mysql query", Constants::MYSQL_ERROR_CODE);
+		}
 	} 
 ?>

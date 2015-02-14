@@ -5,9 +5,8 @@
 	{
 		public static function Register($email, $password, $name)
 		{
-			$sql = "INSERT INTO users (name, password, email)
-					VALUES ('$name', '$password', '$email')";
-
+			$sql    = "INSERT INTO users (name, password, email)
+					   VALUES ('$name', '$password', '$email')";
 			$result = MySQLManager::ExecuteInsert($sql);
 
 			return $result;
@@ -25,7 +24,7 @@
 				return new ServiceResult(true, array("exists" => $exists));
 			}
 			
-			return new ServiceResult(false, null, "Can not check if user exist", Constants::MYSQL_ERROR_CODE);
+			return $result;
 		}
 
 		public static function Login($email, $password)
@@ -45,7 +44,7 @@
 				return new ServiceResult(false, null, "User name or password incorrect", Constants::USER_NAME_OR_PASSWORD_INCORRECT);
 			}
 			
-			return new ServiceResult(false, null, "Can not login user", Constants::MYSQL_ERROR_CODE);
+			return $result;
 		}
 
 		public static function UpdateData($userData)
