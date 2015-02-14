@@ -95,26 +95,10 @@
 
 		public static function GetSubGroups($id)
 		{
-			$sql       = "SELECT * FROM groups WHERE parent_group_id='$id'";
-			$sqlResult = MySQLManager::Execute($sql);
+			$sql    = "SELECT * FROM groups WHERE parent_group_id='$id'";
+			$result = MySQLManager::ExecuteSelectRows($sql);
 			
-			if($sqlResult)
-			{
-				$groups = array();
-				$row    = MySQLManager::FetchRow($sqlResult);
-				
-				while($row != null)
-				{
-					$groups[] = $row;
-					$row 	  = MySQLManager::FetchRow($sqlResult);
-				}
-
-				MySQLManager::Close($sqlResult);
-
-				return new ServiceResult(true, $groups);
-			}
-			
-			return new ServiceResult(false, null, "Couldn't get sub groups", Constants::MYSQL_ERROR_CODE);
+			return $result;
 		}
 
 		private static function AddRootGroupToUser($userId)
@@ -134,36 +118,18 @@
 
 		public static function UpdateData($groupId, $groupData)
 		{
-			$sql       = "UPDATE groups SET data='$groupData' WHERE id='$groupId'";
-			$sqlResult = MySQLManager::Execute($sql);
-			
-			if($sqlResult)
-			{
-				$affectedRows = MySQLManager::AffectedRows();
-				MySQLManager::Close($sqlResult);
+			$sql    = "UPDATE groups SET data='$groupData' WHERE id='$groupId'";
+			$result = MySQLManager::ExecuteUpdate($sql);
 
-				if($affectedRows == 1)
-					return new ServiceResult(true, array("group_id" => $groupId));
-			}
-			
-			return new ServiceResult(false, null, "Could not update group data", Constants::MYSQL_ERROR_CODE);
+			return $result;
 		}
 
 		public static function Rename($groupId, $groupName)
 		{
 			$sql       = "UPDATE groups SET name='$groupName' WHERE id='$groupId'";
-			$sqlResult = MySQLManager::Execute($sql);
+			$result = MySQLManager::ExecuteUpdate($sql);
 			
-			if($sqlResult)
-			{
-				$affectedRows = MySQLManager::AffectedRows();
-				MySQLManager::Close($sqlResult);
-
-				if($affectedRows == 1)
-					return new ServiceResult(true, array("group_id" => $groupId));
-			}
-			
-			return new ServiceResult(false, null, "Could not rename group", Constants::MYSQL_ERROR_CODE);
+			return $result;
 		}
 
 		public static function Delete($groupId)

@@ -101,5 +101,28 @@
 			return new ServiceResult(false, null, "Error executing Mysql query", Constants::MYSQL_ERROR_CODE);
 		}
 
+		public static function ExecuteSelectRows($sql)
+		{
+			$sqlResult = MySQLManager::Execute($sql);
+			
+			if($sqlResult)
+			{
+				$rows = array();
+				$row  = MySQLManager::FetchRow($sqlResult);
+				
+				while($row != null)
+				{
+					$rows[] = $row;
+					$row 	= MySQLManager::FetchRow($sqlResult);
+				}
+
+				MySQLManager::Close($sqlResult);
+
+				return new ServiceResult(true, $rows);
+			}
+			
+			return new ServiceResult(false, null, "Error executing Mysql query", Constants::MYSQL_ERROR_CODE);
+		}
+
 	} 
 ?>
