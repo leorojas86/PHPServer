@@ -10,27 +10,34 @@
 			MySQLManager::$_mysqli = new mysqli($server, $user, $pass);
 
 			if(MySQLManager::$_mysqli->connect_errno)
+			{
     			error_log("Failed to connect to MySQL error MySQLManager::$_mysqli->connect_errno, connect error 'MySQLManager::$_mysqli->connect_error'");
-
-			MySQLManager::Execute("use $db");
+    			return new ServiceResult(false, null, "Failed to connect to MySQL", Constants::MYSQL_ERROR_CODE);
+			}
+			else
+				return MySQLManager::Execute("use $db");
 		}
 
 		public static function Execute($query)
 		{
 			if(MySQLManager::$_mysqli != null)
 			{
-				$result = MySQLManager::$_mysqli->query($query);
+				$sqlResult = MySQLManager::$_mysqli->query($query);
 
-				if(!$result) 
+				if($sqlResult) 
+					return new ServiceResult(true, $sqlResult);
+				else
 				{
 					$error = MySQLManager::$_mysqli->error;
 			    	error_log("Error executing query '$query', error '$error'");
+			    	return new ServiceResult(false, null, "Error executing Mysql query", Constants::MYSQL_ERROR_CODE);
 				}
-
-				return $result;
 			}
 			else
+			{
 				error_log("Calling MySQLManager::Execute without calling MySQLManager::Connect before, mysql connection is null");
+				return new ServiceResult(false, null, "Calling MySQLManager::Execute without calling MySQLManager::Connect before, mysql connection is null", Constants::MYSQL_ERROR_CODE);
+			}
 		}
 
 		public static function GetLastInsertId()
@@ -57,87 +64,97 @@
 		//Extension Methods
 		public static function ExecuteSelectRow($sql)
 		{
-			$sqlResult = MySQLManager::Execute($sql);
+			$result = MySQLManager::Execute($sql);
 			
-			if($sqlResult)
+			if($result->success)
 			{
-				$row = MySQLManager::FetchRow($sqlResult);
-				MySQLManager::Close($sqlResult);
+				$row = MySQLManager::FetchRow($result->data);
+				MySQLManager::Close($result->data);
 
 				return new ServiceResult(true, $row);
 			}
 			
-			return new ServiceResult(false, null, "Error executing Mysql query", Constants::MYSQL_ERROR_CODE);
+			return $result;
 		}
 
 		public static function ExecuteInsert($sql)
 		{
-			$sqlResult = MySQLManager::Execute($sql);
-
-			if($sqlResult)
+			$result = MySQLManager::Execute($sql);
+			
+			if($result->success)
 			{
-				MySQLManager::Close($sqlResult);
-				$resultData = array("new_id" => MySQLManager::GetLastInsertId());
+				MySQLManager::Close($result->data);
+				$resultData = array("insert_id" => MySQLManager::GetLastInsertId());
 
 				return new ServiceResult(true, $resultData);
 			}
 			
-			return new ServiceResult(false, null, "Error executing Mysql query", Constants::MYSQL_ERROR_CODE);
+			return $result;
 		}
 
 		public static function ExecuteUpdate($sql)
 		{
-			$sqlResult = MySQLManager::Execute($sql);
+			$result = MySQLManager::Execute($sql);
 			
-			if($sqlResult)
+			if($result->success)
 			{
 				$affectedRows = MySQLManager::AffectedRows();
-				MySQLManager::Close($sqlResult);
+				MySQLManager::Close($result->data);
 
-				if($affectedRows == 1)
+				if($affectedRows > 0)
 					return new ServiceResult(true);
+				else
+				{
+					error_log("Update query didn't update any row -> $sql");
+					return new ServiceResult(false, null, "Update query didn't update any row", Constants::MYSQL_ERROR_CODE);
+				}
 			}
 			
-			return new ServiceResult(false, null, "Error executing Mysql query", Constants::MYSQL_ERROR_CODE);
+			return $result;
 		}
 
 		public static function ExecuteSelectRows($sql)
 		{
-			$sqlResult = MySQLManager::Execute($sql);
+			$result = MySQLManager::Execute($sql);
 			
-			if($sqlResult)
+			if($result->success)
 			{
 				$rows = array();
-				$row  = MySQLManager::FetchRow($sqlResult);
+				$row  = MySQLManager::FetchRow($result->data);
 				
 				while($row != null)
 				{
 					$rows[] = $row;
-					$row 	= MySQLManager::FetchRow($sqlResult);
+					$row 	= MySQLManager::FetchRow($result->data);
 				}
 
-				MySQLManager::Close($sqlResult);
+				MySQLManager::Close($result->data);
 
 				return new ServiceResult(true, $rows);
 			}
 			
-			return new ServiceResult(false, null, "Error executing Mysql query", Constants::MYSQL_ERROR_CODE);
+			return $result;
 		}
 
 		public static function ExecuteDelete($sql)
 		{
-			$sqlResult = MySQLManager::Execute($sql);
-
-			if($sqlResult)
+			$result = MySQLManager::Execute($sql);
+			
+			if($result->success)
 			{
 				$affectedRows = MySQLManager::AffectedRows();
-				MySQLManager::Close($sqlResult);
+				MySQLManager::Close($result->data);
 
-				if($affectedRows == 1)
+				if($affectedRows > 0)
 					return new ServiceResult(true);
+				else
+				{
+					error_log("Delete query didn't delete any row -> $sql");
+					return new ServiceResult(false, null, "Delete query didn't delete any row", Constants::MYSQL_ERROR_CODE);
+				}
 			}
 			
-			return new ServiceResult(false, null, "Error executing Mysql query", Constants::MYSQL_ERROR_CODE);
+			return $result;
 		}
 	} 
 ?>
