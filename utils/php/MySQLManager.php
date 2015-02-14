@@ -53,5 +53,38 @@
 		{
 			return MySQLManager::$_mysqli->affected_rows;
 		}
+
+		//Extension Methods
+		public static function ExecuteSelectRow($sql)
+		{
+			$sqlResult = MySQLManager::Execute($sql);
+			
+			if($sqlResult)
+			{
+				$row = MySQLManager::FetchRow($sqlResult);
+				MySQLManager::Close($sqlResult);
+
+				return new ServiceResult(true, $row);
+			}
+			
+			error_log("Error Executing Mysql query -> $sql");
+			return new ServiceResult(false, null, "Error Executing Mysql query", Constants::MYSQL_ERROR_CODE);
+		}
+
+		public static function ExecuteInsert($sql)
+		{
+			$sqlResult = MySQLManager::Execute($sql);
+
+			if($sqlResult)
+			{
+				MySQLManager::Close($sqlResult);
+				$resultData = array("new_id" => MySQLManager::GetLastInsertId());
+
+				return new ServiceResult(true, $resultData);
+			}
+			
+			return new ServiceResult(false, null, "Can not register user", Constants::MYSQL_ERROR_CODE);
+		}
+
 	} 
 ?>

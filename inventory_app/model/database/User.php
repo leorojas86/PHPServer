@@ -5,19 +5,13 @@
 	{
 		public static function Register($email, $password, $name)
 		{
-			#echo "RegisterUser name '$name' pass '$password'";
 			$sql = "INSERT INTO users (name, password, email)
 					VALUES ('$name', '$password', '$email')";
 
-			$sqlResult = MySQLManager::Execute($sql);
+			$result = MySQLManager::ExecuteInsert($sql);
 
-			if($sqlResult)
-			{
-				MySQLManager::Close($sqlResult);
-				$resultData = array("new_user_id" => MySQLManager::GetLastInsertId());
-
-				return new ServiceResult(true, $resultData);
-			}
+			if($result->success)
+				return $result;
 			
 			return new ServiceResult(false, null, "Can not register user", Constants::MYSQL_ERROR_CODE);
 		}
@@ -41,20 +35,17 @@
 
 		public static function Login($email, $password)
 		{
-			$sql       = "SELECT * FROM users WHERE email='$email' AND password='$password'";
-			$sqlResult = MySQLManager::Execute($sql);
+			$sql    = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+			$result = MySQLManager::ExecuteSelectRow($sql);
 			
-			if($sqlResult)
+			if($result->success)
 			{
-				$row = MySQLManager::FetchRow($sqlResult);
-				MySQLManager::Close($sqlResult);
-
-				if($row)
+				if($result->data)
 				{
-					SessionManager::SetUserData($row);
-					return new ServiceResult(true, $row);
+					SessionManager::SetUserData($result->data);
+					return new ServiceResult(true, $result->data);
 				}
-				
+		
 				return new ServiceResult(false, null, "User name or password incorrect", Constants::USER_NAME_OR_PASSWORD_INCORRECT);
 			}
 			
