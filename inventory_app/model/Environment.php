@@ -14,5 +14,13 @@
 
 			return $result;
 		}
+
+		public static function DisplayPage($page, $requiresLogin)//Generates the page content (html/js/etc) 
+		{
+			if(!$requiresLogin || SessionManager::IsUserLoggedIn())
+				require_once $page;
+			else
+				require_once "inventory_app/view/php/login.php";
+		}
 	} 
 ?>
