@@ -17,24 +17,41 @@
 
 			function onLocalizationLoaded(sender)
 			{
+				var userNameText  		= LocManager.getInstance().getLocalizedString("user_name_text");
+				var emailText 	  		= LocManager.getInstance().getLocalizedString("email_text");
+				var passwordText  		= LocManager.getInstance().getLocalizedString("password_text");
+				var confirmPasswordText = LocManager.getInstance().getLocalizedString("confirm_password_text");
+				var defaultValues 		= "leo";
+
 				var body 	   = document.getElementById("body");
-				body.innerHTML = 	"<p>User Name</p>" +
-				  					"<input type='text' id='user_name'     value = 'leo'>" +
-				  					"<p>User Email</p>" +
-				  					"<input type='text' id='user_email'    value = 'leo'> <br/><br/>" +
-				  					"<p>User Password</p>" +
-				  					"<input type='text' id='user_password' value = 'leo'> <br/><br/>" +
+				body.innerHTML = 	"<p>" + userNameText + "</p>" +
+				  					"<input type='text' id='user_name'     value = '" + defaultValues + "'>" +
+				  					"<p>" + emailText + "</p>" +
+				  					"<input type='text' id='user_email'    value = '" + defaultValues + "'> <br/><br/>" +
+				  					"<p>" + passwordText + "</p>" +
+				  					"<input type='text' id='user_password' value = '" + defaultValues + "'> <br/><br/>" +
+				  					"<p>" + confirmPasswordText + "</p>" +
+				  					"<input type='text' id='user_confirm_password' value = '" + defaultValues + "'> <br/><br/>" +
 				  					"<button type='button' onclick='onRegisterButtonClick();'>Register</button>";
 			}
 
 			function onRegisterButtonClick()
 			{
-				var userName     = document.getElementById('user_name');
-				var userEmail    = document.getElementById('user_email');	
-				var userPassword = document.getElementById('user_password');	
-				var params 		 = "service=User&method=Register&name=" + userName.value + "&email=" + userEmail.value + "&password=" + userPassword.value;
+				var userName     		= document.getElementById('user_name');
+				var userEmail    		= document.getElementById('user_email');	
+				var userPassword 		= document.getElementById('user_password');
+				var userConfirmPassword = document.getElementById('user_confirm_password');
 
-				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onRegisterCallback, params);
+				if(userPassword.value == userConfirmPassword.value)
+				{
+					var params = "service=User&method=Register&name=" + userName.value + "&email=" + userEmail.value + "&password=" + userPassword.value;
+					RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onRegisterCallback, params);
+				}
+				else
+				{
+					var passwordsDontMatchText = LocManager.getInstance().getLocalizedString("passwords_dont_match_text");
+					alert(passwordsDontMatchText);
+				}
 			}
 
 			function onRegisterCallback(xmlhttp)
