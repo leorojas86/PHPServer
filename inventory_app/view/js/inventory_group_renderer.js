@@ -4,20 +4,22 @@ function InventoryGroupRenderer()
 
 InventoryGroupRenderer.prototype.render = function(groupData)
 {
+	var backButtonTooltip = LocManager.getInstance().getLocalizedString("back_button_tooltip");
+	var backButtonText    = LocManager.getInstance().getLocalizedString("back_button_text");
+
 	var groupId       = groupData.id;
 	var groupPath     = groupData.path;
 	var parentGroupId = groupData.parent_group_id;
 	var subGroupType  = groupData.type;
 	var subGroups 	  = groupData.sub_groups;
 
-	var groupAjax = "<div id='folders_area' align='center'>";
-
+	var groupAjax  = "<div id='folders_area' align='center'>";
 	var groupPath  = groupPath.replace("RootGroup/", "Principal/");
 
 	if(parentGroupId != 0)
-		groupAjax += "<p>" + groupPath + " <button id='back_button' type='button' onclick='onBackButtonClick(" + parentGroupId + ");' title='Ir al folder anterior, shortcut flecha izquierda' >Atras</button> </p>";
+		groupAjax += "<p style='height:20px'>" + groupPath + " <button id='back_button' type='button' onclick='onBackButtonClick(" + parentGroupId + ");' title='" + backButtonTooltip + "' >" + backButtonText + "</button> </p>";
 	else
-		groupAjax += "<p>" + groupPath + "</p>";
+		groupAjax += "<p style='height:20px'>" + groupPath + "</p>";
 
 	if(subGroupType == 0)//Constants::DEFAULT_GROUP_TYPE)
 	{
