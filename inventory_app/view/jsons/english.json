@@ -4,5 +4,8 @@
     "type_new_folder_name"  : "Type the new folder name",
     "sure_to_delete_folder" : "Are you sure that you want to delete the '[folder]'?",
     "back_button_tooltip"   : "Ir al folder anterior, shortcut flecha izquierda",
-    "back_button_text"		: "Back"
+    "back_button_text"		: "Back",
+    "right_click_tooltip"   : "Right click to see options",
+    "update_button_text"	: "Update",
+    "search_button_text"	: "Search"
 }

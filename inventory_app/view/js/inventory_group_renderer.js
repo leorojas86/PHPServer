@@ -6,6 +6,9 @@ InventoryGroupRenderer.prototype.render = function(groupData)
 {
 	var backButtonTooltip = LocManager.getInstance().getLocalizedString("back_button_tooltip");
 	var backButtonText    = LocManager.getInstance().getLocalizedString("back_button_text");
+	var rightClickOptions = LocManager.getInstance().getLocalizedString("right_click_tooltip");
+	var updateButtonText  = LocManager.getInstance().getLocalizedString("update_button_text");
+	var searchButtonText  = LocManager.getInstance().getLocalizedString("search_button_text");
 
 	var groupId       = groupData.id;
 	var groupPath     = groupData.path;
@@ -23,7 +26,7 @@ InventoryGroupRenderer.prototype.render = function(groupData)
 
 	if(subGroupType == 0)//Constants::DEFAULT_GROUP_TYPE)
 	{
-		groupAjax += "<div id='folders_scroll_panel' oncontextmenu='showContextMenu(event); return false;' align='center' style='overflow:scroll; width:600px; height:400px; border:1px solid gray;' title='Haga click derecho para ver opciones'>";
+		groupAjax += "<div id='folders_scroll_panel' oncontextmenu='showContextMenu(event); return false;' align='center' style='overflow:scroll; width:600px; height:400px; border:1px solid gray;' title='" + rightClickOptions + "'>";
 
 		for (var index in subGroups)
 		{
@@ -50,12 +53,12 @@ InventoryGroupRenderer.prototype.render = function(groupData)
 	{
 		groupAjax += "<p>Data"+ 
 							"<input type='text' id='group_data' value = '" + groupData.data + "'>"+
-							"<button type='button' onclick='onUpdateGroupDataClick(" + groupId + ");'>Update</button>"+
+							"<button type='button' onclick='onUpdateGroupDataClick(" + groupId + ");'>" + updateButtonText + "</button>"+
 					   "</p>";
 	}
 
 	groupAjax += "<input type='text' id='search_input' value = ''>"+
-				   "<button type='button' onclick='onSearchButtonClick();'>Search</button>";
+				   "<button type='button' onclick='onSearchButtonClick();'>" + searchButtonText + "</button>";
 
 	groupAjax += "</div>";
 
