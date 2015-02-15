@@ -2,5 +2,6 @@
     "type_name" 			: "Type the name",
     "type_new_name" 		: "Type the new name",
     "type_new_item_name"    : "Type the new item name",
-    "type_new_folder_name"  : "Type the new folder name"
+    "type_new_folder_name"  : "Type the new folder name",
+    "sure_to_delete_folder" : "Are you sure that you want to delete the '[folder]'?"
 }

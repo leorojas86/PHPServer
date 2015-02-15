@@ -26,7 +26,6 @@
 				document.onkeyup  = onKeyUp;
     			var groupContaner = document.getElementById('group_container');
     			var params 		  = "service=Group&method=GetRootGroupData";
-
 				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onGroupContainerAjaxCallback, params);
 			}
 
@@ -40,9 +39,7 @@
 						if(backButton != null) 
    							 backButton.onclick.apply(backButton);
 				    break;
-				    default:
-				    	console.log("pressed key = " + event.which);
-					break;
+				    default: console.log("pressed key = " + event.which); break;
 				}
 			}
 
@@ -81,38 +78,16 @@
 		    {
 		    	switch(option)
 		    	{
-		    		case InventoryAppConstants.MENU_ITEM_ADD_ITEM:
-		    			AddItem(_folderId);
-		    		break;
-		    		case InventoryAppConstants.MENU_ITEM_ADD_FOLDER:
-		    			AddFolder();
-		    		break;
-		    		case InventoryAppConstants.MENU_ITEM_PASTE:
-		    			pasteGroup();
-		    		break;
-		    		case InventoryAppConstants.MENU_ITEM_RENAME:
-		    			renameGroup(_folderId);
-		    		break;
-		    		case InventoryAppConstants.MENU_ITEM_CUT:
-		    			_cuttingGroupId = _folderId;
-		    		break;
-		    		case InventoryAppConstants.MENU_ITEM_DELETE:
-		    			removeSubgroupGroup(_folderId);
-		    		break;
+		    		case InventoryAppConstants.MENU_ITEM_ADD_ITEM: 		addItem(_folderId); 			break;
+		    		case InventoryAppConstants.MENU_ITEM_ADD_FOLDER: 	addFolder();      				break;
+		    		case InventoryAppConstants.MENU_ITEM_PASTE: 		pasteGroup();          			break;
+		    		case InventoryAppConstants.MENU_ITEM_RENAME:    	renameGroup(_folderId); 		break;
+		    		case InventoryAppConstants.MENU_ITEM_CUT: 			_cuttingGroupId = _folderId;	break;
+		    		case InventoryAppConstants.MENU_ITEM_DELETE: 		removeSubgroupGroup(_folderId);	break;
 		    	}
 		    }
 
-		    function AddFolder()
-		    {
-		    	var typeFolderNameText = LocManager.getInstance().getLocalizedString("type_new_folder_name");
-	    		var folderName         = prompt(typeFolderNameText, "");
-	    		var defaultGroupType   = 0;
-
-				if(folderName != null && folderName != "") 
-				    addSubGroup(folderName, defaultGroupType);
-		    }
-
-		    function AddItem(folderId)
+		    function addItem(folderId)
 		    {
 		    	var typeNewItemNameText = LocManager.getInstance().getLocalizedString("type_new_item_name");
 		    	var itemName 			= prompt(typeNewItemNameText, "");
@@ -120,6 +95,16 @@
 
 				if(itemName != null && itemName != "") 
 					addSubGroup(itemName, itemId);
+		    }
+
+		    function addFolder()
+		    {
+		    	var typeFolderNameText = LocManager.getInstance().getLocalizedString("type_new_folder_name");
+	    		var folderName         = prompt(typeFolderNameText, "");
+	    		var defaultGroupType   = 0;
+
+				if(folderName != null && folderName != "") 
+				    addSubGroup(folderName, defaultGroupType);
 		    }
 
 		    function renameGroup(folderId)
@@ -166,7 +151,7 @@
 
 			function onUpdateGroupDataCallback(xmlhttp)
 			{
-				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
+				//if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
 					alert("result '" + xmlhttp.responseText + "'");
 			}
 
@@ -226,7 +211,7 @@
 
 			function onSearchCallback(xmlhttp)
 			{
-				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
+				//if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
 					alert(xmlhttp.responseText);
 			}
 
@@ -255,8 +240,10 @@
 
 			function removeSubgroupGroup(groupId)
 			{
-				var folderLabel = document.getElementById('folder_label_' + groupId);
-				var remove      = confirm("Está seguro de que desea borrar el folder '" + folderLabel.textContent + "'? \nTodos sus folders hijos y sus contenidos serán borrados.");
+				var folderLabel 		= document.getElementById('folder_label_' + groupId);
+				var deleteFolderText 	= LocManager.getInstance().getLocalizedString("sure_to_delete_folder");
+				deleteFolderText 		= deleteFolderText.replace("[folder]", folderLabel.textContent);
+				var remove      		= confirm(deleteFolderText);
 
 				if(remove) 
 				{
