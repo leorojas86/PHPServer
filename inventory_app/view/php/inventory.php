@@ -34,7 +34,7 @@
 			{
 				switch(event.which) 
 				{
-				    case 8://back button
+				    case 37://left arrow button
 				    	var backButton = document.getElementById("back_button");
 
 						if(backButton != null) 
@@ -116,12 +116,10 @@
 		    {
 		    	var typeNewItemNameText = LocManager.getInstance().getLocalizedString("type_new_item_name");
 		    	var itemName 			= prompt(typeNewItemNameText, "");
+		    	var itemId 				= 1;
 
 				if(itemName != null && itemName != "") 
-				{
-					var itemId = 1;
 					addSubGroup(itemName, itemId);
-				}
 		    }
 
 		    function RenameFolder(folderId)
@@ -145,7 +143,6 @@
 			{
 				var userData = document.getElementById('user_data');
 				var params   = "service=User&method=UpdateData&data=" + userData.value;
-
 				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onUpdateUserDataCallback, params);
 			}
 
@@ -153,8 +150,6 @@
 			{
 				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
 				{
-					alert("result '" + xmlhttp.responseText + "'");
-
 					var result = JSON.parse(xmlhttp.responseText);
 
 					if(result.success)
@@ -166,7 +161,6 @@
 			{
 				var groupData = document.getElementById('group_data');
 				var params    = "service=Group&method=UpdateData&id=" + groupId + "&data=" + groupData.value;
-
 				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onUpdateGroupDataCallback, params);
 			}
 
@@ -179,7 +173,6 @@
 			function addSubGroup(newGroupName, type)
 			{
 				var params = "service=Group&method=AddSubGroup&parentGroupId=" + _currentGroupData.id + "&name=" + newGroupName + "&type=" + type;
-
 				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onAddSubGroupCallback, params);
 			}
 
@@ -268,7 +261,6 @@
 				if(remove) 
 				{
 					var params = "service=Group&method=Delete&id=" + groupId;
-
 					RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onDeleteGroupCallback, params);
 				}
 			}

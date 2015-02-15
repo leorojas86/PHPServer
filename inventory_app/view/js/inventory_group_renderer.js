@@ -15,7 +15,7 @@ InventoryGroupRenderer.prototype.render = function(groupData)
 	var groupPath  = groupPath.replace("RootGroup/", "Principal/");
 
 	if(parentGroupId != 0)
-		groupAjax += "<p>" + groupPath + " <button id='back_button' type='button' onclick='onBackButtonClick(" + parentGroupId + ");'>Atras</button> </p>";
+		groupAjax += "<p>" + groupPath + " <button id='back_button' type='button' onclick='onBackButtonClick(" + parentGroupId + ");' title='Ir al folder anterior, shortcut flecha izquierda' >Atras</button> </p>";
 	else
 		groupAjax += "<p>" + groupPath + "</p>";
 

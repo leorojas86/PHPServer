@@ -23,8 +23,6 @@
 			{
 				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
 				{
-					alert("result '" + xmlhttp.responseText + "'");
-
 					var result = JSON.parse(xmlhttp.responseText);
 
 					if(result.success)

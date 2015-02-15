@@ -18,7 +18,6 @@ var RequestUtils =
 
 function RequestUtilsClass()
 {
-	
 }
 
 RequestUtilsClass.prototype.ajax = function(url, elementId, params)
