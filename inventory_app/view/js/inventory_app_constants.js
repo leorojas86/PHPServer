@@ -9,5 +9,8 @@ var InventoryAppConstants =
      'MENU_ITEM_DELETE' : 'Delete',
      'MENU_ITEM_CUT'    : 'Cut',
      'MENU_ITEM_PASTE'  : 'Paste',
-     'MENU_ITEM_RENAME' : 'Rename'
+     'MENU_ITEM_RENAME' : 'Rename',
+
+     'GROUP_ID_FOLDER' : 0,
+     'GROUP_ID_ITEM'   : 1
 };

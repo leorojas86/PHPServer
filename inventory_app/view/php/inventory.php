@@ -91,20 +91,18 @@
 		    {
 		    	var typeNewItemNameText = LocManager.getInstance().getLocalizedString("type_new_item_name");
 		    	var itemName 			= prompt(typeNewItemNameText, "");
-		    	var itemId 				= 1;
 
 				if(itemName != null && itemName != "") 
-					addSubGroup(itemName, itemId);
+					addSubGroup(itemName, InventoryAppConstants.GROUP_ID_ITEM);
 		    }
 
 		    function addFolder()
 		    {
 		    	var typeFolderNameText = LocManager.getInstance().getLocalizedString("type_new_folder_name");
 	    		var folderName         = prompt(typeFolderNameText, "");
-	    		var defaultGroupType   = 0;
 
 				if(folderName != null && folderName != "") 
-				    addSubGroup(folderName, defaultGroupType);
+				    addSubGroup(folderName, InventoryAppConstants.GROUP_ID_FOLDER);
 		    }
 
 		    function renameGroup(folderId)
