@@ -39,7 +39,6 @@
 				var userEmail    = document.getElementById('user_email');	
 				var userPassword = document.getElementById('user_password');	
 				var params 		 = "service=User&method=Login" + "&email=" + userEmail.value + "&password=" + userPassword.value;
-
 				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onLoginCallback, params);
 			}
 
