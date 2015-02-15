@@ -18,13 +18,13 @@ var LocManager =
 
 function LocalizationManagerClass()
 {
-	this.onLocalizationTableLoaded = null;
-	this.localizationTable  	   = null;
+	this.onLocalizationTableLoaded 	= null;
+	this.localizationTable 			= localStorage.localizationTable == null ? null : JSON.parse(localStorage.localizationTable);
 }
 
-LocalizationManagerClass.prototype.loadLocalizationTable = function(localizationTableURL, onLocalizationTableLoaded)
+LocalizationManagerClass.prototype.loadLocalizationTable = function(localizationTableURL, onLocalizationTableLoaded, force)
 {
-	if(this.localizationTable == null)
+	if(this.localizationTable == null || force)
 	{
 		console.log("Loading localization table");
 		this.onLocalizationTableLoaded = onLocalizationTableLoaded;
@@ -32,15 +32,20 @@ LocalizationManagerClass.prototype.loadLocalizationTable = function(localization
 		RequestUtils.getInstance().request(localizationTableURL, "POST", function(xmlhttp) { context.onLoadLocalizationTableCallback(xmlhttp) });
 	}
 	else
+	{
 		console.log("localization table was already loaded");
+		onLocalizationTableLoaded(this);
+	}
 };
 
 LocalizationManagerClass.prototype.onLoadLocalizationTableCallback = function(xmlhttp)
 {
 	if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
 	{
-		this.localizationTable = JSON.parse(xmlhttp.responseText);
+		localStorage.localizationTable = xmlhttp.responseText;
+		this.localizationTable 		   = JSON.parse(xmlhttp.responseText);
 		this.onLocalizationTableLoaded(this);
+		this.onLocalizationTableLoaded = null;
 	}
 };
 

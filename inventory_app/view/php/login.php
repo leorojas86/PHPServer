@@ -12,7 +12,7 @@
 
 			function onPageLoaded() 
 		    {
-		    	LocManager.getInstance().loadLocalizationTable(InventoryAppConstants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded);
+		    	LocManager.getInstance().loadLocalizationTable(InventoryAppConstants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
 			}
 
 			function onLocalizationLoaded(sender)
