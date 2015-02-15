@@ -13,5 +13,7 @@
     "email_text"                   : "Email",
     "password_text"                : "Password",
     "confirm_password_text"        : "Confirm Password",
-    "passwords_dont_match_text"    : "Passwords don't match."
+    "passwords_dont_match_text"    : "Passwords don't match.",
+    "login_button_text"            : "Login",
+    "register_button_text"         : "Register"
 }

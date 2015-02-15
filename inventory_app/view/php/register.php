@@ -21,6 +21,7 @@
 				var emailText 	  		= LocManager.getInstance().getLocalizedString("email_text");
 				var passwordText  		= LocManager.getInstance().getLocalizedString("password_text");
 				var confirmPasswordText = LocManager.getInstance().getLocalizedString("confirm_password_text");
+				var registerButtonText  = LocManager.getInstance().getLocalizedString("register_button_text");
 				var defaultValues 		= "leo";
 
 				var body 	   = document.getElementById("body");
@@ -32,7 +33,7 @@
 				  					"<input type='text' id='user_password' value = '" + defaultValues + "'> <br/><br/>" +
 				  					"<p>" + confirmPasswordText + "</p>" +
 				  					"<input type='text' id='user_confirm_password' value = '" + defaultValues + "'> <br/><br/>" +
-				  					"<button type='button' onclick='onRegisterButtonClick();'>Register</button>";
+				  					"<button type='button' onclick='onRegisterButtonClick();'>" + registerButtonText + "</button>";
 			}
 
 			function onRegisterButtonClick()

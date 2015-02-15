@@ -17,14 +17,21 @@
 
 			function onLocalizationLoaded(sender)
 			{
+				var emailText 	  		= LocManager.getInstance().getLocalizedString("email_text");
+				var passwordText  		= LocManager.getInstance().getLocalizedString("password_text");
+				var passwordText  		= LocManager.getInstance().getLocalizedString("password_text");
+				var loginButtonText 	= LocManager.getInstance().getLocalizedString("login_button_text");
+				var registerButtonText  = LocManager.getInstance().getLocalizedString("register_button_text");
+				var defaultValues 		= "leo";
+
 				var body 	   = document.getElementById("body");
-				body.innerHTML = 	"<p>User Email</p>" +
-									"<input type='text' id='user_email'    value = 'leo'> <br/><br/>" +
-				  					"<p>User Password</p>" +
-				  					"<input type='text' id='user_password' value = 'leo'> <br/><br/>" + 
-				  					"<button type='button' onclick='onLoginButtonClick();'>Login</button>" +
+				body.innerHTML = 	"<p>" + emailText + "</p>" +
+									"<input type='text' id='user_email'    value = '" + defaultValues + "'> <br/><br/>" +
+				  					"<p>" + passwordText + "</p>" +
+				  					"<input type='text' id='user_password' value = '" + defaultValues + "'> <br/><br/>" + 
+				  					"<button type='button' onclick='onLoginButtonClick();'>" + loginButtonText + "</button>" +
 				  					"<br><br><br>" +
-				  					"<button type='button' onclick='onRegisterButtonClick();'>Register</button>";
+				  					"<button type='button' onclick='onRegisterButtonClick();'>" + registerButtonText + "</button>";
 			}
 			
 			function onLoginButtonClick()
