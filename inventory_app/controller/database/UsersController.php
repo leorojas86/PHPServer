@@ -9,15 +9,9 @@ class UsersController
 	{
 		switch ($method) 
 		{
-			case "Register": 
-				$result = UsersController::Register();
-			break;
-			case "Login": 
-				$result = UsersController::Login();
-			break;
-			case "UpdateData": 
-				$result = UsersController::UpdateData();
-			break;
+			case "Register": 	$result = UsersController::Register();		break;
+			case "Login": 		$result = UsersController::Login();			break;
+			case "UpdateData": 	$result = UsersController::UpdateData();	break;
 			default: 		 
 				$result = new ServiceResult(false, null, "Unsupported user service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD); 
 			break;

@@ -53,6 +53,15 @@ InventoryGroupRenderer.prototype.render = function(groupData)
 							"<input type='text' id='group_data' value = '" + groupData.data + "'>" +
 							"<button type='button' onclick='onUpdateGroupDataClick(" + groupId + ");'>" + updateButtonText + "</button>" +
 					   "</p>";
+
+		var apiURL = InventoryAppConstants.API_URL;// + "?service=File&method=Upload";
+		groupAjax += "<form action='" + apiURL + "' method='post' enctype='multipart/form-data'>" +
+					 	" Select image to upload:" + 
+					 	"<input type='hidden' name='service' value='File'>" + 
+					 	"<input type='hidden' name='method'  value='Upload'>" +
+						"<input type='file' name='fileToUpload' id='fileToUpload'>" +
+						"<input type='submit' value='Upload Image' name='submit'>" +
+					 "</form>";
 	}
 
 	groupAjax += "</div>";

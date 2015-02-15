@@ -9,30 +9,14 @@ class GroupsController
 	{
 		switch ($method) 
 		{
-			case "GetGroupData": 
-				$result = GroupsController::GetGroupData();
-			break;
-			case "GetRootGroupData": 
-				$result = GroupsController::GetRootGroupData();
-			break;
-			case "UpdateData":
-				$result = GroupsController::UpdateData();
-			break;
-			case "AddSubGroup":
-				$result = GroupsController::AddSubGroup();
-			break;
-			case "Delete":
-				$result = GroupsController::DeleteGroup();
-			break;
-			case "Move":
-				$result = GroupsController::MoveGroup();
-			break;
-			case "Rename":
-				$result = GroupsController::RenameGroup();
-			break;
-			case "Search":
-				$result = GroupsController::Search();
-			break;
+			case "GetGroupData": 		$result = GroupsController::GetGroupData();		break;
+			case "GetRootGroupData": 	$result = GroupsController::GetRootGroupData();	break;
+			case "UpdateData":			$result = GroupsController::UpdateData();		break;
+			case "AddSubGroup":			$result = GroupsController::AddSubGroup();		break;
+			case "Delete":				$result = GroupsController::DeleteGroup();		break;
+			case "Move":				$result = GroupsController::MoveGroup();		break;
+			case "Rename":				$result = GroupsController::RenameGroup();		break;
+			case "Search":				$result = GroupsController::Search();			break;
 			default: 		 
 				$result = new ServiceResult(false, null, "Unsupported user service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD); 
 			break;

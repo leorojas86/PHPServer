@@ -1,36 +1,28 @@
 <?php 
+	require_once "utils/php/UtilsConstants.php"; 
+	require_once "utils/php/ServiceResult.php";
+
 	class ImageUploadManager
 	{
-		public static function UploadFile()
+		public static function UploadFile($fileName, $destinationFolder)
 		{
-			$target_dir 	= "uploads/";
-			$target_file 	= $target_dir . basename($_FILES["fileToUpload"]["name"]);
+			$target_file 	= $destinationFolder . "/" . basename($_FILES[$fileName]["name"]);
 			$fileType 		= pathinfo($target_file, PATHINFO_EXTENSION);
 
-			error_log("file type = $fileType");
-
-			// Check if file already exists
-			if(file_exists($target_file)) 
+			if(!file_exists($target_file))//Check if file already exists
 			{
-			    echo "Sorry, file already exists.";
-			    return new ServiceResult(false, null, "Error executing Mysql query", Constants::MYSQL_ERROR_CODE);
+				if($_FILES[$fileName]["size"] < UtilsConstants::MAX_UPLOAD_FILE_SIZE)//Check file size
+				{
+					if(move_uploaded_file($_FILES[$fileName]["tmp_name"], $target_file)) 
+			        	return new ServiceResult(true);
+			    	else 
+			        	return new ServiceResult(false, null, "Unknown error occurred uploading file", UtilsConstants::FILE_SIZE_IS_TO_LARGE_ERROR_CODE);
+				}
+				else
+					return new ServiceResult(false, null, "File size is too large", UtilsConstants::FILE_SIZE_IS_TO_LARGE_ERROR_CODE);
 			}
-
-			// Check file size
-			if($_FILES["fileToUpload"]["size"] > 500000) 
-			{
-			    echo "Sorry, your file is too large.";
-			    $uploadOk = 0;
-			}
-
-			    if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
-			    {
-			        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-			    } 
-			    else 
-			    {
-			        echo "Sorry, there was an error uploading your file.";
-			    }
+			else
+				return new ServiceResult(false, null, "File already exists", UtilsConstants::FILE_ALREADY_EXIST_ERROR_CODE);
 		}
 	} 
 ?>

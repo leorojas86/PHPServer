@@ -1,6 +1,4 @@
-<?php 
-	require_once "utils/php/UtilsConstants.php";
-
+<?php
 	class User
 	{
 		public static function Register($email, $password, $name)

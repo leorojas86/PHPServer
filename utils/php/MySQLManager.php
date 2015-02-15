@@ -1,4 +1,5 @@
-<?php 
+<?php
+	require_once "utils/php/UtilsConstants.php"; 
 	require_once "utils/php/ServiceResult.php";
 
 	class MySQLManager
@@ -12,7 +13,7 @@
 			if(MySQLManager::$_mysqli->connect_errno)
 			{
     			error_log("Failed to connect to MySQL error MySQLManager::$_mysqli->connect_errno, connect error 'MySQLManager::$_mysqli->connect_error'");
-    			return new ServiceResult(false, null, "Failed to connect to MySQL", Constants::MYSQL_ERROR_CODE);
+    			return new ServiceResult(false, null, "Failed to connect to MySQL", UtilsConstants::MYSQL_ERROR_CODE);
 			}
 			else
 				return MySQLManager::Execute("use $db");
@@ -30,7 +31,7 @@
 				{
 					$error = MySQLManager::$_mysqli->error;
 			    	error_log("Error executing query '$query', error '$error'");
-			    	return new ServiceResult(false, null, "Error executing Mysql query", Constants::MYSQL_ERROR_CODE);
+			    	return new ServiceResult(false, null, "Error executing Mysql query", UtilsConstants::MYSQL_ERROR_CODE);
 				}
 			}
 			else
@@ -106,7 +107,7 @@
 				else
 				{
 					error_log("Update query didn't update any row -> $sql");
-					return new ServiceResult(false, null, "Update query didn't update any row", Constants::MYSQL_ERROR_CODE);
+					return new ServiceResult(false, null, "Update query didn't update any row", UtilsConstants::MYSQL_ERROR_CODE);
 				}
 			}
 			
@@ -150,7 +151,7 @@
 				else
 				{
 					error_log("Delete query didn't delete any row -> $sql");
-					return new ServiceResult(false, null, "Delete query didn't delete any row", Constants::MYSQL_ERROR_CODE);
+					return new ServiceResult(false, null, "Delete query didn't delete any row", UtilsConstants::MYSQL_ERROR_CODE);
 				}
 			}
 			
