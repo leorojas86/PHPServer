@@ -7,5 +7,6 @@
     "back_button_text"		: "Back",
     "right_click_tooltip"   : "Right click to see options",
     "update_button_text"	: "Update",
-    "search_button_text"	: "Search"
+    "search_button_text"	: "Search",
+    "error_page_text"		: "Ups! We apologize, something went wrong..., please try again later."
 }
