@@ -1,5 +1,5 @@
 <?php 
-	require_once "inventory_app/model/Constants.php";
+	require_once "utils/php/UtilsConstants.php";
 
 	class User
 	{
@@ -41,7 +41,7 @@
 					return new ServiceResult(true, $result->data);
 				}
 		
-				return new ServiceResult(false, null, "User name or password incorrect", Constants::USER_NAME_OR_PASSWORD_INCORRECT);
+				return new ServiceResult(false, null, "User name or password incorrect", UtilsConstants::USER_NAME_OR_PASSWORD_INCORRECT);
 			}
 			
 			return $result;

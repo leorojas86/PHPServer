@@ -16,7 +16,7 @@
 			{
 				case "User":  $result = UsersController::Service($method);  break;
 				case "Group": $result = GroupsController::Service($method); break;
-				default:      $result = new ServiceResult(false, null, "Unknown service '$service'", Constants::MYSQL_ERROR_CODE); break;
+				default:      $result = new ServiceResult(false, null, "Unknown service '$service'", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE); break;
 			}
 		}
 			

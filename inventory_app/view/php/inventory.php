@@ -182,7 +182,7 @@
 
 			function loadAjaxGroup(groupId)
 			{
-				var params = "service=Group&method=GetGroupData&id=" + groupId + "&cuttingGroupId=" + _cuttingGroupId;
+				var params = "service=Group&method=GetGroupData&id=" + groupId;
 				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onGroupContainerAjaxCallback, params);
 			}
 
@@ -194,7 +194,7 @@
 
 					if(result.success)
 					{
-						_currentGroupData = result.data.group_data;
+						_currentGroupData = result.data;
 						groupRenderer.render(_currentGroupData);
 					}
 				}

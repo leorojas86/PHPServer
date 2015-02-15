@@ -98,7 +98,7 @@
 
 		private static function AddRootGroupToUser($userId)
 		{
-			return Group::AddSubGroup('RootGroup', null, $userId, Constants::DEFAULT_GROUP_TYPE);
+			return Group::AddSubGroup('RootGroup', null, $userId, UtilsConstants::DEFAULT_GROUP_TYPE);
 		}
 
 		public static function AddSubGroup($name, $parentGroupId, $userId, $type)

@@ -34,7 +34,7 @@ class GroupsController
 				$result = GroupsController::Search();
 			break;
 			default: 		 
-				$result = new ServiceResult(false, null, "Unsupported user service method '$method'", Constants::UNSUPPORTED_SERVICE_METHOD); 
+				$result = new ServiceResult(false, null, "Unsupported user service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD); 
 			break;
 		}
 
@@ -78,8 +78,8 @@ class GroupsController
 
 		if($rootGroupResult->success)
 		{
-			$groupId         = $rootGroupResult->data["id"];
-			return GroupsController::GetGroupDataInternal($groupId);
+			$groupId = $rootGroupResult->data["id"];
+			return Group::GetGroup($groupId);
 	 	}
 
 	 	return $rootGroupResult;
@@ -87,84 +87,9 @@ class GroupsController
 
 	private static function GetGroupData()
 	{
-		$groupId 		= $_POST["id"];
-		$cuttingGroupId = $_POST["cuttingGroupId"];
+		$groupId = $_POST["id"];
 
-		return GroupsController::GetGroupDataInternal($groupId, $cuttingGroupId);
-	}
-
-	private static function GetGroupDataInternal($groupId, $cuttingGroupId = null)
-	{
-		$result = Group::GetGroup($groupId);
-
-		if($result->success)
-		{
-			$groupData     = $result->data;
-			$groupPath     = $groupData["path"];
-			$parentGroupId = $groupData["parent_group_id"];
-			$subGroupType  = $groupData["type"];
-			$subGroups 	   = $groupData["sub_groups"];
-
-			$groupAjax = "<div id='folders_area' align='center'>";
-			
-				$groupPath  = str_replace("RootGroup/", "Principal/", $groupPath);
-
-				if($parentGroupId != 0)
-					$groupAjax .= "<p>$groupPath <button id='back_button' type='button' onclick='onBackButtonClick($parentGroupId)'>Atras</button> </p>";
-				else
-					$groupAjax .= "<p>$groupPath</p>";
-
-				if($subGroupType == Constants::DEFAULT_GROUP_TYPE)
-				{
-					$groupAjax .= "<div id='folders_scroll_panel' oncontextmenu='showContextMenu(event); return false;' align='center' style='overflow:scroll; width:600px; height:400px; border:1px solid gray;' title='Haga click derecho para ver opciones'>";
-
-					foreach($subGroups as $subGroup)
-		    		{
-		    			$subGroupName = $subGroup["name"];
-		    			$subGroupId	  = $subGroup["id"];
-		    			$subGroupType = $subGroup["type"];
-
-		    			if($subGroupType == Constants::DEFAULT_GROUP_TYPE)
-		    				$icon = "view/images/Folder.png";
-		    			else
-		    				$icon = "view/images/File.png";
-
-		    			$groupAjax .= "<div id='folder_$subGroupId' style='width:100px; height:120px; float: left;'>
-											<img id='folder_image_$subGroupId' src='$icon' onclick='onSubGroupClick($subGroupId);' style='cursor:pointer; cursor:hand; width:100px; height:88px;'/>
-											<label id='folder_label_$subGroupId' > $subGroupName </label>
-									   </div>";
-		    		}
-
-		    		$groupAjax .= "</div>";
-
-					if($cuttingGroupId != "null" && $cuttingGroupId != null)
-					{
-						$result = GroupsController::CanPasteGroup($cuttingGroupId, $subGroups, $groupId);
-
-						if($result->success)
-							$groupData["can_paste"] = $result->data;
-						else
-							return $result;
-					}
-				}
-				else
-				{
-					$data 		= $groupData["data"];
-					$groupAjax .= "<p>Data 
-										<input type='text' id='group_data' value = '$data'>
-										<button type='button' onclick='onUpdateGroupDataClick($groupId)'>Update</button>
-								   </p>";
-				}
-
-			$groupAjax .= "<input type='text' id='search_input' value = ''>
-						   <button type='button' onclick='onUpdateGroupDataClick($groupId)'>Search</button>";
-
-    		$groupAjax .= "</div>";
-
-			return new ServiceResult(true, array("group_ajax" =>$groupAjax, "group_data" => $groupData));
-		}
-
-		return $result;
+		return Group::GetGroup($groupId);
 	}
 
 	private static function CanPasteGroup($cuttingGroupId, $subGroups, $groupId)
