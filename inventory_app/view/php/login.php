@@ -6,8 +6,21 @@
 		<link rel="stylesheet" href="inventory_app/view/css/main_page.css">
 		<script src="utils/js/request_utils.js" 						type="text/javascript" ></script>
 		<script src="utils/js/url_utils.js"     						type="text/javascript" ></script>
+		<script src="utils/js/localization_manager.js" 					type="text/javascript" ></script>
 		<script src="inventory_app/view/js/inventory_app_constants.js" 	type="text/javascript" ></script>
+		<script src="inventory_app/view/js/login_renderer.js" 			type="text/javascript" ></script>
 		<script type="text/javascript">
+
+			function onPageLoaded() 
+		    {
+		    	LocManager.getInstance().loadLocalizationTable(InventoryAppConstants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded);
+			}
+
+			function onLocalizationLoaded(sender)
+			{
+				var loginRenderer = new LoginRenderer();
+				loginRenderer.render();
+			}
 			
 			function onLoginButtonClick()
 			{
@@ -22,8 +35,6 @@
 			{
 				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
 				{
-					alert("result '" + xmlhttp.responseText + "'");
-
 					var result = JSON.parse(xmlhttp.responseText);
 
 					if(result.success)
@@ -42,15 +53,6 @@
 
 		</script>
 	</head>
-	<body>
-		<p>User Email</p>
-		<input type='text' id='user_email'    value = 'leo'> <br/><br/>
-	  	<p>User Password</p>
-	  	<input type='text' id='user_password' value = 'leo'> <br/><br/>
-	  	<button type='button' onclick='onLoginButtonClick();'>Login</button>
-	  	<br>
-	  	<br>
-	  	<br>
-	  	<button type='button' onclick='onRegisterButtonClick();'>Register</button>
+	<body id="body" onload="onPageLoaded();">
 	</body>
 </html>

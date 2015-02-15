@@ -6,8 +6,21 @@
 		<link rel="stylesheet" href="inventory_app/view/css/main_page.css">
 		<script src="utils/js/request_utils.js" 						type="text/javascript" ></script>
 		<script src="utils/js/url_utils.js"     						type="text/javascript" ></script>
+		<script src="utils/js/localization_manager.js" 					type="text/javascript" ></script>
 		<script src="inventory_app/view/js/inventory_app_constants.js" 	type="text/javascript" ></script>
+		<script src="inventory_app/view/js/register_renderer.js" 		type="text/javascript" ></script>
 		<script type="text/javascript">
+
+			function onPageLoaded() 
+		    {
+		    	LocManager.getInstance().loadLocalizationTable(InventoryAppConstants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded);
+			}
+
+			function onLocalizationLoaded(sender)
+			{
+				var registerRenderer = new RegisterRenderer();
+				registerRenderer.render();
+			}
 
 			function onRegisterButtonClick()
 			{
@@ -35,13 +48,6 @@
 
 		</script>
 	</head>
-	<body >
-		<p>User Name</p>
-	  	<input type='text' id='user_name'     value = 'leo'>
-	  	<p>User Email</p>
-	  	<input type='text' id='user_email'    value = 'leo'> <br/><br/>
-	  	<p>User Password</p>
-	  	<input type='text' id='user_password' value = 'leo'> <br/><br/>
-	  	<button type='button' onclick='onRegisterButtonClick();'>Register</button> 
+	<body id='body' onload="onPageLoaded();">
 	</body>
 </html>
