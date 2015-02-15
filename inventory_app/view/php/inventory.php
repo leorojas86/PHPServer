@@ -91,7 +91,7 @@
 		    			pasteGroup();
 		    		break;
 		    		case InventoryAppConstants.MENU_ITEM_RENAME:
-		    			RenameFolder(_folderId);
+		    			renameGroup(_folderId);
 		    		break;
 		    		case InventoryAppConstants.MENU_ITEM_CUT:
 		    			_cuttingGroupId = _folderId;
@@ -122,14 +122,14 @@
 					addSubGroup(itemName, itemId);
 		    }
 
-		    function RenameFolder(folderId)
+		    function renameGroup(folderId)
 		    {
-		    	var folderName = prompt("Escriba el nuevo nombre para el folder", "");
+		    	var typeNewFolderName = LocManager.getInstance().getLocalizedString("type_new_name");
+		    	var folderName 		  = prompt(typeNewFolderName, "");
 
 				if(folderName != null && folderName != "") 
 				{
 					var params = "service=Group&method=Rename&id=" + folderId + "&name=" + folderName;
-
 					RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onRenameCallback, params);
 				}
 		    }
