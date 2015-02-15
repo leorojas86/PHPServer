@@ -29,7 +29,7 @@ LocalizationManagerClass.prototype.loadLocalizationTable = function(localization
 		console.log("Loading localization table");
 		this.onLocalizationTableLoaded = onLocalizationTableLoaded;
 		var context 				   = this;
-		RequestUtils.getInstance().request(localizationTableURL, "POST", function(xmlhttp) { context.onLoadLocalizationTableCallback(xmlhttp) });
+		RequestUtils.getInstance().request(localizationTableURL, "GET", function(xmlhttp) { context.onLoadLocalizationTableCallback(xmlhttp) });
 	}
 	else
 	{
