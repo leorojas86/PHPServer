@@ -6,7 +6,8 @@
 		<link rel="stylesheet" href="inventory_app/view/css/main_page.css">
 		<script src="utils/js/request_utils.js" 	 						type="text/javascript" ></script>
 		<script src="utils/js/context_menu_utils.js" 						type="text/javascript" ></script>
-		<script src="inventory_app/view/js/constants.js" 					type="text/javascript" ></script>
+		<script src="utils/js/localization_manager.js" 						type="text/javascript" ></script>
+		<script src="inventory_app/view/js/inventory_app_constants.js" 		type="text/javascript" ></script>
 		<script src="inventory_app/view/js/inventory_group_renderer.js" 	type="text/javascript" ></script>
 		<script type="text/javascript">
 
@@ -17,7 +18,12 @@
 
 			function onPageLoaded() 
 		    {
-    			document.onkeyup  = onKeyUp;
+		    	LocManager.getInstance().loadLocalizationTable(InventoryAppConstants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded);
+			}
+
+			function onLocalizationLoaded(sender)
+			{
+				document.onkeyup  = onKeyUp;
     			var groupContaner = document.getElementById('group_container');
     			var params 		  = "service=Group&method=GetRootGroupData";
 
@@ -79,11 +85,7 @@
 		    			AddItem(_folderId);
 		    		break;
 		    		case InventoryAppConstants.MENU_ITEM_ADD_FOLDER:
-			    		var folderName       = prompt("Escriba el nombre del nuevo folder", "");
-			    		var defaultGroupType = 0;
-
-						if(folderName != null && folderName != "") 
-						    addSubGroup(folderName, defaultGroupType);
+		    			AddFolder();
 		    		break;
 		    		case InventoryAppConstants.MENU_ITEM_PASTE:
 		    			pasteGroup();
@@ -100,9 +102,20 @@
 		    	}
 		    }
 
+		    function AddFolder()
+		    {
+		    	var typeFolderNameText = LocManager.getInstance().getLocalizedString("type_new_folder_name");
+	    		var folderName         = prompt(typeFolderNameText, "");
+	    		var defaultGroupType   = 0;
+
+				if(folderName != null && folderName != "") 
+				    addSubGroup(folderName, defaultGroupType);
+		    }
+
 		    function AddItem(folderId)
 		    {
-		    	var itemName = prompt("Escriba el nuevo nombre para el item", "");
+		    	var typeNewItemNameText = LocManager.getInstance().getLocalizedString("type_new_item_name");
+		    	var itemName 			= prompt(typeNewItemNameText, "");
 
 				if(itemName != null && itemName != "") 
 				{
