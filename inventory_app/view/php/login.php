@@ -42,6 +42,8 @@
 						var host = URLUtils.getInstance().getHostName();
 						URLUtils.getInstance().redirect(host + "?page=Home");
 					}
+					else
+						alert(xmlhttp.responseText);
 				}
 			}
 
