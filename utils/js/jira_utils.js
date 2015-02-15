@@ -58,7 +58,7 @@ JiraUtilsClass.prototype.replaceJiraTagsAsyncronous = function(plainText, versio
 		onAllTagsReplaced(plainText);
 		this.checkForQueue();
 	}
-}
+};
 
 JiraUtilsClass.prototype.checkForQueue = function()
 {
@@ -70,7 +70,7 @@ JiraUtilsClass.prototype.checkForQueue = function()
 
 		this.replaceJiraTagsAsyncronous(requestInfo.text, requestInfo.version, requestInfo.callback);
 	}
-}
+};
 
 JiraUtilsClass.prototype.getNextJiraTag = function(plainText)
 {
@@ -85,7 +85,7 @@ JiraUtilsClass.prototype.getNextJiraTag = function(plainText)
 	}
 
 	return null;
-}
+};
 
 JiraUtilsClass.prototype.onRequestIssuesInfoResponse = function(xmlhttp, plainText, onAllTagsReplaced)
 {
@@ -116,4 +116,4 @@ JiraUtilsClass.prototype.onRequestIssuesInfoResponse = function(xmlhttp, plainTe
 			this.checkForQueue();
 		}
 	}
-}
+};

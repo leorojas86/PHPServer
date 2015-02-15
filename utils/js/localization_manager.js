@@ -24,9 +24,15 @@ function LocalizationManagerClass()
 
 LocalizationManagerClass.prototype.loadLocalizationTable = function(localizationTableURL, onLocalizationTableLoaded)
 {
-	this.onLocalizationTableLoaded = onLocalizationTableLoaded;
-	var context 				   = this;
-	RequestUtils.getInstance().request(localizationTableURL, "POST", function(xmlhttp) { context.onLoadLocalizationTableCallback(xmlhttp) });
+	if(this.localizationTable == null)
+	{
+		console.log("Loading localization table");
+		this.onLocalizationTableLoaded = onLocalizationTableLoaded;
+		var context 				   = this;
+		RequestUtils.getInstance().request(localizationTableURL, "POST", function(xmlhttp) { context.onLoadLocalizationTableCallback(xmlhttp) });
+	}
+	else
+		console.log("localization table was already loaded");
 };
 
 LocalizationManagerClass.prototype.onLoadLocalizationTableCallback = function(xmlhttp)
@@ -36,10 +42,10 @@ LocalizationManagerClass.prototype.onLoadLocalizationTableCallback = function(xm
 		this.localizationTable = JSON.parse(xmlhttp.responseText);
 		this.onLocalizationTableLoaded(this);
 	}
-}
+};
 
 LocalizationManagerClass.prototype.getLocalizedString = function(key)
 {
 	return this.localizationTable[key];
-}
+};
 

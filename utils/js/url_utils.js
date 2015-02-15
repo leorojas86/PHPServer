@@ -35,12 +35,12 @@ URLUtilsClass.prototype.getHostName = function()
 URLUtilsClass.prototype.redirect = function(url)
 {
 	window.location = url;
-}
+};
 
 URLUtilsClass.prototype.reloadCurrentURL = function()
 {
 	window.location.reload();
-}
+};
 
 URLUtilsClass.prototype.getURLParam = function(paramName)
 {
@@ -50,10 +50,10 @@ URLUtilsClass.prototype.getURLParam = function(paramName)
 		value = value.split("&")[0];
 
 	return value;
-}
+};
 
 URLUtilsClass.prototype.openInNewTab = function(url)
 {
 	var win = window.open(url, '_blank');
   	win.focus();
-}
+};

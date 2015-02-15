@@ -37,7 +37,7 @@ ContextMenuUtilsClass.prototype.hideContextMenu = function()
 		this.element.innerHTML = "";
 		this.element 		   = null;
 	}
-}
+};
 
 ContextMenuUtilsClass.prototype.showContextMenu = function(element, position, options, onOptionSelectecCallback)
 {
