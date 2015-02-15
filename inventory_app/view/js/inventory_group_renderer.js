@@ -48,6 +48,9 @@ InventoryGroupRenderer.prototype.render = function(groupData)
 		}
 
 		groupAjax += "</div>";
+
+		groupAjax += "<input type='text' id='search_input' value = ''>"+
+				   	 "<button type='button' onclick='onSearchButtonClick();'>" + searchButtonText + "</button>";
 	}
 	else
 	{
@@ -56,9 +59,6 @@ InventoryGroupRenderer.prototype.render = function(groupData)
 							"<button type='button' onclick='onUpdateGroupDataClick(" + groupId + ");'>" + updateButtonText + "</button>"+
 					   "</p>";
 	}
-
-	groupAjax += "<input type='text' id='search_input' value = ''>"+
-				   "<button type='button' onclick='onSearchButtonClick();'>" + searchButtonText + "</button>";
 
 	groupAjax += "</div>";
 
