@@ -23,6 +23,25 @@ function onUploadCompleted(xmlhttp)
 	alert(xmlhttp.responseText);
 }
 
+function onSelectedFileChange()
+{
+	var fileInput = document.getElementById('fileToUpload');
+	var ext       = fileInput.value.match(/\.([^\.]+)$/)[1];
+
+    switch(ext)
+    {
+        case 'jpg':
+        case 'bmp':
+        case 'png':
+        case 'tif':
+            console.log('file ok');
+        break;
+        default:
+            alert('Selected file is not a valid image');
+            fileInput.value='';
+    }
+}
+
 InventoryGroupRenderer.prototype.render = function(groupData)
 {
 	var backButtonTooltip = LocManager.getInstance().getLocalizedString("back_button_tooltip");
@@ -75,11 +94,11 @@ InventoryGroupRenderer.prototype.render = function(groupData)
 							"<button type='button' onclick='onUpdateGroupDataClick(" + groupId + ");'>" + updateButtonText + "</button>" +
 					   "</p>";
 
-		groupAjax +=	" Select image to upload:" + 
+		groupAjax +=	"Select image to upload:" + 
 					 	"<input type='hidden' name='service' value='File'>" + 
 					 	"<input type='hidden' name='method'  value='Upload'>" +
-						"<input type='file' name='fileToUpload' id='fileToUpload'>" +
-						"<input type='button' onclick='uploadFile()' value='Upload Image' >" + 
+						"<input type='file' name='fileToUpload' id='fileToUpload' onchange='onSelectedFileChange();'>" +
+						"<input type='button' onclick='uploadFile();' value='Upload Image' >" + 
 						"<div id='progressNumber'></div>";
 	}
 
