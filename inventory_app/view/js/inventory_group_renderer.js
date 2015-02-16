@@ -46,7 +46,8 @@ function onSelectedFileChange()
         break;
         default:
             alert('Selected file is not a valid image');
-            fileInput.value='';
+            fileInput.value	   = '';
+            imageContainer.src = '';
     }
 }
 
