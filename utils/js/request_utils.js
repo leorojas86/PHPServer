@@ -60,14 +60,33 @@ RequestUtilsClass.prototype.request = function(url, method, callback, params)
 	{
 		case "POST":
 
-			xmlhttp.open(method, url, true);
+			if((typeof params) == "string")
+			{
+				xmlhttp.open(method, url, true);
 
-			//Send the proper header information along with the request
-			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			xmlhttp.setRequestHeader("Content-length", params.length);
-			xmlhttp.setRequestHeader("Connection", "close");
+				//Send the proper header information along with the request
+				xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xmlhttp.setRequestHeader("Content-length", params.length);
+				xmlhttp.setRequestHeader("Connection", "close");
 
-			xmlhttp.send(params);
+				xmlhttp.send(params);
+			}
+			else
+			{
+				console.log((typeof params));
+
+				var fd = new FormData();
+
+			    for(var id in params)
+			    	fd.append(id, params[id]);
+
+			    xmlhttp.addEventListener("progress", uploadProgress, false);
+			    xmlhttp.addEventListener("load", uploadComplete, false);
+			    xmlhttp.addEventListener("error", uploadFailed, false);
+			    xmlhttp.addEventListener("abort", uploadCanceled, false);
+			    xmlhttp.open("POST", url);
+			    xmlhttp.send(fd);
+			}
 			
 		break;
 		case "GET":
@@ -83,36 +102,21 @@ RequestUtilsClass.prototype.request = function(url, method, callback, params)
 			alert("Unsupported request method '" + method + "'");
 		break;
 	}
+
+	return xmlhttp;
 };
 
-//http://www.matlus.com/html5-file-upload-with-progress/
-RequestUtilsClass.prototype.upload = function(apiURL, params) 
+function uploadProgress(evt) 
 {
-	var fd = new FormData();
-
-    for(var id in params)
-    {
-    	console.log("adding param " + id);
-    	fd.append(id, params[id]);
-    }
-
-    var xhr = new XMLHttpRequest();
-    xhr.upload.addEventListener("progress", uploadProgress, false);
-    xhr.addEventListener("load", uploadComplete, false);
-    xhr.addEventListener("error", uploadFailed, false);
-    xhr.addEventListener("abort", uploadCanceled, false);
-    xhr.open("POST", apiURL);
-    xhr.send(fd);
-}
-
-function uploadProgress(evt) {
-if (evt.lengthComputable) {
-  var percentComplete = Math.round(evt.loaded * 100 / evt.total);
-  document.getElementById('progressNumber').innerHTML = percentComplete.toString() + '%';
-}
-else {
-  document.getElementById('progressNumber').innerHTML = 'unable to compute';
-}
+	if(evt.lengthComputable) 
+	{
+	  var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+	  document.getElementById('progressNumber').innerHTML = percentComplete.toString() + '%';
+	}
+	else 
+	{
+	  document.getElementById('progressNumber').innerHTML = 'unable to compute';
+	}
 }
 
 function uploadComplete(evt) {

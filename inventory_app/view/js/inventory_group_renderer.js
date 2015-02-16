@@ -10,7 +10,12 @@ function uploadFile()
 	params["method"]   	 	 = "Upload";
 	params["fileToUpload"]   = file;
 
-	RequestUtils.getInstance().upload(InventoryAppConstants.API_URL, params);
+	RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onUploadCompleted, params);
+}
+
+function onUploadCompleted()
+{
+	console.log("onUploadCompleted");
 }
 
 InventoryGroupRenderer.prototype.render = function(groupData)
