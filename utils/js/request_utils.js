@@ -16,9 +16,26 @@ var RequestUtils =
 	}
 )();
 
+//https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest
 function RequestUtilsClass()
 {
 }
+
+/*
+
+oReq.addEventListener("progress", updateProgress, false);
+
+// progress on transfers from the server to the client (downloads)
+function updateProgress (oEvent) {
+  if (oEvent.lengthComputable) {
+    var percentComplete = oEvent.loaded / oEvent.total;
+    // ...
+  } else {
+    // Unable to compute progress information since the total size is unknown
+  }
+}
+*/
+
 
 RequestUtilsClass.prototype.ajax = function(url, elementId, params)
 {
@@ -67,6 +84,49 @@ RequestUtilsClass.prototype.request = function(url, method, callback, params)
 		break;
 	}
 };
+
+//http://www.matlus.com/html5-file-upload-with-progress/
+RequestUtilsClass.prototype.upload = function(apiURL, params) 
+{
+	var fd = new FormData();
+
+    for(var id in params)
+    {
+    	console.log("adding param " + id);
+    	fd.append(id, params[id]);
+    }
+
+    var xhr = new XMLHttpRequest();
+    xhr.upload.addEventListener("progress", uploadProgress, false);
+    xhr.addEventListener("load", uploadComplete, false);
+    xhr.addEventListener("error", uploadFailed, false);
+    xhr.addEventListener("abort", uploadCanceled, false);
+    xhr.open("POST", apiURL);
+    xhr.send(fd);
+}
+
+function uploadProgress(evt) {
+if (evt.lengthComputable) {
+  var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+  document.getElementById('progressNumber').innerHTML = percentComplete.toString() + '%';
+}
+else {
+  document.getElementById('progressNumber').innerHTML = 'unable to compute';
+}
+}
+
+function uploadComplete(evt) {
+/* This event is raised when the server send back a response */
+alert(evt.target.responseText);
+}
+
+function uploadFailed(evt) {
+alert("There was an error attempting to upload the file.");
+}
+
+function uploadCanceled(evt) {
+alert("The upload has been canceled by the user or the browser dropped the connection.");
+}
 
 RequestUtilsClass.prototype.checkForValidResponse = function(xmlhttp)
 {

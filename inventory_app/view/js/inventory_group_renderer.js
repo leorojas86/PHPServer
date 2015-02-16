@@ -2,6 +2,17 @@ function InventoryGroupRenderer()
 {
 }
 
+function uploadFile()
+{
+	var file   				 = document.getElementById('fileToUpload').files[0];
+	var params 				 = new Object();
+	params["service"]   	 = "File";
+	params["method"]   	 	 = "Upload";
+	params["fileToUpload"]   = file;
+
+	RequestUtils.getInstance().upload(InventoryAppConstants.API_URL, params);
+}
+
 InventoryGroupRenderer.prototype.render = function(groupData)
 {
 	var backButtonTooltip = LocManager.getInstance().getLocalizedString("back_button_tooltip");
@@ -54,14 +65,12 @@ InventoryGroupRenderer.prototype.render = function(groupData)
 							"<button type='button' onclick='onUpdateGroupDataClick(" + groupId + ");'>" + updateButtonText + "</button>" +
 					   "</p>";
 
-		var apiURL = InventoryAppConstants.API_URL;// + "?service=File&method=Upload";
-		groupAjax += "<form action='" + apiURL + "' method='post' enctype='multipart/form-data'>" +
-					 	" Select image to upload:" + 
+		groupAjax +=	" Select image to upload:" + 
 					 	"<input type='hidden' name='service' value='File'>" + 
 					 	"<input type='hidden' name='method'  value='Upload'>" +
 						"<input type='file' name='fileToUpload' id='fileToUpload'>" +
-						"<input type='submit' value='Upload Image' name='submit'>" +
-					 "</form>";
+						"<input type='button' onclick='uploadFile()' value='Upload Image' >" + 
+						"<div id='progressNumber'></div>";
 	}
 
 	groupAjax += "</div>";
