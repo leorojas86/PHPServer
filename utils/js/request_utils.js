@@ -16,26 +16,9 @@ var RequestUtils =
 	}
 )();
 
-//https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest
 function RequestUtilsClass()
 {
 }
-
-/*
-
-oReq.addEventListener("progress", updateProgress, false);
-
-// progress on transfers from the server to the client (downloads)
-function updateProgress (oEvent) {
-  if (oEvent.lengthComputable) {
-    var percentComplete = oEvent.loaded / oEvent.total;
-    // ...
-  } else {
-    // Unable to compute progress information since the total size is unknown
-  }
-}
-*/
-
 
 RequestUtilsClass.prototype.ajax = function(url, elementId, params)
 {
@@ -55,6 +38,7 @@ RequestUtilsClass.prototype.request = function(url, method, callback, params, on
 	params 				= params || "";//Default parameter = ""
 	var xmlhttp 		= new XMLHttpRequest();
 	xmlhttp.onload		= function() { callback(xmlhttp) };
+	xmlhttp.onerror		= function() { callback(xmlhttp) };
 	xmlhttp.onprogress 	= function(evt)
 	{
 		if(onProgress != null && evt.lengthComputable) 
@@ -78,8 +62,6 @@ RequestUtilsClass.prototype.request = function(url, method, callback, params, on
 			}
 			else
 			{
-				console.log((typeof params));
-
 				var fd = new FormData();
 
 			    for(var id in params)
