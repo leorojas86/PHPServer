@@ -10,12 +10,17 @@ function uploadFile()
 	params["method"]   	 	 = "Upload";
 	params["fileToUpload"]   = file;
 
-	RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onUploadCompleted, params);
+	RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onUploadCompleted, params, onProgress);
 }
 
-function onUploadCompleted()
+function onProgress(progress) 
 {
-	console.log("onUploadCompleted");
+	document.getElementById('progressNumber').innerHTML = (progress * 100).toString() + '%';
+}
+
+function onUploadCompleted(xmlhttp)
+{
+	alert(xmlhttp.responseText);
 }
 
 InventoryGroupRenderer.prototype.render = function(groupData)

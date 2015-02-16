@@ -50,11 +50,16 @@ RequestUtilsClass.prototype.ajaxCallbackFunction = function(elementId, xmlhttp)
 	  	document.getElementById(elementId).innerHTML = xmlhttp.responseText;
 };
 
-RequestUtilsClass.prototype.request = function(url, method, callback, params) 
+RequestUtilsClass.prototype.request = function(url, method, callback, params, onProgress) 
 {
-	params 					   = params || "";//Default parameter = ""
-	var xmlhttp 			   = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function() { callback(xmlhttp) };
+	params 				= params || "";//Default parameter = ""
+	var xmlhttp 		= new XMLHttpRequest();
+	xmlhttp.onload		= function() { callback(xmlhttp) };
+	xmlhttp.onprogress 	= function(evt)
+	{
+		if(onProgress != null && evt.lengthComputable) 
+		   onProgress(evt.loaded / evt.total);
+	};
 
 	switch(method)
 	{
@@ -80,10 +85,6 @@ RequestUtilsClass.prototype.request = function(url, method, callback, params)
 			    for(var id in params)
 			    	fd.append(id, params[id]);
 
-			    xmlhttp.addEventListener("progress", uploadProgress, false);
-			    xmlhttp.addEventListener("load", uploadComplete, false);
-			    xmlhttp.addEventListener("error", uploadFailed, false);
-			    xmlhttp.addEventListener("abort", uploadCanceled, false);
 			    xmlhttp.open("POST", url);
 			    xmlhttp.send(fd);
 			}
@@ -105,32 +106,6 @@ RequestUtilsClass.prototype.request = function(url, method, callback, params)
 
 	return xmlhttp;
 };
-
-function uploadProgress(evt) 
-{
-	if(evt.lengthComputable) 
-	{
-	  var percentComplete = Math.round(evt.loaded * 100 / evt.total);
-	  document.getElementById('progressNumber').innerHTML = percentComplete.toString() + '%';
-	}
-	else 
-	{
-	  document.getElementById('progressNumber').innerHTML = 'unable to compute';
-	}
-}
-
-function uploadComplete(evt) {
-/* This event is raised when the server send back a response */
-alert(evt.target.responseText);
-}
-
-function uploadFailed(evt) {
-alert("There was an error attempting to upload the file.");
-}
-
-function uploadCanceled(evt) {
-alert("The upload has been canceled by the user or the browser dropped the connection.");
-}
 
 RequestUtilsClass.prototype.checkForValidResponse = function(xmlhttp)
 {
