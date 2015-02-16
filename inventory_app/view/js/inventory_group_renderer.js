@@ -34,7 +34,15 @@ function onSelectedFileChange()
         case 'bmp':
         case 'png':
         case 'tif':
-            console.log('file ok');
+            var imageContainer = document.getElementById('imageContainer');
+            imageContainer.src = fileInput.files[0];
+            var reader   	   = new FileReader();
+	        reader.onload 	   = function(e) 
+	        {
+	        	imageContainer.src = e.target.result;
+	        }
+
+	        reader.readAsDataURL(fileInput.files[0]);
         break;
         default:
             alert('Selected file is not a valid image');
@@ -94,12 +102,13 @@ InventoryGroupRenderer.prototype.render = function(groupData)
 							"<button type='button' onclick='onUpdateGroupDataClick(" + groupId + ");'>" + updateButtonText + "</button>" +
 					   "</p>";
 
-		groupAjax +=	"Select image to upload:" + 
+		groupAjax +=	"Select an image to upload:" + 
 					 	"<input type='hidden' name='service' value='File'>" + 
 					 	"<input type='hidden' name='method'  value='Upload'>" +
-						"<input type='file' name='fileToUpload' id='fileToUpload' onchange='onSelectedFileChange();'>" +
+						"<input type='file'   name='fileToUpload' id='fileToUpload' onchange='onSelectedFileChange();'>" +
 						"<input type='button' onclick='uploadFile();' value='Upload Image' >" + 
-						"<div id='progressNumber'></div>";
+						"<div id='progressNumber'></div>" +
+						"<img id='imageContainer'></img>";
 	}
 
 	groupAjax += "</div>";
