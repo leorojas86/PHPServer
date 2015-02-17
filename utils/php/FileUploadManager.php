@@ -29,10 +29,12 @@
 		{
 			$file 	 = $destinationFolder . "/" . "test.jpg";
 			$img 	 = $_POST[$fileName];
-			$img 	 = str_replace('data:image/png;base64,', '', $img);
+			/*$img 	 = str_replace('data:image/png;base64,', '', $img);
 			$img 	 = str_replace(' ', '+', $img);
 			$data 	 = base64_decode($img);
-			$success = file_put_contents($file, $data);
+			$success = file_put_contents($file, $data);*/
+
+			file_put_contents($file, base64_decode(explode(",", $img)[1]));
 
 			return new ServiceResult(true);
 		}

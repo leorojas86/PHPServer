@@ -6,7 +6,7 @@ function uploadFile()
 {
 	var file   				 = document.getElementById('fileToUpload').files[0];
 	var imageContainer 		 = document.getElementById('imageContainer');
-	var imageData 			 = imageContainer.toDataURL("image/png");
+	var imageData 			 = imageContainer.toDataURL("image/jpeg");
 	var params 				 = new Object();
 	params["service"]   	 = "File";
 	params["method"]   	 	 = "Upload";
