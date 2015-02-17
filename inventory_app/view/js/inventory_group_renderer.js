@@ -5,10 +5,12 @@ function InventoryGroupRenderer()
 function uploadFile()
 {
 	var file   				 = document.getElementById('fileToUpload').files[0];
+	var imageContainer 		 = document.getElementById('imageContainer');
+	var imageData 			 = imageContainer.toDataURL("image/jpeg");
 	var params 				 = new Object();
 	params["service"]   	 = "File";
 	params["method"]   	 	 = "Upload";
-	params["fileToUpload"]   = file;
+	params["fileToUpload"]   = imageData;
 
 	RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onUploadCompleted, params, onProgress);
 }
@@ -39,9 +41,20 @@ function onSelectedFileChange()
             var reader   	   = new FileReader();
 	        reader.onload 	   = function(e) 
 	        {	
-			    var img    = new Image();
-			    img.onload = function() { imageContainer.getContext("2d").drawImage(img, 0, 0, 500, 500); };
-			    img.src    = e.target.result;
+			    var img = new Image();
+			    
+			    img.onload = function() 
+			    { 
+			    	var fitScale  = MathUtils.getInstance().getFitScale({ "x":img.width, "y":img.height }, { "x":imageContainer.width, "y":imageContainer.height }, "FitIn");
+			    	var fitWidth  = img.width  * fitScale;
+			    	var fitHeight = img.height * fitScale;
+			    	var fitX      = (imageContainer.width  - fitWidth)  / 2;
+			    	var fitY      = (imageContainer.height - fitHeight) / 2;
+
+			    	imageContainer.getContext("2d").clearRect(0,0, imageContainer.width, imageContainer.height);
+			    	imageContainer.getContext("2d").drawImage(img, fitX, fitY, fitWidth, fitHeight); 
+			    };
+			    img.src = e.target.result;
 	        }
 
 	        reader.readAsDataURL(fileInput.files[0]);

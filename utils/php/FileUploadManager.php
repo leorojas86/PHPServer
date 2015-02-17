@@ -2,7 +2,7 @@
 	require_once "utils/php/UtilsConstants.php"; 
 	require_once "utils/php/ServiceResult.php";
 
-	class ImageUploadManager
+	class FileUploadManager
 	{
 		public static function UploadFile($fileName, $destinationFolder)
 		{
@@ -23,6 +23,18 @@
 			}
 			else
 				return new ServiceResult(false, null, "File already exists", UtilsConstants::FILE_ALREADY_EXIST_ERROR_CODE);
+		}
+
+		public static function UploadImageData($fileName, $destinationFolder)
+		{
+			$file 	 = $destinationFolder . "/" . "test.jpg";
+			$img 	 = $_POST[$fileName];
+			$img 	 = str_replace('data:image/png;base64,', '', $img);
+			$img 	 = str_replace(' ', '+', $img);
+			$data 	 = base64_decode($img);
+			$success = file_put_contents($file, $data);
+
+			return new ServiceResult(true);
 		}
 	} 
 ?>

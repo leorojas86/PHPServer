@@ -21,7 +21,8 @@ class FilesController
 
 	private static function Upload()
 	{
-		return ImageUploadManager::UploadFile("fileToUpload", "uploads");
+		//return FileUploadManager::UploadFile("fileToUpload", "uploads");
+		return FileUploadManager::UploadImageData("fileToUpload", "uploads");
 	}
 }
 
