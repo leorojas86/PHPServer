@@ -13,7 +13,7 @@ class UsersController
 			case "Login": 		$result = UsersController::Login();			break;
 			case "UpdateData": 	$result = UsersController::UpdateData();	break;
 			default: 		 
-				$result = new ServiceResult(false, null, "Unsupported user service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD); 
+				$result = new ServiceResult(false, null, "Unsupported user service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
 			break;
 		}
 
@@ -28,7 +28,7 @@ class UsersController
 		if($result->success)
 		{
 			if($result->data["exists"])
-				$result = new ServiceResult(false, null, "User with email '$email' already exists", UtilsConstants::USER_ALREADY_EXISTS); 
+				$result = new ServiceResult(false, null, "User with email '$email' already exists", UtilsConstants::USER_ALREADY_EXISTS_ERROR_CODE); 
 			else
 			{
 				$password = $_POST["password"];//TODO: send password securely
