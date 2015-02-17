@@ -38,8 +38,10 @@ function onSelectedFileChange()
             imageContainer.src = fileInput.files[0];
             var reader   	   = new FileReader();
 	        reader.onload 	   = function(e) 
-	        {
-	        	imageContainer.src = e.target.result;
+	        {	
+			    var img    = new Image();
+			    img.onload = function() { imageContainer.getContext("2d").drawImage(img, 0, 0, 500, 500); };
+			    img.src    = e.target.result;
 	        }
 
 	        reader.readAsDataURL(fileInput.files[0]);
@@ -109,7 +111,7 @@ InventoryGroupRenderer.prototype.render = function(groupData)
 						"<input type='file'   name='fileToUpload' id='fileToUpload' onchange='onSelectedFileChange();'>" +
 						"<input type='button' onclick='uploadFile();' value='Upload Image' >" + 
 						"<div id='progressNumber'></div>" +
-						"<img id='imageContainer'></img>";
+						"<canvas id='imageContainer' width='500' height='500'></canvas>";
 	}
 
 	groupAjax += "</div>";
