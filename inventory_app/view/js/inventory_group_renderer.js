@@ -6,11 +6,14 @@ function uploadFile()
 {
 	var file   				 = document.getElementById('fileToUpload').files[0];
 	var imageContainer 		 = document.getElementById('imageContainer');
-	var imageData 			 = imageContainer.toDataURL("image/jpeg");
+	var imageData 			 = imageContainer.toDataURL("image/png");
 	var params 				 = new Object();
 	params["service"]   	 = "File";
 	params["method"]   	 	 = "Upload";
 	params["fileToUpload"]   = imageData;
+
+	var test = document.getElementById("test");
+	test.src = imageData;
 
 	RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onUploadCompleted, params, onProgress);
 }
@@ -124,7 +127,8 @@ InventoryGroupRenderer.prototype.render = function(groupData)
 						"<input type='file'   name='fileToUpload' id='fileToUpload' onchange='onSelectedFileChange();'>" +
 						"<input type='button' onclick='uploadFile();' value='Upload Image' >" + 
 						"<div id='progressNumber'></div>" +
-						"<canvas id='imageContainer' width='500' height='500'></canvas>";
+						"<canvas id='imageContainer' width='500' height='500'></canvas>" +
+						"<img id='test'> </img>";
 	}
 
 	groupAjax += "</div>";
