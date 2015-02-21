@@ -32,6 +32,20 @@
 				  					"<button type='button' onclick='onLoginButtonClick();'>" + loginButtonText + "</button>" +
 				  					"<br><br><br>" +
 				  					"<button type='button' onclick='onRegisterButtonClick();'>" + registerButtonText + "</button>";
+
+				var userPassword     = document.getElementById('user_password');
+				userPassword.onkeyup = onKeyUp;
+			}
+
+			function onKeyUp(event)
+			{
+				switch(event.which) 
+				{
+				    case 13://enter
+				    	onLoginButtonClick();
+				    break;
+				    default: console.log("pressed key = " + event.which); break;
+				}
 			}
 			
 			function onLoginButtonClick()
