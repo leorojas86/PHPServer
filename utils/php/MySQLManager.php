@@ -62,6 +62,11 @@
 			return MySQLManager::$_mysqli->affected_rows;
 		}
 
+		public static function Escape($string)
+		{
+			return MySQLManager::$_mysqli->real_escape_string($string);
+		}
+
 		//Extension Methods
 		public static function ExecuteSelectRow($sql)
 		{
