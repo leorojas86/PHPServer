@@ -1,0 +1,8 @@
+- Upload and Display photos.
+- Add encription to login data.
+- Implement search.
+- Comments.
+- Modes (Publisity, Sell, Auction, Raffle).
+- FB Integration.
+- EULA.
+- ADs.
