@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  lang="en">
+<html lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title>Login</title>
@@ -7,6 +7,7 @@
 		<script src="utils/js/request_utils.js" 						type="text/javascript" ></script>
 		<script src="utils/js/url_utils.js"     						type="text/javascript" ></script>
 		<script src="utils/js/localization_manager.js" 					type="text/javascript" ></script>
+		<script src="utils/js/encription_utils.js" 						type="text/javascript" ></script>
 		<script src="inventory_app/view/js/inventory_app_constants.js" 	type="text/javascript" ></script>
 		<script type="text/javascript">
 
@@ -50,10 +51,12 @@
 			
 			function onLoginButtonClick()
 			{
-				var userEmail    = document.getElementById('user_email');	
+				alert(EncriptionUtils.getInstance().encript("Hello"));
+						
+				/*var userEmail    = document.getElementById('user_email');	
 				var userPassword = document.getElementById('user_password');	
 				var params 		 = "service=User&method=Login" + "&email=" + userEmail.value + "&password=" + userPassword.value;
-				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onLoginCallback, params);
+				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onLoginCallback, params);*/
 			}
 
 			function onLoginCallback(xmlhttp)

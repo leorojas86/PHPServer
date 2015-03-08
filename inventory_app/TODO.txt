@@ -1,5 +1,5 @@
 - Upload and Display photos.
-- Add encription to login data.
+- Add encription to login data and SSL.
 - Implement search.
 - Comments.
 - Modes (Publisity, Sell, Auction, Raffle).

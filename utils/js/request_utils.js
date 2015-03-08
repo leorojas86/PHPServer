@@ -35,15 +35,19 @@ RequestUtilsClass.prototype.ajaxCallbackFunction = function(elementId, xmlhttp)
 
 RequestUtilsClass.prototype.request = function(url, method, callback, params, onProgress) 
 {
-	params 				= params || "";//Default parameter = ""
-	var xmlhttp 		= new XMLHttpRequest();
-	xmlhttp.onload		= function() { callback(xmlhttp) };
-	xmlhttp.onerror		= function() { callback(xmlhttp) };
-	xmlhttp.onprogress 	= function(evt)
+	params 			= params || "";//Default parameter = ""
+	var xmlhttp 	= new XMLHttpRequest();
+	xmlhttp.onload	= function() { callback(xmlhttp) };
+	xmlhttp.onerror	= function() { callback(xmlhttp) };
+
+	if(onProgress != null)
 	{
-		if(onProgress != null && evt.lengthComputable) 
-		   onProgress(evt.loaded / evt.total);
-	};
+		xmlhttp.onprogress 	= function(evt)
+		{
+			if(evt.lengthComputable) 
+			   onProgress(evt.loaded / evt.total);
+		};
+	}
 
 	switch(method)
 	{
