@@ -1,5 +1,5 @@
 <?php 
-	require_once "inventory_app/model/Config.php";
+	require_once "inventory_app/service/model/Config.php";
 	require_once "utils/php/MySQLManager.php";
 	require_once "utils/php/SessionManager.php";
 

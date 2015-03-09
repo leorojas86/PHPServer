@@ -1,8 +1,8 @@
 <?php 
-	require_once "inventory_app/model/Environment.php";
-	require_once "inventory_app/controller/database/UsersController.php";
-	require_once "inventory_app/controller/database/GroupsController.php";
-	require_once "inventory_app/controller/files/FilesController.php";
+	require_once "inventory_app/service/model/Environment.php";
+	require_once "inventory_app/service/controller/database/UsersController.php";
+	require_once "inventory_app/service/controller/database/GroupsController.php";
+	require_once "inventory_app/service/controller/files/FilesController.php";
 
 	$result = Environment::Setup();
 

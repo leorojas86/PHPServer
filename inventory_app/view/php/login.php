@@ -51,12 +51,12 @@
 			
 			function onLoginButtonClick()
 			{
-				alert(EncriptionUtils.getInstance().encript("Hello"));
+				//alert(EncriptionUtils.getInstance().encript("Hello"));
 						
-				/*var userEmail    = document.getElementById('user_email');	
+				var userEmail    = document.getElementById('user_email');	
 				var userPassword = document.getElementById('user_password');	
 				var params 		 = "service=User&method=Login" + "&email=" + userEmail.value + "&password=" + userPassword.value;
-				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onLoginCallback, params);*/
+				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onLoginCallback, params);
 			}
 
 			function onLoginCallback(xmlhttp)
