@@ -101,7 +101,7 @@ InventoryGroupRenderer.prototype.render = function(groupData)
 			var subGroupName = subGroup.name;
 			var subGroupId	 = subGroup.id;
 			var subGroupType = subGroup.type;
-			var icon 		 = subGroupType == InventoryAppConstants.GROUP_ID_FOLDER ? "inventory_app/view/images/Folder.png" : "inventory_app/view/images/File.png";
+			var icon 		 = subGroupType == InventoryAppConstants.GROUP_ID_FOLDER ? "inventory/app/images/Folder.png" : "inventory/app/images/File.png";
 
 			groupAjax += "<div id='folder_" + subGroupId + "' style='width:100px; height:120px; float: left;'>"+
 								"<img id='folder_image_" + subGroupId + "' src='" + icon + "' onclick='onSubGroupClick(" + subGroupId + ");' style='cursor:pointer; cursor:hand; width:100px; height:88px;'/>"+

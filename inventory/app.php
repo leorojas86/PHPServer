@@ -1,8 +1,8 @@
 <?php 
-	require_once "inventory_app/service/model/Environment.php";
-	require_once "inventory_app/service/controller/database/UsersController.php";
-	require_once "inventory_app/service/controller/database/GroupsController.php";
-	require_once "inventory_app/service/controller/files/FilesController.php";
+	require_once "inventory/service/model/Environment.php";
+	require_once "inventory/service/controller/database/UsersController.php";
+	require_once "inventory/service/controller/database/GroupsController.php";
+	require_once "inventory/service/controller/files/FilesController.php";
 
 	$result = Environment::Setup();
 
@@ -32,12 +32,12 @@
 
 			switch($page)
 			{
-		  		case "Home":     Environment::DisplayPage("inventory_app/view/php/inventory.php", true); break;
-		  		case "Register": Environment::DisplayPage("inventory_app/view/php/register.php", false); break;
-		    	default: 	     Environment::DisplayPage("inventory_app/view/php/error.php", false);    break;
+		  		case "Home":     Environment::DisplayPage("inventory/app/php/inventory.php", true); break;
+		  		case "Register": Environment::DisplayPage("inventory/app/php/register.php", false); break;
+		    	default: 	     Environment::DisplayPage("inventory/app/php/error.php", false);    break;
 			}
 		}
 		else
-			Environment::DisplayPage("inventory_app/view/php/error.php", false);
+			Environment::DisplayPage("inventory/app/php/error.php", false);
 	}
 ?>

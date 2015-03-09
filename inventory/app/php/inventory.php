@@ -3,13 +3,13 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title>Inventory</title>
-		<link rel="stylesheet" href="inventory_app/view/css/main_page.css">
+		<link rel="stylesheet" href="inventory/app/css/main_page.css">
 		<script src="utils/js/request_utils.js" 	 						type="text/javascript" ></script>
 		<script src="utils/js/context_menu_utils.js" 						type="text/javascript" ></script>
 		<script src="utils/js/localization_manager.js" 						type="text/javascript" ></script>
 		<script src="utils/js/math_utils.js" 								type="text/javascript" ></script>
-		<script src="inventory_app/view/js/inventory_app_constants.js" 		type="text/javascript" ></script>
-		<script src="inventory_app/view/js/inventory_group_renderer.js" 	type="text/javascript" ></script>
+		<script src="inventory/app/js/inventory_app_constants.js" 		type="text/javascript" ></script>
+		<script src="inventory/app/js/inventory_group_renderer.js" 	type="text/javascript" ></script>
 		<script type="text/javascript">
 
 			var _currentGroupData = null;

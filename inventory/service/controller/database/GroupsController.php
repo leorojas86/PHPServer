@@ -1,7 +1,7 @@
 <?php 
 
-require_once "inventory_app/service/model/Environment.php";
-require_once "inventory_app/service/model/database/Group.php";
+require_once "inventory/service/model/Environment.php";
+require_once "inventory/service/model/database/Group.php";
 
 class GroupsController
 {

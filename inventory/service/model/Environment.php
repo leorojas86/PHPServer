@@ -1,5 +1,5 @@
 <?php 
-	require_once "inventory_app/service/model/Config.php";
+	require_once "inventory/service/model/Config.php";
 	require_once "utils/php/MySQLManager.php";
 	require_once "utils/php/SessionManager.php";
 
@@ -20,7 +20,7 @@
 			if(!$requiresLogin || SessionManager::IsUserLoggedIn())
 				require_once $page;
 			else
-				require_once "inventory_app/view/php/login.php";
+				require_once "inventory/app/php/login.php";
 		}
 	} 
 ?>
