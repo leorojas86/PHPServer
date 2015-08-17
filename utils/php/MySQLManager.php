@@ -8,7 +8,7 @@
 
 		public static function Connect($server, $user, $pass, $db, $port)
 		{
-			MySQLManager::$_mysqli = new mysqli($server, $user, $pass, $port);
+			MySQLManager::$_mysqli = new mysqli($server, $user, $pass, $db, $port);
 
 			if(MySQLManager::$_mysqli->connect_errno)
 			{
