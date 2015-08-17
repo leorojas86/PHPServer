@@ -1,3 +1,19 @@
+-- phpMyAdmin SQL Dump
+-- version 4.2.5
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost:8889
+-- Generation Time: Aug 17, 2015 at 06:39 AM
+-- Server version: 5.5.38
+-- PHP Version: 5.5.14
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `generic_db`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -12,7 +28,7 @@ CREATE TABLE `groups` (
   `parent_group_id` bigint(20) DEFAULT NULL,
   `tags` varchar(300) DEFAULT NULL,
   `data` varchar(1000) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=64 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=65 ;
 
 --
 -- Dumping data for table `groups`
@@ -30,7 +46,8 @@ INSERT INTO `groups` (`id`, `name`, `type`, `user_id`, `parent_group_id`, `tags`
 (60, 'sss', 1, 8, 42, NULL, NULL),
 (61, '2332', 0, 8, 42, NULL, NULL),
 (62, 'adasda', 0, 8, 55, NULL, NULL),
-(63, 'asdasdasd', 0, 8, 62, NULL, NULL);
+(63, 'asdasdasd', 0, 8, 62, NULL, NULL),
+(64, 'ssss', 1, 8, 42, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -56,7 +73,7 @@ CREATE TABLE `users` (
   `password` varchar(100) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   `data` varchar(2000) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `users`
@@ -66,7 +83,9 @@ INSERT INTO `users` (`id`, `fb_id`, `email`, `password`, `name`, `data`) VALUES
 (8, NULL, 'leo', 'leo', 'leo', NULL),
 (9, NULL, 'leo2', 'leo2', 'leo2', NULL),
 (10, NULL, 'leos', 'leos', 'leos', NULL),
-(11, NULL, '3', '3', '3', NULL);
+(11, NULL, '3', '3', '3', NULL),
+(12, NULL, '5', '5', '5', NULL),
+(13, NULL, 'leo1', 'leo1', 'leo1', NULL);
 
 --
 -- Indexes for dumped tables
@@ -82,7 +101,7 @@ ALTER TABLE `groups`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `email` (`email`), ADD UNIQUE KEY `id` (`id`);
+ ADD PRIMARY KEY (`id`)a ADD UNIQUE KEY `email` (`email`), ADD UNIQUE KEY `id` (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -92,9 +111,9 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=64;
+MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=65;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
