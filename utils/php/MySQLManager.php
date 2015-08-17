@@ -12,7 +12,9 @@
 
 			if(MySQLManager::$_mysqli->connect_errno)
 			{
-    			error_log("Failed to connect to MySQL error MySQLManager::$_mysqli->connect_errno, connect error 'MySQLManager::$_mysqli->connect_error'");
+				$error 		  = MySQLManager::$_mysqli->connect_errno;
+				$connectError = MySQLManager::$_mysqli->connect_error;
+    			error_log("Failed to connect to MySQL error '$error', connect error '$connectError'");
     			return new ServiceResult(false, null, "Failed to connect to MySQL", UtilsConstants::MYSQL_ERROR_CODE);
 			}
 			else
