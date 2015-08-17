@@ -7,7 +7,7 @@
 	{
 		public static function Setup()
 		{
-			$result = MySQLManager::Connect(Config::DB_SERVER, Config::DB_USER, Config::DB_PASS, Config::DB_NAME);
+			$result = MySQLManager::Connect(Config::DB_SERVER, Config::DB_USER, Config::DB_PASS, Config::DB_NAME, Config::DB_PORT);
 			
 			if($result->success)
 				$result = SessionManager::StartSession();

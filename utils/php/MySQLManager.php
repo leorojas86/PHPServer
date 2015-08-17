@@ -6,9 +6,9 @@
 	{
 		private static $_mysqli = null;
 
-		public static function Connect($server, $user, $pass, $db)
+		public static function Connect($server, $user, $pass, $db, $port)
 		{
-			MySQLManager::$_mysqli = new mysqli($server, $user, $pass);
+			MySQLManager::$_mysqli = new mysqli($server, $user, $pass, $port);
 
 			if(MySQLManager::$_mysqli->connect_errno)
 			{
