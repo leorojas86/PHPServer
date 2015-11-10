@@ -1,20 +1,5 @@
-var TemplateUtils = 
-(
-	function() 
-	{
-	    var _instance = null;
-	 
-	    return {
-			        getInstance : function() 
-			        {
-			            if(_instance == null)
-			                 _instance = new TemplateClass();
-			            
-			            return _instance;
-			        }
-			    };
-	}
-)();
+
+var TemplateUtils = { Instance : new TemplateClass() };//Singleton instance
 
 function TemplateClass()
 {
