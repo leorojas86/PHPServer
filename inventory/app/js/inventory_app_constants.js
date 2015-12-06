@@ -1,8 +1,8 @@
 var InventoryAppConstants =
 {
-	'API_URL' : "http://localhost:8888",
+	'API_URL' : "http://localhost",
 
-	'ENGLISH_LOCALIZATION_TABLE' : "http://localhost:8888/inventory/app/jsons/english.json",
+	'ENGLISH_LOCALIZATION_TABLE' : "http://localhost/inventory/app/jsons/english.json",
 
      'MENU_ITEM_ADD_ITEM'      : 'Add Item',
      'MENU_ITEM_ADD_FOLDER'    : 'Add Folder',
