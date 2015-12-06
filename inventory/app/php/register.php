@@ -12,16 +12,16 @@
 
 			function onPageLoaded() 
 		    {
-		    	LocManager.getInstance().loadLocalizationTable(InventoryAppConstants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
+		    	LocManager.instance.loadLocalizationTable(InventoryAppConstants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
 			}
 
 			function onLocalizationLoaded(sender)
 			{
-				var userNameText  		= LocManager.getInstance().getLocalizedString("user_name_text");
-				var emailText 	  		= LocManager.getInstance().getLocalizedString("email_text");
-				var passwordText  		= LocManager.getInstance().getLocalizedString("password_text");
-				var confirmPasswordText = LocManager.getInstance().getLocalizedString("confirm_password_text");
-				var registerButtonText  = LocManager.getInstance().getLocalizedString("register_button_text");
+				var userNameText  		= LocManager.instance.getLocalizedString("user_name_text");
+				var emailText 	  		= LocManager.instance.getLocalizedString("email_text");
+				var passwordText  		= LocManager.instance.getLocalizedString("password_text");
+				var confirmPasswordText = LocManager.instance.getLocalizedString("confirm_password_text");
+				var registerButtonText  = LocManager.instance.getLocalizedString("register_button_text");
 				var defaultValues 		= "leo";
 
 				var body 	   = document.getElementById("body");
@@ -50,7 +50,7 @@
 				}
 				else
 				{
-					var passwordsDontMatchText = LocManager.getInstance().getLocalizedString("passwords_dont_match_text");
+					var passwordsDontMatchText = LocManager.instance.getLocalizedString("passwords_dont_match_text");
 					alert(passwordsDontMatchText);
 				}
 			}

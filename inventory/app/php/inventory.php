@@ -19,7 +19,7 @@
 
 			function onPageLoaded() 
 		    {
-		    	LocManager.getInstance().loadLocalizationTable(InventoryAppConstants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
+		    	LocManager.instance.loadLocalizationTable(InventoryAppConstants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
 			}
 
 			function onLocalizationLoaded(sender)
@@ -90,7 +90,7 @@
 
 		    function addItem(folderId)
 		    {
-		    	var typeNewItemNameText = LocManager.getInstance().getLocalizedString("type_new_item_name");
+		    	var typeNewItemNameText = LocManager.instance.getLocalizedString("type_new_item_name");
 		    	var itemName 			= prompt(typeNewItemNameText, "");
 
 				if(itemName != null && itemName != "") 
@@ -99,7 +99,7 @@
 
 		    function addFolder()
 		    {
-		    	var typeFolderNameText = LocManager.getInstance().getLocalizedString("type_new_folder_name");
+		    	var typeFolderNameText = LocManager.instance.getLocalizedString("type_new_folder_name");
 	    		var folderName         = prompt(typeFolderNameText, "");
 
 				if(folderName != null && folderName != "") 
@@ -108,7 +108,7 @@
 
 		    function renameGroup(folderId)
 		    {
-		    	var typeNewFolderName = LocManager.getInstance().getLocalizedString("type_new_name");
+		    	var typeNewFolderName = LocManager.instance.getLocalizedString("type_new_name");
 		    	var folderName 		  = prompt(typeNewFolderName, "");
 
 				if(folderName != null && folderName != "") 
@@ -240,7 +240,7 @@
 			function removeSubgroupGroup(groupId)
 			{
 				var folderLabel 		= document.getElementById('folder_label_' + groupId);
-				var deleteFolderText 	= LocManager.getInstance().getLocalizedString("sure_to_delete_folder");
+				var deleteFolderText 	= LocManager.instance.getLocalizedString("sure_to_delete_folder");
 				deleteFolderText 		= deleteFolderText.replace("[folder]", folderLabel.textContent);
 				var remove      		= confirm(deleteFolderText);
 

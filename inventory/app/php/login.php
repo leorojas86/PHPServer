@@ -13,16 +13,16 @@
 
 			function onPageLoaded() 
 		    {
-		    	LocManager.getInstance().loadLocalizationTable(InventoryAppConstants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
+		    	LocManager.instance.loadLocalizationTable(InventoryAppConstants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
 			}
 
 			function onLocalizationLoaded(sender)
 			{
-				var emailText 	  		= LocManager.getInstance().getLocalizedString("email_text");
-				var passwordText  		= LocManager.getInstance().getLocalizedString("password_text");
-				var passwordText  		= LocManager.getInstance().getLocalizedString("password_text");
-				var loginButtonText 	= LocManager.getInstance().getLocalizedString("login_button_text");
-				var registerButtonText  = LocManager.getInstance().getLocalizedString("register_button_text");
+				var emailText 	  		= LocManager.instance.getLocalizedString("email_text");
+				var passwordText  		= LocManager.instance.getLocalizedString("password_text");
+				var passwordText  		= LocManager.instance.getLocalizedString("password_text");
+				var loginButtonText 	= LocManager.instance.getLocalizedString("login_button_text");
+				var registerButtonText  = LocManager.instance.getLocalizedString("register_button_text");
 				var defaultValues 		= "leo";
 
 				var body 	   = document.getElementById("body");

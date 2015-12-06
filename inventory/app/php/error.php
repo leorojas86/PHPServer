@@ -10,12 +10,12 @@
 			
 			function onPageLoaded()
 			{
-				LocManager.getInstance().loadLocalizationTable(InventoryAppConstants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
+				LocManager.instance.loadLocalizationTable(InventoryAppConstants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
 			}
 
 			function onLocalizationLoaded(sender)
 			{
-				var errorPageText 	= LocManager.getInstance().getLocalizedString("error_page_text");
+				var errorPageText 	= LocManager.instance.getLocalizedString("error_page_text");
 				var body 	   		= document.getElementById("body");
 				body.innerHTML 		= errorPageText;
 			}

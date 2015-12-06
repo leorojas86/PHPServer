@@ -1,6 +1,6 @@
 
 //Singleton instance
-var TemplateUtils = { Instance : new TemplateClass() };
+var TemplateUtils = { instance : new TemplateClass() };
 
 //Variables
 TemplateClass.prototype.templateVariable = null;
