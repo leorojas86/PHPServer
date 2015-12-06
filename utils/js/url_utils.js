@@ -1,20 +1,4 @@
-var URLUtils = 
-(
-	function() 
-	{
-	    var _instance = null;
-	 
-	    return {
-			        getInstance : function () 
-			        {
-			            if(_instance == null)
-			                 _instance = new URLUtilsClass();
-			            
-			            return _instance;
-			        }
-			    };
-	}
-)();
+var URLUtils = { instance : new URLUtilsClass() };
 
 function URLUtilsClass()
 {

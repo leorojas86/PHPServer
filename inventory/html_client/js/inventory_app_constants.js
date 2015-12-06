@@ -1,6 +1,7 @@
 var InventoryAppConstants =
 {
 	'API_URL' : "http://localhost",
+     'CLIENT_APP_URL' : "http://localhost/inventory/html_client/",
 
 	'ENGLISH_LOCALIZATION_TABLE' : "http://localhost/inventory/app/jsons/english.json",
 

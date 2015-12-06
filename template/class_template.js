@@ -3,7 +3,7 @@
 var TemplateUtils = { instance : new TemplateClass() };
 
 //Variables
-TemplateClass.prototype.templateVariable = null;
+TemplateClass.prototype._templateVariable = null;
 
 //Constructors
 function TemplateClass()

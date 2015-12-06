@@ -48,7 +48,7 @@ JiraUtilsClass.prototype.replaceJiraTagsAsyncronous = function(plainText, versio
 
 	if(issueIds != "")//There are issues on the plain text
 	{
-		var host    = URLUtils.getInstance().getHostName();
+		var host    = URLUtils.instance.getHostName();
 		var params  = "service=Jira&method=GetIssuesInfo&version_id=" + versionId + "&issues_ids=" + issueIds;
 		var context = this;
 		RequestUtils.getInstance().request(host, "POST", function(xmlhttp) { context.onRequestIssuesInfoResponse(xmlhttp, plainText, onAllTagsReplaced); }, params);

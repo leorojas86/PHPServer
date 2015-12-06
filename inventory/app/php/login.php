@@ -67,8 +67,8 @@
 
 					if(result.success)
 					{
-						var host = URLUtils.getInstance().getHostName();
-						URLUtils.getInstance().redirect(host + "?page=Home");
+						var host = URLUtils.instance.getHostName();
+						URLUtils.instance.redirect(host + "?page=Home");
 					}
 					else
 						alert(xmlhttp.responseText);
@@ -77,8 +77,8 @@
 
 			function onRegisterButtonClick()
 			{
-				var host = URLUtils.getInstance().getHostName();
-				URLUtils.getInstance().redirect(host + "?page=Register");
+				var host = URLUtils.instance.getHostName();
+				URLUtils.instance.redirect(host + "?page=Register");
 			}
 
 		</script>

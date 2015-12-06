@@ -28,8 +28,14 @@ BootstrapClass.prototype.initialize = function(onBootstrapCompleted)
 
 BootstrapClass.prototype.onLocalizationLoaded = function(success)
 {
+	var thisVar = this;
+	ServiceClient.instance.initialize(function() { thisVar.onServiceClientInitialized(); });
+};
+
+BootstrapClass.prototype.onServiceClientInitialized = function(success)
+{
 	this.notifyCompleted(success);
-	_isInitialized = true;
+	this._isInitialized = true;
 };
 
 BootstrapClass.prototype.notifyCompleted = function(success)

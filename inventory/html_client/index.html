@@ -9,12 +9,16 @@
 		<script src="../../utils/js/url_utils.js"     			type="text/javascript" ></script>
 		<script src="../../utils/js/localization_manager.js" 	type="text/javascript" ></script>
 
-
 		<script src="js/inventory_app_constants.js"  type="text/javascript"> </script>
 		<script src="js/inventory_group_renderer.js" type="text/javascript"> </script>
 		<script src="js/bootstrap.js" 				 type="text/javascript"> </script>
+		<script src="js/service_client.js" 				 type="text/javascript"> </script>
+
+		<script src="js/controllers/login_controller.js" type="text/javascript"> </script>
 
 		<script type="text/javascript">
+
+			var loginController = new LoginController();
 			
 			function onPageLoaded()
 			{
@@ -23,12 +27,15 @@
 
 			function onAppInitializationCompleted()
 			{
-				alert("Initialization completed");
+				if(ServiceClient.instance.loggedUser == null)
+					loginController.render();
+				else
+					console.log("logged");
 			}
 
 		</script>
 	</head>
-	<body onload="onPageLoaded();">
+	<body id="body" onload="onPageLoaded();">
 		<p>Hello World</p>
 	</body>
 </html>
