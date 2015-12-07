@@ -51,7 +51,7 @@ JiraUtilsClass.prototype.replaceJiraTagsAsyncronous = function(plainText, versio
 		var host    = URLUtils.instance.getHostName();
 		var params  = "service=Jira&method=GetIssuesInfo&version_id=" + versionId + "&issues_ids=" + issueIds;
 		var context = this;
-		RequestUtils.getInstance().request(host, "POST", function(xmlhttp) { context.onRequestIssuesInfoResponse(xmlhttp, plainText, onAllTagsReplaced); }, params);
+		RequestUtils.instance.request(host, "POST", function(xmlhttp) { context.onRequestIssuesInfoResponse(xmlhttp, plainText, onAllTagsReplaced); }, params);
 	}
 	else
 	{
@@ -89,7 +89,7 @@ JiraUtilsClass.prototype.getNextJiraTag = function(plainText)
 
 JiraUtilsClass.prototype.onRequestIssuesInfoResponse = function(xmlhttp, plainText, onAllTagsReplaced)
 {
-	if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
+	if(RequestUtils.instance.checkForValidResponse(xmlhttp))
 	{
 		var result = JSON.parse(xmlhttp.responseText);
 

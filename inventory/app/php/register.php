@@ -46,7 +46,7 @@
 				if(userPassword.value == userConfirmPassword.value)
 				{
 					var params = "service=User&method=Register&name=" + userName.value + "&email=" + userEmail.value + "&password=" + userPassword.value;
-					RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onRegisterCallback, params);
+					RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onRegisterCallback, params);
 				}
 				else
 				{
@@ -57,7 +57,7 @@
 
 			function onRegisterCallback(xmlhttp)
 			{
-				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
+				if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
 				{
 					var result = JSON.parse(xmlhttp.responseText);
 

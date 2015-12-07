@@ -1,17 +1,19 @@
 
 //Singleton instance
-//var TemplateUtils = { instance : new TemplateClass() };
+var LoginController = { instance : new LoginControllerClass() };
 
 //Variables
-LoginController.prototype._templateVariable = null;
+
+LoginControllerClass.prototype.onUserLogged				= null;
+LoginControllerClass.prototype.onRegisterButtonClicked 	= null;
 
 //Constructors
-function LoginController()
+function LoginControllerClass()
 {
 }
 
 //Methods
-LoginController.prototype.render = function()
+LoginControllerClass.prototype.render = function()
 {
 	var emailText 	  		= LocManager.instance.getLocalizedString("email_text");
 	var passwordText  		= LocManager.instance.getLocalizedString("password_text");
@@ -38,7 +40,7 @@ function onKeyUp(event)
 	switch(event.which) 
 	{
 	    case 13://enter
-	    	onLoginButtonClick();
+			login();
 	    break;
 	    default: console.log("pressed key = " + event.which); break;
 	}
@@ -46,32 +48,24 @@ function onKeyUp(event)
 			
 function onLoginButtonClick()
 {
+	login();
+}
+
+function login()
+{
 	//alert(EncriptionUtils.getInstance().encript("Hello"));
 			
 	var userEmail    = document.getElementById('user_email');	
 	var userPassword = document.getElementById('user_password');	
-	var params 		 = "service=User&method=Login" + "&email=" + userEmail.value + "&password=" + userPassword.value;
-	RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onLoginCallback, params);
+	ServiceClient.instance.login(userEmail.value, userPassword.value, function() { LoginControllerClass.instance.notifyOnUserLogged(); } );
 }
 
-function onLoginCallback(xmlhttp)
+LoginControllerClass.prototype.notifyOnUserLogged = function()
 {
-	if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
-	{
-		var result = JSON.parse(xmlhttp.responseText);
-
-		if(result.success)
-		{
-			var host = URLUtils.instance.getHostName();
-			URLUtils.instance.redirect(host + "?page=Home");
-		}
-		else
-			alert(xmlhttp.responseText);
-	}
+	this.onUserLogged();
 }
 
 function onRegisterButtonClick()
 {
-	var host = URLUtils.instance.getHostName();
-	URLUtils.instance.redirect(host + "?page=Register");
+	this.onRegisterButtonClicked();
 }

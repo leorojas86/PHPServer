@@ -1,20 +1,4 @@
-var RequestUtils = 
-(
-	function() 
-	{
-	    var _instance = null;
-	 
-	    return {
-			        getInstance : function () 
-			        {
-			            if(_instance == null)
-			                 _instance = new RequestUtilsClass();
-			            
-			            return _instance;
-			        }
-			    };
-	}
-)();
+var RequestUtils =  { instance : new RequestUtilsClass() };
 
 function RequestUtilsClass()
 {

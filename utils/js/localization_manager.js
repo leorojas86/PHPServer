@@ -18,7 +18,7 @@ LocalizationManagerClass.prototype.loadLocalizationTable = function(localization
 	{
 		console.log("Loading localization table at " + localizationTableURL);
 		var thisVar 				   = this;
-		RequestUtils.getInstance().request(localizationTableURL, "GET", function(xmlhttp) { thisVar.onLoadLocalizationTableCallback(xmlhttp) });
+		RequestUtils.instance.request(localizationTableURL, "GET", function(xmlhttp) { thisVar.onLoadLocalizationTableCallback(xmlhttp) });
 	}
 	else
 	{
@@ -29,7 +29,7 @@ LocalizationManagerClass.prototype.loadLocalizationTable = function(localization
 
 LocalizationManagerClass.prototype.onLoadLocalizationTableCallback = function(xmlhttp)
 {
-	if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
+	if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
 	{
 		localStorage.localizationTable = xmlhttp.responseText;
 		this.localizationTable 		   = JSON.parse(xmlhttp.responseText);

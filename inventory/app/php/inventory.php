@@ -27,7 +27,7 @@
 				document.onkeyup  = onKeyUp;
     			var groupContaner = document.getElementById('group_container');
     			var params 		  = "service=Group&method=GetRootGroupData";
-				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onGroupContainerAjaxCallback, params);
+				RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onGroupContainerAjaxCallback, params);
 			}
 
 			function onKeyUp(event)
@@ -114,7 +114,7 @@
 				if(folderName != null && folderName != "") 
 				{
 					var params = "service=Group&method=Rename&id=" + folderId + "&name=" + folderName;
-					RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onRenameCallback, params);
+					RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onRenameCallback, params);
 				}
 		    }
 
@@ -127,12 +127,12 @@
 			{
 				var userData = document.getElementById('user_data');
 				var params   = "service=User&method=UpdateData&data=" + userData.value;
-				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onUpdateUserDataCallback, params);
+				RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onUpdateUserDataCallback, params);
 			}
 
 			function onUpdateUserDataCallback(xmlhttp)
 			{
-				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
+				if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
 				{
 					var result = JSON.parse(xmlhttp.responseText);
 
@@ -145,24 +145,24 @@
 			{
 				var groupData = document.getElementById('group_data');
 				var params    = "service=Group&method=UpdateData&id=" + groupId + "&data=" + groupData.value;
-				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onUpdateGroupDataCallback, params);
+				RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onUpdateGroupDataCallback, params);
 			}
 
 			function onUpdateGroupDataCallback(xmlhttp)
 			{
-				//if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
+				//if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
 					alert("result '" + xmlhttp.responseText + "'");
 			}
 
 			function addSubGroup(newGroupName, type)
 			{
 				var params = "service=Group&method=AddSubGroup&parentGroupId=" + _currentGroupData.id + "&name=" + newGroupName + "&type=" + type;
-				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onAddSubGroupCallback, params);
+				RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onAddSubGroupCallback, params);
 			}
 
 			function onAddSubGroupCallback(xmlhttp)
 			{
-				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
+				if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
 				{
 					var result = JSON.parse(xmlhttp.responseText);
 
@@ -184,12 +184,12 @@
 			function loadAjaxGroup(groupId)
 			{
 				var params = "service=Group&method=GetGroupData&id=" + groupId;
-				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onGroupContainerAjaxCallback, params);
+				RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onGroupContainerAjaxCallback, params);
 			}
 
 			function onGroupContainerAjaxCallback(xmlhttp)
 			{
-				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
+				if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
 				{
 					var result = JSON.parse(xmlhttp.responseText);
 
@@ -205,12 +205,12 @@
 			{
 				var searchTesxtInput = document.getElementById('search_input');
 				var params 	    	 = "service=Group&method=Search&searchText=" + searchTesxtInput.value;
-				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onSearchCallback, params);
+				RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onSearchCallback, params);
 			}
 
 			function onSearchCallback(xmlhttp)
 			{
-				//if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
+				//if(RequestUtils.instance.checkForValidResponse(xmlhttp))
 					alert(xmlhttp.responseText);
 			}
 
@@ -218,7 +218,7 @@
 			{
 				var params 	    = "service=Group&method=Move&id=" + _cuttingGroupId + "&parentGroupId=" + _currentGroupData.id;
 				_cuttingGroupId = null;
-				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onMoveGroupCallback, params);
+				RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onMoveGroupCallback, params);
 			}
 
 			function onMoveGroupCallback(xmlhttp)
@@ -228,7 +228,7 @@
 
 			function refreshCurrentGroup(xmlhttp)
 			{
-				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
+				if(RequestUtils.instance.checkForValidResponse(xmlhttp))
 				{
 					var result = JSON.parse(xmlhttp.responseText);
 
@@ -247,13 +247,13 @@
 				if(remove) 
 				{
 					var params = "service=Group&method=Delete&id=" + groupId;
-					RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onDeleteGroupCallback, params);
+					RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onDeleteGroupCallback, params);
 				}
 			}
 
 			function onDeleteGroupCallback(xmlhttp)
 			{
-				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp))
+				if(RequestUtils.instance.checkForValidResponse(xmlhttp))
 				{
 					var result = JSON.parse(xmlhttp.responseText);
 

@@ -15,7 +15,7 @@ function uploadFile()
 	var test = document.getElementById("test");
 	test.src = imageData;
 
-	RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onUploadCompleted, params, onProgress);
+	RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onUploadCompleted, params, onProgress);
 }
 
 function onProgress(progress) 

@@ -56,12 +56,12 @@
 				var userEmail    = document.getElementById('user_email');	
 				var userPassword = document.getElementById('user_password');	
 				var params 		 = "service=User&method=Login" + "&email=" + userEmail.value + "&password=" + userPassword.value;
-				RequestUtils.getInstance().request(InventoryAppConstants.API_URL, "POST", onLoginCallback, params);
+				RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onLoginCallback, params);
 			}
 
 			function onLoginCallback(xmlhttp)
 			{
-				if(RequestUtils.getInstance().checkForValidResponse(xmlhttp)) 
+				if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
 				{
 					var result = JSON.parse(xmlhttp.responseText);
 
