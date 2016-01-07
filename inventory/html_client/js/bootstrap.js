@@ -1,4 +1,3 @@
-
 //Singleton instance
 var Bootstrap = { instance : new BootstrapClass() };
 

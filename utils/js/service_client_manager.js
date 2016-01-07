@@ -1,25 +1,9 @@
-var ServiceClientManager = 
-(
-	function() 
-	{
-	    var _instance = null;
-	 
-	    return {
-			        getInstance : function() 
-			        {
-			            if(_instance == null)
-			                 _instance = new ServiceClientManagerClass();
-			            
-			            return _instance;
-			        }
-			    };
-	}
-)();
+var ServiceClient = { instance : new ServiceClientClass() };
 
-function ServiceClientManagerClass()
+function ServiceClientClass()
 {
 }
 
-ServiceClientManagerClass.prototype.request = function()
+ServiceClientClass.prototype.request = function()
 {
 };

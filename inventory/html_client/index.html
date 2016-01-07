@@ -20,9 +20,6 @@
 			
 			function onPageLoaded()
 			{
-				LoginController.instance.onUserLogged 			 = onUserLogged;
-				LoginController.instance.onRegisterButtonClicked = onRegisterButtonClicked;
-
 				Bootstrap.instance.initialize(onAppInitializationCompleted);
 			}
 
@@ -39,7 +36,11 @@
 			function onAppInitializationCompleted()
 			{
 				if(ServiceClient.instance.loggedUser == null)
+				{
 					LoginController.instance.render();
+					LoginController.instance.onUserLogged 			 = onUserLogged;
+					LoginController.instance.onRegisterButtonClicked = onRegisterButtonClicked;
+				}
 				else
 					console.log("logged");
 			}

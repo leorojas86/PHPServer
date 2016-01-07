@@ -4,34 +4,15 @@ function RequestUtilsClass()
 {
 }
 
-RequestUtilsClass.prototype.ajax = function(url, elementId, params)
-{
-	var context = this;
-
-	this.request(url, "GET", function(xmlhttp) { context.ajaxCallbackFunction(elementId, xmlhttp); }, params);
-};
-
-RequestUtilsClass.prototype.ajaxCallbackFunction = function(elementId, xmlhttp)
-{
-	if(this.checkForValidResponse(xmlhttp))
-	  	document.getElementById(elementId).innerHTML = xmlhttp.responseText;
-};
-
 RequestUtilsClass.prototype.request = function(url, method, callback, params, onProgress) 
 {
+	var thisVar     = this;
 	params 			= params || "";//Default parameter = ""
 	var xmlhttp 	= new XMLHttpRequest();
-	xmlhttp.onload	= function() { callback(xmlhttp) };
-	xmlhttp.onerror	= function() { callback(xmlhttp) };
+	xmlhttp.onload	= function() { thisVar.checkForReadyResponse(xmlhttp, callback); };
+	xmlhttp.onerror	= function() { thisVar.checkForReadyResponse(xmlhttp, callback); };
 
-	if(onProgress != null)
-	{
-		xmlhttp.onprogress 	= function(evt)
-		{
-			if(evt.lengthComputable) 
-			   onProgress(evt.loaded / evt.total);
-		};
-	}
+	this.notifyProgress(xmlhttp, onProgress);
 
 	switch(method)
 	{
@@ -77,7 +58,23 @@ RequestUtilsClass.prototype.request = function(url, method, callback, params, on
 	return xmlhttp;
 };
 
-RequestUtilsClass.prototype.checkForValidResponse = function(xmlhttp)
+RequestUtilsClass.prototype.notifyProgress = function(xmlhttp, onProgress)
 {
-	return xmlhttp.readyState == 4 && xmlhttp.status == 200;
+	if(onProgress != null)
+	{
+		xmlhttp.onprogress = function(evt)
+		{
+			if(evt.lengthComputable) 
+			   onProgress(evt.loaded / evt.total);
+		};
+	}
+}
+
+RequestUtilsClass.prototype.checkForReadyResponse = function(xmlhttp, callback)
+{
+	if(xmlhttp.readyState == 4)
+	{
+		var success = xmlhttp.status == 200;
+		callback(xmlhttp, success);
+	}
 };

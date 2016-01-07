@@ -2,11 +2,9 @@
 var ServiceClient = { instance : new ServiceClientClass() };
 
 //Variables
-
 ServiceClientClass.prototype.loggedUser = null;
 
 ServiceClientClass.prototype._onInitializationCompleted = null;
-ServiceClientClass.prototype._onLoginCallback 			= null;
 
 //Constructors
 function ServiceClientClass()
@@ -26,7 +24,6 @@ ServiceClientClass.prototype.initialize = function(onInitializationCompleted)
 		this.notifyOnInitializationCompleted();
 };
 
-
 ServiceClientClass.prototype.notifyOnInitializationCompleted = function(success)
 {
 	this._onInitializationCompleted(success);
@@ -34,32 +31,39 @@ ServiceClientClass.prototype.notifyOnInitializationCompleted = function(success)
 }
 
 ServiceClientClass.prototype.login = function(email, password, callback)
-{	
-	this._onLoginCallback 	= callback;
-	var params 		 		= "service=User&method=Login" + "&email=" + email + "&password=" + password;
-	var thisVar		 		= this;
-	RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", function(xmlhttp) { thisVar.onLoginRequestCallback(xmlhttp) }, params);
+{
+	var params 			= "service=User&method=Login" + "&email=" + email + "&password=" + password;
+	var thisVar			= this;
+	var loginCallback	=  function(resultData) { thisVar.onLoginCallback(resultData, callback) };
+	RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", function(xmlhttp, success) { thisVar.onRequestResponse(xmlhttp, success, loginCallback) }, params);
 }
 
-ServiceClientClass.prototype.onLoginRequestCallback = function(xmlhttp)
+ServiceClientClass.prototype.onLoginCallback = function(resultData, callback)
 {
-	if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
+	if(resultData.success)
+		loggedUser = result.data;
+
+	callback(resultData);
+}
+
+ServiceClientClass.prototype.onRequestResponse = function(xmlhttp, success, callback)
+{
+ 	var resultData = null;
+
+	if(success)
 	{
-		alert(xmlhttp.responseText);
-		var result = JSON.parse(xmlhttp.responseText);
+		resultData = JSON.parse(xmlhttp.responseText);
 
-		if(result.success)
-		{
-			loggedUser = result.data;
-			this.notifyOnLogin();
-		}
-		else
-			alert(xmlhttp.responseText);
+		if(!resultData.success)
+			this.logResponse(xmlhttp);
 	}
+	else
+		this.logResponse(xmlhttp);
+
+	callback(resultData);
 }
 
-ServiceClientClass.prototype.notifyOnLogin = function()
+ServiceClientClass.prototype.logResponse = function(xmlhttp)
 {
-	this._onLoginCallback();
-	this._onLoginCallback = null;
+	console.log("Response Text = " + xmlhttp.responseText);
 }

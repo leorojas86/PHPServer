@@ -57,7 +57,7 @@ function login()
 			
 	var userEmail    = document.getElementById('user_email');	
 	var userPassword = document.getElementById('user_password');	
-	ServiceClient.instance.login(userEmail.value, userPassword.value, function() { LoginControllerClass.instance.notifyOnUserLogged(); } );
+	ServiceClient.instance.login(userEmail.value, userPassword.value, function(resultData) { LoginController.instance.notifyOnUserLogged(); } );
 }
 
 LoginControllerClass.prototype.notifyOnUserLogged = function()
