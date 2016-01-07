@@ -2,11 +2,6 @@
 //Singleton instance
 var LoginController = { instance : new LoginControllerClass() };
 
-//Variables
-
-LoginControllerClass.prototype.onUserLogged				= null;
-LoginControllerClass.prototype.onRegisterButtonClicked 	= null;
-
 //Constructors
 function LoginControllerClass()
 {
