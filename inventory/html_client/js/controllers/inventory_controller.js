@@ -3,247 +3,264 @@ var _cuttingGroupId   = null;
 var _folderId         = null;
 var groupRenderer     = new InventoryGroupRenderer();
 
-			function onPageLoaded() 
-		    {
-		    	LocManager.instance.loadLocalizationTable(Constants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
-			}
 
-			function onLocalizationLoaded(sender)
-			{
-				document.onkeyup  = onKeyUp;
-    			var groupContaner = document.getElementById('group_container');
-    			var params 		  = "service=Group&method=GetRootGroupData";
-				RequestUtils.instance.request(Constants.API_URL, "POST", onGroupContainerAjaxCallback, params);
-			}
+//Singleton instance
+var InventoryController = { instance : new LoginControllerClass() };
 
-			function onKeyUp(event)
-			{
-				switch(event.which) 
-				{
-				    case 37://left arrow button
-				    	var backButton = document.getElementById("back_button");
+//Constructors
+function InventoryControllerClass()
+{
+}
 
-						if(backButton != null) 
-   							 backButton.onclick.apply(backButton);
-				    break;
-				    default: console.log("pressed key = " + event.which); break;
-				}
-			}
+//Methods
+InventoryControllerClass.prototype.render = function()
+{
+	var body 	   = document.getElementById("body");
+	body.innerHTML = 	"<div id='group_container'></div>" +
+						"<div id='context_menu_container' style='position: absolute; left: 100px; top: 150px;' ></div>";
+}
 
-		    function showContextMenu(event) 
-		    {
-		    	var options = new Array();
+function onPageLoaded() 
+{
+	LocManager.instance.loadLocalizationTable(Constants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
+}
 
-		    	switch(event.target.id)
-		    	{
-		    		case "folders_scroll_panel":
-		    			options.push(Constants.MENU_ITEM_ADD_ITEM);
-		    			options.push(Constants.MENU_ITEM_ADD_FOLDER);
+function onLocalizationLoaded(sender)
+{
+	document.onkeyup  = onKeyUp;
+	var groupContaner = document.getElementById('group_container');
+	var params 		  = "service=Group&method=GetRootGroupData";
+	RequestUtils.instance.request(Constants.API_URL, "POST", onGroupContainerAjaxCallback, params);
+}
 
-		    			if(canPasteFolder())
-							options.push(Constants.MENU_ITEM_PASTE);
-		    		break;
-		    		default:
-		    			options.push(Constants.MENU_ITEM_RENAME);
-		    			options.push(Constants.MENU_ITEM_CUT);
-		    			options.push(Constants.MENU_ITEM_DELETE);
-		    		break;
-		    	}
+function onKeyUp(event)
+{
+	switch(event.which) 
+	{
+	    case 37://left arrow button
+	    	var backButton = document.getElementById("back_button");
 
-		    	_folderId 		= event.target.parentNode.id.replace("folder_", "");
-		    	var contextMenu = document.getElementById('context_menu_container');
+			if(backButton != null) 
+					 backButton.onclick.apply(backButton);
+	    break;
+	    default: console.log("pressed key = " + event.which); break;
+	}
+}
 
-		    	ContextMenuUtils.getInstance().showContextMenu(contextMenu, { "x" : event.clientX, "y" : event.clientY }, options, onContextMenuOptionSelected);
-		    }
+function showContextMenu(event) 
+{
+	var options = new Array();
 
-		    function canPasteFolder()
-		    {
-		    	return _currentGroupData != null && _currentGroupData.can_paste;
-		    }
+	switch(event.target.id)
+	{
+		case "folders_scroll_panel":
+			options.push(Constants.MENU_ITEM_ADD_ITEM);
+			options.push(Constants.MENU_ITEM_ADD_FOLDER);
 
-		    function onContextMenuOptionSelected(option)
-		    {
-		    	switch(option)
-		    	{
-		    		case Constants.MENU_ITEM_ADD_ITEM: 		addItem(_folderId); 			break;
-		    		case Constants.MENU_ITEM_ADD_FOLDER: 	addFolder();      				break;
-		    		case Constants.MENU_ITEM_PASTE: 		pasteGroup();          			break;
-		    		case Constants.MENU_ITEM_RENAME:    	renameGroup(_folderId); 		break;
-		    		case Constants.MENU_ITEM_CUT: 			_cuttingGroupId = _folderId;	break;
-		    		case Constants.MENU_ITEM_DELETE: 		removeSubgroupGroup(_folderId);	break;
-		    	}
-		    }
+			if(canPasteFolder())
+				options.push(Constants.MENU_ITEM_PASTE);
+		break;
+		default:
+			options.push(Constants.MENU_ITEM_RENAME);
+			options.push(Constants.MENU_ITEM_CUT);
+			options.push(Constants.MENU_ITEM_DELETE);
+		break;
+	}
 
-		    function addItem(folderId)
-		    {
-		    	var typeNewItemNameText = LocManager.instance.getLocalizedString("type_new_item_name");
-		    	var itemName 			= prompt(typeNewItemNameText, "");
+	_folderId 		= event.target.parentNode.id.replace("folder_", "");
+	var contextMenu = document.getElementById('context_menu_container');
 
-				if(itemName != null && itemName != "") 
-					addSubGroup(itemName, Constants.GROUP_ID_ITEM);
-		    }
+	ContextMenuUtils.getInstance().showContextMenu(contextMenu, { "x" : event.clientX, "y" : event.clientY }, options, onContextMenuOptionSelected);
+}
 
-		    function addFolder()
-		    {
-		    	var typeFolderNameText = LocManager.instance.getLocalizedString("type_new_folder_name");
-	    		var folderName         = prompt(typeFolderNameText, "");
+function canPasteFolder()
+{
+	return _currentGroupData != null && _currentGroupData.can_paste;
+}
 
-				if(folderName != null && folderName != "") 
-				    addSubGroup(folderName, Constants.GROUP_ID_FOLDER);
-		    }
+function onContextMenuOptionSelected(option)
+{
+	switch(option)
+	{
+		case Constants.MENU_ITEM_ADD_ITEM: 		addItem(_folderId); 			break;
+		case Constants.MENU_ITEM_ADD_FOLDER: 	addFolder();      				break;
+		case Constants.MENU_ITEM_PASTE: 		pasteGroup();          			break;
+		case Constants.MENU_ITEM_RENAME:    	renameGroup(_folderId); 		break;
+		case Constants.MENU_ITEM_CUT: 			_cuttingGroupId = _folderId;	break;
+		case Constants.MENU_ITEM_DELETE: 		removeSubgroupGroup(_folderId);	break;
+	}
+}
 
-		    function renameGroup(folderId)
-		    {
-		    	var typeNewFolderName = LocManager.instance.getLocalizedString("type_new_name");
-		    	var folderName 		  = prompt(typeNewFolderName, "");
+function addItem(folderId)
+{
+	var typeNewItemNameText = LocManager.instance.getLocalizedString("type_new_item_name");
+	var itemName 			= prompt(typeNewItemNameText, "");
 
-				if(folderName != null && folderName != "") 
-				{
-					var params = "service=Group&method=Rename&id=" + folderId + "&name=" + folderName;
-					RequestUtils.instance.request(Constants.API_URL, "POST", onRenameCallback, params);
-				}
-		    }
+	if(itemName != null && itemName != "") 
+		addSubGroup(itemName, Constants.GROUP_ID_ITEM);
+}
 
-		    function onRenameCallback(xmlhttp)
-		    {
-		    	refreshCurrentGroup(xmlhttp);
-		    }
+function addFolder()
+{
+	var typeFolderNameText = LocManager.instance.getLocalizedString("type_new_folder_name");
+	var folderName         = prompt(typeFolderNameText, "");
 
-			function onUpdateUserDataClick()
-			{
-				var userData = document.getElementById('user_data');
-				var params   = "service=User&method=UpdateData&data=" + userData.value;
-				RequestUtils.instance.request(Constants.API_URL, "POST", onUpdateUserDataCallback, params);
-			}
+	if(folderName != null && folderName != "") 
+	    addSubGroup(folderName, Constants.GROUP_ID_FOLDER);
+}
 
-			function onUpdateUserDataCallback(xmlhttp)
-			{
-				if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
-				{
-					var result = JSON.parse(xmlhttp.responseText);
+function renameGroup(folderId)
+{
+	var typeNewFolderName = LocManager.instance.getLocalizedString("type_new_name");
+	var folderName 		  = prompt(typeNewFolderName, "");
 
-					if(result.success)
-						location.reload();
-				}
-			}
+	if(folderName != null && folderName != "") 
+	{
+		var params = "service=Group&method=Rename&id=" + folderId + "&name=" + folderName;
+		RequestUtils.instance.request(Constants.API_URL, "POST", onRenameCallback, params);
+	}
+}
 
-		    function onUpdateGroupDataClick(groupId)
-			{
-				var groupData = document.getElementById('group_data');
-				var params    = "service=Group&method=UpdateData&id=" + groupId + "&data=" + groupData.value;
-				RequestUtils.instance.request(Constants.API_URL, "POST", onUpdateGroupDataCallback, params);
-			}
+function onRenameCallback(xmlhttp)
+{
+	refreshCurrentGroup(xmlhttp);
+}
 
-			function onUpdateGroupDataCallback(xmlhttp)
-			{
-				//if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
-					alert("result '" + xmlhttp.responseText + "'");
-			}
+function onUpdateUserDataClick()
+{
+	var userData = document.getElementById('user_data');
+	var params   = "service=User&method=UpdateData&data=" + userData.value;
+	RequestUtils.instance.request(Constants.API_URL, "POST", onUpdateUserDataCallback, params);
+}
 
-			function addSubGroup(newGroupName, type)
-			{
-				var params = "service=Group&method=AddSubGroup&parentGroupId=" + _currentGroupData.id + "&name=" + newGroupName + "&type=" + type;
-				RequestUtils.instance.request(Constants.API_URL, "POST", onAddSubGroupCallback, params);
-			}
+function onUpdateUserDataCallback(xmlhttp)
+{
+	if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
+	{
+		var result = JSON.parse(xmlhttp.responseText);
 
-			function onAddSubGroupCallback(xmlhttp)
-			{
-				if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
-				{
-					var result = JSON.parse(xmlhttp.responseText);
+		if(result.success)
+			location.reload();
+	}
+}
 
-					if(result.success)
-						loadAjaxGroup(_currentGroupData.id);
-				}
-			}
+function onUpdateGroupDataClick(groupId)
+{
+	var groupData = document.getElementById('group_data');
+	var params    = "service=Group&method=UpdateData&id=" + groupId + "&data=" + groupData.value;
+	RequestUtils.instance.request(Constants.API_URL, "POST", onUpdateGroupDataCallback, params);
+}
 
-			function onSubGroupClick(groupId)
-			{
-				loadAjaxGroup(groupId);
-			}
+function onUpdateGroupDataCallback(xmlhttp)
+{
+	//if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
+		alert("result '" + xmlhttp.responseText + "'");
+}
 
-			function onBackButtonClick(parentGroupId)
-			{
-				loadAjaxGroup(parentGroupId);
-			}
+function addSubGroup(newGroupName, type)
+{
+	var params = "service=Group&method=AddSubGroup&parentGroupId=" + _currentGroupData.id + "&name=" + newGroupName + "&type=" + type;
+	RequestUtils.instance.request(Constants.API_URL, "POST", onAddSubGroupCallback, params);
+}
 
-			function loadAjaxGroup(groupId)
-			{
-				var params = "service=Group&method=GetGroupData&id=" + groupId;
-				RequestUtils.instance.request(Constants.API_URL, "POST", onGroupContainerAjaxCallback, params);
-			}
+function onAddSubGroupCallback(xmlhttp)
+{
+	if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
+	{
+		var result = JSON.parse(xmlhttp.responseText);
 
-			function onGroupContainerAjaxCallback(xmlhttp)
-			{
-				if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
-				{
-					var result = JSON.parse(xmlhttp.responseText);
+		if(result.success)
+			loadAjaxGroup(_currentGroupData.id);
+	}
+}
 
-					if(result.success)
-					{
-						_currentGroupData = result.data;
-						groupRenderer.render(_currentGroupData);
-					}
-				}
-			}
+function onSubGroupClick(groupId)
+{
+	loadAjaxGroup(groupId);
+}
 
-			function onSearchButtonClick()
-			{
-				var searchTesxtInput = document.getElementById('search_input');
-				var params 	    	 = "service=Group&method=Search&searchText=" + searchTesxtInput.value;
-				RequestUtils.instance.request(Constants.API_URL, "POST", onSearchCallback, params);
-			}
+function onBackButtonClick(parentGroupId)
+{
+	loadAjaxGroup(parentGroupId);
+}
 
-			function onSearchCallback(xmlhttp)
-			{
-				//if(RequestUtils.instance.checkForValidResponse(xmlhttp))
-					alert(xmlhttp.responseText);
-			}
+function loadAjaxGroup(groupId)
+{
+	var params = "service=Group&method=GetGroupData&id=" + groupId;
+	RequestUtils.instance.request(Constants.API_URL, "POST", onGroupContainerAjaxCallback, params);
+}
 
-			function pasteGroup()
-			{
-				var params 	    = "service=Group&method=Move&id=" + _cuttingGroupId + "&parentGroupId=" + _currentGroupData.id;
-				_cuttingGroupId = null;
-				RequestUtils.instance.request(Constants.API_URL, "POST", onMoveGroupCallback, params);
-			}
+function onGroupContainerAjaxCallback(xmlhttp)
+{
+	if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
+	{
+		var result = JSON.parse(xmlhttp.responseText);
 
-			function onMoveGroupCallback(xmlhttp)
-			{
-				refreshCurrentGroup(xmlhttp);
-			}
+		if(result.success)
+		{
+			_currentGroupData = result.data;
+			groupRenderer.render(_currentGroupData);
+		}
+	}
+}
 
-			function refreshCurrentGroup(xmlhttp)
-			{
-				if(RequestUtils.instance.checkForValidResponse(xmlhttp))
-				{
-					var result = JSON.parse(xmlhttp.responseText);
+function onSearchButtonClick()
+{
+	var searchTesxtInput = document.getElementById('search_input');
+	var params 	    	 = "service=Group&method=Search&searchText=" + searchTesxtInput.value;
+	RequestUtils.instance.request(Constants.API_URL, "POST", onSearchCallback, params);
+}
 
-					if(result.success)
-						loadAjaxGroup(_currentGroupData.id);
-				}
-			}
+function onSearchCallback(xmlhttp)
+{
+	//if(RequestUtils.instance.checkForValidResponse(xmlhttp))
+		alert(xmlhttp.responseText);
+}
 
-			function removeSubgroupGroup(groupId)
-			{
-				var folderLabel 		= document.getElementById('folder_label_' + groupId);
-				var deleteFolderText 	= LocManager.instance.getLocalizedString("sure_to_delete_folder");
-				deleteFolderText 		= deleteFolderText.replace("[folder]", folderLabel.textContent);
-				var remove      		= confirm(deleteFolderText);
+function pasteGroup()
+{
+	var params 	    = "service=Group&method=Move&id=" + _cuttingGroupId + "&parentGroupId=" + _currentGroupData.id;
+	_cuttingGroupId = null;
+	RequestUtils.instance.request(Constants.API_URL, "POST", onMoveGroupCallback, params);
+}
 
-				if(remove) 
-				{
-					var params = "service=Group&method=Delete&id=" + groupId;
-					RequestUtils.instance.request(Constants.API_URL, "POST", onDeleteGroupCallback, params);
-				}
-			}
+function onMoveGroupCallback(xmlhttp)
+{
+	refreshCurrentGroup(xmlhttp);
+}
 
-			function onDeleteGroupCallback(xmlhttp)
-			{
-				if(RequestUtils.instance.checkForValidResponse(xmlhttp))
-				{
-					var result = JSON.parse(xmlhttp.responseText);
+function refreshCurrentGroup(xmlhttp)
+{
+	if(RequestUtils.instance.checkForValidResponse(xmlhttp))
+	{
+		var result = JSON.parse(xmlhttp.responseText);
 
-					if(result.success)
-						loadAjaxGroup(_currentGroupData.id);
-				}
-			}
+		if(result.success)
+			loadAjaxGroup(_currentGroupData.id);
+	}
+}
+
+function removeSubgroupGroup(groupId)
+{
+	var folderLabel 		= document.getElementById('folder_label_' + groupId);
+	var deleteFolderText 	= LocManager.instance.getLocalizedString("sure_to_delete_folder");
+	deleteFolderText 		= deleteFolderText.replace("[folder]", folderLabel.textContent);
+	var remove      		= confirm(deleteFolderText);
+
+	if(remove) 
+	{
+		var params = "service=Group&method=Delete&id=" + groupId;
+		RequestUtils.instance.request(Constants.API_URL, "POST", onDeleteGroupCallback, params);
+	}
+}
+
+function onDeleteGroupCallback(xmlhttp)
+{
+	if(RequestUtils.instance.checkForValidResponse(xmlhttp))
+	{
+		var result = JSON.parse(xmlhttp.responseText);
+
+		if(result.success)
+			loadAjaxGroup(_currentGroupData.id);
+	}
+}

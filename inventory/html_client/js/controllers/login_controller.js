@@ -48,8 +48,6 @@ function onLoginButtonClick()
 
 function login()
 {
-	//alert(EncriptionUtils.getInstance().encript("Hello"));
-			
 	var userEmail    = document.getElementById('user_email');	
 	var userPassword = document.getElementById('user_password');	
 	ServiceClient.instance.login(userEmail.value, userPassword.value, LoginController.instance.onLogingCallback );

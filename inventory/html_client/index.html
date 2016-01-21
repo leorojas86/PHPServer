@@ -23,22 +23,12 @@
 				Bootstrap.instance.initialize(onAppInitializationCompleted);
 			}
 
-			function onRegisterButtonClicked()
-			{
-				alert("onRegisterButtonClicked");
-			}
-
-			function onUserLogged()
-			{
-				alert("onUserLogged");
-			}
-
 			function onAppInitializationCompleted()
 			{
 				if(ServiceClient.instance.loggedUser == null)
 					LoginController.instance.render();
 				else
-					console.log("logged");
+					InventoryController.instance.render();
 			}
 
 		</script>
