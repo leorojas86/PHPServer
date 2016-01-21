@@ -12,7 +12,7 @@
 
 			function onPageLoaded() 
 		    {
-		    	LocManager.instance.loadLocalizationTable(InventoryAppConstants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
+		    	LocManager.instance.loadLocalizationTable(Constants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
 			}
 
 			function onLocalizationLoaded(sender)
@@ -46,7 +46,7 @@
 				if(userPassword.value == userConfirmPassword.value)
 				{
 					var params = "service=User&method=Register&name=" + userName.value + "&email=" + userEmail.value + "&password=" + userPassword.value;
-					RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onRegisterCallback, params);
+					RequestUtils.instance.request(Constants.API_URL, "POST", onRegisterCallback, params);
 				}
 				else
 				{

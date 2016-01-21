@@ -35,7 +35,7 @@ ServiceClientClass.prototype.login = function(email, password, callback)
 	var params 			= "service=User&method=Login" + "&email=" + email + "&password=" + password;
 	var thisVar			= this;
 	var loginCallback	=  function(resultData) { thisVar.onLoginCallback(resultData, callback) };
-	RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", function(xmlhttp, success) { thisVar.onRequestResponse(xmlhttp, success, loginCallback) }, params);
+	RequestUtils.instance.request(Constants.API_URL, "POST", function(xmlhttp, success) { thisVar.onRequestResponse(xmlhttp, success, loginCallback) }, params);
 }
 
 ServiceClientClass.prototype.onLoginCallback = function(resultData, callback)

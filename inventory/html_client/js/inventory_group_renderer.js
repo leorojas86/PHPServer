@@ -15,7 +15,7 @@ function uploadFile()
 	var test = document.getElementById("test");
 	test.src = imageData;
 
-	RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onUploadCompleted, params, onProgress);
+	RequestUtils.instance.request(Constants.API_URL, "POST", onUploadCompleted, params, onProgress);
 }
 
 function onProgress(progress) 
@@ -91,7 +91,7 @@ InventoryGroupRenderer.prototype.render = function(groupData)
 	else
 		groupAjax += "<p style='height:20px'>" + groupPath + "</p>";
 
-	if(subGroupType == InventoryAppConstants.GROUP_ID_FOLDER)
+	if(subGroupType == Constants.GROUP_ID_FOLDER)
 	{
 		groupAjax += "<div id='folders_scroll_panel' oncontextmenu='showContextMenu(event); return false;' align='center' style='overflow:scroll; width:600px; height:400px; border:1px solid gray;' title='" + rightClickOptions + "'>";
 
@@ -101,7 +101,7 @@ InventoryGroupRenderer.prototype.render = function(groupData)
 			var subGroupName = subGroup.name;
 			var subGroupId	 = subGroup.id;
 			var subGroupType = subGroup.type;
-			var icon 		 = subGroupType == InventoryAppConstants.GROUP_ID_FOLDER ? "inventory/app/images/Folder.png" : "inventory/app/images/File.png";
+			var icon 		 = subGroupType == Constants.GROUP_ID_FOLDER ? "inventory/app/images/Folder.png" : "inventory/app/images/File.png";
 
 			groupAjax += "<div id='folder_" + subGroupId + "' style='width:100px; height:120px; float: left;'>"+
 								"<img id='folder_image_" + subGroupId + "' src='" + icon + "' onclick='onSubGroupClick(" + subGroupId + ");' style='cursor:pointer; cursor:hand; width:100px; height:88px;'/>"+

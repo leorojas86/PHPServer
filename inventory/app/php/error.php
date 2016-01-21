@@ -10,7 +10,7 @@
 			
 			function onPageLoaded()
 			{
-				LocManager.instance.loadLocalizationTable(InventoryAppConstants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
+				LocManager.instance.loadLocalizationTable(Constants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
 			}
 
 			function onLocalizationLoaded(sender)

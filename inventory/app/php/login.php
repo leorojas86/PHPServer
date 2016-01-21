@@ -13,7 +13,7 @@
 
 			function onPageLoaded() 
 		    {
-		    	LocManager.instance.loadLocalizationTable(InventoryAppConstants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
+		    	LocManager.instance.loadLocalizationTable(Constants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
 			}
 
 			function onLocalizationLoaded(sender)
@@ -56,7 +56,7 @@
 				var userEmail    = document.getElementById('user_email');	
 				var userPassword = document.getElementById('user_password');	
 				var params 		 = "service=User&method=Login" + "&email=" + userEmail.value + "&password=" + userPassword.value;
-				RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onLoginCallback, params);
+				RequestUtils.instance.request(Constants.API_URL, "POST", onLoginCallback, params);
 			}
 
 			function onLoginCallback(xmlhttp)

@@ -19,7 +19,7 @@
 
 			function onPageLoaded() 
 		    {
-		    	LocManager.instance.loadLocalizationTable(InventoryAppConstants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
+		    	LocManager.instance.loadLocalizationTable(Constants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
 			}
 
 			function onLocalizationLoaded(sender)
@@ -27,7 +27,7 @@
 				document.onkeyup  = onKeyUp;
     			var groupContaner = document.getElementById('group_container');
     			var params 		  = "service=Group&method=GetRootGroupData";
-				RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onGroupContainerAjaxCallback, params);
+				RequestUtils.instance.request(Constants.API_URL, "POST", onGroupContainerAjaxCallback, params);
 			}
 
 			function onKeyUp(event)
@@ -51,16 +51,16 @@
 		    	switch(event.target.id)
 		    	{
 		    		case "folders_scroll_panel":
-		    			options.push(InventoryAppConstants.MENU_ITEM_ADD_ITEM);
-		    			options.push(InventoryAppConstants.MENU_ITEM_ADD_FOLDER);
+		    			options.push(Constants.MENU_ITEM_ADD_ITEM);
+		    			options.push(Constants.MENU_ITEM_ADD_FOLDER);
 
 		    			if(canPasteFolder())
-							options.push(InventoryAppConstants.MENU_ITEM_PASTE);
+							options.push(Constants.MENU_ITEM_PASTE);
 		    		break;
 		    		default:
-		    			options.push(InventoryAppConstants.MENU_ITEM_RENAME);
-		    			options.push(InventoryAppConstants.MENU_ITEM_CUT);
-		    			options.push(InventoryAppConstants.MENU_ITEM_DELETE);
+		    			options.push(Constants.MENU_ITEM_RENAME);
+		    			options.push(Constants.MENU_ITEM_CUT);
+		    			options.push(Constants.MENU_ITEM_DELETE);
 		    		break;
 		    	}
 
@@ -79,12 +79,12 @@
 		    {
 		    	switch(option)
 		    	{
-		    		case InventoryAppConstants.MENU_ITEM_ADD_ITEM: 		addItem(_folderId); 			break;
-		    		case InventoryAppConstants.MENU_ITEM_ADD_FOLDER: 	addFolder();      				break;
-		    		case InventoryAppConstants.MENU_ITEM_PASTE: 		pasteGroup();          			break;
-		    		case InventoryAppConstants.MENU_ITEM_RENAME:    	renameGroup(_folderId); 		break;
-		    		case InventoryAppConstants.MENU_ITEM_CUT: 			_cuttingGroupId = _folderId;	break;
-		    		case InventoryAppConstants.MENU_ITEM_DELETE: 		removeSubgroupGroup(_folderId);	break;
+		    		case Constants.MENU_ITEM_ADD_ITEM: 		addItem(_folderId); 			break;
+		    		case Constants.MENU_ITEM_ADD_FOLDER: 	addFolder();      				break;
+		    		case Constants.MENU_ITEM_PASTE: 		pasteGroup();          			break;
+		    		case Constants.MENU_ITEM_RENAME:    	renameGroup(_folderId); 		break;
+		    		case Constants.MENU_ITEM_CUT: 			_cuttingGroupId = _folderId;	break;
+		    		case Constants.MENU_ITEM_DELETE: 		removeSubgroupGroup(_folderId);	break;
 		    	}
 		    }
 
@@ -94,7 +94,7 @@
 		    	var itemName 			= prompt(typeNewItemNameText, "");
 
 				if(itemName != null && itemName != "") 
-					addSubGroup(itemName, InventoryAppConstants.GROUP_ID_ITEM);
+					addSubGroup(itemName, Constants.GROUP_ID_ITEM);
 		    }
 
 		    function addFolder()
@@ -103,7 +103,7 @@
 	    		var folderName         = prompt(typeFolderNameText, "");
 
 				if(folderName != null && folderName != "") 
-				    addSubGroup(folderName, InventoryAppConstants.GROUP_ID_FOLDER);
+				    addSubGroup(folderName, Constants.GROUP_ID_FOLDER);
 		    }
 
 		    function renameGroup(folderId)
@@ -114,7 +114,7 @@
 				if(folderName != null && folderName != "") 
 				{
 					var params = "service=Group&method=Rename&id=" + folderId + "&name=" + folderName;
-					RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onRenameCallback, params);
+					RequestUtils.instance.request(Constants.API_URL, "POST", onRenameCallback, params);
 				}
 		    }
 
@@ -127,7 +127,7 @@
 			{
 				var userData = document.getElementById('user_data');
 				var params   = "service=User&method=UpdateData&data=" + userData.value;
-				RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onUpdateUserDataCallback, params);
+				RequestUtils.instance.request(Constants.API_URL, "POST", onUpdateUserDataCallback, params);
 			}
 
 			function onUpdateUserDataCallback(xmlhttp)
@@ -145,7 +145,7 @@
 			{
 				var groupData = document.getElementById('group_data');
 				var params    = "service=Group&method=UpdateData&id=" + groupId + "&data=" + groupData.value;
-				RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onUpdateGroupDataCallback, params);
+				RequestUtils.instance.request(Constants.API_URL, "POST", onUpdateGroupDataCallback, params);
 			}
 
 			function onUpdateGroupDataCallback(xmlhttp)
@@ -157,7 +157,7 @@
 			function addSubGroup(newGroupName, type)
 			{
 				var params = "service=Group&method=AddSubGroup&parentGroupId=" + _currentGroupData.id + "&name=" + newGroupName + "&type=" + type;
-				RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onAddSubGroupCallback, params);
+				RequestUtils.instance.request(Constants.API_URL, "POST", onAddSubGroupCallback, params);
 			}
 
 			function onAddSubGroupCallback(xmlhttp)
@@ -184,7 +184,7 @@
 			function loadAjaxGroup(groupId)
 			{
 				var params = "service=Group&method=GetGroupData&id=" + groupId;
-				RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onGroupContainerAjaxCallback, params);
+				RequestUtils.instance.request(Constants.API_URL, "POST", onGroupContainerAjaxCallback, params);
 			}
 
 			function onGroupContainerAjaxCallback(xmlhttp)
@@ -205,7 +205,7 @@
 			{
 				var searchTesxtInput = document.getElementById('search_input');
 				var params 	    	 = "service=Group&method=Search&searchText=" + searchTesxtInput.value;
-				RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onSearchCallback, params);
+				RequestUtils.instance.request(Constants.API_URL, "POST", onSearchCallback, params);
 			}
 
 			function onSearchCallback(xmlhttp)
@@ -218,7 +218,7 @@
 			{
 				var params 	    = "service=Group&method=Move&id=" + _cuttingGroupId + "&parentGroupId=" + _currentGroupData.id;
 				_cuttingGroupId = null;
-				RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onMoveGroupCallback, params);
+				RequestUtils.instance.request(Constants.API_URL, "POST", onMoveGroupCallback, params);
 			}
 
 			function onMoveGroupCallback(xmlhttp)
@@ -247,7 +247,7 @@
 				if(remove) 
 				{
 					var params = "service=Group&method=Delete&id=" + groupId;
-					RequestUtils.instance.request(InventoryAppConstants.API_URL, "POST", onDeleteGroupCallback, params);
+					RequestUtils.instance.request(Constants.API_URL, "POST", onDeleteGroupCallback, params);
 				}
 			}
 
