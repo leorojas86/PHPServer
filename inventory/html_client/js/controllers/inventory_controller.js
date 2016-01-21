@@ -1,11 +1,11 @@
 var _currentGroupData = null;
 var _cuttingGroupId   = null;
 var _folderId         = null;
-var groupRenderer     = new InventoryGroupRenderer();
+var groupRenderer     = new InventoryGroupController();
 
 
 //Singleton instance
-var InventoryController = { instance : new LoginControllerClass() };
+var InventoryController = { instance : new InventoryControllerClass() };
 
 //Constructors
 function InventoryControllerClass()

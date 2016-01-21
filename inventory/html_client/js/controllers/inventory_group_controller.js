@@ -1,4 +1,5 @@
-function InventoryGroupRenderer()
+
+function InventoryGroupController()
 {
 }
 
@@ -69,7 +70,7 @@ function onSelectedFileChange()
     }
 }
 
-InventoryGroupRenderer.prototype.render = function(groupData)
+InventoryGroupController.prototype.render = function(groupData)
 {
 	var backButtonTooltip = LocManager.instance.getLocalizedString("back_button_tooltip");
 	var backButtonText    = LocManager.instance.getLocalizedString("back_button_text");
