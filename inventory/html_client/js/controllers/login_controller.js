@@ -52,12 +52,17 @@ function login()
 			
 	var userEmail    = document.getElementById('user_email');	
 	var userPassword = document.getElementById('user_password');	
-	ServiceClient.instance.login(userEmail.value, userPassword.value, function(resultData) { LoginController.instance.notifyOnUserLogged(); } );
+	ServiceClient.instance.login(userEmail.value, userPassword.value, LoginController.instance.onLogingCallback );
 }
 
-LoginControllerClass.prototype.notifyOnUserLogged = function()
+LoginControllerClass.prototype.onLogingCallback = function(resultData)
 {
-	this.onUserLogged();
+	if(resultData != null && resultData.success)
+	{
+		alert("success");
+	}
+	else
+		alert("Login Failed, " + resultData.errorMessage);
 }
 
 function onRegisterButtonClick()
