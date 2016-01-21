@@ -41,7 +41,7 @@ ServiceClientClass.prototype.login = function(email, password, callback)
 ServiceClientClass.prototype.onLoginCallback = function(resultData, callback)
 {
 	if(resultData.success)
-		loggedUser = result.data;
+		loggedUser = resultData.data;
 
 	callback(resultData);
 }
