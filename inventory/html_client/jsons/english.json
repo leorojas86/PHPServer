@@ -1,4 +1,5 @@
 {
+    "loading_text"                 : "Loading...",
     "type_new_name" 		       : "Type the new name",
     "type_new_item_name"           : "Type the new item name",
     "type_new_folder_name"         : "Type the new folder name",

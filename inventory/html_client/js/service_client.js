@@ -52,6 +52,12 @@ ServiceClientClass.prototype.loadRootGroup = function(callback)
 	this.request("POST", params, callback);
 }
 
+ServiceClientClass.prototype.loadGroup = function(groupId, callback)
+{
+	var params = "service=Group&method=GetGroupData&id=" + groupId;
+	this.request("POST", params, callback);
+}
+
 ServiceClientClass.prototype.request = function(method, params, callback)
 {
 	var thisVar = this;

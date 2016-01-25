@@ -16,8 +16,9 @@ function InventoryControllerClass()
 //Methods
 InventoryControllerClass.prototype.render = function()
 {
-	var body 	   = document.getElementById("body");
-	body.innerHTML = 	"<div id='group_container'>Loading...</div>" +
+	var loadingText = LocManager.instance.getLocalizedString("loading_text");
+	var body 	    = document.getElementById("body");
+	body.innerHTML  = 	"<div id='group_container'>" + loadingText + "</div>" +
 						"<div id='context_menu_container' style='position: absolute; left: 100px; top: 150px;' ></div>";
 
 	ServiceClient.instance.loadRootGroup(onLoadGroupCallback);
@@ -176,8 +177,7 @@ function onBackButtonClick(parentGroupId)
 
 function loadAjaxGroup(groupId)
 {
-	var params = "service=Group&method=GetGroupData&id=" + groupId;
-	RequestUtils.instance.request(Constants.API_URL, "POST", onLoadGroupCallback, params);
+	ServiceClient.instance.loadGroup(groupId, onLoadGroupCallback);
 }
 
 function onLoadGroupCallback(resultData)
