@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.5
+-- version 4.4.10
 -- http://www.phpmyadmin.net
 --
--- Host: localhost:8889
--- Generation Time: Aug 17, 2015 at 06:39 AM
--- Server version: 5.5.38
--- PHP Version: 5.5.14
+-- Host: localhost:3306
+-- Generation Time: Jan 25, 2016 at 04:44 AM
+-- Server version: 5.5.42
+-- PHP Version: 7.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -21,20 +21,21 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `groups` (
-`id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `name` varchar(100) NOT NULL,
   `type` int(11) NOT NULL,
   `user_id` bigint(20) NOT NULL,
   `parent_group_id` bigint(20) DEFAULT NULL,
   `tags` varchar(300) DEFAULT NULL,
   `data` varchar(1000) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=65 ;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `groups`
 --
 
 INSERT INTO `groups` (`id`, `name`, `type`, `user_id`, `parent_group_id`, `tags`, `data`) VALUES
+(1, 'sdsds', 1, 8, 44, NULL, NULL),
 (42, 'RootGroup', 0, 8, 0, NULL, NULL),
 (44, 'test1', 0, 8, 42, NULL, NULL),
 (50, 'RootGroup', 0, 10, 0, NULL, NULL),
@@ -67,13 +68,13 @@ CREATE TABLE `tags` (
 --
 
 CREATE TABLE `users` (
-`id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `fb_id` bigint(20) DEFAULT NULL,
   `email` varchar(150) NOT NULL,
   `password` varchar(100) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   `data` varchar(2000) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -95,13 +96,19 @@ INSERT INTO `users` (`id`, `fb_id`, `email`, `password`, `name`, `data`) VALUES
 -- Indexes for table `groups`
 --
 ALTER TABLE `groups`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tags`
+--
+ALTER TABLE `tags`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
- ADD PRIMARY KEY (`id`)a ADD UNIQUE KEY `email` (`email`), ADD UNIQUE KEY `id` (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -111,9 +118,14 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=65;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=65;
+--
+-- AUTO_INCREMENT for table `tags`
+--
+ALTER TABLE `tags`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
