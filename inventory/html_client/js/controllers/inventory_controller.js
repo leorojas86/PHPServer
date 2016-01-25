@@ -150,19 +150,14 @@ function onUpdateGroupDataCallback(xmlhttp)
 
 function addSubGroup(newGroupName, type)
 {
-	var params = "service=Group&method=AddSubGroup&parentGroupId=" + _currentGroupData.id + "&name=" + newGroupName + "&type=" + type;
-	RequestUtils.instance.request(Constants.API_URL, "POST", onAddSubGroupCallback, params);
+	ServiceClient.instance.addSubGroup(_currentGroupData.id, newGroupName, type, onAddSubGroupCallback);
 }
 
-function onAddSubGroupCallback(xmlhttp)
+function onAddSubGroupCallback(resultData)
 {
-	if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
-	{
-		var result = JSON.parse(xmlhttp.responseText);
-
-		if(result.success)
-			loadAjaxGroup(_currentGroupData.id);
-	}
+	if(resultData.success) 
+		loadAjaxGroup(_currentGroupData.id);
+	//TODO: Handle error case
 }
 
 function onSubGroupClick(groupId)

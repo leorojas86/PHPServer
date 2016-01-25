@@ -58,6 +58,12 @@ ServiceClientClass.prototype.loadGroup = function(groupId, callback)
 	this.request("POST", params, callback);
 }
 
+ServiceClientClass.prototype.addSubGroup = function(parentGroupId, newGroupName, type, callback)
+{
+	var params = "service=Group&method=AddSubGroup&parentGroupId=" + parentGroupId + "&name=" + newGroupName + "&type=" + type;
+	this.request("POST", params, callback);
+}
+
 ServiceClientClass.prototype.request = function(method, params, callback)
 {
 	var thisVar = this;

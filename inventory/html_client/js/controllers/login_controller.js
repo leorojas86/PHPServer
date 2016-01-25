@@ -1,4 +1,3 @@
-
 //Singleton instance
 var LoginController = { instance : new LoginControllerClass() };
 
@@ -50,7 +49,7 @@ function login()
 {
 	var userEmail    = document.getElementById('user_email');	
 	var userPassword = document.getElementById('user_password');	
-	ServiceClient.instance.login(userEmail.value, userPassword.value, LoginController.instance.onLogingCallback );
+	ServiceClient.instance.login(userEmail.value, userPassword.value, LoginController.instance.onLogingCallback);
 }
 
 LoginControllerClass.prototype.onLogingCallback = function(resultData)
