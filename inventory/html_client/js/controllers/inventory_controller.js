@@ -10,6 +10,7 @@ var InventoryController = { instance : new InventoryControllerClass() };
 //Constructors
 function InventoryControllerClass()
 {
+	document.onkeyup = onKeyUp;
 }
 
 //Methods
@@ -19,9 +20,7 @@ InventoryControllerClass.prototype.render = function()
 	body.innerHTML = 	"<div id='group_container'>Loading...</div>" +
 						"<div id='context_menu_container' style='position: absolute; left: 100px; top: 150px;' ></div>";
 
-	var params 		  = "service=Group&method=GetRootGroupData";
-	RequestUtils.instance.request(Constants.API_URL, "POST", onGroupContainerAjaxCallback, params);
-	document.onkeyup  = onKeyUp;
+	ServiceClient.instance.loadRootGroup(onLoadGroupCallback);
 }
 
 function onKeyUp(event)
@@ -178,21 +177,17 @@ function onBackButtonClick(parentGroupId)
 function loadAjaxGroup(groupId)
 {
 	var params = "service=Group&method=GetGroupData&id=" + groupId;
-	RequestUtils.instance.request(Constants.API_URL, "POST", onGroupContainerAjaxCallback, params);
+	RequestUtils.instance.request(Constants.API_URL, "POST", onLoadGroupCallback, params);
 }
 
-function onGroupContainerAjaxCallback(xmlhttp, success)
+function onLoadGroupCallback(resultData)
 {
-	if(success) 
+	if(resultData.success) 
 	{
-		var result = JSON.parse(xmlhttp.responseText);
-
-		if(result.success)
-		{
-			_currentGroupData = result.data;
-			groupRenderer.render(_currentGroupData);
-		}
+		_currentGroupData = resultData.data;
+		groupRenderer.render(_currentGroupData);
 	}
+	//TODO: Report error
 }
 
 function onSearchButtonClick()

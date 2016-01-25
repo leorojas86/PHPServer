@@ -33,9 +33,9 @@ ServiceClientClass.prototype.notifyOnInitializationCompleted = function(success)
 ServiceClientClass.prototype.login = function(email, password, callback)
 {
 	var params 			= "service=User&method=Login" + "&email=" + email + "&password=" + password;
-	var thisVar			= this;
+	var thisVar 		= this;
 	var loginCallback	=  function(resultData) { thisVar.onLoginCallback(resultData, callback) };
-	RequestUtils.instance.request(Constants.API_URL, "POST", function(xmlhttp, success) { thisVar.onRequestResponse(xmlhttp, success, loginCallback) }, params);
+	this.request("POST", params, loginCallback);
 }
 
 ServiceClientClass.prototype.onLoginCallback = function(resultData, callback)
@@ -46,24 +46,24 @@ ServiceClientClass.prototype.onLoginCallback = function(resultData, callback)
 	callback(resultData);
 }
 
-ServiceClientClass.prototype.onRequestResponse = function(xmlhttp, success, callback)
+ServiceClientClass.prototype.loadRootGroup = function(callback)
 {
- 	var resultData = null;
-
-	if(success)
-	{
-		resultData = JSON.parse(xmlhttp.responseText);
-
-		if(!resultData.success)
-			this.logResponse(xmlhttp);
-	}
-	else
-		this.logResponse(xmlhttp);
-
-	callback(resultData);
+	var params = "service=Group&method=GetRootGroupData";
+	this.request("POST", params, callback);
 }
 
-ServiceClientClass.prototype.logResponse = function(xmlhttp)
+ServiceClientClass.prototype.request = function(method, params, callback)
 {
-	console.log("Response Text = " + xmlhttp.responseText);
+	var thisVar = this;
+	RequestUtils.instance.request(Constants.API_URL, "POST", function(xmlhttp, success) { thisVar.onRequestResponse(xmlhttp, success, callback) }, params);
+}
+
+ServiceClientClass.prototype.onRequestResponse = function(xmlhttp, success, callback)
+{
+	var resultData = success ? JSON.parse(xmlhttp.responseText) : { success : false, data : xmlhttp.responseText };
+
+	if(!resultData.success)
+		console.log("Response Text = " + xmlhttp.responseText)
+
+	callback(resultData);
 }
