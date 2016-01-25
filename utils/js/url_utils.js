@@ -5,15 +5,16 @@ function URLUtilsClass()
 	
 }
 
-URLUtilsClass.prototype.getHostName = function()
+URLUtilsClass.prototype.getServerURL = function()
 {
-	var host 		 = window.location.href;
-	var paramsIndex  = host.indexOf("?");
+	var url 		  			= window.location.href;
+	var protocolIndex 			= url.indexOf("//");
+	var protocol  				= url.substring(0, protocolIndex);
+	var path    				= url.substring(protocolIndex + 2, url.length);
+	var nextPathSeparatorIndex 	= path.indexOf("/");
+	var server  				= nextPathSeparatorIndex != -1 ? path.substring(0, nextPathSeparatorIndex) : path;
 
-	if(paramsIndex != -1)
-		host = host.substring(0, paramsIndex);//Remove params if necessary
-
-	return host;
+	return protocol + "//" + server + "/";
 };
 
 URLUtilsClass.prototype.redirect = function(url)

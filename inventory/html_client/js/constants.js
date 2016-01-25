@@ -1,4 +1,4 @@
-var URL = "http://201.200.1.187/";
+var URL = URLUtils.instance.getServerURL();
 
 var Constants =
 {
