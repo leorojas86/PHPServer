@@ -16,21 +16,12 @@ function InventoryControllerClass()
 InventoryControllerClass.prototype.render = function()
 {
 	var body 	   = document.getElementById("body");
-	body.innerHTML = 	"<div id='group_container'></div>" +
+	body.innerHTML = 	"<div id='group_container'>Loading...</div>" +
 						"<div id='context_menu_container' style='position: absolute; left: 100px; top: 150px;' ></div>";
-}
 
-function onPageLoaded() 
-{
-	LocManager.instance.loadLocalizationTable(Constants.ENGLISH_LOCALIZATION_TABLE, onLocalizationLoaded, false);
-}
-
-function onLocalizationLoaded(sender)
-{
-	document.onkeyup  = onKeyUp;
-	var groupContaner = document.getElementById('group_container');
 	var params 		  = "service=Group&method=GetRootGroupData";
 	RequestUtils.instance.request(Constants.API_URL, "POST", onGroupContainerAjaxCallback, params);
+	document.onkeyup  = onKeyUp;
 }
 
 function onKeyUp(event)
@@ -190,9 +181,9 @@ function loadAjaxGroup(groupId)
 	RequestUtils.instance.request(Constants.API_URL, "POST", onGroupContainerAjaxCallback, params);
 }
 
-function onGroupContainerAjaxCallback(xmlhttp)
+function onGroupContainerAjaxCallback(xmlhttp, success)
 {
-	if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
+	if(success) 
 	{
 		var result = JSON.parse(xmlhttp.responseText);
 
