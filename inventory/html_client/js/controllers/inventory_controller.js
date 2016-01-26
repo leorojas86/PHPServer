@@ -16,12 +16,16 @@ function InventoryControllerClass()
 //Methods
 InventoryControllerClass.prototype.render = function()
 {
+	this.clearHTML();
+	ServiceClient.instance.loadRootGroup(onLoadGroupCallback);
+}
+
+InventoryControllerClass.prototype.clearHTML = function()
+{
 	var loadingText = LocManager.instance.getLocalizedString("loading_text");
 	var body 	    = document.getElementById("body");
 	body.innerHTML  = 	"<div id='group_container'>" + loadingText + "</div>" +
 						"<div id='context_menu_container' style='position: absolute; left: 100px; top: 150px;' ></div>";
-
-	ServiceClient.instance.loadRootGroup(onLoadGroupCallback);
 }
 
 function onKeyUp(event)
@@ -32,7 +36,7 @@ function onKeyUp(event)
 	    	var backButton = document.getElementById("back_button");
 
 			if(backButton != null) 
-					 backButton.onclick.apply(backButton);
+				backButton.onclick.apply(backButton);
 	    break;
 	    default: console.log("pressed key = " + event.which); break;
 	}
@@ -156,22 +160,23 @@ function addSubGroup(newGroupName, type)
 function onAddSubGroupCallback(resultData)
 {
 	if(resultData.success) 
-		loadAjaxGroup(_currentGroupData.id);
+		InventoryController.instance.loadAjaxGroup(_currentGroupData.id);
 	//TODO: Handle error case
 }
 
 function onSubGroupClick(groupId)
 {
-	loadAjaxGroup(groupId);
+	InventoryController.instance.loadAjaxGroup(groupId);
 }
 
 function onBackButtonClick(parentGroupId)
 {
-	loadAjaxGroup(parentGroupId);
+	InventoryController.instance.loadAjaxGroup(parentGroupId);
 }
 
-function loadAjaxGroup(groupId)
+InventoryControllerClass.prototype.loadAjaxGroup = function(groupId)
 {
+	this.clearHTML();
 	ServiceClient.instance.loadGroup(groupId, onLoadGroupCallback);
 }
 
@@ -217,7 +222,7 @@ function refreshCurrentGroup(xmlhttp)
 		var result = JSON.parse(xmlhttp.responseText);
 
 		if(result.success)
-			loadAjaxGroup(_currentGroupData.id);
+			InventoryController.instance.loadAjaxGroup(_currentGroupData.id);
 	}
 }
 
@@ -229,19 +234,12 @@ function removeSubgroupGroup(groupId)
 	var remove      		= confirm(deleteFolderText);
 
 	if(remove) 
-	{
-		var params = "service=Group&method=Delete&id=" + groupId;
-		RequestUtils.instance.request(Constants.API_URL, "POST", onDeleteGroupCallback, params);
-	}
+		ServiceClient.instance.deleteGroup(groupId, onDeleteGroupCallback);
 }
 
-function onDeleteGroupCallback(xmlhttp)
+function onDeleteGroupCallback(resultData)
 {
-	if(RequestUtils.instance.checkForValidResponse(xmlhttp))
-	{
-		var result = JSON.parse(xmlhttp.responseText);
-
-		if(result.success)
-			loadAjaxGroup(_currentGroupData.id);
-	}
+	if(resultData.success)
+		InventoryController.instance.loadAjaxGroup(_currentGroupData.id);
+	//TODO: handle error case
 }

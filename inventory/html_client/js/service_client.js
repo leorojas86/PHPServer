@@ -64,6 +64,12 @@ ServiceClientClass.prototype.addSubGroup = function(parentGroupId, newGroupName,
 	this.request("POST", params, callback);
 }
 
+ServiceClientClass.prototype.deleteGroup = function(groupId, callback)
+{
+	var params = "service=Group&method=Delete&id=" + groupId;
+	this.request("POST", params, callback);
+}
+
 ServiceClientClass.prototype.request = function(method, params, callback)
 {
 	var thisVar = this;
