@@ -1,11 +1,11 @@
-var _currentGroupData = null;
-var _cuttingGroupId   = null;
-var _folderId         = null;
-var groupRenderer     = new InventoryGroupController();
-
-
 //Singleton instance
 var InventoryController = { instance : new InventoryControllerClass() };
+
+//Variables
+
+InventoryControllerClass.prototype._currentGroupData 	= null;
+InventoryControllerClass.prototype._cuttingGroupId 		= null;
+InventoryControllerClass.prototype._folderId 			= null;
 
 //Constructors
 function InventoryControllerClass()
@@ -16,17 +16,13 @@ function InventoryControllerClass()
 //Methods
 InventoryControllerClass.prototype.render = function()
 {
-	this.clearHTML();
-	ServiceClient.instance.loadRootGroup(onLoadGroupCallback);
-}
-
-InventoryControllerClass.prototype.clearHTML = function()
-{
 	var loadingText = LocManager.instance.getLocalizedString("loading_text");
 	var body 	    = document.getElementById("body");
 	body.innerHTML  = 	"<div id='group_container'>" + loadingText + "</div>" +
 						"<div id='context_menu_container' style='position: absolute; left: 100px; top: 150px;' ></div>";
-}
+
+	InventoryGroupController.instance.renderRootGroup();
+};
 
 function onKeyUp(event)
 {
@@ -70,7 +66,7 @@ function showContextMenu(event)
 
 function canPasteFolder()
 {
-	return _currentGroupData != null && _currentGroupData.can_paste;
+	return InventoryController.instance._currentGroupData != null && InventoryController.instance._currentGroupData.can_paste;
 }
 
 function onContextMenuOptionSelected(option)
@@ -118,18 +114,6 @@ function onRenameCallback(xmlhttp)
 	refreshCurrentGroup(xmlhttp);
 }
 
-function onUpdateGroupDataClick(groupId)
-{
-	var groupData = document.getElementById('group_data');
-	ServiceClient.instance.updateGroupData(groupId, groupData.value, onUpdateGroupDataCallback);
-}
-
-function onUpdateGroupDataCallback(resultData)
-{
-	//if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
-		alert("success = '" + resultData.success + "'");
-}
-
 function addSubGroup(newGroupName, type)
 {
 	ServiceClient.instance.addSubGroup(_currentGroupData.id, newGroupName, type, onAddSubGroupCallback);
@@ -140,32 +124,6 @@ function onAddSubGroupCallback(resultData)
 	if(resultData.success) 
 		InventoryController.instance.loadAjaxGroup(_currentGroupData.id);
 	//TODO: Handle error case
-}
-
-function onSubGroupClick(groupId)
-{
-	InventoryController.instance.loadAjaxGroup(groupId);
-}
-
-function onBackButtonClick(parentGroupId)
-{
-	InventoryController.instance.loadAjaxGroup(parentGroupId);
-}
-
-InventoryControllerClass.prototype.loadAjaxGroup = function(groupId)
-{
-	this.clearHTML();
-	ServiceClient.instance.loadGroup(groupId, onLoadGroupCallback);
-}
-
-function onLoadGroupCallback(resultData)
-{
-	if(resultData.success) 
-	{
-		_currentGroupData = resultData.data;
-		groupRenderer.renderGroupData(_currentGroupData);
-	}
-	//TODO: Report error
 }
 
 function onSearchButtonClick()
@@ -190,7 +148,7 @@ function pasteGroup()
 function refreshCurrentGroup(resultData)
 {
 	if(resultData.success)
-		InventoryController.instance.loadAjaxGroup(_currentGroupData.id);
+		InventoryGroupController.instance.loadAjaxGroup(InventoryController.instance._currentGroupData.id);
 	//TODO: Handle error case
 }
 
@@ -208,6 +166,6 @@ function removeSubgroupGroup(groupId)
 function onDeleteGroupCallback(resultData)
 {
 	if(resultData.success)
-		InventoryController.instance.loadAjaxGroup(_currentGroupData.id);
+		InventoryGroupController.instance.loadAjaxGroup(_currentGroupData.id);
 	//TODO: handle error case
 }

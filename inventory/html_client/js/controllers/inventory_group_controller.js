@@ -1,66 +1,14 @@
 
-function InventoryGroupController()
+//Singleton instance
+var InventoryGroupController = { instance : new InventoryGroupControllerClass() };
+
+
+
+function InventoryGroupControllerClass()
 {
 }
 
-function uploadFile()
-{
-	var imageData = imageContainer.toDataURL("image/jpeg");
-	ServiceClient.instance.uploadFile(imageData, onUploadCompleted, onProgress);
-}
-
-function onProgress(progress) 
-{
-	document.getElementById('progressNumber').innerHTML = (progress * 100).toString() + '%';
-}
-
-function onUploadCompleted(resultData)
-{
-	alert("success = " + resultData.success);
-}
-
-function onSelectedFileChange()
-{
-	var fileInput = document.getElementById('fileToUpload');
-	var ext       = fileInput.value.match(/\.([^\.]+)$/)[1];
-
-    switch(ext)
-    {
-        case 'jpg':
-        case 'bmp':
-        case 'png':
-        case 'tif':
-            var imageContainer = document.getElementById('imageContainer');
-            imageContainer.src = fileInput.files[0];
-            var reader   	   = new FileReader();
-	        reader.onload 	   = function(e) 
-	        {	
-			    var img = new Image();
-			    
-			    img.onload = function() 
-			    { 
-			    	var fitScale  = MathUtils.instance.getFitScale({ "x":img.width, "y":img.height }, { "x":imageContainer.width, "y":imageContainer.height }, "FitIn");
-			    	var fitWidth  = img.width  * fitScale;
-			    	var fitHeight = img.height * fitScale;
-			    	var fitX      = (imageContainer.width  - fitWidth)  / 2;
-			    	var fitY      = (imageContainer.height - fitHeight) / 2;
-
-			    	imageContainer.getContext("2d").clearRect(0,0, imageContainer.width, imageContainer.height);
-			    	imageContainer.getContext("2d").drawImage(img, fitX, fitY, fitWidth, fitHeight); 
-			    };
-			    img.src = e.target.result;
-	        }
-
-	        reader.readAsDataURL(fileInput.files[0]);
-        break;
-        default:
-            alert('Selected file is not a valid image');
-            fileInput.value	   = '';
-            imageContainer.src = '';
-    }
-}
-
-InventoryGroupController.prototype.renderGroupData = function(groupData)
+InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 {
 	var backButtonTooltip = LocManager.instance.getLocalizedString("back_button_tooltip");
 	var backButtonText    = LocManager.instance.getLocalizedString("back_button_text");
@@ -124,6 +72,114 @@ InventoryGroupController.prototype.renderGroupData = function(groupData)
 
 	groupAjax += "</div>";
 
-	var groupContaner 	    = document.getElementById('group_container');
-	groupContaner.innerHTML = groupAjax;
+	document.getElementById('group_container').innerHTML = groupAjax;
 };
+
+InventoryGroupControllerClass.prototype.renderRootGroup = function()
+{
+	this.clearHTML();
+	var thisVar = this;
+	ServiceClient.instance.loadRootGroup(function(resultData) { thisVar.onLoadGroupCallback(resultData) });
+};
+
+InventoryGroupControllerClass.prototype.onLoadGroupCallback = function(resultData)
+{
+	if(resultData.success) 
+	{
+		InventoryController.instance._currentGroupData = resultData.data;
+		this.renderGroup(InventoryController.instance._currentGroupData);
+	}
+	//TODO: Report error
+};
+
+InventoryGroupControllerClass.prototype.clearHTML = function()
+{
+	var loadingText 			= LocManager.instance.getLocalizedString("loading_text");
+	var groupContainer  		= document.getElementById("group_container");
+	groupContainer.innerHTML 	= loadingText;
+};
+
+InventoryGroupControllerClass.prototype.loadAjaxGroup = function(groupId)
+{
+	this.clearHTML();
+	var thisVar = this;
+	ServiceClient.instance.loadGroup(groupId, function(resultData) { thisVar.onLoadGroupCallback(resultData) });
+};
+
+function uploadFile()
+{
+	var imageData = imageContainer.toDataURL("image/jpeg");
+	ServiceClient.instance.uploadFile(imageData, onUploadCompleted, onProgress);
+}
+
+function onProgress(progress) 
+{
+	document.getElementById('progressNumber').innerHTML = (progress * 100).toString() + '%';
+}
+
+function onUploadCompleted(resultData)
+{
+	alert("success = " + resultData.success);
+}
+
+function onSelectedFileChange()
+{
+	var fileInput = document.getElementById('fileToUpload');
+	var ext       = fileInput.value.match(/\.([^\.]+)$/)[1];
+
+    switch(ext)
+    {
+        case 'jpg':
+        case 'bmp':
+        case 'png':
+        case 'tif':
+            var imageContainer = document.getElementById('imageContainer');
+            imageContainer.src = fileInput.files[0];
+            var reader   	   = new FileReader();
+	        reader.onload 	   = function(e) 
+	        {	
+			    var img = new Image();
+			    
+			    img.onload = function() 
+			    { 
+			    	var fitScale  = MathUtils.instance.getFitScale({ "x":img.width, "y":img.height }, { "x":imageContainer.width, "y":imageContainer.height }, "FitIn");
+			    	var fitWidth  = img.width  * fitScale;
+			    	var fitHeight = img.height * fitScale;
+			    	var fitX      = (imageContainer.width  - fitWidth)  / 2;
+			    	var fitY      = (imageContainer.height - fitHeight) / 2;
+
+			    	imageContainer.getContext("2d").clearRect(0,0, imageContainer.width, imageContainer.height);
+			    	imageContainer.getContext("2d").drawImage(img, fitX, fitY, fitWidth, fitHeight); 
+			    };
+			    img.src = e.target.result;
+	        }
+
+	        reader.readAsDataURL(fileInput.files[0]);
+        break;
+        default:
+            alert('Selected file is not a valid image');
+            fileInput.value	   = '';
+            imageContainer.src = '';
+    }
+}
+
+function onSubGroupClick(groupId)
+{
+	InventoryGroupController.instance.loadAjaxGroup(groupId);
+}
+
+function onUpdateGroupDataClick(groupId)
+{
+	var groupData = document.getElementById('group_data');
+	ServiceClient.instance.updateGroupData(groupId, groupData.value, onUpdateGroupDataCallback);
+}
+
+function onUpdateGroupDataCallback(resultData)
+{
+	alert("success = '" + resultData.success + "'");
+}
+
+function onBackButtonClick(parentGroupId)
+{
+	InventoryGroupController.instance.loadAjaxGroup(parentGroupId);
+}
