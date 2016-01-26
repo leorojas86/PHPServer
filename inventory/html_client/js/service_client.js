@@ -76,6 +76,18 @@ ServiceClientClass.prototype.renameGroup = function(groupId, name, callback)
 	this.request("POST", params, callback);
 }
 
+ServiceClientClass.prototype.moveGroup = function(groupId, parentGroupId, callback)
+{
+	var params = "service=Group&method=Move&id=" + groupId + "&parentGroupId=" + parentGroupId;
+	this.request("POST", params, callback);
+}
+
+ServiceClientClass.prototype.updateGroupData = function(groupId, groupData, callback)
+{
+	var params = "service=Group&method=UpdateData&id=" + groupId + "&data=" + groupData;
+	this.request("POST", params, callback);
+}
+
 ServiceClientClass.prototype.request = function(method, params, callback)
 {
 	var thisVar = this;

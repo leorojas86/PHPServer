@@ -139,14 +139,13 @@ function onUpdateUserDataCallback(xmlhttp)
 function onUpdateGroupDataClick(groupId)
 {
 	var groupData = document.getElementById('group_data');
-	var params    = "service=Group&method=UpdateData&id=" + groupId + "&data=" + groupData.value;
-	RequestUtils.instance.request(Constants.API_URL, "POST", onUpdateGroupDataCallback, params);
+	ServiceClient.instance.updateGroupData(groupId, groupData.value, onUpdateGroupDataCallback);
 }
 
-function onUpdateGroupDataCallback(xmlhttp)
+function onUpdateGroupDataCallback(resultData)
 {
 	//if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
-		alert("result '" + xmlhttp.responseText + "'");
+		alert("success = '" + resultData.success + "'");
 }
 
 function addSubGroup(newGroupName, type)
@@ -202,14 +201,8 @@ function onSearchCallback(xmlhttp)
 
 function pasteGroup()
 {
-	var params 	    = "service=Group&method=Move&id=" + _cuttingGroupId + "&parentGroupId=" + _currentGroupData.id;
+	ServiceClient.instance.moveGroup(_cuttingGroupId, _currentGroupData.id, refreshCurrentGroup);
 	_cuttingGroupId = null;
-	RequestUtils.instance.request(Constants.API_URL, "POST", onMoveGroupCallback, params);
-}
-
-function onMoveGroupCallback(xmlhttp)
-{
-	refreshCurrentGroup(xmlhttp);
 }
 
 function refreshCurrentGroup(resultData)
