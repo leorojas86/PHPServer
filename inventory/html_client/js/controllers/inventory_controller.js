@@ -2,7 +2,6 @@
 var InventoryController = { instance : new InventoryControllerClass() };
 
 //Variables
-
 InventoryControllerClass.prototype._currentGroupData 	= null;
 InventoryControllerClass.prototype._cuttingGroupId 		= null;
 InventoryControllerClass.prototype._folderId 			= null;
