@@ -110,10 +110,7 @@ function renameGroup(folderId)
 	var folderName 		  = prompt(typeNewFolderName, "");
 
 	if(folderName != null && folderName != "") 
-	{
-		var params = "service=Group&method=Rename&id=" + folderId + "&name=" + folderName;
-		RequestUtils.instance.request(Constants.API_URL, "POST", onRenameCallback, params);
-	}
+		ServiceClient.instance.renameGroup(folderId, folderName, onRenameCallback);
 }
 
 function onRenameCallback(xmlhttp)
@@ -185,7 +182,7 @@ function onLoadGroupCallback(resultData)
 	if(resultData.success) 
 	{
 		_currentGroupData = resultData.data;
-		groupRenderer.render(_currentGroupData);
+		groupRenderer.renderGroupData(_currentGroupData);
 	}
 	//TODO: Report error
 }
@@ -215,15 +212,11 @@ function onMoveGroupCallback(xmlhttp)
 	refreshCurrentGroup(xmlhttp);
 }
 
-function refreshCurrentGroup(xmlhttp)
+function refreshCurrentGroup(resultData)
 {
-	if(RequestUtils.instance.checkForValidResponse(xmlhttp))
-	{
-		var result = JSON.parse(xmlhttp.responseText);
-
-		if(result.success)
-			InventoryController.instance.loadAjaxGroup(_currentGroupData.id);
-	}
+	if(resultData.success)
+		InventoryController.instance.loadAjaxGroup(_currentGroupData.id);
+	//TODO: Handle error case
 }
 
 function removeSubgroupGroup(groupId)

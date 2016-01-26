@@ -70,6 +70,12 @@ ServiceClientClass.prototype.deleteGroup = function(groupId, callback)
 	this.request("POST", params, callback);
 }
 
+ServiceClientClass.prototype.renameGroup = function(groupId, name, callback)
+{
+	var params = "service=Group&method=Rename&id=" + groupId + "&name=" + name;
+	this.request("POST", params, callback);
+}
+
 ServiceClientClass.prototype.request = function(method, params, callback)
 {
 	var thisVar = this;
