@@ -77,7 +77,7 @@ function onContextMenuOptionSelected(option)
 		case Constants.MENU_ITEM_ADD_FOLDER: 	addFolder();      				break;
 		case Constants.MENU_ITEM_PASTE: 		pasteGroup();          			break;
 		case Constants.MENU_ITEM_RENAME:    	renameGroup(_folderId); 		break;
-		case Constants.MENU_ITEM_CUT: 			_cuttingGroupId = _folderId;	break;
+		case Constants.MENU_ITEM_CUT: 			InventoryController.instance._cuttingGroupId = _folderId;	break;
 		case Constants.MENU_ITEM_DELETE: 		removeSubgroupGroup(_folderId);	break;
 	}
 }
@@ -116,13 +116,13 @@ function onRenameCallback(xmlhttp)
 
 function addSubGroup(newGroupName, type)
 {
-	ServiceClient.instance.addSubGroup(_currentGroupData.id, newGroupName, type, onAddSubGroupCallback);
+	ServiceClient.instance.addSubGroup(InventoryController.instance._currentGroupData.id, newGroupName, type, onAddSubGroupCallback);
 }
 
 function onAddSubGroupCallback(resultData)
 {
 	if(resultData.success) 
-		InventoryController.instance.loadAjaxGroup(_currentGroupData.id);
+		InventoryGroupController.instance.loadAjaxGroup(InventoryController.instance._currentGroupData.id);
 	//TODO: Handle error case
 }
 
@@ -141,8 +141,8 @@ function onSearchCallback(xmlhttp)
 
 function pasteGroup()
 {
-	ServiceClient.instance.moveGroup(_cuttingGroupId, _currentGroupData.id, refreshCurrentGroup);
-	_cuttingGroupId = null;
+	ServiceClient.instance.moveGroup(InventoryController.instance._cuttingGroupId, InventoryController.instance._currentGroupData.id, refreshCurrentGroup);
+	InventoryController.instance._cuttingGroupId = null;
 }
 
 function refreshCurrentGroup(resultData)
@@ -166,6 +166,6 @@ function removeSubgroupGroup(groupId)
 function onDeleteGroupCallback(resultData)
 {
 	if(resultData.success)
-		InventoryGroupController.instance.loadAjaxGroup(_currentGroupData.id);
+		InventoryGroupController.instance.loadAjaxGroup(InventoryController.instance._currentGroupData.id);
 	//TODO: handle error case
 }
