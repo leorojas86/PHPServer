@@ -118,24 +118,6 @@ function onRenameCallback(xmlhttp)
 	refreshCurrentGroup(xmlhttp);
 }
 
-function onUpdateUserDataClick()
-{
-	var userData = document.getElementById('user_data');
-	var params   = "service=User&method=UpdateData&data=" + userData.value;
-	RequestUtils.instance.request(Constants.API_URL, "POST", onUpdateUserDataCallback, params);
-}
-
-function onUpdateUserDataCallback(xmlhttp)
-{
-	if(RequestUtils.instance.checkForValidResponse(xmlhttp)) 
-	{
-		var result = JSON.parse(xmlhttp.responseText);
-
-		if(result.success)
-			location.reload();
-	}
-}
-
 function onUpdateGroupDataClick(groupId)
 {
 	var groupData = document.getElementById('group_data');

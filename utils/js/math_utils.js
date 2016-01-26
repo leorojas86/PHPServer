@@ -1,20 +1,4 @@
-var MathUtils = 
-(
-	function() 
-	{
-	    var _instance = null;
-	 
-	    return {
-			        getInstance : function() 
-			        {
-			            if(_instance == null)
-			                 _instance = new MathUtilsClass();
-			            
-			            return _instance;
-			        }
-			    };
-	}
-)();
+var MathUtils = { instance : new MathUtilsClass() };
 
 function MathUtilsClass()
 {

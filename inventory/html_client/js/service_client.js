@@ -88,6 +88,22 @@ ServiceClientClass.prototype.updateGroupData = function(groupId, groupData, call
 	this.request("POST", params, callback);
 }
 
+ServiceClientClass.prototype.updateUserData = function(data, callback)
+{
+	var params = "service=User&method=UpdateData&data=" + data;
+	this.request("POST", params, callback);
+}
+
+ServiceClientClass.prototype.uploadFile = function(fileData, callback, onProgress)
+{
+	var params 				 = new Object();
+	params["service"]   	 = "File";
+	params["method"]   	 	 = "Upload";
+	params["fileToUpload"]   = fileData;
+
+	this.request("POST", params, callback);
+}
+
 ServiceClientClass.prototype.request = function(method, params, callback)
 {
 	var thisVar = this;

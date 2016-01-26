@@ -1,10 +1,11 @@
+
 function InventoryGroupController()
 {
 }
 
 function uploadFile()
 {
-	var file   				 = document.getElementById('fileToUpload').files[0];
+	/*var file   				 = document.getElementById('fileToUpload').files[0];
 	var imageContainer 		 = document.getElementById('imageContainer');
 	var imageData 			 = imageContainer.toDataURL("image/jpeg");
 	var params 				 = new Object();
@@ -15,7 +16,11 @@ function uploadFile()
 	var test = document.getElementById("test");
 	test.src = imageData;
 
-	RequestUtils.instance.request(Constants.API_URL, "POST", onUploadCompleted, params, onProgress);
+	RequestUtils.instance.request(Constants.API_URL, "POST", onUploadCompleted, params, onProgress);*/
+
+	var imageData = imageContainer.toDataURL("image/jpeg");
+
+	ServiceClient.instance.uploadFile(imageData, onUploadCompleted, onProgress);
 }
 
 function onProgress(progress) 
@@ -23,9 +28,9 @@ function onProgress(progress)
 	document.getElementById('progressNumber').innerHTML = (progress * 100).toString() + '%';
 }
 
-function onUploadCompleted(xmlhttp)
+function onUploadCompleted(resultData)
 {
-	alert(xmlhttp.responseText);
+	alert("success = " + resultData.success);
 }
 
 function onSelectedFileChange()
@@ -48,7 +53,7 @@ function onSelectedFileChange()
 			    
 			    img.onload = function() 
 			    { 
-			    	var fitScale  = MathUtils.getInstance().getFitScale({ "x":img.width, "y":img.height }, { "x":imageContainer.width, "y":imageContainer.height }, "FitIn");
+			    	var fitScale  = MathUtils.instance.getFitScale({ "x":img.width, "y":img.height }, { "x":imageContainer.width, "y":imageContainer.height }, "FitIn");
 			    	var fitWidth  = img.width  * fitScale;
 			    	var fitHeight = img.height * fitScale;
 			    	var fitX      = (imageContainer.width  - fitWidth)  / 2;

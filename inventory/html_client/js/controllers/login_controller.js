@@ -45,7 +45,7 @@ function onLoginButtonClick()
 	login();
 }
 
-function login()
+function login()//TODO: Display login while request is waiting.
 {
 	var userEmail    = document.getElementById('user_email');	
 	var userPassword = document.getElementById('user_password');	
@@ -62,5 +62,5 @@ LoginControllerClass.prototype.onLogingCallback = function(resultData)
 
 function onRegisterButtonClick()
 {
-	this.onRegisterButtonClicked();
+	
 }
