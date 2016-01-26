@@ -5,21 +5,7 @@ function InventoryGroupController()
 
 function uploadFile()
 {
-	/*var file   				 = document.getElementById('fileToUpload').files[0];
-	var imageContainer 		 = document.getElementById('imageContainer');
-	var imageData 			 = imageContainer.toDataURL("image/jpeg");
-	var params 				 = new Object();
-	params["service"]   	 = "File";
-	params["method"]   	 	 = "Upload";
-	params["fileToUpload"]   = imageData;
-
-	var test = document.getElementById("test");
-	test.src = imageData;
-
-	RequestUtils.instance.request(Constants.API_URL, "POST", onUploadCompleted, params, onProgress);*/
-
 	var imageData = imageContainer.toDataURL("image/jpeg");
-
 	ServiceClient.instance.uploadFile(imageData, onUploadCompleted, onProgress);
 }
 
