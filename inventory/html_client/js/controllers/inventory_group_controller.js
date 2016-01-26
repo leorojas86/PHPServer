@@ -1,13 +1,27 @@
-
 //Singleton instance
 var InventoryGroupController = { instance : new InventoryGroupControllerClass() };
 
-
-
+//Constructor
 function InventoryGroupControllerClass()
 {
+	document.onkeyup = onKeyUp;
 }
 
+function onKeyUp(event)
+{
+	switch(event.which) 
+	{
+	    case 37://left arrow button
+	    	var backButton = document.getElementById("back_button");
+
+			if(backButton != null) 
+				backButton.onclick.apply(backButton);
+	    break;
+	    default: console.log("pressed key = " + event.which); break;
+	}
+}
+
+//Methods
 InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 {
 	var backButtonTooltip = LocManager.instance.getLocalizedString("back_button_tooltip");
@@ -72,7 +86,8 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 
 	groupAjax += "</div>";
 
-	document.getElementById('group_container').innerHTML = groupAjax;
+	var groupContainer  		= document.getElementById("group_container");
+	groupContainer.innerHTML 	= groupAjax;
 };
 
 InventoryGroupControllerClass.prototype.renderRootGroup = function()
