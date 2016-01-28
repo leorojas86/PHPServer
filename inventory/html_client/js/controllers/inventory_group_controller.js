@@ -46,7 +46,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 
 	if(subGroupType == Constants.GROUP_ID_FOLDER)
 	{
-		groupAjax += "<div id='folders_scroll_panel' oncontextmenu='showContextMenu(event); return false;' align='center' style='overflow:scroll; width:600px; height:400px; border:1px solid gray;' title='" + rightClickOptions + "'>";
+		groupAjax += "<div id='folders_scroll_panel' class='folders_scroll_panel_class' oncontextmenu='showContextMenu(event); return false;' align='center' title='" + rightClickOptions + "'>";
 
 		for (var index in subGroups)
 		{
