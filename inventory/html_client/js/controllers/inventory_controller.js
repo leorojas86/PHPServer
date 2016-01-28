@@ -16,7 +16,7 @@ InventoryControllerClass.prototype.render = function()
 {
 	var loadingText 			= LocManager.instance.getLocalizedString("loading_text");
 	var pageContainer 			= document.getElementById("page_container");
-	pageContainer.innerHTML  	= 	"<div id='group_container'>" + loadingText + "</div>";
+	pageContainer.innerHTML  	= "<div id='group_container'>" + loadingText + "</div>";
 
 	InventoryGroupController.instance.renderRootGroup();
 };

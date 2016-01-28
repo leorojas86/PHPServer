@@ -40,9 +40,9 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	var groupPath  = groupPath.replace("RootGroup/", "Principal/");
 
 	if(parentGroupId != 0)
-		groupAjax += "<p style='height:20px'>" + groupPath + " <button id='back_button' type='button' onclick='onBackButtonClick(" + parentGroupId + ");' title='" + backButtonTooltip + "' >" + backButtonText + "</button> </p>";
+		groupAjax += "<p id='group_path' class='group_path_class'>" + groupPath + " <button id='back_button' type='button' onclick='onBackButtonClick(" + parentGroupId + ");' title='" + backButtonTooltip + "' >" + backButtonText + "</button> </p>";
 	else
-		groupAjax += "<p style='height:20px'>" + groupPath + "</p>";
+		groupAjax += "<p id='group_path' class='group_path_class'>" + groupPath + "</p>";
 
 	if(subGroupType == Constants.GROUP_ID_FOLDER)
 	{
