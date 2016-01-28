@@ -11,7 +11,17 @@
 
 	.group_path_class
 	{
-		height:20px;
+		height : 20px;
+	}
+
+	.folder_class
+	{
+		width : 100px; height : 120px; float : left;
+	}
+
+	.folder_image_class
+	{
+		cursor : pointer; cursor : hand; width : 100px; height : 88px;
 	}
 
 </style>

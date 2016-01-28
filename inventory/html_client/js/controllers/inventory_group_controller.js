@@ -46,7 +46,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 
 	if(subGroupType == Constants.GROUP_ID_FOLDER)
 	{
-		groupAjax += "<div id='folders_scroll_panel' class='folders_scroll_panel_class' oncontextmenu='showContextMenu(event); return false;' align='center' title='" + rightClickOptions + "'>";
+		groupAjax += "<div id='folders_scroll_panel' class='folders_scroll_panel_class' oncontextmenu='showContextMenu(event); return false;' title='" + rightClickOptions + "'>";
 
 		for (var index in subGroups)
 		{
@@ -56,8 +56,8 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 			var subGroupType = subGroup.type;
 			var icon 		 = URLUtils.instance.getServerURL() + (subGroupType == Constants.GROUP_ID_FOLDER ? "inventory/html_client/images/Folder.png" : "inventory/html_client/images/File.png");
 
-			groupAjax += "<div id='folder_" + subGroupId + "' style='width:100px; height:120px; float: left;'>"+
-								"<img id='folder_image_" + subGroupId + "' src='" + icon + "' onclick='onSubGroupClick(" + subGroupId + ");' style='cursor:pointer; cursor:hand; width:100px; height:88px;'/>"+
+			groupAjax += "<div id='folder_" + subGroupId + "' class='folder_class'>"+
+								"<img id='folder_image_" + subGroupId + "' class='folder_image_class' src='" + icon + "' onclick='onSubGroupClick(" + subGroupId + ");'/>"+
 								"<label id='folder_label_" + subGroupId + "' >" + subGroupName + "</label>"+
 						   "</div>";
 		}
