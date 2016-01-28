@@ -8,4 +8,11 @@
 	    float:left;
 	    padding:5px; 
 	}
+
+	.context_menu_container_class
+	{
+		position : absolute; 
+		left : 100px; 
+		top : 150px;
+	}
 </style>

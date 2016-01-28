@@ -16,14 +16,14 @@ LoginControllerClass.prototype.render = function()
 	var registerButtonText  = LocManager.instance.getLocalizedString("register_button_text");
 	var defaultValues 		= "leo";
 
-	var body 	   = document.getElementById("body");
-	body.innerHTML = 	"<p>" + emailText + "</p>" +
-						"<input type='text' id='user_email'    value = '" + defaultValues + "'> <br/><br/>" +
-	  					"<p>" + passwordText + "</p>" +
-	  					"<input type='text' id='user_password' value = '" + defaultValues + "'> <br/><br/>" + 
-	  					"<button type='button' onclick='onLoginButtonClick();'>" + loginButtonText + "</button>" +
-	  					"<br><br><br>" +
-	  					"<button type='button' onclick='onRegisterButtonClick();'>" + registerButtonText + "</button>";
+	var pageContainer 	   	= document.getElementById("page_container");
+	pageContainer.innerHTML = 	"<p>" + emailText + "</p>" +
+								"<input type='text' id='user_email'    value = '" + defaultValues + "'> <br/><br/>" +
+	  							"<p>" + passwordText + "</p>" +
+	  							"<input type='text' id='user_password' value = '" + defaultValues + "'> <br/><br/>" + 
+	  							"<button type='button' onclick='onLoginButtonClick();'>" + loginButtonText + "</button>" +
+	  							"<br><br><br>" +
+	  							"<button type='button' onclick='onRegisterButtonClick();'>" + registerButtonText + "</button>";
 
 	var userPassword     = document.getElementById('user_password');
 	userPassword.onkeyup = onKeyUp;
