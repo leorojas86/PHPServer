@@ -17,7 +17,6 @@ BootstrapClass.prototype.initialize = function(onBootstrapCompleted)
 
 	if(!this._isInitialized)
 	{
-		console.log("Initializing app");
 		var thisVar = this;
 		LocManager.instance.loadLocalizationTable(Constants.ENGLISH_LOCALIZATION_TABLE, function() { thisVar.onLocalizationLoaded(); }, false);
 	}

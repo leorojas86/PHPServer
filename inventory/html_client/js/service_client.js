@@ -9,6 +9,14 @@ ServiceClientClass.prototype._onInitializationCompleted = null;
 //Constructors
 function ServiceClientClass()
 {
+	var loggedUser = CacheUtils.instance.get("LoggedUser");
+
+	if(loggedUser != null)
+	{
+		this.loggedUser = loggedUser;
+		console.log("logged user info loaded from cache");
+		//alert(this.loggedUser);
+	}
 }
 
 //Methods
@@ -41,7 +49,13 @@ ServiceClientClass.prototype.login = function(email, password, callback)
 ServiceClientClass.prototype.onLoginCallback = function(resultData, callback)
 {
 	if(resultData.success)
-		loggedUser = resultData.data;
+	{
+		this.loggedUser = resultData.data;
+		CacheUtils.instance.set("LoggedUser", this.loggedUser);
+		//alert(this.loggedUser);
+	}
+
+	//alert(ServiceClient.instance.loggedUser);
 
 	callback(resultData);
 }

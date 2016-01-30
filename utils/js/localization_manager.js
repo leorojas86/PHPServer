@@ -4,10 +4,13 @@ LocalizationManagerClass.prototype._onLocalizationTableLoaded = null;
 
 function LocalizationManagerClass()
 {	
-	this.localizationTable = localStorage.localizationTable == null ? null : JSON.parse(localStorage.localizationTable);
+	var localizationTable = CacheUtils.instance.get("LocalizationTable");
 
-	if(this.localizationTable != null)
-		console.log("localization table loaded from local storage");
+	if(localizationTable != null)
+	{
+		this.localizationTable = JSON.parse(localizationTable);
+		console.log("localization table loaded from cache");
+	}
 }
 
 LocalizationManagerClass.prototype.loadLocalizationTable = function(localizationTableURL, onLocalizationTableLoaded, force)
@@ -16,23 +19,20 @@ LocalizationManagerClass.prototype.loadLocalizationTable = function(localization
 
 	if(this.localizationTable == null || force)
 	{
-		console.log("Loading localization table at " + localizationTableURL);
-		var thisVar 				   = this;
+		console.log("Loading localization table from url = " + localizationTableURL);
+		var thisVar = this;
 		RequestUtils.instance.request(localizationTableURL, "GET", function(xmlhttp, success) { thisVar.onLoadLocalizationTableCallback(xmlhttp, success) });
 	}
 	else
-	{
-		console.log("localization table was already loaded");
 		this.notifyLocalizationLoaded(true);
-	}
 };
 
 LocalizationManagerClass.prototype.onLoadLocalizationTableCallback = function(xmlhttp, success)
 {
 	if(success) 
 	{
-		localStorage.localizationTable = xmlhttp.responseText;
-		this.localizationTable 		   = JSON.parse(xmlhttp.responseText);
+		CacheUtils.instance.set("LocalizationTable", xmlhttp.responseText);
+		this.localizationTable = JSON.parse(xmlhttp.responseText);
 		this.notifyLocalizationLoaded(true);
 	}
 	else
