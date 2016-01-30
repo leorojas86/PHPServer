@@ -51,5 +51,5 @@ LocalizationManagerClass.prototype.notifyLocalizationLoaded = function(success)
 {
 	this._onLocalizationTableLoaded(success);
 	this._onLocalizationTableLoaded = null;
-}
+};
 

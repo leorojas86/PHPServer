@@ -2,7 +2,6 @@ var URLUtils = { instance : new URLUtilsClass() };
 
 function URLUtilsClass()
 {
-	
 }
 
 URLUtilsClass.prototype.getServerURL = function()

@@ -67,7 +67,7 @@
 		    	_folderId 		= event.target.parentNode.id.replace("folder_", "");
 		    	var contextMenu = document.getElementById('context_menu_container');
 
-		    	ContextMenuUtils.getInstance().showContextMenu(contextMenu, { "x" : event.clientX, "y" : event.clientY }, options, onContextMenuOptionSelected);
+		    	ContextMenuUtils.instance.showContextMenu(contextMenu, { "x" : event.clientX, "y" : event.clientY }, options, onContextMenuOptionSelected);
 		    }
 
 		    function canPasteFolder()

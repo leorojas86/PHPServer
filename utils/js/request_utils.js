@@ -1,4 +1,4 @@
-var RequestUtils =  { instance : new RequestUtilsClass() };
+var RequestUtils = { instance : new RequestUtilsClass() };
 
 function RequestUtilsClass()
 {
@@ -47,7 +47,7 @@ RequestUtilsClass.prototype.request = function(url, method, callback, params, on
 				url += "?" + params;
 
 			xmlhttp.open(method, url, true);
-			xmlhttp.send();
+			xmlhttp.send(params);
 
 		break;
 		default:
@@ -68,7 +68,7 @@ RequestUtilsClass.prototype.notifyProgress = function(xmlhttp, onProgress)
 			   onProgress(evt.loaded / evt.total);
 		};
 	}
-}
+};
 
 RequestUtilsClass.prototype.checkForReadyResponse = function(xmlhttp, callback)
 {
