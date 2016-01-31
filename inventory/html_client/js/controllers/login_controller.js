@@ -42,25 +42,25 @@ function onKeyUp(event)
 			
 function onLoginButtonClick()
 {
-	login();
-}
-
-function login()//TODO: Display login while request is waiting.
-{
 	var userEmail    = document.getElementById('user_email');	
 	var userPassword = document.getElementById('user_password');	
-	ServiceClient.instance.login(userEmail.value, userPassword.value, LoginController.instance.onLogingCallback);
+	LoginController.instance.login(userEmail.value, userPassword.value);
 }
+
+LoginControllerClass.prototype.login = function(email, password)//TODO: Display login while request is waiting.
+{
+	ServiceClient.instance.login(email, password, LoginController.instance.onLogingCallback);
+};
 
 LoginControllerClass.prototype.onLogingCallback = function(resultData)
 {
-	if(resultData != null && resultData.success)
+	if(resultData.success)
 		InventoryController.instance.render();
 	else
 		alert("Login Failed, " + resultData.errorMessage);
-}
+};
 
 function onRegisterButtonClick()
 {
-	
+	RegistrationController.instance.render();
 }

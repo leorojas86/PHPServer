@@ -38,6 +38,12 @@ ServiceClientClass.prototype.notifyOnInitializationCompleted = function(success)
 	this._onInitializationCompleted = null;
 };
 
+ServiceClientClass.prototype.register = function(name, password, email)
+{
+	var params = "service=User&method=Register&name=" + name + "&email=" + email + "&password=" + password;
+	this.request("POST", params, callback);
+};
+
 ServiceClientClass.prototype.login = function(email, password, callback)
 {
 	var params 			= "service=User&method=Login" + "&email=" + email + "&password=" + password;

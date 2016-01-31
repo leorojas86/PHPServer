@@ -25,19 +25,5 @@
 		echo $result->toJSON();
 	}
 	else
-	{
-		if($result->success)
-		{
-			$page = isset($_GET["page"]) ? $_GET["page"] : "Home";
-
-			switch($page)
-			{
-		  		case "Home":     Environment::DisplayPage("inventory/app/php/inventory.php", true); break;
-		  		case "Register": Environment::DisplayPage("inventory/app/php/register.php", false); break;
-		    	default: 	     Environment::DisplayPage("inventory/app/php/error.php", false);    break;
-			}
-		}
-		else
-			Environment::DisplayPage("inventory/app/php/error.php", false);
-	}
+		$result = new ServiceResult(false, null, "Unspecified service parameter", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE);
 ?>
