@@ -71,7 +71,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	{
 		groupAjax += "<p>Data"+ 
 							"<input type='text' id='group_data' value = '" + groupData.data + "'>" +
-							"<button type='button' onclick='onUpdateGroupDataClick(" + groupId + ");'>" + updateButtonText + "</button>" +
+							"<button onclick='onUpdateGroupDataClick(" + groupId + ");'>" + updateButtonText + "</button>" +
 					   "</p>";
 
 		groupAjax +=	"Select an image to upload:" + 

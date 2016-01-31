@@ -6,3 +6,4 @@
 - Improve context menu.
 - Encript password in DB.
 - Implement tags for search and associations.
+- Agregar info de online offline en header.
