@@ -4,3 +4,4 @@
 - Integrate with facebook.
 - Improve css.
 - Improve context menu.
+- Encript password in DB.
