@@ -1,4 +1,5 @@
 <?php 
+
 	require_once "inventory/service/model/Environment.php";
 	require_once "inventory/service/controller/database/UsersController.php";
 	require_once "inventory/service/controller/database/GroupsController.php";
@@ -6,12 +7,12 @@
 
 	$result = Environment::Init();
 
-	if(isset($_POST["service"]))
+	if($result->success)
 	{
-		if($result->success)
+		if(isset($_POST["service"]) && isset($_POST["method"]))
 		{
 			$service = $_POST["service"];
-			$method  = $_POST["method"]; 
+			$method  = $_POST["method"];
 
 			switch($service)
 			{
@@ -21,9 +22,10 @@
 				default:      $result = new ServiceResult(false, null, "Unknown service '$service'", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE); break;
 			}
 		}
-			
-		echo $result->toJSON();
+		else
+			$result = new ServiceResult(false, null, "Unspecified service parameter", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE);
 	}
-	else
-		$result = new ServiceResult(false, null, "Unspecified service parameter", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE);
+
+	echo $result->toJSON();
+
 ?>
