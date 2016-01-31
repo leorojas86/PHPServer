@@ -4,7 +4,7 @@
 	require_once "inventory/service/controller/database/GroupsController.php";
 	require_once "inventory/service/controller/files/FilesController.php";
 
-	$result = Environment::Setup();
+	$result = Environment::Init();
 
 	if(isset($_POST["service"]))
 	{

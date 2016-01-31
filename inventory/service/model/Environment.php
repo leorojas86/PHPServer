@@ -5,7 +5,7 @@
 
 	class Environment
 	{
-		public static function Setup()
+		public static function Init()
 		{
 			$result = MySQLManager::Connect(Config::DB_SERVER, Config::DB_USER, Config::DB_PASS, Config::DB_NAME, Config::DB_PORT);
 			
@@ -14,13 +14,5 @@
 
 			return $result;
 		}
-
-		public static function DisplayPage($page, $requiresLogin)//Generates the page content (html/js/etc) 
-		{
-			if(!$requiresLogin || SessionManager::IsUserLoggedIn())
-				require_once $page;
-			else
-				require_once "inventory/app/php/login.php";
-		}
-	} 
+	}
 ?>
