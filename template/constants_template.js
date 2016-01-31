@@ -1,4 +1,3 @@
-
 var ConstantsTemplate =
 {
      TEMPLATE_CONSTANT_1 : true,

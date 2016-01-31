@@ -1,4 +1,3 @@
-
 //Singleton instance
 var TemplateUtils = { instance : new TemplateClass() };
 

@@ -21,14 +21,14 @@ InventoryControllerClass.prototype.render = function()
 	InventoryGroupController.instance.renderRootGroup();
 };
 
-function onSearchButtonClick()//TODO: Move the code that invokes the search here
+InventoryControllerClass.prototype.onSearchButtonClick = function()//TODO: Move the code that invokes the search here
 {
 	var searchTesxtInput = document.getElementById('search_input');
 	var params 	    	 = "service=Group&method=Search&searchText=" + searchTesxtInput.value;
 	RequestUtils.instance.request(Constants.API_URL, "POST", onSearchCallback, params);
 }
 
-function onSearchCallback(xmlhttp)
+InventoryControllerClass.prototype.onSearchCallback = function(xmlhttp)
 {
 	//if(RequestUtils.instance.checkForValidResponse(xmlhttp))
 		alert(xmlhttp.responseText);

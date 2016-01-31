@@ -36,7 +36,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	var subGroupType  = groupData.type;
 	var subGroups 	  = groupData.sub_groups;
 
-	var groupAjax  = "<div id='folders_area' align='center'>";
+	var groupAjax  = "<div id='folders_area' class='folders_area_class' align='center'>";
 	var groupPath  = groupPath.replace("RootGroup/", "Principal/");
 
 	if(parentGroupId != 0)
