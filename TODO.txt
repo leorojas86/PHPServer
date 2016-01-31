@@ -5,3 +5,4 @@
 - Improve css.
 - Improve context menu.
 - Encript password in DB.
+- Implement tags for search and associations.
