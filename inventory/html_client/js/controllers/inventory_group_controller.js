@@ -71,7 +71,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	{
 		groupAjax += "<p>Data"+ 
 							"<input type='text' id='group_data' value = '" + groupData.data + "'>" +
-							"<button onclick='onUpdateGroupDataClick(" + groupId + ");'>" + updateButtonText + "</button>" +
+							"<button id='update_group_button'>" + updateButtonText + "</button>" +
 					   "</p>";
 
 		groupAjax +=	"Select an image to upload:" + 
@@ -88,6 +88,8 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 
 	var groupContainer  		= document.getElementById("group_container");
 	groupContainer.innerHTML 	= groupAjax;
+
+	document.getElementById("update_group_button").onclick = function() { InventoryGroupController.instance.onUpdateGroupDataClick(groupId); }
 };
 
 InventoryGroupControllerClass.prototype.renderRootGroup = function()
@@ -183,11 +185,11 @@ function onSubGroupClick(groupId)
 	InventoryGroupController.instance.loadAjaxGroup(groupId);
 }
 
-function onUpdateGroupDataClick(groupId)
+InventoryGroupControllerClass.prototype.onUpdateGroupDataClick = function(groupId)
 {
 	var groupData = document.getElementById('group_data');
 	ServiceClient.instance.updateGroupData(groupId, groupData.value, onUpdateGroupDataCallback);
-}
+};
 
 function onUpdateGroupDataCallback(resultData)
 {
