@@ -21,31 +21,32 @@ LoginControllerClass.prototype.render = function()
 								"<input type='text' id='user_email'    value = '" + defaultValues + "'> <br/><br/>" +
 	  							"<p>" + passwordText + "</p>" +
 	  							"<input type='text' id='user_password' value = '" + defaultValues + "'> <br/><br/>" + 
-	  							"<button type='button' onclick='onLoginButtonClick();'>" + loginButtonText + "</button>" +
+	  							"<button type='button' id='login_button'>" + loginButtonText + "</button>" +
 	  							"<br><br><br>" +
-	  							"<button type='button' onclick='onRegisterButtonClick();'>" + registerButtonText + "</button>";
+	  							"<button type='button' id='register_button'>" + registerButtonText + "</button>";
 
-	var userPassword     = document.getElementById('user_password');
-	userPassword.onkeyup = onKeyUp;
+	document.getElementById('user_password').onkeyup 	= function(){ LoginController.instance.onKeyUp(); };
+	document.getElementById('login_button').onclick  	= function(){ LoginController.instance.onLoginButtonClick(); };
+	document.getElementById('register_button').onclick  = function(){ LoginController.instance.onRegisterButtonClick(); };
 };
 
-function onKeyUp(event)
+LoginControllerClass.prototype.onKeyUp = function(event)
 {
 	switch(event.which) 
 	{
 	    case 13://enter
-			login();
+			this.login();
 	    break;
 	    default: console.log("pressed key = " + event.which); break;
 	}
-}
+};
 			
-function onLoginButtonClick()
+LoginControllerClass.prototype.onLoginButtonClick = function()
 {
 	var userEmail    = document.getElementById('user_email');	
 	var userPassword = document.getElementById('user_password');	
-	LoginController.instance.login(userEmail.value, userPassword.value);
-}
+	this.login(userEmail.value, userPassword.value);
+};
 
 LoginControllerClass.prototype.login = function(email, password)//TODO: Display login while request is waiting.
 {
@@ -60,7 +61,7 @@ LoginControllerClass.prototype.onLogingCallback = function(resultData)
 		alert("Login Failed, " + resultData.data);
 };
 
-function onRegisterButtonClick()
+LoginControllerClass.prototype.onRegisterButtonClick = function()
 {
 	RegistrationController.instance.render();
-}
+};

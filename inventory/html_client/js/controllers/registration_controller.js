@@ -21,31 +21,33 @@ RegistrationControllerClass.prototype.render = function()
 
 	var pageContainer 	   	= document.getElementById("page_container");
 	pageContainer.innerHTML = 	"<p>" + userNameText + "</p>" +
-	  					"<input type='text' id='user_name'     value = '" + defaultValues + "'>" +
-	  					"<p>" + emailText + "</p>" +
-	  					"<input type='text' id='user_email'    value = '" + defaultValues + "'> <br/><br/>" +
-	  					"<p>" + passwordText + "</p>" +
-	  					"<input type='text' id='user_password' value = '" + defaultValues + "'> <br/><br/>" +
-	  					"<p>" + confirmPasswordText + "</p>" +
-	  					"<input type='text' id='user_confirm_password' value = '" + defaultValues + "'> <br/><br/>" +
-	  					"<button type='button' onclick='onRegisterButtonClick();'>" + registerButtonText + "</button>";
+	  							"<input type='text' id='user_name'     			value = '" + defaultValues + "'>" +
+	  							"<p>" + emailText + "</p>" +
+	  							"<input type='text' id='user_email'    			value = '" + defaultValues + "'> <br/><br/>" +
+	  							"<p>" + passwordText + "</p>" +
+	  							"<input type='text' id='user_password' 			value = '" + defaultValues + "'> <br/><br/>" +
+	  							"<p>" + confirmPasswordText + "</p>" +
+	  							"<input type='text' id='user_confirm_password' 	value = '" + defaultValues + "'> <br/><br/>" +
+	  							"<button type='button' id='register_button'>" + registerButtonText + "</button>";
+
+	document.getElementById('register_button').onclick = function(){ RegistrationController.instance.onRegisterButtonClick(); };
 };
 
-function onRegisterButtonClick()
+RegistrationControllerClass.prototype.onRegisterButtonClick = function()
 {
 	var userName     		= document.getElementById('user_name');
-	var userEmail    		= document.getElementById('user_email');	
+	var userEmail    		= document.getElementById('user_email');
 	var userPassword 		= document.getElementById('user_password');
 	var userConfirmPassword = document.getElementById('user_confirm_password');
 
 	if(userPassword.value == userConfirmPassword.value)//TODO: Validate email
-		ServiceClient.instance.register(userName.value, userPassword.value, userEmail.value, RegistrationController.instance.onRegisterCallback);
+		ServiceClient.instance.register(userName.value, userPassword.value, userEmail.value, this.onRegisterCallback);
 	else
 	{
 		var passwordsDontMatchText = LocManager.instance.getLocalizedString("passwords_dont_match_text");
 		alert(passwordsDontMatchText);
 	}
-}
+};
 
 RegistrationControllerClass.prototype.onRegisterCallback = function(resultData)
 {

@@ -38,7 +38,7 @@ ServiceClientClass.prototype.notifyOnInitializationCompleted = function(success)
 	this._onInitializationCompleted = null;
 };
 
-ServiceClientClass.prototype.register = function(name, password, email)
+ServiceClientClass.prototype.register = function(name, password, email, callback)
 {
 	var params = "service=User&method=Register&name=" + name + "&email=" + email + "&password=" + password;
 	this.request("POST", params, callback);
