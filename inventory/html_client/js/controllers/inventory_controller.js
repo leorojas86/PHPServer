@@ -14,9 +14,15 @@ function InventoryControllerClass()
 //Methods
 InventoryControllerClass.prototype.render = function()
 {
-	var loadingText 			= LocManager.instance.getLocalizedString("loading_text");
-	var pageContainer 			= document.getElementById("page_container");
-	pageContainer.innerHTML  	= "<div id='group_container'>" + loadingText + "</div>";
+	var loadingText 		= LocManager.instance.getLocalizedString("loading_text");
+	var searchButtonText  	= LocManager.instance.getLocalizedString("search_button_text");
+
+	var pageContainer 		= document.getElementById("page_container");
+	pageContainer.innerHTML	= 	"<div id='inventory_container' align='center'>" +
+									"<div id='group_container'>" + loadingText + "</div>" +
+									"<input type='text' id='search_input' value = ''>" +
+				   	 				"<button type='button' onclick='onSearchButtonClick();'>" + searchButtonText + "</button>" +
+				   	 			"</div>";
 
 	InventoryGroupController.instance.renderRootGroup();
 };

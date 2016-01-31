@@ -28,7 +28,6 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	var backButtonText    = LocManager.instance.getLocalizedString("back_button_text");
 	var rightClickOptions = LocManager.instance.getLocalizedString("right_click_tooltip");
 	var updateButtonText  = LocManager.instance.getLocalizedString("update_button_text");
-	var searchButtonText  = LocManager.instance.getLocalizedString("search_button_text");
 
 	var groupId       = groupData.id;
 	var groupPath     = groupData.path;
@@ -36,7 +35,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	var subGroupType  = groupData.type;
 	var subGroups 	  = groupData.sub_groups;
 
-	var groupAjax  = "<div id='folders_area' class='folders_area_class' align='center'>";
+	var groupAjax  = "<div id='folders_area' class='folders_area_class'>";
 	var groupPath  = groupPath.replace("RootGroup/", "Principal/");
 
 	if(parentGroupId != 0)
@@ -63,9 +62,6 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 		}
 
 		groupAjax += "</div>";
-
-		groupAjax += "<input type='text' id='search_input' value = ''>" +
-				   	 "<button type='button' onclick='onSearchButtonClick();'>" + searchButtonText + "</button>";
 	}
 	else
 	{
