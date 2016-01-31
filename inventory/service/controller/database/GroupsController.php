@@ -18,7 +18,7 @@ class GroupsController
 			case "Rename":				$result = GroupsController::RenameGroup();		break;
 			case "Search":				$result = GroupsController::Search();			break;
 			default: 		 
-				$result = new ServiceResult(false, null, "Unsupported user service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
+				$result = new ServiceResult(false, "Unsupported user service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
 			break;
 		}
 

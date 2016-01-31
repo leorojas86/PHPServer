@@ -56,5 +56,5 @@ RegistrationControllerClass.prototype.onRegisterCallback = function(resultData)
 		LoginController.instance.login(userEmail.value, userPassword.value);
 	}
 	else
-		alert(resultData.errorMessage);
+		alert(resultData.data);
 };

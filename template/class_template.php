@@ -12,7 +12,6 @@
 		{
 			$data = array('success' 	 => $this->success, 
 						  'data' 	     => $this->data, 
-						  'errorMessage' => $this->errorMessage, 
 						  'errorCode' 	 => $this->errorCode);
 
 			return json_encode($data);

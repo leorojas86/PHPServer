@@ -39,7 +39,7 @@
 					return new ServiceResult(true, $result->data);
 				}
 		
-				return new ServiceResult(false, null, "User name or password incorrect", UtilsConstants::USER_NAME_OR_PASSWORD_INCORRECT_ERROR_CODE);
+				return new ServiceResult(false, "User name or password incorrect", UtilsConstants::USER_NAME_OR_PASSWORD_INCORRECT_ERROR_CODE);
 			}
 			
 			return $result;

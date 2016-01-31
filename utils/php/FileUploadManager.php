@@ -16,13 +16,13 @@
 					if(move_uploaded_file($_FILES[$fileName]["tmp_name"], $target_file)) 
 			        	return new ServiceResult(true);
 			    	else 
-			        	return new ServiceResult(false, null, "Unknown error occurred uploading file", UtilsConstants::FILE_SIZE_IS_TO_LARGE_ERROR_CODE);
+			        	return new ServiceResult(false, "Unknown error occurred uploading file", UtilsConstants::FILE_SIZE_IS_TO_LARGE_ERROR_CODE);
 				}
 				else
-					return new ServiceResult(false, null, "File size is too large", UtilsConstants::FILE_SIZE_IS_TO_LARGE_ERROR_CODE);
+					return new ServiceResult(false, "File size is too large", UtilsConstants::FILE_SIZE_IS_TO_LARGE_ERROR_CODE);
 			}
 			else
-				return new ServiceResult(false, null, "File already exists", UtilsConstants::FILE_ALREADY_EXIST_ERROR_CODE);
+				return new ServiceResult(false, "File already exists", UtilsConstants::FILE_ALREADY_EXIST_ERROR_CODE);
 		}
 
 		public static function UploadImageData($fileName, $destinationFolder)

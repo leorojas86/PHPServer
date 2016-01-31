@@ -57,7 +57,7 @@ LoginControllerClass.prototype.onLogingCallback = function(resultData)
 	if(resultData.success)
 		InventoryController.instance.render();
 	else
-		alert("Login Failed, " + resultData.errorMessage);
+		alert("Login Failed, " + resultData.data);
 };
 
 function onRegisterButtonClick()
