@@ -40,8 +40,10 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	var groupAjax  = "<div id='folders_area' class='folders_area_class'>";
 	var groupPath  = groupPath.replace("RootGroup/", rootGroupText + "/");
 
-	if(parentGroupId != 0)
-		groupAjax += "<p id='group_path' class='group_path_class'>" + groupPath + " <button id='back_button' type='button' onclick='onBackButtonClick(" + parentGroupId + ");' title='" + backButtonTooltip + "' >" + backButtonText + "</button> </p>";
+	var isParentGroup = parentGroupId != 0;
+
+	if(isParentGroup)
+		groupAjax += "<p id='group_path' class='group_path_class'>" + groupPath + " <button id='back_button' type='button' title='" + backButtonTooltip + "' >" + backButtonText + "</button> </p>";
 	else
 		groupAjax += "<p id='group_path' class='group_path_class'>" + groupPath + "</p>";
 
@@ -51,7 +53,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	{
 		groupAjax += "<div id='folders_scroll_panel' class='folders_scroll_panel_class' oncontextmenu='showContextMenu(event); return false;' title='" + rightClickOptions + "'>";
 
-		for (var index in subGroups)
+		for(var index in subGroups)
 		{
 			var subGroup     = subGroups[index];
 			var subGroupName = subGroup.name;
@@ -91,6 +93,9 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 
 	var groupContainer  		= document.getElementById("group_container");
 	groupContainer.innerHTML 	= groupAjax;
+
+	if(isParentGroup)
+		document.getElementById("back_button").onclick = function() { InventoryGroupController.instance.onBackButtonClick(parentGroupId); }
 
 	if(isFolderGroup)
 		document.getElementById("search_button").onclick = function() { InventoryGroupController.instance.onSearchButtonClick(); }
@@ -202,7 +207,7 @@ function onUpdateGroupDataCallback(resultData)
 	alert("success = '" + resultData.success + "'");
 }
 
-function onBackButtonClick(parentGroupId)
+InventoryGroupControllerClass.prototype.onBackButtonClick = function(parentGroupId)
 {
 	InventoryGroupController.instance.loadAjaxGroup(parentGroupId);
 }
