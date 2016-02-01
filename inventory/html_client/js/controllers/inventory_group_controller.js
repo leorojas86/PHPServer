@@ -60,9 +60,10 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 			var subGroupId	 = subGroup.id;
 			var subGroupType = subGroup.type;
 			var icon 		 = URLUtils.instance.getServerURL() + (subGroupType == Constants.GROUP_ID_FOLDER ? "inventory/html_client/images/Folder.png" : "inventory/html_client/images/File.png");
+			var clickEvent   = "onclick='InventoryGroupController.instance.onSubGroupButtonClick(" + subGroupId + ");'"
 
 			groupAjax += "<div id='folder_" + subGroupId + "' class='folder_class'>"+
-							"<img id='folder_image_" + subGroupId + "' class='folder_image_class' src='" + icon + "'/>"+
+							"<img id='folder_image_" + subGroupId + "' class='folder_image_class' src='" + icon + "' " + clickEvent + "/>"+
 							"<label id='folder_label_" + subGroupId + "' >" + subGroupName + "</label>"+
 						 "</div>";
 		}
@@ -83,7 +84,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 					 	"<input type='hidden' name='service' value='File'>" + 
 					 	"<input type='hidden' name='method'  value='Upload'>" +
 						"<input type='file'   name='fileToUpload' id='fileToUpload' onchange='onSelectedFileChange();'>" +
-						"<input type='button' onclick='uploadFile();' value='Upload Image' >" + 
+						"<input type='button' id='uploadFileButton' value='Upload Image' >" + 
 						"<div id='progressNumber'></div>" +
 						"<canvas id='imageContainer' width='500' height='500'></canvas>" +
 						"<img id='test'> </img>";
@@ -102,22 +103,24 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 		document.getElementById("search_button").onclick 				= function() 		{ InventoryGroupController.instance.onSearchButtonClick(); }
 		document.getElementById("folders_scroll_panel").oncontextmenu	= function(event) 	{ InventoryContextMenuController.instance.showContextMenu(event); return false; }
 
-		for(var index in subGroups)
+		/*for(var index in subGroups)
 		{
 			var subGroup     = subGroups[index];
 			var subGroupId	 = subGroup.id;
-			document.getElementById("folder_image_" + subGroupId).onclick = function() { InventoryGroupController.instance.onSubGroupClick(subGroupId) };
-		}
+			document.getElementById("folder_image_" + subGroupId).onclick = function() { InventoryGroupController.instance.onSubGroupButtonClick(subGroupId); };
+		}*/
 	}
 	else
+	{
 		document.getElementById("update_group_button").onclick = function() { InventoryGroupController.instance.onUpdateGroupDataClick(groupId); }
+		document.getElementById("uploadFileButton").onclick    = function() { InventoryGroupController.instance.uploadFile(); }
+	}
 };
 
 InventoryGroupControllerClass.prototype.renderRootGroup = function()
 {
 	this.clearHTML();
-	var thisVar = this;
-	ServiceClient.instance.loadRootGroup(function(resultData) { thisVar.onLoadGroupCallback(resultData) });
+	ServiceClient.instance.loadRootGroup(function(resultData) { InventoryGroupController.instance.onLoadGroupCallback(resultData); });
 };
 
 InventoryGroupControllerClass.prototype.onLoadGroupCallback = function(resultData)
@@ -140,11 +143,10 @@ InventoryGroupControllerClass.prototype.clearHTML = function()
 InventoryGroupControllerClass.prototype.loadAjaxGroup = function(groupId)
 {
 	this.clearHTML();
-	var thisVar = this;
-	ServiceClient.instance.loadGroup(groupId, function(resultData) { thisVar.onLoadGroupCallback(resultData) });
+	ServiceClient.instance.loadGroup(groupId, function(resultData) { InventoryGroupController.instance.onLoadGroupCallback(resultData); });
 };
 
-function uploadFile()
+InventoryGroupControllerClass.prototype.uploadFile = function()
 {
 	var imageData = imageContainer.toDataURL("image/jpeg");
 	ServiceClient.instance.uploadFile(imageData, onUploadCompleted, onProgress);
@@ -201,7 +203,7 @@ function onSelectedFileChange()
     }
 }
 
-InventoryGroupControllerClass.prototype.onSubGroupClick = function(groupId)
+InventoryGroupControllerClass.prototype.onSubGroupButtonClick = function(groupId)
 {
 	this.loadAjaxGroup(groupId);
 };
@@ -219,7 +221,7 @@ function onUpdateGroupDataCallback(resultData)
 
 InventoryGroupControllerClass.prototype.onBackButtonClick = function(parentGroupId)
 {
-	InventoryGroupController.instance.loadAjaxGroup(parentGroupId);
+	this.loadAjaxGroup(parentGroupId);
 }
 
 
