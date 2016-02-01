@@ -29,6 +29,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	var rightClickOptions = LocManager.instance.getLocalizedString("right_click_tooltip");
 	var updateButtonText  = LocManager.instance.getLocalizedString("update_button_text");
 	var searchButtonText  = LocManager.instance.getLocalizedString("search_button_text");
+	var rootGroupText  	  = LocManager.instance.getLocalizedString("root_group_text");
 
 	var groupId       = groupData.id;
 	var groupPath     = groupData.path;
@@ -37,7 +38,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	var subGroups 	  = groupData.sub_groups;
 
 	var groupAjax  = "<div id='folders_area' class='folders_area_class'>";
-	var groupPath  = groupPath.replace("RootGroup/", "Principal/");
+	var groupPath  = groupPath.replace("RootGroup/", rootGroupText + "/");
 
 	if(parentGroupId != 0)
 		groupAjax += "<p id='group_path' class='group_path_class'>" + groupPath + " <button id='back_button' type='button' onclick='onBackButtonClick(" + parentGroupId + ");' title='" + backButtonTooltip + "' >" + backButtonText + "</button> </p>";
