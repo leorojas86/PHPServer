@@ -12,7 +12,7 @@
 .context_menu_container_class
 {
 	position:absolute;/* left : 100px; top : 150px;*/
-	border:1px solid red;/**/
+	/*border:1px solid red;*/
 }
 
 .popups_container_class

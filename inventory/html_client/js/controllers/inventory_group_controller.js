@@ -43,7 +43,9 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	else
 		groupAjax += "<p id='group_path' class='group_path_class'>" + groupPath + "</p>";
 
-	if(subGroupType == Constants.GROUP_ID_FOLDER)
+	var isFolderGroup = subGroupType == Constants.GROUP_ID_FOLDER;
+
+	if(isFolderGroup)
 	{
 		groupAjax += "<div id='folders_scroll_panel' class='folders_scroll_panel_class' oncontextmenu='showContextMenu(event); return false;' title='" + rightClickOptions + "'>";
 
@@ -85,7 +87,8 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	var groupContainer  		= document.getElementById("group_container");
 	groupContainer.innerHTML 	= groupAjax;
 
-	document.getElementById("update_group_button").onclick = function() { InventoryGroupController.instance.onUpdateGroupDataClick(groupId); }
+	if(!isFolderGroup)
+		document.getElementById("update_group_button").onclick = function() { InventoryGroupController.instance.onUpdateGroupDataClick(groupId); }
 };
 
 InventoryGroupControllerClass.prototype.renderRootGroup = function()

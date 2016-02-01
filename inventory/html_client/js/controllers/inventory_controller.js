@@ -21,21 +21,22 @@ InventoryControllerClass.prototype.render = function()
 	pageContainer.innerHTML	= 	"<div id='inventory_container' align='center'>" +
 									"<div id='group_container'>" + loadingText + "</div>" +
 									"<input type='text' id='search_input' value = ''>" +
-				   	 				"<button type='button' onclick='onSearchButtonClick();'>" + searchButtonText + "</button>" +
+				   	 				"<button id='search_button' type='button'>" + searchButtonText + "</button>" +
 				   	 			"</div>";
 
 	InventoryGroupController.instance.renderRootGroup();
+
+	document.getElementById("search_button").onclick = function() { InventoryController.instance.onSearchButtonClick(); }
 };
 
 InventoryControllerClass.prototype.onSearchButtonClick = function()//TODO: Move the code that invokes the search here
 {
 	var searchTesxtInput = document.getElementById('search_input');
-	var params 	    	 = "service=Group&method=Search&searchText=" + searchTesxtInput.value;
-	RequestUtils.instance.request(Constants.API_URL, "POST", onSearchCallback, params);
+	ServiceClient.instance.searchGroups(searchTesxtInput.value, this.onSearchCallback);
 }
 
-InventoryControllerClass.prototype.onSearchCallback = function(xmlhttp)
+InventoryControllerClass.prototype.onSearchCallback = function(resultData)
 {
-	//if(RequestUtils.instance.checkForValidResponse(xmlhttp))
-		alert(xmlhttp.responseText);
+	//if(resultData.success)
+		alert(resultData.data);
 }

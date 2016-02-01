@@ -108,6 +108,12 @@ ServiceClientClass.prototype.updateGroupData = function(groupId, groupData, call
 	this.request("POST", params, callback);
 };
 
+ServiceClientClass.prototype.searchGroups = function(searchText, callback)
+{
+	var params = "service=Group&method=Search&searchText=" + searchText;
+	this.request("POST", params, callback);
+};
+
 ServiceClientClass.prototype.updateUserData = function(data, callback)
 {
 	var params = "service=User&method=UpdateData&data=" + data;
