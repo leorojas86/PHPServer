@@ -43,7 +43,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	var isParentGroup = parentGroupId != 0;
 
 	if(isParentGroup)
-		groupAjax += "<p id='group_path' class='group_path_class'>" + groupPath + " <button id='back_button' type='button' title='" + backButtonTooltip + "'>" + backButtonText + "</button> </p>";
+		groupAjax += "<p id='group_path' class='group_path_class'>" + groupPath + " <button id='back_button' title='" + backButtonTooltip + "'>" + backButtonText + "</button> </p>";
 	else
 		groupAjax += "<p id='group_path' class='group_path_class'>" + groupPath + "</p>";
 
@@ -62,9 +62,9 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 			var icon 		 = URLUtils.instance.getServerURL() + (subGroupType == Constants.GROUP_ID_FOLDER ? "inventory/html_client/images/Folder.png" : "inventory/html_client/images/File.png");
 
 			groupAjax += "<div id='folder_" + subGroupId + "' class='folder_class'>"+
-								"<img id='folder_image_" + subGroupId + "' class='folder_image_class' src='" + icon + "' onclick='onSubGroupClick(" + subGroupId + ");'/>"+
-								"<label id='folder_label_" + subGroupId + "' >" + subGroupName + "</label>"+
-						   "</div>";
+							"<img id='folder_image_" + subGroupId + "' class='folder_image_class' src='" + icon + "'/>"+
+							"<label id='folder_label_" + subGroupId + "' >" + subGroupName + "</label>"+
+						 "</div>";
 		}
 
 		groupAjax += "</div>";
@@ -99,8 +99,15 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 
 	if(isFolderGroup)
 	{
-		document.getElementById("search_button").onclick 				= function() { InventoryGroupController.instance.onSearchButtonClick(); }
-		document.getElementById("folders_scroll_panel").oncontextmenu	= function(event) { InventoryContextMenuController.instance.showContextMenu(event); return false; }
+		document.getElementById("search_button").onclick 				= function() 		{ InventoryGroupController.instance.onSearchButtonClick(); }
+		document.getElementById("folders_scroll_panel").oncontextmenu	= function(event) 	{ InventoryContextMenuController.instance.showContextMenu(event); return false; }
+
+		for(var index in subGroups)
+		{
+			var subGroup     = subGroups[index];
+			var subGroupId	 = subGroup.id;
+			document.getElementById("folder_image_" + subGroupId).onclick = function() { InventoryGroupController.instance.onSubGroupClick(subGroupId) };
+		}
 	}
 	else
 		document.getElementById("update_group_button").onclick = function() { InventoryGroupController.instance.onUpdateGroupDataClick(groupId); }
@@ -194,10 +201,10 @@ function onSelectedFileChange()
     }
 }
 
-function onSubGroupClick(groupId)
+InventoryGroupControllerClass.prototype.onSubGroupClick = function(groupId)
 {
-	InventoryGroupController.instance.loadAjaxGroup(groupId);
-}
+	this.loadAjaxGroup(groupId);
+};
 
 InventoryGroupControllerClass.prototype.onUpdateGroupDataClick = function(groupId)
 {
