@@ -43,7 +43,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	var isParentGroup = parentGroupId != 0;
 
 	if(isParentGroup)
-		groupAjax += "<p id='group_path' class='group_path_class'>" + groupPath + " <button id='back_button' type='button' title='" + backButtonTooltip + "' >" + backButtonText + "</button> </p>";
+		groupAjax += "<p id='group_path' class='group_path_class'>" + groupPath + " <button id='back_button' type='button' title='" + backButtonTooltip + "'>" + backButtonText + "</button> </p>";
 	else
 		groupAjax += "<p id='group_path' class='group_path_class'>" + groupPath + "</p>";
 
@@ -51,7 +51,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 
 	if(isFolderGroup)
 	{
-		groupAjax += "<div id='folders_scroll_panel' class='folders_scroll_panel_class' oncontextmenu='showContextMenu(event); return false;' title='" + rightClickOptions + "'>";
+		groupAjax += "<div id='folders_scroll_panel' class='folders_scroll_panel_class' title='" + rightClickOptions + "'>";
 
 		for(var index in subGroups)
 		{
@@ -98,7 +98,10 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 		document.getElementById("back_button").onclick = function() { InventoryGroupController.instance.onBackButtonClick(parentGroupId); }
 
 	if(isFolderGroup)
-		document.getElementById("search_button").onclick = function() { InventoryGroupController.instance.onSearchButtonClick(); }
+	{
+		document.getElementById("search_button").onclick 				= function() { InventoryGroupController.instance.onSearchButtonClick(); }
+		document.getElementById("folders_scroll_panel").oncontextmenu	= function(event) { InventoryContextMenuController.instance.showContextMenu(event); return false; }
+	}
 	else
 		document.getElementById("update_group_button").onclick = function() { InventoryGroupController.instance.onUpdateGroupDataClick(groupId); }
 };

@@ -6,7 +6,7 @@ function InventoryContextMenuControllerClass()
 {
 }
 
-function showContextMenu(event)//TODO: Move the logic to call this here
+InventoryContextMenuControllerClass.prototype.showContextMenu = function(event)//TODO: Move the logic to call this here
 {
 	var options = new Array();
 
@@ -16,7 +16,7 @@ function showContextMenu(event)//TODO: Move the logic to call this here
 			options.push(Constants.MENU_ITEM_ADD_ITEM);
 			options.push(Constants.MENU_ITEM_ADD_FOLDER);
 
-			if(canPasteFolder())
+			if(this.canPasteFolder())
 				options.push(Constants.MENU_ITEM_PASTE);
 		break;
 		default:
@@ -32,7 +32,7 @@ function showContextMenu(event)//TODO: Move the logic to call this here
 	ContextMenuUtils.instance.showContextMenu(contextMenu, { "x" : event.clientX, "y" : event.clientY }, options, onContextMenuOptionSelected);
 }
 
-function canPasteFolder()
+InventoryContextMenuControllerClass.prototype.canPasteFolder = function()
 {
 	return InventoryController.instance._currentGroupData != null && InventoryController.instance._currentGroupData.can_paste;
 }
