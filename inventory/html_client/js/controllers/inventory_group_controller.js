@@ -28,6 +28,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	var backButtonText    = LocManager.instance.getLocalizedString("back_button_text");
 	var rightClickOptions = LocManager.instance.getLocalizedString("right_click_tooltip");
 	var updateButtonText  = LocManager.instance.getLocalizedString("update_button_text");
+	var searchButtonText  = LocManager.instance.getLocalizedString("search_button_text");
 
 	var groupId       = groupData.id;
 	var groupPath     = groupData.path;
@@ -64,6 +65,9 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 		}
 
 		groupAjax += "</div>";
+
+		groupAjax += "<input type='text' id='search_input' value = ''>";
+		groupAjax += "<button id='search_button' type='button'>" + searchButtonText + "</button>";
 	}
 	else
 	{
@@ -87,7 +91,9 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	var groupContainer  		= document.getElementById("group_container");
 	groupContainer.innerHTML 	= groupAjax;
 
-	if(!isFolderGroup)
+	if(isFolderGroup)
+		document.getElementById("search_button").onclick = function() { InventoryGroupController.instance.onSearchButtonClick(); }
+	else
 		document.getElementById("update_group_button").onclick = function() { InventoryGroupController.instance.onUpdateGroupDataClick(groupId); }
 };
 
@@ -198,4 +204,17 @@ function onUpdateGroupDataCallback(resultData)
 function onBackButtonClick(parentGroupId)
 {
 	InventoryGroupController.instance.loadAjaxGroup(parentGroupId);
+}
+
+
+InventoryGroupControllerClass.prototype.onSearchButtonClick = function()//TODO: Move the code that invokes the search here
+{
+	var searchTesxtInput = document.getElementById('search_input');
+	ServiceClient.instance.searchGroups(searchTesxtInput.value, this.onSearchCallback);
+}
+
+InventoryGroupControllerClass.prototype.onSearchCallback = function(resultData)
+{
+	//if(resultData.success)
+		alert(resultData.data);
 }
