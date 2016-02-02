@@ -12,11 +12,11 @@ function RegistrationControllerClass()
 //Methods
 RegistrationControllerClass.prototype.render = function()
 {
-	var userNameText  		= LocManager.instance.getLocalizedString("user_name_text");
-	var emailText 	  		= LocManager.instance.getLocalizedString("email_text");
-	var passwordText  		= LocManager.instance.getLocalizedString("password_text");
-	var confirmPasswordText = LocManager.instance.getLocalizedString("confirm_password_text");
-	var registerButtonText  = LocManager.instance.getLocalizedString("register_button_text");
+	var userNameText  		= LocManager.instance.getLocalizedText("user_name_text");
+	var emailText 	  		= LocManager.instance.getLocalizedText("email_text");
+	var passwordText  		= LocManager.instance.getLocalizedText("password_text");
+	var confirmPasswordText = LocManager.instance.getLocalizedText("confirm_password_text");
+	var registerButtonText  = LocManager.instance.getLocalizedText("register_button_text");
 	var defaultValues 		= "leo";
 
 	var pageContainer 	   	= document.getElementById("page_container");
@@ -44,7 +44,7 @@ RegistrationControllerClass.prototype.onRegisterButtonClick = function()
 		ServiceClient.instance.register(userName.value, userPassword.value, userEmail.value, this.onRegisterCallback);
 	else
 	{
-		var passwordsDontMatchText = LocManager.instance.getLocalizedString("passwords_dont_match_text");
+		var passwordsDontMatchText = LocManager.instance.getLocalizedText("passwords_dont_match_text");
 		alert(passwordsDontMatchText);
 	}
 };
