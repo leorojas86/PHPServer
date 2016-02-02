@@ -4,21 +4,6 @@ var InventoryGroupController = { instance : new InventoryGroupControllerClass() 
 //Constructor
 function InventoryGroupControllerClass()
 {
-	document.onkeyup = onKeyUp;
-}
-
-function onKeyUp(event)
-{
-	switch(event.which) 
-	{
-	    case 37://left arrow button
-	    	var backButton = document.getElementById("back_button");
-
-			if(backButton != null) 
-				backButton.onclick.apply(backButton);
-	    break;
-	    default: console.log("pressed key = " + event.which); break;
-	}
 }
 
 //Methods
@@ -114,6 +99,8 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 		document.getElementById("update_group_button").onclick 	= function() { InventoryGroupController.instance.onUpdateGroupDataClick(groupId); }
 		document.getElementById("uploadFileButton").onclick    	= function() { InventoryGroupController.instance.uploadFile(); }
 	}
+
+	document.onkeyup = function(event) { InventoryGroupController.instance.onKeyUp(event); }
 };
 
 InventoryGroupControllerClass.prototype.renderRootGroup = function()
@@ -234,4 +221,18 @@ InventoryGroupControllerClass.prototype.onSearchCallback = function(resultData)
 {
 	//if(resultData.success)
 		alert(resultData.data);
+}
+
+InventoryGroupControllerClass.prototype.onKeyUp = function(event)
+{
+	switch(event.which) 
+	{
+	    case 37://left arrow button
+	    	var backButton = document.getElementById("back_button");
+
+			if(backButton != null) 
+				backButton.onclick.apply(backButton);
+	    break;
+	    default: console.log("pressed key = " + event.which); break;
+	}
 }
