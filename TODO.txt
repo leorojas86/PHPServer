@@ -1,9 +1,15 @@
 - Improve offline mode.
 - Add user logged info and logout option.
-- Integrate register.
 - Integrate with facebook.
-- Improve css.
 - Improve context menu.
 - Encript password in DB.
 - Implement tags for search and associations.
-- Agregar info de online offline en header.
+- Add online/offline in header.
+- Upload and Display photos.
+- Add encription to login data and SSL.
+- Implement search.
+- Comments.
+- Modes (Publisity, Sell, Auction, Raffle).
+- FB Integration.
+- EULA.
+- ADs.
