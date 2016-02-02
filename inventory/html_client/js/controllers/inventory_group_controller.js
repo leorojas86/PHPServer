@@ -71,7 +71,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 		groupAjax += "</div>";
 
 		groupAjax += "<input type='text' id='search_input' value = ''>";
-		groupAjax += "<button id='search_button' type='button'>" + searchButtonText + "</button>";
+		groupAjax += "<button id='search_button'>" + searchButtonText + "</button>";
 	}
 	else
 	{
@@ -81,13 +81,10 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 					   "</p>";
 
 		groupAjax +=	"Select an image to upload:" + 
-					 	"<input type='hidden' name='service' value='File'>" + 
-					 	"<input type='hidden' name='method'  value='Upload'>" +
-						"<input type='file'   id='fileToUpload'   name='fileToUpload' id='fileToUpload'>" +
+						"<input type='file'   id='fileToUpload'>" +
 						"<input type='button' id='uploadFileButton' value='Upload Image' >" + 
 						"<div id='progressNumber'></div>" +
-						"<canvas id='imageContainer' width='500' height='500'></canvas>" +
-						"<img id='test'> </img>";
+						"<canvas id='imageContainer' width='500' height='500'></canvas>";
 	}
 
 	groupAjax += "</div>";
