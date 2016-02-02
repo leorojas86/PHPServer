@@ -83,7 +83,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 		groupAjax +=	"Select an image to upload:" + 
 					 	"<input type='hidden' name='service' value='File'>" + 
 					 	"<input type='hidden' name='method'  value='Upload'>" +
-						"<input type='file'   name='fileToUpload' id='fileToUpload' onchange='onSelectedFileChange();'>" +
+						"<input type='file'   id='fileToUpload'   name='fileToUpload' id='fileToUpload'>" +
 						"<input type='button' id='uploadFileButton' value='Upload Image' >" + 
 						"<div id='progressNumber'></div>" +
 						"<canvas id='imageContainer' width='500' height='500'></canvas>" +
@@ -112,8 +112,9 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	}
 	else
 	{
-		document.getElementById("update_group_button").onclick = function() { InventoryGroupController.instance.onUpdateGroupDataClick(groupId); }
-		document.getElementById("uploadFileButton").onclick    = function() { InventoryGroupController.instance.uploadFile(); }
+		document.getElementById("fileToUpload").onchange   		= function() { InventoryGroupController.instance.onSelectedFileChange(); }
+		document.getElementById("update_group_button").onclick 	= function() { InventoryGroupController.instance.onUpdateGroupDataClick(groupId); }
+		document.getElementById("uploadFileButton").onclick    	= function() { InventoryGroupController.instance.uploadFile(); }
 	}
 };
 
@@ -162,7 +163,7 @@ function onUploadCompleted(resultData)
 	alert("success = " + resultData.success);
 }
 
-function onSelectedFileChange()
+InventoryGroupControllerClass.prototype.onSelectedFileChange = function()
 {
 	var fileInput = document.getElementById('fileToUpload');
 	var ext       = fileInput.value.match(/\.([^\.]+)$/)[1];
@@ -201,7 +202,7 @@ function onSelectedFileChange()
             fileInput.value	   = '';
             imageContainer.src = '';
     }
-}
+};
 
 InventoryGroupControllerClass.prototype.onSubGroupButtonClick = function(groupId)
 {
