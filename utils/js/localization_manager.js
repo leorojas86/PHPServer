@@ -42,7 +42,7 @@ LocalizationManagerClass.prototype.onLoadLocalizationTableCallback = function(xm
 	}
 };
 
-LocalizationManagerClass.prototype.getLocalizedString = function(key)
+LocalizationManagerClass.prototype.getLocalizedText = function(key)
 {
 	return this.localizationTable[key];
 };

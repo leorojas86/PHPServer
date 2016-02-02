@@ -29,15 +29,16 @@ InventoryContextMenuControllerClass.prototype.showContextMenu = function(event)/
 	_folderId 		= event.target.parentNode.id.replace("folder_", "");
 	var contextMenu = document.getElementById('context_menu_container');
 
+	var onContextMenuOptionSelected = function(option) { InventoryContextMenuController.instance.onContextMenuOptionSelected(option); } 
 	ContextMenuUtils.instance.showContextMenu(contextMenu, { "x" : event.clientX, "y" : event.clientY }, options, onContextMenuOptionSelected);
-}
+};
 
 InventoryContextMenuControllerClass.prototype.canPasteFolder = function()
 {
 	return InventoryController.instance._currentGroupData != null && InventoryController.instance._currentGroupData.can_paste;
-}
+};
 
-function onContextMenuOptionSelected(option)
+InventoryContextMenuControllerClass.prototype.onContextMenuOptionSelected = function(option)
 {
 	switch(option)
 	{
@@ -48,11 +49,11 @@ function onContextMenuOptionSelected(option)
 		case Constants.MENU_ITEM_CUT: 			InventoryController.instance._cuttingGroupId = _folderId;	break;
 		case Constants.MENU_ITEM_DELETE: 		removeSubgroupGroup(_folderId);	break;
 	}
-}
+};
 
 function addItem(folderId)
 {
-	var typeNewItemNameText = LocManager.instance.getLocalizedString("type_new_item_name");
+	var typeNewItemNameText = LocManager.instance.getLocalizedText("type_new_item_name");
 	var itemName 			= prompt(typeNewItemNameText, "");
 
 	if(itemName != null && itemName != "") 
@@ -61,7 +62,7 @@ function addItem(folderId)
 
 function addFolder()
 {
-	var typeFolderNameText = LocManager.instance.getLocalizedString("type_new_folder_name");
+	var typeFolderNameText = LocManager.instance.getLocalizedText("type_new_folder_name");
 	var folderName         = prompt(typeFolderNameText, "");
 
 	if(folderName != null && folderName != "") 
@@ -70,7 +71,7 @@ function addFolder()
 
 function renameGroup(folderId)
 {
-	var typeNewFolderName = LocManager.instance.getLocalizedString("type_new_name");
+	var typeNewFolderName = LocManager.instance.getLocalizedText("type_new_name");
 	var folderName 		  = prompt(typeNewFolderName, "");
 
 	if(folderName != null && folderName != "") 
@@ -110,7 +111,7 @@ function refreshCurrentGroup(resultData)
 function removeSubgroupGroup(groupId)
 {
 	var folderLabel 		= document.getElementById('folder_label_' + groupId);
-	var deleteFolderText 	= LocManager.instance.getLocalizedString("sure_to_delete_folder");
+	var deleteFolderText 	= LocManager.instance.getLocalizedText("sure_to_delete_folder");
 	deleteFolderText 		= deleteFolderText.replace("[folder]", folderLabel.textContent);
 	var remove      		= confirm(deleteFolderText);
 

@@ -9,13 +9,13 @@ function InventoryGroupControllerClass()
 //Methods
 InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 {
-	var backButtonTooltip = LocManager.instance.getLocalizedString("back_button_tooltip");
-	var backButtonText    = LocManager.instance.getLocalizedString("back_button_text");
-	var rightClickOptions = LocManager.instance.getLocalizedString("right_click_tooltip");
-	var updateButtonText  = LocManager.instance.getLocalizedString("update_button_text");
-	var searchButtonText  = LocManager.instance.getLocalizedString("search_button_text");
-	var rootGroupText  	  = LocManager.instance.getLocalizedString("root_group_text");
-	var uploadImageText   = LocManager.instance.getLocalizedString("upload_image_text");
+	var backButtonTooltip = LocManager.instance.getLocalizedText("back_button_tooltip");
+	var backButtonText    = LocManager.instance.getLocalizedText("back_button_text");
+	var rightClickOptions = LocManager.instance.getLocalizedText("right_click_tooltip");
+	var updateButtonText  = LocManager.instance.getLocalizedText("update_button_text");
+	var searchButtonText  = LocManager.instance.getLocalizedText("search_button_text");
+	var rootGroupText  	  = LocManager.instance.getLocalizedText("root_group_text");
+	var uploadImageText   = LocManager.instance.getLocalizedText("upload_image_text");
 
 	var groupId       = groupData.id;
 	var groupPath     = groupData.path;
@@ -121,7 +121,7 @@ InventoryGroupControllerClass.prototype.onLoadGroupCallback = function(resultDat
 
 InventoryGroupControllerClass.prototype.clearHTML = function()
 {
-	var loadingText 			= LocManager.instance.getLocalizedString("loading_text");
+	var loadingText 			= LocManager.instance.getLocalizedText("loading_text");
 	var groupContainer  		= document.getElementById("group_container");
 	groupContainer.innerHTML 	= loadingText;
 };
@@ -136,7 +136,7 @@ InventoryGroupControllerClass.prototype.uploadFile = function()
 {
 	var imageData = imageContainer.toDataURL("image/jpeg");
 	ServiceClient.instance.uploadFile(imageData, onUploadCompleted, onProgress);
-}
+};
 
 function onProgress(progress) 
 {
@@ -208,20 +208,19 @@ function onUpdateGroupDataCallback(resultData)
 InventoryGroupControllerClass.prototype.onBackButtonClick = function(parentGroupId)
 {
 	this.loadAjaxGroup(parentGroupId);
-}
-
+};
 
 InventoryGroupControllerClass.prototype.onSearchButtonClick = function()//TODO: Move the code that invokes the search here
 {
 	var searchTesxtInput = document.getElementById('search_input');
 	ServiceClient.instance.searchGroups(searchTesxtInput.value, this.onSearchCallback);
-}
+};
 
 InventoryGroupControllerClass.prototype.onSearchCallback = function(resultData)
 {
 	//if(resultData.success)
-		alert(resultData.data);
-}
+	alert(resultData.data);
+};
 
 InventoryGroupControllerClass.prototype.onKeyUp = function(event)
 {
@@ -235,4 +234,4 @@ InventoryGroupControllerClass.prototype.onKeyUp = function(event)
 	    break;
 	    default: console.log("pressed key = " + event.which); break;
 	}
-}
+};

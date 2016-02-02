@@ -9,11 +9,11 @@ function LoginControllerClass()
 //Methods
 LoginControllerClass.prototype.render = function()
 {
-	var emailText 	  		= LocManager.instance.getLocalizedString("email_text");
-	var passwordText  		= LocManager.instance.getLocalizedString("password_text");
-	var passwordText  		= LocManager.instance.getLocalizedString("password_text");
-	var loginButtonText 	= LocManager.instance.getLocalizedString("login_button_text");
-	var registerButtonText  = LocManager.instance.getLocalizedString("register_button_text");
+	var emailText 	  		= LocManager.instance.getLocalizedText("email_text");
+	var passwordText  		= LocManager.instance.getLocalizedText("password_text");
+	var passwordText  		= LocManager.instance.getLocalizedText("password_text");
+	var loginButtonText 	= LocManager.instance.getLocalizedText("login_button_text");
+	var registerButtonText  = LocManager.instance.getLocalizedText("register_button_text");
 	var defaultValues 		= "leo";
 
 	var pageContainer 	   	= document.getElementById("page_container");
@@ -34,8 +34,8 @@ LoginControllerClass.prototype.onKeyUp = function(event)
 {
 	switch(event.which) 
 	{
-	    case 13://enter
-			this.login();
+	    case 13://enter 
+	    	this.login();
 	    break;
 	    default: console.log("pressed key = " + event.which); break;
 	}
