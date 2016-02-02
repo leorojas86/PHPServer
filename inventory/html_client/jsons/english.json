@@ -17,5 +17,6 @@
     "passwords_dont_match_text"    : "Passwords don't match.",
     "login_button_text"            : "Login",
     "register_button_text"         : "Register",
-    "root_group_text"              : "Home"
+    "root_group_text"              : "Home",
+    "upload_image_text"            : "Upload Image"
 }
