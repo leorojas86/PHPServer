@@ -1,24 +1,29 @@
+.body_class
+{
+	margin:0px; color:white;
+}
+
 .header_container_class
 {
-	height:40px;
-	border:1px solid blue;/**/
+	/*background:#5986D1;*/
+	height:40px; background:#3D557E; box-shadow:0 0 3px rgba(0,0,0,.14),0 3px 6px rgba(0,0,0,.28);
 }
 
 .page_container_class
 {
-	border:1px solid blue;/**/
+	/*background:#454c56;*/
+	background:rgba(69, 76, 86, 0.48);
+
 }
 
 .context_menu_container_class
 {
 	position:absolute;/* left : 100px; top : 150px;*/
-	/*border:1px solid red;*/
 }
 
 .popups_container_class
 {
 	position:absolute;
-	border:1px solid red;/**/
 }
 
 .folders_area_class
@@ -48,5 +53,10 @@
 
 .session_button_class
 {
-   	position:absolute; right:0px; width:100px; padding:10px; 
+   	position:absolute; right:0px; width:60px; height:40px; margin:auto;
+}
+
+.session_button_text_class
+{
+	text-align:center; margin-top:10px;
 }

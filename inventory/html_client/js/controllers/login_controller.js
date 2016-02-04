@@ -17,7 +17,7 @@ LoginControllerClass.prototype.render = function()
 	var defaultValues 		= "leo";
 
 	var pageContainer 	   	= document.getElementById("page_container");
-	pageContainer.innerHTML = 	"<p>" + emailText + "</p>" +
+	pageContainer.innerHTML = 	"</br><p>" + emailText + "</p>" +
 								"<input type='text' id='user_email'    value = '" + defaultValues + "'> <br/><br/>" +
 	  							"<p>" + passwordText + "</p>" +
 	  							"<input type='text' id='user_password' value = '" + defaultValues + "'> <br/><br/>" + 

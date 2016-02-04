@@ -27,12 +27,13 @@
 			
 			function onPageLoaded()
 			{
-				HeaderController.instance.render();
 				Bootstrap.instance.initialize(onAppInitializationCompleted);
 			}
 
 			function onAppInitializationCompleted()
 			{
+				HeaderController.instance.render();
+
 				if(ServiceClient.instance.loggedUser == null)
 					LoginController.instance.render();
 				else
@@ -41,7 +42,7 @@
 
 		</script>
 	</head>
-	<body onload="onPageLoaded();">
+	<body class="body_class" onload="onPageLoaded();">
 		<div id='header_container' 			class='header_container_class'></div>
 		<div id='page_container' 			class='page_container_class'>Loading...</div>
 		<div id='context_menu_container' 	class='context_menu_container_class'></div>
