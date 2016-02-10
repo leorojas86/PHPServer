@@ -17,10 +17,10 @@ LoginControllerClass.prototype.render = function()
 	var defaultValues 		= "leo";
 
 	var pageContainer 	   	= document.getElementById("page_container");
-	pageContainer.innerHTML = 	"</br><p>" + emailText + "</p>" +
-								"<input type='text' id='user_email'    value = '" + defaultValues + "'> <br/><br/>" +
+	pageContainer.innerHTML = 	"<p>" + emailText + "</p>" +
+								"<input type='text' id='user_email'   		class='input_class' value = '" + defaultValues + "'> <br/><br/>" +
 	  							"<p>" + passwordText + "</p>" +
-	  							"<input type='text' id='user_password' value = '" + defaultValues + "'> <br/><br/>" + 
+	  							"<input type='text' id='user_password' 		class='input_class' value = '" + defaultValues + "'> <br/><br/>" + 
 	  							"<button type='button' id='login_button'	class='button_class'>" + loginButtonText + "</button>" +
 	  							"<br><br><br>" +
 	  							"<button type='button' id='register_button'	class='button_class'>" + registerButtonText + "</button>";

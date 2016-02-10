@@ -1,3 +1,8 @@
+.html_class
+{
+	background:rgba(198, 204, 213, 1);
+}
+
 .body_class
 {
 	margin:0px; color:#3D557E;
@@ -5,15 +10,12 @@
 
 .header_container_class
 {
-	/*background:#5986D1;*/
-	height:40px; background:#3D557E; box-shadow:0 0 3px rgba(0,0,0,.14),0 3px 6px rgba(0,0,0,.28); color:white;
+	height:40px; background:#3D557E; box-shadow:0 0 3px #112A56,0 3px 6px #112A56; color:white;
 }
 
 .page_container_class
 {
-	/*background:#454c56;*/
-	background:#C6CCD5;
-
+	/*background:rgba(198, 204, 213, 0.81);*/
 }
 
 .context_menu_container_class

@@ -21,13 +21,13 @@ RegistrationControllerClass.prototype.render = function()
 
 	var pageContainer 	   	= document.getElementById("page_container");
 	pageContainer.innerHTML = 	"<p>" + userNameText + "</p>" +
-	  							"<input type='text' 	id='user_name'     			class='button_class'	value = '" + defaultValues + "'>" +
+	  							"<input type='text' 	id='user_name'     			class='input_class'		value = '" + defaultValues + "'>" +
 	  							"<p>" + emailText + "</p>" +
-	  							"<input type='text' 	id='user_email'    			class='button_class'	value = '" + defaultValues + "'> <br/><br/>" +
+	  							"<input type='text' 	id='user_email'    			class='input_class'	value = '" + defaultValues + "'> <br/><br/>" +
 	  							"<p>" + passwordText + "</p>" +
-	  							"<input type='text' 	id='user_password'   		class='button_class' 	value = '" + defaultValues + "'> <br/><br/>" +
+	  							"<input type='text' 	id='user_password'   		class='input_class' 	value = '" + defaultValues + "'> <br/><br/>" +
 	  							"<p>" + confirmPasswordText + "</p>" +
-	  							"<input type='text' 	id='user_confirm_password' 	class='button_class' 	value = '" + defaultValues + "'> <br/><br/>" +
+	  							"<input type='text' 	id='user_confirm_password' 	class='input_class' 	value = '" + defaultValues + "'> <br/><br/>" +
 	  							"<button type='button' 	id='register_button' 		class='button_class'>" + registerButtonText + "</button>";
 
 	document.getElementById('register_button').onclick = function(){ RegistrationController.instance.onRegisterButtonClick(); };
