@@ -12,8 +12,24 @@ function HeaderControllerClass()
 //Methods
 HeaderControllerClass.prototype.render = function()
 {
-	var loginText				= LocManager.instance.getLocalizedText("login_text");
+	var headerContainer = document.getElementById("header_container");
 
-	var headerContainer 		= document.getElementById("header_container");
-	headerContainer.innerHTML  	= "<div id='session_button' class='session_button_class'> <p class='session_button_text_class'>" + loginText + "</p> </div>";
+	if(ServiceClient.instance.loggedUser != null)
+	{
+		//var loginText				= LocManager.instance.getLocalizedText("login_text");
+		var logoutText	= LocManager.instance.getLocalizedText("logout_text");
+
+		headerContainer.innerHTML  	= "<button id='logout_button' class='button_class session_button_class'>" + logoutText + "</button>";
+
+		document.getElementById('logout_button').onclick = function(){ HeaderController.instance.onLogoutButtonClick(); };
+	}
+	else
+		headerContainer.innerHTML = '';
+};
+
+HeaderControllerClass.prototype.onLogoutButtonClick = function()
+{
+	ServiceClient.instance.logout();
+	this.render();
+	LoginController.instance.render();
 };

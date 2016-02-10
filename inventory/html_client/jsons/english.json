@@ -19,5 +19,6 @@
     "register_button_text"         : "Register",
     "root_group_text"              : "Home",
     "upload_image_text"            : "Upload Image",
-    "login_text"                   : "Login"
+    "login_text"                   : "Login",
+    "logout_text"                  : "Logout"
 }

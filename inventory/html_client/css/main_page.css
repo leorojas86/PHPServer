@@ -16,6 +16,7 @@
 .page_container_class
 {
 	/*background:rgba(198, 204, 213, 0.81);*/
+	margin: 20px;
 }
 
 .context_menu_container_class
@@ -65,7 +66,9 @@
 
 .button_class
 {
-	color:#3D557E;
+	color:#3D557E; margin:5px; width:70px; height:30px; background-color:white;
+	border:none; border-radius:50%; box-shadow:0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28); 
+	cursor:pointer; cursor:hand;
 }
 
 .input_class

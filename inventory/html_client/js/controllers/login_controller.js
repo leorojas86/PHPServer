@@ -56,7 +56,10 @@ LoginControllerClass.prototype.login = function(email, password)//TODO: Display 
 LoginControllerClass.prototype.onLogingCallback = function(resultData)
 {
 	if(resultData.success)
+	{
+		HeaderController.instance.render();
 		InventoryController.instance.render();
+	}
 	else
 		alert("Login Failed, " + resultData.data);
 };

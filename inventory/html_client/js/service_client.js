@@ -159,3 +159,11 @@ ServiceClientClass.prototype.onRequestResponse = function(params, xmlhttp, succe
 
 	callback(resultData);
 };
+
+ServiceClientClass.prototype.logout = function()
+{
+	this.loggedUser = null;
+	CacheUtils.instance.set("LoggedUser", null);
+};
+
+
