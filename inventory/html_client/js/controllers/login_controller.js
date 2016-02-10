@@ -21,9 +21,9 @@ LoginControllerClass.prototype.render = function()
 								"<input type='text' id='user_email'    value = '" + defaultValues + "'> <br/><br/>" +
 	  							"<p>" + passwordText + "</p>" +
 	  							"<input type='text' id='user_password' value = '" + defaultValues + "'> <br/><br/>" + 
-	  							"<button type='button' id='login_button'>" + loginButtonText + "</button>" +
+	  							"<button type='button' id='login_button'	class='button_class'>" + loginButtonText + "</button>" +
 	  							"<br><br><br>" +
-	  							"<button type='button' id='register_button'>" + registerButtonText + "</button>";
+	  							"<button type='button' id='register_button'	class='button_class'>" + registerButtonText + "</button>";
 
 	document.getElementById('user_password').onkeyup 	= function(){ LoginController.instance.onKeyUp(); };
 	document.getElementById('login_button').onclick  	= function(){ LoginController.instance.onLoginButtonClick(); };
