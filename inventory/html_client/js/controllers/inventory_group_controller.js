@@ -15,7 +15,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	var updateButtonText  = LocManager.instance.getLocalizedText("update_button_text");
 	var searchButtonText  = LocManager.instance.getLocalizedText("search_button_text");
 	var rootGroupText  	  = LocManager.instance.getLocalizedText("root_group_text");
-	var uploadImageText   = LocManager.instance.getLocalizedText("upload_image_text");
+	var uploadText   	  = LocManager.instance.getLocalizedText("upload_text");
 
 	var groupId       = groupData.id;
 	var groupPath     = groupData.path;
@@ -45,7 +45,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 			var subGroupName = subGroup.name;
 			var subGroupId	 = subGroup.id;
 			var subGroupType = subGroup.type;
-			var icon 		 = subGroupType == Constants.GROUP_ID_FOLDER ? "images/Folder.png" : "images/File.png";
+			var icon 		 = subGroupType == Constants.GROUP_ID_FOLDER ? Constants.IMAGE_FOLDER : Constants.IMAGE_FILE;
 			var clickEvent   = "onclick='InventoryGroupController.instance.onSubGroupButtonClick(" + subGroupId + ");'"
 
 			groupAjax += "<div id='folder_" + subGroupId + "' class='folder_class'>"+
@@ -68,7 +68,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 
 		groupAjax +=	"Select an image to upload:" + 
 						"<input type='file' id='fileToUpload' 		class='input_class'>" +
-						"<button 			id='uploadFileButton' 	class='button_class'>" + uploadImageText + "</button>" + 
+						"<button 			id='uploadFileButton' 	class='button_class'>" + uploadText + "</button>" + 
 						"<div 				id='progressNumber'></div>" +
 						"<canvas 			id='imageContainer' width='500' height='500'></canvas>";
 	}

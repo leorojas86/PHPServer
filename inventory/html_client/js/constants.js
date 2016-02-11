@@ -12,5 +12,8 @@ var Constants =
      MENU_ITEM_RENAME         : 'Rename',
 
      GROUP_ID_FOLDER : 0,
-     GROUP_ID_ITEM   : 1
+     GROUP_ID_ITEM   : 1,
+
+     IMAGE_FOLDER   : "images/Folder.png",
+     IMAGE_FILE     : "images/File.png"
 };
