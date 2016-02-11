@@ -45,7 +45,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 			var subGroupName = subGroup.name;
 			var subGroupId	 = subGroup.id;
 			var subGroupType = subGroup.type;
-			var icon 		 = URLUtils.instance.getServerURL() + (subGroupType == Constants.GROUP_ID_FOLDER ? "inventory/html_client/images/Folder.png" : "inventory/html_client/images/File.png");
+			var icon 		 = subGroupType == Constants.GROUP_ID_FOLDER ? "images/Folder.png" : "images/File.png";
 			var clickEvent   = "onclick='InventoryGroupController.instance.onSubGroupButtonClick(" + subGroupId + ");'"
 
 			groupAjax += "<div id='folder_" + subGroupId + "' class='folder_class'>"+

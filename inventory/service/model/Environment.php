@@ -7,6 +7,9 @@
 	{
 		public static function Init()
 		{
+			header('Access-Control-Allow-Origin: *');
+			header('Access-Control-Allow-Methods: GET, POST'); 
+
 			$result = MySQLManager::Connect(Config::DB_SERVER, Config::DB_USER, Config::DB_PASS, Config::DB_NAME, Config::DB_PORT);
 			
 			if($result->success)

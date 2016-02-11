@@ -1,10 +1,8 @@
-var URL = URLUtils.instance.getServerURL();
-
 var Constants =
 {
-     API_URL : URL,
+     API_URL : 'http://201.200.1.187',
 
-     ENGLISH_LOCALIZATION_TABLE : URL + "inventory/html_client/jsons/english.json",
+     ENGLISH_LOCALIZATION_TABLE : "jsons/english.json",
 
      MENU_ITEM_ADD_ITEM       : 'Add Item',
      MENU_ITEM_ADD_FOLDER     : 'Add Folder',
