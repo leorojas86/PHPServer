@@ -56,9 +56,12 @@
 
 		private static function GetRootGroupData()
 		{
+			//$sessionId 		  = SessionManager::$sessionId;
 			$loggedInUserData = SessionManager::GetUserData();
 			$userId   		  = $loggedInUserData["id"];
 			$rootGroupResult  = Group::GetUserRootGroup($userId);
+
+			//error_log("user id = '$userId' session id = '$sessionId'");
 
 			if($rootGroupResult->success)
 			{

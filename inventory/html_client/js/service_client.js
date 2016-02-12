@@ -126,7 +126,7 @@ ServiceClientClass.prototype.request = function(method, params, callback)
 {
 	if(this.sessionId != null)
 	{
-		alert("session = " + this.sessionId);
+		//alert("session = " + this.sessionId);
 
 		if((typeof params) == "string")
 			params += "&sessionId="+this.sessionId;
@@ -146,7 +146,7 @@ ServiceClientClass.prototype.onRequestResponse = function(params, xmlhttp, succe
 		CacheUtils.instance.set(params, xmlhttp.responseText);
 		this.sessionId = resultData.sessionId;
 
-		alert("session = " + this.sessionId);
+		//alert("session = " + this.sessionId);
 		CacheUtils.instance.set("SessionId", this.sessionId);
 	}
 	else

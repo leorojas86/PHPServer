@@ -5,8 +5,9 @@
 	require_once "inventory/service/controller/database/GroupsController.php";
 	require_once "inventory/service/controller/files/FilesController.php";
 
-	try 
+	/*try 
 	{
+		throw new Exception('Division by zero.');*/
 		$result = Environment::Init(isset($_POST["sessionId"]) ? $_POST["sessionId"] : null);
 
 		if($result->success)
@@ -27,13 +28,13 @@
 			else
 				$result = new ServiceResult(false, "Unspecified service parameter", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE);
 		}
-	}
+	/*}
 	catch(Exception $e) 
 	{
-		$result = new ServiceResult(false, "Unexpected exception ocurred, message = " . $e->getMessage(), UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE);
-    	error_log("Error message => " + $e->getMessage());
-    	error_log("Error stack trace => " + $e->getTraceAsString());
-	}
+		$result = new ServiceResult(false, "Unexpected exception occurred, message = " . $e->getMessage(), UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE);
+    	error_log("Error message => " . $e->getMessage());
+    	error_log("Error stack trace => " . $e->getTraceAsString());
+	}*/
 
 	echo $result->toJSON();
 ?>

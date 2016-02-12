@@ -9,16 +9,12 @@
 
 		public static function StartSession($sessionId = null)
 		{
+			if($sessionId != null)
+				session_id($sessionId);
+
 			session_start();
 
-			if($sessionId == null)
-				SessionManager::$sessionId = session_id();//Gets a new id
-			else
-			{
-				//error_log('restauring session id = ' . )
-				session_id($sessionId);
-				SessionManager::$sessionId = $sessionId;//Sets the specified id
-			}
+			SessionManager::$sessionId = session_id();//Gets current session id
 
 			return new ServiceResult(true);
 		}
