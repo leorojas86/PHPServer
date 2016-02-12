@@ -5,9 +5,20 @@
 	{
 		private static $USER_DATA = "USER_DATA";
 
-		public static function StartSession()
+		public static $sessionId = null;
+
+		public static function StartSession($sessionId = null)
 		{
 			session_start();
+
+			if($sessionId == null)
+				SessionManager::$sessionId = session_id();//Gets a new id
+			else
+			{
+				//error_log('restauring session id = ' . )
+				session_id($sessionId);
+				SessionManager::$sessionId = $sessionId;//Sets the specified id
+			}
 
 			return new ServiceResult(true);
 		}

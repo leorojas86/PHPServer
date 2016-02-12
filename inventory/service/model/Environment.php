@@ -5,7 +5,7 @@
 
 	class Environment
 	{
-		public static function Init()
+		public static function Init($sessionId = null)
 		{
 			header('Access-Control-Allow-Origin: *');
 			header('Access-Control-Allow-Methods: GET, POST'); 
@@ -13,7 +13,7 @@
 			$result = MySQLManager::Connect(Config::DB_SERVER, Config::DB_USER, Config::DB_PASS, Config::DB_NAME, Config::DB_PORT);
 			
 			if($result->success)
-				$result = SessionManager::StartSession();
+				$result = SessionManager::StartSession($sessionId);
 
 			return $result;
 		}

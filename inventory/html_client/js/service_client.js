@@ -3,6 +3,7 @@ var ServiceClient = { instance : new ServiceClientClass() };
 
 //Variables
 ServiceClientClass.prototype.loggedUser = null;
+ServiceClientClass.prototype.sessionId  = null;
 
 ServiceClientClass.prototype._onInitializationCompleted = null;
 
@@ -10,12 +11,13 @@ ServiceClientClass.prototype._onInitializationCompleted = null;
 function ServiceClientClass()
 {
 	var loggedUser = CacheUtils.instance.get("LoggedUser");
+	var sessionId  = CacheUtils.instance.get("SessionId");
 
 	if(loggedUser != null)
 	{
 		this.loggedUser = loggedUser;
-		console.log("logged user info loaded from cache");
-		//alert(this.loggedUser);
+		this.sessionId  = sessionId;
+		console.log("session and logged user info loaded from cache");
 	}
 }
 
@@ -23,13 +25,7 @@ function ServiceClientClass()
 ServiceClientClass.prototype.initialize = function(onInitializationCompleted)
 {
 	this._onInitializationCompleted = onInitializationCompleted;
-
-	//if(this.loggedUser == null)
-	//{
-		//TODO: Initialize server session
-	//}
-	//else
-		this.notifyOnInitializationCompleted();
+	this.notifyOnInitializationCompleted();
 };
 
 ServiceClientClass.prototype.notifyOnInitializationCompleted = function(success)
@@ -47,8 +43,7 @@ ServiceClientClass.prototype.register = function(name, password, email, callback
 ServiceClientClass.prototype.login = function(email, password, callback)
 {
 	var params 			= "service=User&method=Login" + "&email=" + email + "&password=" + password;
-	var thisVar 		= this;
-	var loginCallback	=  function(resultData) { thisVar.onLoginCallback(resultData, callback) };
+	var loginCallback	=  function(resultData) { ServiceClient.instance.onLoginCallback(resultData, callback) };
 	this.request("POST", params, loginCallback);
 };
 
@@ -58,10 +53,7 @@ ServiceClientClass.prototype.onLoginCallback = function(resultData, callback)
 	{
 		this.loggedUser = resultData.data;
 		CacheUtils.instance.set("LoggedUser", this.loggedUser);
-		//alert(this.loggedUser);
 	}
-
-	//alert(ServiceClient.instance.loggedUser);
 
 	callback(resultData);
 };
@@ -132,8 +124,17 @@ ServiceClientClass.prototype.uploadFile = function(fileData, callback, onProgres
 
 ServiceClientClass.prototype.request = function(method, params, callback)
 {
-	var thisVar = this;
-	RequestUtils.instance.request(Constants.API_URL, "POST", function(xmlhttp, success) { thisVar.onRequestResponse(params, xmlhttp, success, callback) }, params);
+	if(this.sessionId != null)
+	{
+		alert("session = " + this.sessionId);
+
+		if((typeof params) == "string")
+			params += "&sessionId="+this.sessionId;
+		else
+			params["sessionId"]  = this.sessionId;
+	}
+
+	RequestUtils.instance.request(Constants.API_URL, "POST", function(xmlhttp, success) { ServiceClient.instance.onRequestResponse(params, xmlhttp, success, callback) }, params);
 };
 
 ServiceClientClass.prototype.onRequestResponse = function(params, xmlhttp, success, callback)
@@ -141,7 +142,13 @@ ServiceClientClass.prototype.onRequestResponse = function(params, xmlhttp, succe
 	var resultData = success ? JSON.parse(xmlhttp.responseText) : { success : false, data : xmlhttp.responseText };
 
 	if(resultData.success)
+	{
 		CacheUtils.instance.set(params, xmlhttp.responseText);
+		this.sessionId = resultData.sessionId;
+
+		alert("session = " + this.sessionId);
+		CacheUtils.instance.set("SessionId", this.sessionId);
+	}
 	else
 	{
 		console.log("Error Response Text = " + xmlhttp.responseText);
@@ -163,7 +170,9 @@ ServiceClientClass.prototype.onRequestResponse = function(params, xmlhttp, succe
 ServiceClientClass.prototype.logout = function()
 {
 	this.loggedUser = null;
+	this.sessionId  = null;
 	CacheUtils.instance.set("LoggedUser", null);
+	CacheUtils.instance.set("SessionId", null);
 };
 
 
