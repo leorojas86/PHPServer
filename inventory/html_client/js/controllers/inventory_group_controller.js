@@ -61,16 +61,18 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	}
 	else
 	{
-		groupAjax += "<p>Data"+ 
-							"<input type='text' id='group_data' 			class='input_class'	value = '" + groupData.data + "'>" +
-							"<button 			id='update_group_button' 	class='button_class'>" + updateButtonText + "</button>" +
-					   "</p>";
+		groupAjax += "<div id='item_scroll_panel' class='item_scroll_panel_class'>";
+			groupAjax += "<p>Data"+ 
+								"<input type='text' id='group_data' 			class='input_class'	value = '" + groupData.data + "'>" +
+								"<button 			id='update_group_button' 	class='button_class'>" + updateButtonText + "</button>" +
+						   "</p>";
 
-		groupAjax +=	"Select an image to upload:" + 
-						"<input type='file' id='fileToUpload' 		class='input_class'>" +
-						"<button 			id='uploadFileButton' 	class='button_class'>" + uploadText + "</button>" + 
-						"<div 				id='progressNumber'></div>" +
-						"<canvas 			id='imageContainer' width='500' height='500'></canvas>";
+			groupAjax +=	"Select an image to upload:" + 
+							"<input type='file' id='fileToUpload' 		class='input_class'>" +
+							"<button 			id='uploadFileButton' 	class='button_class'>" + uploadText + "</button>" + 
+							"<div 				id='progressNumber'></div>" +
+							"<canvas 			id='imageContainer' width='500' height='500'></canvas>";
+		groupAjax += "</div>";
 	}
 
 	groupAjax += "</div>";

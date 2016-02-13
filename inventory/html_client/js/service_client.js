@@ -171,8 +171,9 @@ ServiceClientClass.prototype.logout = function()
 {
 	this.loggedUser = null;
 	this.sessionId  = null;
-	CacheUtils.instance.set("LoggedUser", null);
-	CacheUtils.instance.set("SessionId", null);
+	//CacheUtils.instance.set("LoggedUser", null);
+	//CacheUtils.instance.set("SessionId", null);
+	CacheUtils.instance.clear();
 };
 
 

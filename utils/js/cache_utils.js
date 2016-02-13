@@ -24,3 +24,8 @@ CacheUtilsClass.prototype.remove = function(key, value)
 {
 	localStorage.removeItem('key');
 };
+
+CacheUtilsClass.prototype.clear = function()
+{
+	localStorage.clear();
+};
