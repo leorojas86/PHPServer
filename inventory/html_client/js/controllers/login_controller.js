@@ -17,13 +17,20 @@ LoginControllerClass.prototype.render = function()
 	var defaultValues 		= "leo";
 
 	var pageContainer 	   	= document.getElementById("page_container");
-	pageContainer.innerHTML = 	"<p>" + emailText + "</p>" +
-								"<input type='text' id='user_email'   		class='input_class' value = '" + defaultValues + "'> <br/><br/>" +
-	  							"<p>" + passwordText + "</p>" +
-	  							"<input type='text' id='user_password' 		class='input_class' value = '" + defaultValues + "'> <br/><br/>" + 
-	  							"<button type='button' id='login_button'	class='button_class'>" + loginButtonText + "</button>" +
-	  							"<br><br><br>" +
-	  							"<button type='button' id='register_button'	class='button_class'>" + registerButtonText + "</button>";
+
+	var html = "<div id='login_container' class='login_container_class'>";
+
+		html += "<p class='margin_class'>" + emailText + "</p>" +
+				"<input type='text' id='user_email'   		class='input_class margin_class' value = '" + defaultValues + "'> <br/><br/>" +
+		  		"<p class='margin_class'>" + passwordText + "</p>" +
+		  		"<input type='text' id='user_password' 		class='input_class margin_class' value = '" + defaultValues + "'> <br/><br/>" + 
+		  		"<button type='button' id='login_button'	class='button_class margin_class'>" + loginButtonText + "</button>" +
+		  		"<br><br>" +
+		  		"<button type='button' id='register_button'	class='button_class margin_class'>" + registerButtonText + "</button>";
+
+	html += "</div>";
+
+	pageContainer.innerHTML = html;
 
 	document.getElementById('user_password').onkeyup 	= function(){ LoginController.instance.onKeyUp(); };
 	document.getElementById('login_button').onclick  	= function(){ LoginController.instance.onLoginButtonClick(); };

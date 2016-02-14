@@ -80,3 +80,13 @@
 {
 	color:#3D557E;
 }
+
+.login_container_class
+{
+	width:152px; height:100%; border:1px solid gray;
+}
+
+.margin_class
+{
+	margin:5px;
+}

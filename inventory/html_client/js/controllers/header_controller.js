@@ -28,8 +28,8 @@ HeaderControllerClass.prototype.render = function()
 	{
 		var loginText = LocManager.instance.getLocalizedText("login_text");
 
-		headerContainer.innerHTML = "<button id='login_button' class='button_class session_button_class'>" + loginText + "</button>";
-		document.getElementById('login_button').onclick = function(){ HeaderController.instance.onLoginButtonClick(); };
+		headerContainer.innerHTML = "<button id='header_login_button' class='button_class session_button_class'>" + loginText + "</button>";
+		document.getElementById('header_login_button').onclick = function(){ HeaderController.instance.onLoginButtonClick(); };
 	}
 };
 
