@@ -29,7 +29,12 @@ HeaderControllerClass.prototype.render = function()
 		var loginText = LocManager.instance.getLocalizedText("login_text");
 
 		headerContainer.innerHTML = "<button id='header_login_button' class='button_class session_button_class'>" + loginText + "</button>";
-		document.getElementById('header_login_button').onclick = function(){ HeaderController.instance.onLoginButtonClick(); };
+		
+		document.getElementById('header_login_button').onclick = function(event)
+		{ 
+			var eventPosition = { x : event.currentTarget.offsetLeft,  y : event.currentTarget.offsetTop }; 
+			HeaderController.instance.onLoginButtonClick(eventPosition); 
+		};
 	}
 };
 
@@ -40,7 +45,10 @@ HeaderControllerClass.prototype.onLogoutButtonClick = function()
 	LoginController.instance.render();
 };
 
-HeaderControllerClass.prototype.onLoginButtonClick = function()
+HeaderControllerClass.prototype.onLoginButtonClick = function(event)
 {
-	LoginController.instance.render();
+	//alert(event.target);
+	//LoginController.instance.render();
+
+	LoginController.instance.show(event);
 }

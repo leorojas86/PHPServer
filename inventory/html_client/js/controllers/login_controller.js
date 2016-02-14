@@ -7,7 +7,7 @@ function LoginControllerClass()
 }
 
 //Methods
-LoginControllerClass.prototype.render = function()
+LoginControllerClass.prototype.show = function(position)
 {
 	var emailText 	  		= LocManager.instance.getLocalizedText("email_text");
 	var passwordText  		= LocManager.instance.getLocalizedText("password_text");
@@ -16,11 +16,7 @@ LoginControllerClass.prototype.render = function()
 	var registerButtonText  = LocManager.instance.getLocalizedText("register_button_text");
 	var defaultValues 		= "leo";
 
-	var pageContainer 	   	= document.getElementById("page_container");
-
-	var html = "<div id='login_container' class='login_container_class'>";
-
-		html += "<p class='margin_class'>" + emailText + "</p>" +
+	var html =  "<p class='margin_class'>" + emailText + "</p>" +
 				"<input type='text' id='user_email'   		class='input_class margin_class' value = '" + defaultValues + "'> <br/><br/>" +
 		  		"<p class='margin_class'>" + passwordText + "</p>" +
 		  		"<input type='text' id='user_password' 		class='input_class margin_class' value = '" + defaultValues + "'> <br/><br/>" + 
@@ -28,13 +24,20 @@ LoginControllerClass.prototype.render = function()
 		  		"<br><br>" +
 		  		"<button type='button' id='register_button'	class='button_class margin_class'>" + registerButtonText + "</button>";
 
-	html += "</div>";
 
-	pageContainer.innerHTML = html;
+	var loginContainer 			= document.getElementById("login_popup_container");
+	loginContainer.innerHTML  	= html;
+	loginContainer.style.left 	= position.x - 80 + "px";
+	loginContainer.style.top  	= position.y + 35 + "px";
 
 	document.getElementById('user_password').onkeyup 	= function(){ LoginController.instance.onKeyUp(); };
 	document.getElementById('login_button').onclick  	= function(){ LoginController.instance.onLoginButtonClick(); };
 	document.getElementById('register_button').onclick  = function(){ LoginController.instance.onRegisterButtonClick(); };
+};
+
+LoginControllerClass.prototype.hide = function()
+{
+	document.getElementById("login_popup_container").innerHTML = "";
 };
 
 LoginControllerClass.prototype.onKeyUp = function(event)
@@ -52,7 +55,9 @@ LoginControllerClass.prototype.onLoginButtonClick = function()
 {
 	var userEmail    = document.getElementById('user_email');	
 	var userPassword = document.getElementById('user_password');	
+	
 	this.login(userEmail.value, userPassword.value);
+	this.hide();
 };
 
 LoginControllerClass.prototype.login = function(email, password)//TODO: Display login while request is waiting.
@@ -74,4 +79,5 @@ LoginControllerClass.prototype.onLogingCallback = function(resultData)
 LoginControllerClass.prototype.onRegisterButtonClick = function()
 {
 	RegistrationController.instance.render();
+	this.hide();
 };

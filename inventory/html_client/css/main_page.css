@@ -24,9 +24,9 @@
 	position:absolute; /* left : 100px; top : 150px;*/
 }
 
-.popups_container_class
+.login_popup_container_class
 {
-	position:absolute;
+	position:absolute; /*width:152px; height:100%;*/ border:1px solid gray;
 }
 
 .folders_area_class
@@ -79,11 +79,6 @@
 .input_class
 {
 	color:#3D557E;
-}
-
-.login_container_class
-{
-	width:152px; height:100%; border:1px solid gray;
 }
 
 .margin_class
