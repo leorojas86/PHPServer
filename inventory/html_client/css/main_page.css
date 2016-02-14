@@ -21,7 +21,7 @@
 
 .context_menu_container_class
 {
-	position:absolute;/* left : 100px; top : 150px;*/
+	position:absolute; margin:0px; /* left : 100px; top : 150px;*/
 }
 
 .popups_container_class

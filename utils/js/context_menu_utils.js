@@ -32,8 +32,8 @@ ContextMenuUtilsClass.prototype.showContextMenu = function(element, position, op
 	document.onclick              = function() { context.hideContextMenu(); };
 
 	element.style.position = "absolute";
-	element.style.left 	   = position.x + "px";
-	element.style.top  	   = position.y + "px";
+	element.style.left 	   = position.x + -2 + "px";
+	element.style.top  	   = position.y + -2 + "px";
 	element.style.display  = 'inline';
 
 	var elementHTML = "";
