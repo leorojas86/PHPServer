@@ -7,7 +7,7 @@ function LoginControllerClass()
 }
 
 //Methods
-LoginControllerClass.prototype.show = function(position)
+LoginControllerClass.prototype.show = function()
 {
 	var emailText 	  		= LocManager.instance.getLocalizedText("email_text");
 	var passwordText  		= LocManager.instance.getLocalizedText("password_text");
@@ -25,10 +25,7 @@ LoginControllerClass.prototype.show = function(position)
 		  		"<button type='button' id='register_button'	class='button_class margin_class'>" + registerButtonText + "</button>";
 
 
-	var loginContainer 			= document.getElementById("login_popup_container");
-	loginContainer.innerHTML  	= html;
-	loginContainer.style.left 	= position.x - 80 + "px";
-	loginContainer.style.top  	= position.y + 35 + "px";
+	document.getElementById("login_popup_container").innerHTML = html;
 
 	document.getElementById('user_password').onkeyup 	= function(){ LoginController.instance.onKeyUp(); };
 	document.getElementById('login_button').onclick  	= function(){ LoginController.instance.onLoginButtonClick(); };
