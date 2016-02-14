@@ -24,16 +24,21 @@ ContextMenuUtilsClass.prototype.hideContextMenu = function()
 	}
 };
 
-ContextMenuUtilsClass.prototype.showContextMenu = function(element, position, options, onOptionSelectecCallback)
+ContextMenuUtilsClass.prototype.showContextMenu = function(element, event, options, onOptionSelectecCallback)
 {
 	this.element 				  = element;
 	this.onOptionSelectecCallback = onOptionSelectecCallback;
 	var context 				  = this;
 	document.onclick              = function() { context.hideContextMenu(); };
 
+	var pageScrolledXOffset = window.pageXOffset || document.documentElement.scrollLeft;
+	var pageScrolledYOffset = window.pageYOffset || document.documentElement.scrollTop;
+
+	//alert(pageScrolledYOffset);
+
 	element.style.position = "absolute";
-	element.style.left 	   = position.x + -2 + "px";
-	element.style.top  	   = position.y + -2 + "px";
+	element.style.left 	   = event.clientX + -2 + pageScrolledXOffset +"px";
+	element.style.top  	   = event.clientY + -2 + pageScrolledYOffset + "px";
 	element.style.display  = 'inline';
 
 	var elementHTML = "";

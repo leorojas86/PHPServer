@@ -30,7 +30,7 @@ InventoryContextMenuControllerClass.prototype.showContextMenu = function(event)/
 	var contextMenu = document.getElementById('context_menu_container');
 
 	var onContextMenuOptionSelected = function(option) { InventoryContextMenuController.instance.onContextMenuOptionSelected(option); } 
-	ContextMenuUtils.instance.showContextMenu(contextMenu, { "x" : event.clientX, "y" : event.clientY }, options, onContextMenuOptionSelected);
+	ContextMenuUtils.instance.showContextMenu(contextMenu, event, options, onContextMenuOptionSelected);
 };
 
 InventoryContextMenuControllerClass.prototype.canPasteFolder = function()
