@@ -17,14 +17,20 @@ HeaderControllerClass.prototype.render = function()
 	if(ServiceClient.instance.loggedUser != null)
 	{
 		//var loginText				= LocManager.instance.getLocalizedText("login_text");
-		var logoutText	= LocManager.instance.getLocalizedText("logout_text");
+		var userName	= ServiceClient.instance.loggedUser.name;
+		var logoutText	= userName.length < 3 ? userName : userName.substring(0, 3); //LocManager.instance.getLocalizedText("logout_text");
 
-		headerContainer.innerHTML  	= "<button id='logout_button' class='button_class session_button_class'>" + logoutText + "</button>";
+		headerContainer.innerHTML = "<button id='logout_button' class='button_class session_button_class'>" + logoutText + "</button>";
 
 		document.getElementById('logout_button').onclick = function(){ HeaderController.instance.onLogoutButtonClick(); };
 	}
 	else
-		headerContainer.innerHTML = '';
+	{
+		var loginText = LocManager.instance.getLocalizedText("login_text");
+
+		headerContainer.innerHTML = "<button id='login_button' class='button_class session_button_class'>" + loginText + "</button>";
+		document.getElementById('login_button').onclick = function(){ HeaderController.instance.onLoginButtonClick(); };
+	}
 };
 
 HeaderControllerClass.prototype.onLogoutButtonClick = function()
@@ -33,3 +39,8 @@ HeaderControllerClass.prototype.onLogoutButtonClick = function()
 	this.render();
 	LoginController.instance.render();
 };
+
+HeaderControllerClass.prototype.onLoginButtonClick = function()
+{
+	LoginController.instance.render();
+}

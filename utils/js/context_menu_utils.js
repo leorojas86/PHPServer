@@ -37,7 +37,7 @@ ContextMenuUtilsClass.prototype.showContextMenu = function(element, event, optio
 	//alert(pageScrolledYOffset);
 
 	element.style.position = "absolute";
-	element.style.left 	   = event.clientX + -2 + pageScrolledXOffset +"px";
+	element.style.left 	   = event.clientX + -2 + pageScrolledXOffset + "px";
 	element.style.top  	   = event.clientY + -2 + pageScrolledYOffset + "px";
 	element.style.display  = 'inline';
 
