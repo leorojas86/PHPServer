@@ -28,8 +28,7 @@ ContextMenuUtilsClass.prototype.showContextMenu = function(element, event, optio
 {
 	this.element 				  = element;
 	this.onOptionSelectecCallback = onOptionSelectecCallback;
-	var context 				  = this;
-	document.onclick              = function() { context.hideContextMenu(); };
+	document.onclick              = function() { ContextMenuUtils.instance.hideContextMenu(); };
 
 	var pageScrolledXOffset = window.pageXOffset || document.documentElement.scrollLeft;
 	var pageScrolledYOffset = window.pageYOffset || document.documentElement.scrollTop;

@@ -30,6 +30,8 @@ LoginPopupClass.prototype.show = function()
 	document.getElementById('user_password').onkeyup 	= function(){ LoginPopup.instance.onKeyUp(); };
 	document.getElementById('login_button').onclick  	= function(){ LoginPopup.instance.onLoginButtonClick(); };
 	document.getElementById('register_button').onclick  = function(){ LoginPopup.instance.onRegisterButtonClick(); };
+
+	//document.onclick = function() { LoginPopup.instance.hide(); };
 };
 
 LoginPopupClass.prototype.hide = function()
