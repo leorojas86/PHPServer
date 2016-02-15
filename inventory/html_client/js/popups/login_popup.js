@@ -1,13 +1,13 @@
 //Singleton instance
-var LoginController = { instance : new LoginControllerClass() };
+var LoginPopup = { instance : new LoginPopupClass() };
 
 //Constructors
-function LoginControllerClass()
+function LoginPopupClass()
 {
 }
 
 //Methods
-LoginControllerClass.prototype.show = function()
+LoginPopupClass.prototype.show = function()
 {
 	var emailText 	  		= LocManager.instance.getLocalizedText("email_text");
 	var passwordText  		= LocManager.instance.getLocalizedText("password_text");
@@ -27,17 +27,17 @@ LoginControllerClass.prototype.show = function()
 
 	document.getElementById("login_popup_container").innerHTML = html;
 
-	document.getElementById('user_password').onkeyup 	= function(){ LoginController.instance.onKeyUp(); };
-	document.getElementById('login_button').onclick  	= function(){ LoginController.instance.onLoginButtonClick(); };
-	document.getElementById('register_button').onclick  = function(){ LoginController.instance.onRegisterButtonClick(); };
+	document.getElementById('user_password').onkeyup 	= function(){ LoginPopup.instance.onKeyUp(); };
+	document.getElementById('login_button').onclick  	= function(){ LoginPopup.instance.onLoginButtonClick(); };
+	document.getElementById('register_button').onclick  = function(){ LoginPopup.instance.onRegisterButtonClick(); };
 };
 
-LoginControllerClass.prototype.hide = function()
+LoginPopupClass.prototype.hide = function()
 {
 	document.getElementById("login_popup_container").innerHTML = "";
 };
 
-LoginControllerClass.prototype.onKeyUp = function(event)
+LoginPopupClass.prototype.onKeyUp = function(event)
 {
 	switch(event.which) 
 	{
@@ -48,7 +48,7 @@ LoginControllerClass.prototype.onKeyUp = function(event)
 	}
 };
 			
-LoginControllerClass.prototype.onLoginButtonClick = function()
+LoginPopupClass.prototype.onLoginButtonClick = function()
 {
 	var userEmail    = document.getElementById('user_email');	
 	var userPassword = document.getElementById('user_password');	
@@ -57,12 +57,12 @@ LoginControllerClass.prototype.onLoginButtonClick = function()
 	this.hide();
 };
 
-LoginControllerClass.prototype.login = function(email, password)//TODO: Display login while request is waiting.
+LoginPopupClass.prototype.login = function(email, password)//TODO: Display login while request is waiting.
 {
-	ServiceClient.instance.login(email, password, LoginController.instance.onLogingCallback);
+	ServiceClient.instance.login(email, password, LoginPopup.instance.onLogingCallback);
 };
 
-LoginControllerClass.prototype.onLogingCallback = function(resultData)
+LoginPopupClass.prototype.onLogingCallback = function(resultData)
 {
 	if(resultData.success)
 	{
@@ -73,7 +73,7 @@ LoginControllerClass.prototype.onLogingCallback = function(resultData)
 		alert("Login Failed, " + resultData.data);
 };
 
-LoginControllerClass.prototype.onRegisterButtonClick = function()
+LoginPopupClass.prototype.onRegisterButtonClick = function()
 {
 	RegistrationController.instance.render();
 	this.hide();

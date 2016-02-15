@@ -42,13 +42,13 @@ HeaderControllerClass.prototype.onLogoutButtonClick = function()
 {
 	ServiceClient.instance.logout();
 	this.render();
-	LoginController.instance.render();
+	HomeController.instance.render();
 };
 
 HeaderControllerClass.prototype.onLoginButtonClick = function(event)
 {
 	//alert(event.target);
-	//LoginController.instance.render();
+	//LoginPopup.instance.render();
 
-	LoginController.instance.show(event);
+	LoginPopup.instance.show(event);
 }

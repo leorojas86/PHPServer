@@ -55,7 +55,7 @@ RegistrationControllerClass.prototype.onRegisterCallback = function(resultData)
 	{
 		var userEmail    = document.getElementById('user_email');	
 		var userPassword = document.getElementById('user_password');	
-		LoginController.instance.login(userEmail.value, userPassword.value);
+		LoginPopup.instance.login(userEmail.value, userPassword.value);
 	}
 	else
 		alert(resultData.data);
