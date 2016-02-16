@@ -1,15 +1,11 @@
-- Improve offline mode.
-- Add user logged info and logout option.
-- Integrate with facebook.
-- Improve context menu.
-- Encript password in DB.
 - Implement tags for search and associations.
-- Add online/offline in header.
+- Integrate with facebook.
+- Improve context menu for mobile.
+- Encript password in DB.
 - Upload and Display photos.
 - Add encription to login data and SSL.
-- Implement search.
 - Comments.
-- Modes (Publisity, Sell, Auction, Raffle).
+- Modes (Publisity, Sell, Auction, Raffle, Free).
 - FB Integration.
 - EULA.
 - ADs.
