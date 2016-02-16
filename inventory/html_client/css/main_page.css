@@ -16,7 +16,7 @@
 .page_container_class
 {
 	/*background:rgba(198, 204, 213, 0.81);*/
-	margin: 20px;
+	height:600px; margin: 20px;
 }
 
 .context_menu_container_class
