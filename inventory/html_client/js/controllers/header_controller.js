@@ -20,9 +20,9 @@ HeaderControllerClass.prototype.render = function()
 		var userName	= ServiceClient.instance.loggedUser.name;
 		var logoutText	= userName.length < 3 ? userName : userName.substring(0, 3); //LocManager.instance.getLocalizedText("logout_text");
 
-		headerContainer.innerHTML = "<button id='logout_button' class='button_class session_button_class'>" + logoutText + "</button>";
+		headerContainer.innerHTML = "<button id='user_profile_button' class='button_class session_button_class'>" + logoutText + "</button>";
 
-		document.getElementById('logout_button').onclick = function(){ HeaderController.instance.onLogoutButtonClick(); };
+		document.getElementById('user_profile_button').onclick = function(){ HeaderController.instance.onUserProfileButtonClick(); };
 	}
 	else
 	{
@@ -38,11 +38,9 @@ HeaderControllerClass.prototype.render = function()
 	}
 };
 
-HeaderControllerClass.prototype.onLogoutButtonClick = function()
+HeaderControllerClass.prototype.onUserProfileButtonClick = function()
 {
-	ServiceClient.instance.logout();
-	this.render();
-	HomeController.instance.render();
+	UserProfilePopup.instance.show();
 };
 
 HeaderControllerClass.prototype.onLoginButtonClick = function(event)
