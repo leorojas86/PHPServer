@@ -79,7 +79,7 @@
 			return Group::GetGroup($groupId);
 		}
 
-		private static function CanPasteGroup($cuttingGroupId, $subGroups, $groupId)
+		/*private static function CanPasteGroup($cuttingGroupId, $subGroups, $groupId)
 		{
 			$isChildGroup = false;
 
@@ -103,7 +103,7 @@
 			}
 
 			return new ServiceResult(true, false);
-		}
+		}*/
 
 		public static function UpdateData()
 		{

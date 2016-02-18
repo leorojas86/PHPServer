@@ -9,3 +9,8 @@
 - FB Integration.
 - EULA.
 - ADs.
+
+Bugs:
+
+- Check why the logged user is not cached correctly.
+- Fix vertical alignment of group paths.

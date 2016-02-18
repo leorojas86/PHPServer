@@ -28,10 +28,17 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 
 	var isParentGroup = parentGroupId != 0;
 
-	if(isParentGroup)
-		groupAjax += "<p id='group_path' class='group_path_class'>" + groupPath + " <button id='back_button' class='button_class' title='" + backButtonTooltip + "'>" + backButtonText + "</button> </p>";
-	else
-		groupAjax += "<p id='group_path' class='group_path_class'>" + groupPath + "</p>";
+	groupAjax += "<div id='group_header' class='group_header_class'>";
+
+	groupAjax += "<button id='search_button' class='search_button_class button_class'>" + searchButtonText + "</button>";
+
+
+		if(isParentGroup)
+			groupAjax += "<div id='group_path' class='group_path_class'>" + groupPath + " <button id='back_button' class='button_class' title='" + backButtonTooltip + "'>" + backButtonText + "</button> </div>";
+		else
+			groupAjax += "<div id='group_path' class='group_path_class'>" + groupPath + "</div>";
+
+	groupAjax += "</div>";
 
 	var isFolderGroup = subGroupType == Constants.GROUP_ID_FOLDER;
 
@@ -55,9 +62,6 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 		}
 
 		groupAjax += "</div>";
-
-		groupAjax += "<input type='text' id='search_input' 	class='input_class' value = ''>";
-		groupAjax += "<button id='search_button' 			class='button_class'>" + searchButtonText + "</button>";
 	}
 	else
 	{

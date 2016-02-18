@@ -35,7 +35,7 @@ InventoryContextMenuControllerClass.prototype.showContextMenu = function(event)/
 
 InventoryContextMenuControllerClass.prototype.canPasteFolder = function()
 {
-	return InventoryController.instance._currentGroupData != null && InventoryController.instance._currentGroupData.can_paste;
+	return InventoryController.instance._currentGroupData != null/* && InventoryController.instance._currentGroupData.can_paste*/;
 };
 
 InventoryContextMenuControllerClass.prototype.onContextMenuOptionSelected = function(option)
