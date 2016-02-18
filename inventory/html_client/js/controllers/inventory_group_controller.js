@@ -33,7 +33,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	groupAjax += "<div id='group_path' class='group_path_class'>" + groupPath + "</div>";
 
 	if(isParentGroup)
-		groupAjax += "<button id='back_button' class='button_class' title='" + backButtonTooltip + "'>" + backButtonText + "</button>";
+		groupAjax += "<button id='back_button' class='group_path_class button_class' title='" + backButtonTooltip + "'>" + backButtonText + "</button>";
 
 	groupAjax += "<button id='search_button' class='search_button_class button_class'>" + searchButtonText + "</button>";
 

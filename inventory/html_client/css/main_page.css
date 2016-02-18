@@ -51,7 +51,7 @@
 
 .group_path_class
 {
-	display:block; float:left;
+	display:inline-block; float:middle;
 }
 
 .folder_class
@@ -83,7 +83,7 @@
 
 .search_button_class
 {
-	display:block; float:right;
+	display:inline-block; float:right;
 }
 
 .input_class
