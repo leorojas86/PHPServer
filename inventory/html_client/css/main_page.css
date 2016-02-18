@@ -51,7 +51,7 @@
 
 .group_path_class
 {
-	width:100%; height:100%;
+	display:block; float:left;
 }
 
 .folder_class
