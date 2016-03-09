@@ -115,7 +115,21 @@
 			$sql    = "UPDATE groups SET data='$groupData' WHERE id='$groupId'";
 			$result = MySQLManager::ExecuteUpdate($sql);
 
+			if($result->success)
+				$result = Group::UpdateGroupSearchTags($groupId, $groupData);
+
 			return $result;
+		}
+
+		private static function UpdateGroupSearchTags($groupId, $groupData)
+		{
+			$search  	  = array("{", "}", "[", "]", ",", ":", '"', "<", ">", "/", "=", "\t");
+			$replace  	  = ' ';
+			$groupData 	  = str_replace($search, $replace, $groupData);
+			$groupData 	  = strtolower($groupData);
+			$groupData 	  = preg_split('@ @', $groupData, null, PREG_SPLIT_NO_EMPTY);
+
+			return new ServiceResult(false, $groupData);
 		}
 
 		public static function Rename($groupId, $groupName)
@@ -189,7 +203,7 @@
 			return new ServiceResult(true, true);
 		}
 
-		public static function SearchGroupsByName($name)
+		public static function SearchGroupsByTag($tagType)
 		{
 			$sql    = "SELECT * FROM groups WHERE name LIKE '$name'";
 			$result = MySQLManager::ExecuteSelectRows($sql);
