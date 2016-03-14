@@ -28,8 +28,18 @@
 		private static function SearchGroup()
 		{
 			$searchText = $_POST["searchText"];
+			$result 	= Group::SearchGroups($searchText);	
 
-			return Group::SearchGroupsByName($searchText);	
+			if($result->success)
+			{
+				$groupsByName = $result->data;
+				$result 	  = Tag::SearchGroups($searchText);
+
+				if($result->success)
+					$result->data = array_unique(array_merge($result->data, $groupsByName)); 
+			}
+
+			return $result;
 		}
 
 		private static function RenameGroup()

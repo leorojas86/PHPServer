@@ -189,13 +189,12 @@
 			return new ServiceResult(true, true);
 		}
 
-		public static function SearchGroupsByTag($tagType)
+		public static function SearchGroups($searchText)
 		{
-			$sql    = "SELECT * FROM groups WHERE name LIKE '$name'";
+			$sql    = "SELECT * FROM groups WHERE name LIKE '$searchText'";
 			$result = MySQLManager::ExecuteSelectRows($sql);
 			
 			return $result;
 		}
-
 	}
 ?>
