@@ -29,6 +29,11 @@
 	position:absolute; right:5px; top:40px; border:1px solid gray;
 }
 
+.search_popup_container_class
+{
+	position:absolute; right:5px; top:40px; border:1px solid gray;
+}
+
 .folders_area_class
 {
 	/*margin: auto;*/

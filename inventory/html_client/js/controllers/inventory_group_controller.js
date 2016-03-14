@@ -217,14 +217,7 @@ InventoryGroupControllerClass.prototype.onBackButtonClick = function(parentGroup
 
 InventoryGroupControllerClass.prototype.onSearchButtonClick = function()//TODO: Move the code that invokes the search here
 {
-	var searchTesxtInput = document.getElementById('search_input');
-	ServiceClient.instance.searchGroups(searchTesxtInput.value, this.onSearchCallback);
-};
-
-InventoryGroupControllerClass.prototype.onSearchCallback = function(resultData)
-{
-	//if(resultData.success)
-	alert(resultData.data);
+	SearchPopup.instance.show();
 };
 
 InventoryGroupControllerClass.prototype.onKeyUp = function(event)
