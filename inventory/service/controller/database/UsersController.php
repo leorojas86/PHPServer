@@ -1,6 +1,5 @@
 <?php 
 
-	require_once "inventory/service/model/Environment.php";
 	require_once "inventory/service/model/database/User.php";
 
 	class UsersController

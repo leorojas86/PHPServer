@@ -1,7 +1,7 @@
 <?php 
 
-	require_once "inventory/service/model/Environment.php";
 	require_once "inventory/service/model/database/Group.php";
+	require_once "inventory/service/model/database/Tag.php";
 
 	class GroupsController
 	{
@@ -9,14 +9,14 @@
 		{
 			switch ($method) 
 			{
-				case "GetGroupData": 		$result = GroupsController::GetGroupData();		break;
-				case "GetRootGroupData": 	$result = GroupsController::GetRootGroupData();	break;
-				case "UpdateData":			$result = GroupsController::UpdateData();		break;
+				case "GetGroup": 			$result = GroupsController::GetGroup();			break;
+				case "GetRootGroup": 		$result = GroupsController::GetRootGroup();		break;
+				case "UpdateData":			$result = GroupsController::UpdateGroupData();	break;
 				case "AddSubGroup":			$result = GroupsController::AddSubGroup();		break;
 				case "Delete":				$result = GroupsController::DeleteGroup();		break;
 				case "Move":				$result = GroupsController::MoveGroup();		break;
 				case "Rename":				$result = GroupsController::RenameGroup();		break;
-				case "Search":				$result = GroupsController::Search();			break;
+				case "Search":				$result = GroupsController::SearchGroup();		break;
 				default: 		 
 					$result = new ServiceResult(false, "Unsupported user service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
 				break;
@@ -25,7 +25,7 @@
 			return $result;
 		}
 
-		private static function Search()
+		private static function SearchGroup()
 		{
 			$searchText = $_POST["searchText"];
 
@@ -54,7 +54,7 @@
 			return Group::Delete($groupId);
 		}
 
-		private static function GetRootGroupData()
+		private static function GetRootGroup()
 		{
 			//$sessionId 		  = SessionManager::$sessionId;
 			$loggedInUserData = SessionManager::GetUserData();
@@ -72,7 +72,7 @@
 		 	return $rootGroupResult;
 		}
 
-		private static function GetGroupData()
+		private static function GetGroup()
 		{
 			$groupId = $_POST["id"];
 
@@ -105,12 +105,17 @@
 			return new ServiceResult(true, false);
 		}*/
 
-		public static function UpdateData()
+		public static function UpdateGroupData()
 		{
 			$groupId = $_POST["id"];
 			$data    = $_POST["data"];
 
-			return Group::UpdateData($groupId, $data);
+			$result = Group::UpdateData($groupId, $data);
+
+			if($result->success)
+				$result = Tag::UpdateSearchTags($groupId, $data);
+
+			return $result;
 		}
 
 		public static function AddSubGroup()

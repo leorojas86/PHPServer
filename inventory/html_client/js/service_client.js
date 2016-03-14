@@ -60,13 +60,13 @@ ServiceClientClass.prototype.onLoginCallback = function(resultData, callback)
 
 ServiceClientClass.prototype.loadRootGroup = function(callback)
 {
-	var params = "service=Group&method=GetRootGroupData";
+	var params = "service=Group&method=GetRootGroup";
 	this.request("POST", params, callback);
 };
 
 ServiceClientClass.prototype.loadGroup = function(groupId, callback)
 {
-	var params = "service=Group&method=GetGroupData&id=" + groupId;
+	var params = "service=Group&method=GetGroup&id=" + groupId;
 	this.request("POST", params, callback);
 };
 

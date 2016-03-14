@@ -113,7 +113,7 @@
 					return new ServiceResult(true);
 				else
 				{
-					error_log("Update query didn't update any row -> $sql");
+					error_log("Update query didn't update any row");
 					return new ServiceResult(false, "Update query didn't update any row", UtilsConstants::MYSQL_ERROR_CODE);
 				}
 			}
@@ -144,7 +144,7 @@
 			return $result;
 		}
 
-		public static function ExecuteDelete($sql)
+		public static function ExecuteDelete($sql, $checkForAffectedRows = true)
 		{
 			$result = MySQLManager::Execute($sql);
 			
@@ -153,7 +153,7 @@
 				$affectedRows = MySQLManager::AffectedRows();
 				MySQLManager::Close($result->data);
 
-				if($affectedRows > 0)
+				if(!$checkForAffectedRows || $affectedRows > 0)
 					return new ServiceResult(true);
 				else
 				{
