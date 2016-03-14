@@ -76,7 +76,6 @@
 						return $result;
 				}
 
-				error_log("tag name '$tagName' id '$tagId'");
 				$sql 	= "INSERT INTO tags_per_groups (group_id, tag_id) VALUES ('$groupId', '$tagId')";
 				$result = MySQLManager::ExecuteInsert($sql);
 
