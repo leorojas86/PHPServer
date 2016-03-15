@@ -19,19 +19,29 @@
 	height:600px; margin: 20px;
 }
 
+.popup_container
+{
+	position:absolute; border:1px solid gray;
+}
+
 .context_menu_container_class
 {
 	position:absolute; /* left : 100px; top : 150px;*/
 }
 
-.login_popup_container_class
+.login_popup_class
 {
-	position:absolute; right:5px; top:40px; border:1px solid gray;
+	right:5px; top:40px;
 }
 
-.search_popup_container_class
+.user_profile_popup_class
 {
-	position:absolute; right:5px; top:40px; border:1px solid gray;
+	right:5px; top:40px;
+}
+
+.search_popup_class
+{
+	right:5px; top:100px; width:100%;
 }
 
 .folders_area_class

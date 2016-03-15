@@ -11,7 +11,9 @@ UserProfilePopupClass.prototype.show = function()
 {
 	var logoutText = LocManager.instance.getLocalizedText("logout_text");
 
-	var html = "<button id='logout_button' class='button_class margin_class'>" + logoutText + "</button>";
+	var html =  "<div class='user_profile_popup_class popup_container'>" + 
+					"<button id='logout_button' class='button_class margin_class'>" + logoutText + "</button>" +
+				"<div>";
 
 	document.getElementById("user_profile_popup_container").innerHTML = html;
 	

@@ -16,13 +16,15 @@ LoginPopupClass.prototype.show = function()
 	var registerButtonText  = LocManager.instance.getLocalizedText("register_button_text");
 	var defaultValues 		= "leo";
 
-	var html =  "<p class='margin_class'>" + emailText + "</p>" +
-				"<input type='text' id='user_email'   		class='input_class margin_class' value = '" + defaultValues + "'> <br/><br/>" +
-		  		"<p class='margin_class'>" + passwordText + "</p>" +
-		  		"<input type='text' id='user_password' 		class='input_class margin_class' value = '" + defaultValues + "'> <br/><br/>" + 
-		  		"<button id='login_button'	class='button_class margin_class'>" + loginButtonText + "</button>" +
-		  		"<br><br>" +
-		  		"<button id='register_button'	class='button_class margin_class'>" + registerButtonText + "</button>";
+	var html =  "<div class='login_popup_class popup_container'>" +
+					"<p class='margin_class'>" + emailText + "</p>" +
+					"<input type='text' id='user_email'   		class='input_class margin_class' value = '" + defaultValues + "'> <br/><br/>" +
+		  			"<p class='margin_class'>" + passwordText + "</p>" +
+		  			"<input type='text' id='user_password' 		class='input_class margin_class' value = '" + defaultValues + "'> <br/><br/>" + 
+		  			"<button id='login_button'	class='button_class margin_class'>" + loginButtonText + "</button>" +
+		  			"<br><br>" +
+		  			"<button id='register_button'	class='button_class margin_class'>" + registerButtonText + "</button>" +
+		  		"</div>";
 
 
 	document.getElementById("login_popup_container").innerHTML = html;

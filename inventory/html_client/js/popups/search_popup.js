@@ -11,13 +11,13 @@ SearchPopupClass.prototype.show = function()
 {
 	var searchText 		= LocManager.instance.getLocalizedText("search_button_text");
 	var defaultValue 	= "";
-	var html 	   		= "<input 	type='text' id='search_input_text' 		class='input_class margin_class' value = '" + defaultValue + "'>" +
-					 	  "<button 				id='search_popup_button'	class='button_class margin_class'>" + searchText + "</button>";
+	var html 	   		= "<div class='search_popup_class popup_container'>" + 
+						  	"<input 	type='text' id='search_input_text' 		class='input_class margin_class' value = '" + defaultValue + "'>" +
+					 	  	"<button 				id='search_popup_button'	class='button_class margin_class'>" + searchText + "</button>" +
+					 	  "</div>";
 
 	document.getElementById("search_popup_container").innerHTML = html;
-	
-	document.getElementById('search_popup_button').onclick  = function(){ SearchPopup.instance.onSearchButtonClick(); };
-	
+	document.getElementById('search_popup_button').onclick = function(){ SearchPopup.instance.onSearchButtonClick(); };
 	document.getElementById('background_container').addEventListener('mousedown', SearchPopup.instance.hide);
 };
 
