@@ -1,6 +1,6 @@
 var Constants =
 {
-     API_URL : 'http://201.200.1.187',
+     API_URL : 'http://localhost',
 
      ENGLISH_LOCALIZATION_TABLE : "jsons/english.json",
 

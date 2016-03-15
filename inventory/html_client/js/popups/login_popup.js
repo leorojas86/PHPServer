@@ -20,9 +20,9 @@ LoginPopupClass.prototype.show = function()
 				"<input type='text' id='user_email'   		class='input_class margin_class' value = '" + defaultValues + "'> <br/><br/>" +
 		  		"<p class='margin_class'>" + passwordText + "</p>" +
 		  		"<input type='text' id='user_password' 		class='input_class margin_class' value = '" + defaultValues + "'> <br/><br/>" + 
-		  		"<button type='button' id='login_button'	class='button_class margin_class'>" + loginButtonText + "</button>" +
+		  		"<button id='login_button'	class='button_class margin_class'>" + loginButtonText + "</button>" +
 		  		"<br><br>" +
-		  		"<button type='button' id='register_button'	class='button_class margin_class'>" + registerButtonText + "</button>";
+		  		"<button id='register_button'	class='button_class margin_class'>" + registerButtonText + "</button>";
 
 
 	document.getElementById("login_popup_container").innerHTML = html;
