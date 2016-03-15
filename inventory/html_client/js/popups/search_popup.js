@@ -23,7 +23,7 @@ SearchPopupClass.prototype.show = function()
 
 SearchPopupClass.prototype.hide = function()
 {
-	document.getElementById('background_container').removeEventListener('mousedown', SearchPopup.instance.hide );
+	document.getElementById('background_container').removeEventListener('mousedown', SearchPopup.instance.hide);
 	document.getElementById("search_popup_container").innerHTML = "";
 };
 
@@ -37,6 +37,7 @@ SearchPopupClass.prototype.onSearchButtonClick = function()
 
 SearchPopupClass.prototype.onSearchCallback = function(resultData)
 {
+	console.log(JSON.stringify(resultData.data));
 	//if(resultData.success)
-	alert(resultData.data);
+	//alert(resultData.data);
 };
