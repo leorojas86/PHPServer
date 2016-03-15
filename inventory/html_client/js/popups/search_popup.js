@@ -11,7 +11,7 @@ SearchPopupClass.prototype.show = function()
 {
 	var searchText 		= LocManager.instance.getLocalizedText("search_button_text");
 	var defaultValue 	= "";
-	var html 	   		= "<input 	type='text' id='search_input_text' 		class='input_class margin_class' value = '" + defaultValue + "'> <br/><br/>" +
+	var html 	   		= "<input 	type='text' id='search_input_text' 		class='input_class margin_class' value = '" + defaultValue + "'>" +
 					 	  "<button 				id='search_popup_button'	class='button_class margin_class'>" + searchText + "</button>";
 
 	document.getElementById("search_popup_container").innerHTML = html;
@@ -31,6 +31,8 @@ SearchPopupClass.prototype.onSearchButtonClick = function()
 {
 	var searchTesxtInput = document.getElementById('search_input_text');
 	ServiceClient.instance.searchGroups(searchTesxtInput.value, this.onSearchCallback);
+
+	this.hide();
 };
 
 SearchPopupClass.prototype.onSearchCallback = function(resultData)

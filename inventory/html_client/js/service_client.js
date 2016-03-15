@@ -15,7 +15,7 @@ function ServiceClientClass()
 
 	if(loggedUser != null)
 	{
-		this.loggedUser = loggedUser;
+		this.loggedUser = JSON.parse(loggedUser);
 		this.sessionId  = sessionId;
 		console.log("session and logged user info loaded from cache");
 	}
@@ -52,7 +52,7 @@ ServiceClientClass.prototype.onLoginCallback = function(resultData, callback)
 	if(resultData.success)
 	{
 		this.loggedUser = resultData.data;
-		CacheUtils.instance.set("LoggedUser", this.loggedUser);
+		CacheUtils.instance.set("LoggedUser", JSON.stringify(this.loggedUser));
 	}
 
 	callback(resultData);

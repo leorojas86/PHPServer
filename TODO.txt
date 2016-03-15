@@ -1,4 +1,5 @@
 - Implement tags for search and associations.
+- Use css sprites.
 - Integrate with facebook.
 - Improve context menu for mobile.
 - Encript password in DB.
