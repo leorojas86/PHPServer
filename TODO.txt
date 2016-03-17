@@ -1,4 +1,6 @@
+
 - Implement tags for search and associations.
+- Implement tabs for (Home, Global Search, etc)
 - Use css sprites.
 - Integrate with facebook.
 - Improve context menu for mobile.
