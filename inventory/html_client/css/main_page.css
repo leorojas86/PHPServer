@@ -41,7 +41,12 @@
 
 .search_popup_class
 {
-	right:5px; top:100px; width:100%;
+	position:absolute; right:5px; top:100px; width:100%;
+}
+
+.search_popup_content_class
+{
+	width:300px; border:1px solid gray;
 }
 
 .folders_area_class
