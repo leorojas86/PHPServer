@@ -17,26 +17,21 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	var rootGroupText  	  = LocManager.instance.getLocalizedText("root_group_text");
 	var uploadText   	  = LocManager.instance.getLocalizedText("upload_text");
 
-	var groupId       = groupData.id;
-	var groupPath     = groupData.path;
-	var parentGroupId = groupData.parent_group_id;
-	var subGroupType  = groupData.type;
-	var subGroups 	  = groupData.sub_groups;
+	var groupId       	= groupData.id;
+	var groupPath     	= groupData.path;
+	var parentGroupId 	= groupData.parent_group_id;
+	var subGroupType  	= groupData.type;
+	var subGroups 	  	= groupData.sub_groups;
+	var groupPath  		= groupPath.replace("RootGroup/", rootGroupText + "/");
+	var isParentGroup 	= parentGroupId != 0;
 
-	var groupAjax  = "<div id='folders_area' class='folders_area_class'>";
-	var groupPath  = groupPath.replace("RootGroup/", rootGroupText + "/");
+	var groupAjax = "<div id='group_header' class='group_header_class'>";
+		groupAjax 	 += "<div id='group_path' class='group_path_class'>" + groupPath + "</div>";
 
-	var isParentGroup = parentGroupId != 0;
+		if(isParentGroup)
+			groupAjax += "<button id='back_button' class='group_path_class button_class' title='" + backButtonTooltip + "'>" + backButtonText + "</button>";
 
-	groupAjax += "<div id='group_header' class='group_header_class'>";
-
-	groupAjax += "<div id='group_path' class='group_path_class'>" + groupPath + "</div>";
-
-	if(isParentGroup)
-		groupAjax += "<button id='back_button' class='group_path_class button_class' title='" + backButtonTooltip + "'>" + backButtonText + "</button>";
-
-	groupAjax += "<button id='search_button' class='search_button_class button_class'>" + searchButtonText + "</button>";
-
+		groupAjax += "<button id='search_button' class='search_button_class button_class'>" + searchButtonText + "</button>";
 	groupAjax += "</div>";
 
 	var isFolderGroup = subGroupType == Constants.GROUP_ID_FOLDER;
@@ -77,8 +72,6 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 							"<canvas 			id='imageContainer' width='500' height='500'></canvas>";
 		groupAjax += "</div>";
 	}
-
-	groupAjax += "</div>";
 
 	var groupContainer  		= document.getElementById("group_container");
 	groupContainer.innerHTML 	= groupAjax;

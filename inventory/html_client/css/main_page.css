@@ -51,11 +51,6 @@
 	border: medium none; box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.14), 0px 4px 8px rgba(0, 0, 0, 0.28);
 }
 
-.folders_area_class
-{
-	/*margin: auto;*/
-}
-
 .folders_scroll_panel_class
 {
 	overflow:auto; width:800px; height:100%; min-height:600px; border:1px solid gray;
