@@ -21,7 +21,8 @@
 
 .popup_container
 {
-	position:absolute; border:1px solid gray;
+	position:absolute; background:rgba(198, 204, 213, 0.5); 
+	border: medium none; box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.14), 0px 4px 8px rgba(0, 0, 0, 0.28);
 }
 
 .context_menu_container_class
@@ -46,7 +47,8 @@
 
 .search_popup_content_class
 {
-	width:300px; border:1px solid gray; background:rgba(61, 85, 126, 0.5);
+	width:300px; border:1px solid gray; background:rgba(198, 204, 213, 0.5);
+	border: medium none; box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.14), 0px 4px 8px rgba(0, 0, 0, 0.28);
 }
 
 .folders_area_class
