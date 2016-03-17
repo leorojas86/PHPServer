@@ -9,32 +9,18 @@ function InventoryGroupControllerClass()
 //Methods
 InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 {
-	var backButtonTooltip = LocManager.instance.getLocalizedText("back_button_tooltip");
-	var backButtonText    = LocManager.instance.getLocalizedText("back_button_text");
 	var rightClickOptions = LocManager.instance.getLocalizedText("right_click_tooltip");
 	var updateButtonText  = LocManager.instance.getLocalizedText("update_button_text");
-	var searchButtonText  = LocManager.instance.getLocalizedText("search_button_text");
-	var rootGroupText  	  = LocManager.instance.getLocalizedText("root_group_text");
 	var uploadText   	  = LocManager.instance.getLocalizedText("upload_text");
 
 	var groupId       	= groupData.id;
-	var groupPath     	= groupData.path;
 	var parentGroupId 	= groupData.parent_group_id;
 	var subGroupType  	= groupData.type;
 	var subGroups 	  	= groupData.sub_groups;
-	var groupPath  		= groupPath.replace("RootGroup/", rootGroupText + "/");
 	var isParentGroup 	= parentGroupId != 0;
+	var isFolderGroup   = subGroupType == Constants.GROUP_ID_FOLDER;
 
-	var groupAjax = "<div id='group_header' class='group_header_class'>";
-		groupAjax 	 += "<div id='group_path' class='group_path_class'>" + groupPath + "</div>";
-
-		if(isParentGroup)
-			groupAjax += "<button id='back_button' class='group_path_class button_class' title='" + backButtonTooltip + "'>" + backButtonText + "</button>";
-
-		groupAjax += "<button id='search_button' class='search_button_class button_class'>" + searchButtonText + "</button>";
-	groupAjax += "</div>";
-
-	var isFolderGroup = subGroupType == Constants.GROUP_ID_FOLDER;
+	var groupAjax = this.getGroupHeader(groupData);
 
 	if(isFolderGroup)
 	{
@@ -100,6 +86,30 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 
 	document.onkeyup = function(event) { InventoryGroupController.instance.onKeyUp(event); }
 };
+
+InventoryGroupControllerClass.prototype.getGroupHeader = function(groupData)
+{
+	var backButtonTooltip = LocManager.instance.getLocalizedText("back_button_tooltip");
+	var backButtonText    = LocManager.instance.getLocalizedText("back_button_text");
+	var searchButtonText  = LocManager.instance.getLocalizedText("search_button_text");
+	var rootGroupText  	  = LocManager.instance.getLocalizedText("root_group_text");
+	
+	var groupPath     	= groupData.path;
+	var parentGroupId 	= groupData.parent_group_id;
+	var groupPath  		= groupPath.replace("RootGroup/", rootGroupText + "/");
+	var isParentGroup 	= parentGroupId != 0;
+
+	var html = "<div id='group_header' class='group_header_class'>";
+			html 	 += "<div id='group_path' class='group_path_class'>" + groupPath + "</div>";
+
+			if(isParentGroup)
+				html += "<button id='back_button' class='group_path_class button_class' title='" + backButtonTooltip + "'>" + backButtonText + "</button>";
+
+			html += "<button id='search_button' class='search_button_class button_class'>" + searchButtonText + "</button>";
+		html += "</div>";
+
+	return html;
+}
 
 InventoryGroupControllerClass.prototype.renderRootGroup = function()
 {
