@@ -9,58 +9,19 @@ function InventoryGroupControllerClass()
 //Methods
 InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 {
-	var rightClickOptions = LocManager.instance.getLocalizedText("right_click_tooltip");
-	var updateButtonText  = LocManager.instance.getLocalizedText("update_button_text");
-	var uploadText   	  = LocManager.instance.getLocalizedText("upload_text");
-
 	var groupId       	= groupData.id;
 	var parentGroupId 	= groupData.parent_group_id;
-	var subGroupType  	= groupData.type;
-	var subGroups 	  	= groupData.sub_groups;
 	var isParentGroup 	= parentGroupId != 0;
-	var isFolderGroup   = subGroupType == Constants.GROUP_ID_FOLDER;
+	var isFolderGroup   = groupData.type == Constants.GROUP_ID_FOLDER;
 
-	var groupAjax = this.getGroupHeader(groupData);
+	var html = this.getGroupHeaderHTML(groupData);
 
 	if(isFolderGroup)
-	{
-		groupAjax += "<div id='folders_scroll_panel' class='folders_scroll_panel_class' title='" + rightClickOptions + "'>";
-
-		for(var index in subGroups)
-		{
-			var subGroup     = subGroups[index];
-			var subGroupName = subGroup.name;
-			var subGroupId	 = subGroup.id;
-			var subGroupType = subGroup.type;
-			var icon 		 = subGroupType == Constants.GROUP_ID_FOLDER ? Constants.IMAGE_FOLDER : Constants.IMAGE_FILE;
-			var clickEvent   = "onclick='InventoryGroupController.instance.onSubGroupButtonClick(" + subGroupId + ");'"
-
-			groupAjax += "<div id='folder_" + subGroupId + "' class='folder_class'>"+
-							"<img id='folder_image_" + subGroupId + "' class='folder_image_class' src='" + icon + "' " + clickEvent + "/>"+
-							"<label id='folder_label_" + subGroupId + "' >" + subGroupName + "</label>"+
-						 "</div>";
-		}
-
-		groupAjax += "</div>";
-	}
+		html += this.getGroupChildrenHTML(groupData);
 	else
-	{
-		groupAjax += "<div id='item_scroll_panel' class='item_scroll_panel_class'>";
-			groupAjax += "<p>Data"+ 
-								"<input type='text' id='group_data' 			class='input_class'	value = '" + groupData.data + "'>" +
-								"<button 			id='update_group_button' 	class='button_class'>" + updateButtonText + "</button>" +
-						   "</p>";
+		html += this.getGroupInfoHTML(groupData);
 
-			groupAjax +=	"Select an image to upload:" + 
-							"<input type='file' id='fileToUpload' 		class='input_class'>" +
-							"<button 			id='uploadFileButton' 	class='button_class'>" + uploadText + "</button>" + 
-							"<div 				id='progressNumber'></div>" +
-							"<canvas 			id='imageContainer' width='500' height='500'></canvas>";
-		groupAjax += "</div>";
-	}
-
-	var groupContainer  		= document.getElementById("group_container");
-	groupContainer.innerHTML 	= groupAjax;
+	document.getElementById("group_container").innerHTML = html;
 
 	if(isParentGroup)
 		document.getElementById("back_button").onclick = function() { InventoryGroupController.instance.onBackButtonClick(parentGroupId); }
@@ -87,29 +48,77 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	document.onkeyup = function(event) { InventoryGroupController.instance.onKeyUp(event); }
 };
 
-InventoryGroupControllerClass.prototype.getGroupHeader = function(groupData)
+InventoryGroupControllerClass.prototype.getGroupInfoHTML = function(groupData)
+{
+	var updateButtonText  = LocManager.instance.getLocalizedText("update_button_text");
+	var uploadText   	  = LocManager.instance.getLocalizedText("upload_text");
+
+	var html = "<div id='item_scroll_panel' class='item_scroll_panel_class'>";
+			html += "<p>Data"+ 
+						"<input type='text' id='group_data' 			class='input_class'	value = '" + groupData.data + "'>" +
+						"<button 			id='update_group_button' 	class='button_class'>" + updateButtonText + "</button>" +
+					"</p>";
+
+			html +=	"Select an image to upload:" + 
+					"<input type='file' id='fileToUpload' 		class='input_class'>" +
+					"<button 			id='uploadFileButton' 	class='button_class'>" + uploadText + "</button>" + 
+					"<div 				id='progressNumber'></div>" +
+					"<canvas 			id='imageContainer' width='500' height='500'></canvas>";
+		html += "</div>";
+
+	return html;
+};
+
+InventoryGroupControllerClass.prototype.getGroupChildrenHTML = function(groupData)
+{
+	var rightClickOptions 	= LocManager.instance.getLocalizedText("right_click_tooltip");
+	var subGroups 	  		= groupData.sub_groups;
+
+	var html = "<div id='folders_scroll_panel' class='folders_scroll_panel_class' title='" + rightClickOptions + "'>";
+
+	for(var index in subGroups)
+	{
+		var subGroup     = subGroups[index];
+		var subGroupName = subGroup.name;
+		var subGroupId	 = subGroup.id;
+		var subGroupType = subGroup.type;
+		var icon 		 = subGroupType == Constants.GROUP_ID_FOLDER ? Constants.IMAGE_FOLDER : Constants.IMAGE_FILE;
+		var clickEvent   = "onclick='InventoryGroupController.instance.onSubGroupButtonClick(" + subGroupId + ");'"
+
+		html += "<div id='folder_" + subGroupId + "' class='folder_class'>"+
+					"<img id='folder_image_" + subGroupId + "' class='folder_image_class' src='" + icon + "' " + clickEvent + "/>"+
+					"<label id='folder_label_" + subGroupId + "' >" + subGroupName + "</label>"+
+				"</div>";
+	}
+
+	html += "</div>";
+
+	return html;
+};
+
+InventoryGroupControllerClass.prototype.getGroupHeaderHTML = function(groupData)
 {
 	var backButtonTooltip = LocManager.instance.getLocalizedText("back_button_tooltip");
 	var backButtonText    = LocManager.instance.getLocalizedText("back_button_text");
 	var searchButtonText  = LocManager.instance.getLocalizedText("search_button_text");
 	var rootGroupText  	  = LocManager.instance.getLocalizedText("root_group_text");
 	
-	var groupPath     	= groupData.path;
-	var parentGroupId 	= groupData.parent_group_id;
-	var groupPath  		= groupPath.replace("RootGroup/", rootGroupText + "/");
-	var isParentGroup 	= parentGroupId != 0;
+	var groupPath     	= groupData.path.replace("RootGroup/", rootGroupText + "/");
+	var hasParentGroup 	= groupData.parent_group_id != 0;
+	var subGroupType  	= groupData.type;
+	var isFolderGroup   = subGroupType == Constants.GROUP_ID_FOLDER;
 
 	var html = "<div id='group_header' class='group_header_class'>";
-			html 	 += "<div id='group_path' class='group_path_class'>" + groupPath + "</div>";
+			html += "<div id='group_path' class='group_path_class'>" + groupPath + "</div>";
 
-			if(isParentGroup)
+			if(hasParentGroup)
 				html += "<button id='back_button' class='group_path_class button_class' title='" + backButtonTooltip + "'>" + backButtonText + "</button>";
 
 			html += "<button id='search_button' class='search_button_class button_class'>" + searchButtonText + "</button>";
 		html += "</div>";
 
 	return html;
-}
+};
 
 InventoryGroupControllerClass.prototype.renderRootGroup = function()
 {
