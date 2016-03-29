@@ -36,7 +36,32 @@
 				$result 	  = Tag::SearchGroups($searchText);
 
 				if($result->success)
-					$result->data = /*array_unique(*/array_merge($result->data, $groupsByName)/*)*/; 
+					$result->data = GroupsController::MergeSearchResults($result->data, $groupsByName); 
+			}
+
+			return $result;
+		}
+
+		private static function MergeSearchResults($result1, $result2)
+		{
+			$result = array();
+			$ids    = array();
+
+			foreach($result1 as $value) 
+			{
+				$result[] 	= $value;
+				$ids[] 		= $value["id"];
+			}
+
+			foreach($result2 as $value) 
+			{
+				$id = $value["id"];
+
+				if(!in_array($id, $ids))
+				{
+					$result[] 	= $value;
+					$ids[] 		= $id;
+				}
 			}
 
 			return $result;
