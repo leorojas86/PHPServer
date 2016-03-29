@@ -11,7 +11,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 {
 	var groupId       	= groupData.id;
 	var parentGroupId 	= groupData.parent_group_id;
-	var isParentGroup 	= parentGroupId != 0;
+	var hasParentGroup 	= parentGroupId != 0;
 	var isFolderGroup   = groupData.type == Constants.GROUP_ID_FOLDER;
 
 	var html = this.getGroupHeaderHTML(groupData);
@@ -23,12 +23,11 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 
 	document.getElementById("group_container").innerHTML = html;
 
-	if(isParentGroup)
+	if(hasParentGroup)
 		document.getElementById("back_button").onclick = function() { InventoryGroupController.instance.onBackButtonClick(parentGroupId); }
 
 	if(isFolderGroup)
 	{
-		document.getElementById("search_button").onclick 				= function() 		{ InventoryGroupController.instance.onSearchButtonClick(); }
 		document.getElementById("folders_scroll_panel").oncontextmenu	= function(event) 	{ InventoryContextMenuController.instance.showContextMenu(event); return false; }
 
 		/*for(var index in subGroups)
@@ -45,7 +44,8 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 		document.getElementById("uploadFileButton").onclick    	= function() { InventoryGroupController.instance.uploadFile(); }
 	}
 
-	document.onkeyup = function(event) { InventoryGroupController.instance.onKeyUp(event); }
+	document.getElementById("search_button").onclick = function() { InventoryGroupController.instance.onSearchButtonClick(); }
+	document.onkeyup 								 = function(event) { InventoryGroupController.instance.onKeyUp(event); }
 };
 
 InventoryGroupControllerClass.prototype.getGroupInfoHTML = function(groupData)
