@@ -88,7 +88,7 @@
 		public static function SearchGroups($searchText)
 		{
 			$searchType = Constants::SEARCH_TAG_ID;
-			$sql    	= "SELECT * FROM groups 
+			$sql    	= "SELECT groups.*, tags.id as tag_id FROM groups 
 					   		INNER JOIN tags_per_groups 	ON groups.id 				= tags_per_groups.group_id
 					   		INNER JOIN tags 			ON tags_per_groups.tag_id 	= tags.id
 					   		WHERE tags.type = '$searchType' and tags.name LIKE '$searchText'";

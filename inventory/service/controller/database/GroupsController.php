@@ -36,7 +36,7 @@
 				$result 	  = Tag::SearchGroups($searchText);
 
 				if($result->success)
-					$result->data = array_unique(array_merge($result->data, $groupsByName)); 
+					$result->data = /*array_unique(*/array_merge($result->data, $groupsByName)/*)*/; 
 			}
 
 			return $result;
