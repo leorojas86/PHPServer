@@ -1,5 +1,5 @@
-
-- Implement tags for search and associations.
+- Implement mobile apps.
+- Improve inventory logic.
 - Implement tabs for (Home, Global Search, etc)
 - Use css sprites.
 - Integrate with facebook.
@@ -8,12 +8,13 @@
 - Upload and Display photos.
 - Add encription to login data and SSL.
 - Comments.
+- Rates.
 - Modes (Publisity, Sell, Auction, Raffle, Free).
 - FB Integration.
 - EULA.
 - ADs.
 
+
 Bugs:
 
-- Check why the logged user is not cached correctly.
 - Fix vertical alignment of group paths.
