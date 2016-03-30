@@ -32,14 +32,8 @@ SearchPopupClass.prototype.hide = function()
 SearchPopupClass.prototype.onSearchButtonClick = function()
 {
 	var searchTesxtInput = document.getElementById('search_input_text');
-	ServiceClient.instance.searchGroups(searchTesxtInput.value, this.onSearchCallback);
-
+	InventorySearchResultsController.instance.renderResults(searchTesxtInput.value);
+	
 	this.hide();
 };
 
-SearchPopupClass.prototype.onSearchCallback = function(resultData)
-{
-	console.log(JSON.stringify(resultData.data));
-	//if(resultData.success)
-	//alert(resultData.data);
-};

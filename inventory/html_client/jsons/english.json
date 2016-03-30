@@ -20,5 +20,6 @@
     "root_group_text"              : "Home",
     "upload_text"                  : "Upload",
     "login_text"                   : "Login",
-    "logout_text"                  : "Logout"
+    "logout_text"                  : "Logout",
+    "search_results_text"          : "Search Results"
 }
