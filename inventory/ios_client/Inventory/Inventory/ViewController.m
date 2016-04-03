@@ -17,6 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    NSString* fullURL = @"http://google.com";
+    NSURLRequest* urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:fullURL]];
+    [self.webview loadRequest:urlRequest];
 }
 
 - (void)didReceiveMemoryWarning {

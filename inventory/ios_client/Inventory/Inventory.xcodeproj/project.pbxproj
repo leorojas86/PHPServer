@@ -300,6 +300,7 @@
 				B323179A1CAB89D800EC1586 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
