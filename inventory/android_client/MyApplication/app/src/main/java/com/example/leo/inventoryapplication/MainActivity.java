@@ -13,6 +13,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         WebView webView = (WebView)findViewById(R.id.webView);
-        webView.loadUrl("http://localhost/inventory/html_client/index.html");
+        webView.loadUrl("http://201.200.1.187/inventory/html_client/index.html");
     }
 }
