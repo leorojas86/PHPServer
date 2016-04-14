@@ -41,9 +41,9 @@
     /*self.webview.scalesPageToFit = YES;
     self.webview.contentMode = UIViewContentModeScaleAspectFit;*/
     
-    NSString* jsCommand = [NSString stringWithFormat:@"document.body.style.zoom = 0.3;"];
+    /*NSString* jsCommand = [NSString stringWithFormat:@"document.body.style.zoom = 0.3;"];
     [self.webview stringByEvaluatingJavaScriptFromString:jsCommand];
-
+*/
 }
 
 - (void)didReceiveMemoryWarning

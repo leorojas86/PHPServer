@@ -17,12 +17,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BFu-Jx-uTs">
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BFu-Jx-uTs">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="BFu-Jx-uTs" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="1mK-jq-Sb1"/>
+                            <constraint firstAttribute="trailing" secondItem="BFu-Jx-uTs" secondAttribute="trailing" id="WcD-6D-3Iy"/>
+                            <constraint firstItem="BFu-Jx-uTs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="jUD-Ul-Lmj"/>
+                            <constraint firstItem="BFu-Jx-uTs" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="oKp-fT-vob"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="webview" destination="BFu-Jx-uTs" id="juV-4m-Zuj"/>
