@@ -1,4 +1,5 @@
 - Implement mobile apps.
+- Improve error management.
 - Improve inventory logic.
 - Implement tabs for (Home, Global Search, etc)
 - Use css sprites.

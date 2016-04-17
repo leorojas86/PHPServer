@@ -51,19 +51,24 @@
 	border: medium none; box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.14), 0px 4px 8px rgba(0, 0, 0, 0.28);
 }
 
+.group_container_class
+{
+	width:802px; min-width:100px; 
+}
+
 .folders_scroll_panel_class
 {
-	overflow:auto; width:800px; height:100%; min-height:600px; border:1px solid gray;
+	overflow:auto; height:100%; min-height:600px; border:1px solid gray;
 }
 
 .item_scroll_panel_class
 {
-	overflow:auto; width:800px; height:100%; min-height:600px; border:1px solid gray;
+	overflow:auto; height:100%; min-height:600px; border:1px solid gray;
 }
 
 .group_header_class
 {
-	width:800px; height:50px;
+	height:50px;
 }
 
 .group_path_class
