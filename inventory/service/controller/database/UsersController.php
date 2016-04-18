@@ -50,9 +50,10 @@
 
 		private static function UpdateData()
 		{
-			$data = $_POST["data"];
+			$data   = $_POST["data"];
+			$userId = SessionManager::GetUserData()["id"];
 
-			return User::UpdateData($data);
+			return User::UpdateData($userId, $data);
 		}
 	}
 

@@ -1,6 +1,8 @@
 //Singleton instance
 var InventoryGroupController = { instance : new InventoryGroupControllerClass() };
 
+InventoryGroupControllerClass.prototype._groupData = null;
+
 //Constructor
 function InventoryGroupControllerClass()
 {
@@ -9,6 +11,7 @@ function InventoryGroupControllerClass()
 //Methods
 InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 {
+	this._groupData     = groupData;
 	var groupId       	= groupData.id;
 	var parentGroupId 	= groupData.parent_group_id;
 	var hasParentGroup 	= parentGroupId != 0;
@@ -152,7 +155,7 @@ InventoryGroupControllerClass.prototype.loadAjaxGroup = function(groupId)
 InventoryGroupControllerClass.prototype.uploadFile = function()
 {
 	var imageData = imageContainer.toDataURL("image/jpeg");
-	ServiceClient.instance.uploadFile(imageData, onUploadCompleted, onProgress);
+	ServiceClient.instance.uploadFile(imageData, "jpg", this._groupData.id, onUploadCompleted, onProgress);
 };
 
 function onProgress(progress) 
@@ -162,7 +165,7 @@ function onProgress(progress)
 
 function onUploadCompleted(resultData)
 {
-	alert("success = " + resultData.success);
+	alert("result = " + JSON.stringify(resultData));
 }
 
 InventoryGroupControllerClass.prototype.onSelectedFileChange = function()

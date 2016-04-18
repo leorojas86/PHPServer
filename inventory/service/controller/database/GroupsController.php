@@ -92,8 +92,7 @@
 		private static function GetRootGroup()
 		{
 			//$sessionId 		  = SessionManager::$sessionId;
-			$loggedInUserData = SessionManager::GetUserData();
-			$userId   		  = $loggedInUserData["id"];
+			$userId   		  = SessionManager::GetUserData()["id"];
 			$rootGroupResult  = Group::GetUserRootGroup($userId);
 
 			//error_log("user id = '$userId' session id = '$sessionId'");
@@ -155,8 +154,7 @@
 
 		public static function AddSubGroup()
 		{
-			$loggedInUserData = SessionManager::GetUserData();
-			$userId   		  = $loggedInUserData["id"];
+			$userId   		  = SessionManager::GetUserData()["id"];
 			$name 		      = $_POST["name"];
 			$parentGroupId    = $_POST["parentGroupId"];
 			$type	          = $_POST["type"];

@@ -4,7 +4,7 @@
 
 	class FileUploadManager
 	{
-		public static function UploadFile($fileName, $destinationFolder)
+		/*public static function UploadFile($fileName, $destinationFolder)
 		{
 			$target_file 	= $destinationFolder . "/" . basename($_FILES[$fileName]["name"]);
 			$fileType 		= pathinfo($target_file, PATHINFO_EXTENSION);
@@ -23,20 +23,18 @@
 			}
 			else
 				return new ServiceResult(false, "File already exists", UtilsConstants::FILE_ALREADY_EXIST_ERROR_CODE);
-		}
+		}*/
 
-		public static function UploadImageData($fileName, $destinationFolder)
+		public static function UploadFile($fileData, $filePath)
 		{
-			$file 	 = $destinationFolder . "/" . "test.jpg";
-			$img 	 = $_POST[$fileName];
 			/*$img 	 = str_replace('data:image/png;base64,', '', $img);
 			$img 	 = str_replace(' ', '+', $img);
 			$data 	 = base64_decode($img);
 			$success = file_put_contents($file, $data);*/
 
-			file_put_contents($file, base64_decode(explode(",", $img)[1]));
+			file_put_contents($filePath, base64_decode(explode(",", $fileData)[1]));
 
 			return new ServiceResult(true);
-		}
+		}	
 	} 
 ?>

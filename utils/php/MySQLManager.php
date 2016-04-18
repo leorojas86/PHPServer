@@ -113,7 +113,7 @@
 					return new ServiceResult(true);
 				else
 				{
-					error_log("Update query didn't update any row");
+					error_log("Update query didn't update any row -> $sql");
 					return new ServiceResult(false, "Update query didn't update any row", UtilsConstants::MYSQL_ERROR_CODE);
 				}
 			}
