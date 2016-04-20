@@ -51,4 +51,6 @@ ContextMenuUtilsClass.prototype.showContextMenu = function(element, event, optio
 	}
 
 	element.innerHTML = elementHTML;
+
+	//event.preventDefault();
 };
