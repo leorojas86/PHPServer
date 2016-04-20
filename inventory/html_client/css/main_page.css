@@ -58,7 +58,7 @@
 
 .folders_scroll_panel_class
 {
-	overflow:auto; height:100%; min-height:600px; border:1px solid gray;
+	overflow:auto; height:100%; min-height:400px; border:1px solid gray;
 }
 
 .item_scroll_panel_class
