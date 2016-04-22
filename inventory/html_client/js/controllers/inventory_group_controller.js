@@ -66,7 +66,7 @@ InventoryGroupControllerClass.prototype.getGroupInfoHTML = function(groupData)
 					"<input type='file' id='fileToUpload' 		class='input_class'>" +
 					"<button 			id='uploadFileButton' 	class='button_class'>" + uploadText + "</button>" + 
 					"<div 				id='progressNumber'></div>" +
-					"<canvas 			id='imageContainer' width='500' height='500'></canvas>";
+					"<canvas 			id='imageContainer' class='imageContainerClass' width='500' height='500'></canvas>";
 		html += "</div>";
 
 	return html;
