@@ -10,10 +10,13 @@
 - Improve inventory logic.
 - Implement tabs for (Home, Global Search, etc)
 - Use css sprites.
-- Integrate with facebook.
 - Improve context menu for mobile.
-- Encript password in DB.
 - Upload and Display photos.
+
+Infraestructure Migration
+
+- Integrate with facebook.
+- Encript password in DB.
 - Add encription to login data and SSL.
 - Comments.
 - Rates.
