@@ -20,7 +20,6 @@ ImageRenderingUtilsClass.prototype.renderImage = function(fileInput, canvas)
         case 'bmp':
         case 'png':
         case 'tif':
-            canvas.src 		= fileInput.files[0];
             var reader   	= new FileReader();
 	        reader.onload 	= function(e) 
 	        {	
