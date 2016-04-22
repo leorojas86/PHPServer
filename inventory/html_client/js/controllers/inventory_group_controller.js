@@ -155,7 +155,7 @@ InventoryGroupControllerClass.prototype.loadAjaxGroup = function(groupId)
 InventoryGroupControllerClass.prototype.uploadFile = function()
 {
 	var imageData = imageContainer.toDataURL("image/jpeg");
-	ServiceClient.instance.uploadFile(imageData, "jpg", this._groupData.id, onUploadCompleted, onProgress);
+	ServiceClient.instance.uploadFile(imageData, "jpg", this._groupData.id, function(resultData) { InventoryGroupController.instance.onUploadCompleted(resultData); }, onProgress);
 };
 
 function onProgress(progress) 
@@ -163,8 +163,11 @@ function onProgress(progress)
 	document.getElementById('progressNumber').innerHTML = (progress * 100).toString() + '%';
 }
 
-function onUploadCompleted(resultData)
+InventoryGroupControllerClass.prototype.onUploadCompleted = function(resultData)
 {
+	if(resultData.success)
+		this.loadAjaxGroup(this._groupData.id);
+
 	alert("result = " + JSON.stringify(resultData));
 }
 
