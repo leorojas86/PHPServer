@@ -173,43 +173,10 @@ InventoryGroupControllerClass.prototype.onUploadCompleted = function(resultData)
 
 InventoryGroupControllerClass.prototype.onSelectedFileChange = function()
 {
-	var fileInput = document.getElementById('fileToUpload');
-	var ext       = fileInput.value.match(/\.([^\.]+)$/)[1];
+	var fileInput 	= document.getElementById('fileToUpload');
+	var canvas 		= document.getElementById('imageContainer');
 
-    switch(ext)
-    {
-        case 'jpg':
-        case 'bmp':
-        case 'png':
-        case 'tif':
-            var imageContainer = document.getElementById('imageContainer');
-            imageContainer.src = fileInput.files[0];
-            var reader   	   = new FileReader();
-	        reader.onload 	   = function(e) 
-	        {	
-			    var img = new Image();
-			    
-			    img.onload = function() 
-			    { 
-			    	var fitScale  = MathUtils.instance.getFitScale({ "x":img.width, "y":img.height }, { "x":imageContainer.width, "y":imageContainer.height }, "FitIn");
-			    	var fitWidth  = img.width  * fitScale;
-			    	var fitHeight = img.height * fitScale;
-			    	var fitX      = (imageContainer.width  - fitWidth)  / 2;
-			    	var fitY      = (imageContainer.height - fitHeight) / 2;
-
-			    	imageContainer.getContext("2d").clearRect(0,0, imageContainer.width, imageContainer.height);
-			    	imageContainer.getContext("2d").drawImage(img, fitX, fitY, fitWidth, fitHeight); 
-			    };
-			    img.src = e.target.result;
-	        }
-
-	        reader.readAsDataURL(fileInput.files[0]);
-        break;
-        default:
-            alert('Selected file is not a valid image');
-            fileInput.value	   = '';
-            imageContainer.src = '';
-    }
+	ImageRenderingUtils.instance.renderImage(fileInput, canvas);
 };
 
 InventoryGroupControllerClass.prototype.onSubGroupButtonClick = function(groupId)
