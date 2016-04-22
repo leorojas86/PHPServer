@@ -39,12 +39,13 @@
 
 				if($result)
 				{
-					$groupData 			= $result->data["data"] != null ? json_decode($result->data["data"]) : array();
-					$files 				= isset($groupData["files"]) ? $groupData["files"] : array();
+					$stringData			= $result->data["data"];
+					$groupData 			= $stringData != null ? json_decode($stringData) : array();
+					$files 				= isset($groupData->files) ? $groupData->files : array();
 					$files[] 			= $fileName;
-					$groupData["files"] = $files;
-					$groupDataString 	= json_encode($groupData);
-					$result 			= Group::UpdateData($groupId, $groupDataString);
+					$groupData->files   = $files;
+					$stringData 		= json_encode($groupData);
+					$result 			= Group::UpdateData($groupId, $stringData);
 				}
 			}
 
