@@ -17,14 +17,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
     
-    self.webview.delegate = self;
-    NSString* fullURL = @"http://201.200.1.187/inventory/html_client/index.html";
-    NSURLRequest* urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:fullURL]];
+    self.webview.delegate       = self;
+    NSString* fullURL           = @"http://201.200.1.187/inventory/html_client/index.html";
+    NSURLRequest* urlRequest    = [NSURLRequest requestWithURL:[NSURL URLWithString:fullURL]];
 
     [self.webview loadRequest:urlRequest];
-    
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)theWebView
@@ -50,6 +48,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
 }
 
 @end
