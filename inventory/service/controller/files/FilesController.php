@@ -40,7 +40,7 @@
 				if($result)
 				{
 					$stringData			= $result->data["data"];
-					$groupData 			= $stringData != null ? json_decode($stringData) : array();
+					$groupData 			= $stringData != null ? json_decode($stringData) : new StdClass();
 					$files 				= isset($groupData->files) ? $groupData->files : array();
 					$files[] 			= $fileName;
 					$groupData->files   = $files;
