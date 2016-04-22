@@ -20,24 +20,13 @@ ImageRenderingUtilsClass.prototype.renderImage = function(fileInput, canvas)
         case 'bmp':
         case 'png':
         case 'tif':
-            canvas.src = fileInput.files[0];
-            var reader   	   = new FileReader();
-	        reader.onload 	   = function(e) 
+            canvas.src 		= fileInput.files[0];
+            var reader   	= new FileReader();
+	        reader.onload 	= function(e) 
 	        {	
-			    var img = new Image();
-			    
-			    img.onload = function() 
-			    { 
-			    	var fitScale  = MathUtils.instance.getFitScale({ "x":img.width, "y":img.height }, { "x":canvas.width, "y":canvas.height }, "FitIn");
-			    	var fitWidth  = img.width  * fitScale;
-			    	var fitHeight = img.height * fitScale;
-			    	var fitX      = (canvas.width  - fitWidth)  / 2;
-			    	var fitY      = (canvas.height - fitHeight) / 2;
-
-			    	canvas.getContext("2d").clearRect(0,0, canvas.width, canvas.height);
-			    	canvas.getContext("2d").drawImage(img, fitX, fitY, fitWidth, fitHeight); 
-			    };
-			    img.src = e.target.result;
+			    var image = new Image();
+			    image.onload = function() { ImageRenderingUtils.instance.loadImageIntoCanvas(image, canvas); };
+			    image.src = e.target.result;
 	        }
 
 	        reader.readAsDataURL(fileInput.files[0]);
@@ -48,3 +37,15 @@ ImageRenderingUtilsClass.prototype.renderImage = function(fileInput, canvas)
             canvas.src = '';
     }
 };
+
+ImageRenderingUtilsClass.prototype.loadImageIntoCanvas = function(image, canvas)
+{
+	var fitScale  = MathUtils.instance.getFitScale({ "x":image.width, "y":image.height }, { "x":canvas.width, "y":canvas.height }, "FitIn");
+	var fitWidth  = image.width  * fitScale;
+	var fitHeight = image.height * fitScale;
+	var fitX      = (canvas.width  - fitWidth)  / 2;
+	var fitY      = (canvas.height - fitHeight) / 2;
+
+	canvas.getContext("2d").clearRect(0,0, canvas.width, canvas.height);
+	canvas.getContext("2d").drawImage(image, fitX, fitY, fitWidth, fitHeight); 
+}

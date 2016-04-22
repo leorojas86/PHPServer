@@ -26,6 +26,9 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 
 	document.getElementById("group_container").innerHTML = html;
 
+	if(!isFolderGroup)
+		this.loadImage();
+
 	if(hasParentGroup)
 		document.getElementById("back_button").onclick = function() { InventoryGroupController.instance.onBackButtonClick(parentGroupId); }
 
@@ -50,6 +53,28 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 	document.getElementById("search_button").onclick = function() { InventoryGroupController.instance.onSearchButtonClick(); }
 	document.onkeyup 								 = function(event) { InventoryGroupController.instance.onKeyUp(event); }
 };
+
+InventoryGroupControllerClass.prototype.loadImage = function()
+{
+	try
+	{
+		var data = JSON.parse(this._groupData.data);
+
+		if(data.files != null && data.files.length > 0)
+		{
+			var imageName 	= data.files[0];
+			var imageURL 	= Constants.API_URL + "/uploads/" + imageName;
+			var canvas 		= document.getElementById('imageContainer');
+			var image 		= new Image();
+			image.onload 	= function() { ImageRenderingUtils.instance.loadImageIntoCanvas(image, canvas); };
+			image.src 		= imageURL;
+		}
+	}
+	catch(e)
+	{
+        //alert(e); //error in the above string(in this case,yes)!
+    }
+}
 
 InventoryGroupControllerClass.prototype.getGroupInfoHTML = function(groupData)
 {
