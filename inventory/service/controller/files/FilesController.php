@@ -39,7 +39,7 @@
 
 				if($result)
 				{
-					$groupData 			= $result->data["data"] != null ? $result->data["data"] : array();
+					$groupData 			= $result->data["data"] != null ? json_decode($result->data["data"]) : array();
 					$files 				= isset($groupData["files"]) ? $groupData["files"] : array();
 					$files[] 			= $fileName;
 					$groupData["files"] = $files;
