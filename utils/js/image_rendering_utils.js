@@ -14,22 +14,20 @@ ImageRenderingUtilsClass.prototype.renderImage = function(fileInput, canvas)
 {
 	var ext = fileInput.value.match(/\.([^\.]+)$/)[1];
 
-    switch(ext)
-    {
-        case 'jpg': case 'jpeg': case 'bmp': case 'png': case 'tif':
-            var reader   	= new FileReader();
-	        reader.onload 	= function(e) 
-	        {	
-			    var image = new Image();
-			    image.onload = function() { ImageRenderingUtils.instance.loadImageIntoCanvas(image, canvas); };
-			    image.src = e.target.result;
-	        }
+	if(ext == 'jpg' || ext == 'jpeg' || ext == 'bmp' || ext == 'png' || ext == 'tif')
+	{
+        var reader   	= new FileReader();
+        reader.onload 	= function(e) 
+        {
+		    var image = new Image();
+		    image.onload = function() { ImageRenderingUtils.instance.loadImageIntoCanvas(image, canvas); };
+		    image.src = e.target.result;
+        }
 
-	        reader.readAsDataURL(fileInput.files[0]);
-        break;
-        default:
-            alert('Selected file is not a valid image, extension = ' + ext);
+        reader.readAsDataURL(fileInput.files[0]);
     }
+    else //HACK: Using setTimeout to fix iOS issue -> http://stackoverflow.com/questions/18903525/alert-and-confirm-not-working-with-apple-mobile-web-app-capable
+    	setTimeout(function(){ alert('Selected file is not a valid image, extension = ' + ext); }, 100);
 };
 
 ImageRenderingUtilsClass.prototype.loadImageIntoCanvas = function(image, canvas)
