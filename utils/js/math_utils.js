@@ -6,54 +6,19 @@ function MathUtilsClass()
 
 MathUtilsClass.prototype.getFitScale = function(originalSize, fitSize, fitMode)
 {
-	var fixScaleX = fitSize.x / originalSize.x;
-	var fixScaleY = fitSize.y / originalSize.y;
-	var scale   = 1;
+	var fixScaleW = fitSize.w / originalSize.w;
+	var fixScaleH = fitSize.h / originalSize.h;
+	var scale     = 1;
 	
 	switch(fitMode)
 	{
 		case "FitOut":
-			scale = Math.max(fixScaleX, fixScaleY);
+			scale = Math.max(fixScaleW, fixScaleH);
 		break;
 		case "FitIn":
-			scale = Math.min(fixScaleX, fixScaleY);
+			scale = Math.min(fixScaleW, fixScaleH);
 		break;
 	}
 	
 	return scale;
 };
-
-/*
-public static float GetFitScale(Vector2 originalSize, Vector2 fitSize, FitAxes fitAxes = FitAxes.Both, FitMode fitMode = FitMode.FitIn)
-	{
-		float fixScaleX = fitSize.x / originalSize.x;
-		float fixScaleY = fitSize.y / originalSize.y;
-		
-		float scale = 1.0f;
-		
-		switch(fitAxes)
-		{
-			case FitAxes.Both:
-	        {
-				switch(fitMode)
-				{
-					case FitMode.FitOut:
-						scale = Mathf.Max(fixScaleX, fixScaleY);
-					break;
-					case FitMode.FitIn:
-						scale = Mathf.Min(fixScaleX, fixScaleY);
-    				break;
-				}
-	        }
-			break;
-			case FitAxes.Horizontal: 
-				scale = fixScaleX;
-			break;
-			case FitAxes.Vertical: 
-				scale = fixScaleY;
-			break;
-		}
-		
-		return scale;
-	}
-*/
