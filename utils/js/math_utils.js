@@ -9,6 +9,8 @@ MathUtilsClass.prototype.getFitScale = function(originalSize, fitSize, fitMode)
 	var fixScaleW = fitSize.w / originalSize.w;
 	var fixScaleH = fitSize.h / originalSize.h;
 	var scale     = 1;
+
+	//alert("fixScaleW = " + fixScaleW);
 	
 	switch(fitMode)
 	{

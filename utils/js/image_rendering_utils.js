@@ -32,8 +32,14 @@ ImageRenderingUtilsClass.prototype.renderImage = function(fileInput, canvas, pre
 
 ImageRenderingUtilsClass.prototype.loadImageIntoCanvas = function(image, canvas, preferedCanvasSize, maxImageSize)
 {
+    preferedCanvasSize = 200;
+
+    //alert("image.width = " + image.width + " image.height = " + image.height + " maxImageSize = " + maxImageSize);
+
 	var downscaleImageScale = MathUtils.instance.getFitScale({ w:image.width, h:image.height }, { w:maxImageSize, h:maxImageSize }, "FitIn");
 	var downscaleImageSize  = { w:image.width * downscaleImageScale, h: image.height * downscaleImageScale};
+
+	//alert("downscaleImageScale " + downscaleImageScale + " downscaleImageSize = " + downscaleImageSize.w + "," + downscaleImageSize.h);
 
 	canvas.width 	= downscaleImageSize.w;
 	canvas.height 	= downscaleImageSize.h;
