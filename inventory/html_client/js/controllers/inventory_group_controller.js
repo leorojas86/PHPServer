@@ -179,7 +179,8 @@ InventoryGroupControllerClass.prototype.loadAjaxGroup = function(groupId)
 
 InventoryGroupControllerClass.prototype.uploadFile = function()
 {
-	var imageData = imageContainer.toDataURL("image/jpeg");
+	var canvas 	  = document.getElementById('imageContainer');
+	var imageData = canvas.toDataURL("image/jpeg");
 	ServiceClient.instance.uploadFile(imageData, "jpg", this._groupData.id, function(resultData) { InventoryGroupController.instance.onUploadCompleted(resultData); }, onProgress);
 };
 
