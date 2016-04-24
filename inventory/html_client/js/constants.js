@@ -15,5 +15,6 @@ var Constants =
      GROUP_ID_ITEM   : 1,
 
      IMAGE_FOLDER   : "images/Folder.png",
-     IMAGE_FILE     : "images/File.png"
+     IMAGE_FILE     : "images/File.png",
+     IMAGE_MAX_SIZE : 1024
 };

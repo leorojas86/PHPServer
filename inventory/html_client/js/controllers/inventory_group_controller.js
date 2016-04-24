@@ -202,7 +202,7 @@ InventoryGroupControllerClass.prototype.onSelectedFileChange = function()
 	var fileInput 	= document.getElementById('fileToUpload');
 	var canvas 		= document.getElementById('imageContainer');
 
-	ImageRenderingUtils.instance.renderImage(fileInput, canvas);
+	ImageRenderingUtils.instance.renderImage(fileInput, canvas, 600, Constants.IMAGE_MAX_SIZE);
 };
 
 InventoryGroupControllerClass.prototype.onSubGroupButtonClick = function(groupId)

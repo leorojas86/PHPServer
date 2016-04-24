@@ -10,7 +10,7 @@ function ImageRenderingUtilsClass()
 }
 
 //Methods
-ImageRenderingUtilsClass.prototype.renderImage = function(fileInput, canvas)
+ImageRenderingUtilsClass.prototype.renderImage = function(fileInput, canvas, preferedCanvasSize, maxImageSize)
 {
 	var ext = fileInput.value.match(/\.([^\.]+)$/)[1];
 
@@ -20,7 +20,7 @@ ImageRenderingUtilsClass.prototype.renderImage = function(fileInput, canvas)
         reader.onload 	= function(e) 
         {
 		    var image = new Image();
-		    image.onload = function() { ImageRenderingUtils.instance.loadImageIntoCanvas(image, canvas); };
+		    image.onload = function() { ImageRenderingUtils.instance.loadImageIntoCanvas(image, canvas, preferedCanvasSize, maxImageSize); };
 		    image.src = e.target.result;
         }
 
@@ -30,14 +30,20 @@ ImageRenderingUtilsClass.prototype.renderImage = function(fileInput, canvas)
     	setTimeout(function(){ alert('Selected file is not a valid image, extension = ' + ext); }, 100);
 };
 
-ImageRenderingUtilsClass.prototype.loadImageIntoCanvas = function(image, canvas)
+ImageRenderingUtilsClass.prototype.loadImageIntoCanvas = function(image, canvas, preferedCanvasSize, maxImageSize)
 {
-	var fitScale  = MathUtils.instance.getFitScale({ "x":image.width, "y":image.height }, { "x":canvas.width, "y":canvas.height }, "FitIn");
-	var fitWidth  = image.width  * fitScale;
-	var fitHeight = image.height * fitScale;
-	var fitX      = (canvas.width  - fitWidth)  / 2;
-	var fitY      = (canvas.height - fitHeight) / 2;
+	var downscaleImageScale = MathUtils.instance.getFitScale({ w:image.width, h:image.height }, { w:maxImageSize, h:maxImageSize }, "FitIn");
+	var downscaleImageSize  = { w:image.width * downscaleImageScale, h: image.height * downscaleImageScale};
+
+	canvas.width 	= downscaleImageSize.w;
+	canvas.height 	= downscaleImageSize.h;
+
+	/*var fitScale  			= MathUtils.instance.getFitScale({ w:image.width, h:image.height }, { w:canvas.width, h:canvas.height }, "FitIn");
+	var fitWidth  			= image.width  * fitScale;
+	var fitHeight 			= image.height * fitScale;
+	var fitX      			= (canvas.width  - fitWidth)  / 2;
+	var fitY      			= (canvas.height - fitHeight) / 2;*/
 
 	canvas.getContext("2d").clearRect(0,0, canvas.width, canvas.height);
-	canvas.getContext("2d").drawImage(image, fitX, fitY, fitWidth, fitHeight); 
+	canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
 }
