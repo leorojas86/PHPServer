@@ -16,5 +16,7 @@ var Constants =
 
      IMAGE_FOLDER   : "images/Folder.png",
      IMAGE_FILE     : "images/File.png",
-     IMAGE_MAX_SIZE : 1024
+     IMAGE_MAX_SIZE : 1024,
+
+     INVENTORY_CANVAS_MAX_SIZE : 400
 };
