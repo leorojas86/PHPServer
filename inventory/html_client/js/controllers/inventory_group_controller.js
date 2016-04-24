@@ -91,7 +91,7 @@ InventoryGroupControllerClass.prototype.getGroupInfoHTML = function(groupData)
 					"<input type='file' id='fileToUpload' 		class='input_class'>" +
 					"<button 			id='uploadFileButton' 	class='button_class'>" + uploadText + "</button>" + 
 					"<div 				id='progressNumber'></div>" +
-					"<canvas 			id='imageContainer' class='imageContainerClass' width='500' height='500'></canvas>";
+					"<canvas 			id='imageContainer' class='imageContainerClass' width='800' height='800'></canvas>";
 		html += "</div>";
 
 	return html;
@@ -180,7 +180,7 @@ InventoryGroupControllerClass.prototype.loadAjaxGroup = function(groupId)
 InventoryGroupControllerClass.prototype.uploadFile = function()
 {
 	var canvas 	  = document.getElementById('imageContainer');
-	var imageData = canvas.toDataURL("image/jpeg");
+	var imageData = canvas.toDataURL("image/jpeg", 0.95);
 	ServiceClient.instance.uploadFile(imageData, "jpg", this._groupData.id, function(resultData) { InventoryGroupController.instance.onUploadCompleted(resultData); }, onProgress);
 };
 
