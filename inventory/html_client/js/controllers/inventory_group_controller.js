@@ -62,12 +62,12 @@ InventoryGroupControllerClass.prototype.loadImage = function()
 
 		if(data.files != null && data.files.length > 0)
 		{
-			var imageName 	= data.files[0];
-			var imageURL 	= Constants.API_URL + "/uploads/" + imageName;
-			var canvas 		= document.getElementById('imageContainer');
-			var image 		= new Image();
-			image.onload 	= function() { ImageRenderingUtils.instance.loadImageIntoCanvas(image, canvas, Constants.INVENTORY_CANVAS_MAX_SIZE, Constants.IMAGE_MAX_SIZE); };
-			image.src 		= imageURL;
+			var imageName 		= data.files[0];
+			var imageURL 		= Constants.API_URL + "/uploads/" + imageName;
+			var canvas 			= document.getElementById('imageContainer');
+			var image 			= new Image();
+			image.onload 		= function() { ImageRenderingUtils.instance.loadImageIntoCanvas(image, canvas, canvas.parentElement.offsetWidth * 0.9, Constants.IMAGE_MAX_SIZE); };
+			image.src 			= imageURL;
 		}
 	}
 	catch(e)
@@ -202,7 +202,7 @@ InventoryGroupControllerClass.prototype.onSelectedFileChange = function()
 	var fileInput 	= document.getElementById('fileToUpload');
 	var canvas 		= document.getElementById('imageContainer');
 
-	ImageRenderingUtils.instance.renderImage(fileInput, canvas, Constants.INVENTORY_CANVAS_MAX_SIZE, Constants.IMAGE_MAX_SIZE);
+	ImageRenderingUtils.instance.renderImage(fileInput, canvas, canvas.parentElement.offsetWidth * 0.9, Constants.IMAGE_MAX_SIZE);
 };
 
 InventoryGroupControllerClass.prototype.onSubGroupButtonClick = function(groupId)
