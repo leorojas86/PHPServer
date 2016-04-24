@@ -12,6 +12,7 @@
 - Use css sprites.
 - Improve context menu for mobile.
 - Upload and Display photos.
+- Implement upload progress.
 
 Infraestructure Migration
 
