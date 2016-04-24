@@ -16,10 +16,7 @@ ImageRenderingUtilsClass.prototype.renderImage = function(fileInput, canvas)
 
     switch(ext)
     {
-        case 'jpg':
-        case 'bmp':
-        case 'png':
-        case 'tif':
+        case 'jpg': case 'jpeg': case 'bmp': case 'png': case 'tif':
             var reader   	= new FileReader();
 	        reader.onload 	= function(e) 
 	        {	
@@ -31,9 +28,7 @@ ImageRenderingUtilsClass.prototype.renderImage = function(fileInput, canvas)
 	        reader.readAsDataURL(fileInput.files[0]);
         break;
         default:
-            alert('Selected file is not a valid image');
-            fileInput.value	   = '';
-            canvas.src = '';
+            alert('Selected file is not a valid image, extension = ' + ext);
     }
 };
 
