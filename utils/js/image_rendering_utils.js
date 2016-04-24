@@ -38,12 +38,12 @@ ImageRenderingUtilsClass.prototype.loadImageIntoCanvas = function(image, canvas,
 	canvas.width 	= downscaleImageSize.w;
 	canvas.height 	= downscaleImageSize.h;
 
-	/*var fitScale  			= MathUtils.instance.getFitScale({ w:image.width, h:image.height }, { w:canvas.width, h:canvas.height }, "FitIn");
-	var fitWidth  			= image.width  * fitScale;
-	var fitHeight 			= image.height * fitScale;
-	var fitX      			= (canvas.width  - fitWidth)  / 2;
-	var fitY      			= (canvas.height - fitHeight) / 2;*/
-
 	canvas.getContext("2d").clearRect(0,0, canvas.width, canvas.height);
 	canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
+
+	var fitCanvasSizeScale = MathUtils.instance.getFitScale({ w:canvas.width, h:canvas.height }, { w:preferedCanvasSize, h:preferedCanvasSize }, "FitIn");
+	var fitCanvasSize      = { w: canvas.width * fitCanvasSizeScale, h: canvas.height * fitCanvasSizeScale};
+
+	canvas.style.width  = fitCanvasSize.w + "px";
+	canvas.style.height = fitCanvasSize.h + "px";
 }
