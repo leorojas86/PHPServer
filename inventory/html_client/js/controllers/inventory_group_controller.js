@@ -34,8 +34,7 @@ InventoryGroupControllerClass.prototype.renderGroup = function(groupData)
 
 	if(isFolderGroup)
 	{
-		document.getElementById("folders_scroll_panel").oncontextmenu	= function(event) 	{ InventoryContextMenuController.instance.showContextMenu(event); return false; }
-
+		InventoryContextMenuController.instance.initContextMenu();
 		/*for(var index in subGroups)
 		{
 			var subGroup     = subGroups[index];

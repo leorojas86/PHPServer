@@ -33,7 +33,7 @@ ContextMenuUtilsClass.prototype.showContextMenu = function(element, event, optio
 	var pageScrolledXOffset = window.pageXOffset || document.documentElement.scrollLeft;
 	var pageScrolledYOffset = window.pageYOffset || document.documentElement.scrollTop;
 
-	//alert(pageScrolledYOffset);
+	//alert("event.clientX = " + event.clientX);
 
 	element.style.position = "absolute";
 	element.style.left 	   = event.clientX + -2 + pageScrolledXOffset + "px";

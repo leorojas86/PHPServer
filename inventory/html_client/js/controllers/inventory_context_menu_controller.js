@@ -1,9 +1,45 @@
 //Singleton instance
 var InventoryContextMenuController = { instance : new InventoryContextMenuControllerClass() };
 
+
+InventoryContextMenuControllerClass.prototype._startTime = null;
+
 //Constructors
 function InventoryContextMenuControllerClass()
 {
+}
+
+InventoryContextMenuControllerClass.prototype.initContextMenu = function()
+{
+	var scrollPanel 			= document.getElementById("folders_scroll_panel");
+	scrollPanel.oncontextmenu 	= function(event) { InventoryContextMenuController.instance.showContextMenu(event); return false; };
+	/*var isIOS 					= /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+
+	if(isIOS)//HACK: Fix iOS oncontextmenu event
+	{
+		//scrollPanel.style.pointerEvents = "none";
+		
+		document.addEventListener('touchstart', function(e) 
+		{ 
+			ContextMenuUtils.instance.hideContextMenu();
+			InventoryContextMenuController.instance._startTime = new Date(); 
+			return false; 
+		}, true);
+
+		document.addEventListener('touchend', function(e) 
+		{ 
+			//alert("touchend");
+			var endTime     = new Date();
+			var elapsedTime = endTime - InventoryContextMenuController.instance._startTime;
+
+			if(elapsedTime > 700)//Hold for half a second
+			{
+				var touch = e.changedTouches[0];
+				setTimeout(function(){ InventoryContextMenuController.instance.showContextMenu(touch); }, 500);
+			}
+			return false;
+		}, true);
+	}*/
 }
 
 InventoryContextMenuControllerClass.prototype.showContextMenu = function(event)//TODO: Move the logic to call this here
