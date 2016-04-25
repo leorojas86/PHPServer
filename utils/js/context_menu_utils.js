@@ -1,6 +1,8 @@
 //Singleton instance
 var ContextMenuUtils = { instance : new ContextMenuUtilsClass() };
 
+ContextMenuUtilsClass.prototype.isShown = false;
+
 //http://stackoverflow.com/questions/4909167/how-to-add-a-custom-right-click-menu-to-a-webpage
 //http://www.codeproject.com/Tips/630793/Context-Menu-on-Right-Click-in-Webpage
 function ContextMenuUtilsClass()
@@ -17,15 +19,20 @@ function onContextMenuButtonClick(option)
 
 ContextMenuUtilsClass.prototype.hideContextMenu = function()
 {
-	if(this.element != null)
+	if(this.isShown)
 	{
 		this.element.innerHTML = "";
 		this.element 		   = null;
+
+		this.isShown = false;
 	}
 };
 
 ContextMenuUtilsClass.prototype.showContextMenu = function(element, event, options, onOptionSelectecCallback)
 {
+	if(this.isShown)
+		this.hideContextMenu();
+
 	this.element 				  = element;
 	this.onOptionSelectecCallback = onOptionSelectecCallback;
 	document.onclick              = function() { ContextMenuUtils.instance.hideContextMenu(); };
@@ -51,6 +58,8 @@ ContextMenuUtilsClass.prototype.showContextMenu = function(element, event, optio
 	}
 
 	element.innerHTML = elementHTML;
+
+	this.isShown = true;
 
 	//event.preventDefault();
 };

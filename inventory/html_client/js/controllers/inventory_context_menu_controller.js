@@ -1,9 +1,6 @@
 //Singleton instance
 var InventoryContextMenuController = { instance : new InventoryContextMenuControllerClass() };
 
-
-InventoryContextMenuControllerClass.prototype._startTime = null;
-
 //Constructors
 function InventoryContextMenuControllerClass()
 {
@@ -13,33 +10,46 @@ InventoryContextMenuControllerClass.prototype.initContextMenu = function()
 {
 	var scrollPanel 			= document.getElementById("folders_scroll_panel");
 	scrollPanel.oncontextmenu 	= function(event) { InventoryContextMenuController.instance.showContextMenu(event); return false; };
-	/*var isIOS 					= /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+
+	var isIOS = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
 
 	if(isIOS)//HACK: Fix iOS oncontextmenu event
-	{
-		//scrollPanel.style.pointerEvents = "none";
-		
+	{	
+		var startTime = null;
+
 		document.addEventListener('touchstart', function(e) 
 		{ 
-			ContextMenuUtils.instance.hideContextMenu();
-			InventoryContextMenuController.instance._startTime = new Date(); 
-			return false; 
+			//alert('touchstart');
+			//if(!ContextMenuUtils.instance.isShown)
+			//{
+				scrollPanel.style.pointerEvents = "none";
+				startTime = new Date(); 
+				return false; 
+			//}
 		}, true);
 
 		document.addEventListener('touchend', function(e) 
-		{ 
-			//alert("touchend");
+		{
 			var endTime     = new Date();
-			var elapsedTime = endTime - InventoryContextMenuController.instance._startTime;
+			var elapsedTime = endTime - startTime;
 
-			if(elapsedTime > 700)//Hold for half a second
+			if(startTime != null && elapsedTime > 200)//Hold for half a second
 			{
 				var touch = e.changedTouches[0];
-				setTimeout(function(){ InventoryContextMenuController.instance.showContextMenu(touch); }, 500);
+				setTimeout(function()
+				{ 
+					InventoryContextMenuController.instance.showContextMenu(touch); 
+					//scrollPanel.style.pointerEvents = "all";
+				}, 500);
+			}
+			else
+			{
+				//ContextMenuUtils.instance.hideContextMenu();
+				scrollPanel.style.pointerEvents = "all";
 			}
 			return false;
 		}, true);
-	}*/
+	}
 }
 
 InventoryContextMenuControllerClass.prototype.showContextMenu = function(event)//TODO: Move the logic to call this here
