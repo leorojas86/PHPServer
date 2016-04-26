@@ -4,6 +4,7 @@
 		Support context menu.
 	Android:
 		Make the andriod app load the web page.
+- Make context menu bigger.
 - Improve error management.
 - Code Cleanup.
 - Associate image to item.
