@@ -31,3 +31,4 @@ Infraestructure Migration
 Bugs:
 
 - Fix vertical alignment of group paths.
+- Sometimes the application does not load all folders/groups.
