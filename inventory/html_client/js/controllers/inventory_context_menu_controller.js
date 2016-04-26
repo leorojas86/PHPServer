@@ -19,7 +19,6 @@ InventoryContextMenuControllerClass.prototype.initContextMenu = function()
 
 		scrollPanel.addEventListener('touchstart', function(e) 
 		{ 
-			scrollPanel.style.pointerEvents = "none";
 			startTime = new Date(); 
 			return false;
 		}, true);
@@ -31,18 +30,17 @@ InventoryContextMenuControllerClass.prototype.initContextMenu = function()
 
 			if(startTime != null && elapsedTime > 300)//Hold for half a second
 			{
-				var touch = e.changedTouches[0];
+				scrollPanel.style.pointerEvents = "none";
 				setTimeout(function()
 				{ 
+					var touch = e.changedTouches[0];
 					InventoryContextMenuController.instance.showContextMenu(touch); 
 					scrollPanel.style.pointerEvents = "all";
 				}, 500);
 			}
 			else
-			{
 				ContextMenuUtils.instance.hideContextMenu();
-				scrollPanel.style.pointerEvents = "all";
-			}
+
 			return false;
 		}, true);
 	}
