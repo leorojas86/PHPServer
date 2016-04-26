@@ -17,18 +17,14 @@ InventoryContextMenuControllerClass.prototype.initContextMenu = function()
 	{	
 		var startTime = null;
 
-		document.addEventListener('touchstart', function(e) 
+		scrollPanel.addEventListener('touchstart', function(e) 
 		{ 
-			//alert('touchstart');
-			//if(!ContextMenuUtils.instance.isShown)
-			//{
-				scrollPanel.style.pointerEvents = "none";
-				startTime = new Date(); 
-				return false; 
-			//}
+			scrollPanel.style.pointerEvents = "none";
+			startTime = new Date(); 
+			return false;
 		}, true);
 
-		document.addEventListener('touchend', function(e) 
+		scrollPanel.addEventListener('touchend', function(e) 
 		{
 			var endTime     = new Date();
 			var elapsedTime = endTime - startTime;
@@ -39,12 +35,12 @@ InventoryContextMenuControllerClass.prototype.initContextMenu = function()
 				setTimeout(function()
 				{ 
 					InventoryContextMenuController.instance.showContextMenu(touch); 
-					//scrollPanel.style.pointerEvents = "all";
+					scrollPanel.style.pointerEvents = "all";
 				}, 500);
 			}
 			else
 			{
-				//ContextMenuUtils.instance.hideContextMenu();
+				ContextMenuUtils.instance.hideContextMenu();
 				scrollPanel.style.pointerEvents = "all";
 			}
 			return false;
