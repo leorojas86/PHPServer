@@ -29,7 +29,7 @@ InventoryContextMenuControllerClass.prototype.initContextMenu = function()
 			var endTime     = new Date();
 			var elapsedTime = endTime - startTime;
 
-			if(startTime != null && elapsedTime > 200)//Hold for half a second
+			if(startTime != null && elapsedTime > 300)//Hold for half a second
 			{
 				var touch = e.changedTouches[0];
 				setTimeout(function()
