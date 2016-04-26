@@ -1,5 +1,7 @@
 .html_class
 {
+	-moz-user-select: none;
+	-webkit-user-select:none;
 	background:rgba(198, 204, 213, 1);
 }
 
