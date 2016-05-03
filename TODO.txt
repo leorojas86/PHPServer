@@ -9,11 +9,15 @@
 - Upload and Display photos.
 - Implement upload progress.
 
-Infrastructure Migration
+- Infrastructure Migration
+	- Git.
+	- Jira.
+	- Jenkins.
+	- WAMP.
+	- Google Analitics.
+
 
 - Integrate with facebook.
-- Encript password in DB.
-- Add encription to login data and SSL.
 - Comments.
 - Rates.
 - Modes (Publisity, Sell, Auction, Raffle, Free).
@@ -21,14 +25,13 @@ Infrastructure Migration
 - Improvements for search engines.
 - EULA.
 - ADs.
-- Git.
-- Jira.
-- Jenkins.
-- WAMP.
 - Implement tabs for (Home, Global Search, etc).
 - Improve searchs, don't use like.
 - Improve caching to release server resources.
 - Error/Reload handling.
+- Improve Security.
+	- Encript password in DB.
+	- Add encription to login data and SSL.
 
 
 Bugs:
