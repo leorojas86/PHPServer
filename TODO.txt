@@ -27,6 +27,8 @@ Infrastructure Migration
 - WAMP.
 - Implement tabs for (Home, Global Search, etc).
 - Improve searchs, don't use like.
+- Improve caching to release server resources.
+- Error/Reload handling.
 
 
 Bugs:
