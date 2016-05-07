@@ -70,9 +70,9 @@ ServiceClientClass.prototype.loadGroup = function(groupId, callback)
 	this.request("POST", params, callback);
 };
 
-ServiceClientClass.prototype.addSubGroup = function(parentGroupId, newGroupName, type, callback)
+ServiceClientClass.prototype.addSubGroup = function(parentGroupId, newGroupName, type, data, callback)
 {
-	var params = "service=Group&method=AddSubGroup&parentGroupId=" + parentGroupId + "&name=" + newGroupName + "&type=" + type;
+	var params = "service=Group&method=AddSubGroup&parentGroupId=" + parentGroupId + "&name=" + newGroupName + "&type=" + type + '&data=' + data;
 	this.request("POST", params, callback);
 };
 

@@ -158,8 +158,9 @@
 			$name 		      = $_POST["name"];
 			$parentGroupId    = $_POST["parentGroupId"];
 			$type	          = $_POST["type"];
+			$data    		  = $_POST["data"];
 
-			return Group::AddSubGroup($name, $parentGroupId, $userId, $type);
+			return Group::AddSubGroup($name, $parentGroupId, $userId, $type, $data);
 		}
 	}
 

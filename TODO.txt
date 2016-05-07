@@ -18,7 +18,6 @@
 	- WAMP.
 	- Google Analitics.
 
-
 - Integrate with facebook.
 - Comments.
 - Rates.

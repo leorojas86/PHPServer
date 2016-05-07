@@ -125,7 +125,7 @@ function onRenameCallback(xmlhttp)
 
 function addSubGroup(newGroupName, type)
 {
-	ServiceClient.instance.addSubGroup(InventoryController.instance._currentGroupData.id, newGroupName, type, onAddSubGroupCallback);
+	ServiceClient.instance.addSubGroup(InventoryController.instance._currentGroupData.id, newGroupName, type, null, onAddSubGroupCallback);
 }
 
 function onAddSubGroupCallback(resultData)

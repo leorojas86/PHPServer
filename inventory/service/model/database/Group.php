@@ -98,13 +98,13 @@
 
 		private static function AddRootGroupToUser($userId)
 		{
-			return Group::AddSubGroup('RootGroup', null, $userId, UtilsConstants::DEFAULT_GROUP_TYPE);
+			return Group::AddSubGroup('RootGroup', null, $userId, UtilsConstants::DEFAULT_GROUP_TYPE, null);
 		}
 
-		public static function AddSubGroup($name, $parentGroupId, $userId, $type)
+		public static function AddSubGroup($name, $parentGroupId, $userId, $type, $data)
 		{
-			$sql    = "INSERT INTO groups (name, user_id, parent_group_id, type, creation_date)
-					   VALUES ('$name', '$userId', '$parentGroupId', '$type', NOW())";
+			$sql    = "INSERT INTO groups (name, user_id, parent_group_id, type, data, creation_date)
+					   VALUES ('$name', '$userId', '$parentGroupId', '$type', '$data', NOW())";
 			$result = MySQLManager::ExecuteInsert($sql);
 
 			return $result;

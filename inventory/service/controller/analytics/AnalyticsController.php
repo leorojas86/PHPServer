@@ -20,22 +20,11 @@
 
 		private static function Log()
 		{
-			$name = $_POST["name"];
-			$data = $_POST["data"];
+			$userId = SessionManager::GetUserData()["id"];
+			$name 	= $_POST["name"];
+			$data 	= $_POST["data"];
 
-			/*$searchText = $_POST["searchText"];
-			$result 	= Group::SearchGroups($searchText);	
-
-			if($result->success)
-			{
-				$groupsByName = $result->data;
-				$result 	  = Tag::SearchGroups($searchText);
-
-				if($result->success)
-					$result->data = GroupsController::MergeSearchResults($result->data, $groupsByName); 
-			}
-
-			return $result;*/
+			return Group::AddSubGroup($name, null, $userId, Constants::ANALYTICS_GROUP_TYPE, $data);
 		}
 
 		private static function MergeSearchResults($result1, $result2)
@@ -154,8 +143,9 @@
 			$name 		      = $_POST["name"];
 			$parentGroupId    = $_POST["parentGroupId"];
 			$type	          = $_POST["type"];
+			$data	          = $_POST["data"];
 
-			return Group::AddSubGroup($name, $parentGroupId, $userId, $type);
+			return Group::AddSubGroup($name, $parentGroupId, $userId, $type, $data);
 		}
 	}
 
