@@ -8,6 +8,7 @@
 - Use css sprites.
 - Upload and Display photos.
 - Implement upload progress.
+- Performance Analytics.
 
 - Infrastructure Migration
 	- Git.
