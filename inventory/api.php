@@ -19,6 +19,8 @@
 				$service = $_POST["service"];
 				$method  = $_POST["method"];
 
+				$profiler = new Profiler("service = '$service', method = '$method'");
+
 				switch($service)
 				{
 					case "User":  $result = UsersController::Service($method);  break;
@@ -26,6 +28,8 @@
 					case "File":  $result = FilesController::Service($method);  break;
 					default:      $result = new ServiceResult(false, "Unknown service '$service'", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE); break;
 				}
+
+				$profiler->Finish();
 			}
 			else
 				$result = new ServiceResult(false, "Unspecified service parameter", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE);
