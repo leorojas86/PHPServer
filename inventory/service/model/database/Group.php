@@ -103,8 +103,8 @@
 
 		public static function AddSubGroup($name, $parentGroupId, $userId, $type)
 		{
-			$sql    = "INSERT INTO groups (name, user_id, parent_group_id, type)
-					   VALUES ('$name', '$userId', '$parentGroupId', '$type')";
+			$sql    = "INSERT INTO groups (name, user_id, parent_group_id, type, creation_date)
+					   VALUES ('$name', '$userId', '$parentGroupId', '$type', NOW())";
 			$result = MySQLManager::ExecuteInsert($sql);
 
 			return $result;

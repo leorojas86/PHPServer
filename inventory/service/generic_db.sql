@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Mar 09, 2016 at 03:30 AM
+-- Generation Time: May 07, 2016 at 05:39 AM
 -- Server version: 5.5.42
 -- PHP Version: 7.0.0
 
@@ -26,78 +26,80 @@ CREATE TABLE `groups` (
   `type` int(11) NOT NULL,
   `user_id` bigint(20) NOT NULL,
   `parent_group_id` bigint(20) DEFAULT NULL,
-  `data` varchar(1000) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=latin1;
+  `data` varchar(1000) DEFAULT NULL,
+  `creation_date` datetime DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=145 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `groups`
 --
 
-INSERT INTO `groups` (`id`, `name`, `type`, `user_id`, `parent_group_id`, `data`) VALUES
-(1, 'sdsds', 1, 8, 44, NULL),
-(42, 'RootGroup', 0, 8, 0, NULL),
-(44, 'test111', 0, 8, 42, NULL),
-(50, 'RootGroup', 0, 10, 0, NULL),
-(60, 'sss', 1, 8, 42, '555sss'),
-(61, 'dfdfdf', 0, 8, 42, NULL),
-(65, 'ddddd', 1, 8, 44, 'nullsdd'),
-(67, 'sdsd', 0, 8, 44, NULL),
-(68, 'sdsd', 0, 8, 67, NULL),
-(70, 'ssss', 0, 8, 42, NULL),
-(71, 'ssaaa', 1, 8, 42, NULL),
-(73, 'sasdds', 1, 8, 42, 'nullsss'),
-(74, 'aasddsdsa', 1, 8, 42, NULL),
-(76, 'sdasddddd', 0, 8, 76, NULL),
-(79, 'fdffddf', 0, 8, 70, NULL),
-(80, 'RootGroup', 0, 14, 0, NULL),
-(81, 'r5trtt', 1, 14, 80, NULL),
-(82, 'vgvh', 0, 8, 79, NULL),
-(83, 'RootGroup', 0, 0, 0, NULL),
-(84, 'dd', 1, 8, 42, NULL),
-(85, 'sds', 0, 8, 42, NULL),
-(86, 'dfdf', 1, 8, 42, NULL),
-(87, 'dddd', 0, 8, 61, NULL),
-(88, 'sssssaaaaa', 1, 8, 42, NULL),
-(89, 'sssssaaaaaa', 0, 8, 89, NULL),
-(90, 'sadasd', 1, 0, 83, 'www'),
-(91, 'asdasd', 0, 0, 83, NULL),
-(92, 'sdddsssss', 1, 0, 91, NULL),
-(93, 'new', 1, 8, 76, NULL),
-(94, 'w', 1, 8, 42, NULL),
-(95, 'w', 1, 8, 42, NULL),
-(96, 'w', 1, 8, 42, NULL),
-(97, 'w', 1, 8, 42, NULL),
-(98, 'w', 1, 8, 42, NULL),
-(99, 'w', 1, 8, 42, NULL),
-(100, 'w', 1, 8, 42, NULL),
-(101, 'w', 1, 8, 42, NULL),
-(102, 'w', 1, 8, 42, NULL),
-(104, 'w', 1, 8, 42, NULL),
-(105, 'w', 1, 8, 42, NULL),
-(106, 'w', 1, 8, 42, NULL),
-(107, 'w', 1, 8, 42, NULL),
-(108, 'w', 1, 8, 42, NULL),
-(109, 'w', 1, 8, 42, NULL),
-(110, 'w', 1, 8, 42, NULL),
-(111, 'w', 1, 8, 42, NULL),
-(112, 'w', 1, 8, 42, NULL),
-(113, 'w', 1, 8, 42, NULL),
-(114, 'w', 1, 8, 42, NULL),
-(115, 'w', 1, 8, 42, NULL),
-(116, 'w', 1, 8, 42, NULL),
-(117, 'w', 1, 8, 42, NULL),
-(118, 'w', 1, 8, 42, NULL),
-(119, '1', 1, 8, 42, NULL),
-(124, 'a', 1, 8, 42, NULL),
-(126, 'a', 1, 8, 42, NULL),
-(127, 'a', 1, 8, 42, NULL),
-(128, 'a', 1, 8, 42, NULL),
-(129, 'a', 1, 8, 42, NULL),
-(130, 'a', 1, 8, 42, NULL),
-(131, 'a', 1, 8, 42, NULL),
-(132, 'a', 1, 8, 42, NULL),
-(133, 'a', 1, 8, 42, NULL),
-(134, 'sss', 0, 8, 85, NULL);
+INSERT INTO `groups` (`id`, `name`, `type`, `user_id`, `parent_group_id`, `data`, `creation_date`) VALUES
+(1, 'sdsds', 1, 8, 44, NULL, '0000-00-00 00:00:00'),
+(42, 'RootGroup', 0, 8, 0, NULL, '0000-00-00 00:00:00'),
+(44, 'test111', 0, 8, 42, NULL, '0000-00-00 00:00:00'),
+(50, 'RootGroup', 0, 10, 0, NULL, '0000-00-00 00:00:00'),
+(60, 'sss', 1, 8, 42, '{"files":["8 FFE15079-8D91-4D69-ACBA-D2B12B623DF2.jpg"]}', '0000-00-00 00:00:00'),
+(61, 'ff', 0, 8, 42, NULL, '0000-00-00 00:00:00'),
+(65, 'ddddd', 1, 8, 44, NULL, '0000-00-00 00:00:00'),
+(67, 'sdsd', 0, 8, 44, NULL, '0000-00-00 00:00:00'),
+(68, 'sdsd', 0, 8, 67, NULL, '0000-00-00 00:00:00'),
+(70, 'ssss', 0, 8, 61, NULL, '0000-00-00 00:00:00'),
+(71, 'ssaaa', 1, 8, 42, '{"files":["8 EF6B02E7-0A25-45B7-8AA4-7C7B0E90318D.jpg"]}', '0000-00-00 00:00:00'),
+(73, 'sasdds', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(74, 'aasddsdsa', 1, 8, 42, '{"files":["8 DE156F8C-343F-4DCD-A022-0466A212483E.jpg"]}', '0000-00-00 00:00:00'),
+(76, 'sdasddddd', 0, 8, 76, NULL, '0000-00-00 00:00:00'),
+(79, 'fdffddf', 0, 8, 70, NULL, '0000-00-00 00:00:00'),
+(80, 'RootGroup', 0, 14, 0, NULL, '0000-00-00 00:00:00'),
+(81, 'r5trtt', 1, 14, 80, NULL, '0000-00-00 00:00:00'),
+(82, 'vgvh', 0, 8, 79, NULL, '0000-00-00 00:00:00'),
+(83, 'RootGroup', 0, 0, 0, NULL, '0000-00-00 00:00:00'),
+(84, 'dd', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(86, 'dfdf', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(87, 'dddd', 0, 8, 61, NULL, '0000-00-00 00:00:00'),
+(88, 'sssssaaaaa', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(89, 'sssssaaaaaa', 0, 8, 89, NULL, '0000-00-00 00:00:00'),
+(90, 'ddd', 1, 0, 83, NULL, '0000-00-00 00:00:00'),
+(91, 'asdasd', 0, 0, 83, NULL, '0000-00-00 00:00:00'),
+(92, 'sdddsssss', 1, 0, 91, NULL, '0000-00-00 00:00:00'),
+(93, 'new', 1, 8, 76, NULL, '0000-00-00 00:00:00'),
+(94, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(95, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(96, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(98, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(99, 'w', 1, 8, 70, NULL, '0000-00-00 00:00:00'),
+(100, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(101, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(102, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(104, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(105, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(106, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(107, 'w', 1, 8, 42, '{"files":["8 35B5C1B1-9A94-4F4F-8F5D-37B1320A06BF.jpg","8 AE48ACF0-1032-4BD2-AF23-C84C73C0AB56.jpg"]}', '0000-00-00 00:00:00'),
+(108, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(109, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(110, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(111, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(112, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(113, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(114, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(115, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(116, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(117, 'w', 1, 8, 42, '{"files":["8 23F3409B-8F63-495F-8A1E-D6B2EE9359CA.jpg"]}', '0000-00-00 00:00:00'),
+(118, 'w', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(119, '1', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(124, 'a', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(126, 'a', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(127, 'a', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(128, 'a', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(129, 'a', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(130, 'a', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(136, 'ana', 0, 8, 42, NULL, '0000-00-00 00:00:00'),
+(137, 'leo', 1, 8, 136, NULL, '0000-00-00 00:00:00'),
+(139, 'c', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(140, 'c2', 1, 8, 42, NULL, '0000-00-00 00:00:00'),
+(142, 'eee', 1, 8, 44, NULL, '0000-00-00 00:00:00'),
+(143, 'cccc', 1, 8, 42, NULL, '2016-05-06 00:00:00'),
+(144, 'hhh', 1, 8, 42, NULL, '2016-05-06 21:39:05');
 
 -- --------------------------------------------------------
 
@@ -109,7 +111,31 @@ CREATE TABLE `tags` (
   `id` bigint(20) NOT NULL,
   `name` varchar(100) NOT NULL,
   `type` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tags`
+--
+
+INSERT INTO `tags` (`id`, `name`, `type`) VALUES
+(1, 'asda', 0),
+(2, 'as', 0),
+(3, 'da', 0),
+(4, 'sds', 0),
+(5, 'dsss', 0),
+(6, 'ads', 0),
+(7, 'dsd', 0),
+(8, 'd', 0),
+(9, 'a', 0),
+(10, 's', 0),
+(11, 'sss', 0),
+(12, 'ssss', 0),
+(13, 'ssss1', 0),
+(14, 'bat', 0),
+(15, 'null', 0),
+(16, 'rfff', 0),
+(17, 'ghh', 0),
+(18, 'ooo', 0);
 
 -- --------------------------------------------------------
 
@@ -121,6 +147,17 @@ CREATE TABLE `tags_per_groups` (
   `group_id` bigint(20) NOT NULL,
   `tag_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tags_per_groups`
+--
+
+INSERT INTO `tags_per_groups` (`group_id`, `tag_id`) VALUES
+(73, 17),
+(74, 16),
+(95, 14),
+(119, 15),
+(140, 18);
 
 -- --------------------------------------------------------
 
@@ -186,12 +223,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=135;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=145;
 --
 -- AUTO_INCREMENT for table `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `users`
 --

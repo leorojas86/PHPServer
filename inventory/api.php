@@ -8,6 +8,8 @@
 	/*try 
 	{
 		throw new Exception('Division by zero.');*/
+
+		
 		$result = Environment::Init(isset($_POST["sessionId"]) ? $_POST["sessionId"] : null);
 
 		if($result->success)
