@@ -19,8 +19,7 @@
 			if($result->success)
 				$result = SessionManager::StartSession($sessionId);
 
-
-			$profiler->Finish();
+			$profiler->Profile();
 
 			return $result;
 		}

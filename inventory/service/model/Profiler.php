@@ -13,12 +13,12 @@
 			//usleep(2000000);// Sleep for a while
 		}
 
-		public function Finish()
+		public function Profile()
 		{
 			$currentMilliseconds 	= microtime(true);
 			$profileDuration 		= $currentMilliseconds - $this->profileStartTime;
 
-			error_log("Profile '$this->name', duration = '$profileDuration', startTime = '$this->profileStartTime', endTime = '$currentMilliseconds'");
+			//Profileerror_log("Profile '$this->name', duration = '$profileDuration', startTime = '$this->profileStartTime', endTime = '$currentMilliseconds'");
 
 			return $profileDuration;
 		}

@@ -29,7 +29,7 @@
 					default:      $result = new ServiceResult(false, "Unknown service '$service'", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE); break;
 				}
 
-				$profiler->Finish();
+				$profiler->Profile();
 			}
 			else
 				$result = new ServiceResult(false, "Unspecified service parameter", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE);
