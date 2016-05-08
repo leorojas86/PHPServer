@@ -1,9 +1,11 @@
 <?php 
-
+	
+	require_once "utils/php/Profiler.php";
 	require_once "inventory/service/model/Environment.php";
 	require_once "inventory/service/controller/database/UsersController.php";
 	require_once "inventory/service/controller/database/GroupsController.php";
 	require_once "inventory/service/controller/files/FilesController.php";
+	require_once "inventory/service/controller/analytics/AnalyticsController.php";
 
 	/*try 
 	{
@@ -23,10 +25,11 @@
 
 				switch($service)
 				{
-					case "User":  $result = UsersController::Service($method);  break;
-					case "Group": $result = GroupsController::Service($method); break;
-					case "File":  $result = FilesController::Service($method);  break;
-					default:      $result = new ServiceResult(false, "Unknown service '$service'", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE); break;
+					case "User":  		$result = UsersController::Service($method);  break;
+					case "Group": 		$result = GroupsController::Service($method); break;
+					case "File":  		$result = FilesController::Service($method);  break;
+					case "Analytic":  	$result = FilesController::Service($method);  break;
+					default:      		$result = new ServiceResult(false, "Unknown service '$service'", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE); break;
 				}
 
 				$profiler->Profile();
