@@ -9,7 +9,7 @@
 		{
 			switch ($method) 
 			{
-				case "Log": $result = AnalyticsController::Log(); break;
+				case "Event": $result = AnalyticsController::Event(); break;
 				default: 		 
 					$result = new ServiceResult(false, "Unsupported user service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
 				break;
@@ -18,13 +18,25 @@
 			return $result;
 		}
 
-		private static function Log()
+		private static function Event()
+		{
+			$name = $_POST["name"];
+			$data = $_POST["data"];
+
+			return AnalyticsController::SaveEvent($name, $data);
+		}
+
+		private static function SaveEvent($name, $data)
 		{
 			$userId = SessionManager::GetUserData()["id"];
-			$name 	= $_POST["name"];
-			$data 	= $_POST["data"];
 
 			return Group::AddSubGroup($name, null, $userId, Constants::ANALYTICS_GROUP_TYPE, $data);
+		}
+
+		public static function SaveProfile($profiler)
+		{
+			$duration = $profiler->Profile();
+			return AnalyticsController::SaveEvent($profiler->name, $duration);
 		}
 	}
 ?>
