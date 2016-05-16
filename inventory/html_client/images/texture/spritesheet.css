@@ -1,0 +1,15 @@
+.Folder {
+   background: url('spritesheet.png') no-repeat -0px -0px;
+   width: 64px;
+   height: 56px;
+}
+.Item {
+   background: url('spritesheet.png') no-repeat -65px -0px;
+   width: 64px;
+   height: 64px;
+}
+.Search {
+   background: url('spritesheet.png') no-repeat -0px -57px;
+   width: 64px;
+   height: 64px;
+}
