@@ -113,7 +113,7 @@ InventoryGroupControllerClass.prototype.getGroupChildrenHTML = function(groupDat
 		var clickEvent   = "onclick='InventoryGroupController.instance.onSubGroupButtonClick(" + subGroupId + ");'"
 
 		html += "<div id='folder_" + subGroupId + "' class='folder_class'>"+
-					"<img id='folder_image_" + subGroupId + "' class='folder_image_class' src='" + icon + "' " + clickEvent + "/>"+
+					"<img id='folder_image_" + subGroupId + "' class='folder_image_class " + icon + "' src='" + Constants.TEXTURE_FILE + "' " + clickEvent + "/>"+
 					"<label id='folder_label_" + subGroupId + "' >" + subGroupName + "</label>"+
 				"</div>";
 	}
