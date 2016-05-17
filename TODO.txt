@@ -9,6 +9,8 @@
 - Implement upload progress.
 - Performance Analytics.
 - Make context menu bigger.
+- Improve search logic.
+- Sort folders/files.
 
 - Infrastructure Migration
 	- Git.

@@ -14,7 +14,6 @@ var Constants =
      GROUP_ID_FOLDER : 0,
      GROUP_ID_ITEM   : 1,
 
-     TEXTURE_FILE   : "images/empty.png",
      IMAGE_FOLDER   : "Folder",
      IMAGE_FILE     : "Item",
      IMAGE_MAX_SIZE : 1024,
