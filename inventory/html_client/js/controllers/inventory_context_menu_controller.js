@@ -1,6 +1,9 @@
 //Singleton instance
 var InventoryContextMenuController = { instance : new InventoryContextMenuControllerClass() };
 
+InventoryContextMenuControllerClass.prototype._cuttingGroupId 	= null;
+InventoryContextMenuControllerClass.prototype._folderId 		= null;
+
 //Constructors
 function InventoryContextMenuControllerClass()
 {
@@ -66,7 +69,7 @@ InventoryContextMenuControllerClass.prototype.showContextMenu = function(event)/
 		break;
 	}
 
-	_folderId 		= event.target.parentNode.id.replace("folder_", "");
+	this._folderId  = event.target.parentNode.id.replace("folder_", "");
 	var contextMenu = document.getElementById('context_menu_container');
 
 	var onContextMenuOptionSelected = function(option) { InventoryContextMenuController.instance.onContextMenuOptionSelected(option); } 
@@ -75,80 +78,75 @@ InventoryContextMenuControllerClass.prototype.showContextMenu = function(event)/
 
 InventoryContextMenuControllerClass.prototype.canPasteFolder = function()
 {
-	return InventoryController.instance._currentGroupData != null/* && InventoryController.instance._currentGroupData.can_paste*/;
+	return this._cuttingGroupId != null;
 };
 
 InventoryContextMenuControllerClass.prototype.onContextMenuOptionSelected = function(option)
 {
 	switch(option)
 	{
-		case Constants.MENU_ITEM_ADD_ITEM: 		addItem(_folderId); 			break;
-		case Constants.MENU_ITEM_ADD_FOLDER: 	addFolder();      				break;
-		case Constants.MENU_ITEM_PASTE: 		pasteGroup();          			break;
-		case Constants.MENU_ITEM_RENAME:    	renameGroup(_folderId); 		break;
-		case Constants.MENU_ITEM_CUT: 			InventoryController.instance._cuttingGroupId = _folderId;	break;
-		case Constants.MENU_ITEM_DELETE: 		removeSubgroupGroup(_folderId);	break;
+		case Constants.MENU_ITEM_ADD_ITEM: 		this.addItem(this._folderId); 			break;
+		case Constants.MENU_ITEM_ADD_FOLDER: 	this.addFolder();      				break;
+		case Constants.MENU_ITEM_PASTE: 		this.pasteGroup();          			break;
+		case Constants.MENU_ITEM_RENAME:    	this.renameGroup(this._folderId); 		break;
+		case Constants.MENU_ITEM_CUT: 			this._cuttingGroupId = this._folderId;	break;
+		case Constants.MENU_ITEM_DELETE: 		this.removeSubgroupGroup(this._folderId);	break;
 	}
 };
 
-function addItem(folderId)
+InventoryContextMenuControllerClass.prototype.addItem = function(folderId)
 {
 	var typeNewItemNameText = LocManager.instance.getLocalizedText("type_new_item_name");
 	var itemName 			= prompt(typeNewItemNameText, "");
 
 	if(itemName != null && itemName != "") 
-		addSubGroup(itemName, Constants.GROUP_ID_ITEM);
+		this.addSubGroup(itemName, Constants.GROUP_ID_ITEM);
 }
 
-function addFolder()
+InventoryContextMenuControllerClass.prototype.addFolder = function()
 {
 	var typeFolderNameText = LocManager.instance.getLocalizedText("type_new_folder_name");
 	var folderName         = prompt(typeFolderNameText, "");
 
 	if(folderName != null && folderName != "") 
-	    addSubGroup(folderName, Constants.GROUP_ID_FOLDER);
+	    this.addSubGroup(folderName, Constants.GROUP_ID_FOLDER);
 }
 
-function renameGroup(folderId)
+InventoryContextMenuControllerClass.prototype.renameGroup = function(folderId)
 {
 	var typeNewFolderName = LocManager.instance.getLocalizedText("type_new_name");
 	var folderName 		  = prompt(typeNewFolderName, "");
 
 	if(folderName != null && folderName != "") 
-		ServiceClient.instance.renameGroup(folderId, folderName, onRenameCallback);
+		ServiceClient.instance.renameGroup(folderId, folderName, this.refreshCurrentGroup);
 }
 
-function onRenameCallback(xmlhttp)
+InventoryContextMenuControllerClass.prototype.addSubGroup = function(newGroupName, type)
 {
-	refreshCurrentGroup(xmlhttp);
+	ServiceClient.instance.addSubGroup(InventoryGroupController.instance._groupData.id, newGroupName, type, null, this.onAddSubGroupCallback);
 }
 
-function addSubGroup(newGroupName, type)
-{
-	ServiceClient.instance.addSubGroup(InventoryController.instance._currentGroupData.id, newGroupName, type, null, onAddSubGroupCallback);
-}
-
-function onAddSubGroupCallback(resultData)
+InventoryContextMenuControllerClass.prototype.onAddSubGroupCallback = function(resultData)
 {
 	if(resultData.success) 
-		InventoryGroupController.instance.loadAjaxGroup(InventoryController.instance._currentGroupData.id);
+		InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance._groupData.id);
 	//TODO: Handle error case
 }
 
-function pasteGroup()
+InventoryContextMenuControllerClass.prototype.pasteGroup = function()
 {
-	ServiceClient.instance.moveGroup(InventoryController.instance._cuttingGroupId, InventoryController.instance._currentGroupData.id, refreshCurrentGroup);
-	InventoryController.instance._cuttingGroupId = null;
+	ServiceClient.instance.moveGroup(this._cuttingGroupId, InventoryGroupController.instance._groupData.id, this.refreshCurrentGroup);
+	this._cuttingGroupId = null;
 }
 
-function refreshCurrentGroup(resultData)
+InventoryContextMenuControllerClass.prototype.refreshCurrentGroup = function(resultData)
 {
 	if(resultData.success)
-		InventoryGroupController.instance.loadAjaxGroup(InventoryController.instance._currentGroupData.id);
+		InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance._groupData.id);
 	//TODO: Handle error case
 }
 
-function removeSubgroupGroup(groupId)
+InventoryContextMenuControllerClass.prototype.removeSubgroupGroup = function(groupId)
 {
 	var folderLabel 		= document.getElementById('folder_label_' + groupId);
 	var deleteFolderText 	= LocManager.instance.getLocalizedText("sure_to_delete_folder");
@@ -159,9 +157,9 @@ function removeSubgroupGroup(groupId)
 		ServiceClient.instance.deleteGroup(groupId, onDeleteGroupCallback);
 }
 
-function onDeleteGroupCallback(resultData)
+InventoryContextMenuControllerClass.prototype.onDeleteGroupCallback = function(resultData)
 {
 	if(resultData.success)
-		InventoryGroupController.instance.loadAjaxGroup(InventoryController.instance._currentGroupData.id);
+		InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance._groupData.id);
 	//TODO: handle error case
 }

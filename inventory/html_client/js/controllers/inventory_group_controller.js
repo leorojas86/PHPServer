@@ -174,10 +174,7 @@ InventoryGroupControllerClass.prototype.renderRootGroup = function()
 InventoryGroupControllerClass.prototype.onLoadGroupCallback = function(resultData)
 {
 	if(resultData.success) 
-	{
-		InventoryController.instance._currentGroupData = resultData.data;
-		this.renderGroup(InventoryController.instance._currentGroupData);
-	}
+		this.renderGroup(resultData.data);
 	//TODO: Report error
 };
 
