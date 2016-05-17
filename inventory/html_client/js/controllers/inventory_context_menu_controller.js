@@ -154,7 +154,7 @@ InventoryContextMenuControllerClass.prototype.removeSubgroupGroup = function(gro
 	var remove      		= confirm(deleteFolderText);
 
 	if(remove) 
-		ServiceClient.instance.deleteGroup(groupId, onDeleteGroupCallback);
+		ServiceClient.instance.deleteGroup(groupId, this.onDeleteGroupCallback);
 }
 
 InventoryContextMenuControllerClass.prototype.onDeleteGroupCallback = function(resultData)
