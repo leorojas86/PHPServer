@@ -99,7 +99,7 @@ InventoryGroupControllerClass.prototype.getGroupInfoHTML = function(groupData)
 InventoryGroupControllerClass.prototype.getGroupChildrenHTML = function(groupData)
 {
 	var rightClickOptions 	= LocManager.instance.getLocalizedText("right_click_tooltip");
-	var subGroups 	  		= groupData.sub_groups;
+	var subGroups 	  		= this.sortSubgroups(groupData.sub_groups);
 
 	var html = "<div id='folders_scroll_panel' class='folders_scroll_panel_class' title='" + rightClickOptions + "'>";
 
@@ -121,6 +121,24 @@ InventoryGroupControllerClass.prototype.getGroupChildrenHTML = function(groupDat
 	html += "</div>";
 
 	return html;
+};
+
+InventoryGroupControllerClass.prototype.sortSubgroups = function(subGroups)
+{
+	var folders = new Array();
+	var items   = new Array();
+
+	for(var index in subGroups)
+	{
+		var subGroup = subGroups[index];
+
+		if(subGroup.type == Constants.GROUP_ID_FOLDER)
+			folders.push(subGroup);
+		else
+			items.push(subGroup);
+	}
+
+	return folders.concat(items);
 };
 
 InventoryGroupControllerClass.prototype.getGroupHeaderHTML = function(groupData)

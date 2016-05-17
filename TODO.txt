@@ -11,6 +11,8 @@
 - Make context menu bigger.
 - Improve search logic.
 - Sort folders/files.
+- Improve profilinng 
+	https://beaver6813.com/2009/10/php-get-current-time-in-milliseconds/
 
 - Infrastructure Migration
 	- Git.
