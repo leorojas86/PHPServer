@@ -14,13 +14,15 @@ RequestUtilsClass.prototype.request = function(url, method, callback, params, on
 
 	this.notifyProgress(xmlhttp, onProgress);
 
+	var async = true;
+
 	switch(method)
 	{
 		case "POST":
 
 			if((typeof params) == "string")
 			{
-				xmlhttp.open(method, url, true);
+				xmlhttp.open(method, url, async);
 
 				//Send the proper header information along with the request
 				xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -36,7 +38,7 @@ RequestUtilsClass.prototype.request = function(url, method, callback, params, on
 			    for(var id in params)
 			    	fd.append(id, params[id]);
 
-			    xmlhttp.open("POST", url);
+			    xmlhttp.open(method, url, async);
 			    xmlhttp.send(fd);
 			}
 			
@@ -46,7 +48,7 @@ RequestUtilsClass.prototype.request = function(url, method, callback, params, on
 			if(params.length > 0)
 				url += "?" + params;
 
-			xmlhttp.open(method, url, true);
+			xmlhttp.open(method, url, async);
 			xmlhttp.send(params);
 
 		break;

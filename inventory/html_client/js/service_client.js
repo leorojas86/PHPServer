@@ -112,6 +112,14 @@ ServiceClientClass.prototype.updateUserData = function(data, callback)
 	this.request("POST", params, callback);
 };
 
+ServiceClientClass.prototype.profile = function(key, duration)
+{
+	var data   = "{ 'name' : 'Profile_" + key + "', 'data' : { 'duration' : '" + duration + "' } }";
+	var params = "service=Analytic&method=Event&data=" + data;
+	
+	RequestUtils.instance.request(Constants.API_URL, "POST", function(xmlhttp, success) { /* DO NOTHING */ }, params);
+};
+
 ServiceClientClass.prototype.uploadFile = function(fileData, extension, groupId, callback, onProgress)
 {
 	var params 				= new Object();
@@ -141,6 +149,8 @@ ServiceClientClass.prototype.request = function(method, params, callback)
 
 ServiceClientClass.prototype.onRequestResponse = function(params, xmlhttp, success, callback)
 {
+	//this.profile(params, xmlhttp);
+
 	var resultData = success ? JSON.parse(xmlhttp.responseText) : { success : false, data : xmlhttp.responseText };
 
 	if(resultData.success)
