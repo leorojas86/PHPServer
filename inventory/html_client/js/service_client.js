@@ -144,12 +144,12 @@ ServiceClientClass.prototype.request = function(method, params, callback)
 			params["sessionId"]  = this.sessionId;
 	}
 
-	RequestUtils.instance.request(Constants.API_URL, "POST", function(xmlhttp, success) { ServiceClient.instance.onRequestResponse(params, xmlhttp, success, callback) }, params);
+	RequestUtils.instance.request(Constants.API_URL, "POST", function(xmlhttp, success, duration) { ServiceClient.instance.onRequestResponse(params, xmlhttp, success, callback, duration); }, params);
 };
 
-ServiceClientClass.prototype.onRequestResponse = function(params, xmlhttp, success, callback)
+ServiceClientClass.prototype.onRequestResponse = function(params, xmlhttp, success, callback, duration)
 {
-	//this.profile(params, xmlhttp);
+	this.profile(params, duration);
 
 	var resultData = success ? JSON.parse(xmlhttp.responseText) : { success : false, data : xmlhttp.responseText };
 

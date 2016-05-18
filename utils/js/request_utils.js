@@ -7,10 +7,11 @@ function RequestUtilsClass()
 RequestUtilsClass.prototype.request = function(url, method, callback, params, onProgress) 
 {
 	var thisVar     = this;
+	var startTime 	= new Date();
 	params 			= params || "";//Default parameter = ""
 	var xmlhttp 	= new XMLHttpRequest();
-	xmlhttp.onload	= function() { thisVar.checkForReadyResponse(xmlhttp, callback); };
-	xmlhttp.onerror	= function() { thisVar.checkForReadyResponse(xmlhttp, callback); };
+	xmlhttp.onload	= function() { thisVar.checkForReadyResponse(xmlhttp, callback, startTime); };
+	xmlhttp.onerror	= function() { thisVar.checkForReadyResponse(xmlhttp, callback, startTime); };
 
 	this.notifyProgress(xmlhttp, onProgress);
 
@@ -72,11 +73,15 @@ RequestUtilsClass.prototype.notifyProgress = function(xmlhttp, onProgress)
 	}
 };
 
-RequestUtilsClass.prototype.checkForReadyResponse = function(xmlhttp, callback)
+RequestUtilsClass.prototype.checkForReadyResponse = function(xmlhttp, callback, startTime)
 {
 	if(xmlhttp.readyState == 4)
 	{
-		var success = xmlhttp.status == 200;
-		callback(xmlhttp, success);
+		var currentTime = new Date();
+		var duration 	= currentTime - startTime;
+		var success 	= xmlhttp.status == 200;
+
+		//alert("duration = " + duration);
+		callback(xmlhttp, success, duration);
 	}
 };
