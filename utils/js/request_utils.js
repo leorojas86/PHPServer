@@ -26,8 +26,6 @@ RequestUtilsClass.prototype.request = function(url, method, callback, params, on
 
 				//Send the proper header information along with the request
 				xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				xmlhttp.setRequestHeader("Content-length", params.length);
-				xmlhttp.setRequestHeader("Connection", "close");
 
 				xmlhttp.send(params);
 			}
