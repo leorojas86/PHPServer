@@ -128,21 +128,21 @@
 
 .Folder 
 {
-   background: url('../../../inventory/html_client/images/texture/spritesheet.png') no-repeat -0px -0px;
+   background: url('../images/texture/spritesheet.png') no-repeat -0px -0px;
    width: 64px;
    height: 56px;
 }
 
 .Item 
 {
-   background: url('../../../inventory/html_client/images/texture/spritesheet.png') no-repeat -65px -0px;
+   background: url('../images/texture/spritesheet.png') no-repeat -65px -0px;
    width: 64px;
    height: 64px;
 }
 
 .Search 
 {
-   background: url('../../../inventory/html_client/images/texture/spritesheet.png') no-repeat -0px -57px;
+   background: url('../images/texture/spritesheet.png') no-repeat -0px -57px;
    width: 64px;
    height: 64px;
 }
