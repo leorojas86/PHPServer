@@ -31,22 +31,24 @@ RequestUtilsClass.prototype.request = function(url, method, callback, params, on
 			}
 			else
 			{
+				xmlhttp.open(method, url, async);
+
 				var fd = new FormData();
 
 			    for(var id in params)
 			    	fd.append(id, params[id]);
 
-			    xmlhttp.open(method, url, async);
 			    xmlhttp.send(fd);
 			}
 			
 		break;
 		case "GET":
 
+			xmlhttp.open(method, url, async);
+
 			if(params.length > 0)
 				url += "?" + params;
 
-			xmlhttp.open(method, url, async);
 			xmlhttp.send(params);
 
 		break;
