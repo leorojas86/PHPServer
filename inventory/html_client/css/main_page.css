@@ -126,28 +126,23 @@
 
 /* Images */
 
-.Folder {
-   background: url('http://201.200.1.187/inventory/html_client/images/texture/spritesheet.png') no-repeat -0px -0px;
+.Folder 
+{
+   background: url('../../../inventory/html_client/images/texture/spritesheet.png') no-repeat -0px -0px;
    width: 64px;
    height: 56px;
-
-   /*object-fit: none;
-  object-position: 0 0;
-  width: 64px;
-  height: 56px;*/
 }
-.Item {
-   background: url('http://201.200.1.187/inventory/html_client/images/texture/spritesheet.png') no-repeat -65px -0px;
+
+.Item 
+{
+   background: url('../../../inventory/html_client/images/texture/spritesheet.png') no-repeat -65px -0px;
    width: 64px;
    height: 64px;
-
-   /*object-fit: none;
-  object-position: -65px 0;
-  width: 64px;
-  height: 64px;*/
 }
-.Search {
-   background: url('http://201.200.1.187/inventory/html_client/images/texture/spritesheet.png') no-repeat -0px -57px;
+
+.Search 
+{
+   background: url('../../../inventory/html_client/images/texture/spritesheet.png') no-repeat -0px -57px;
    width: 64px;
    height: 64px;
 }

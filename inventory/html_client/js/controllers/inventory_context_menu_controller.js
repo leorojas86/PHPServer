@@ -31,7 +31,7 @@ InventoryContextMenuControllerClass.prototype.initContextMenu = function()
 			var endTime     = new Date();
 			var elapsedTime = endTime - startTime;
 
-			if(startTime != null && elapsedTime > 300)//Hold for half a second
+			if(startTime != null && elapsedTime > 500)//Hold for half a second
 			{
 				scrollPanel.style.pointerEvents = "none";
 				setTimeout(function()
