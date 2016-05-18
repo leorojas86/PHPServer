@@ -114,9 +114,9 @@ ServiceClientClass.prototype.updateUserData = function(data, callback)
 
 ServiceClientClass.prototype.profile = function(key, duration)
 {
-	var data   = "{ 'name' : 'Profile_" + key + "', 'data' : { 'duration' : '" + duration + "' } }";
-	var params = "service=Analytic&method=Event&data=" + data;
-	
+	var name   	= "Profile_" + key; 
+	var params 	= "service=Analytic&method=Event&name=" + name + "&data=" + duration;
+	params 		= this.addSessionId(params);
 	RequestUtils.instance.request(Constants.API_URL, "POST", function(xmlhttp, success) { /* DO NOTHING */ }, params);
 };
 
@@ -134,17 +134,23 @@ ServiceClientClass.prototype.uploadFile = function(fileData, extension, groupId,
 
 ServiceClientClass.prototype.request = function(method, params, callback)
 {
+	params = this.addSessionId(params);
+	RequestUtils.instance.request(Constants.API_URL, "POST", function(xmlhttp, success, duration) { ServiceClient.instance.onRequestResponse(params, xmlhttp, success, callback, duration); }, params);
+};
+
+ServiceClientClass.prototype.addSessionId = function(params)
+{
 	if(this.sessionId != null)
 	{
 		//alert("session = " + this.sessionId);
 
 		if((typeof params) == "string")
-			params += "&sessionId="+this.sessionId;
+			params += "&sessionId=" + this.sessionId;
 		else
-			params["sessionId"]  = this.sessionId;
+			params["sessionId"] = this.sessionId;
 	}
 
-	RequestUtils.instance.request(Constants.API_URL, "POST", function(xmlhttp, success, duration) { ServiceClient.instance.onRequestResponse(params, xmlhttp, success, callback, duration); }, params);
+	return params;
 };
 
 ServiceClientClass.prototype.onRequestResponse = function(params, xmlhttp, success, callback, duration)
