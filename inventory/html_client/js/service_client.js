@@ -117,7 +117,10 @@ ServiceClientClass.prototype.profile = function(key, duration)
 	var name   	= "Profile_" + key; 
 	var params 	= "service=Analytic&method=Event&name=" + name + "&data=" + duration;
 	params 		= this.addSessionId(params);
-	RequestUtils.instance.request(Constants.API_URL, "POST", function(xmlhttp, success) { /* DO NOTHING */ }, params);
+	RequestUtils.instance.request(Constants.API_URL, "POST", function(xmlhttp, success, duration) 
+{ /* DO NOTHING */ 
+	var test = duration;
+}, params);
 };
 
 ServiceClientClass.prototype.uploadFile = function(fileData, extension, groupId, callback, onProgress)
