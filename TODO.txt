@@ -43,7 +43,13 @@
 	- Encript password in DB.
 	- Add encription to login data and SSL.
 
-
+- Decouple Services:
+	- Auth
+	- Groups
+	- Tags
+	- Search
+	- Files
+	- Analytics
 Bugs:
 
 - Fix vertical alignment of group paths.
