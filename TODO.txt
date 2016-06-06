@@ -46,7 +46,6 @@
 - Decouple Services:
 	- Auth
 	- Groups
-	- Tags
 	- Search
 	- Files
 	- Analytics
