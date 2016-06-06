@@ -11,6 +11,11 @@
 - Make context menu bigger.
 - Improve search logic.
 - Sort folders/files.
+- Implement pagination.
+- Make modular actons.
+- Remove unused data.
+- Improve messaging (parameters and compression).
+- Implement home page.
 - Improve profiling 
 	https://beaver6813.com/2009/10/php-get-current-time-in-milliseconds/
 
