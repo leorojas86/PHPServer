@@ -51,6 +51,8 @@
 	- Analytics
 	- Security
 	- Static content
+	- Profiling
+	- Unit Tests
 Bugs:
 
 - Fix vertical alignment of group paths.
