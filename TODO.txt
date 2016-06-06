@@ -51,7 +51,7 @@
 	- Files
 	- Analytics
 	- Security
-	
+	- Static content
 Bugs:
 
 - Fix vertical alignment of group paths.
