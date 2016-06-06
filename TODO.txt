@@ -50,6 +50,8 @@
 	- Search
 	- Files
 	- Analytics
+	- Security
+	
 Bugs:
 
 - Fix vertical alignment of group paths.
