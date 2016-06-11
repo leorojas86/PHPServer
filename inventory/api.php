@@ -34,6 +34,25 @@
 
 				AnalyticsController::SaveProfile($profiler);
 			}
+			else if(isset($_POST["payload"]))
+			{
+				$payload = json_decode($_POST["payload"]);
+				$service = $payload->service;
+				$method  = $payload->method;
+
+				$profiler = new Profiler("service = $service, method = $method");
+
+				switch($service)
+				{
+					case "User":  		$result = UsersController::Service($method, $payload);  break;
+					case "Group": 		$result = GroupsController::Service($method, $payload); break;
+					case "File":  		$result = FilesController::Service($method, $payload);  break;
+					case "Analytic":  	$result = AnalyticsController::Service($method, $payload);  break;
+					default:      		$result = new ServiceResult(false, "Unknown service '$service'", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE); break;
+				}
+
+				AnalyticsController::SaveProfile($profiler);
+			}
 			else
 				$result = new ServiceResult(false, "Unspecified service parameter", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE);
 		}

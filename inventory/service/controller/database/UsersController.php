@@ -4,13 +4,13 @@
 
 	class UsersController
 	{
-		public static function Service($method)
+		public static function Service($method, $payload)
 		{
 			switch ($method) 
 			{
-				case "Register": 	$result = UsersController::Register();		break;
-				case "Login": 		$result = UsersController::Login();			break;
-				case "UpdateData": 	$result = UsersController::UpdateData();	break;
+				case "Register": 	$result = UsersController::Register($payload);		break;
+				case "Login": 		$result = UsersController::Login($payload);			break;
+				case "UpdateData": 	$result = UsersController::UpdateData($payload);	break;
 				default: 		 
 					$result = new ServiceResult(false, "Unsupported user service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
 				break;
@@ -19,9 +19,9 @@
 			return $result;
 		}
 
-		private static function Register()
+		private static function Register($payload)
 		{
-			$email 	= $_POST["email"];//TODO: Validate email
+			$email 	= $payload->email;//TODO: Validate email
 			$result = User::ExistsUserWithEmail($email);
 
 			if($result->success)
@@ -30,8 +30,8 @@
 					$result = new ServiceResult(false, "User with email '$email' already exists", UtilsConstants::USER_ALREADY_EXISTS_ERROR_CODE); 
 				else
 				{
-					$password = $_POST["password"];//TODO: send password securely
-					$name     = $_POST["name"];
+					$password = $payload->password;//TODO: send password securely
+					$name     = $payload->name;
 					return User::Register($email, $password, $name);//TODO: send validation email
 				}
 			}
@@ -39,18 +39,18 @@
 			return $result;
 		}
 
-		private static function Login()
+		private static function Login($payload)
 		{
-			$email 	  = $_POST["email"];
-			$password = $_POST["password"];//TODO: send password securely
+			$email 	  = $payload->email;
+			$password = $payload->password;//TODO: send password securely
 			$result   = User::Login($email, $password);
 
 			return $result;
 		}
 
-		private static function UpdateData()
+		private static function UpdateData($payload)
 		{
-			$data   = $_POST["data"];
+			$data   = $payload->data;
 			$userId = SessionManager::GetUserData()["id"];
 
 			return User::UpdateData($userId, $data);

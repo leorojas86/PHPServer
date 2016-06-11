@@ -36,16 +36,37 @@ ServiceClientClass.prototype.notifyOnInitializationCompleted = function(success)
 
 ServiceClientClass.prototype.register = function(name, password, email, callback)
 {
-	var params = "service=User&method=Register&name=" + name + "&email=" + email + "&password=" + password;
+	var payload 			= new Object();
+	payload["service"]   	= "User";
+	payload["method"]   	= "Register";
+	payload["name"]  		= name;
+	payload["email"]   		= email;
+	payload["password"]   	= password;
+
+	var params 	= "payload="+JSON.stringify(payload);
+
 	this.request("POST", params, callback);
 };
 
 ServiceClientClass.prototype.login = function(email, password, callback)
 {
-	var params 			= "service=User&method=Login" + "&email=" + email + "&password=" + password;
+	var payload 			= new Object();
+	payload["service"]   	= "User";
+	payload["method"]   	= "Login";
+	payload["email"]  		= email;
+	payload["password"]   	= password;
+
+	var params 			= "payload="+JSON.stringify(payload);
 	var loginCallback	=  function(resultData) { ServiceClient.instance.onLoginCallback(resultData, callback) };
 	this.request("POST", params, loginCallback);
 };
+
+ServiceClientClass.prototype.updateUserData = function(data, callback)
+{
+	var params = "service=User&method=UpdateData&data=" + data;
+	this.request("POST", params, callback);
+};
+
 
 ServiceClientClass.prototype.onLoginCallback = function(resultData, callback)
 {
@@ -103,12 +124,6 @@ ServiceClientClass.prototype.updateGroupData = function(groupId, groupData, call
 ServiceClientClass.prototype.searchGroups = function(searchText, callback)
 {
 	var params = "service=Group&method=Search&searchText=" + searchText;
-	this.request("POST", params, callback);
-};
-
-ServiceClientClass.prototype.updateUserData = function(data, callback)
-{
-	var params = "service=User&method=UpdateData&data=" + data;
 	this.request("POST", params, callback);
 };
 
