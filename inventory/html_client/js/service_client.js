@@ -38,9 +38,7 @@ ServiceClientClass.prototype.register = function(name, password, email, callback
 	payload["email"]   	= email;
 	payload["password"] = password;
 
-	var params 	= "payload="+JSON.stringify(payload);
-
-	this.request("POST", params, callback);
+	this.request("POST", payload, callback);
 };
 
 ServiceClientClass.prototype.login = function(email, password, callback)
@@ -48,10 +46,9 @@ ServiceClientClass.prototype.login = function(email, password, callback)
 	var payload 		= this.getPayload("User", "Login");
 	payload["email"]  	= email;
 	payload["password"] = password;
-
-	var params 			= "payload="+JSON.stringify(payload);
 	var loginCallback	=  function(resultData) { ServiceClient.instance.onLoginCallback(resultData, callback) };
-	this.request("POST", params, loginCallback);
+	
+	this.request("POST", payload, loginCallback);
 };
 
 ServiceClientClass.prototype.updateUserData = function(data, callback)
@@ -59,9 +56,7 @@ ServiceClientClass.prototype.updateUserData = function(data, callback)
 	var payload 	= this.getPayload("User", "UpdateData");
 	payload["data"] = data;
 
-	var params = "payload="+JSON.stringify(payload);
-
-	this.request("POST", params, callback);
+	this.request("POST", payload, callback);
 };
 
 ServiceClientClass.prototype.onLoginCallback = function(resultData, callback)
@@ -79,19 +74,15 @@ ServiceClientClass.prototype.loadRootGroup = function(callback)
 {
 	var payload = this.getPayload("Group", "GetRootGroup");
 
-	var params = "payload="+JSON.stringify(payload);
-
-	this.request("POST", params, callback);
+	this.request("POST", payload, callback);
 };
 
 ServiceClientClass.prototype.loadGroup = function(groupId, callback)
 {
-	var payload 			= this.getPayload("Group", "GetGroup");
-	payload["id"]   		= groupId;
+	var payload 	= this.getPayload("Group", "GetGroup");
+	payload["id"]   = groupId;
 
-	var params 			= "payload="+JSON.stringify(payload);
-
-	this.request("POST", params, callback);
+	this.request("POST", payload, callback);
 };
 
 ServiceClientClass.prototype.addSubGroup = function(parentGroupId, newGroupName, type, data, callback)
@@ -102,9 +93,7 @@ ServiceClientClass.prototype.addSubGroup = function(parentGroupId, newGroupName,
 	payload["type"]   			= type;
 	payload["data"]   			= data;
 
-	var params = "payload="+JSON.stringify(payload);
-
-	this.request("POST", params, callback);
+	this.request("POST", payload, callback);
 };
 
 ServiceClientClass.prototype.deleteGroup = function(groupId, callback)
@@ -112,9 +101,7 @@ ServiceClientClass.prototype.deleteGroup = function(groupId, callback)
 	var payload 	= this.getPayload("Group", "Delete");
 	payload["id"]   = groupId;
 
-	var params = "payload="+JSON.stringify(payload);
-
-	this.request("POST", params, callback);
+	this.request("POST", payload, callback);
 };
 
 ServiceClientClass.prototype.renameGroup = function(groupId, name, callback)
@@ -123,9 +110,7 @@ ServiceClientClass.prototype.renameGroup = function(groupId, name, callback)
 	payload["id"]   = groupId;
 	payload["name"] = name;
 
-	var params = "payload="+JSON.stringify(payload);
-
-	this.request("POST", params, callback);
+	this.request("POST", payload, callback);
 };
 
 ServiceClientClass.prototype.moveGroup = function(groupId, parentGroupId, callback)
@@ -134,9 +119,7 @@ ServiceClientClass.prototype.moveGroup = function(groupId, parentGroupId, callba
 	payload["id"]   			= groupId;
 	payload["parentGroupId"]   	= parentGroupId;
 
-	var params 	= "payload="+JSON.stringify(payload);
-
-	this.request("POST", params, callback);
+	this.request("POST", payload, callback);
 };
 
 ServiceClientClass.prototype.updateGroupData = function(groupId, groupData, callback)
@@ -145,9 +128,7 @@ ServiceClientClass.prototype.updateGroupData = function(groupId, groupData, call
 	payload["id"]   = groupId;
 	payload["data"] = groupData;
 
-	var params 	= "payload="+JSON.stringify(payload);
-
-	this.request("POST", params, callback);
+	this.request("POST", payload, callback);
 };
 
 ServiceClientClass.prototype.searchGroups = function(searchText, callback)
@@ -155,9 +136,7 @@ ServiceClientClass.prototype.searchGroups = function(searchText, callback)
 	var payload 			= this.getPayload("Group", "Search");
 	payload["searchText"]   = searchText;
 
-	var params = "payload="+JSON.stringify(payload);
-
-	this.request("POST", params, callback);
+	this.request("POST", payload, callback);
 };
 
 ServiceClientClass.prototype.profile = function(key, duration)
@@ -181,12 +160,19 @@ ServiceClientClass.prototype.uploadFile = function(fileData, extension, groupId,
 	params["payload"]   	= JSON.stringify(payload);
 	params["fileToUpload"]  = fileData;
 
-	this.request("POST", params, callback);
+	this.requestWithParams("POST", params, callback);
 };
 
-ServiceClientClass.prototype.request = function(method, params, callback)
+ServiceClientClass.prototype.request = function(method, payload, callback)
 {
-	RequestUtils.instance.request(Constants.API_URL, "POST", function(xmlhttp, success, duration) { ServiceClient.instance.onRequestResponse(params, xmlhttp, success, callback, duration); }, params);
+	var params = "payload="+JSON.stringify(payload);
+
+	this.requestWithParams(method, params, callback);
+};
+
+ServiceClientClass.prototype.requestWithParams = function(method, params, callback)
+{
+	RequestUtils.instance.request(Constants.API_URL, method, function(xmlhttp, success, duration) { ServiceClient.instance.onRequestResponse(params, xmlhttp, success, callback, duration); }, params);
 };
 
 ServiceClientClass.prototype.getPayload = function(service, method)
