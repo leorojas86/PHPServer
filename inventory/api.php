@@ -2,10 +2,10 @@
 	
 	require_once "utils/php/Profiler.php";
 	require_once "inventory/service/model/Environment.php";
-	require_once "inventory/service/controller/database/UsersController.php";
-	require_once "inventory/service/controller/database/GroupsController.php";
-	require_once "inventory/service/controller/files/FilesController.php";
-	require_once "inventory/service/controller/analytics/AnalyticsController.php";
+	require_once "inventory/service/controllers/UsersController.php";
+	require_once "inventory/service/controllers/GroupsController.php";
+	require_once "inventory/service/controllers/FilesController.php";
+	require_once "inventory/service/controllers/AnalyticsController.php";
 
 	/*try 
 	{
