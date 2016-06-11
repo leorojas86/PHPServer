@@ -8,12 +8,12 @@
 
 	class FilesController
 	{
-		public static function Service($method)
+		public static function Service($method, $payload)
 		{
 			switch ($method) 
 			{
 				case "Upload": 	
-					$result = FilesController::Upload();	
+					$result = FilesController::Upload($payload);	
 				break;
 				default: 		 
 					$result = new ServiceResult(false, "Unsupported Files service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
@@ -23,10 +23,10 @@
 			return $result;
 		}
 
-		private static function Upload()
+		private static function Upload($payload)
 		{
-			$groupId 	= $_POST["groupId"];
-			$extension 	= $_POST["extension"];
+			$groupId 	= $payload->groupId;
+			$extension 	= $payload->extension;
 			$fileData 	= $_POST["fileToUpload"];
 			$userId   	= SessionManager::GetUserData()["id"];
 			$guid 		= FilesController::GetRandomGUID();

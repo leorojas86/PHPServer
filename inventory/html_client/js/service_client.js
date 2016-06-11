@@ -189,23 +189,26 @@ ServiceClientClass.prototype.searchGroups = function(searchText, callback)
 
 ServiceClientClass.prototype.profile = function(key, duration)
 {
-	var name   	= "Profile_" + key; 
+	/*var name   	= "Profile_" + key; 
 	var params 	= "service=Analytic&method=Event&name=" + name + "&data=" + duration;
 	params 		= this.addSessionId(params);
 	RequestUtils.instance.request(Constants.API_URL, "POST", function(xmlhttp, success, duration) 
-{ /* DO NOTHING */ 
+{ 
 	var test = duration;
-}, params);
+}, params);*/
 };
 
 ServiceClientClass.prototype.uploadFile = function(fileData, extension, groupId, callback, onProgress)
 {
+	var payload 				= new Object();
+	payload["service"]   		= "File";
+	payload["method"]   		= "Upload";
+	payload["extension"]   		= extension;
+	payload["groupId"] 			= groupId;
+
 	var params 				= new Object();
-	params["service"]   	= "File";
-	params["method"]   	 	= "Upload";
+	params["payload"]   	= JSON.stringify(payload);
 	params["fileToUpload"]  = fileData;
-	params["extension"]   	= extension;
-	params["groupId"] 		= groupId;
 
 	this.request("POST", params, callback);
 };
