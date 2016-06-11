@@ -1,5 +1,5 @@
 <?php 
-	require_once "utils/php/ServiceResult.php";
+	/*require_once "utils/php/ServiceResult.php";
 
 	class SessionManager
 	{
@@ -33,5 +33,5 @@
 		{
 			return $_SESSION[SessionManager::$USER_DATA];
 		}
-	} 
+	}*/
 ?>
