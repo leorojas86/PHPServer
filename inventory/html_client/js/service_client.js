@@ -86,49 +86,104 @@ ServiceClientClass.prototype.onLoginCallback = function(resultData, callback)
 
 ServiceClientClass.prototype.loadRootGroup = function(callback)
 {
-	var params = "service=Group&method=GetRootGroup";
+	var payload 			= new Object();
+	payload["service"]   	= "Group";
+	payload["method"]   	= "GetRootGroup";
+
+	var params 			= "payload="+JSON.stringify(payload);
+
 	this.request("POST", params, callback);
 };
 
 ServiceClientClass.prototype.loadGroup = function(groupId, callback)
 {
-	var params = "service=Group&method=GetGroup&id=" + groupId;
+	var payload 			= new Object();
+	payload["service"]   	= "Group";
+	payload["method"]   	= "GetGroup";
+	payload["id"]   		= groupId;
+
+	var params 			= "payload="+JSON.stringify(payload);
+
 	this.request("POST", params, callback);
 };
 
 ServiceClientClass.prototype.addSubGroup = function(parentGroupId, newGroupName, type, data, callback)
 {
-	var params = "service=Group&method=AddSubGroup&parentGroupId=" + parentGroupId + "&name=" + newGroupName + "&type=" + type + '&data=' + data;
+	var payload 				= new Object();
+	payload["service"]   		= "Group";
+	payload["method"]   		= "AddSubGroup";
+	payload["parentGroupId"]   	= parentGroupId;
+	payload["name"]   			= newGroupName;
+	payload["type"]   			= type;
+	payload["data"]   			= data;
+
+	var params 			= "payload="+JSON.stringify(payload);
+
 	this.request("POST", params, callback);
 };
 
 ServiceClientClass.prototype.deleteGroup = function(groupId, callback)
 {
-	var params = "service=Group&method=Delete&id=" + groupId;
+	var payload 				= new Object();
+	payload["service"]   		= "Group";
+	payload["method"]   		= "Delete";
+	payload["id"]   			= groupId;
+
+	var params 			= "payload="+JSON.stringify(payload);
+
 	this.request("POST", params, callback);
 };
 
 ServiceClientClass.prototype.renameGroup = function(groupId, name, callback)
 {
-	var params = "service=Group&method=Rename&id=" + groupId + "&name=" + name;
+	var payload 				= new Object();
+	payload["service"]   		= "Group";
+	payload["method"]   		= "Rename";
+	payload["id"]   			= groupId;
+	payload["name"]   			= name;
+
+	var params 			= "payload="+JSON.stringify(payload);
+
 	this.request("POST", params, callback);
 };
 
 ServiceClientClass.prototype.moveGroup = function(groupId, parentGroupId, callback)
 {
-	var params = "service=Group&method=Move&id=" + groupId + "&parentGroupId=" + parentGroupId;
+	var payload 				= new Object();
+	payload["service"]   		= "Group";
+	payload["method"]   		= "Move";
+	payload["id"]   			= groupId;
+	payload["parentGroupId"]   	= parentGroupId;
+
+	var params 			= "payload="+JSON.stringify(payload);
+
 	this.request("POST", params, callback);
 };
 
 ServiceClientClass.prototype.updateGroupData = function(groupId, groupData, callback)
 {
-	var params = "service=Group&method=UpdateData&id=" + groupId + "&data=" + groupData;
+	var payload 				= new Object();
+	payload["service"]   		= "Group";
+	payload["method"]   		= "UpdateData";
+	payload["id"]   			= groupId;
+	payload["data"]   			= groupData;
+
+	var params 			= "payload="+JSON.stringify(payload);
+
 	this.request("POST", params, callback);
 };
 
 ServiceClientClass.prototype.searchGroups = function(searchText, callback)
 {
 	var params = "service=Group&method=Search&searchText=" + searchText;
+
+	var payload 				= new Object();
+	payload["service"]   		= "Group";
+	payload["method"]   		= "Search";
+	payload["searchText"]   	= searchText;
+
+	var params 			= "payload="+JSON.stringify(payload);
+
 	this.request("POST", params, callback);
 };
 

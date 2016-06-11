@@ -5,29 +5,29 @@
 
 	class GroupsController
 	{
-		public static function Service($method)
+		public static function Service($method, $payload)
 		{
 			switch ($method) 
 			{
-				case "GetGroup": 			$result = GroupsController::GetGroup();			break;
-				case "GetRootGroup": 		$result = GroupsController::GetRootGroup();		break;
-				case "UpdateData":			$result = GroupsController::UpdateGroupData();	break;
-				case "AddSubGroup":			$result = GroupsController::AddSubGroup();		break;
-				case "Delete":				$result = GroupsController::DeleteGroup();		break;
-				case "Move":				$result = GroupsController::MoveGroup();		break;
-				case "Rename":				$result = GroupsController::RenameGroup();		break;
-				case "Search":				$result = GroupsController::SearchGroup();		break;
+				case "GetGroup": 			$result = GroupsController::GetGroup($payload);			break;
+				case "GetRootGroup": 		$result = GroupsController::GetRootGroup($payload);		break;
+				case "UpdateData":			$result = GroupsController::UpdateGroupData($payload);	break;
+				case "AddSubGroup":			$result = GroupsController::AddSubGroup($payload);		break;
+				case "Delete":				$result = GroupsController::DeleteGroup($payload);		break;
+				case "Move":				$result = GroupsController::MoveGroup($payload);		break;
+				case "Rename":				$result = GroupsController::RenameGroup($payload);		break;
+				case "Search":				$result = GroupsController::SearchGroup($payload);		break;
 				default: 		 
-					$result = new ServiceResult(false, "Unsupported user service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
+					$result = new ServiceResult(false, "Unsupported Groups service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
 				break;
 			}
 
 			return $result;
 		}
 
-		private static function SearchGroup()
+		private static function SearchGroup($payload)
 		{
-			$searchText = $_POST["searchText"];
+			$searchText = $payload->searchText;
 			$result 	= Group::SearchGroups($searchText);	
 
 			if($result->success)
@@ -67,29 +67,29 @@
 			return $result;
 		}
 
-		private static function RenameGroup()
+		private static function RenameGroup($payload)
 		{
-			$groupId   = $_POST["id"];
-			$groupName = $_POST["name"];
+			$groupId   = $payload->id;
+			$groupName = $payload->name;
 
 			return Group::Rename($groupId, $groupName);
 		}
 
-		private static function MoveGroup()
+		private static function MoveGroup($payload)
 		{
-			$groupId 	   = $_POST["id"];
-			$parentGroupId = $_POST["parentGroupId"];
+			$groupId 	   = $payload->id;
+			$parentGroupId = $payload->parentGroupId;
 
 			return Group::Move($groupId, $parentGroupId);
 		}
 
-		private static function DeleteGroup()
+		private static function DeleteGroup($payload)
 		{
-			$groupId = $_POST["id"];
+			$groupId = $payload->id;
 			return Group::Delete($groupId);
 		}
 
-		private static function GetRootGroup()
+		private static function GetRootGroup($payload)
 		{
 			//$sessionId 		  = SessionManager::$sessionId;
 			$userId   		  = SessionManager::GetUserData()["id"];
@@ -106,9 +106,9 @@
 		 	return $rootGroupResult;
 		}
 
-		private static function GetGroup()
+		private static function GetGroup($payload)
 		{
-			$groupId = $_POST["id"];
+			$groupId = $payload->id;
 
 			return Group::GetGroup($groupId);
 		}
@@ -139,10 +139,10 @@
 			return new ServiceResult(true, false);
 		}*/
 
-		public static function UpdateGroupData()
+		public static function UpdateGroupData($payload)
 		{
-			$groupId = $_POST["id"];
-			$data    = $_POST["data"];
+			$groupId = $payload->id;
+			$data    = $payload->data;
 
 			$result = Group::UpdateData($groupId, $data);
 
@@ -152,13 +152,13 @@
 			return $result;
 		}
 
-		public static function AddSubGroup()
+		public static function AddSubGroup($payload)
 		{
 			$userId   		  = SessionManager::GetUserData()["id"];
-			$name 		      = $_POST["name"];
-			$parentGroupId    = $_POST["parentGroupId"];
-			$type	          = $_POST["type"];
-			$data    		  = $_POST["data"];
+			$name 		      = $payload->name;
+			$parentGroupId    = $payload->parentGroupId;
+			$type	          = $payload->type;
+			$data    		  = $payload->data;
 
 			return Group::AddSubGroup($name, $parentGroupId, $userId, $type, $data);
 		}
