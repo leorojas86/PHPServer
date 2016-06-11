@@ -51,7 +51,7 @@
 		private static function UpdateData($payload)
 		{
 			$data   = $payload->data;
-			$userId = SessionManager::GetUserData()["id"];
+			$userId = $payload->userId;
 
 			return User::UpdateData($userId, $data);
 		}

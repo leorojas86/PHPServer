@@ -33,11 +33,7 @@
 			if($result->success)
 			{
 				if($result->data)
-				{
-					SessionManager::SetUserData($result->data);
-
 					return new ServiceResult(true, $result->data);
-				}
 		
 				return new ServiceResult(false, "User name or password incorrect", UtilsConstants::USER_NAME_OR_PASSWORD_INCORRECT_ERROR_CODE);
 			}

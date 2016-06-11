@@ -3,7 +3,6 @@ var ServiceClient = { instance : new ServiceClientClass() };
 
 //Variables
 ServiceClientClass.prototype.loggedUser = null;
-ServiceClientClass.prototype.sessionId  = null;
 
 ServiceClientClass.prototype._onInitializationCompleted = null;
 
@@ -11,12 +10,10 @@ ServiceClientClass.prototype._onInitializationCompleted = null;
 function ServiceClientClass()
 {
 	var loggedUser = CacheUtils.instance.get("LoggedUser");
-	var sessionId  = CacheUtils.instance.get("SessionId");
 
 	if(loggedUser != null)
 	{
 		this.loggedUser = JSON.parse(loggedUser);
-		this.sessionId  = sessionId;
 		console.log("session and logged user info loaded from cache");
 	}
 }
@@ -36,7 +33,7 @@ ServiceClientClass.prototype.notifyOnInitializationCompleted = function(success)
 
 ServiceClientClass.prototype.register = function(name, password, email, callback)
 {
-	var payload 			= new Object();
+	var payload 			= this.getPayload();
 	payload["service"]   	= "User";
 	payload["method"]   	= "Register";
 	payload["name"]  		= name;
@@ -50,7 +47,7 @@ ServiceClientClass.prototype.register = function(name, password, email, callback
 
 ServiceClientClass.prototype.login = function(email, password, callback)
 {
-	var payload 			= new Object();
+	var payload 			= this.getPayload();
 	payload["service"]   	= "User";
 	payload["method"]   	= "Login";
 	payload["email"]  		= email;
@@ -63,7 +60,7 @@ ServiceClientClass.prototype.login = function(email, password, callback)
 
 ServiceClientClass.prototype.updateUserData = function(data, callback)
 {
-	var payload 			= new Object();
+	var payload 			= this.getPayload();
 	payload["service"]   	= "User";
 	payload["method"]   	= "UpdateData";
 	payload["data"]  		= data;
@@ -86,7 +83,7 @@ ServiceClientClass.prototype.onLoginCallback = function(resultData, callback)
 
 ServiceClientClass.prototype.loadRootGroup = function(callback)
 {
-	var payload 			= new Object();
+	var payload 			= this.getPayload();
 	payload["service"]   	= "Group";
 	payload["method"]   	= "GetRootGroup";
 
@@ -97,7 +94,7 @@ ServiceClientClass.prototype.loadRootGroup = function(callback)
 
 ServiceClientClass.prototype.loadGroup = function(groupId, callback)
 {
-	var payload 			= new Object();
+	var payload 			= this.getPayload();
 	payload["service"]   	= "Group";
 	payload["method"]   	= "GetGroup";
 	payload["id"]   		= groupId;
@@ -109,7 +106,7 @@ ServiceClientClass.prototype.loadGroup = function(groupId, callback)
 
 ServiceClientClass.prototype.addSubGroup = function(parentGroupId, newGroupName, type, data, callback)
 {
-	var payload 				= new Object();
+	var payload 				= this.getPayload();
 	payload["service"]   		= "Group";
 	payload["method"]   		= "AddSubGroup";
 	payload["parentGroupId"]   	= parentGroupId;
@@ -124,7 +121,7 @@ ServiceClientClass.prototype.addSubGroup = function(parentGroupId, newGroupName,
 
 ServiceClientClass.prototype.deleteGroup = function(groupId, callback)
 {
-	var payload 				= new Object();
+	var payload 				= this.getPayload();
 	payload["service"]   		= "Group";
 	payload["method"]   		= "Delete";
 	payload["id"]   			= groupId;
@@ -136,7 +133,7 @@ ServiceClientClass.prototype.deleteGroup = function(groupId, callback)
 
 ServiceClientClass.prototype.renameGroup = function(groupId, name, callback)
 {
-	var payload 				= new Object();
+	var payload 				= this.getPayload();
 	payload["service"]   		= "Group";
 	payload["method"]   		= "Rename";
 	payload["id"]   			= groupId;
@@ -149,7 +146,7 @@ ServiceClientClass.prototype.renameGroup = function(groupId, name, callback)
 
 ServiceClientClass.prototype.moveGroup = function(groupId, parentGroupId, callback)
 {
-	var payload 				= new Object();
+	var payload 				= this.getPayload();
 	payload["service"]   		= "Group";
 	payload["method"]   		= "Move";
 	payload["id"]   			= groupId;
@@ -162,7 +159,7 @@ ServiceClientClass.prototype.moveGroup = function(groupId, parentGroupId, callba
 
 ServiceClientClass.prototype.updateGroupData = function(groupId, groupData, callback)
 {
-	var payload 				= new Object();
+	var payload 				= this.getPayload();
 	payload["service"]   		= "Group";
 	payload["method"]   		= "UpdateData";
 	payload["id"]   			= groupId;
@@ -175,9 +172,7 @@ ServiceClientClass.prototype.updateGroupData = function(groupId, groupData, call
 
 ServiceClientClass.prototype.searchGroups = function(searchText, callback)
 {
-	var params = "service=Group&method=Search&searchText=" + searchText;
-
-	var payload 				= new Object();
+	var payload 				= this.getPayload();
 	payload["service"]   		= "Group";
 	payload["method"]   		= "Search";
 	payload["searchText"]   	= searchText;
@@ -200,7 +195,7 @@ ServiceClientClass.prototype.profile = function(key, duration)
 
 ServiceClientClass.prototype.uploadFile = function(fileData, extension, groupId, callback, onProgress)
 {
-	var payload 				= new Object();
+	var payload 				= this.getPayload();
 	payload["service"]   		= "File";
 	payload["method"]   		= "Upload";
 	payload["extension"]   		= extension;
@@ -215,23 +210,17 @@ ServiceClientClass.prototype.uploadFile = function(fileData, extension, groupId,
 
 ServiceClientClass.prototype.request = function(method, params, callback)
 {
-	params = this.addSessionId(params);
 	RequestUtils.instance.request(Constants.API_URL, "POST", function(xmlhttp, success, duration) { ServiceClient.instance.onRequestResponse(params, xmlhttp, success, callback, duration); }, params);
 };
 
-ServiceClientClass.prototype.addSessionId = function(params)
+ServiceClientClass.prototype.getPayload = function()
 {
-	if(this.sessionId != null)
-	{
-		//alert("session = " + this.sessionId);
+	var payload = new Object();
 
-		if((typeof params) == "string")
-			params += "&sessionId=" + this.sessionId;
-		else
-			params["sessionId"] = this.sessionId;
-	}
+	if(this.loggedUser != null)
+		payload["userId"] = this.loggedUser.id;
 
-	return params;
+	return payload;
 };
 
 ServiceClientClass.prototype.onRequestResponse = function(params, xmlhttp, success, callback, duration)
@@ -243,10 +232,6 @@ ServiceClientClass.prototype.onRequestResponse = function(params, xmlhttp, succe
 	if(resultData.success)
 	{
 		CacheUtils.instance.set(params, xmlhttp.responseText);
-		this.sessionId = resultData.sessionId;
-
-		//alert("session = " + this.sessionId);
-		CacheUtils.instance.set("SessionId", this.sessionId);
 	}
 	else
 	{
@@ -269,9 +254,7 @@ ServiceClientClass.prototype.onRequestResponse = function(params, xmlhttp, succe
 ServiceClientClass.prototype.logout = function()
 {
 	this.loggedUser = null;
-	this.sessionId  = null;
-	//CacheUtils.instance.set("LoggedUser", null);
-	//CacheUtils.instance.set("SessionId", null);
+
 	CacheUtils.instance.clear();
 };
 

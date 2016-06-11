@@ -28,7 +28,7 @@
 			$groupId 	= $payload->groupId;
 			$extension 	= $payload->extension;
 			$fileData 	= $_POST["fileToUpload"];
-			$userId   	= SessionManager::GetUserData()["id"];
+			$userId   	= $payload->userId;
 			$guid 		= FilesController::GetRandomGUID();
 			$fileName	= "$userId $guid.$extension";
 			$result  	= FileUploadManager::UploadFile($fileData, "uploads/$fileName");

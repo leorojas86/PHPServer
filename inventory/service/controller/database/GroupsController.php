@@ -91,11 +91,8 @@
 
 		private static function GetRootGroup($payload)
 		{
-			//$sessionId 		  = SessionManager::$sessionId;
-			$userId   		  = SessionManager::GetUserData()["id"];
+			$userId   		  = $payload->userId;
 			$rootGroupResult  = Group::GetUserRootGroup($userId);
-
-			//error_log("user id = '$userId' session id = '$sessionId'");
 
 			if($rootGroupResult->success)
 			{
@@ -154,7 +151,7 @@
 
 		public static function AddSubGroup($payload)
 		{
-			$userId   		  = SessionManager::GetUserData()["id"];
+			$userId   		  = $payload->userId;
 			$name 		      = $payload->name;
 			$parentGroupId    = $payload->parentGroupId;
 			$type	          = $payload->type;
