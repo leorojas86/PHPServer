@@ -1,3 +1,7 @@
+CREATE DATABASE auth;
+
+USE auth;
+
 --
 -- Table structure for table `users`
 --
@@ -8,5 +12,5 @@ CREATE TABLE `users` (
   `email` varchar(150) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
-  `data` text
+  `data` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
