@@ -2,11 +2,8 @@ CREATE DATABASE auth;
 
 USE auth;
 
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
+CREATE TABLE `users` 
+(
   `id` bigint(20) NOT NULL,
   `fb_id` bigint(20) DEFAULT NULL,
   `email` varchar(150) DEFAULT NULL,

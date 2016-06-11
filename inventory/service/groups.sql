@@ -2,7 +2,8 @@ CREATE DATABASE groups;
 
 USE groups;
 
-CREATE TABLE `groups` (
+CREATE TABLE `groups` 
+(
   `id` bigint(20) NOT NULL,
   `name` varchar(100) NOT NULL,
   `type` int(11) NOT NULL,
