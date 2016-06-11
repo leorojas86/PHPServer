@@ -7,7 +7,7 @@
 	{
 		public static function Service($method)
 		{
-			switch ($method) 
+			/*switch ($method) 
 			{
 				case "Event": $result = AnalyticsController::Event(); break;
 				default: 		 
@@ -15,7 +15,7 @@
 				break;
 			}
 
-			return $result;
+			return $result;*/
 		}
 
 		private static function Event()
@@ -35,8 +35,8 @@
 
 		public static function SaveProfile($profiler)
 		{
-			$duration = $profiler->Profile();
-			return AnalyticsController::SaveEvent($profiler->name, $duration);
+			/*$duration = $profiler->Profile();
+			return AnalyticsController::SaveEvent($profiler->name, $duration);*/
 		}
 	}
 ?>

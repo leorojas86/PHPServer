@@ -63,10 +63,15 @@ ServiceClientClass.prototype.login = function(email, password, callback)
 
 ServiceClientClass.prototype.updateUserData = function(data, callback)
 {
-	var params = "service=User&method=UpdateData&data=" + data;
+	var payload 			= new Object();
+	payload["service"]   	= "User";
+	payload["method"]   	= "UpdateData";
+	payload["data"]  		= data;
+
+	var params 			= "payload="+JSON.stringify(payload);
+
 	this.request("POST", params, callback);
 };
-
 
 ServiceClientClass.prototype.onLoginCallback = function(resultData, callback)
 {
