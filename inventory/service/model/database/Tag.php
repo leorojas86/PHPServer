@@ -25,9 +25,9 @@
 			return $result;
 		}
 
-		public static function UpdateTags($groupId, $groupData)
+		public static function UpdateTags($id, $groupData)
 		{
-			$result = Tag::RemoveAllTagAssociations($groupId, Constants::SEARCH_TAG_ID);
+			$result = Tag::RemoveAllTagAssociations($id, Constants::SEARCH_TAG_ID);
 
 			if($result->success)
 			{
@@ -40,7 +40,7 @@
 
 				foreach($groupData as $tagName)
 				{
-	    			$result = Tag::AssociateTag($groupId, $tagName, Constants::SEARCH_TAG_ID);
+	    			$result = Tag::AssociateTag($id, $tagName, Constants::SEARCH_TAG_ID);
 
 	    			if(!$result->success)
 	    				return $result;
@@ -50,15 +50,15 @@
 			return $result;
 		}
 
-		private static function RemoveAllTagAssociations($groupId, $type)
+		private static function RemoveAllTagAssociations($id, $type)
 		{
-			$sql 	= "DELETE FROM tags_per_groups WHERE group_id = '$groupId'";
+			$sql 	= "DELETE FROM tags_per_id WHERE id = '$id'";
 			$result = MySQLManager::ExecuteDelete($sql, false);
 
 			return $result;
 		}
 
-		private static function AssociateTag($groupId, $tagName, $type)
+		private static function AssociateTag($id, $tagName, $type)
 		{
 			$result = Tag::ExistsTag($tagName, $type);
 
@@ -76,7 +76,7 @@
 						return $result;
 				}
 
-				$sql 	= "INSERT INTO tags_per_groups (group_id, tag_id) VALUES ('$groupId', '$tagId')";
+				$sql 	= "INSERT INTO tags_per_id (id, tag_id) VALUES ('$id', '$tagId')";
 				$result = MySQLManager::ExecuteInsert($sql);
 
 				return $result;
@@ -88,9 +88,9 @@
 		public static function Search($searchText)
 		{
 			$searchType = Constants::SEARCH_TAG_ID;
-			$sql    	= "SELECT groups.*, tags.id as tag_id FROM groups 
-					   		INNER JOIN tags_per_groups 	ON groups.id 				= tags_per_groups.group_id
-					   		INNER JOIN tags 			ON tags_per_groups.tag_id 	= tags.id
+			$sql    	= "SELECT tags_per_id.id as id
+							FROM tags_per_id
+					   		INNER JOIN tags ON tags_per_id.tag_id = tags.id
 					   		WHERE tags.type = '$searchType' and tags.name LIKE '$searchText'";
 			$result 	= MySQLManager::ExecuteSelectRows($sql);
 			

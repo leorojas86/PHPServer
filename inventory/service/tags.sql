@@ -10,7 +10,7 @@ CREATE TABLE `tags`
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `tags_per_ids` 
+CREATE TABLE `tags_per_id` 
 (
   `id` bigint(20) NOT NULL,
   `tag_id` bigint(20) NOT NULL

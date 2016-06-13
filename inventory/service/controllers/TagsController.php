@@ -27,9 +27,9 @@
 
 		private static function UpdateTags($payload)
 		{
-			$groupId = $payload->id;
+			$id 	 = $payload->id;
 			$data    = $payload->data;
-			$result  = Tag::UpdateTags($groupId, $data);
+			$result  = Tag::UpdateTags($id, $data);
 
 			return $result;
 		}
