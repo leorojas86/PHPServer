@@ -6,6 +6,7 @@
 	require_once "inventory/service/controllers/GroupsController.php";
 	require_once "inventory/service/controllers/FilesController.php";
 	require_once "inventory/service/controllers/AnalyticsController.php";
+	require_once "inventory/service/controllers/TagsController.php";
 
 	/*try 
 	{
@@ -27,9 +28,10 @@
 
 			switch($service)
 			{
-				case "User":  		$result = UsersController::Service($method, $payload);  break;
-				case "Group": 		$result = GroupsController::Service($method, $payload); break;
-				case "File":  		$result = FilesController::Service($method, $payload);  break;
+				case "User":  		$result = UsersController::Service($method, $payload);  	break;
+				case "Group": 		$result = GroupsController::Service($method, $payload); 	break;
+				case "File":  		$result = FilesController::Service($method, $payload);  	break;
+				case "Tag":  		$result = TagsController::Service($method, $payload);  		break;
 				case "Analytic":  	$result = AnalyticsController::Service($method, $payload);  break;
 				default:      		$result = new ServiceResult(false, "Unknown service '$service'", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE); break;
 			}
