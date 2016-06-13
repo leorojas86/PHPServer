@@ -28,8 +28,8 @@
 		private static function UpdateTags($payload)
 		{
 			$id 	 = $payload->id;
-			$data    = $payload->data;
-			$result  = Tag::UpdateTags($id, $data);
+			$tags    = $payload->tags;
+			$result  = Tag::UpdateTags($id, $tags);
 
 			return $result;
 		}

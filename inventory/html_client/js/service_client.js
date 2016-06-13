@@ -131,9 +131,18 @@ ServiceClientClass.prototype.updateGroupData = function(groupId, groupData, call
 	this.request("POST", payload, callback);
 
 	//TODO: queue this steps
+	this.updateSearchTags(groupId, groupData);
+};
+
+ServiceClientClass.prototype.updateSearchTags = function(groupId, groupData)
+{
+	//TODO: Fix this
+	var tags = groupData.replace("{|}|[|]|,|:|<|>|/|=|\t|\"/g", '');
+
+	//TODO: queue this steps
 	var payload 	= this.getPayload("Tag", "UpdateTags");
 	payload["id"]   = groupId;
-	payload["data"] = groupData;
+	payload["tags"] = tags;
 
 	this.request("POST", payload, null);
 };
