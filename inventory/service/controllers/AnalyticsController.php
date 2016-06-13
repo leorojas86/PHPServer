@@ -1,5 +1,4 @@
 <?php 
-
 	require_once "inventory/service/model/database/Group.php";
 	require_once "inventory/service/model/database/Tag.php";
 
