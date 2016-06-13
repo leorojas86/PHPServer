@@ -7,7 +7,7 @@
 		const DB_PASS 	 = 'root';
 		const DB_NAME 	 = 'generic_db';
 		const DB_PORT    = '8889';//Default is 3306
-		const DB_NAMES   = array('User' => 'auth');
+		const DB_NAMES   = array('User' => 'auth', 'Group' => 'groups');
 	} 
 	
 ?>
