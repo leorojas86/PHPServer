@@ -25,7 +25,7 @@
 			return $result;
 		}
 
-		public static function UpdateSearchTags($groupId, $groupData)
+		public static function UpdateTags($groupId, $groupData)
 		{
 			$result = Tag::RemoveAllTagAssociations($groupId, Constants::SEARCH_TAG_ID);
 
@@ -85,7 +85,7 @@
 				return $result;
 		}
 
-		public static function SearchGroups($searchText)
+		public static function Search($searchText)
 		{
 			$searchType = Constants::SEARCH_TAG_ID;
 			$sql    	= "SELECT groups.*, tags.id as tag_id FROM groups 

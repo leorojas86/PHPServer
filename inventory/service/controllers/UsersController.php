@@ -1,5 +1,4 @@
 <?php 
-
 	require_once "inventory/service/model/database/User.php";
 
 	class UsersController
@@ -56,5 +55,4 @@
 			return User::UpdateData($userId, $data);
 		}
 	}
-
 ?>
