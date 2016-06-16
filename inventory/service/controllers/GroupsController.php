@@ -14,6 +14,7 @@
 				case "Delete":				$result = GroupsController::DeleteGroup($payload);		break;
 				case "Move":				$result = GroupsController::MoveGroup($payload);		break;
 				case "Rename":				$result = GroupsController::RenameGroup($payload);		break;
+				case "GetGroups" 			$result = GroupsController::GetGroups($payload);		break;
 				default: 		 
 					$result = new ServiceResult(false, "Unsupported Groups service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
 				break;
@@ -84,5 +85,13 @@
 
 			return Group::AddSubGroup($name, $parentGroupId, $userId, $type, $data);
 		}
+
+		private static function GetGroups($payload)
+		{
+			$ids = $payload->ids;
+
+			return Group::GetGroupsData($ids);
+		}
+		
 	}
 ?>

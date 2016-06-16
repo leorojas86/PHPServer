@@ -64,6 +64,25 @@
 			return $result;
 		}
 
+		public static function GetGroupsData($ids)
+		{
+			$firstId = $ids[0]; 
+			$idsText = '';
+			
+			for($ids as $id)
+			{
+				if($id == $firstId)
+					$idsText .= "'$id'";
+				else
+					$idsText .= ",'$id'";
+			}
+
+			$sql    = "SELECT * FROM groups WHERE id IN ($idsText)";
+			$result = MySQLManager::ExecuteSelectRow($sql);
+
+			return $result;
+		}
+
 		public static function GetGroupPath($groupData)
 		{
 			$id   		   = $groupData["id"];
