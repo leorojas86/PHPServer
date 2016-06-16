@@ -136,15 +136,18 @@ ServiceClientClass.prototype.updateGroupData = function(groupId, groupData, call
 
 ServiceClientClass.prototype.updateSearchTags = function(groupId, groupData)
 {
-	//TODO: Fix this
-	var tags = groupData.replace("{|}|[|]|,|:|<|>|/|=|\t|\"/g", '');
+	var regexp = new RegExp("]|{|}|,|:|<|>|=|\t|\"", 'g');
+	var regexp2 = new RegExp(" ", 'g');
+	var tags = groupData.replace(regexp, '').replace(/\[/g,'').replace(regexp2, ',');
+
+	alert(tags);
 
 	//TODO: queue this steps
 	var payload 	= this.getPayload("Tag", "UpdateTags");
 	payload["id"]   = groupId;
 	payload["tags"] = tags;
 
-	this.request("POST", payload, null);
+	this.request("POST", payload, function() {});
 };
 
 ServiceClientClass.prototype.searchGroups = function(searchText, callback)
