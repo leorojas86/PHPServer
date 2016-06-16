@@ -25,20 +25,13 @@
 			return $result;
 		}
 
-		public static function UpdateTags($id, $groupData)
+		public static function UpdateTags($id, $tags)
 		{
 			$result = Tag::RemoveAllTagAssociations($id, Constants::SEARCH_TAG_ID);
 
 			if($result->success)
 			{
-				$search  	= array("{", "}", "[", "]", ",", ":", '"', "<", ">", "/", "=", "\t");
-				$replace  	= ' ';
-				$groupData 	= str_replace($search, $replace, $groupData);
-				$groupData 	= strtolower($groupData);
-				$groupData 	= preg_split('@ @', $groupData, null, PREG_SPLIT_NO_EMPTY);
-				$groupData  = array_unique($groupData);
-
-				foreach($groupData as $tagName)
+				foreach($tags as $tagName)
 				{
 	    			$result = Tag::AssociateTag($id, $tagName, Constants::SEARCH_TAG_ID);
 

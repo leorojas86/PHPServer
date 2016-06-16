@@ -28,7 +28,7 @@
 		private static function UpdateTags($payload)
 		{
 			$id 	 = $payload->id;
-			$tags    = $payload->tags;
+			$tags    = explode(',', $payload->tags);
 			$result  = Tag::UpdateTags($id, $tags);
 
 			return $result;
