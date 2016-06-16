@@ -137,7 +137,7 @@ ServiceClientClass.prototype.updateGroupData = function(groupId, groupData, call
 ServiceClientClass.prototype.updateSearchTags = function(groupId, groupData)
 {
 	var regexp = new RegExp("]|{|}|,|:|<|>|=|\t|\"", 'g');
-	var regexp2 = new RegExp(" ", 'g');
+	var regexp2 = new RegExp(" +", 'g');
 	var tags = groupData.replace(regexp, '').replace(/\[/g,'').replace(regexp2, ',');
 
 	alert(tags);
