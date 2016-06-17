@@ -84,7 +84,8 @@
 			$sql    	= "SELECT tags_per_id.id as id
 							FROM tags_per_id
 					   		INNER JOIN tags ON tags_per_id.tag_id = tags.id
-					   		WHERE tags.type = '$searchType' and tags.name LIKE '$searchText'";
+					   		WHERE tags.type = '$searchType' and tags.name LIKE '$searchText'
+					   		LIMIT 500";
 			$result 	= MySQLManager::ExecuteSelectRows($sql);
 			
 			return $result;
