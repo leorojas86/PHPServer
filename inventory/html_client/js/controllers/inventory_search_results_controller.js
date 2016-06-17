@@ -20,7 +20,7 @@ InventorySearchResultsControllerClass.prototype.renderSearchResults = function(g
 
 InventorySearchResultsControllerClass.prototype.getGroupChildrenHTML = function(subGroups)
 {
-	var html 	  = "<div id='folders_scroll_panel' class='folders_scroll_panel_class'>";
+	var html = "<div id='folders_scroll_panel' class='folders_scroll_panel_class'>";
 
 	for(var index in subGroups)
 	{
@@ -32,7 +32,7 @@ InventorySearchResultsControllerClass.prototype.getGroupChildrenHTML = function(
 		var clickEvent   = "onclick='InventorySearchResultsController.instance.onSubGroupButtonClick(" + subGroupId + ");'"
 
 		html += "<div id='folder_" + subGroupId + "' class='folder_class'>"+
-					"<img id='folder_image_" + subGroupId + "' class='folder_image_class' src='" + icon + "' " + clickEvent + "/>"+
+					"<div id='folder_image_" + subGroupId + "' class='folder_image_class " + icon + "' " + clickEvent + "> </div>"+
 					"<label id='folder_label_" + subGroupId + "' >" + subGroupName + "</label>"+
 				"</div>";
 	}
