@@ -132,25 +132,25 @@
 			return $result;
 		}
 
-		public static function UpdateData($groupId, $groupData)
+		public static function UpdateData($id, $groupData)
 		{
-			$sql    = "UPDATE groups SET data='$groupData' WHERE id='$groupId'";
+			$sql    = "UPDATE groups SET data='$groupData' WHERE id='$id'";
 			$result = MySQLManager::ExecuteUpdate($sql);
 
 			return $result;
 		}
 
-		public static function Rename($groupId, $groupName)
+		public static function Rename($id, $newName)
 		{
-			$sql    = "UPDATE groups SET name='$groupName' WHERE id='$groupId'";
+			$sql    = "UPDATE groups SET name='$newName' WHERE id='$id'";
 			$result = MySQLManager::ExecuteUpdate($sql);
 			
 			return $result;
 		}
 
-		public static function Delete($groupId)
+		public static function Delete($id)
 		{
-			$result = Group::GetSubGroups($groupId);
+			$result = Group::GetSubGroups($id);
 
 			if($result->success)
 			{
@@ -162,7 +162,7 @@
 	    			Group::Delete($subGroupId);
 				}
 
-				$sql 	= "DELETE FROM groups WHERE id = '$groupId'";
+				$sql 	= "DELETE FROM groups WHERE id = '$id'";
 				$result = MySQLManager::ExecuteDelete($sql);
 
 				return $result;
@@ -171,17 +171,17 @@
 			return $result;
 		}
 
-		public static function Move($groupId, $parentGroupId)
+		public static function Move($id, $parentGroupId)
 		{
-			$sql    = "UPDATE groups SET parent_group_id='$parentGroupId' WHERE id='$groupId'";
+			$sql    = "UPDATE groups SET parent_group_id='$parentGroupId' WHERE id='$id'";
 			$result = MySQLManager::ExecuteUpdate($sql);
 			
 			return $result;
 		}
 
-		public static function IsInHierarchy($groupId, $hierarchyParentId)
+		public static function IsInHierarchy($id, $hierarchyParentId)
 		{
-			if($hierarchyParentId != $groupId)
+			if($hierarchyParentId != $id)
 			{
 				$result = Group::GetSubGroups($hierarchyParentId);
 
@@ -191,7 +191,7 @@
 
 					foreach($subGroups as $subGroup)
 		    		{
-		    			$result = Group::IsInHierarchy($groupId, $subGroup["id"]);
+		    			$result = Group::IsInHierarchy($id, $subGroup["id"]);
 
 		    			if($result->success)
 		    			{
@@ -209,14 +209,6 @@
 			}
 
 			return new ServiceResult(true, true);
-		}
-
-		public static function SearchGroups($searchText)
-		{
-			$sql    = "SELECT * FROM groups WHERE name LIKE '$searchText'";
-			$result = MySQLManager::ExecuteSelectRows($sql);
-			
-			return $result;
 		}
 	}
 ?>
