@@ -155,7 +155,19 @@ ServiceClientClass.prototype.searchGroups = function(searchText, callback)
 	var payload 			= this.getPayload("Tag", "Search");
 	payload["searchText"]   = searchText;
 
-	this.request("POST", payload, callback);
+	this.request("POST", payload, function(resultData) { ServiceClient.instance.onSearchGroupIdsCallback(resultData, callback); });
+};
+
+ServiceClientClass.prototype.onSearchGroupIdsCallback = function(resultData, callback)
+{
+	if(resultData.success)
+	{
+		var payload 	 = this.getPayload("Group", "GetGroups");
+		payload["ids"]   = resultData.data;
+		this.request("POST", payload, callback);
+	}
+	else
+		callback(resultData);
 };
 
 ServiceClientClass.prototype.profile = function(key, duration)

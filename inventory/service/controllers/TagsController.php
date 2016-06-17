@@ -22,6 +22,16 @@
 			$searchText 	= $payload->searchText;
 			$result 	  	= Tag::Search($searchText);
 
+			if($result->success)
+			{
+				$ids = array();
+
+				foreach($result->data as $row)
+					$ids[] = $row['id'];
+
+				return new ServiceResult(true, $ids);
+			}
+
 			return $result;
 		}
 

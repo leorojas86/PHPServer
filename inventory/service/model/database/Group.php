@@ -71,14 +71,17 @@
 			
 			foreach($ids as $id)
 			{
+				$stringId = print_r($id,true);
+				error_log($stringId);
+
 				if($id == $firstId)
-					$idsText .= "'$id'";
+					$idsText .= "'$stringId'";
 				else
-					$idsText .= ",'$id'";
+					$idsText .= ",'$stringId'";
 			}
 
 			$sql    = "SELECT * FROM groups WHERE id IN ($idsText)";
-			$result = MySQLManager::ExecuteSelectRow($sql);
+			$result = MySQLManager::ExecuteSelectRows($sql);
 
 			return $result;
 		}
