@@ -93,7 +93,19 @@ ServiceClientClass.prototype.addSubGroup = function(parentGroupId, newGroupName,
 	payload["type"]   			= type;
 	payload["data"]   			= data;
 
-	this.request("POST", payload, callback);
+	this.request("POST", payload, function(result) { ServiceClient.instance.onAddSubGroupCallback(result, payload, callback); });
+};
+
+ServiceClientClass.prototype.onAddSubGroupCallback = function(result, payload, callback)
+{
+	if(result.success)
+	{
+		//TODO: Queue this
+		this.updateSearchTags(result.data.insert_id, payload["name"], payload["data"], callback);
+		callback(result);
+	}
+	else
+		callback(result);
 };
 
 ServiceClientClass.prototype.deleteGroup = function(groupId, callback)
