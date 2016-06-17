@@ -160,7 +160,7 @@ ServiceClientClass.prototype.searchGroups = function(searchText, callback)
 
 ServiceClientClass.prototype.onSearchGroupIdsCallback = function(resultData, callback)
 {
-	if(resultData.success)
+	if(resultData.success && resultData.data.length > 0)
 	{
 		var payload 	 = this.getPayload("Group", "GetGroups");
 		payload["ids"]   = resultData.data;
