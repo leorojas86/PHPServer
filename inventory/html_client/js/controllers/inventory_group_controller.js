@@ -227,7 +227,7 @@ InventoryGroupControllerClass.prototype.onSubGroupButtonClick = function(groupId
 InventoryGroupControllerClass.prototype.onUpdateGroupDataClick = function(groupId)
 {
 	var groupData = document.getElementById('group_data');
-	ServiceClient.instance.updateGroupData(groupId, groupData.value, onUpdateGroupDataCallback);
+	ServiceClient.instance.updateGroupData(groupId, this._groupData.name, groupData.value, onUpdateGroupDataCallback);
 };
 
 function onUpdateGroupDataCallback(resultData)

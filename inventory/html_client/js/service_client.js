@@ -122,7 +122,7 @@ ServiceClientClass.prototype.moveGroup = function(groupId, parentGroupId, callba
 	this.request("POST", payload, callback);
 };
 
-ServiceClientClass.prototype.updateGroupData = function(groupId, groupData, callback)
+ServiceClientClass.prototype.updateGroupData = function(groupId, groupName, groupData, callback)
 {
 	var payload 	= this.getPayload("Group", "UpdateData");
 	payload["id"]   = groupId;
@@ -131,11 +131,13 @@ ServiceClientClass.prototype.updateGroupData = function(groupId, groupData, call
 	this.request("POST", payload, callback);
 
 	//TODO: queue this steps
-	this.updateSearchTags(groupId, groupData);
+	this.updateSearchTags(groupId, groupName, groupData);
 };
 
-ServiceClientClass.prototype.updateSearchTags = function(groupId, groupData)
+ServiceClientClass.prototype.updateSearchTags = function(groupId, groupName, groupData)
 {
+	groupData += " " + groupName;
+
 	var regexp = new RegExp("]|{|}|,|:|<|>|=|\t|\"", 'g');
 	var regexp2 = new RegExp(" +", 'g');
 	var tags = groupData.replace(regexp, '').replace(/\[/g,'').replace(regexp2, ',');
