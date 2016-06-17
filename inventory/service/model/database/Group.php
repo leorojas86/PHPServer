@@ -69,7 +69,7 @@
 			$firstId = $ids[0]; 
 			$idsText = '';
 			
-			for($ids as $id)
+			foreach($ids as $id)
 			{
 				if($id == $firstId)
 					$idsText .= "'$id'";
