@@ -13,6 +13,10 @@
 				require_once "api/users/UsersService.php";
 				$result = UsersService::Service($method, $payload);  	
 			break;
+			case "Group":  
+				require_once "api/groups/GroupsService.php";
+				$result = GroupsService::Service($method, $payload);  	
+			break;
 			default: $result = new ServiceResult(false, "Unknown service '$service'", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE); break;
 		}
 	}

@@ -21,6 +21,10 @@
 					require_once "api/api.php";
 					die();
 				break;
+				case "Group": 		
+					require_once "api/api.php";
+					die();	
+				break;
 
 				default:      
 						require_once "inventory/service/model/Environment.php";

@@ -14,7 +14,7 @@
 				switch ($method) 
 				{
 					case "Register": 	$result = UsersService::Register($payload);		break;
-					case "Login": 		$result = UsersService::Login($payload);			break;
+					case "Login": 		$result = UsersService::Login($payload);		break;
 					case "UpdateData": 	$result = UsersService::UpdateData($payload);	break;
 					default: 		 
 						$result = new ServiceResult(false, "Unsupported Users service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
