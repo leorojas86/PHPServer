@@ -25,11 +25,12 @@
 			return $result;
 		}
 
-		public static function UpdateTags($id, $tags)
+		public static function UpdateTags($id, $tags, $removeOldTags)
 		{
-			$result = Tag::RemoveAllTagAssociations($id, Constants::SEARCH_TAG_ID);
+			if($removeOldTags)
+				$result = Tag::RemoveAllTagAssociations($id, Constants::SEARCH_TAG_ID);
 
-			if($result->success)
+			if(!$removeOldTags || $result->success)
 			{
 				foreach($tags as $tagName)
 				{
@@ -51,7 +52,7 @@
 			return $result;
 		}
 
-		private static function AssociateTag($id, $tagName, $type)
+		private static function AssociateTag($id, $tagName, $type)//TODO: Improve this
 		{
 			$result = Tag::ExistsTag($tagName, $type);
 

@@ -101,7 +101,8 @@ ServiceClientClass.prototype.onAddSubGroupCallback = function(result, payload, c
 	if(result.success)
 	{
 		//TODO: Queue this
-		this.updateSearchTags(result.data.insert_id, payload["name"], payload["data"], callback);
+		var tagsData = payload["name"];
+		this.updateSearchTags(result.data.insert_id, tagsData, false);
 		callback(result);
 	}
 	else
@@ -123,6 +124,7 @@ ServiceClientClass.prototype.renameGroup = function(groupId, name, callback)
 	payload["name"] = name;
 
 	this.request("POST", payload, callback);
+	this.updateSearchTags(groupId, name, false);
 };
 
 ServiceClientClass.prototype.moveGroup = function(groupId, parentGroupId, callback)
@@ -143,25 +145,25 @@ ServiceClientClass.prototype.updateGroupData = function(groupId, groupName, grou
 	this.request("POST", payload, callback);
 
 	//TODO: queue this steps
-	this.updateSearchTags(groupId, groupName, groupData);
+	var tagsData = groupData + " " + groupName;
+	this.updateSearchTags(groupId, tagsData, true);
 };
 
-ServiceClientClass.prototype.updateSearchTags = function(groupId, groupName, groupData)
+ServiceClientClass.prototype.updateSearchTags = function(groupId, data, removeOldTags)
 {
-	groupData += " " + groupName;
-
 	var regexp = new RegExp("]|{|}|,|:|<|>|=|\t|\"", 'g');
 	var regexp2 = new RegExp(" +", 'g');
-	var tags = groupData.replace(regexp, '').replace(/\[/g,'').replace(regexp2, ',');
+	var tags = data.replace(regexp, '').replace(/\[/g,'').replace(regexp2, ',');
 
 	alert(tags);
 
 	//TODO: queue this steps
-	var payload 	= this.getPayload("Tag", "UpdateTags");
-	payload["id"]   = groupId;
-	payload["tags"] = tags;
+	var payload 				= this.getPayload("Tag", "UpdateTags");
+	payload["id"]   			= groupId;
+	payload["tags"] 			= tags;
+	payload["remove_old_tags"] 	= removeOldTags;
 
-	this.request("POST", payload, function() {});
+	this.request("POST", payload, function(result) {});
 };
 
 ServiceClientClass.prototype.searchGroups = function(searchText, callback)
