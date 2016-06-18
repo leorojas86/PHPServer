@@ -5,13 +5,13 @@
 
 	class UsersService
 	{
-		public static function Service($method, $payload)
+		public static function Service($payload)
 		{
 			$result = Environment::Init();
 
 			if($result->success)
 			{
-				switch ($method) 
+				switch($payload->method) 
 				{
 					case "Register": 	$result = UsersService::Register($payload);		break;
 					case "Login": 		$result = UsersService::Login($payload);		break;

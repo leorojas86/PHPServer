@@ -4,9 +4,9 @@
 
 	class FilesService
 	{
-		public static function Service($method, $payload)
+		public static function Service($payload)
 		{
-			switch ($method) 
+			switch($payload->method) 
 			{
 				case "Upload": 	
 					$result = FilesService::Upload($payload);	

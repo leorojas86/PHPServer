@@ -5,13 +5,13 @@
 
 	class GroupsService
 	{
-		public static function Service($method, $payload)
+		public static function Service($payload)
 		{
 			$result = Environment::Init();
 
 			if($result->success)
 			{
-				switch ($method) 
+				switch($payload->method) 
 				{
 					case "GetGroup": 		$result = GroupsService::GetGroup($payload);		break;
 					case "GetRootGroup": 	$result = GroupsService::GetRootGroup($payload);	break;

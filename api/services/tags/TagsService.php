@@ -6,13 +6,13 @@
 
 	class TagsService
 	{
-		public static function Service($method, $payload)
+		public static function Service($payload)
 		{
 			$result = Environment::Init();
 
 			if($result->success)
 			{
-				switch ($method) 
+				switch($payload->method) 
 				{
 					case "UpdateTags":	$result = TagsService::UpdateTags($payload);	break;
 					case "Search":		$result = TagsService::Search($payload);		break;

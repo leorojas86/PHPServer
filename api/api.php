@@ -1,29 +1,27 @@
 <?php 
-		
 	if(isset($_POST["payload"]))
 	{
 		$payload = json_decode($_POST["payload"]);
-		$userId  = $payload->userId;
-		$service = $payload->service;
-		$method  = $payload->method;
+		//$userId  = $payload->userId;
+		//$method  = $payload->method;
 
-		switch($service)
+		switch($payload->service)
 		{
-			case "User":  
+			case "User":
 				require_once "api/services/users/UsersService.php";
-				$result = UsersService::Service($method, $payload);  	
+				$result = UsersService::Service($payload);
 			break;
-			case "Group":  
+			case "Group":
 				require_once "api/services/groups/GroupsService.php";
-				$result = GroupsService::Service($method, $payload);  	
+				$result = GroupsService::Service($payload);
 			break;
-			case "Tag":  
+			case "Tag":
 				require_once "api/services/tags/TagsService.php";
-				$result = TagsService::Service($method, $payload);  	
+				$result = TagsService::Service($payload);
 			break;
-			case "File":  
+			case "File":
 				require_once "api/services/files/FilesService.php";
-				$result = FilesService::Service($method, $payload);  	
+				$result = FilesService::Service($payload);
 			break;
 			default: $result = new ServiceResult(false, "Unknown service '$service'", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE); break;
 		}
