@@ -195,7 +195,7 @@ InventoryGroupControllerClass.prototype.uploadFile = function()
 {
 	var canvas 	  = document.getElementById('imageContainer');
 	var imageData = canvas.toDataURL("image/jpeg", 0.95);
-	ServiceClient.instance.uploadFile(imageData, "jpg", this._groupData.id, function(resultData) { InventoryGroupController.instance.onUploadCompleted(resultData); }, onProgress);
+	ServiceClient.instance.uploadFile(imageData, "jpg", this._groupData, function(resultData) { InventoryGroupController.instance.onUploadCompleted(resultData); }, onProgress);
 };
 
 function onProgress(progress) 

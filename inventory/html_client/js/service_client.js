@@ -195,22 +195,46 @@ ServiceClientClass.prototype.profile = function(key, duration)
 }, params);*/
 };
 
-ServiceClientClass.prototype.uploadFile = function(fileData, extension, groupId, callback, onProgress)
+ServiceClientClass.prototype.uploadFile = function(fileData, extension, groupData, callback, onProgress)
 {
 	var payload 			= this.getPayload("File", "Upload");
 	payload["extension"]   	= extension;
-	payload["groupId"] 		= groupId;
 
 	var params 				= new Object();
 	params["payload"]   	= JSON.stringify(payload);
 	params["fileToUpload"]  = fileData;
 
-	this.requestWithParams("POST", params, callback);
+	this.requestWithParams("POST", params, function(result) { ServiceClient.instance.onFileUploadCompleted(result, groupData, callback); });
+};
+
+ServiceClientClass.prototype.onFileUploadCompleted = function(result, groupData, callback)
+{
+	if(result.success)
+	{
+		var data = new Object();
+
+		try
+		{
+			data = JSON.parse(groupData.data);
+		}
+		catch(e)
+		{
+			//Remove old data if the data is not a valid JSON
+		}
+		
+		var files = data.files == null ? new Array() : data.files;
+		files.push(result.data.file_name);
+		data.files = files;
+
+		this.updateGroupData(groupData.id, groupData.name, JSON.stringify(data), callback);
+	}
+	else
+		callback(result);
 };
 
 ServiceClientClass.prototype.request = function(method, payload, callback)
 {
-	var params = "payload="+JSON.stringify(payload);
+	var params = "payload=" + JSON.stringify(payload);
 
 	this.requestWithParams(method, params, callback);
 };
@@ -222,8 +246,7 @@ ServiceClientClass.prototype.requestWithParams = function(method, params, callba
 
 ServiceClientClass.prototype.getPayload = function(service, method)
 {
-	var payload = new Object();
-
+	var payload 		= new Object();
 	payload["userId"] 	= this.loggedUser != null ? this.loggedUser.id : null;
 	payload["service"]  = service;
 	payload["method"]   = method;

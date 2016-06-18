@@ -26,29 +26,15 @@
 
 		private static function Upload($payload)
 		{
-			$groupId 	= $payload->groupId;
+			$userId 	= $payload->userId;
 			$extension 	= $payload->extension;
 			$fileData 	= $_POST["fileToUpload"];
-			$userId   	= $payload->userId;
 			$guid 		= GUIDUtils::GetRandomGUID();
 			$fileName	= "$userId $guid.$extension";
 			$result  	= FileUploadManager::UploadFile($fileData, "uploads/$fileName");
 
 			if($result->success)
-			{
-				$result = Group::GetGroupData($groupId);
-
-				if($result)
-				{
-					$stringData			= $result->data["data"];
-					$groupData 			= $stringData != null ? json_decode($stringData) : new StdClass();
-					$files 				= isset($groupData->files) ? $groupData->files : array();
-					$files[] 			= $fileName;
-					$groupData->files   = $files;
-					$stringData 		= json_encode($groupData);
-					$result 			= Group::UpdateData($groupId, $stringData);
-				}
-			}
+				return new ServiceResult(true, array('file_name' => $fileName));
 
 			return $result;
 		}	
