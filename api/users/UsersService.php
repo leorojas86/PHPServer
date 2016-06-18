@@ -1,18 +1,25 @@
 <?php 
-	require_once "User.php";
+	require_once "api/users/Config.php";
+	require_once "api/users/User.php";
+	require_once "api/general/Environment.php";
 
 	class UsersService
 	{
 		public static function Service($method, $payload)
 		{
-			switch ($method) 
+			$result = Environment::Init();
+
+			if($result->success)
 			{
-				case "Register": 	$result = UsersController::Register($payload);		break;
-				case "Login": 		$result = UsersController::Login($payload);			break;
-				case "UpdateData": 	$result = UsersController::UpdateData($payload);	break;
-				default: 		 
-					$result = new ServiceResult(false, "Unsupported Users service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
-				break;
+				switch ($method) 
+				{
+					case "Register": 	$result = UsersController::Register($payload);		break;
+					case "Login": 		$result = UsersController::Login($payload);			break;
+					case "UpdateData": 	$result = UsersController::UpdateData($payload);	break;
+					default: 		 
+						$result = new ServiceResult(false, "Unsupported Users service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
+					break;
+				}
 			}
 
 			return $result;

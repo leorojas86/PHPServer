@@ -1,6 +1,6 @@
 <?php 
-	require_once "Constants.php";
-	require_once "../../utils/php/MySQLManager.php";
+	require_once "api/general/Constants.php";
+	require_once "utils/php/MySQLManager.php";
 
 	class Environment
 	{
@@ -9,9 +9,7 @@
 			header('Access-Control-Allow-Origin: *');
 			header('Access-Control-Allow-Methods: GET, POST');
 
-			$dbName = isset(Config::DB_NAMES[$service]) ? Config::DB_NAMES[$service] : Config::DB_NAME;
-
-			$result = MySQLManager::Connect(Config::DB_SERVER, Config::DB_USER, Config::DB_PASS, $dbName, Config::DB_PORT);
+			$result = MySQLManager::Connect(Config::DB_SERVER, Config::DB_USER, Config::DB_PASS, Config::DB_NAME, Config::DB_PORT);
 
 			return $result;
 		}
