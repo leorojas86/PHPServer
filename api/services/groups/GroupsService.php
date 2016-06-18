@@ -1,13 +1,13 @@
 <?php 
+	require_once "api/general/Environment.php";
 	require_once "api/services/groups/DBConfig.php";
 	require_once "api/services/groups/Group.php";
-	require_once "api/general/Environment.php";
 
 	class GroupsService
 	{
 		public static function Service($payload)
 		{
-			$result = Environment::Init();
+			$result = Environment::Init(true);
 
 			if($result->success)
 			{

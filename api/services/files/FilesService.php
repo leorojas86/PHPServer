@@ -1,4 +1,5 @@
 <?php 
+	require_once "api/general/Environment.php";
 	require_once "utils/php/FileUploadManager.php";
 	require_once "utils/php/GUIDUtils.php";
 
@@ -6,14 +7,19 @@
 	{
 		public static function Service($payload)
 		{
-			switch($payload->method) 
+			$result = Environment::Init(false);
+
+			if($result->success)
 			{
-				case "Upload": 	
-					$result = FilesService::Upload($payload);	
-				break;
-				default: 		 
-					$result = new ServiceResult(false, "Unsupported Files service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
-				break;
+				switch($payload->method) 
+				{
+					case "Upload": 	
+						$result = FilesService::Upload($payload);	
+					break;
+					default: 		 
+						$result = new ServiceResult(false, "Unsupported Files service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
+					break;
+				}
 			}
 
 			return $result;

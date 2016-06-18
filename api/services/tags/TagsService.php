@@ -1,14 +1,14 @@
 <?php 
+	require_once "api/general/Environment.php";
 	require_once "api/services/tags/Constants.php";
 	require_once "api/services/tags/DBConfig.php";
 	require_once "api/services/tags/Tag.php";
-	require_once "api/general/Environment.php";
 
 	class TagsService
 	{
 		public static function Service($payload)
 		{
-			$result = Environment::Init();
+			$result = Environment::Init(true);
 
 			if($result->success)
 			{
