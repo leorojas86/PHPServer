@@ -1,12 +1,9 @@
 <?php 
-
 	class Profiler
 	{
-		public $name 			 = false;
-		public $profileStartTime = null;
-
-		public function __construct($name)
+		public function __construct($userId, $name)
 		{
+			$this->userId 			= $userId;
 			$this->name 			= $name;
 			$this->profileStartTime = microtime(true);
 
