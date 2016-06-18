@@ -1,6 +1,6 @@
 <?php 
-	require_once "api/groups/DBConfig.php";
-	require_once "api/groups/Group.php";
+	require_once "api/services/groups/DBConfig.php";
+	require_once "api/services/groups/Group.php";
 	require_once "api/general/Environment.php";
 
 	class GroupsService

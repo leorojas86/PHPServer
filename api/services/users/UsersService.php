@@ -1,6 +1,6 @@
 <?php 
-	require_once "api/users/DBConfig.php";
-	require_once "api/users/User.php";
+	require_once "api/services/users/DBConfig.php";
+	require_once "api/services/users/User.php";
 	require_once "api/general/Environment.php";
 
 	class UsersService
