@@ -100,9 +100,8 @@ ServiceClientClass.prototype.onAddSubGroupCallback = function(result, payload, c
 {
 	if(result.success)
 	{
-		//TODO: Queue this
 		var tagsData = payload["name"];
-		this.updateSearchTags(result.data.insert_id, tagsData, false);
+		this.updateSearchTags(result.data.insert_id, tagsData, false);//TODO: queue this steps
 		callback(result);
 	}
 	else
@@ -124,7 +123,7 @@ ServiceClientClass.prototype.renameGroup = function(groupId, name, callback)
 	payload["name"] = name;
 
 	this.request("POST", payload, callback);
-	this.updateSearchTags(groupId, name, false);
+	this.updateSearchTags(groupId, name, false);//TODO: queue this steps
 };
 
 ServiceClientClass.prototype.moveGroup = function(groupId, parentGroupId, callback)
@@ -144,9 +143,8 @@ ServiceClientClass.prototype.updateGroupData = function(groupId, groupName, grou
 
 	this.request("POST", payload, callback);
 
-	//TODO: queue this steps
 	var tagsData = groupData + " " + groupName;
-	this.updateSearchTags(groupId, tagsData, true);
+	this.updateSearchTags(groupId, tagsData, true);//TODO: queue this steps
 };
 
 ServiceClientClass.prototype.updateSearchTags = function(groupId, data, removeOldTags)
