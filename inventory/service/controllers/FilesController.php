@@ -3,6 +3,7 @@
 	require_once "inventory/service/model/Environment.php";
 	require_once "inventory/service/model/database/User.php";
 	require_once "utils/php/FileUploadManager.php";
+	require_once "utils/php/GUIDUtils.php";
 	require_once "inventory/service/model/database/Group.php";
 
 
@@ -29,7 +30,7 @@
 			$extension 	= $payload->extension;
 			$fileData 	= $_POST["fileToUpload"];
 			$userId   	= $payload->userId;
-			$guid 		= FilesController::GetRandomGUID();
+			$guid 		= GUIDUtils::GetRandomGUID();
 			$fileName	= "$userId $guid.$extension";
 			$result  	= FileUploadManager::UploadFile($fileData, "uploads/$fileName");
 
@@ -50,20 +51,7 @@
 			}
 
 			return $result;
-		}
-
-		private static function GetRandomGUID()
-		{
-			return sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', 
-							mt_rand(0, 65535), 
-							mt_rand(0, 65535), 
-							mt_rand(0, 65535), 
-							mt_rand(16384, 20479), 
-							mt_rand(32768, 49151), 
-							mt_rand(0, 65535), 
-							mt_rand(0, 65535), 
-							mt_rand(0, 65535));
-		}		
+		}	
 	}
 
 ?>
