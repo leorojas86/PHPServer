@@ -1,3 +1,3 @@
 <?php 
-	require_once "inventory/api.php";
+	require_once "api/api.php";
 ?>
