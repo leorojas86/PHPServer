@@ -29,6 +29,10 @@
 					require_once "api/api.php";
 					die();	
 				break;
+				case "File": 		
+					require_once "api/api.php";
+					die();	
+				break;
 
 				default:      
 						require_once "inventory/service/model/Environment.php";

@@ -21,6 +21,10 @@
 				require_once "api/tags/TagsService.php";
 				$result = TagsService::Service($method, $payload);  	
 			break;
+			case "File":  
+				require_once "api/files/FilesService.php";
+				$result = FilesService::Service($method, $payload);  	
+			break;
 			default: $result = new ServiceResult(false, "Unknown service '$service'", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE); break;
 		}
 	}
