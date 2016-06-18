@@ -3,7 +3,7 @@
 
 	class Environment
 	{
-		public static function Init($service)
+		public static function Init()
 		{
 			header('Access-Control-Allow-Origin: *');
 			header('Access-Control-Allow-Methods: GET, POST');
