@@ -25,6 +25,10 @@
 					require_once "api/api.php";
 					die();	
 				break;
+				case "Tag": 		
+					require_once "api/api.php";
+					die();	
+				break;
 
 				default:      
 						require_once "inventory/service/model/Environment.php";
