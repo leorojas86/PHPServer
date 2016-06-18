@@ -40,7 +40,7 @@
 			$id 	 		= $payload->id;
 			$tags    		= explode(',', $payload->tags);
 			$removeOldTags 	= $payload->remove_old_tags;
-			$result  		= Tag::UpdateTags($id, $tags);
+			$result  		= Tag::UpdateTags($id, $tags, $removeOldTags);
 
 			return $result;
 		}
