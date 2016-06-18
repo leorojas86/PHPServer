@@ -1,5 +1,5 @@
 <?php 
-	class Config
+	class DBConfig
 	{
 		const DB_SERVER  = 'localhost';
 		const DB_USER 	 = 'root';

@@ -1,7 +1,6 @@
 <?php 
 
 	require_once "inventory/service/model/Environment.php";
-	require_once "inventory/service/model/database/User.php";
 	require_once "utils/php/FileUploadManager.php";
 	require_once "utils/php/GUIDUtils.php";
 	require_once "inventory/service/model/database/Group.php";

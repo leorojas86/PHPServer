@@ -1,5 +1,5 @@
 <?php 
-	require_once "api/users/Config.php";
+	require_once "api/users/DBConfig.php";
 	require_once "api/users/User.php";
 	require_once "api/general/Environment.php";
 
