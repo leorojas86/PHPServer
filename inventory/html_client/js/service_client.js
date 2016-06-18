@@ -153,7 +153,7 @@ ServiceClientClass.prototype.updateSearchTags = function(groupId, data, removeOl
 	var regexp2 = new RegExp(" +", 'g');
 	var tags = data.replace(regexp, '').replace(/\[/g,'').replace(regexp2, ',');
 
-	alert(tags);
+	//alert(tags);
 
 	//TODO: queue this steps
 	var payload 				= this.getPayload("Tag", "UpdateTags");
