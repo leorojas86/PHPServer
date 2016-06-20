@@ -1,6 +1,6 @@
 <?php 
 	class EnvironmentConfig
 	{
-		const FAKE_RESPONSE_DELAY = true;
+		const FAKE_RESPONSE_DELAY = false;
 	}
 ?>
