@@ -167,7 +167,7 @@ InventoryGroupControllerClass.prototype.getGroupHeaderHTML = function(groupData)
 
 InventoryGroupControllerClass.prototype.renderRootGroup = function()
 {
-	this.clearHTML();
+	this.renderLoadingText();
 	ServiceClient.instance.loadRootGroup(function(resultData) { InventoryGroupController.instance.onLoadGroupCallback(resultData); });
 };
 
@@ -178,7 +178,7 @@ InventoryGroupControllerClass.prototype.onLoadGroupCallback = function(resultDat
 	//TODO: Report error
 };
 
-InventoryGroupControllerClass.prototype.clearHTML = function()
+InventoryGroupControllerClass.prototype.renderLoadingText = function()
 {
 	var loadingText 			= LocManager.instance.getLocalizedText("loading_text");
 	var groupContainer  		= document.getElementById("group_container");
@@ -187,7 +187,7 @@ InventoryGroupControllerClass.prototype.clearHTML = function()
 
 InventoryGroupControllerClass.prototype.loadAjaxGroup = function(groupId)
 {
-	this.clearHTML();
+	this.renderLoadingText();
 	ServiceClient.instance.loadGroup(groupId, function(resultData) { InventoryGroupController.instance.onLoadGroupCallback(resultData); });
 };
 

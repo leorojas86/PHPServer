@@ -61,7 +61,7 @@ InventorySearchResultsControllerClass.prototype.getGroupHeaderHTML = function(gr
 
 InventorySearchResultsControllerClass.prototype.renderResults = function(searchText)
 {
-	this.clearHTML();
+	InventoryGroupController.instance.renderLoadingText();
 	ServiceClient.instance.searchGroups(searchText, this.onSearchCallback);
 };
 
@@ -69,13 +69,6 @@ InventorySearchResultsControllerClass.prototype.onSearchCallback = function(resu
 {
 	if(resultData.success)
 		InventorySearchResultsController.instance.renderSearchResults(resultData.data);
-};
-
-InventorySearchResultsControllerClass.prototype.clearHTML = function()
-{
-	var loadingText 			= LocManager.instance.getLocalizedText("loading_text");
-	var groupContainer  		= document.getElementById("group_container");
-	groupContainer.innerHTML 	= loadingText;
 };
 
 InventorySearchResultsControllerClass.prototype.onSubGroupButtonClick = function(groupId)

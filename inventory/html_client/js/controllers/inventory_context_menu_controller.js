@@ -99,8 +99,11 @@ InventoryContextMenuControllerClass.prototype.addItem = function(folderId)
 	var typeNewItemNameText = LocManager.instance.getLocalizedText("type_new_item_name");
 	var itemName 			= prompt(typeNewItemNameText, "");
 
-	if(itemName != null && itemName != "") 
+	if(itemName != null && itemName != "")
+	{
+		InventoryGroupController.instance.renderLoadingText();
 		this.addSubGroup(itemName, Constants.GROUP_ID_ITEM);
+	}
 }
 
 InventoryContextMenuControllerClass.prototype.addFolder = function()
@@ -108,8 +111,11 @@ InventoryContextMenuControllerClass.prototype.addFolder = function()
 	var typeFolderNameText = LocManager.instance.getLocalizedText("type_new_folder_name");
 	var folderName         = prompt(typeFolderNameText, "");
 
-	if(folderName != null && folderName != "") 
+	if(folderName != null && folderName != "")
+	{
+		InventoryGroupController.instance.renderLoadingText();
 	    this.addSubGroup(folderName, Constants.GROUP_ID_FOLDER);
+	}
 }
 
 InventoryContextMenuControllerClass.prototype.renameGroup = function(folderId)
@@ -118,7 +124,10 @@ InventoryContextMenuControllerClass.prototype.renameGroup = function(folderId)
 	var folderName 		  = prompt(typeNewFolderName, "");
 
 	if(folderName != null && folderName != "") 
+	{
+		InventoryGroupController.instance.renderLoadingText();
 		ServiceClient.instance.renameGroup(folderId, folderName, this.refreshCurrentGroup);
+	}
 }
 
 InventoryContextMenuControllerClass.prototype.addSubGroup = function(newGroupName, type)
@@ -135,6 +144,7 @@ InventoryContextMenuControllerClass.prototype.onAddSubGroupCallback = function(r
 
 InventoryContextMenuControllerClass.prototype.pasteGroup = function()
 {
+	InventoryGroupController.instance.renderLoadingText();
 	ServiceClient.instance.moveGroup(this._cuttingGroupId, InventoryGroupController.instance._groupData.id, this.refreshCurrentGroup);
 	this._cuttingGroupId = null;
 }
@@ -154,7 +164,10 @@ InventoryContextMenuControllerClass.prototype.removeSubgroupGroup = function(gro
 	var remove      		= confirm(deleteFolderText);
 
 	if(remove) 
+	{
+		InventoryGroupController.instance.renderLoadingText();
 		ServiceClient.instance.deleteGroup(groupId, this.onDeleteGroupCallback);
+	}
 }
 
 InventoryContextMenuControllerClass.prototype.onDeleteGroupCallback = function(resultData)
