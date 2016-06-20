@@ -43,9 +43,9 @@
 
 		public static function UpdateData($userId, $userData)
 		{
-			$userId 		  = $loggedInUserData["id"];
-			$sql    		  = "UPDATE users SET data='$userData' WHERE id='$userId'";
-			$result 		  = MySQLManager::ExecuteUpdate($sql);
+			$userId = $loggedInUserData["id"];
+			$sql    = "UPDATE users SET data='$userData' WHERE id='$userId'";
+			$result = MySQLManager::ExecuteUpdate($sql);
 			
 			return $result;
 		}
