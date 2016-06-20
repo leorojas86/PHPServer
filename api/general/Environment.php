@@ -1,10 +1,14 @@
 <?php 
+	require_once "api/general/EnvironmentConfig.php";
 	require_once "utils/php/MySQLManager.php";
 
 	class Environment
 	{
 		public static function Init($initDB)
 		{
+			if(EnvironmentConfig::FAKE_RESPONSE_DELAY)
+				sleep(3);
+
 			header('Access-Control-Allow-Origin: *');
 			header('Access-Control-Allow-Methods: GET, POST');
 
