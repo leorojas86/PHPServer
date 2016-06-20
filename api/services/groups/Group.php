@@ -71,8 +71,7 @@
 			
 			foreach($ids as $id)
 			{
-				$stringId = print_r($id,true);
-				error_log($stringId);
+				$stringId = print_r($id, true);//TODO: Check why this print_r
 
 				if($id == $firstId)
 					$idsText .= "'$stringId'";
