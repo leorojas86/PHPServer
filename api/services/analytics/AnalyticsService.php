@@ -1,4 +1,4 @@
-<?php 
+<?php/* 
 	require_once "inventory/service/model/database/Group.php";
 	require_once "inventory/service/model/database/Tag.php";
 
@@ -36,5 +36,5 @@
 			$duration = $profiler->Profile();
 			return AnalyticsController::SaveEvent($profiler->userId, $profiler->name, $duration);
 		}
-	}
+	}*/
 ?>
