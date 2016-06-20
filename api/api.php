@@ -2,8 +2,6 @@
 	if(isset($_POST["payload"]))
 	{
 		$payload = json_decode($_POST["payload"]);
-		//$userId  = $payload->userId;
-		//$method  = $payload->method;
 
 		switch($payload->service)
 		{

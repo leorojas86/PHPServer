@@ -1,6 +1,6 @@
-CREATE DATABASE auth;
+CREATE DATABASE users;
 
-USE auth;
+USE users;
 
 CREATE TABLE `users` 
 (
