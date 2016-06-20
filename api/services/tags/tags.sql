@@ -13,5 +13,5 @@ CREATE TABLE `tags_per_id`
 (
   `tag_id` bigint(20) NOT NULL,
   `id` bigint(20) NOT NULL, -- id associated to the tag
-  `type` int(11) NOT NULL,
+  `type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -3,7 +3,7 @@
 	{
 		public static function AddTag($name, $type)
 		{
-			$sql    = "INSERT INTO tags (name, type) VALUES ('$name', '$type')";
+			$sql    = "INSERT INTO tags (name) VALUES ('$name')";
 			$result = MySQLManager::ExecuteInsert($sql);
 
 			return $result;
@@ -11,7 +11,7 @@
 
 		public static function ExistsTag($name, $type)
 		{
-			$sql    = "SELECT id FROM tags WHERE name='$name' AND type='$type'";
+			$sql    = "SELECT id FROM tags WHERE name='$name'";
 			$result = MySQLManager::ExecuteSelectRow($sql);
 
 			if($result->success)
@@ -85,7 +85,7 @@
 			$sql    	= "SELECT tags_per_id.id as id
 							FROM tags_per_id
 					   		INNER JOIN tags ON tags_per_id.tag_id = tags.id
-					   		WHERE tags.type = '$searchType' and tags.name LIKE '$searchText'
+					   		WHERE tags_per_id.type = '$searchType' and tags.name = '$searchText'
 					   		LIMIT 500";
 			$result 	= MySQLManager::ExecuteSelectRows($sql);
 			

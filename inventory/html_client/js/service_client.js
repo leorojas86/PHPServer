@@ -149,9 +149,9 @@ ServiceClientClass.prototype.updateGroupData = function(groupId, groupName, grou
 
 ServiceClientClass.prototype.updateSearchTags = function(groupId, data, removeOldTags)
 {
-	var regexp = new RegExp("]|{|}|,|:|<|>|=|\t|\"", 'g');
+	var regexp 	= new RegExp("]|{|}|,|:|<|>|=|\t|\"", 'g');
 	var regexp2 = new RegExp(" +", 'g');
-	var tags = data.replace(regexp, '').replace(/\[/g,'').replace(regexp2, ',');
+	var tags 	= data.replace(regexp, '').replace(/\[/g,'').replace(regexp2, ',').toLowerCase();
 
 	//alert(tags);
 
@@ -167,7 +167,7 @@ ServiceClientClass.prototype.updateSearchTags = function(groupId, data, removeOl
 ServiceClientClass.prototype.searchGroups = function(searchText, callback)
 {
 	var payload 			= this.getPayload("Tag", "Search");
-	payload["searchText"]   = searchText;
+	payload["searchText"]   = searchText.toLowerCase();
 
 	this.request("POST", payload, function(resultData) { ServiceClient.instance.onSearchGroupIdsCallback(resultData, callback); });
 };
