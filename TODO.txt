@@ -1,3 +1,4 @@
+- Setup development ssl.
 - Implement mobile apps:
 	Android:
 		Make the andriod app load the web page.
