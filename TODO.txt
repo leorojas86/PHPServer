@@ -28,6 +28,7 @@
 	- WAMP.
 	- Google Analitics.
 
+- Manage routing
 - Integrate with facebook.
 - Comments.
 - Rates.
