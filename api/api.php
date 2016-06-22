@@ -28,7 +28,7 @@
 		}
 	}
 	else
-		$result = new ServiceResult(false, "Unspecified payload parameter", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE);
+		$result = new ServiceResult(false, "Unspecified parameter 'payload'", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE);
 
 	echo $result->toJSON();
 ?>
