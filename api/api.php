@@ -1,4 +1,7 @@
 <?php 
+	require_once "utils/php/ServiceResult.php";
+	require_once "utils/php/UtilsConstants.php"; 
+
 	if(isset($_POST["payload"]))
 	{
 		$payload = json_decode($_POST["payload"]);
