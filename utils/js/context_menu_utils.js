@@ -9,57 +9,58 @@ function ContextMenuUtilsClass()
 {
 	this.onOptionSelectecCallback = null;
 	this.element 				  = null;
+
+	ContextMenuUtilsClass.prototype.hideContextMenu = function()
+	{
+		if(this.isShown)
+		{
+			this.element.innerHTML = "";
+			this.element 		   = null;
+
+			this.isShown = false;
+		}
+	};
+
+	ContextMenuUtilsClass.prototype.showContextMenu = function(element, event, options, onOptionSelectecCallback)
+	{
+		if(this.isShown)
+			this.hideContextMenu();
+
+		this.element 				  = element;
+		this.onOptionSelectecCallback = onOptionSelectecCallback;
+		document.onclick              = function() { ContextMenuUtils.instance.hideContextMenu(); };
+
+		var pageScrolledXOffset = window.pageXOffset || document.documentElement.scrollLeft;
+		var pageScrolledYOffset = window.pageYOffset || document.documentElement.scrollTop;
+
+		//alert("event.clientX = " + event.clientX);
+
+		element.style.position = "absolute";
+		element.style.left 	   = event.clientX + -2 + pageScrolledXOffset + "px";
+		element.style.top  	   = event.clientY + -2 + pageScrolledYOffset + "px";
+		element.style.display  = 'inline';
+
+		var elementHTML = "";
+
+		for(var x = 0; x < options.length; x++)
+		{
+			var currentOption       = options[x];
+			var currentOptionScaped = '"' + currentOption + '"';
+			var optionButton        = "<button style='width:120px; height:20px;' onclick='onContextMenuButtonClick(" + currentOptionScaped + ");' > " + currentOption + " </button>";
+			elementHTML 			+= optionButton + "<br>";
+		}
+
+		element.innerHTML = elementHTML;
+
+		this.isShown = true;
+
+		//event.preventDefault();
+	};
 }
 
-function onContextMenuButtonClick(option)
+function onContextMenuButtonClick(option)//TODO: move this to the class
 {
 	ContextMenuUtils.instance.hideContextMenu();
 	ContextMenuUtils.instance.onOptionSelectecCallback(option);
 }
 
-ContextMenuUtilsClass.prototype.hideContextMenu = function()
-{
-	if(this.isShown)
-	{
-		this.element.innerHTML = "";
-		this.element 		   = null;
-
-		this.isShown = false;
-	}
-};
-
-ContextMenuUtilsClass.prototype.showContextMenu = function(element, event, options, onOptionSelectecCallback)
-{
-	if(this.isShown)
-		this.hideContextMenu();
-
-	this.element 				  = element;
-	this.onOptionSelectecCallback = onOptionSelectecCallback;
-	document.onclick              = function() { ContextMenuUtils.instance.hideContextMenu(); };
-
-	var pageScrolledXOffset = window.pageXOffset || document.documentElement.scrollLeft;
-	var pageScrolledYOffset = window.pageYOffset || document.documentElement.scrollTop;
-
-	//alert("event.clientX = " + event.clientX);
-
-	element.style.position = "absolute";
-	element.style.left 	   = event.clientX + -2 + pageScrolledXOffset + "px";
-	element.style.top  	   = event.clientY + -2 + pageScrolledYOffset + "px";
-	element.style.display  = 'inline';
-
-	var elementHTML = "";
-
-	for(var x = 0; x < options.length; x++)
-	{
-		var currentOption       = options[x];
-		var currentOptionScaped = '"' + currentOption + '"';
-		var optionButton        = "<button style='width:120px; height:20px;' onclick='onContextMenuButtonClick(" + currentOptionScaped + ");' > " + currentOption + " </button>";
-		elementHTML 			+= optionButton + "<br>";
-	}
-
-	element.innerHTML = elementHTML;
-
-	this.isShown = true;
-
-	//event.preventDefault();
-};

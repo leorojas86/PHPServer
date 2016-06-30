@@ -1,31 +1,27 @@
 //Singleton instance
 var CacheUtils = { instance : new CacheUtilsClass() };
 
-//Variables
-CacheUtilsClass.prototype._templateVariable = null;
-
 //Constructors
 function CacheUtilsClass()
 {
+	this.get = function(key)
+	{
+		return localStorage.getItem(key);
+	};
+
+	this.set = function(key, value)
+	{
+		localStorage.setItem(key, value);
+	};
+
+	this.remove = function(key, value)
+	{
+		localStorage.removeItem('key');
+	};
+
+	this.clear = function()
+	{
+		localStorage.clear();
+	};
 }
 
-//Methods
-CacheUtilsClass.prototype.get = function(key)
-{
-	return localStorage.getItem(key);
-};
-
-CacheUtilsClass.prototype.set = function(key, value)
-{
-	localStorage.setItem(key, value);
-};
-
-CacheUtilsClass.prototype.remove = function(key, value)
-{
-	localStorage.removeItem('key');
-};
-
-CacheUtilsClass.prototype.clear = function()
-{
-	localStorage.clear();
-};
