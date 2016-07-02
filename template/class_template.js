@@ -7,7 +7,6 @@ function TemplateClass()
 	this.templatePublicVariable = null;
 	var _templatePrivateVariable = null;
 
-
 	//Methods
 	this.templateMethod = function()
 	{

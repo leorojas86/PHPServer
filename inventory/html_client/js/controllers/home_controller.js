@@ -1,17 +1,13 @@
 //Singleton instance
 var HomeController = { instance : new HomeControllerClass() };
 
-//Variables
-HomeControllerClass.prototype._templateVariable = null;
-
 //Constructors
 function HomeControllerClass()
 {
+	//Methods
+	this.render = function()
+	{
+		var pageContainer 		= document.getElementById("page_container");
+		pageContainer.innerHTML = "Home";
+	};
 }
-
-//Methods
-HomeControllerClass.prototype.render = function()
-{
-	var pageContainer 		= document.getElementById("page_container");
-	pageContainer.innerHTML = "Home";
-};
