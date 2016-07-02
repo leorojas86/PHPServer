@@ -3,15 +3,15 @@
 	Android:
 		Make the andriod app load the web page.
 	Handle connection errors.
+- Improve caching to release server resources.
+- Implement pagination.
 - Improve error management.
 - Code Cleanup.
 - Improve inventory logic.
 - Display multiplephotos.
 - Implement upload progress.
 - Performance Analytics.
-- Make context menu bigger.
 - Improve search logic.
-- Implement pagination.
 - Make modular actons.
 - Remove unused data.
 - Improve messaging (parameters and compression).
@@ -38,14 +38,13 @@
 - ADs.
 - Implement tabs for (Home, Global Search, etc).
 - Improve searchs, don't use like.
-- Improve caching to release server resources.
 - Error/Reload handling.
 - Improve Security.
 	- Encript password in DB.
 	- Add encription to login data and SSL.
 
 - Decouple Services:
-	- Auth
+	- Users
 	- Groups
 	- Search
 	- Files
