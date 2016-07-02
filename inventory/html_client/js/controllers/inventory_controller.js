@@ -1,7 +1,6 @@
 //Singleton instance
 var InventoryController = { instance : new InventoryControllerClass() };
 
-//Constructors
 function InventoryControllerClass()
 {
 	//Methods

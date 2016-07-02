@@ -1,7 +1,6 @@
 //Singleton instance
 var HeaderController = { instance : new HeaderControllerClass() };
 
-//Constructors
 function HeaderControllerClass()
 {
 	//Methods
@@ -17,7 +16,7 @@ function HeaderControllerClass()
 
 			headerContainer.innerHTML = "<button id='user_profile_button' class='button_class session_button_class'>" + logoutText + "</button>";
 
-			document.getElementById('user_profile_button').onclick = function(){ HeaderController.instance.onUserProfileButtonClick(); };
+			document.getElementById('user_profile_button').onclick = UserProfilePopup.instance.show;
 		}
 		else
 		{
@@ -25,24 +24,7 @@ function HeaderControllerClass()
 
 			headerContainer.innerHTML = "<button id='header_login_button' class='button_class session_button_class'>" + loginText + "</button>";
 			
-			document.getElementById('header_login_button').onclick = function(event)
-			{ 
-				var eventPosition = { x : event.currentTarget.offsetLeft,  y : event.currentTarget.offsetTop }; 
-				HeaderController.instance.onLoginButtonClick(eventPosition); 
-			};
+			document.getElementById('header_login_button').onclick = LoginPopup.instance.show;
 		}
-	};
-
-	this.onUserProfileButtonClick = function()
-	{
-		UserProfilePopup.instance.show();
-	};
-
-	this.onLoginButtonClick = function(event)
-	{
-		//alert(event.target);
-		//LoginPopup.instance.render();
-
-		LoginPopup.instance.show(event);
 	};
 }

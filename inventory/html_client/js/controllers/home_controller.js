@@ -1,7 +1,6 @@
 //Singleton instance
 var HomeController = { instance : new HomeControllerClass() };
 
-//Constructors
 function HomeControllerClass()
 {
 	//Methods

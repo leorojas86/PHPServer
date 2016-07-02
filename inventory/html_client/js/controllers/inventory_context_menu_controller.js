@@ -1,7 +1,6 @@
 //Singleton instance
 var InventoryContextMenuController = { instance : new InventoryContextMenuControllerClass() };
 
-//Constructors
 function InventoryContextMenuControllerClass()
 {
 	var _cuttingGroupId = null;

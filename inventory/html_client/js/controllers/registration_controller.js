@@ -1,7 +1,6 @@
 //Singleton instance
 var RegistrationController = { instance : new RegistrationControllerClass() };
 
-//Constructors
 function RegistrationControllerClass()
 {
 	//Methods
