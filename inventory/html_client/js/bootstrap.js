@@ -10,18 +10,14 @@ function BootstrapClass()
 	this.initialize = function()
 	{
 		if(!_isInitialized)
-		{
-			var thisVar = this;
-			LocManager.instance.loadLocalizationTable(Constants.ENGLISH_LOCALIZATION_TABLE, function() { thisVar.onLocalizationLoaded(); }, false);
-		}
+			LocManager.instance.loadLocalizationTable(Constants.ENGLISH_LOCALIZATION_TABLE, function() { Bootstrap.instance.onLocalizationLoaded(); }, false);
 		else
 			this.onBootstrapCompleted(true);
 	};
 
 	this.onLocalizationLoaded = function(success)
 	{
-		var thisVar = this;
-		ServiceClient.instance.initialize(function() { thisVar.onServiceClientInitialized(); });
+		ServiceClient.instance.initialize(function() { Bootstrap.instance.onServiceClientInitialized(); });
 	};
 
 	this.onServiceClientInitialized = function(success)
