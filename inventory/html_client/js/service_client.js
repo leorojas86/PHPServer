@@ -20,43 +20,6 @@ function ServiceClientClass()
 	}, params);*/
 	};
 
-	this.uploadFile = function(fileData, extension, groupData, callback, onProgress)
-	{
-		var payload 			= this.getPayload("File", "Upload");
-		payload["extension"]   	= extension;
-
-		var params 				= new Object();
-		params["payload"]   	= JSON.stringify(payload);
-		params["fileToUpload"]  = fileData;
-
-		this.requestWithParams("POST", params, function(result) { ServiceClient.instance.onFileUploadCompleted(result, groupData, callback); });
-	};
-
-	this.onFileUploadCompleted = function(result, groupData, callback)
-	{
-		if(result.success)
-		{
-			var data = new Object();
-
-			try
-			{
-				data = JSON.parse(groupData.data);
-			}
-			catch(e)
-			{
-				//Remove old data if the data is not a valid JSON
-			}
-			
-			var files = data.files == null ? new Array() : data.files;
-			files.push(result.data.file_name);
-			data.files = files;
-
-			this.updateGroupData(groupData.id, groupData.name, JSON.stringify(data), callback);
-		}
-		else
-			callback(result);
-	};
-
 	this.request = function(method, payload, callback)
 	{
 		var params = "payload=" + JSON.stringify(payload);
