@@ -9,43 +9,6 @@ function ServiceClientClass()
 		UsersService.instance.initialize(onInitializationCompleted);
 	};
 
-	this.updateSearchTags = function(groupId, data, removeOldTags)
-	{
-		var regexp 	= new RegExp("]|{|}|,|:|<|>|=|\t|\"", 'g');
-		var regexp2 = new RegExp(" +", 'g');
-		var tags 	= data.replace(regexp, '').replace(/\[/g,'').replace(regexp2, ',').toLowerCase();
-
-		//alert(tags);
-
-		//TODO: queue this steps
-		var payload 				= this.getPayload("Tag", "UpdateTags");
-		payload["id"]   			= groupId;
-		payload["tags"] 			= tags;
-		payload["remove_old_tags"] 	= removeOldTags;
-
-		this.request("POST", payload, function(result) {});
-	};
-
-	this.searchGroups = function(searchText, callback)
-	{
-		var payload 			= this.getPayload("Tag", "Search");
-		payload["searchText"]   = searchText.toLowerCase();
-
-		this.request("POST", payload, function(resultData) { ServiceClient.instance.onSearchGroupIdsCallback(resultData, callback); });
-	};
-
-	this.onSearchGroupIdsCallback = function(resultData, callback)
-	{
-		if(resultData.success && resultData.data.length > 0)
-		{
-			var payload 	 = this.getPayload("Group", "GetGroups");
-			payload["ids"]   = resultData.data;
-			this.request("POST", payload, callback);
-		}
-		else
-			callback(resultData);
-	};
-
 	this.profile = function(key, duration)
 	{
 		/*var name   	= "Profile_" + key; 

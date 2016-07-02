@@ -59,7 +59,7 @@ function InventorySearchResultsControllerClass()
 	this.renderResults = function(searchText)
 	{
 		InventoryGroupController.instance.renderLoadingText();
-		ServiceClient.instance.searchGroups(searchText, this.onSearchCallback);
+		TagsService.instance.searchGroups(searchText, this.onSearchCallback);
 	};
 
 	this.onSearchCallback = function(resultData)

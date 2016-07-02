@@ -34,7 +34,7 @@ function GroupsServiceClass()
 		if(result.success)
 		{
 			var tagsData = payload["name"];
-			ServiceClient.instance.updateSearchTags(result.data.insert_id, tagsData, false);//TODO: queue this steps
+			TagsService.instance.updateSearchTags(result.data.insert_id, tagsData, false);//TODO: queue this steps
 			callback(result);
 		}
 		else
@@ -56,7 +56,7 @@ function GroupsServiceClass()
 		payload["name"] = name;
 
 		ServiceClient.instance.request("POST", payload, callback);
-		ServiceClient.instance.updateSearchTags(groupId, name, false);//TODO: queue this steps
+		TagsService.instance.updateSearchTags(groupId, name, false);//TODO: queue this steps
 	};
 
 	this.moveGroup = function(groupId, parentGroupId, callback)
@@ -74,9 +74,21 @@ function GroupsServiceClass()
 		payload["id"]   = groupId;
 		payload["data"] = groupData;
 
-		this.request("POST", payload, callback);
+		ServiceClient.instance.request("POST", payload, callback);
 
 		var tagsData = groupData + " " + groupName;
-		ServiceClient.instance.updateSearchTags(groupId, tagsData, true);//TODO: queue this steps
+		TagsService.instance.updateSearchTags(groupId, tagsData, true);//TODO: queue this steps
+	};
+
+	this.getGroupsByIds = function(resultData, callback)//TODO: improve this
+	{
+		if(resultData.success && resultData.data.length > 0)
+		{
+			var payload 	 = ServiceClient.instance.getPayload("Group", "GetGroups");
+			payload["ids"]   = resultData.data;
+			ServiceClient.instance.request("POST", payload, callback);
+		}
+		else
+			callback(resultData);
 	};
 }
