@@ -13,9 +13,7 @@ function UserProfilePopupClass()
 					"<div>";
 
 		document.getElementById("user_profile_popup_container").innerHTML = html;
-		
 		document.getElementById('logout_button').onclick  = function(){ UserProfilePopup.instance.onLogoutButtonClick(); };
-		
 		document.getElementById('background_container').addEventListener('mousedown', function() { UserProfilePopup.instance.hide(); });
 	};
 

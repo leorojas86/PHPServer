@@ -16,11 +16,7 @@ function InventoryGroupControllerClass()
 		var isFolderGroup   = groupData.type == Constants.GROUP_ID_FOLDER;
 
 		var html = this.getGroupHeaderHTML(groupData);
-
-		if(isFolderGroup)
-			html += this.getGroupChildrenHTML(groupData);
-		else
-			html += this.getGroupInfoHTML(groupData);
+		html 	+= isFolderGroup ? this.getGroupChildrenHTML(groupData) : this.getGroupInfoHTML(groupData);
 
 		document.getElementById("group_container").innerHTML = html;
 
@@ -33,6 +29,7 @@ function InventoryGroupControllerClass()
 		if(isFolderGroup)
 		{
 			InventoryContextMenuController.instance.initContextMenu();
+			//TODO: Assing the events
 			/*for(var index in subGroups)
 			{
 				var subGroup     = subGroups[index];
@@ -173,7 +170,8 @@ function InventoryGroupControllerClass()
 	{
 		if(resultData.success) 
 			this.renderGroup(resultData.data);
-		//TODO: Report error
+		else
+			alert(resultData.data);
 	};
 
 	this.renderLoadingText = function()
@@ -253,7 +251,7 @@ function InventoryGroupControllerClass()
 				if(backButton != null) 
 					backButton.onclick.apply(backButton);
 		    break;
-		    default: console.log("pressed key = " + event.which); break;
+		    default: /*console.log("pressed key = " + event.which);*/ break;
 		}
 	};
 }
