@@ -13,7 +13,7 @@ function InventoryContextMenuControllerClass()
 
 		var isIOS = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
 
-		if(isIOS)//HACK: Fix iOS oncontextmenu event
+		if(isIOS)//HACK: Fix iOS oncontextmenu event, TODO: move this to a utils class
 		{	
 			var startTime = null;
 
@@ -66,7 +66,7 @@ function InventoryContextMenuControllerClass()
 			break;
 		}
 
-		this._folderId  = event.target.parentNode.id.replace("folder_", "");
+		_folderId  		= event.target.parentNode.id.replace("folder_", "");
 		var contextMenu = document.getElementById('context_menu_container');
 
 		var onContextMenuOptionSelected = function(option) { InventoryContextMenuController.instance.onContextMenuOptionSelected(option); } 
@@ -75,19 +75,19 @@ function InventoryContextMenuControllerClass()
 
 	this.canPasteFolder = function()
 	{
-		return this._cuttingGroupId != null;
+		return _cuttingGroupId != null;
 	};
 
 	this.onContextMenuOptionSelected = function(option)
 	{
 		switch(option)
 		{
-			case Constants.MENU_ITEM_ADD_ITEM: 		this.addItem(this._folderId); 			break;
+			case Constants.MENU_ITEM_ADD_ITEM: 		this.addItem(_folderId); 			break;
 			case Constants.MENU_ITEM_ADD_FOLDER: 	this.addFolder();      				break;
 			case Constants.MENU_ITEM_PASTE: 		this.pasteGroup();          			break;
-			case Constants.MENU_ITEM_RENAME:    	this.renameGroup(this._folderId); 		break;
-			case Constants.MENU_ITEM_CUT: 			this._cuttingGroupId = this._folderId;	break;
-			case Constants.MENU_ITEM_DELETE: 		this.removeSubgroupGroup(this._folderId);	break;
+			case Constants.MENU_ITEM_RENAME:    	this.renameGroup(_folderId); 		break;
+			case Constants.MENU_ITEM_CUT: 			_cuttingGroupId = _folderId;	break;
+			case Constants.MENU_ITEM_DELETE: 		this.removeSubgroupGroup(_folderId);	break;
 		}
 	};
 
@@ -129,13 +129,13 @@ function InventoryContextMenuControllerClass()
 
 	this.addSubGroup = function(newGroupName, type)
 	{
-		ServiceClient.instance.addSubGroup(InventoryGroupController.instance._groupData.id, newGroupName, type, null, this.onAddSubGroupCallback);
+		ServiceClient.instance.addSubGroup(InventoryGroupController.instance.groupData.id, newGroupName, type, null, this.onAddSubGroupCallback);
 	};
 
 	this.onAddSubGroupCallback = function(resultData)
 	{
 		if(resultData.success) 
-			InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance._groupData.id);
+			InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance.groupData.id);
 		else
 			alert(resultData.data);
 	};
@@ -143,14 +143,14 @@ function InventoryContextMenuControllerClass()
 	this.pasteGroup = function()
 	{
 		InventoryGroupController.instance.renderLoadingText();
-		ServiceClient.instance.moveGroup(this._cuttingGroupId, InventoryGroupController.instance._groupData.id, this.refreshCurrentGroup);
-		this._cuttingGroupId = null;
+		ServiceClient.instance.moveGroup(_cuttingGroupId, InventoryGroupController.instance.groupData.id, this.refreshCurrentGroup);
+		_cuttingGroupId = null;
 	};
 
 	this.refreshCurrentGroup = function(resultData)
 	{
 		if(resultData.success)
-			InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance._groupData.id);
+			InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance.groupData.id);
 		else
 			alert(resultData.data);
 	};
@@ -172,7 +172,7 @@ function InventoryContextMenuControllerClass()
 	this.onDeleteGroupCallback = function(resultData)
 	{
 		if(resultData.success)
-			InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance._groupData.id);
+			InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance.groupData.id);
 		else
 			alert(resultData.data);
 	};

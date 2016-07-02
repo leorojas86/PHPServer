@@ -4,12 +4,12 @@ var InventoryGroupController = { instance : new InventoryGroupControllerClass() 
 function InventoryGroupControllerClass()
 {
 	//Variables
-	var _groupData = null;
+	this.groupData = null;
 
 	//Methods
 	this.renderGroup = function(groupData)
 	{
-		this._groupData     = groupData;
+		this.groupData      = groupData;
 		var groupId       	= groupData.id;
 		var parentGroupId 	= groupData.parent_group_id;
 		var hasParentGroup 	= parentGroupId != 0;
@@ -55,7 +55,7 @@ function InventoryGroupControllerClass()
 	{
 		try
 		{
-			var data = JSON.parse(this._groupData.data);
+			var data = JSON.parse(this.groupData.data);
 
 			if(data.files != null && data.files.length > 0)
 			{
@@ -193,7 +193,7 @@ function InventoryGroupControllerClass()
 	{
 		var canvas 	  = document.getElementById('imageContainer');
 		var imageData = canvas.toDataURL("image/jpeg", 0.95);
-		ServiceClient.instance.uploadFile(imageData, "jpg", this._groupData, function(resultData) { InventoryGroupController.instance.onUploadCompleted(resultData); }, onProgress);
+		ServiceClient.instance.uploadFile(imageData, "jpg", this.groupData, function(resultData) { InventoryGroupController.instance.onUploadCompleted(resultData); }, onProgress);
 	};
 
 	function onProgress(progress) 
@@ -204,7 +204,7 @@ function InventoryGroupControllerClass()
 	this.onUploadCompleted = function(resultData)
 	{
 		if(resultData.success)
-			this.loadAjaxGroup(this._groupData.id);
+			this.loadAjaxGroup(this.groupData.id);
 
 		alert("result = " + JSON.stringify(resultData));
 	}
@@ -225,7 +225,7 @@ function InventoryGroupControllerClass()
 	this.onUpdateGroupDataClick = function(groupId)
 	{
 		var groupData = document.getElementById('group_data');
-		ServiceClient.instance.updateGroupData(groupId, this._groupData.name, groupData.value, onUpdateGroupDataCallback);
+		ServiceClient.instance.updateGroupData(groupId, this.groupData.name, groupData.value, onUpdateGroupDataCallback);
 	};
 
 	function onUpdateGroupDataCallback(resultData)
