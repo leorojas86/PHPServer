@@ -6,19 +6,17 @@
 - Improve error management.
 - Code Cleanup.
 - Improve inventory logic.
-- Use css sprites.
-- Upload and Display photos.
+- Display multiplephotos.
 - Implement upload progress.
 - Performance Analytics.
 - Make context menu bigger.
 - Improve search logic.
-- Sort folders/files.
 - Implement pagination.
 - Make modular actons.
 - Remove unused data.
 - Improve messaging (parameters and compression).
 - Implement home page.
-- Improve profiling 
+- Improve profiling
 	https://beaver6813.com/2009/10/php-get-current-time-in-milliseconds/
 
 - Infrastructure Migration
