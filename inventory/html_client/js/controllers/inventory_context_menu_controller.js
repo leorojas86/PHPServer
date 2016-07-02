@@ -123,13 +123,13 @@ function InventoryContextMenuControllerClass()
 		if(folderName != null && folderName != "") 
 		{
 			InventoryGroupController.instance.renderLoadingText();
-			ServiceClient.instance.renameGroup(folderId, folderName, this.refreshCurrentGroup);
+			GroupsService.instance.renameGroup(folderId, folderName, this.refreshCurrentGroup);
 		}
 	};
 
 	this.addSubGroup = function(newGroupName, type)
 	{
-		ServiceClient.instance.addSubGroup(InventoryGroupController.instance.groupData.id, newGroupName, type, null, this.onAddSubGroupCallback);
+		GroupsService.instance.addSubGroup(InventoryGroupController.instance.groupData.id, newGroupName, type, null, this.onAddSubGroupCallback);
 	};
 
 	this.onAddSubGroupCallback = function(resultData)
@@ -143,7 +143,7 @@ function InventoryContextMenuControllerClass()
 	this.pasteGroup = function()
 	{
 		InventoryGroupController.instance.renderLoadingText();
-		ServiceClient.instance.moveGroup(_cuttingGroupId, InventoryGroupController.instance.groupData.id, this.refreshCurrentGroup);
+		GroupsService.instance.moveGroup(_cuttingGroupId, InventoryGroupController.instance.groupData.id, this.refreshCurrentGroup);
 		_cuttingGroupId = null;
 	};
 
@@ -165,7 +165,7 @@ function InventoryContextMenuControllerClass()
 		if(remove) 
 		{
 			InventoryGroupController.instance.renderLoadingText();
-			ServiceClient.instance.deleteGroup(groupId, this.onDeleteGroupCallback);
+			GroupsService.instance.deleteGroup(groupId, this.onDeleteGroupCallback);
 		}
 	};
 

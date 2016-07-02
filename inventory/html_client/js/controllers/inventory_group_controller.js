@@ -163,7 +163,7 @@ function InventoryGroupControllerClass()
 	this.renderRootGroup = function()
 	{
 		this.renderLoadingText();
-		ServiceClient.instance.loadRootGroup(function(resultData) { InventoryGroupController.instance.onLoadGroupCallback(resultData); });
+		GroupsService.instance.loadRootGroup(function(resultData) { InventoryGroupController.instance.onLoadGroupCallback(resultData); });
 	};
 
 	this.onLoadGroupCallback = function(resultData)
@@ -184,7 +184,7 @@ function InventoryGroupControllerClass()
 	this.loadAjaxGroup = function(groupId)
 	{
 		this.renderLoadingText();
-		ServiceClient.instance.loadGroup(groupId, function(resultData) { InventoryGroupController.instance.onLoadGroupCallback(resultData); });
+		GroupsService.instance.loadGroup(groupId, function(resultData) { InventoryGroupController.instance.onLoadGroupCallback(resultData); });
 	};
 
 	this.uploadFile = function()
@@ -223,7 +223,7 @@ function InventoryGroupControllerClass()
 	this.onUpdateGroupDataClick = function(groupId)
 	{
 		var groupData = document.getElementById('group_data');
-		ServiceClient.instance.updateGroupData(groupId, this.groupData.name, groupData.value, onUpdateGroupDataCallback);
+		GroupsService.instance.updateGroupData(groupId, this.groupData.name, groupData.value, onUpdateGroupDataCallback);
 	};
 
 	function onUpdateGroupDataCallback(resultData)
