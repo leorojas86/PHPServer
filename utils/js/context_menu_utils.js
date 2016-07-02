@@ -46,7 +46,7 @@ function ContextMenuUtilsClass()
 		{
 			var currentOption       = options[x];
 			var currentOptionScaped = '"' + currentOption + '"';
-			var optionButton        = "<button style='width:120px; height:20px;' onclick='onContextMenuButtonClick(" + currentOptionScaped + ");' > " + currentOption + " </button>";
+			var optionButton        = "<button class='contextMenu' onclick='onContextMenuButtonClick(" + currentOptionScaped + ");' > " + currentOption + " </button>";
 			elementHTML 			+= optionButton + "<br>";
 		}
 

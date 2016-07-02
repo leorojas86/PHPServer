@@ -146,3 +146,8 @@
    width: 64px;
    height: 64px;
 }
+
+.contextMenu
+{
+	width:120px; height:25px;
+}
