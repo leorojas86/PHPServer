@@ -55,7 +55,7 @@ function GroupsServiceClass()
 		payload["id"]   = groupId;
 		payload["name"] = name;
 
-		this.request("POST", payload, callback);
+		ServiceClient.instance.request("POST", payload, callback);
 		ServiceClient.instance.updateSearchTags(groupId, name, false);//TODO: queue this steps
 	};
 
