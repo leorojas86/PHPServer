@@ -6,6 +6,9 @@
 		<title>Inventory</title>
 		<link rel="stylesheet" href="css/main_page.css">
 
+		<script src="js/constants.js"  					type="text/javascript"> </script>
+		<script src="js/bootstrap.js" 				 	type="text/javascript"> </script>
+
 		<script src="../../utils/js/cache_utils.js" 			type="text/javascript" ></script>
 		<script src="../../utils/js/math_utils.js" 				type="text/javascript" ></script>
 		<script src="../../utils/js/context_menu_utils.js" 		type="text/javascript" ></script>
@@ -13,10 +16,6 @@
 		<script src="../../utils/js/url_utils.js"     			type="text/javascript" ></script>
 		<script src="../../utils/js/localization_manager.js" 	type="text/javascript" ></script>
 		<script src="../../utils/js/image_rendering_utils.js" 	type="text/javascript" ></script>
-
-		<script src="js/constants.js"  					type="text/javascript"> </script>
-		<script src="js/bootstrap.js" 				 	type="text/javascript"> </script>
-		<script src="js/service_client.js" 				type="text/javascript"> </script>
 
 		<script src="js/controllers/header_controller.js" 					type="text/javascript"> </script>
 		<script src="js/controllers/home_controller.js" 					type="text/javascript"> </script>
@@ -30,30 +29,12 @@
 		<script src="js/popups/user_profile_popup.js" 	type="text/javascript"> </script>
 		<script src="js/popups/search_popup.js" 		type="text/javascript"> </script>
 
+		<script src="js/service_client.js" 				type="text/javascript"> </script>
 		<script src="js/services/users_service.js" 		type="text/javascript"> </script>
 		<script src="js/services/groups_service.js" 	type="text/javascript"> </script>
 
-
-		<script type="text/javascript">
-			
-			function onPageLoaded()
-			{
-				Bootstrap.instance.initialize(onAppInitializationCompleted);
-			}
-
-			function onAppInitializationCompleted()
-			{
-				HeaderController.instance.render();
-
-				if(UsersService.instance.loggedUser != null)
-					InventoryController.instance.render();
-				else
-					HomeController.instance.render();
-			}
-
-		</script>
 	</head>
-	<body class="body_class" onload="onPageLoaded();">
+	<body class='body_class'>
 		<div id='background_container'>
 			<div id='header_container' 	class='header_container_class'></div>
 			<div id='page_container' 	class='page_container_class'>Loading...</div>

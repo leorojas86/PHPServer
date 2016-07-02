@@ -4,21 +4,18 @@ var Bootstrap = { instance : new BootstrapClass() };
 function BootstrapClass()
 {
 	//Variables
-	var _isInitialized 			= false;
-	var _onBootstrapCompleted 	= null;
+	var _isInitialized = false;
 
 	//Methods
-	this.initialize = function(onBootstrapCompleted)
+	this.initialize = function()
 	{
-		this._onBootstrapCompleted = onBootstrapCompleted;
-
-		if(!this._isInitialized)
+		if(!_isInitialized)
 		{
 			var thisVar = this;
 			LocManager.instance.loadLocalizationTable(Constants.ENGLISH_LOCALIZATION_TABLE, function() { thisVar.onLocalizationLoaded(); }, false);
 		}
 		else
-			this.notifyCompleted();
+			this.onBootstrapCompleted(true);
 	};
 
 	this.onLocalizationLoaded = function(success)
@@ -29,13 +26,19 @@ function BootstrapClass()
 
 	this.onServiceClientInitialized = function(success)
 	{
-		this.notifyCompleted(success);
-		this._isInitialized = true;
+		this.onBootstrapCompleted(success);
+		_isInitialized = true;
 	};
 
-	this.notifyCompleted = function(success)
+	this.onBootstrapCompleted = function(success)
 	{
-		this._onBootstrapCompleted(success);
+		HeaderController.instance.render();
+
+		if(UsersService.instance.loggedUser != null)
+			InventoryController.instance.render();
+		else
+			HomeController.instance.render();
 	};
 }
 
+window.onload = function() { Bootstrap.instance.initialize(); };
