@@ -2,7 +2,7 @@ var Constants =
 {
      API_URL : 'http://201.200.1.187',
 
-     ENGLISH_LOCALIZATION_TABLE : "jsons/english.json",
+     ENGLISH_LOCALIZATION_TABLE : 'jsons/english.json',
 
      MENU_ITEM_ADD_ITEM       : 'Add Item',
      MENU_ITEM_ADD_FOLDER     : 'Add Folder',
@@ -14,9 +14,17 @@ var Constants =
      GROUP_ID_FOLDER : 0,
      GROUP_ID_ITEM   : 1,
 
-     IMAGE_FOLDER   : "Folder",
-     IMAGE_FILE     : "Item",
+     IMAGE_FOLDER   : 'Folder',
+     IMAGE_FILE     : 'Item',
      IMAGE_MAX_SIZE : 1024,
 
-     INVENTORY_CANVAS_MAX_SIZE : 400
+     INVENTORY_CANVAS_MAX_SIZE : 400,
+
+     SERVICES :
+     {
+          USERS  : { URL : 'http://201.200.1.187' },
+          GROUPS : { URL : 'http://201.200.1.187' },
+          TAGS   : { URL : 'http://201.200.1.187' },
+          FILES  : { URL : 'http://201.200.1.187' }
+     }
 };

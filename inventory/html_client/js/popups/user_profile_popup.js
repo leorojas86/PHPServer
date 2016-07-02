@@ -24,7 +24,7 @@ function UserProfilePopupClass()
 
 	this.onLogoutButtonClick = function()
 	{
-		ServiceClient.instance.logout();
+		UsersService.instance.logout();
 		HeaderController.instance.render();
 		HomeController.instance.render();
 		this.hide();

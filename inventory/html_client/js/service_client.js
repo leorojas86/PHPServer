@@ -3,70 +3,10 @@ var ServiceClient = { instance : new ServiceClientClass() };
 
 function ServiceClientClass()
 {
-	//Variables
-	this.loggedUser = null;
-
-	var _onInitializationCompleted = null;
-
-	//Initialization
-	var loggedUser = CacheUtils.instance.get("LoggedUser");
-
-	if(loggedUser != null)
-	{
-		this.loggedUser = JSON.parse(loggedUser);
-		console.log("session and logged user info loaded from cache");
-	}
-
 	//Methods
 	this.initialize = function(onInitializationCompleted)
 	{
-		this._onInitializationCompleted = onInitializationCompleted;
-		this.notifyOnInitializationCompleted();
-	};
-
-	this.notifyOnInitializationCompleted = function(success)
-	{
-		this._onInitializationCompleted(success);
-		this._onInitializationCompleted = null;
-	};
-
-	this.register = function(name, password, email, callback)
-	{
-		var payload 		= this.getPayload("User", "Register");
-		payload["name"]  	= name;
-		payload["email"]   	= email;
-		payload["password"] = password;
-
-		this.request("POST", payload, callback);
-	};
-
-	this.login = function(email, password, callback)
-	{
-		var payload 		= this.getPayload("User", "Login");
-		payload["email"]  	= email;
-		payload["password"] = password;
-		var loginCallback	=  function(resultData) { ServiceClient.instance.onLoginCallback(resultData, callback) };
-		
-		this.request("POST", payload, loginCallback);
-	};
-
-	this.updateUserData = function(data, callback)
-	{
-		var payload 	= this.getPayload("User", "UpdateData");
-		payload["data"] = data;
-
-		this.request("POST", payload, callback);
-	};
-
-	this.onLoginCallback = function(resultData, callback)
-	{
-		if(resultData.success)
-		{
-			this.loggedUser = resultData.data;
-			CacheUtils.instance.set("LoggedUser", JSON.stringify(this.loggedUser));
-		}
-
-		callback(resultData);
+		UsersService.instance.initialize(onInitializationCompleted);
 	};
 
 	this.loadRootGroup = function(callback)
@@ -246,7 +186,7 @@ function ServiceClientClass()
 	this.getPayload = function(service, method)
 	{
 		var payload 		= new Object();
-		payload["userId"] 	= this.loggedUser != null ? this.loggedUser.id : null;
+		payload["userId"] 	= UsersService.instance.loggedUser != null ? UsersService.instance.loggedUser.id : null;
 		payload["service"]  = service;
 		payload["method"]   = method;
 
@@ -279,13 +219,6 @@ function ServiceClientClass()
 		}
 
 		callback(resultData);
-	};
-
-	this.logout = function()
-	{
-		this.loggedUser = null;
-
-		CacheUtils.instance.clear();
 	};
 }
 

@@ -34,7 +34,7 @@ function RegistrationControllerClass()
 		var userConfirmPassword = document.getElementById('user_confirm_password');
 
 		if(userPassword.value == userConfirmPassword.value)//TODO: Validate email
-			ServiceClient.instance.register(userName.value, userPassword.value, userEmail.value, this.onRegisterCallback);
+			UsersService.instance.register(userName.value, userPassword.value, userEmail.value, this.onRegisterCallback);
 		else
 		{
 			var passwordsDontMatchText = LocManager.instance.getLocalizedText("passwords_dont_match_text");

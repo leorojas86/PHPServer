@@ -60,7 +60,7 @@ function LoginPopupClass()
 
 	this.login = function(email, password)//TODO: Display login while request is waiting.
 	{
-		ServiceClient.instance.login(email, password, LoginPopup.instance.onLogingCallback);
+		UsersService.instance.login(email, password, LoginPopup.instance.onLogingCallback);
 	};
 
 	this.onLogingCallback = function(resultData)

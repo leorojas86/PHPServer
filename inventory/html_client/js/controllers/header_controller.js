@@ -8,9 +8,9 @@ function HeaderControllerClass()
 	{
 		var headerContainer = document.getElementById("header_container");
 
-		if(ServiceClient.instance.loggedUser != null)
+		if(UsersService.instance.loggedUser != null)
 		{
-			var userName				= ServiceClient.instance.loggedUser.name;
+			var userName				= UsersService.instance.loggedUser.name;
 			var logoutText				= userName.length < 3 ? userName : userName.substring(0, 3); //LocManager.instance.getLocalizedText("logout_text");
 			headerContainer.innerHTML 	= "<button id='user_profile_button' class='button_class session_button_class'>" + logoutText + "</button>";
 
