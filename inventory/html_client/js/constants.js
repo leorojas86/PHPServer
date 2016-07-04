@@ -1,7 +1,5 @@
 var Constants =
 {
-     API_URL : 'http://201.200.1.187',
-
      ENGLISH_LOCALIZATION_TABLE : 'jsons/english.json',
 
      MENU_ITEM_ADD_ITEM       : 'Add Item',
