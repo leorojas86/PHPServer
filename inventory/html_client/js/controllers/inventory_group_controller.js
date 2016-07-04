@@ -57,7 +57,7 @@ function InventoryGroupControllerClass()
 			if(data.files != null && data.files.length > 0)
 			{
 				var imageName 		= data.files[0];
-				var imageURL 		= Constants.API_URL + "/uploads/" + imageName;
+				var imageURL 		= FilesService.instance.getFileURL(imageName);
 				var canvas 			= document.getElementById('imageContainer');
 				var image 			= new Image();
 				image.onload 		= function() { ImageRenderingUtils.instance.loadImageIntoCanvas(image, canvas, canvas.parentElement.offsetWidth * 0.9, Constants.IMAGE_MAX_SIZE); };

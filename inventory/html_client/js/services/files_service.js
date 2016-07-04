@@ -39,4 +39,9 @@ function FilesServiceClass()
 		else
 			callback(result);
 	};
+
+	this.getFileURL = function(fileName)
+	{
+		return Constants.SERVICES.FILES.URL + "/uploads/" + fileName;
+	}
 }
