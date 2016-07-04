@@ -20,16 +20,16 @@ function ServiceClientClass()
 	}, params);*/
 	};
 
-	this.request = function(method, payload, callback)
+	this.request = function(serviceURL, method, payload, callback)
 	{
 		var params = "payload=" + JSON.stringify(payload);
 
-		this.requestWithParams(method, params, callback);
+		this.requestWithParams(serviceURL, method, params, callback);
 	};
 
-	this.requestWithParams = function(method, params, callback)
+	this.requestWithParams = function(serviceURL, method, params, callback)
 	{
-		RequestUtils.instance.request(Constants.API_URL, method, function(xmlhttp, success, duration) { ServiceClient.instance.onRequestResponse(params, xmlhttp, success, callback, duration); }, params);
+		RequestUtils.instance.request(serviceURL, method, function(xmlhttp, success, duration) { ServiceClient.instance.onRequestResponse(params, xmlhttp, success, callback, duration); }, params);
 	};
 
 	this.getPayload = function(service, method)

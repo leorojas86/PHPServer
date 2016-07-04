@@ -35,7 +35,7 @@ function UsersServiceClass()
 		payload["email"]   	= email;
 		payload["password"] = password;
 
-		ServiceClient.instance.request("POST", payload, callback);
+		ServiceClient.instance.request(Constants.SERVICES.USERS.URL, "POST", payload, callback);
 	};
 
 	this.login = function(email, password, callback)
@@ -45,7 +45,7 @@ function UsersServiceClass()
 		payload["password"] = password;
 		var loginCallback	=  function(resultData) { UsersService.instance.onLoginCallback(resultData, callback) };
 		
-		ServiceClient.instance.request("POST", payload, loginCallback);
+		ServiceClient.instance.request(Constants.SERVICES.USERS.URL, "POST", payload, loginCallback);
 	};
 
 	this.updateUserData = function(data, callback)
@@ -53,7 +53,7 @@ function UsersServiceClass()
 		var payload 	= ServiceClient.instance.getPayload("User", "UpdateData");
 		payload["data"] = data;
 
-		ServiceClient.instance.request("POST", payload, callback);
+		ServiceClient.instance.request(Constants.SERVICES.USERS.URL, "POST", payload, callback);
 	};
 
 	this.onLoginCallback = function(resultData, callback)

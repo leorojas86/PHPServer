@@ -17,7 +17,7 @@ function TagsServiceClass()
 		payload["tags"] 			= tags;
 		payload["remove_old_tags"] 	= removeOldTags;
 
-		ServiceClient.instance.request("POST", payload, function(result) {});
+		ServiceClient.instance.request(Constants.SERVICES.TAGS.URL, "POST", payload, function(result) {});
 	};
 
 	this.searchGroups = function(searchText, callback)
@@ -25,6 +25,6 @@ function TagsServiceClass()
 		var payload 			= ServiceClient.instance.getPayload("Tag", "Search");
 		payload["searchText"]   = searchText.toLowerCase();
 
-		ServiceClient.instance.request("POST", payload, function(resultData) { GroupsService.instance.getGroupsByIds(resultData, callback); });
+		ServiceClient.instance.request(Constants.SERVICES.TAGS.URL, "POST", payload, function(resultData) { GroupsService.instance.getGroupsByIds(resultData, callback); });
 	};
 }
