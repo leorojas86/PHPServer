@@ -1,4 +1,3 @@
-- Setup development ssl.
 - Implement mobile apps:
 	Android:
 		Make the andriod app load the web page.
@@ -18,6 +17,7 @@
 - Implement home page.
 - Improve profiling
 	https://beaver6813.com/2009/10/php-get-current-time-in-milliseconds/
+- Setup development ssl.
 
 - Infrastructure Migration
 	- Git.
