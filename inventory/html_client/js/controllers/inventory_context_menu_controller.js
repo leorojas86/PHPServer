@@ -123,7 +123,7 @@ function InventoryContextMenuControllerClass()
 		if(folderName != null && folderName != "") 
 		{
 			InventoryGroupController.instance.renderLoadingText();
-			GroupsService.instance.renameGroup(folderId, folderName, this.refreshCurrentGroup);
+			GroupsService.instance.renameGroup(folderId, InventoryGroupController.instance.groupData.id, folderName, this.refreshCurrentGroup);
 		}
 	};
 
@@ -165,7 +165,7 @@ function InventoryContextMenuControllerClass()
 		if(remove) 
 		{
 			InventoryGroupController.instance.renderLoadingText();
-			GroupsService.instance.deleteGroup(groupId, this.onDeleteGroupCallback);
+			GroupsService.instance.deleteGroup(groupId, InventoryGroupController.instance.groupData.id, this.onDeleteGroupCallback);
 		}
 	};
 

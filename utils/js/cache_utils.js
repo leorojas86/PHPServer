@@ -14,9 +14,9 @@ function CacheUtilsClass()
 		localStorage.setItem(key, value);
 	};
 
-	this.remove = function(key, value)
+	this.remove = function(key)
 	{
-		localStorage.removeItem('key');
+		localStorage.removeItem(key);
 	};
 
 	this.clear = function()
