@@ -7,7 +7,7 @@ function ImageRenderingUtilsClass()
 	//Methods
 	this.renderImage = function(fileInput, canvas, preferedCanvasSize, maxImageSize)
 	{
-		var ext = fileInput.value.match(/\.([^\.]+)$/)[1];
+		var ext = (fileInput.value.match(/\.([^\.]+)$/)[1]).toLowerCase();
 
 		if(ext == 'jpg' || ext == 'jpeg' || ext == 'bmp' || ext == 'png' || ext == 'tif')
 		{
