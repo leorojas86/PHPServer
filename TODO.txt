@@ -1,8 +1,9 @@
 - Implement mobile apps:
+	iOS:
+		Add loading spinner and handle connection errors.
 	Android:
-		Make the andriod app load the web page.
+		Make file picker work on android.
 	Handle connection errors.
-- Improve caching to release server resources.
 - Implement pagination.
 - Improve error management.
 - Code Cleanup.
