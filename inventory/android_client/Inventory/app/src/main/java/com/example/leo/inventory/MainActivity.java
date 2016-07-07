@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity
         WebView webView = (WebView)findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setAllowContentAccess(true);
+        webView.getSettings().setAllowFileAccess(true);
+        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.setWebViewClient(new WebViewClient());
 
         //webView.addJavascriptInterface(new JSInterface(this), "external");
