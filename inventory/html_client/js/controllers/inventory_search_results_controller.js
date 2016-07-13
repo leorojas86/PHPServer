@@ -3,18 +3,6 @@ var InventorySearchResultsController = { instance : new InventorySearchResultsCo
 
 function InventorySearchResultsControllerClass()
 {
-	//Methods
-	this.renderSearchResults = function(groupData)
-	{
-		var html = getGroupHeaderHTML(groupData);
-		html += getGroupChildrenHTML(groupData);
-
-		document.getElementById("group_container").innerHTML 	= html;
-		document.getElementById("back_button").onclick 			= onBackButtonClick;
-		document.getElementById("search_button").onclick 		= onSearchButtonClick;
-		document.onkeyup 								 		= onKeyUp;
-	};
-
 	this.renderResults = function(searchText)
 	{
 		InventoryGroupController.instance.renderLoadingText();
@@ -47,6 +35,11 @@ function InventorySearchResultsControllerClass()
 		return html;
 	}
 
+	this.onSubGroupButtonClick = function(groupId)//TODO: Assign this event from code
+	{
+		InventoryGroupController.instance.loadAjaxGroup(groupId);
+	}
+
 	function getGroupHeaderHTML(groupData)
 	{
 		var backButtonTooltip = LocManager.instance.getLocalizedText("back_button_tooltip");
@@ -67,15 +60,21 @@ function InventorySearchResultsControllerClass()
 	function onSearchCallback(resultData)
 	{
 		if(resultData.success)
-			InventorySearchResultsController.instance.renderSearchResults(resultData.data);
-	};
+			renderSearchResults(resultData.data);
+	}
 
-	this.onSubGroupButtonClick = function(groupId)
+	function renderSearchResults(groupData)
 	{
-		InventoryGroupController.instance.loadAjaxGroup(groupId);
-	};
+		var html = getGroupHeaderHTML(groupData);
+		html += getGroupChildrenHTML(groupData);
 
-	function onSearchButtonClick()//TODO: Move the code that invokes the search here
+		document.getElementById("group_container").innerHTML 	= html;
+		document.getElementById("back_button").onclick 			= onBackButtonClick;
+		document.getElementById("search_button").onclick 		= onSearchButtonClick;
+		document.onkeyup 								 		= onKeyUp;
+	}
+
+	function onSearchButtonClick()
 	{
 		SearchPopup.instance.show();
 	}
