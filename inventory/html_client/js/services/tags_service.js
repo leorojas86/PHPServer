@@ -3,7 +3,7 @@ var TagsService = { instance : new TagsServiceClass() };
 
 function TagsServiceClass()
 {
-	this.updateSearchTags = function(groupId, data, removeOldTags)
+	this.updateSearchTags = function(groupId, data, type)
 	{
 		var regexp 	= new RegExp("]|{|}|,|:|<|>|=|\t|\"", 'g');
 		var regexp2 = new RegExp(" +", 'g');
@@ -14,16 +14,16 @@ function TagsServiceClass()
 		var payload 	= ServiceClient.instance.getPayload("Tag", "UpdateTags");
 		payload["id"]   = groupId;
 		payload["tags"] = tags;
-		payload["type"] = Constants.SEARCH_TAGS_TYPES.DATA_TEXT_TYPE;
+		payload["type"] = type;
 
-		ServiceClient.instance.request(Constants.SERVICES.TAGS.URL, "POST", payload, function(result) {});
+		ServiceClient.instance.request(Constants.SERVICES.TAGS.URL, "POST", payload, function(result) {});//TODO: Handle result
 	};
 
 	this.searchGroups = function(searchText, callback)
 	{
 		var payload 			= ServiceClient.instance.getPayload("Tag", "Search");
 		payload["searchText"]   = searchText.toLowerCase();
-		payload["types"]   		= [ Constants.SEARCH_TAGS_TYPES.DATA_TEXT_TYPE ];
+		payload["types"]   		= [ Constants.SEARCH_TAGS_TYPES.GROUP_DATA_TEXT_TYPE, Constants.SEARCH_TAGS_TYPES.GROUP_NAME_TYPE];
 
 		ServiceClient.instance.request(Constants.SERVICES.TAGS.URL, "POST", payload, function(resultData) { GroupsService.instance.getGroupsByIds(resultData, callback); });
 	};

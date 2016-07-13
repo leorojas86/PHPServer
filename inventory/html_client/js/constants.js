@@ -28,6 +28,7 @@ var Constants =
 
      SEARCH_TAGS_TYPES :
      {
-          DATA_TEXT_TYPE : 0
+          GROUP_DATA_TEXT_TYPE : 0,
+          GROUP_NAME_TYPE : 1
      }
 };

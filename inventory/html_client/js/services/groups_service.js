@@ -48,7 +48,7 @@ function GroupsServiceClass()
 		if(result.success)
 		{
 			var tagsData = payload["name"];
-			TagsService.instance.updateSearchTags(result.data.insert_id, tagsData, false);//TODO: queue this steps
+			TagsService.instance.updateSearchTags(result.data.insert_id, tagsData, Constants.SEARCH_TAGS_TYPES.GROUP_NAME_TYPE);//TODO: queue this steps
 		}
 
 		callback(result);
@@ -73,7 +73,7 @@ function GroupsServiceClass()
 		ServiceCache.instance.removeCachedGroupResult(groupId);
 		ServiceCache.instance.removeCachedGroupResult(parentGroupId);
 		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, callback);
-		TagsService.instance.updateSearchTags(groupId, name, false);//TODO: queue this steps
+		TagsService.instance.updateSearchTags(groupId, name, Constants.SEARCH_TAGS_TYPES.GROUP_NAME_TYPE);//TODO: queue this steps
 	};
 
 	this.moveGroup = function(groupId, parentGroupId, callback)
@@ -87,7 +87,7 @@ function GroupsServiceClass()
 		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, callback);
 	};
 
-	this.updateGroupData = function(groupId, groupName, groupData, callback)
+	this.updateGroupData = function(groupId, groupData, callback)
 	{
 		var payload 	= ServiceClient.instance.getPayload("Group", "UpdateData");
 		payload["id"]   = groupId;
@@ -96,8 +96,7 @@ function GroupsServiceClass()
 		ServiceCache.instance.removeCachedGroupResult(groupId);
 		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, callback);
 
-		var tagsData = groupData + " " + groupName;
-		TagsService.instance.updateSearchTags(groupId, tagsData, true);//TODO: queue this steps
+		TagsService.instance.updateSearchTags(groupId, groupData, Constants.SEARCH_TAGS_TYPES.GROUP_DATA_TEXT_TYPE);//TODO: queue this steps
 	};
 
 	this.getGroupsByIds = function(resultData, callback)//TODO: improve this

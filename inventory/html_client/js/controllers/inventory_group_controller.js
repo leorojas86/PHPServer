@@ -223,7 +223,7 @@ function InventoryGroupControllerClass()
 	this.onUpdateGroupDataClick = function(groupId)
 	{
 		var groupData = document.getElementById('group_data');
-		GroupsService.instance.updateGroupData(groupId, this.groupData.name, groupData.value, onUpdateGroupDataCallback);
+		GroupsService.instance.updateGroupData(groupId, groupData.value, onUpdateGroupDataCallback);
 	};
 
 	function onUpdateGroupDataCallback(resultData)

@@ -34,7 +34,7 @@ function FilesServiceClass()
 			files.push(result.data.file_name);
 			data.files = files;
 
-			GroupsService.instance.updateGroupData(groupData.id, groupData.name, JSON.stringify(data), callback);
+			GroupsService.instance.updateGroupData(groupData.id, JSON.stringify(data), callback);
 		}
 		else
 			callback(result);
