@@ -15,8 +15,8 @@ function InventoryGroupControllerClass()
 		var hasParentGroup 	= parentGroupId != 0;
 		var isFolderGroup   = groupData.type == Constants.GROUP_ID_FOLDER;
 
-		var html = this.getGroupHeaderHTML(groupData);
-		html 	+= isFolderGroup ? this.getGroupChildrenHTML(groupData) : this.getGroupInfoHTML(groupData);
+		var html = getGroupHeaderHTML(groupData);
+		html 	+= isFolderGroup ? getGroupChildrenHTML(groupData) : getGroupInfoHTML(groupData);
 
 		document.getElementById("group_container").innerHTML = html;
 
@@ -29,13 +29,13 @@ function InventoryGroupControllerClass()
 		if(isFolderGroup)
 		{
 			InventoryContextMenuController.instance.initContextMenu();
-			//TODO: Assing the events
-			/*for(var index in subGroups)
+			
+			for(var index in groupData.sub_groups)
 			{
-				var subGroup     = subGroups[index];
+				var subGroup     = groupData.sub_groups[index];
 				var subGroupId	 = subGroup.id;
-				document.getElementById("folder_image_" + subGroupId).onclick = function() { InventoryGroupController.instance.onSubGroupButtonClick(subGroupId); };
-			}*/
+				assignButtonClick("folder_image_" + subGroupId, subGroupId);
+			}
 		}
 		else
 		{
@@ -47,6 +47,11 @@ function InventoryGroupControllerClass()
 		document.getElementById("search_button").onclick = function() { InventoryGroupController.instance.onSearchButtonClick(); }
 		document.onkeyup 								 = function(event) { InventoryGroupController.instance.onKeyUp(event); }
 	};
+
+	function assignButtonClick(elementId, subGroupId)
+	{
+		document.getElementById(elementId).onclick 	= function() { onSubGroupButtonClick(subGroupId); };
+	}
 
 	this.loadImage = function()
 	{
@@ -70,7 +75,7 @@ function InventoryGroupControllerClass()
 	    }
 	}
 
-	this.getGroupInfoHTML = function(groupData)
+	function getGroupInfoHTML(groupData)
 	{
 		var updateButtonText  = LocManager.instance.getLocalizedText("update_button_text");
 		var uploadText   	  = LocManager.instance.getLocalizedText("upload_text");
@@ -89,12 +94,12 @@ function InventoryGroupControllerClass()
 			html += "</div>";
 
 		return html;
-	};
+	}
 
-	this.getGroupChildrenHTML = function(groupData)
+	function getGroupChildrenHTML(groupData)
 	{
 		var rightClickOptions 	= LocManager.instance.getLocalizedText("right_click_tooltip");
-		var subGroups 	  		= this.sortSubgroups(groupData.sub_groups);
+		var subGroups 	  		= sortSubgroups(groupData.sub_groups);
 
 		var html = "<div id='folders_scroll_panel' class='folders_scroll_panel_class' title='" + rightClickOptions + "'>";
 
@@ -105,10 +110,9 @@ function InventoryGroupControllerClass()
 			var subGroupId	 = subGroup.id;
 			var subGroupType = subGroup.type;
 			var icon 		 = subGroupType == Constants.GROUP_ID_FOLDER ? Constants.IMAGE_FOLDER : Constants.IMAGE_FILE;
-			var clickEvent   = "onclick='InventoryGroupController.instance.onSubGroupButtonClick(" + subGroupId + ");'"
 
 			html += "<div id='folder_" + subGroupId + "' class='folder_class'>"+
-						"<div id='folder_image_" + subGroupId + "' class='folder_image_class " + icon + "' " + clickEvent + "> </div>"+
+						"<div id='folder_image_" + subGroupId + "' class='folder_image_class " + icon + "'> </div>"+
 						"<label id='folder_label_" + subGroupId + "' >" + subGroupName + "</label>"+
 					"</div>";
 		}
@@ -116,9 +120,9 @@ function InventoryGroupControllerClass()
 		html += "</div>";
 
 		return html;
-	};
+	}
 
-	this.sortSubgroups = function(subGroups)
+	function sortSubgroups(subGroups)
 	{
 		var folders = new Array();
 		var items   = new Array();
@@ -136,7 +140,7 @@ function InventoryGroupControllerClass()
 		return folders.concat(items);
 	};
 
-	this.getGroupHeaderHTML = function(groupData)
+	function getGroupHeaderHTML(groupData)
 	{
 		var backButtonTooltip = LocManager.instance.getLocalizedText("back_button_tooltip");
 		var backButtonText    = LocManager.instance.getLocalizedText("back_button_text");
@@ -158,7 +162,7 @@ function InventoryGroupControllerClass()
 			html += "</div>";
 
 		return html;
-	};
+	}
 
 	this.renderRootGroup = function()
 	{
@@ -215,10 +219,10 @@ function InventoryGroupControllerClass()
 		ImageRenderingUtils.instance.renderImage(fileInput, canvas, canvas.parentElement.offsetWidth * 0.9, Constants.IMAGE_MAX_SIZE);
 	};
 
-	this.onSubGroupButtonClick = function(groupId)
+	function onSubGroupButtonClick(groupId)
 	{
-		this.loadAjaxGroup(groupId);
-	};
+		InventoryGroupController.instance.loadAjaxGroup(groupId);
+	}
 
 	this.onUpdateGroupDataClick = function(groupId)
 	{

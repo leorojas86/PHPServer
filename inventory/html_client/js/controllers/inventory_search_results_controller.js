@@ -29,8 +29,8 @@ function InventorySearchResultsControllerClass()
 
 		for(var index in groupData)
 		{
-			var subGroup     							= groupData[index];
-			var subGroupId	 							= subGroup.id;
+			var subGroup     = groupData[index];
+			var subGroupId	 = subGroup.id;
 			
 			assignButtonClick("folder_image_" + subGroupId, subGroupId);
 		}
