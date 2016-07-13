@@ -6,16 +6,24 @@ function InventorySearchResultsControllerClass()
 	//Methods
 	this.renderSearchResults = function(groupData)
 	{
-		var html = this.getGroupHeaderHTML(groupData);
-		html += this.getGroupChildrenHTML(groupData);
+		var html = getGroupHeaderHTML(groupData);
+		html += getGroupChildrenHTML(groupData);
 
 		document.getElementById("group_container").innerHTML 	= html;
-		document.getElementById("back_button").onclick 			= function() { InventoryGroupController.instance.renderRootGroup(); }
-		document.getElementById("search_button").onclick 		= function() { InventoryGroupController.instance.onSearchButtonClick(); }
-		document.onkeyup 								 		= function(event) { InventorySearchResultsController.instance.onKeyUp(event); }
+		document.getElementById("back_button").onclick 			= onBackButtonClick;
+		document.getElementById("search_button").onclick 		= onSearchButtonClick;
+		document.onkeyup 								 		= onKeyUp;
 	};
 
-	this.getGroupChildrenHTML = function(subGroups)
+	this.renderResults = function(searchText)
+	{
+		InventoryGroupController.instance.renderLoadingText();
+		
+		var types = [Constants.SEARCH_TAGS_TYPES.GROUP_DATA_TEXT_TYPE, Constants.SEARCH_TAGS_TYPES.GROUP_NAME_TYPE];
+		TagsService.instance.searchGroups(searchText, types, onSearchCallback);
+	};
+
+	function getGroupChildrenHTML(subGroups)
 	{
 		var html = "<div id='folders_scroll_panel' class='folders_scroll_panel_class'>";
 
@@ -26,7 +34,7 @@ function InventorySearchResultsControllerClass()
 			var subGroupId	 = subGroup.id;
 			var subGroupType = subGroup.type;
 			var icon 		 = subGroupType == Constants.GROUP_ID_FOLDER ? Constants.IMAGE_FOLDER : Constants.IMAGE_FILE;
-			var clickEvent   = "onclick='InventorySearchResultsController.instance.onSubGroupButtonClick(" + subGroupId + ");'"
+			var clickEvent   = "onclick='InventorySearchResultsController.instance.onSubGroupButtonClick(" + subGroupId + ");'"; //TODO: Assign this event from code
 
 			html += "<div id='folder_" + subGroupId + "' class='folder_class'>"+
 						"<div id='folder_image_" + subGroupId + "' class='folder_image_class " + icon + "' " + clickEvent + "> </div>"+
@@ -37,9 +45,9 @@ function InventorySearchResultsControllerClass()
 		html += "</div>";
 
 		return html;
-	};
+	}
 
-	this.getGroupHeaderHTML = function(groupData)
+	function getGroupHeaderHTML(groupData)
 	{
 		var backButtonTooltip = LocManager.instance.getLocalizedText("back_button_tooltip");
 		var backButtonText    = LocManager.instance.getLocalizedText("back_button_text");
@@ -54,15 +62,7 @@ function InventorySearchResultsControllerClass()
 			html += "</div>";
 
 		return html;
-	};
-
-	this.renderResults = function(searchText)
-	{
-		InventoryGroupController.instance.renderLoadingText();
-		
-		var types = [Constants.SEARCH_TAGS_TYPES.GROUP_DATA_TEXT_TYPE, Constants.SEARCH_TAGS_TYPES.GROUP_NAME_TYPE];
-		TagsService.instance.searchGroups(searchText, types, onSearchCallback);
-	};
+	}
 
 	function onSearchCallback(resultData)
 	{
@@ -75,17 +75,12 @@ function InventorySearchResultsControllerClass()
 		InventoryGroupController.instance.loadAjaxGroup(groupId);
 	};
 
-	this.onBackButtonClick = function(parentGroupId)
-	{
-		InventoryGroupController.instance.loadAjaxGroup(parentGroupId);
-	};
-
-	this.onSearchButtonClick = function()//TODO: Move the code that invokes the search here
+	function onSearchButtonClick()//TODO: Move the code that invokes the search here
 	{
 		SearchPopup.instance.show();
-	};
+	}
 
-	this.onKeyUp = function(event)
+	function onKeyUp(event)
 	{
 		switch(event.which) 
 		{
@@ -97,5 +92,10 @@ function InventorySearchResultsControllerClass()
 		    break;
 		    default: console.log("pressed key = " + event.which); break;
 		}
-	};
+	}
+
+	function onBackButtonClick()
+	{
+		InventoryGroupController.instance.renderRootGroup();
+	}
 }
