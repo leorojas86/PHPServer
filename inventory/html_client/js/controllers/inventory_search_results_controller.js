@@ -11,6 +11,36 @@ function InventorySearchResultsControllerClass()
 		TagsService.instance.searchGroups(searchText, types, onSearchCallback);
 	};
 
+	function onSearchCallback(resultData)
+	{
+		if(resultData.success)
+			renderSearchResults(resultData.data);
+	}
+
+	function renderSearchResults(groupData)
+	{
+		var html = getGroupHeaderHTML(groupData);
+		html += getGroupChildrenHTML(groupData);
+
+		document.getElementById("group_container").innerHTML 	= html;
+		document.getElementById("back_button").onclick 			= onBackButtonClick;
+		document.getElementById("search_button").onclick 		= onSearchButtonClick;
+		document.onkeyup 								 		= onKeyUp;
+
+		for(var index in groupData)
+		{
+			var subGroup     							= groupData[index];
+			var subGroupId	 							= subGroup.id;
+			
+			assignButtonClick("folder_image_" + subGroupId, subGroupId);
+		}
+	}
+
+	function assignButtonClick(elementId, subGroupId)
+	{
+		document.getElementById(elementId).onclick 	= function() { onSubGroupButtonClick(subGroupId); };
+	}
+
 	function getGroupChildrenHTML(subGroups)
 	{
 		var html = "<div id='folders_scroll_panel' class='folders_scroll_panel_class'>";
@@ -22,10 +52,9 @@ function InventorySearchResultsControllerClass()
 			var subGroupId	 = subGroup.id;
 			var subGroupType = subGroup.type;
 			var icon 		 = subGroupType == Constants.GROUP_ID_FOLDER ? Constants.IMAGE_FOLDER : Constants.IMAGE_FILE;
-			var clickEvent   = "onclick='InventorySearchResultsController.instance.onSubGroupButtonClick(" + subGroupId + ");'"; //TODO: Assign this event from code
-
+			
 			html += "<div id='folder_" + subGroupId + "' class='folder_class'>"+
-						"<div id='folder_image_" + subGroupId + "' class='folder_image_class " + icon + "' " + clickEvent + "> </div>"+
+						"<div id='folder_image_" + subGroupId + "' class='folder_image_class " + icon + "'> </div>"+
 						"<label id='folder_label_" + subGroupId + "' >" + subGroupName + "</label>"+
 					"</div>";
 		}
@@ -35,7 +64,7 @@ function InventorySearchResultsControllerClass()
 		return html;
 	}
 
-	this.onSubGroupButtonClick = function(groupId)//TODO: Assign this event from code
+	function onSubGroupButtonClick(groupId)
 	{
 		InventoryGroupController.instance.loadAjaxGroup(groupId);
 	}
@@ -55,23 +84,6 @@ function InventorySearchResultsControllerClass()
 			html += "</div>";
 
 		return html;
-	}
-
-	function onSearchCallback(resultData)
-	{
-		if(resultData.success)
-			renderSearchResults(resultData.data);
-	}
-
-	function renderSearchResults(groupData)
-	{
-		var html = getGroupHeaderHTML(groupData);
-		html += getGroupChildrenHTML(groupData);
-
-		document.getElementById("group_container").innerHTML 	= html;
-		document.getElementById("back_button").onclick 			= onBackButtonClick;
-		document.getElementById("search_button").onclick 		= onSearchButtonClick;
-		document.onkeyup 								 		= onKeyUp;
 	}
 
 	function onSearchButtonClick()
