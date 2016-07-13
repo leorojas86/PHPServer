@@ -24,5 +24,10 @@ var Constants =
           GROUPS : { URL : 'http://201.200.1.187' },
           TAGS   : { URL : 'http://201.200.1.187' },
           FILES  : { URL : 'http://201.200.1.187' }
+     },
+
+     SEARCH_TAGS_TYPES :
+     {
+          DATA_TEXT_TYPE : 0
      }
 };

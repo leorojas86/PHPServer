@@ -1,7 +1,7 @@
 <?php 
 	class Tag
 	{
-		public static function AddTag($name, $type)
+		public static function AddTag($name)
 		{
 			$sql    = "INSERT INTO tags (name) VALUES ('$name')";
 			$result = MySQLManager::ExecuteInsert($sql);
@@ -9,7 +9,7 @@
 			return $result;
 		}
 
-		public static function ExistsTag($name, $type)
+		public static function ExistsTag($name)
 		{
 			$sql    = "SELECT id FROM tags WHERE name='$name'";
 			$result = MySQLManager::ExecuteSelectRow($sql);
@@ -25,16 +25,15 @@
 			return $result;
 		}
 
-		public static function UpdateTags($id, $tags, $removeOldTags)
+		public static function UpdateTags($id, $tags, $type)
 		{
-			if($removeOldTags)
-				$result = Tag::RemoveAllTagAssociations($id, Constants::SEARCH_TAG_ID);
+			$result = Tag::RemoveAllTagAssociations($id, $type);
 
-			if(!$removeOldTags || $result->success)
+			if($result->success)
 			{
 				foreach($tags as $tagName)
 				{
-	    			$result = Tag::AssociateTag($id, $tagName, Constants::SEARCH_TAG_ID);
+	    			$result = Tag::AssociateTag($id, $tagName, $type);
 
 	    			if(!$result->success)
 	    				return $result;
@@ -46,15 +45,15 @@
 
 		private static function RemoveAllTagAssociations($id, $type)
 		{
-			$sql 	= "DELETE FROM tags_per_id WHERE id = '$id'";
+			$sql 	= "DELETE FROM tags_per_id WHERE id = '$id' and type = '$type'";
 			$result = MySQLManager::ExecuteDelete($sql, false);
 
 			return $result;
 		}
 
-		private static function AssociateTag($id, $tagName, $type)//TODO: Improve this
+		private static function AssociateTag($id, $tagName, $type)
 		{
-			$result = Tag::ExistsTag($tagName, $type);
+			$result = Tag::ExistsTag($tagName);
 
 			if($result->success)
 			{
@@ -62,7 +61,7 @@
 					$tagId = $result->data["id"];
 				else
 				{
-					$result = Tag::AddTag($tagName, $type);
+					$result = Tag::AddTag($tagName);
 
 					if($result->success)
 						$tagId = $result->data["insert_id"]; 
@@ -70,22 +69,22 @@
 						return $result;
 				}
 
-				$sql 	= "INSERT INTO tags_per_id (id, tag_id) VALUES ('$id', '$tagId')";
+				$sql 	= "INSERT INTO tags_per_id (id, tag_id, type) VALUES ('$id', '$tagId', '$type')";
 				$result = MySQLManager::ExecuteInsert($sql);
-
-				return $result;
 			}
-			else
-				return $result;
+
+			return $result;
 		}
 
-		public static function Search($searchText)
+		public static function Search($searchText, $types)
 		{
-			$searchType = Constants::SEARCH_TAG_ID;
+			$typesText 	= MySQLManager::GetListSQL($types);
+			$where 		= "WHERE tags_per_id.type IN ($typesText)";
+			$where 		.= " and tags.name = '$searchText'";
 			$sql    	= "SELECT tags_per_id.id as id
 							FROM tags_per_id
 					   		INNER JOIN tags ON tags_per_id.tag_id = tags.id
-					   		WHERE tags_per_id.type = '$searchType' and tags.name = '$searchText'
+					   		$where
 					   		LIMIT 500";
 			$result 	= MySQLManager::ExecuteSelectRows($sql);
 			

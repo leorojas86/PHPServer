@@ -164,5 +164,23 @@
 			
 			return $result;
 		}
+
+		public static function GetListSQL($list)
+		{
+			$firstId = $list[0]; 
+			$idsText = '';
+			
+			foreach($list as $id)
+			{
+				$stringId = print_r($id, true);//TODO: Check why this print_r
+
+				if($id == $firstId)
+					$idsText .= "'$stringId'";
+				else
+					$idsText .= ",'$stringId'";
+			}
+
+			return $idsText;
+		}
 	} 
 ?>

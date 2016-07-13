@@ -1,6 +1,5 @@
 <?php 
 	require_once "api/general/Environment.php";
-	require_once "api/services/tags/Constants.php";
 	require_once "api/services/tags/DBConfig.php";
 	require_once "api/services/tags/Tag.php";
 
@@ -28,7 +27,8 @@
 		private static function Search($payload)
 		{
 			$searchText = $payload->searchText;
-			$result 	= Tag::Search($searchText);
+			$types      = $payload->types;
+			$result 	= Tag::Search($searchText, $types);
 
 			if($result->success)
 			{
@@ -45,10 +45,10 @@
 
 		private static function UpdateTags($payload)
 		{
-			$id 	 		= $payload->id;
-			$tags    		= explode(',', $payload->tags);
-			$removeOldTags 	= $payload->remove_old_tags;
-			$result  		= Tag::UpdateTags($id, $tags, $removeOldTags);
+			$id 	= $payload->id;
+			$tags   = explode(',', $payload->tags);
+			$type   = $payload->type;
+			$result = Tag::UpdateTags($id, $tags, $type);
 
 			return $result;
 		}

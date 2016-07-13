@@ -66,19 +66,7 @@
 
 		public static function GetGroupsData($ids)
 		{
-			$firstId = $ids[0]; 
-			$idsText = '';
-			
-			foreach($ids as $id)
-			{
-				$stringId = print_r($id, true);//TODO: Check why this print_r
-
-				if($id == $firstId)
-					$idsText .= "'$stringId'";
-				else
-					$idsText .= ",'$stringId'";
-			}
-
+			$idsText = MySQLManager::GetListSQL($ids);
 			$sql    = "SELECT * FROM groups WHERE id IN ($idsText)";
 			$result = MySQLManager::ExecuteSelectRows($sql);
 
@@ -178,7 +166,7 @@
 			return $result;
 		}
 
-		public static function IsInHierarchy($id, $hierarchyParentId)
+		/*public static function IsInHierarchy($id, $hierarchyParentId)
 		{
 			if($hierarchyParentId != $id)
 			{
@@ -208,6 +196,6 @@
 			}
 
 			return new ServiceResult(true, true);
-		}
+		}*/
 	}
 ?>

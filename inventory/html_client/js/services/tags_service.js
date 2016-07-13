@@ -11,11 +11,10 @@ function TagsServiceClass()
 
 		//alert(tags);
 
-		//TODO: queue this steps
-		var payload 				= ServiceClient.instance.getPayload("Tag", "UpdateTags");
-		payload["id"]   			= groupId;
-		payload["tags"] 			= tags;
-		payload["remove_old_tags"] 	= removeOldTags;
+		var payload 	= ServiceClient.instance.getPayload("Tag", "UpdateTags");
+		payload["id"]   = groupId;
+		payload["tags"] = tags;
+		payload["type"] = Constants.SEARCH_TAGS_TYPES.DATA_TEXT_TYPE;
 
 		ServiceClient.instance.request(Constants.SERVICES.TAGS.URL, "POST", payload, function(result) {});
 	};
@@ -24,6 +23,7 @@ function TagsServiceClass()
 	{
 		var payload 			= ServiceClient.instance.getPayload("Tag", "Search");
 		payload["searchText"]   = searchText.toLowerCase();
+		payload["types"]   		= [ Constants.SEARCH_TAGS_TYPES.DATA_TEXT_TYPE ];
 
 		ServiceClient.instance.request(Constants.SERVICES.TAGS.URL, "POST", payload, function(resultData) { GroupsService.instance.getGroupsByIds(resultData, callback); });
 	};
