@@ -59,10 +59,12 @@ function InventorySearchResultsControllerClass()
 	this.renderResults = function(searchText)
 	{
 		InventoryGroupController.instance.renderLoadingText();
-		TagsService.instance.searchGroups(searchText, this.onSearchCallback);
+		
+		var types = [Constants.SEARCH_TAGS_TYPES.GROUP_DATA_TEXT_TYPE, Constants.SEARCH_TAGS_TYPES.GROUP_NAME_TYPE];
+		TagsService.instance.searchGroups(searchText, types, onSearchCallback);
 	};
 
-	this.onSearchCallback = function(resultData)
+	function onSearchCallback(resultData)
 	{
 		if(resultData.success)
 			InventorySearchResultsController.instance.renderSearchResults(resultData.data);

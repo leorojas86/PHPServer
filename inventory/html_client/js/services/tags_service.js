@@ -19,11 +19,11 @@ function TagsServiceClass()
 		ServiceClient.instance.request(Constants.SERVICES.TAGS.URL, "POST", payload, function(result) {});//TODO: Handle result
 	};
 
-	this.searchGroups = function(searchText, callback)
+	this.searchGroups = function(searchText, types, callback)
 	{
 		var payload 			= ServiceClient.instance.getPayload("Tag", "Search");
 		payload["searchText"]   = searchText.toLowerCase();
-		payload["types"]   		= [ Constants.SEARCH_TAGS_TYPES.GROUP_DATA_TEXT_TYPE, Constants.SEARCH_TAGS_TYPES.GROUP_NAME_TYPE];
+		payload["types"]   		= types;
 
 		ServiceClient.instance.request(Constants.SERVICES.TAGS.URL, "POST", payload, function(resultData) { GroupsService.instance.getGroupsByIds(resultData, callback); });
 	};
