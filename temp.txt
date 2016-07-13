@@ -1,0 +1,16 @@
+Update Tags Payload
+
+{
+ 	id     : 100,
+	texts  : { text : "hey, yeah, etc", type : 1 },
+	dates  : [ { date : "11-04-2014", type : 2 } ],
+	values : [ { value : 200, type : 3 } ]
+}
+
+Search With Tags Payload
+
+{
+	searchText   : { text : "text", types : [0, 1] }
+	searchDates  : { { min : "11-04-2014", max : "11-04-2015", type : 2 } }
+	searchValues : { { min : 3, max : 800, type : 3 } } 
+}
