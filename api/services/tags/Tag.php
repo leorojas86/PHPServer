@@ -1,17 +1,17 @@
 <?php 
 	class Tag
 	{
-		public static function AddTag($name)
+		public static function AddTextTag($text)
 		{
-			$sql    = "INSERT INTO text_tags (text) VALUES ('$name')";
+			$sql    = "INSERT INTO text_tags (text) VALUES ('$text')";
 			$result = MySQLManager::ExecuteInsert($sql);
 
 			return $result;
 		}
 
-		public static function ExistsTag($name)
+		public static function ExistsTextTag($text)
 		{
-			$sql    = "SELECT id FROM text_tags WHERE text='$name'";
+			$sql    = "SELECT id FROM text_tags WHERE text='$text'";
 			$result = MySQLManager::ExecuteSelectRow($sql);
 
 			if($result->success)
@@ -25,15 +25,15 @@
 			return $result;
 		}
 
-		public static function UpdateTags($id, $tags, $type)
+		public static function UpdateTextTags($id, $textTags, $type)
 		{
-			$result = Tag::RemoveAllTagAssociations($id, $type);
+			$result = Tag::RemoveAllTextTagAssociations($id, $type);
 
 			if($result->success)
 			{
-				foreach($tags as $tagName)
+				foreach($textTags as $text)
 				{
-	    			$result = Tag::AssociateTag($id, $tagName, $type);
+	    			$result = Tag::AssociateTextTag($id, $text, $type);
 
 	    			if(!$result->success)
 	    				return $result;
@@ -43,7 +43,7 @@
 			return $result;
 		}
 
-		private static function RemoveAllTagAssociations($id, $type)
+		private static function RemoveAllTextTagAssociations($id, $type)
 		{
 			$sql 	= "DELETE FROM text_tags_per_id WHERE id = '$id' and type = '$type'";
 			$result = MySQLManager::ExecuteDelete($sql, false);
@@ -51,9 +51,9 @@
 			return $result;
 		}
 
-		private static function AssociateTag($id, $tagName, $type)
+		private static function AssociateTextTag($id, $text, $type)
 		{
-			$result = Tag::ExistsTag($tagName);
+			$result = Tag::ExistsTextTag($text);
 
 			if($result->success)
 			{
@@ -61,7 +61,7 @@
 					$tagId = $result->data["id"];
 				else
 				{
-					$result = Tag::AddTag($tagName);
+					$result = Tag::AddTextTag($text);
 
 					if($result->success)
 						$tagId = $result->data["insert_id"]; 

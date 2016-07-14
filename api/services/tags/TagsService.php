@@ -48,7 +48,7 @@
 			$id 	= $payload->id;
 			$texts  = explode(',', $payload->texts->text);
 			$type   = $payload->texts->type;
-			$result = Tag::UpdateTags($id, $texts, $type);
+			$result = Tag::UpdateTextTags($id, $texts, $type);
 
 			return $result;
 		}
