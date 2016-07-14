@@ -46,9 +46,9 @@
 		private static function UpdateTags($payload)
 		{
 			$id 	= $payload->id;
-			$tags   = explode(',', $payload->tags);
-			$type   = $payload->type;
-			$result = Tag::UpdateTags($id, $tags, $type);
+			$texts  = explode(',', $payload->texts->text);
+			$type   = $payload->texts->type;
+			$result = Tag::UpdateTags($id, $texts, $type);
 
 			return $result;
 		}
