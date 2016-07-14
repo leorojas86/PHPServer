@@ -21,8 +21,7 @@ function TagsServiceClass()
 	this.searchGroups = function(searchText, types, callback)
 	{
 		var payload 			= ServiceClient.instance.getPayload("Tag", "Search");
-		payload["searchText"]   = searchText.toLowerCase();
-		payload["types"]   		= types;
+		payload["searchText"]   = { text : searchText.toLowerCase(), types : types };
 
 		ServiceClient.instance.request(Constants.SERVICES.TAGS.URL, "POST", payload, function(resultData) { GroupsService.instance.getGroupsByIds(resultData, callback); });
 	};
