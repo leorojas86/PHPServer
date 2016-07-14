@@ -45,10 +45,25 @@
 
 		private static function UpdateTags($payload)
 		{
-			$id 	= $payload->id;
-			$texts  = explode(',', $payload->texts->text);
-			$type   = $payload->texts->type;
-			$result = Tag::UpdateTextTags($id, $texts, $type);
+			$id = $payload->id;
+
+			if(isset($payload->texts))
+			{
+				$texts  = explode(',', $payload->texts->text);
+				$type   = $payload->texts->type;
+				$result = Tag::UpdateTextTags($id, $texts, $type);
+
+				if(!$result->success)
+					return $result;
+			}
+
+			if(isset($payload->dates))
+			{
+			}
+
+			if(isset($payload->values))
+			{
+			}
 
 			return $result;
 		}
