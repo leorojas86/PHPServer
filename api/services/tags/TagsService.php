@@ -26,9 +26,7 @@
 
 		private static function Search($payload)
 		{
-			$searchText = $payload->searchText->text;
-			$types      = $payload->searchText->types;
-			$result 	= Tag::Search($searchText, $types);
+			$result = Tag::Search($payload->searchText);
 
 			if($result->success)
 			{

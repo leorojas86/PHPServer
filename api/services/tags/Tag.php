@@ -55,11 +55,12 @@
 			return $result;
 		}
 
-		public static function Search($searchText, $types)
+		public static function Search($searchText)
 		{
-			$typesText 	= MySQLManager::GetListSQL($types);
+			$text 		= $searchText->text;
+			$typesText 	= MySQLManager::GetListSQL($searchText->types);
 			$where 		= "WHERE text_tags_per_id.type IN ($typesText)";
-			$where 		.= " and text_tags.text = '$searchText'";
+			$where 		.= " and text_tags.text = '$text'";
 			$sql    	= "SELECT text_tags_per_id.id as id
 							FROM text_tags_per_id
 					   		INNER JOIN text_tags ON text_tags_per_id.text_tag_id = text_tags.id
