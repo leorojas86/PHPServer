@@ -26,7 +26,7 @@
 
 		private static function Search($payload)
 		{
-			$result = Tag::Search($payload->searchText);
+			$result = Tag::Search($payload->searchText, $payload->searchDates, $payload->searchValues);
 
 			if($result->success)
 			{
@@ -57,10 +57,18 @@
 
 			if(isset($payload->dates))
 			{
+				$result = Tag::UpdateDateTags($id, $payload->dates);
+
+				if(!$result->success)
+					return $result;
 			}
 
 			if(isset($payload->values))
 			{
+				$result = Tag::UpdateValueTags($id, $payload->dates);
+
+				if(!$result->success)
+					return $result;
 			}
 
 			return $result;

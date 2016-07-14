@@ -55,7 +55,7 @@
 			return $result;
 		}
 
-		public static function Search($searchText)
+		public static function Search($searchText, $searchDates, $searchValues)
 		{
 			$text 		= $searchText->text;
 			$typesText 	= MySQLManager::GetListSQL($searchText->types);
