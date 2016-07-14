@@ -3,7 +3,7 @@
 	{
 		public static function AddTag($name)
 		{
-			$sql    = "INSERT INTO tags (name) VALUES ('$name')";
+			$sql    = "INSERT INTO text_tags (text) VALUES ('$name')";
 			$result = MySQLManager::ExecuteInsert($sql);
 
 			return $result;
@@ -11,7 +11,7 @@
 
 		public static function ExistsTag($name)
 		{
-			$sql    = "SELECT id FROM tags WHERE name='$name'";
+			$sql    = "SELECT id FROM text_tags WHERE text='$name'";
 			$result = MySQLManager::ExecuteSelectRow($sql);
 
 			if($result->success)
@@ -45,7 +45,7 @@
 
 		private static function RemoveAllTagAssociations($id, $type)
 		{
-			$sql 	= "DELETE FROM tags_per_id WHERE id = '$id' and type = '$type'";
+			$sql 	= "DELETE FROM text_tags_per_id WHERE id = '$id' and type = '$type'";
 			$result = MySQLManager::ExecuteDelete($sql, false);
 
 			return $result;
@@ -69,7 +69,7 @@
 						return $result;
 				}
 
-				$sql 	= "INSERT INTO tags_per_id (id, tag_id, type) VALUES ('$id', '$tagId', '$type')";
+				$sql 	= "INSERT INTO text_tags_per_id (id, text_tag_id, type) VALUES ('$id', '$tagId', '$type')";
 				$result = MySQLManager::ExecuteInsert($sql);
 			}
 
@@ -79,11 +79,11 @@
 		public static function Search($searchText, $types)
 		{
 			$typesText 	= MySQLManager::GetListSQL($types);
-			$where 		= "WHERE tags_per_id.type IN ($typesText)";
-			$where 		.= " and tags.name = '$searchText'";
-			$sql    	= "SELECT tags_per_id.id as id
-							FROM tags_per_id
-					   		INNER JOIN tags ON tags_per_id.tag_id = tags.id
+			$where 		= "WHERE text_tags_per_id.type IN ($typesText)";
+			$where 		.= " and text_tags.text = '$searchText'";
+			$sql    	= "SELECT text_tags_per_id.id as id
+							FROM text_tags_per_id
+					   		INNER JOIN text_tags ON text_tags_per_id.text_tag_id = text_tags.id
 					   		$where
 					   		LIMIT 500";
 			$result 	= MySQLManager::ExecuteSelectRows($sql);
