@@ -65,7 +65,7 @@
 
 			if(isset($payload->values))
 			{
-				$result = Tag::UpdateValueTags($id, $payload->dates);
+				$result = Tag::UpdateValueTags($id, $payload->values);
 
 				if(!$result->success)
 					return $result;
