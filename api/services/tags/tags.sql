@@ -2,6 +2,12 @@ CREATE DATABASE tags;
 
 USE tags;
 
+CREATE TABLE `ids` 
+(
+  `id` bigint(20) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE `text_tags` 
 (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,

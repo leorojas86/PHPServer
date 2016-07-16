@@ -1,7 +1,10 @@
 <?php 
 	require_once "api/general/Environment.php";
 	require_once "api/services/tags/DBConfig.php";
-	require_once "api/services/tags/Tag.php";
+	require_once "api/services/tags/models/Tag.php";
+	require_once "api/services/tags/models/Text.php";
+	require_once "api/services/tags/models/Value.php";
+	require_once "api/services/tags/models/Date.php";
 
 	class TagsService
 	{
@@ -26,7 +29,10 @@
 
 		private static function Search($payload)
 		{
-			$result = Tag::Search($payload->searchText, $payload->searchDates, $payload->searchValues);
+			$searchText 	= isset($payload->searchText) ? $payload->searchText 		: null;
+			$searchDates 	= isset($payload->searchDates) ? $payload->searchDates 		: null;
+			$searchValues 	= isset($payload->searchValues) ? $payload->searchValues 	: null;
+			$result 		= Tag::Search($searchText, $searchDates, $searchValues);
 
 			if($result->success)
 			{
