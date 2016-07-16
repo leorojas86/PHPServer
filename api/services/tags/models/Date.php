@@ -1,6 +1,35 @@
 <?php 
 	class Date
 	{
+		public static function GetSearchJoin()
+		{
+			return "INNER JOIN date_tags_per_id ON ids.id = date_tags_per_id.id";
+		}
+
+		public static function GetSearchWhere($searchDates)
+		{
+			$where  = " (";
+			$length = count($searchDates);
+
+			for($i = 0; $i < $length; $i++) 
+			{
+				if($i > 0)
+					$where .= " and ";
+
+				$date = $searchDates[$i];
+				$type  = $value->type;
+				$min   = $value->min;
+				$max   = $value->max;
+				$where .= "(value_tags_per_id.type = '$type' AND 
+							value_tags_per_id.date >= '$min' AND
+							value_tags_per_id.date <= '$max')";
+			}
+
+			$where .= " )";
+
+			return $where;
+		}
+
 		public static function UpdateDateTags($id, $dateTags)
 		{
 			foreach($dateTags as $dateTag)

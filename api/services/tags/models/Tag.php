@@ -35,12 +35,32 @@
 		public static function Search($searchText, $searchDates, $searchValues)
 		{
 			$joins = "";
-			$where = "";
+			$where = "WHERE ";
 
 			if($searchText != null)
 			{
-				$joins .= Text::GetSearchJoin($searchText);
+				$joins .= Text::GetSearchJoin();
 				$where .= Text::GetSearchWhere($searchText);
+			}
+
+			if($searchDates != null)
+			{
+				$joins .= Date::GetSearchJoin();
+
+				if($where != "")
+					$where .= " AND ";
+
+				$where .= Date::GetSearchWhere($searchDates);
+			}
+
+			if($searchValues != null)
+			{
+				$joins .= Value::GetSearchJoin();
+
+				if($where != "")
+					$where .= " AND ";
+
+				$where .= Value::GetSearchWhere($searchValues);
 			}
 
 			$sql    = "SELECT ids.id as id 

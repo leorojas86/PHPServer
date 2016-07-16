@@ -1,7 +1,7 @@
 <?php 
 	class Text
 	{
-		public static function GetSearchJoin($searchText)
+		public static function GetSearchJoin()
 		{
 			return "INNER JOIN text_tags_per_id ON ids.id = text_tags_per_id.id
 					INNER JOIN text_tags ON text_tags_per_id.text_tag_id = text_tags.id";
@@ -12,7 +12,7 @@
 			$text 		= $searchText->text;
 			$typesText 	= MySQLManager::GetListSQL($searchText->types);
 
-			return "WHERE text_tags_per_id.type IN ($typesText) and text_tags.text = '$text'";
+			return "( text_tags_per_id.type IN ($typesText) AND text_tags.text = '$text' )";
 		}
 
 		public static function UpdateTextTags($id, $textTags, $type)

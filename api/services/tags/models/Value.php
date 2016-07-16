@@ -1,6 +1,35 @@
 <?php 
 	class Value
 	{
+		public static function GetSearchJoin()
+		{
+			return "INNER JOIN value_tags_per_id ON ids.id = value_tags_per_id.id";
+		}
+
+		public static function GetSearchWhere($searchValues)
+		{
+			$where  = " (";
+			$length = count($searchValues);
+
+			for($i = 0; $i < $length; $i++) 
+			{
+				if($i > 0)
+					$where .= " and ";
+
+				$value = $searchValues[$i];
+				$type  = $value->type;
+				$min   = $value->min;
+				$max   = $value->max;
+				$where .= "(value_tags_per_id.type = '$type' AND 
+							value_tags_per_id.value >= '$min' AND
+							value_tags_per_id.value <= '$max')";
+			}
+
+			$where .= " )";
+
+			return $where;
+		}
+
 		public static function UpdateValueTags($id, $valueTags)
 		{
 			foreach($valueTags as $valueTag)
