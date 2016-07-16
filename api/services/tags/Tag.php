@@ -1,6 +1,37 @@
 <?php 
 	class Tag
 	{
+		public static function UpdateTags($id, $textTags, $datesTags, $valuesTags)
+		{
+			$result = Tag::AddId($id);
+
+			if($result->success)
+			{
+				if(isset($textTags))
+				{
+					$texts  = explode(',', $textTags->text);
+					$type   = $textTags->type;
+					$result = Tag::UpdateTextTags($id, $texts, $type);
+
+					if(!$result->success)
+						return $result;
+				}
+
+				if(isset($datesTags))
+				{
+					$result = Tag::UpdateDateTags($id, $datesTags);
+
+					if(!$result->success)
+						return $result;
+				}
+
+				if(isset($valuesTags))
+					$result = Tag::UpdateValueTags($id, $valuesTags);
+			}
+
+			return $result;
+		}
+
 		public static function UpdateTextTags($id, $textTags, $type)
 		{
 			$result = Tag::RemoveAllTextTagAssociations($id, $type);
@@ -68,6 +99,14 @@
 					   		LIMIT 500";
 			$result 	= MySQLManager::ExecuteSelectRows($sql);
 			
+			return $result;
+		}
+
+		private static function AddId($id)
+		{
+			$sql    = "INSERT IGNORE INTO ids (id) VALUES ('$id')";
+			$result = MySQLManager::ExecuteInsert($sql);
+
 			return $result;
 		}
 
