@@ -34,17 +34,21 @@
 
 		public static function Search($searchText, $searchDates, $searchValues)
 		{
-			$text 		= $searchText->text;
-			$typesText 	= MySQLManager::GetListSQL($searchText->types);
-			$where 		= "WHERE text_tags_per_id.type IN ($typesText)";
-			$where 		.= " and text_tags.text = '$text'";
-			$sql    	= "SELECT ids.id as id 
-							FROM ids
-							INNER JOIN text_tags_per_id ON ids.id = text_tags_per_id.id
-					   		INNER JOIN text_tags ON text_tags_per_id.text_tag_id = text_tags.id
-					   		$where
-					   		LIMIT 500";
-			$result 	= MySQLManager::ExecuteSelectRows($sql);
+			$joins = "";
+			$where = "";
+
+			if($searchText != null)
+			{
+				$joins .= Text::GetSearchJoin($searchText);
+				$where .= Text::GetSearchWhere($searchText);
+			}
+
+			$sql    = "SELECT ids.id as id 
+						FROM ids
+						$joins
+					   	$where
+					   	LIMIT 500";
+			$result = MySQLManager::ExecuteSelectRows($sql);
 			
 			return $result;
 		}
