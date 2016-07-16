@@ -45,7 +45,7 @@
 
 			if($searchDates != null)
 			{
-				$joins .= Date::GetSearchJoin();
+				$joins .= " " . Date::GetSearchJoin();
 
 				if($where != "")
 					$where .= " AND ";
@@ -55,7 +55,7 @@
 
 			if($searchValues != null)
 			{
-				$joins .= Value::GetSearchJoin();
+				$joins .= " " . Value::GetSearchJoin();
 
 				if($where != "")
 					$where .= " AND ";
@@ -63,11 +63,11 @@
 				$where .= Value::GetSearchWhere($searchValues);
 			}
 
-			$sql    = "SELECT ids.id as id 
-						FROM ids
-						$joins
-					   	$where
-					   	LIMIT 500";
+			$sql = "SELECT ids.id as id 
+					FROM ids
+					$joins
+					$where
+					LIMIT 500";
 			$result = MySQLManager::ExecuteSelectRows($sql);
 			
 			return $result;
