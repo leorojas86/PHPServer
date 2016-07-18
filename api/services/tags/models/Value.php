@@ -34,12 +34,12 @@
 		{
 			foreach($valueTags as $valueTag)
 			{
-				$result = Tag::RemoveValueTag($id, $valueTag->type);
+				$result = Value::RemoveValueTag($id, $valueTag->type);
 
 				if(!$result->success)
     				return $result;
 
-    			$result = Tag::AssociateValueTag($id, $valueTag->value, $valueTag->type);
+    			$result = Value::AssociateValueTag($id, $valueTag->value, $valueTag->type);
 
     			if(!$result->success)
     				return $result;

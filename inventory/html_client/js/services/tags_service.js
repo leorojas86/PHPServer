@@ -14,6 +14,8 @@ function TagsServiceClass()
 		var payload 	 = ServiceClient.instance.getPayload("Tag", "UpdateTags");
 		payload["id"]    = groupId;
 		payload["texts"] = { text : text, type : type };
+		payload["dates"] = [ { date : new Date(), type : 3 } ];
+		payload["values"] = [ { value : 3, type : 4 } ];
 
 		ServiceClient.instance.request(Constants.SERVICES.TAGS.URL, "POST", payload, function(result) {});//TODO: Handle result
 	};
