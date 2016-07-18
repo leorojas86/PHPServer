@@ -68,6 +68,9 @@
 					$joins
 					$where
 					LIMIT 500";
+
+			error_log("TEST ->  $sql");
+
 			$result = MySQLManager::ExecuteSelectRows($sql);
 			
 			return $result;

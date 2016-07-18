@@ -15,7 +15,7 @@ function TagsServiceClass()
 		payload["id"]    = groupId;
 		payload["texts"] = { text : text, type : type };
 		payload["dates"] = [ { date : new Date(), type : 3 } ];
-		payload["values"] = [ { value : 3, type : 4 } ];
+		payload["values"] = [ { value : 3, type : 4 }, { value : 4, type : 5 } ];
 
 		ServiceClient.instance.request(Constants.SERVICES.TAGS.URL, "POST", payload, function(result) {});//TODO: Handle result
 	};
@@ -24,6 +24,7 @@ function TagsServiceClass()
 	{
 		var payload 			= ServiceClient.instance.getPayload("Tag", "Search");
 		payload["searchText"]   = { text : searchText.toLowerCase(), types : types };
+		payload["searchValues"] = [ { min : 3, max : 4, type : 4 }, { min : 3, max : 4, type : 5 } ];
 
 		ServiceClient.instance.request(Constants.SERVICES.TAGS.URL, "POST", payload, function(resultData) { GroupsService.instance.getGroupsByIds(resultData, callback); });
 	};
