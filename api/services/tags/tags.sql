@@ -24,14 +24,14 @@ CREATE TABLE `text_tags_per_id`
 
 CREATE TABLE `date_tags_per_id` 
 (
-  `date` bigint(20) NOT NULL,
-  `id` datetime NOT NULL, -- object id associated
+  `date` datetime NOT NULL,
+  `id` bigint(20) NOT NULL, -- object id associated
   `type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `value_tags_per_id`
 (
   `value` float(20) NOT NULL,
-  `id` datetime NOT NULL, -- object id associated
+  `id` bigint(20) NOT NULL, -- object id associated
   `type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
