@@ -45,31 +45,35 @@
 
 			if($searchDates != null)
 			{
-				$joins .= " " . Date::GetSearchJoin();
+				$joins .= " 
+							" . Date::GetSearchJoin($searchDates);
 
 				if($where != "")
-					$where .= " AND ";
+					$where .= " AND 
+								";
 
 				$where .= Date::GetSearchWhere($searchDates);
 			}
 
 			if($searchValues != null)
 			{
-				$joins .= " " . Value::GetSearchJoin();
+				$joins .= " 
+							" . Value::GetSearchJoin($searchValues);
 
 				if($where != "")
-					$where .= " AND ";
+					$where .= " AND 
+								";
 
 				$where .= Value::GetSearchWhere($searchValues);
 			}
 
-			$sql = "SELECT ids.id as id 
+			$sql = "SELECT ids.id AS id 
 					FROM ids
 					$joins
 					$where
 					LIMIT 500";
 
-			error_log("TEST ->  $sql");
+			//error_log("TEST ->  $sql");
 
 			$result = MySQLManager::ExecuteSelectRows($sql);
 			

@@ -1,9 +1,15 @@
 <?php 
 	class Value
 	{
-		public static function GetSearchJoin()
+		public static function GetSearchJoin($searchValues)
 		{
-			return "INNER JOIN value_tags_per_id ON ids.id = value_tags_per_id.id";
+			$join 	= "";
+			$length = count($searchValues);
+
+			for($i = 0; $i < $length; $i++) 
+				$join .= "INNER JOIN value_tags_per_id AS vtpi$i ON ids.id = vtpi$i.id ";
+
+			return $join;
 		}
 
 		public static function GetSearchWhere($searchValues)
@@ -14,15 +20,13 @@
 			for($i = 0; $i < $length; $i++) 
 			{
 				if($i > 0)
-					$where .= " and ";
+					$where .= " AND ";
 
 				$value = $searchValues[$i];
 				$type  = $value->type;
 				$min   = $value->min;
 				$max   = $value->max;
-				$where .= "(value_tags_per_id.type = '$type' AND 
-							value_tags_per_id.value >= '$min' AND
-							value_tags_per_id.value <= '$max')";
+				$where .= "(vtpi$i.type = '$type' AND vtpi$i.value >= '$min' AND vtpi$i.value <= '$max')";
 			}
 
 			$where .= " )";

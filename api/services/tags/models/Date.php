@@ -1,9 +1,15 @@
 <?php 
 	class Date
 	{
-		public static function GetSearchJoin()
+		public static function GetSearchJoin($searchDates)
 		{
-			return "INNER JOIN date_tags_per_id ON ids.id = date_tags_per_id.id";
+			$join 	= "";
+			$length = count($searchDates);
+
+			for($i = 0; $i < $length; $i++) 
+				$join .= "INNER JOIN date_tags_per_id AS dtpi$i ON ids.id = dtpi$i.id ";
+
+			return $join;
 		}
 
 		public static function GetSearchWhere($searchDates)
@@ -14,15 +20,13 @@
 			for($i = 0; $i < $length; $i++) 
 			{
 				if($i > 0)
-					$where .= " and ";
+					$where .= " AND ";
 
 				$date = $searchDates[$i];
 				$type  = $value->type;
 				$min   = $value->min;
 				$max   = $value->max;
-				$where .= "(value_tags_per_id.type = '$type' AND 
-							value_tags_per_id.date >= '$min' AND
-							value_tags_per_id.date <= '$max')";
+				$where .= "(dtpi$i.type = '$type' AND dtpi$i.date >= '$min' AND dtpi$i.date <= '$max')";
 			}
 
 			$where .= " )";
