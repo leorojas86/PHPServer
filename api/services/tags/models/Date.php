@@ -23,9 +23,9 @@
 					$where .= " AND ";
 
 				$date = $searchDates[$i];
-				$type  = $value->type;
-				$min   = $value->min;
-				$max   = $value->max;
+				$type  = $date->type;
+				$min   = $date->min;
+				$max   = $date->max;
 				$where .= "(dtpi$i.type = '$type' AND dtpi$i.date >= '$min' AND dtpi$i.date <= '$max')";
 			}
 
