@@ -1,2 +1,3 @@
 Texture Packer -> https://www.leshylabs.com/apps/sstool/
 Sounds Maker -> https://www.leshylabs.com/apps/sfMaker/
+Icon generator -> http://www.gieson.com/Library/projects/utilities/icon_slayer/#.V47oj5MrJ98
