@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 
+#define WEB_SITE_URL @"http://201.200.1.187/inventory/html_client/index.html"
+
 @interface ViewController ()
 
 @end
@@ -18,11 +20,9 @@
 {
     [super viewDidLoad];
     
-    self.webview.delegate       = self;
-    NSString* fullURL           = @"http://201.200.1.187/inventory/html_client/index.html";
-    NSURLRequest* urlRequest    = [NSURLRequest requestWithURL:[NSURL URLWithString:fullURL]];
-
-    [self.webview loadRequest:urlRequest];
+    self.webview.delegate = self;
+    
+    [self loadWebSite];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)theWebView
@@ -42,6 +42,25 @@
     /*NSString* jsCommand = [NSString stringWithFormat:@"document.body.style.zoom = 0.3;"];
     [self.webview stringByEvaluatingJavaScriptFromString:jsCommand];
 */
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
+{
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Connection Error"
+                                                                   message:@"Failed to contact servers, please check your internet connection and try again."
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Retry" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) { [self loadWebSite]; }];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)loadWebSite
+{
+    NSURLRequest* urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:WEB_SITE_URL]];
+    [self.webview loadRequest:urlRequest];
 }
 
 - (void)didReceiveMemoryWarning
