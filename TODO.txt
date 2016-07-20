@@ -1,6 +1,7 @@
 - Implement mobile apps:
 	iOS:
 		Add loading spinner and handle connection errors.
+		Improve context menu buttons margin
 	Android:
 		Make file picker work on android.
 	Handle connection errors.
