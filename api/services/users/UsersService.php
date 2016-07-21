@@ -36,9 +36,10 @@
 					$result = new ServiceResult(false, "User with email '$email' already exists", UtilsConstants::USER_ALREADY_EXISTS_ERROR_CODE); 
 				else
 				{
-					$password = $payload->password;//TODO: send password securely
-					$name     = $payload->name;
-					return User::Register($email, $password, $name);//TODO: send validation email
+					$password 		= $payload->password;//TODO: send password securely
+					$name     		= $payload->name;
+					$rootGroupId    = $payload->rootGroupId;
+					return User::Register($email, $password, $name, $rootGroupId);//TODO: send validation email
 				}
 			}
 

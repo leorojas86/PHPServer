@@ -9,6 +9,7 @@ CREATE TABLE `users`
   `email` varchar(150) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
+  `rootGroupId` char(36) DEFAULT NULL,
   `data` text DEFAULT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

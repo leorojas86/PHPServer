@@ -24,10 +24,11 @@ function UsersServiceClass()
 
 	this.register = function(name, password, email, callback)
 	{
-		var payload 		= ServiceClient.instance.getPayload("User", "Register");
-		payload["name"]  	= name;
-		payload["email"]   	= email;
-		payload["password"] = password;
+		var payload 			= ServiceClient.instance.getPayload("User", "Register");
+		payload["name"]  		= name;
+		payload["email"]   		= email;
+		payload["password"] 	= password;
+		payload["rootGroupId"]	= GUIDUtils.instance.generateNewGUID();
 
 		ServiceClient.instance.request(Constants.SERVICES.USERS.URL, "POST", payload, callback);
 	};
