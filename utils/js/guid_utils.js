@@ -5,11 +5,10 @@ function GUIDUtils()
 {
 	this.generateNewGUID = function()
 	{
-		var guid = (this.s4() + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + this.s4() + this.s4()).toLowerCase();
-		return guid;
+		return (s4() + s4() + "-" + s4() + "-" + s4() + "-" + s4() + "-" + s4() + s4() + s4()).toLowerCase();
 	};
 
-	this.s4 = function()
+	function s4()
 	{
 	    return (((1+Math.random())*0x10000)|0).toString(16).substring(1); 
 	};

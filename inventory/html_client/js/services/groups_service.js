@@ -3,6 +3,11 @@ var GroupsService = { instance : new GroupsServiceClass() };
 
 function GroupsServiceClass()
 {
+	//var newGUID = GUIDUtils.instance.generateNewGUID();
+
+	//alert(newGUID);
+
+
 	this.loadRootGroup = function(callback)
 	{
 		var payload = ServiceClient.instance.getPayload("Group", "GetRootGroup");
