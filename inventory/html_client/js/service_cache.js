@@ -6,23 +6,17 @@ function ServiceCacheClass()
 	this.cacheGroupResult = function(groupId, result)
 	{
 		if(result.success)
-		{
-			var json = JSON.stringify(result);
-			CacheUtils.instance.set("Group_" + groupId, json);
-		}
+			CacheUtils.instance.setObject("Group_" + groupId, result);
 	};
 
 	this.getCachedGroupResult = function(groupId)
 	{
-		var json = CacheUtils.instance.get("Group_" + groupId);
+		var object = CacheUtils.instance.getObject("Group_" + groupId);
 
-		if(json != null)
-		{
+		if(object != null)
 			console.log("Getting cached group with id = " + groupId);
-			return JSON.parse(json);
-		}
 
-		return null;
+		return object;
 	}
 
 	this.removeCachedGroupResult = function(groupId)
