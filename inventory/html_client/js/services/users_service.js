@@ -3,17 +3,11 @@ var UsersService = { instance : new UsersServiceClass() };
 
 function UsersServiceClass()
 {
-	//Variables
-	this.loggedUser = null;
-
 	//Initialization
-	var loggedUser = CacheUtils.instance.get("LoggedUser");
+	this.loggedUser = CacheUtils.instance.getObject("LoggedUser");
 
-	if(loggedUser != null)
-	{
-		this.loggedUser = JSON.parse(loggedUser);
+	if(this.loggedUser != null)
 		console.log("session and logged user info loaded from cache");
-	}
 
 	//Methods
 	this.initialize = function(onInitializationCompleted)
@@ -61,7 +55,7 @@ function UsersServiceClass()
 		if(resultData.success)
 		{
 			this.loggedUser = resultData.data;
-			CacheUtils.instance.set("LoggedUser", JSON.stringify(this.loggedUser));
+			CacheUtils.instance.setObject("LoggedUser", this.loggedUser);
 		}
 
 		callback(resultData);

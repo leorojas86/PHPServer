@@ -4,13 +4,10 @@ LocalizationManagerClass.prototype._onLocalizationTableLoaded = null;
 
 function LocalizationManagerClass()
 {	
-	var localizationTable = CacheUtils.instance.get("LocalizationTable");
+	this.localizationTable = CacheUtils.instance.getObject("LocalizationTable");
 
-	if(localizationTable != null)
-	{
-		this.localizationTable = JSON.parse(localizationTable);
+	if(this.localizationTable != null)
 		console.log("localization table loaded from cache");
-	}
 
 	this.loadLocalizationTable = function(localizationTableURL, onLocalizationTableLoaded, force)
 	{
@@ -30,8 +27,8 @@ function LocalizationManagerClass()
 	{
 		if(success) 
 		{
-			CacheUtils.instance.set("LocalizationTable", xmlhttp.responseText);
 			this.localizationTable = JSON.parse(xmlhttp.responseText);
+			CacheUtils.instance.setObject("LocalizationTable", this.localizationTable);
 			this.notifyLocalizationLoaded(true);
 		}
 		else
