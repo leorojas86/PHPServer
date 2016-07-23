@@ -13,6 +13,8 @@ function GroupsServiceClass()
 		var payload = ServiceClient.instance.getPayload("Group", "GetRootGroup");
 
 		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, callback);
+		
+		//this.loadGroup(UsersService.instance.loggedUser.rootGroupId, callback);
 	};
 
 	this.loadGroup = function(groupId, callback)

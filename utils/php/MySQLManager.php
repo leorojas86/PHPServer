@@ -79,7 +79,10 @@
 				$row = MySQLManager::FetchRow($result->data);
 				MySQLManager::Close($result->data);
 
-				return new ServiceResult(true, $row);
+				if($row != null)
+					return new ServiceResult(true, $row);
+
+				return new ServiceResult(false, "SQL query did not return the expected result");
 			}
 			
 			return $result;
