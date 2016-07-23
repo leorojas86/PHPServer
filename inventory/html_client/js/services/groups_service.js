@@ -81,7 +81,7 @@ function GroupsServiceClass()
 
 	this.moveGroup = function(groupId, parentGroupId, callback)
 	{
-		var payload 				= ServiceClient.instance.getPayload("Group", "UpdateData");
+		var payload 				= ServiceClient.instance.getPayload("Group", "Move");
 		payload["id"]   			= groupId;
 		payload["parentGroupId"]   	= parentGroupId;
 
