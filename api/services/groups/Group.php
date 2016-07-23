@@ -76,7 +76,7 @@
 		public static function GetGroupPath($groupData)
 		{
 			$id   		   = $groupData["id"];
-			$name 		   = $groupData->data["name"];
+			$name 		   = json_decode($groupData["data"])->name;
 			$parentGroupId = $groupData["parent_group_id"];
 			$groupPath     = "$name/";
 
@@ -87,7 +87,7 @@
 				if($result->success)
 				{
 					$parentGroupId = $result->data["parent_group_id"];
-					$groupName     = $result->data->data["name"];
+					$groupName     = json_decode($result->data["data"])->name;
 					$groupPath     = $groupName . "/" .$groupPath;
 				}
 				else

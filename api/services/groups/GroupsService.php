@@ -85,12 +85,10 @@
 		private static function AddSubGroup($payload)
 		{
 			$userId   		  = $payload->userId;
-			$name 		      = $payload->name;
 			$parentGroupId    = $payload->parentGroupId;
-			$type	          = $payload->type;
 			$data    		  = $payload->data;
 
-			return Group::AddSubGroup($name, $parentGroupId, $userId, $type, $data);
+			return Group::AddSubGroup($parentGroupId, $userId, $data);
 		}
 
 		private static function GetGroups($payload)

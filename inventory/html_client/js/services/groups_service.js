@@ -40,7 +40,7 @@ function GroupsServiceClass()
 	{
 		var payload 				= ServiceClient.instance.getPayload("Group", "AddSubGroup");
 		payload["parentGroupId"]   	= parentGroupId;
-		payload["data"]   			= "{ \"name\":\"" + name + "\", \"type\":\"" + type + "\", subgroups:[] }";
+		payload["data"]   			= "{ \"name\":\"" + name + "\", \"type\":\"" + type + "\", \"subgroups\":[] }";
 
 		ServiceCache.instance.removeCachedGroupResult(parentGroupId);
 		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, function(result) { onAddSubGroupCallback(result, payload, callback); });
