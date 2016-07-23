@@ -1,7 +1,7 @@
 <?php 
 	class Group
 	{
-		public static function GetUserRootGroup($userId)
+		public static function GetUserRootGroup($userId)//TODO: remove this function
 		{
 			$result = Group::GetUserRootGroupInternal($userId);
 
@@ -25,7 +25,7 @@
 				return Group::GetGroup($result->data['id']);
 			
 			return $result;
-		} 
+		}
 
 		public static function GetGroup($id)
 		{
@@ -76,7 +76,7 @@
 		public static function GetGroupPath($groupData)
 		{
 			$id   		   = $groupData["id"];
-			$name 		   = $groupData["name"];
+			$name 		   = $groupData->data["name"];
 			$parentGroupId = $groupData["parent_group_id"];
 			$groupPath     = "$name/";
 
@@ -87,7 +87,7 @@
 				if($result->success)
 				{
 					$parentGroupId = $result->data["parent_group_id"];
-					$groupName     = $result->data["name"];
+					$groupName     = $result->data->data["name"];
 					$groupPath     = $groupName . "/" .$groupPath;
 				}
 				else
@@ -105,15 +105,16 @@
 			return $result;
 		}
 
-		private static function AddRootGroupToUser($userId)
+		private static function AddRootGroupToUser($userId)//TODO: Remove this 
 		{
-			return Group::AddSubGroup('RootGroup', null, $userId, UtilsConstants::DEFAULT_GROUP_TYPE, null);
+			$type = UtilsConstants::DEFAULT_GROUP_TYPE;
+			return Group::AddSubGroup(null, $userId, "{ \"name\":\"RootGroup\", \"type\":\"$type\", \"subgroups\":[] }");
 		}
 
-		public static function AddSubGroup($name, $parentGroupId, $userId, $type, $data)
+		public static function AddSubGroup($parentGroupId, $userId, $data)
 		{
-			$sql    = "INSERT INTO groups (name, user_id, parent_group_id, type, data, creation_date)
-					   VALUES ('$name', '$userId', '$parentGroupId', '$type', '$data', NOW())";
+			$sql    = "INSERT INTO groups (user_id, parent_group_id, data)
+					   VALUES ('$userId', '$parentGroupId', '$data')";
 			$result = MySQLManager::ExecuteInsert($sql);
 
 			return $result;
@@ -124,14 +125,6 @@
 			$sql    = "UPDATE groups SET data='$groupData' WHERE id='$id'";
 			$result = MySQLManager::ExecuteUpdate($sql);
 
-			return $result;
-		}
-
-		public static function Rename($id, $newName)
-		{
-			$sql    = "UPDATE groups SET name='$newName' WHERE id='$id'";
-			$result = MySQLManager::ExecuteUpdate($sql);
-			
 			return $result;
 		}
 
@@ -165,37 +158,5 @@
 			
 			return $result;
 		}
-
-		/*public static function IsInHierarchy($id, $hierarchyParentId)
-		{
-			if($hierarchyParentId != $id)
-			{
-				$result = Group::GetSubGroups($hierarchyParentId);
-
-				if($result->success)
-				{
-					$subGroups = $result->data;
-
-					foreach($subGroups as $subGroup)
-		    		{
-		    			$result = Group::IsInHierarchy($id, $subGroup["id"]);
-
-		    			if($result->success)
-		    			{
-		    				$isInHierarchy = $result->data;
-
-		    				if($isInHierarchy)
-		    					return $result;
-		    			}
-		    			else
-		    				return $result;
-					}
-
-					return new ServiceResult(true, false);
-				}
-			}
-
-			return new ServiceResult(true, true);
-		}*/
 	}
 ?>

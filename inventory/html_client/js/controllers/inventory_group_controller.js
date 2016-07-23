@@ -10,10 +10,11 @@ function InventoryGroupControllerClass()
 	this.renderGroup = function(groupData)
 	{
 		this.groupData      = groupData;
+		var data 			= JSON.parse(this.groupData.data);
 		var groupId       	= groupData.id;
 		var parentGroupId 	= groupData.parent_group_id;
 		var hasParentGroup 	= parentGroupId != 0;
-		var isFolderGroup   = groupData.type == Constants.GROUP_ID_FOLDER;
+		var isFolderGroup   = data.type == Constants.GROUP_ID_FOLDER;
 
 		var html = getGroupHeaderHTML(groupData);
 		html 	+= isFolderGroup ? getGroupChildrenHTML(groupData) : getGroupInfoHTML(groupData);
@@ -106,9 +107,10 @@ function InventoryGroupControllerClass()
 		for(var index in subGroups)
 		{
 			var subGroup     = subGroups[index];
-			var subGroupName = subGroup.name;
+			var data 		 = JSON.parse(subGroup.data);
+			var subGroupName = data.name;
 			var subGroupId	 = subGroup.id;
-			var subGroupType = subGroup.type;
+			var subGroupType = data.type;
 			var icon 		 = subGroupType == Constants.GROUP_ID_FOLDER ? Constants.IMAGE_FOLDER : Constants.IMAGE_FILE;
 
 			html += "<div id='folder_" + subGroupId + "' class='folder_class'>"+
@@ -130,8 +132,9 @@ function InventoryGroupControllerClass()
 		for(var index in subGroups)
 		{
 			var subGroup = subGroups[index];
+			var data 	 = JSON.parse(subGroup.data);//TODO: improve this
 
-			if(subGroup.type == Constants.GROUP_ID_FOLDER)
+			if(data.type == Constants.GROUP_ID_FOLDER)
 				folders.push(subGroup);
 			else
 				items.push(subGroup);
@@ -149,7 +152,8 @@ function InventoryGroupControllerClass()
 		
 		var groupPath     	= groupData.path.replace("RootGroup/", rootGroupText + "/");
 		var hasParentGroup 	= groupData.parent_group_id != 0;
-		var subGroupType  	= groupData.type;
+		var data 	 		= JSON.parse(groupData.data);
+		var subGroupType  	= data.type;
 		var isFolderGroup   = subGroupType == Constants.GROUP_ID_FOLDER;
 
 		var html = "<div id='group_header' class='group_header_class'>";

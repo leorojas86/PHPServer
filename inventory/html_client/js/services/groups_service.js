@@ -13,8 +13,6 @@ function GroupsServiceClass()
 		var payload = ServiceClient.instance.getPayload("Group", "GetRootGroup");
 
 		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, callback);
-		
-		//this.loadGroup(UsersService.instance.loggedUser.rootGroupId, callback);
 	};
 
 	this.loadGroup = function(groupId, callback)
@@ -38,13 +36,11 @@ function GroupsServiceClass()
 		callback(result);
 	}
 
-	this.addSubGroup = function(parentGroupId, newGroupName, type, data, callback)
+	this.addSubGroup = function(parentGroupId, name, type, data, callback)
 	{
 		var payload 				= ServiceClient.instance.getPayload("Group", "AddSubGroup");
 		payload["parentGroupId"]   	= parentGroupId;
-		payload["name"]   			= newGroupName;
-		payload["type"]   			= type;
-		payload["data"]   			= data;
+		payload["data"]   			= "{ \"name\":\"" + name + "\", \"type\":\"" + type + "\", subgroups:[] }";
 
 		ServiceCache.instance.removeCachedGroupResult(parentGroupId);
 		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, function(result) { onAddSubGroupCallback(result, payload, callback); });
@@ -54,7 +50,7 @@ function GroupsServiceClass()
 	{
 		if(result.success)
 		{
-			var tagsData = payload["name"];
+			var tagsData = payload["data"];
 			TagsService.instance.updateSearchTags(result.data.insert_id, tagsData, Constants.SEARCH_TAGS_TYPES.GROUP_NAME_TYPE);//TODO: queue this steps
 		}
 
@@ -71,21 +67,21 @@ function GroupsServiceClass()
 		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, callback);
 	};
 
-	this.renameGroup = function(groupId, parentGroupId, name, callback)
+	this.renameGroup = function(groupData, newName, callback)
 	{
+		groupData.name  = newName;  
 		var payload 	= ServiceClient.instance.getPayload("Group", "Rename");
 		payload["id"]   = groupId;
-		payload["name"] = name;
+		payload["data"] = JSON.stringify(groupData);
 
 		ServiceCache.instance.removeCachedGroupResult(groupId);
-		ServiceCache.instance.removeCachedGroupResult(parentGroupId);
 		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, callback);
 		TagsService.instance.updateSearchTags(groupId, name, Constants.SEARCH_TAGS_TYPES.GROUP_NAME_TYPE);//TODO: queue this steps
 	};
 
 	this.moveGroup = function(groupId, parentGroupId, callback)
 	{
-		var payload 				= ServiceClient.instance.getPayload("Group", "Move");
+		var payload 				= ServiceClient.instance.getPayload("Group", "UpdateData");
 		payload["id"]   			= groupId;
 		payload["parentGroupId"]   	= parentGroupId;
 
