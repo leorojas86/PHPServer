@@ -69,14 +69,9 @@ function GroupsServiceClass()
 
 	this.renameGroup = function(groupData, newName, callback)
 	{
-		groupData.name  = newName;  
-		var payload 	= ServiceClient.instance.getPayload("Group", "Rename");
-		payload["id"]   = groupId;
-		payload["data"] = JSON.stringify(groupData);
-
-		ServiceCache.instance.removeCachedGroupResult(groupId);
-		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, callback);
-		TagsService.instance.updateSearchTags(groupId, name, Constants.SEARCH_TAGS_TYPES.GROUP_NAME_TYPE);//TODO: queue this steps
+		var data  = JSON.parse(groupData.data);
+		data.name = newName;
+		this.updateGroupData(groupData.id, JSON.stringify(data), callback);
 	};
 
 	this.moveGroup = function(groupId, parentGroupId, callback)
