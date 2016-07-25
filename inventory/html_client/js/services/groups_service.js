@@ -71,8 +71,9 @@ function GroupsServiceClass()
 	{
 		var data  = JSON.parse(groupData.data);
 		data.name = newName;
-		this.updateGroupData(groupData.id, JSON.stringify(data), callback);
+
 		ServiceCache.instance.removeCachedGroupResult(parentGroupId);
+		this.updateGroupData(groupData.id, JSON.stringify(data), callback);
 	};
 
 	this.moveGroup = function(groupId, parentGroupId, oldParentGroupId, callback)
@@ -98,15 +99,10 @@ function GroupsServiceClass()
 		TagsService.instance.updateSearchTags(groupId, groupData, Constants.SEARCH_TAGS_TYPES.GROUP_DATA_TEXT_TYPE);//TODO: queue this steps
 	};
 
-	this.getGroupsByIds = function(resultData, callback)//TODO: improve this
+	this.getGroupsByIds = function(ids, callback)//TODO: improve this
 	{
-		if(resultData.success && resultData.data.length > 0)
-		{
-			var payload 	 = ServiceClient.instance.getPayload("Group", "GetGroups");
-			payload["ids"]   = resultData.data;
-			ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, callback);
-		}
-		else
-			callback(resultData);
+		var payload 	 = ServiceClient.instance.getPayload("Group", "GetGroups");
+		payload["ids"]   = ids;
+		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, callback);
 	};
 }

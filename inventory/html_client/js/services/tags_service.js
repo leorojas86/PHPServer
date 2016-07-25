@@ -29,6 +29,16 @@ function TagsServiceClass()
 		payload["searchDates"]  = [ { min : yesterday, max : currentDate, type : 3 } ];
 		payload["searchValues"] = [ { min : 3, max : 4, type : 4 }, { min : 3, max : 4, type : 5 } ];*/
 
-		ServiceClient.instance.request(Constants.SERVICES.TAGS.URL, "POST", payload, function(resultData) { GroupsService.instance.getGroupsByIds(resultData, callback); });
+		ServiceClient.instance.request(Constants.SERVICES.TAGS.URL, "POST", payload, function(resultData) { onSearchGroupsCallback(resultData, callback); });
 	};
+
+	function onSearchGroupsCallback(resultData, callback)
+	{
+		//GroupsService.instance.getGroupsByIds(resultData, callback);
+
+		if(resultData.success && resultData.data.length > 0)
+			GroupsService.instance.getGroupsByIds(resultData.data, callback);
+		else
+			callback(resultData);
+	}
 }
