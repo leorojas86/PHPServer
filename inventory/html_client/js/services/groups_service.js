@@ -75,7 +75,7 @@ function GroupsServiceClass()
 		ServiceCache.instance.removeCachedGroupResult(parentGroupId);
 	};
 
-	this.moveGroup = function(groupId, parentGroupId, callback)
+	this.moveGroup = function(groupId, parentGroupId, oldParentGroupId, callback)
 	{
 		var payload 				= ServiceClient.instance.getPayload("Group", "Move");
 		payload["id"]   			= groupId;
@@ -83,6 +83,7 @@ function GroupsServiceClass()
 
 		ServiceCache.instance.removeCachedGroupResult(groupId);
 		ServiceCache.instance.removeCachedGroupResult(parentGroupId);
+		ServiceCache.instance.removeCachedGroupResult(oldParentGroupId);
 		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, callback);
 	};
 

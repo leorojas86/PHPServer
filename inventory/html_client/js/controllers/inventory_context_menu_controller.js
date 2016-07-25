@@ -3,8 +3,9 @@ var InventoryContextMenuController = { instance : new InventoryContextMenuContro
 
 function InventoryContextMenuControllerClass()
 {
-	var _cuttingGroupId = null;
-	var _folderId 		= null;
+	var _cuttingGroupId 		= null;
+	var _cuttingGroupParentId 	= null;
+	var _folderId 				= null;
 
 	this.initContextMenu = function()
 	{
@@ -82,11 +83,14 @@ function InventoryContextMenuControllerClass()
 	{
 		switch(option)
 		{
-			case Constants.MENU_ITEM_ADD_ITEM: 		this.addItem(_folderId); 			break;
-			case Constants.MENU_ITEM_ADD_FOLDER: 	this.addFolder();      				break;
+			case Constants.MENU_ITEM_ADD_ITEM: 		this.addItem(_folderId); 				break;
+			case Constants.MENU_ITEM_ADD_FOLDER: 	this.addFolder();      					break;
 			case Constants.MENU_ITEM_PASTE: 		this.pasteGroup();          			break;
-			case Constants.MENU_ITEM_RENAME:    	this.renameGroup(_folderId); 		break;
-			case Constants.MENU_ITEM_CUT: 			_cuttingGroupId = _folderId;	break;
+			case Constants.MENU_ITEM_RENAME:    	this.renameGroup(_folderId); 			break;
+			case Constants.MENU_ITEM_CUT: 			
+										_cuttingGroupId = _folderId; 
+										_cuttingGroupParentId = InventoryGroupController.instance.groupData.id;
+			break;
 			case Constants.MENU_ITEM_DELETE: 		this.removeSubgroupGroup(_folderId);	break;
 		}
 	};
@@ -144,7 +148,7 @@ function InventoryContextMenuControllerClass()
 	this.pasteGroup = function()
 	{
 		InventoryGroupController.instance.renderLoadingText();
-		GroupsService.instance.moveGroup(_cuttingGroupId, InventoryGroupController.instance.groupData.id, this.refreshCurrentGroup);
+		GroupsService.instance.moveGroup(_cuttingGroupId, InventoryGroupController.instance.groupData.id, _cuttingGroupParentId, this.refreshCurrentGroup);
 		_cuttingGroupId = null;
 	};
 
