@@ -123,7 +123,8 @@ function InventoryContextMenuControllerClass()
 		if(folderName != null && folderName != "") 
 		{
 			InventoryGroupController.instance.renderLoadingText();
-			GroupsService.instance.renameGroup(InventoryGroupController.instance.groupData, folderName, this.refreshCurrentGroup);
+			var subgroup = InventoryGroupController.instance.findSubGroup(folderId);
+			GroupsService.instance.renameGroup(subgroup, InventoryGroupController.instance.groupData.id, folderName, this.refreshCurrentGroup);
 		}
 	};
 

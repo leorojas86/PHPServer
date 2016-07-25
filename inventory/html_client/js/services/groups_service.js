@@ -67,11 +67,12 @@ function GroupsServiceClass()
 		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, callback);
 	};
 
-	this.renameGroup = function(groupData, newName, callback)
+	this.renameGroup = function(groupData, parentGroupId, newName, callback)
 	{
 		var data  = JSON.parse(groupData.data);
 		data.name = newName;
 		this.updateGroupData(groupData.id, JSON.stringify(data), callback);
+		ServiceCache.instance.removeCachedGroupResult(parentGroupId);
 	};
 
 	this.moveGroup = function(groupId, parentGroupId, callback)
@@ -93,7 +94,6 @@ function GroupsServiceClass()
 
 		ServiceCache.instance.removeCachedGroupResult(groupId);
 		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, callback);
-
 		TagsService.instance.updateSearchTags(groupId, groupData, Constants.SEARCH_TAGS_TYPES.GROUP_DATA_TEXT_TYPE);//TODO: queue this steps
 	};
 

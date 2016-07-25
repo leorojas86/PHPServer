@@ -262,4 +262,19 @@ function InventoryGroupControllerClass()
 		    default: /*console.log("pressed key = " + event.which);*/ break;
 		}
 	};
+
+	this.findSubGroup = function(groupId)
+	{
+		var subgroups = InventoryGroupController.instance.groupData.sub_groups;
+		
+		for(var i = 0; i < subgroups.length; i++)
+		{
+			var currentSubGroup = subgroups[i];
+
+			if(currentSubGroup.id == groupId)
+				return currentSubGroup;
+		}
+
+		return null;
+	}
 }
