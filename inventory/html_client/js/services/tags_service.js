@@ -5,9 +5,10 @@ function TagsServiceClass()
 {
 	this.updateSearchTags = function(groupId, data, type)
 	{
-		var regexp 	= new RegExp("]|{|}|,|:|<|>|=|\t|\"", 'g');
-		var regexp2 = new RegExp(" +", 'g');
-		var text 	= data.replace(regexp, '').replace(/\[/g,'').replace(regexp2, ',').toLowerCase();
+		var text 	= data.replace(new RegExp("]|{|}|,|:|<|>|=|\t|\"", 'g'), ' ');
+		text        = text.replace(/\[/g,' ');
+		text 		= text.replace(new RegExp(" +", 'g'), ',');
+		text 		= text.toLowerCase();
 
 		//alert(tags);
 		var payload 	  = ServiceClient.instance.getPayload("Tag", "UpdateTags");
