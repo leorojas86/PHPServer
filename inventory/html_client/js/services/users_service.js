@@ -24,14 +24,24 @@ function UsersServiceClass()
 
 	this.register = function(name, password, email, callback)
 	{
-		var payload 			= ServiceClient.instance.getPayload("User", "Register");
-		payload["name"]  		= name;
-		payload["email"]   		= email;
-		payload["password"] 	= password;
-		payload["rootGroupId"]	= GUIDUtils.instance.generateNewGUID();
-
-		ServiceClient.instance.request(Constants.SERVICES.USERS.URL, "POST", payload, callback);
+		GroupsService.instance.createRootGroup(function(result) { onRootGroupCreated(result, name, password, email, callback); });
 	};
+
+	function onRootGroupCreated(result, name, password, email, callback)
+	{
+		if(result.success)
+		{
+			var payload 			= ServiceClient.instance.getPayload("User", "Register");
+			payload["name"]  		= name;
+			payload["email"]   		= email;
+			payload["password"] 	= password;
+			payload["rootGroupId"]	= result.data.insert_id;
+
+			ServiceClient.instance.request(Constants.SERVICES.USERS.URL, "POST", payload, callback);
+		}
+		else
+			callback(result);
+	}
 
 	this.login = function(email, password, callback)
 	{

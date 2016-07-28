@@ -134,7 +134,7 @@ function InventoryContextMenuControllerClass()
 
 	this.addSubGroup = function(newGroupName, type)
 	{
-		GroupsService.instance.addSubGroup(InventoryGroupController.instance.groupData.id, newGroupName, type, null, this.onAddSubGroupCallback);
+		GroupsService.instance.addSubGroup(InventoryGroupController.instance.groupData.id, newGroupName, type, this.onAddSubGroupCallback);
 	};
 
 	this.onAddSubGroupCallback = function(resultData)

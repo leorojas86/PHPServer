@@ -7,12 +7,14 @@ function GroupsServiceClass()
 
 	//alert(newGUID);
 
+	this.createRootGroup = function(callback)
+	{
+		this.addSubGroup(null, "RootGroup", Constants.GROUP_ID_FOLDER, callback);
+	};
 
 	this.loadRootGroup = function(callback)
 	{
-		var payload = ServiceClient.instance.getPayload("Group", "GetRootGroup");
-
-		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, callback);
+		this.loadGroup(UsersService.instance.loggedUser.rootGroupId, callback);
 	};
 
 	this.loadGroup = function(groupId, callback)
@@ -36,11 +38,11 @@ function GroupsServiceClass()
 		callback(result);
 	}
 
-	this.addSubGroup = function(parentGroupId, name, type, data, callback)
+	this.addSubGroup = function(parentGroupId, name, type, callback)
 	{
 		var payload 				= ServiceClient.instance.getPayload("Group", "AddSubGroup");
 		payload["parentGroupId"]   	= parentGroupId;
-		payload["data"]   			= "{ \"name\":\"" + name + "\", \"type\":\"" + type + "\", \"subgroups\":[] }";
+		payload["data"]   			= "{ \"name\":\"" + name + "\", \"type\":\"" + type + "\", \"customData\":\"{}\", \"subgroups\":[] }";
 
 		ServiceCache.instance.removeCachedGroupResult(parentGroupId);
 		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, function(result) { onAddSubGroupCallback(result, payload, callback); });

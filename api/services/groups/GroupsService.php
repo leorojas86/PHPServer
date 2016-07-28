@@ -14,7 +14,6 @@
 				switch($payload->method) 
 				{
 					case "GetGroup": 		$result = GroupsService::GetGroup($payload);		break;
-					case "GetRootGroup": 	$result = GroupsService::GetRootGroup($payload);	break;
 					case "UpdateData":		$result = GroupsService::UpdateGroupData($payload);	break;
 					case "AddSubGroup":		$result = GroupsService::AddSubGroup($payload);		break;
 					case "Delete":			$result = GroupsService::DeleteGroup($payload);		break;
@@ -50,20 +49,6 @@
 		{
 			$groupId = $payload->id;
 			return Group::Delete($groupId);
-		}
-
-		private static function GetRootGroup($payload)
-		{
-			$userId   		  = $payload->userId;
-			$rootGroupResult  = Group::GetUserRootGroup($userId);
-
-			if($rootGroupResult->success)
-			{
-				$groupId = $rootGroupResult->data["id"];
-				return Group::GetGroup($groupId);
-		 	}
-
-		 	return $rootGroupResult;
 		}
 
 		private static function GetGroup($payload)

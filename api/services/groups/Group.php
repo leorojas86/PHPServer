@@ -1,32 +1,6 @@
 <?php 
 	class Group
 	{
-		public static function GetUserRootGroup($userId)//TODO: remove this function
-		{
-			$result = Group::GetUserRootGroupInternal($userId);
-
-			if($result->success && $result->data == null)//User does not have a root folder yet
-			{
-				$result = Group::AddRootGroupToUser($userId);
-
-				if($result->success)
-					return Group::GetUserRootGroupInternal($userId);
-			}
-
-			return $result;
-		}
-
-		public static function GetUserRootGroupInternal($userId)
-		{
-			$sql    = "SELECT id FROM groups WHERE parent_group_id='0' AND user_id='$userId'";
-			$result = MySQLManager::ExecuteSelectRow($sql);
-			
-			if($result->success)
-				return Group::GetGroup($result->data['id']);
-			
-			return $result;
-		}
-
 		public static function GetGroup($id)
 		{
 			$result = Group::GetGroupData($id);
@@ -103,12 +77,6 @@
 			$result = MySQLManager::ExecuteSelectRows($sql);
 			
 			return $result;
-		}
-
-		private static function AddRootGroupToUser($userId)//TODO: Remove this 
-		{
-			$type = UtilsConstants::DEFAULT_GROUP_TYPE;
-			return Group::AddSubGroup(null, $userId, "{ \"name\":\"RootGroup\", \"type\":\"$type\", \"subgroups\":[] }");
 		}
 
 		public static function AddSubGroup($parentGroupId, $userId, $data)
