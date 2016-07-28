@@ -80,10 +80,11 @@ function InventoryGroupControllerClass()
 	{
 		var updateButtonText  = LocManager.instance.getLocalizedText("update_button_text");
 		var uploadText   	  = LocManager.instance.getLocalizedText("upload_text");
+		var customData		  = JSON.parse(groupData.data).customData;
 
 		var html = "<div id='item_scroll_panel' class='item_scroll_panel_class'>";
 				html += "<p>Data"+ 
-							"<input type='text' id='group_data' 			class='input_class'	value = '" + groupData.data + "'>" +
+							"<input type='text' id='group_data' 			class='input_class'	value = '" + customData + "'>" +
 							"<button 			id='update_group_button' 	class='button_class'>" + updateButtonText + "</button>" +
 						"</p>";
 
@@ -230,8 +231,10 @@ function InventoryGroupControllerClass()
 
 	this.onUpdateGroupDataClick = function(groupId)
 	{
-		var groupData = document.getElementById('group_data');
-		GroupsService.instance.updateGroupData(groupId, groupData.value, onUpdateGroupDataCallback);
+		var groupData 		= document.getElementById('group_data');
+		var data 			= JSON.parse(this.groupData.data);
+		data.customData 	= groupData.value;
+		GroupsService.instance.updateGroupData(groupId, JSON.stringify(data), onUpdateGroupDataCallback);
 	};
 
 	function onUpdateGroupDataCallback(resultData)
