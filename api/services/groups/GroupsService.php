@@ -13,9 +13,9 @@
 			{
 				switch($payload->method) 
 				{
-					case "GetGroup": 		$result = GroupsService::GetGroup($payload);		break;
-					case "UpdateData":		$result = GroupsService::UpdateGroupData($payload);	break;
 					case "Add":				$result = GroupsService::AddGroup($payload);		break;
+					case "Get": 			$result = GroupsService::GetGroup($payload);		break;
+					case "UpdateData":		$result = GroupsService::UpdateGroupData($payload);	break;
 					case "Delete":			$result = GroupsService::DeleteGroup($payload);		break;
 					case "Move":			$result = GroupsService::MoveGroup($payload);		break;
 					case "Rename":			$result = GroupsService::RenameGroup($payload);		break;

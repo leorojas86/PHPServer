@@ -25,7 +25,7 @@ function GroupsServiceClass()
 			callback(cachedResult);
 		else
 		{
-			var payload 	= ServiceClient.instance.getPayload("Group", "GetGroup");
+			var payload 	= ServiceClient.instance.getPayload("Group", "Get");
 			payload["id"]   = groupId;
 
 			ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, function(result) { onLoadGroupCallback(groupId, result, callback); });
