@@ -79,10 +79,10 @@
 			return $result;
 		}
 
-		public static function AddGroup($parentGroupId, $userId, $data)
+		public static function AddGroup($parentGroupId, $data)
 		{
-			$sql    = "INSERT INTO groups (user_id, parent_group_id, data)
-					   VALUES ('$userId', '$parentGroupId', '$data')";
+			$sql    = "INSERT INTO groups (parent_group_id, data)
+					   VALUES ('$parentGroupId', '$data')";
 			$result = MySQLManager::ExecuteInsert($sql);
 
 			return $result;

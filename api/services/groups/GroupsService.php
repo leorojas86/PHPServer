@@ -69,11 +69,10 @@
 
 		private static function AddGroup($payload)
 		{
-			$userId   		  = $payload->userId;
 			$parentGroupId    = $payload->parentGroupId;
 			$data    		  = $payload->data;
 
-			return Group::AddGroup($parentGroupId, $userId, $data);
+			return Group::AddGroup($parentGroupId, $data);
 		}
 
 		private static function GetGroups($payload)
