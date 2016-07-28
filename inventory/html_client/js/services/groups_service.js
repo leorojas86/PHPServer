@@ -92,7 +92,7 @@ function GroupsServiceClass()
 
 	this.updateGroupData = function(groupId, groupData, callback)
 	{
-		var payload 	= ServiceClient.instance.getPayload("Group", "UpdateData");
+		var payload 	= ServiceClient.instance.getPayload("Group", "Update");
 		payload["id"]   = groupId;
 		payload["data"] = groupData;
 

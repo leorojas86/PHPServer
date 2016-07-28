@@ -13,13 +13,13 @@
 			{
 				switch($payload->method) 
 				{
-					case "Add":				$result = GroupsService::AddGroup($payload);		break;
-					case "Get": 			$result = GroupsService::GetGroup($payload);		break;
-					case "UpdateData":		$result = GroupsService::UpdateGroupData($payload);	break;
-					case "Delete":			$result = GroupsService::DeleteGroup($payload);		break;
-					case "Move":			$result = GroupsService::MoveGroup($payload);		break;
-					case "Rename":			$result = GroupsService::RenameGroup($payload);		break;
-					case "GetGroups": 		$result = GroupsService::GetGroups($payload);		break;
+					case "Add":			$result = GroupsService::AddGroup($payload);		break;
+					case "Get": 		$result = GroupsService::GetGroup($payload);		break;
+					case "Update":		$result = GroupsService::UpdateGroupData($payload);	break;
+					case "Delete":		$result = GroupsService::DeleteGroup($payload);		break;
+					case "Move":		$result = GroupsService::MoveGroup($payload);		break;
+					case "Rename":		$result = GroupsService::RenameGroup($payload);		break;
+					case "GetGroups": 	$result = GroupsService::GetGroups($payload);		break;
 					default: 		 
 						$result = new ServiceResult(false, "Unsupported Groups service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
 					break;
