@@ -15,7 +15,7 @@
 				{
 					case "GetGroup": 		$result = GroupsService::GetGroup($payload);		break;
 					case "UpdateData":		$result = GroupsService::UpdateGroupData($payload);	break;
-					case "AddSubGroup":		$result = GroupsService::AddSubGroup($payload);		break;
+					case "Add":				$result = GroupsService::AddGroup($payload);		break;
 					case "Delete":			$result = GroupsService::DeleteGroup($payload);		break;
 					case "Move":			$result = GroupsService::MoveGroup($payload);		break;
 					case "Rename":			$result = GroupsService::RenameGroup($payload);		break;
@@ -67,13 +67,13 @@
 			return $result;
 		}
 
-		private static function AddSubGroup($payload)
+		private static function AddGroup($payload)
 		{
 			$userId   		  = $payload->userId;
 			$parentGroupId    = $payload->parentGroupId;
 			$data    		  = $payload->data;
 
-			return Group::AddSubGroup($parentGroupId, $userId, $data);
+			return Group::AddGroup($parentGroupId, $userId, $data);
 		}
 
 		private static function GetGroups($payload)

@@ -9,7 +9,7 @@ function GroupsServiceClass()
 
 	this.createRootGroup = function(callback)
 	{
-		this.addSubGroup(null, "RootGroup", Constants.GROUP_ID_FOLDER, callback);
+		this.addGroup(null, "RootGroup", Constants.GROUP_ID_FOLDER, callback);
 	};
 
 	this.loadRootGroup = function(callback)
@@ -38,17 +38,17 @@ function GroupsServiceClass()
 		callback(result);
 	}
 
-	this.addSubGroup = function(parentGroupId, name, type, callback)
+	this.addGroup = function(parentGroupId, name, type, callback)
 	{
-		var payload 				= ServiceClient.instance.getPayload("Group", "AddSubGroup");
+		var payload 				= ServiceClient.instance.getPayload("Group", "Add");
 		payload["parentGroupId"]   	= parentGroupId;
 		payload["data"]   			= "{ \"name\":\"" + name + "\", \"type\":\"" + type + "\", \"customData\":\"{}\", \"subgroups\":[] }";
 
 		ServiceCache.instance.removeCachedGroupResult(parentGroupId);
-		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, function(result) { onAddSubGroupCallback(result, payload, callback); });
+		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, function(result) { onAddGroupCallback(result, payload, callback); });
 	};
 
-	function onAddSubGroupCallback(result, payload, callback)
+	function onAddGroupCallback(result, payload, callback)
 	{
 		if(result.success)
 		{

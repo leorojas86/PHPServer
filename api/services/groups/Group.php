@@ -79,7 +79,7 @@
 			return $result;
 		}
 
-		public static function AddSubGroup($parentGroupId, $userId, $data)
+		public static function AddGroup($parentGroupId, $userId, $data)
 		{
 			$sql    = "INSERT INTO groups (user_id, parent_group_id, data)
 					   VALUES ('$userId', '$parentGroupId', '$data')";

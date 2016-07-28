@@ -103,7 +103,7 @@ function InventoryContextMenuControllerClass()
 		if(itemName != null && itemName != "")
 		{
 			InventoryGroupController.instance.renderLoadingText();
-			this.addSubGroup(itemName, Constants.GROUP_ID_ITEM);
+			this.addGroup(itemName, Constants.GROUP_ID_ITEM);
 		}
 	};
 
@@ -115,7 +115,7 @@ function InventoryContextMenuControllerClass()
 		if(folderName != null && folderName != "")
 		{
 			InventoryGroupController.instance.renderLoadingText();
-		    this.addSubGroup(folderName, Constants.GROUP_ID_FOLDER);
+		    this.addGroup(folderName, Constants.GROUP_ID_FOLDER);
 		}
 	};
 
@@ -132,12 +132,12 @@ function InventoryContextMenuControllerClass()
 		}
 	};
 
-	this.addSubGroup = function(newGroupName, type)
+	this.addGroup = function(newGroupName, type)
 	{
-		GroupsService.instance.addSubGroup(InventoryGroupController.instance.groupData.id, newGroupName, type, this.onAddSubGroupCallback);
+		GroupsService.instance.addGroup(InventoryGroupController.instance.groupData.id, newGroupName, type, this.onAddGroupCallback);
 	};
 
-	this.onAddSubGroupCallback = function(resultData)
+	this.onAddGroupCallback = function(resultData)
 	{
 		if(resultData.success) 
 			InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance.groupData.id);
