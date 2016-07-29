@@ -48,25 +48,6 @@ function ServiceClientClass()
 
 		var resultData = success ? JSON.parse(xmlhttp.responseText) : { success : false, data : xmlhttp.responseText };
 
-		/*if(resultData.success)
-		{
-			CacheUtils.instance.set(params, xmlhttp.responseText);
-		}
-		else
-		{
-			console.log("Error Response Text = " + xmlhttp.responseText);
-
-			var cachedResult = CacheUtils.instance.get(params);
-
-			if(cachedResult != null)
-			{
-				resultData = JSON.parse(cachedResult);
-				console.log("Getting cached response = " + cachedResult);
-			}
-			else
-				console.log("Could not get cached response = " + cachedResult);
-		}*/
-
 		callback(resultData);
 	};
 }
