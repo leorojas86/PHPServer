@@ -13,14 +13,14 @@ function UsersServiceClass()
 	this.initialize = function(onInitializationCompleted)
 	{
 		this._onInitializationCompleted = onInitializationCompleted;
-		this.notifyOnInitializationCompleted();
+		notifyOnInitializationCompleted();
 	};
 
-	this.notifyOnInitializationCompleted = function(success)
+	function notifyOnInitializationCompleted(success)
 	{
-		this._onInitializationCompleted(success);
-		this._onInitializationCompleted = null;
-	};
+		UsersService.instance._onInitializationCompleted(success);
+		UsersService.instance._onInitializationCompleted = null;
+	}
 
 	this.register = function(name, password, email, callback)
 	{
@@ -48,7 +48,7 @@ function UsersServiceClass()
 		var payload 		= ServiceClient.instance.getPayload("User", "Login");
 		payload["email"]  	= email;
 		payload["password"] = password;
-		var loginCallback	=  function(resultData) { UsersService.instance.onLoginCallback(resultData, callback) };
+		var loginCallback	=  function(resultData) { onLoginCallback(resultData, callback) };
 		
 		ServiceClient.instance.request(Constants.SERVICES.USERS.URL, "POST", payload, loginCallback);
 	};
@@ -61,16 +61,16 @@ function UsersServiceClass()
 		ServiceClient.instance.request(Constants.SERVICES.USERS.URL, "POST", payload, callback);
 	};
 
-	this.onLoginCallback = function(resultData, callback)
+	function onLoginCallback(resultData, callback)
 	{
 		if(resultData.success)
 		{
-			this.loggedUser = resultData.data;
-			CacheUtils.instance.setObject("LoggedUser", this.loggedUser);
+			UsersService.instance.loggedUser = resultData.data;
+			CacheUtils.instance.setObject("LoggedUser", UsersService.instance.loggedUser);
 		}
 
 		callback(resultData);
-	};
+	}
 
 	this.logout = function()
 	{

@@ -38,7 +38,7 @@ function FilesServiceClass()
 		}
 		else
 			callback(result);
-	};
+	}
 
 	this.getFileURL = function(fileName)
 	{
