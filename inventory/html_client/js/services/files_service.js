@@ -12,10 +12,10 @@ function FilesServiceClass()
 		params["payload"]   	= JSON.stringify(payload);
 		params["fileToUpload"]  = fileData;
 
-		ServiceClient.instance.requestWithParams(Constants.SERVICES.FILES.URL, "POST", params, function(result) { FilesService.instance.onFileUploadCompleted(result, groupData, callback); });
+		ServiceClient.instance.requestWithParams(Constants.SERVICES.FILES.URL, "POST", params, function(result) { onFileUploadCompleted(result, groupData, callback); });
 	};
 
-	this.onFileUploadCompleted = function(result, groupData, callback)
+	function onFileUploadCompleted(result, groupData, callback)
 	{
 		if(result.success)
 		{
