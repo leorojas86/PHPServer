@@ -48,9 +48,10 @@ function InventorySearchResultsControllerClass()
 		for(var index in subGroups)
 		{
 			var subGroup     = subGroups[index];
-			var subGroupName = subGroup.name;
+			var data 		 = JSON.parse(subGroup.data);
+			var subGroupName = data.name;
 			var subGroupId	 = subGroup.id;
-			var subGroupType = subGroup.type;
+			var subGroupType = data.type;
 			var icon 		 = subGroupType == Constants.GROUP_ID_FOLDER ? Constants.IMAGE_FOLDER : Constants.IMAGE_FILE;
 			
 			html += "<div id='folder_" + subGroupId + "' class='folder_class'>"+
