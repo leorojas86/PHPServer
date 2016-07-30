@@ -29,6 +29,7 @@ function ImageRenderingUtilsClass()
 	{
 	    //alert("image.width = " + image.width + " image.height = " + image.height + " maxImageSize = " + maxImageSize);
 
+	    maxImageSize        	= Math.min(Math.min(maxImageSize, image.width), image.height);
 		var downscaleImageScale = MathUtils.instance.getFitScale({ w:image.width, h:image.height }, { w:maxImageSize, h:maxImageSize }, "FitIn");
 		var downscaleImageSize  = { w:image.width * downscaleImageScale, h: image.height * downscaleImageScale};
 
