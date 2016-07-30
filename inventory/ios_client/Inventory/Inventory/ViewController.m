@@ -16,6 +16,8 @@
 
 @implementation ViewController
 
+UIActivityIndicatorView* _spinner = nil;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -29,6 +31,7 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)theWebView
 {
+    [self hideLoadingSpinner];
     /*CGSize contentSize = theWebView.scrollView.contentSize;
     CGSize viewSize = theWebView.bounds.size;
     
@@ -61,8 +64,23 @@
 
 - (void)loadWebSite
 {
+    [self showLoadingSpinner];
     NSURLRequest* urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:WEB_SITE_URL]];
     [self.webview loadRequest:urlRequest];
+}
+
+- (void) showLoadingSpinner
+{
+    _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    _spinner.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2);
+    _spinner.color = [UIColor grayColor];
+    [self.view addSubview:_spinner];
+    [_spinner startAnimating];
+}
+
+- (void) hideLoadingSpinner
+{
+    [_spinner removeFromSuperview];
 }
 
 - (void)didReceiveMemoryWarning
