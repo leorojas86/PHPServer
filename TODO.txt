@@ -4,7 +4,6 @@
 	Handle connection errors.
 - Implement pagination.
 - Implement file upload/donwload progress.
-- Small images should be saved small, not scaled up
 - Improve messaging (parameters and compression).
 - Manage routing
 - Improve error management.
