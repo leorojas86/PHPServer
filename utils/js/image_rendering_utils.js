@@ -41,6 +41,10 @@ function ImageRenderingUtilsClass()
 		canvas.getContext("2d").clearRect(0,0, canvas.width, canvas.height);
 		canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
 
+
+
+		preferedCanvasSize = Math.min(preferedCanvasSize, maxImageSize * 1.5);
+
 		var fitCanvasSizeScale = MathUtils.instance.getFitScale({ w:canvas.width, h:canvas.height }, { w:preferedCanvasSize, h:preferedCanvasSize }, "FitIn");
 		var fitCanvasSize      = { w: canvas.width * fitCanvasSizeScale, h: canvas.height * fitCanvasSizeScale};
 
