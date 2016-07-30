@@ -22,6 +22,8 @@
     
     self.webview.delegate = self;
     
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    
     [self loadWebSite];
 }
 
