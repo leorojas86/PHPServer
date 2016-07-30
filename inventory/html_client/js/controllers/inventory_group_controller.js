@@ -56,24 +56,15 @@ function InventoryGroupControllerClass()
 
 	this.loadImage = function()
 	{
-		try
-		{
-			var data = JSON.parse(this.groupData.data);
+		var data = JSON.parse(this.groupData.data);
 
-			if(data.files != null && data.files.length > 0)
-			{
-				var imageName 		= data.files[0];
-				var imageURL 		= FilesService.instance.getFileURL(imageName);
-				var canvas 			= document.getElementById('imageContainer');
-				var image 			= new Image();
-				image.onload 		= function() { ImageRenderingUtils.instance.loadImageIntoCanvas(image, canvas, canvas.parentElement.offsetWidth * 0.9, Constants.IMAGE_MAX_SIZE); };
-				image.src 			= imageURL;
-			}
-		}
-		catch(e)
+		if(data.files != null && data.files.length > 0)
 		{
-	        //alert(e); //error in the above string(in this case,yes)!
-	    }
+			var imageURL 			 = FilesService.instance.getFileURL(data.files[0]);
+			var canvas 				 = document.getElementById('imageContainer');
+			var imageContainerComponent = new ImageContainerComponent(canvas);
+			imageContainerComponent.loadImage(imageURL);
+		}
 	}
 
 	function getGroupInfoHTML(groupData)

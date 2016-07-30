@@ -3,7 +3,7 @@
 		Make file picker work on android.
 	Handle connection errors.
 - Implement pagination.
-- Implement upload progress.
+- Implement file upload/donwload progress.
 - Small images should be saved small, not scaled up
 - Improve messaging (parameters and compression).
 - Manage routing
