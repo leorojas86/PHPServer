@@ -3,16 +3,18 @@
 		Make file picker work on android.
 	Handle connection errors.
 - Implement pagination.
+- Implement upload progress.
+- Small images should be saved small, not scaled up
+- Improve messaging (parameters and compression).
+- Manage routing
 - Improve error management.
 - Code Cleanup.
 - Improve inventory logic.
 - Display multiplephotos.
-- Implement upload progress.
 - Performance Analytics.
 - Improve search logic.
-- Make modular actons.
+- Make modular actions.
 - Remove unused data.
-- Improve messaging (parameters and compression).
 - Implement home page.
 - Improve profiling
 	https://beaver6813.com/2009/10/php-get-current-time-in-milliseconds/
@@ -26,7 +28,6 @@
 	- WAMP.
 	- Google Analitics.
 
-- Manage routing
 - Integrate with facebook.
 - Comments.
 - Rates.
@@ -55,5 +56,3 @@
 Bugs:
 
 - Fix vertical alignment of group paths.
-- Sometimes the application does not load all folders/groups.
-- Small images should be saved small, not scaled up
