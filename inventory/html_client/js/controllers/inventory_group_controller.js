@@ -212,7 +212,8 @@ function InventoryGroupControllerClass()
 		var fileInput 	= document.getElementById('fileToUpload');
 		var canvas 		= document.getElementById('imageContainer');
 
-		ImageRenderingUtils.instance.renderImage(fileInput, canvas, canvas.parentElement.offsetWidth * 0.9, Constants.IMAGE_MAX_SIZE);
+		var imageContainerComponent = new ImageContainerComponent(canvas);
+		imageContainerComponent.renderImage(fileInput);
 	};
 
 	function onSubGroupButtonClick(groupId)
