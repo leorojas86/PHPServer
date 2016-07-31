@@ -133,6 +133,8 @@ function InventoryGroupControllerClass()
 
 	this.renderLoadingText = function()
 	{
+		window.scrollTo(0, 0);
+
 		var loadingText 			= LocManager.instance.getLocalizedText("loading_text");
 		var groupContainer  		= document.getElementById("group_container");
 		groupContainer.innerHTML 	= loadingText;
