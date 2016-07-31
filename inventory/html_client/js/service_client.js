@@ -27,9 +27,9 @@ function ServiceClientClass()
 		this.requestWithParams(serviceURL, method, params, callback);
 	};
 
-	this.requestWithParams = function(serviceURL, method, params, callback)
+	this.requestWithParams = function(serviceURL, method, params, callback, onProgress)
 	{
-		RequestUtils.instance.request(serviceURL, method, function(xmlhttp, success, duration) { ServiceClient.instance.onRequestResponse(params, xmlhttp, success, callback, duration); }, params);
+		RequestUtils.instance.request(serviceURL, method, function(xmlhttp, success, duration) { ServiceClient.instance.onRequestResponse(params, xmlhttp, success, callback, duration); }, params, onProgress);
 	};
 
 	this.getPayload = function(service, method)
