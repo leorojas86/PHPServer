@@ -82,7 +82,11 @@ UIActivityIndicatorView* _spinner = nil;
 
 - (void) hideLoadingSpinner
 {
-    [_spinner removeFromSuperview];
+    if(_spinner != nil)
+    {
+        [_spinner removeFromSuperview];
+        _spinner = nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning
