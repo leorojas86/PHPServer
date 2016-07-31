@@ -60,8 +60,8 @@ function InventoryGroupControllerClass()
 
 		if(data.files != null && data.files.length > 0)
 		{
-			var imageURL 			 = FilesService.instance.getFileURL(data.files[0]);
-			var canvas 				 = document.getElementById('imageContainer');
+			var imageURL 			 	= FilesService.instance.getFileURL(data.files[0]);
+			var canvas 				 	= document.getElementById('imageContainer');
 			var imageContainerComponent = new ImageContainerComponent(canvas);
 			imageContainerComponent.loadImage(imageURL);
 		}
@@ -92,7 +92,7 @@ function InventoryGroupControllerClass()
 	function getGroupChildrenHTML(groupData)
 	{
 		var rightClickOptions 	= LocManager.instance.getLocalizedText("right_click_tooltip");
-		var subGroups 	  		= sortSubgroups(groupData.sub_groups);
+		var subGroups 	  		= InventoryUtils.instance.sortSubgroups(groupData.sub_groups);
 
 		var html = "<div id='folders_scroll_panel' class='folders_scroll_panel_class' title='" + rightClickOptions + "'>";
 
@@ -115,25 +115,6 @@ function InventoryGroupControllerClass()
 
 		return html;
 	}
-
-	function sortSubgroups(subGroups)
-	{
-		var folders = new Array();
-		var items   = new Array();
-
-		for(var index in subGroups)
-		{
-			var subGroup = subGroups[index];
-			var data 	 = JSON.parse(subGroup.data);//TODO: improve this
-
-			if(data.type == Constants.GROUP_ID_FOLDER)
-				folders.push(subGroup);
-			else
-				items.push(subGroup);
-		}
-
-		return folders.concat(items);
-	};
 
 	function getGroupHeaderHTML(groupData)
 	{
@@ -257,19 +238,4 @@ function InventoryGroupControllerClass()
 		    default: /*console.log("pressed key = " + event.which);*/ break;
 		}
 	};
-
-	this.findSubGroup = function(groupId)
-	{
-		var subgroups = InventoryGroupController.instance.groupData.sub_groups;
-		
-		for(var i = 0; i < subgroups.length; i++)
-		{
-			var currentSubGroup = subgroups[i];
-
-			if(currentSubGroup.id == groupId)
-				return currentSubGroup;
-		}
-
-		return null;
-	}
 }
