@@ -33,23 +33,23 @@ function InventoryGroupHeaderControllerClass()
 		var backButton = document.getElementById("back_button");
 
 		if(backButton != null)
-			backButton.onclick = function() { InventoryGroupHeaderController.instance.onBackButtonClick(parentGroupId); }
+			backButton.onclick = function() { onBackButtonClick(parentGroupId); }
 
-		document.getElementById("search_button").onclick = function() { InventoryGroupHeaderController.instance.onSearchButtonClick(); }
-		document.onkeyup 								 = function(event) { InventoryGroupHeaderController.instance.onKeyUp(event); }
+		document.getElementById("search_button").onclick = onSearchButtonClick;
+		document.onkeyup 								 = onKeyUp;
 	};
 
-	this.onBackButtonClick = function(parentGroupId)
+	function onBackButtonClick(parentGroupId)
 	{
 		InventoryGroupController.instance.loadAjaxGroup(parentGroupId);
-	};
+	}
 
-	this.onSearchButtonClick = function()//TODO: Move the code that invokes the search here
+	function onSearchButtonClick()
 	{
 		SearchPopup.instance.show();
-	};
+	}
 
-	this.onKeyUp = function(event)
+	function onKeyUp(event)
 	{
 		switch(event.which) 
 		{
@@ -61,5 +61,5 @@ function InventoryGroupHeaderControllerClass()
 		    break;
 		    default: /*console.log("pressed key = " + event.which);*/ break;
 		}
-	};
+	}
 }
