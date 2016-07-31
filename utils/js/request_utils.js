@@ -4,14 +4,13 @@ function RequestUtilsClass()
 {
 	this.request = function(url, method, callback, params, onProgress) 
 	{
-		var thisVar     = this;
 		var startTime 	= new Date();
 		params 			= params || "";//Default parameter = ""
 		var xmlhttp 	= new XMLHttpRequest();
-		xmlhttp.onload	= function() { thisVar.checkForReadyResponse(xmlhttp, callback, startTime); };
-		xmlhttp.onerror	= function() { thisVar.checkForReadyResponse(xmlhttp, callback, startTime); };
+		xmlhttp.onload	= function() { checkForReadyResponse(xmlhttp, callback, startTime); };
+		xmlhttp.onerror	= function() { checkForReadyResponse(xmlhttp, callback, startTime); };
 
-		this.notifyProgress(xmlhttp, onProgress);
+		notifyProgress(xmlhttp, onProgress);
 
 		var async = true;
 
@@ -60,19 +59,22 @@ function RequestUtilsClass()
 	};
 
 
-	this.notifyProgress = function(xmlhttp, onProgress)
+	function notifyProgress(xmlhttp, onProgress)
 	{
 		if(onProgress != null)
 		{
 			xmlhttp.onprogress = function(evt)
 			{
-				if(evt.lengthComputable) 
-				   onProgress(evt.loaded / evt.total);
+				if(evt.lengthComputable)
+				{
+				   var progress = evt.loaded / evt.total;
+				   onProgress(progress.toFixed(2));
+				}
 			};
 		}
-	};
+	}
 
-	this.checkForReadyResponse = function(xmlhttp, callback, startTime)
+	function checkForReadyResponse(xmlhttp, callback, startTime)
 	{
 		if(xmlhttp.readyState == 4) //Done
 		{
