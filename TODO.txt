@@ -1,12 +1,10 @@
 - Implement mobile apps:
 	iOS:
 		Screen size does not match the view size.
-		when a folder is loaded, move the screen to 0 offset.
 	Android:
 		Make file picker work on android.
 	Handle connection errors.
 - Implement pagination.
-- Implement file upload/donwload progress.
 - Improve messaging (parameters and compression).
 - Manage routing
 - Improve error management.
@@ -14,7 +12,6 @@
 - Improve inventory logic.
 - Display multiplephotos.
 - Performance Analytics.
-- Improve search logic.
 - Make modular actions.
 - Remove unused data.
 - Implement home page.
