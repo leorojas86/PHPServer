@@ -64,7 +64,7 @@ function InventoryGroupControllerClass()
 			var imageURL 			 	= FilesService.instance.getFileURL(data.files[0]);
 			var canvas 				 	= document.getElementById('imageContainer');
 			var imageContainerComponent = new ImageContainerComponent(canvas);
-			imageContainerComponent.loadImage(imageURL);
+			imageContainerComponent.loadImage(imageURL, onProgress);
 		}
 	}
 
