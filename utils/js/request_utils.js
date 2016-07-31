@@ -63,6 +63,8 @@ function RequestUtilsClass()
 	{
 		if(onProgress != null)
 		{
+			onProgress(0);
+
 			xmlhttp.onprogress = function(evt)
 			{
 				if(evt.lengthComputable)
@@ -71,6 +73,8 @@ function RequestUtilsClass()
 				   onProgress(progress.toFixed(2));
 				}
 			};
+
+			xmlhttp.upload.onprogress = xmlhttp.onprogress;
 		}
 	}
 
