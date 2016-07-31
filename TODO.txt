@@ -1,4 +1,7 @@
 - Implement mobile apps:
+	iOS:
+		Screen size does not match the view size.
+		when a folder is loaded, move the screen to 0 offset.
 	Android:
 		Make file picker work on android.
 	Handle connection errors.
