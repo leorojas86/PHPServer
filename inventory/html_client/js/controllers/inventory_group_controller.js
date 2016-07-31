@@ -22,12 +22,12 @@ function InventoryGroupControllerClass()
 		document.getElementById("group_container").innerHTML = html;
 
 		if(!isFolderGroup)
-			this.loadImage();
+			loadImage();
 
-		assignEvents(isFolderGroup, parentGroupId, groupData);
+		assignEvents(groupId, isFolderGroup, parentGroupId, groupData);
 	};
 
-	function assignEvents(isFolderGroup, parentGroupId, groupData)
+	function assignEvents(groupId, isFolderGroup, parentGroupId, groupData)
 	{
 		if(isFolderGroup)
 		{
@@ -42,9 +42,9 @@ function InventoryGroupControllerClass()
 		}
 		else
 		{
-			document.getElementById("fileToUpload").onchange   		= function() { InventoryGroupController.instance.onSelectedFileChange(); }
-			document.getElementById("update_group_button").onclick 	= function() { InventoryGroupController.instance.onUpdateGroupDataClick(groupId); }
-			document.getElementById("uploadFileButton").onclick    	= function() { InventoryGroupController.instance.uploadFile(); }
+			document.getElementById("fileToUpload").onchange   		= onSelectedFileChange;
+			document.getElementById("update_group_button").onclick 	= function() { onUpdateGroupDataClick(groupId); };
+			document.getElementById("uploadFileButton").onclick    	= uploadFile;
 		}
 
 		InventoryGroupHeaderController.instance.assignEvents(parentGroupId);
@@ -55,9 +55,9 @@ function InventoryGroupControllerClass()
 		document.getElementById(elementId).onclick 	= function() { onSubGroupButtonClick(subGroupId); };
 	}
 
-	this.loadImage = function()
+	function loadImage()
 	{
-		var data = JSON.parse(this.groupData.data);
+		var data = JSON.parse(InventoryGroupController.instance.groupData.data);
 
 		if(data.files != null && data.files.length > 0)
 		{
@@ -120,16 +120,16 @@ function InventoryGroupControllerClass()
 	this.renderRootGroup = function()
 	{
 		this.renderLoadingText();
-		GroupsService.instance.loadRootGroup(function(resultData) { InventoryGroupController.instance.onLoadGroupCallback(resultData); });
+		GroupsService.instance.loadRootGroup(onLoadGroupCallback);
 	};
 
-	this.onLoadGroupCallback = function(resultData)
+	function onLoadGroupCallback(resultData)
 	{
 		if(resultData.success) 
-			this.renderGroup(resultData.data);
+			InventoryGroupController.instance.renderGroup(resultData.data);
 		else
 			alert(resultData.data);
-	};
+	}
 
 	this.renderLoadingText = function()
 	{
@@ -141,50 +141,50 @@ function InventoryGroupControllerClass()
 	this.loadAjaxGroup = function(groupId)
 	{
 		this.renderLoadingText();
-		GroupsService.instance.loadGroup(groupId, function(resultData) { InventoryGroupController.instance.onLoadGroupCallback(resultData); });
+		GroupsService.instance.loadGroup(groupId, onLoadGroupCallback);
 	};
 
-	this.uploadFile = function()
+	function uploadFile()
 	{
 		var canvas 	  = document.getElementById('imageContainer');
 		var imageData = canvas.toDataURL("image/jpeg", 0.95);
-		FilesService.instance.uploadFile(imageData, "jpg", this.groupData, function(resultData) { InventoryGroupController.instance.onUploadCompleted(resultData); }, onProgress);
-	};
+		FilesService.instance.uploadFile(imageData, "jpg", InventoryGroupController.instance.groupData, onUploadCompleted, onProgress);
+	}
 
 	function onProgress(progress) 
 	{
 		document.getElementById('progressNumber').innerHTML = (progress * 100).toString() + '%';
 	}
 
-	this.onUploadCompleted = function(resultData)
+	function onUploadCompleted(resultData)
 	{
 		if(resultData.success)
-			this.loadAjaxGroup(this.groupData.id);
+			InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance.groupData.id);
 
 		alert("result = " + JSON.stringify(resultData));
 	}
 
-	this.onSelectedFileChange = function()
+	function onSelectedFileChange()
 	{
 		var fileInput 	= document.getElementById('fileToUpload');
 		var canvas 		= document.getElementById('imageContainer');
 
 		var imageContainerComponent = new ImageContainerComponent(canvas);
 		imageContainerComponent.renderImage(fileInput);
-	};
+	}
 
 	function onSubGroupButtonClick(groupId)
 	{
 		InventoryGroupController.instance.loadAjaxGroup(groupId);
 	}
 
-	this.onUpdateGroupDataClick = function(groupId)
+	function onUpdateGroupDataClick(groupId)
 	{
 		var groupData 		= document.getElementById('group_data');
-		var data 			= JSON.parse(this.groupData.data);
+		var data 			= JSON.parse(InventoryGroupController.instance.groupData.data);
 		data.customData 	= groupData.value;
 		GroupsService.instance.updateGroupData(groupId, JSON.stringify(data), onUpdateGroupDataCallback);
-	};
+	}
 
 	function onUpdateGroupDataCallback(resultData)
 	{
