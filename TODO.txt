@@ -3,7 +3,7 @@
 		Screen size does not match the view size.
 	Android:
 		Make file picker work on android.
-	Handle connection errors.
+		Handle connection errors.
 - Implement pagination.
 - Improve messaging (parameters and compression).
 - Manage routing
