@@ -155,7 +155,11 @@ function InventoryGroupControllerClass()
 
 	function onProgress(progress) 
 	{
-		console.log("progress = " + progress);
+		var progressString = progress.toString();
+		
+		if(progressString.length > 5)
+			progressString = progressString.slice(0, 5);
+
 		document.getElementById('progressNumber').innerHTML = (progress * 100).toString() + '%';
 	}
 
