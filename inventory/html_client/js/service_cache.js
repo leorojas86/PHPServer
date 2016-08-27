@@ -3,24 +3,32 @@ var ServiceCache = { instance : new ServiceCacheClass() };
 
 function ServiceCacheClass()
 {
+	this.enabled = true;
+
 	this.cacheGroupResult = function(groupId, result)
 	{
-		if(result.success)
+		if(this.enabled && result.success)
 			CacheUtils.instance.setObject("Group_" + groupId, result);
 	};
 
 	this.getCachedGroupResult = function(groupId)
 	{
-		var object = CacheUtils.instance.getObject("Group_" + groupId);
+		if(this.enabled)
+		{
+			var object = CacheUtils.instance.getObject("Group_" + groupId);
 
-		if(object != null)
-			console.log("Getting cached group with id = " + groupId);
+			if(object != null)
+				console.log("Getting cached group with id = " + groupId);
 
-		return object;
+			return object;
+		}
+
+		return null;
 	}
 
 	this.removeCachedGroupResult = function(groupId)
 	{
-		CacheUtils.instance.remove("Group_" + groupId);
+		if(this.enabled)
+			CacheUtils.instance.remove("Group_" + groupId);
 	}
 }

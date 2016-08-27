@@ -9,6 +9,8 @@ function BootstrapClass()
 	//Methods
 	this.initialize = function()
 	{
+		ServiceCache.instance.enabled = true;
+
 		if(!_isInitialized)
 			LocManager.instance.loadLocalizationTable(Constants.ENGLISH_LOCALIZATION_TABLE, function() { Bootstrap.instance.onLocalizationLoaded(); }, false);
 		else
