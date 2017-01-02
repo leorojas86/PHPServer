@@ -47,6 +47,7 @@
 	- Add encription to login data and SSL.
 - Avoid urls
 - Auth Service
+- Validate redirects.
 - Decouple Services:
 	- Users
 	- Groups
