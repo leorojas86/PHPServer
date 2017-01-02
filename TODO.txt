@@ -2,6 +2,7 @@
 - Change all keys to be UUIDs
 - Secure Service
 - Encrypt Passwords
+- Validate service/url parameters
 - Implement mobile apps:
 	iOS:
 		Screen size does not match the view size.
