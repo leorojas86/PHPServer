@@ -1,3 +1,7 @@
+- Use S3 for UI and objects data.
+- Change all keys to be UUIDs
+- Secure Service
+- Encrypt Passwords
 - Implement mobile apps:
 	iOS:
 		Screen size does not match the view size.
@@ -41,7 +45,8 @@
 - Improve Security.
 	- Encript password in DB.
 	- Add encription to login data and SSL.
-
+- Avoid urls
+- Auth Service
 - Decouple Services:
 	- Users
 	- Groups
