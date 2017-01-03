@@ -1,3 +1,4 @@
+- Standardize files names
 - Use S3 for UI and objects data.
 - Change all keys to be UUIDs
 - Secure Service
