@@ -30,5 +30,44 @@ var Constants =
      {
           GROUP_DATA_TEXT_TYPE : 0,
           GROUP_NAME_TYPE : 1
+     },
+
+     SEPARATOR : '!#~$@#!',
+     REPLACEMENTS : {
+          'a':'2',
+          '2':'a',
+          
+          'e':'v',
+          'v':'e'
      }
+};
+
+var SEPARATOR     = '!#~$@#!';
+var REPLACEMENTS  = {
+     'a':'9',
+     '9':'a',
+     
+     'e':'2',
+     '2':'e',
+     
+     'i':'4',
+     '4':'i',
+     
+     'o':'6',
+     '6':'o',
+     
+     'u':'5',
+     '5':'u',
+
+     '-':'h',
+     'h':'-',
+
+     '~':'d',
+     'd':'~',
+     
+     '{':'&',
+     '&':'{',
+     
+     '}':'`',
+     '`':'}'
 };
