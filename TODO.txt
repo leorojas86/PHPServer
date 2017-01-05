@@ -63,3 +63,4 @@
 Bugs:
 
 - Fix vertical alignment of group paths.
+- Add lockout time, hash, encryption, salt, etc to password security
