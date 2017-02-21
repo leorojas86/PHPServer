@@ -9,19 +9,19 @@
 		switch($payload->service)
 		{
 			case "User":
-				require_once "api/services/users/UsersService.php";
+				require_once "services/users/UsersService.php";
 				$result = UsersService::Service($payload);
 			break;
 			case "Group":
-				require_once "api/services/groups/GroupsService.php";
+				require_once "services/groups/GroupsService.php";
 				$result = GroupsService::Service($payload);
 			break;
 			case "Tag":
-				require_once "api/services/tags/TagsService.php";
+				require_once "services/tags/TagsService.php";
 				$result = TagsService::Service($payload);
 			break;
 			case "File":
-				require_once "api/services/files/FilesService.php";
+				require_once "services/files/FilesService.php";
 				$result = FilesService::Service($payload);
 			break;
 			default: $result = new ServiceResult(false, "Unknown service '$service'", UtilsConstants::UNKNOWN_SERVICE_ERROR_CODE); break;

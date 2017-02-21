@@ -1,10 +1,10 @@
 <?php 
-	require_once "api/general/Environment.php";
-	require_once "api/services/tags/DBConfig.php";
-	require_once "api/services/tags/models/Tag.php";
-	require_once "api/services/tags/models/Text.php";
-	require_once "api/services/tags/models/Value.php";
-	require_once "api/services/tags/models/Date.php";
+	require_once "general/Environment.php";
+	require_once "services/tags/DBConfig.php";
+	require_once "services/tags/models/Tag.php";
+	require_once "services/tags/models/Text.php";
+	require_once "services/tags/models/Value.php";
+	require_once "services/tags/models/Date.php";
 
 	class TagsService
 	{

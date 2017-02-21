@@ -1,5 +1,5 @@
 <?php 
-	require_once "api/general/EnvironmentConfig.php";
+	require_once "general/EnvironmentConfig.php";
 	require_once "utils/MySQLManager.php";
 
 	class Environment
