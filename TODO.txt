@@ -1,5 +1,6 @@
 - Standardize files names
 - Make services independient
+- Add version descriptor
 - Use S3 for UI and objects data
 - Change all keys to be UUIDs
 - Secure Service
