@@ -1,6 +1,6 @@
-<?php 
-	require_once "utils/php/ServiceResult.php";
-	require_once "utils/php/UtilsConstants.php"; 
+<?php
+	require_once "utils/ServiceResult.php";
+	require_once "utils/UtilsConstants.php";
 
 	if(isset($_POST["payload"]))
 	{

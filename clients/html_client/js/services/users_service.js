@@ -37,7 +37,7 @@ function UsersServiceClass()
 			payload["password"] 	= password;
 			payload["rootGroupId"]	= result.data.insert_id;
 
-			ServiceClient.instance.request(App.ENVIRONMENT.SERVICES.USERS.URL, "POST", payload, callback);
+			ServiceClient.instance.request(App.instance.ENVIRONMENT.SERVICES.USERS.URL, "POST", payload, callback);
 		}
 		else
 			callback(result);
@@ -50,7 +50,7 @@ function UsersServiceClass()
 		payload["password"] = password;
 		var loginCallback	=  function(resultData) { onLoginCallback(resultData, callback) };
 		
-		ServiceClient.instance.request(App.ENVIRONMENT.SERVICES.USERS.URL, "POST", payload, loginCallback);
+		ServiceClient.instance.request(App.instance.ENVIRONMENT.SERVICES.USERS.URL, "POST", payload, loginCallback);
 	};
 
 	this.updateUserData = function(data, callback)
@@ -58,7 +58,7 @@ function UsersServiceClass()
 		var payload 	= ServiceClient.instance.getPayload("User", "UpdateData");
 		payload["data"] = data;
 
-		ServiceClient.instance.request(App.ENVIRONMENT.SERVICES.USERS.URL, "POST", payload, callback);
+		ServiceClient.instance.request(App.instance.ENVIRONMENT.SERVICES.USERS.URL, "POST", payload, callback);
 	};
 
 	function onLoginCallback(resultData, callback)

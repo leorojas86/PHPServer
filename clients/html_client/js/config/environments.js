@@ -4,10 +4,10 @@ var ENVIRONMENTS =
   {
     SERVICES :
     {
-         USERS  : { URL : 'http://127.0.0.1' },
-         GROUPS : { URL : 'http://127.0.0.1' },
-         TAGS   : { URL : 'http://127.0.0.1' },
-         FILES  : { URL : 'http://127.0.0.1' }
+         USERS  : { URL : 'http://api' },
+         GROUPS : { URL : 'http://api' },
+         TAGS   : { URL : 'http://api' },
+         FILES  : { URL : 'http://api' }
     }
   },
   PUBLIC:

@@ -26,12 +26,13 @@ function URLUtilsClass()
 
 	this.getURLParam = function(paramName)
 	{
-		var value = window.location.search.split(paramName + "=")[1];
-
-		if(value.indexOf("&"))
-			value = value.split("&")[0];
-
-		return value;
+		var url = window.location.search;
+		if(url.indexOf("=") != -1)
+		{
+			var value = window.location.search.split(paramName + "=")[1];
+			return value.indexOf("&") ? value.split("&")[0] : value;
+		}
+		return false;
 	};
 
 	this.openInNewTab = function(url)
@@ -40,11 +41,3 @@ function URLUtilsClass()
 	  	win.focus();
 	};
 }
-
-
-
-
-
-
-
-

@@ -12,7 +12,7 @@ function FilesServiceClass()
 		params["payload"]   	= JSON.stringify(payload);
 		params["fileToUpload"]  = fileData;
 
-		ServiceClient.instance.requestWithParams(App.ENVIRONMENT.SERVICES.FILES.URL, "POST", params, function(result) { onFileUploadCompleted(result, groupData, callback); }, onProgress);
+		ServiceClient.instance.requestWithParams(App.instance.ENVIRONMENT.SERVICES.FILES.URL, "POST", params, function(result) { onFileUploadCompleted(result, groupData, callback); }, onProgress);
 	};
 
 	function onFileUploadCompleted(result, groupData, callback)
@@ -42,6 +42,6 @@ function FilesServiceClass()
 
 	this.getFileURL = function(fileName)
 	{
-		return App.ENVIRONMENT.SERVICES.FILES.URL + "/uploads/" + fileName;
+		return App.instance.ENVIRONMENT.SERVICES.FILES.URL + "/uploads/" + fileName;
 	}
 }

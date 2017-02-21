@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<title>PHP Test</title>
 		<!--<link rel="stylesheet" href="inventory_app/view/css/main_page.css">-->
-		<!--<script src="utils/js/utils.js" type="text/javascript"> </script>-->
+		<!--<script src="utils/utils.js" type="text/javascript"> </script>-->
 		<script type="text/javascript">
 			
 			function onPageLoaded()
@@ -15,6 +15,6 @@
 		</script>
 	</head>
 	<body onload="onPageLoaded();">
-		<p>Hello World</p>
+		<?php echo '<p>Hello World</p>'; ?> 
 	</body>
 </html>

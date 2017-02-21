@@ -21,9 +21,10 @@ function AppClass()
 
 	function _loadEnvironment()
 	{
-		var environmentParam = URLUtils.getURLParam('env') || 'local';
+		var environmentParam = URLUtils.instance.getURLParam('env') || 'local';
 		environmentParam = environmentParam.toUpperCase();
-		this.ENVIRONMENT = ENVIRONMENTS[environmentParam];
+		console.log('Loading environment = ' + environmentParam);
+		_this.ENVIRONMENT = ENVIRONMENTS[environmentParam];
 
 		ServiceCache.instance.enabled = true;
 	}

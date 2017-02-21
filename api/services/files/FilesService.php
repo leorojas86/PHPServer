@@ -1,7 +1,7 @@
 <?php 
 	require_once "api/general/Environment.php";
-	require_once "utils/php/FileUploadManager.php";
-	require_once "utils/php/GUIDUtils.php";
+	require_once "utils/FileUploadManager.php";
+	require_once "utils/GUIDUtils.php";
 
 	class FilesService
 	{
