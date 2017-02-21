@@ -1,9 +1,12 @@
 - Standardize files names
-- Use S3 for UI and objects data.
+- Make services independient
+- Use S3 for UI and objects data
 - Change all keys to be UUIDs
 - Secure Service
 - Encrypt Passwords
 - Validate service/url parameters
+- Add services healthchecks
+- Add e2e tests
 - Implement mobile apps:
 	iOS:
 		Screen size does not match the view size.
