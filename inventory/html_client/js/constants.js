@@ -18,14 +18,6 @@ var Constants =
 
      INVENTORY_CANVAS_MAX_SIZE : 400,
 
-     SERVICES :
-     {
-          USERS  : { URL : 'http://201.200.1.187' },
-          GROUPS : { URL : 'http://201.200.1.187' },
-          TAGS   : { URL : 'http://201.200.1.187' },
-          FILES  : { URL : 'http://201.200.1.187' }
-     },
-
      SEARCH_TAGS_TYPES :
      {
           GROUP_DATA_TEXT_TYPE : 0,
@@ -36,7 +28,7 @@ var Constants =
      REPLACEMENTS : {
           'a':'2',
           '2':'a',
-          
+
           'e':'v',
           'v':'e'
      }
@@ -46,16 +38,16 @@ var SEPARATOR     = '!#~$@#!';
 var REPLACEMENTS  = {
      'a':'9',
      '9':'a',
-     
+
      'e':'2',
      '2':'e',
-     
+
      'i':'4',
      '4':'i',
-     
+
      'o':'6',
      '6':'o',
-     
+
      'u':'5',
      '5':'u',
 
@@ -64,10 +56,10 @@ var REPLACEMENTS  = {
 
      '~':'d',
      'd':'~',
-     
+
      '{':'&',
      '&':'{',
-     
+
      '}':'`',
      '`':'}'
 };

@@ -28,7 +28,7 @@ function GroupsServiceClass()
 			var payload 	= ServiceClient.instance.getPayload("Group", "Get");
 			payload["id"]   = groupId;
 
-			ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, function(result) { onLoadGroupCallback(groupId, result, callback); });
+			ServiceClient.instance.request(App.ENVIRONMENT.SERVICES.GROUPS.URL, "POST", payload, function(result) { onLoadGroupCallback(groupId, result, callback); });
 		}
 	};
 
@@ -45,7 +45,7 @@ function GroupsServiceClass()
 		payload["data"]   			= "{ \"name\":\"" + name + "\", \"type\":\"" + type + "\", \"customData\":\"{}\", \"subgroups\":[] }";
 
 		ServiceCache.instance.removeCachedGroupResult(parentGroupId);
-		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, function(result) { onAddGroupCallback(result, payload, callback); });
+		ServiceClient.instance.request(App.ENVIRONMENT.SERVICES.GROUPS.URL, "POST", payload, function(result) { onAddGroupCallback(result, payload, callback); });
 	};
 
 	function onAddGroupCallback(result, payload, callback)
@@ -66,7 +66,7 @@ function GroupsServiceClass()
 
 		ServiceCache.instance.removeCachedGroupResult(groupId);
 		ServiceCache.instance.removeCachedGroupResult(parentGroupId);
-		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, callback);
+		ServiceClient.instance.request(App.ENVIRONMENT.SERVICES.GROUPS.URL, "POST", payload, callback);
 	};
 
 	this.renameGroup = function(groupData, parentGroupId, newName, callback)
@@ -87,7 +87,7 @@ function GroupsServiceClass()
 		ServiceCache.instance.removeCachedGroupResult(groupId);
 		ServiceCache.instance.removeCachedGroupResult(parentGroupId);
 		ServiceCache.instance.removeCachedGroupResult(oldParentGroupId);
-		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, callback);
+		ServiceClient.instance.request(App.ENVIRONMENT.SERVICES.GROUPS.URL, "POST", payload, callback);
 	};
 
 	this.updateGroupData = function(groupId, groupData, callback)
@@ -97,7 +97,7 @@ function GroupsServiceClass()
 		payload["data"] = groupData;
 
 		ServiceCache.instance.removeCachedGroupResult(groupId);
-		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, callback);
+		ServiceClient.instance.request(App.ENVIRONMENT.SERVICES.GROUPS.URL, "POST", payload, callback);
 		TagsService.instance.updateSearchTags(groupId, groupData, Constants.SEARCH_TAGS_TYPES.GROUP_DATA_TEXT_TYPE);//TODO: queue this steps
 	};
 
@@ -105,6 +105,6 @@ function GroupsServiceClass()
 	{
 		var payload 	 = ServiceClient.instance.getPayload("Group", "GetGroups");
 		payload["ids"]   = ids;
-		ServiceClient.instance.request(Constants.SERVICES.GROUPS.URL, "POST", payload, callback);
+		ServiceClient.instance.request(App.ENVIRONMENT.SERVICES.GROUPS.URL, "POST", payload, callback);
 	};
 }
