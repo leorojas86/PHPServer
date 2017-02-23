@@ -1,8 +1,9 @@
+- Change all keys to be UUIDs
+- Use S3 for UI and objects data
+- Add version descriptor
+- Make deploy scripts
 - Standardize files names
 - Make services independient
-- Add version descriptor
-- Use S3 for UI and objects data
-- Change all keys to be UUIDs
 - Secure Service
 - Encrypt Passwords
 - Validate service/url parameters
@@ -18,8 +19,9 @@
 - Improve messaging (parameters and compression).
 - Manage routing
 - Improve error management.
+- Improve UI code
+	Make renderes (wit callbacks)
 - Code Cleanup.
-- Improve inventory logic.
 - Display multiplephotos.
 - Performance Analytics.
 - Make modular actions.
@@ -28,7 +30,6 @@
 - Improve profiling
 	https://beaver6813.com/2009/10/php-get-current-time-in-milliseconds/
 - Setup development ssl.
-
 - Infrastructure Migration
 	- Git.
 	- Jira.
@@ -36,7 +37,6 @@
 	- Code Review.
 	- WAMP.
 	- Google Analitics.
-
 - Integrate with facebook.
 - Comments.
 - Rates.
