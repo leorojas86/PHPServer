@@ -1,4 +1,4 @@
-<?php 
+<?php
 	require_once "general/Environment.php";
 	require_once "utils/FileUploadManager.php";
 	require_once "utils/GUIDUtils.php";
@@ -11,13 +11,13 @@
 
 			if($result->success)
 			{
-				switch($payload->method) 
+				switch($payload->method)
 				{
-					case "Upload": 	
-						$result = FilesService::Upload($payload);	
+					case "Upload":
+						$result = FilesService::Upload($payload);
 					break;
-					default: 		 
-						$result = new ServiceResult(false, "Unsupported Files service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
+					default:
+						$result = new ServiceResult(false, "Unsupported Files service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE);
 					break;
 				}
 			}
@@ -27,18 +27,18 @@
 
 		private static function Upload($payload)
 		{
-			$userId 	= $payload->userId;
+			$userGuid 	= $payload->userGuid;
 			$extension 	= $payload->extension;
 			$fileData 	= $_POST["fileToUpload"];
-			$guid 		= GUIDUtils::GetRandomGUID();
-			$fileName	= "$userId $guid.$extension";
-			$result  	= FileUploadManager::UploadFile($fileData, "uploads/$fileName");
+			$guid 			= GUIDUtils::GetRandomGUID();
+			$fileName		= "$userGuid $guid.$extension";
+			$result  		= FileUploadManager::UploadFile($fileData, "uploads/$fileName");
 
 			if($result->success)
 				return new ServiceResult(true, array('file_name' => $fileName));
 
 			return $result;
-		}	
+		}
 	}
 
 ?>

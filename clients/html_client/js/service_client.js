@@ -11,11 +11,11 @@ function ServiceClientClass()
 
 	this.profile = function(key, duration)
 	{
-		/*var name   	= "Profile_" + key; 
+		/*var name   	= "Profile_" + key;
 		var params 	= "service=Analytic&method=Event&name=" + name + "&data=" + duration;
 		params 		= this.addSessionId(params);
-		RequestUtils.instance.request(Constants.API_URL, "POST", function(xmlhttp, success, duration) 
-	{ 
+		RequestUtils.instance.request(Constants.API_URL, "POST", function(xmlhttp, success, duration)
+	{
 		var test = duration;
 	}, params);*/
 	};
@@ -34,10 +34,10 @@ function ServiceClientClass()
 
 	this.getPayload = function(service, method)
 	{
-		var payload 		= new Object();
-		payload["userId"] 	= UsersService.instance.loggedUser != null ? UsersService.instance.loggedUser.id : null;
-		payload["service"]  = service;
-		payload["method"]   = method;
+		var payload 					= new Object();
+		payload["userGuid"] 	= UsersService.instance.loggedUser != null ? UsersService.instance.loggedUser.guid : null;
+		payload["service"] 	 	= service;
+		payload["method"]   	= method;
 
 		return payload;
 	};
@@ -51,5 +51,3 @@ function ServiceClientClass()
 		callback(resultData);
 	};
 }
-
-

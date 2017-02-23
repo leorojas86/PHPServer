@@ -1,4 +1,4 @@
-<?php 
+<?php
 	require_once "general/Environment.php";
 	require_once "services/users/DBConfig.php";
 	require_once "services/users/User.php";
@@ -11,13 +11,13 @@
 
 			if($result->success)
 			{
-				switch($payload->method) 
+				switch($payload->method)
 				{
-					case "Register": 	$result = UsersService::Register($payload);		break;
-					case "Login": 		$result = UsersService::Login($payload);		break;
+					case "Register": 		$result = UsersService::Register($payload);		break;
+					case "Login": 			$result = UsersService::Login($payload);			break;
 					case "UpdateData": 	$result = UsersService::UpdateData($payload);	break;
-					default: 		 
-						$result = new ServiceResult(false, "Unsupported Users service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
+					default:
+						$result = new ServiceResult(false, "Unsupported Users service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE);
 					break;
 				}
 			}
@@ -33,13 +33,14 @@
 			if($result->success)
 			{
 				if($result->data["exists"])
-					$result = new ServiceResult(false, "User with email '$email' already exists", UtilsConstants::USER_ALREADY_EXISTS_ERROR_CODE); 
+					$result = new ServiceResult(false, "User with email '$email' already exists", UtilsConstants::USER_ALREADY_EXISTS_ERROR_CODE);
 				else
 				{
+					$guid					= $payload->guid;
 					$password 		= $payload->password;//TODO: send password securely
 					$name     		= $payload->name;
-					$rootGroupId    = $payload->rootGroupId;
-					return User::Register($email, $password, $name, $rootGroupId);//TODO: send validation email
+					$rootGroupId  = $payload->rootGroupId;
+					return User::Register($guid, $email, $password, $name, $rootGroupId);//TODO: send validation email
 				}
 			}
 
@@ -58,9 +59,9 @@
 		private static function UpdateData($payload)
 		{
 			$data   = $payload->data;
-			$userId = $payload->userId;
+			$userGuid = $payload->userGuid;
 
-			return User::UpdateData($userId, $data);
+			return User::UpdateData($userGuid, $data);
 		}
 	}
 ?>

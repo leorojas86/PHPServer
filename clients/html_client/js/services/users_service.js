@@ -31,10 +31,11 @@ function UsersServiceClass()
 	{
 		if(result.success)
 		{
-			var payload 			= ServiceClient.instance.getPayload("User", "Register");
-			payload["name"]  		= name;
-			payload["email"]   		= email;
-			payload["password"] 	= password;
+			var payload 						= ServiceClient.instance.getPayload("User", "Register");
+			payload["guid"]  				= GUIDUtils.instance.generateNewGUID();
+			payload["name"]  				= name;
+			payload["email"]   			= email;
+			payload["password"] 		= password;
 			payload["rootGroupId"]	= result.data.insert_id;
 
 			ServiceClient.instance.request(App.instance.ENVIRONMENT.SERVICES.USERS.URL, "POST", payload, callback);
@@ -45,17 +46,17 @@ function UsersServiceClass()
 
 	this.login = function(email, password, callback)
 	{
-		var payload 		= ServiceClient.instance.getPayload("User", "Login");
+		var payload 				= ServiceClient.instance.getPayload("User", "Login");
 		payload["email"]  	= email;
 		payload["password"] = password;
-		var loginCallback	=  function(resultData) { onLoginCallback(resultData, callback) };
-		
+		var loginCallback		=  function(resultData) { onLoginCallback(resultData, callback) };
+
 		ServiceClient.instance.request(App.instance.ENVIRONMENT.SERVICES.USERS.URL, "POST", payload, loginCallback);
 	};
 
 	this.updateUserData = function(data, callback)
 	{
-		var payload 	= ServiceClient.instance.getPayload("User", "UpdateData");
+		var payload 		= ServiceClient.instance.getPayload("User", "UpdateData");
 		payload["data"] = data;
 
 		ServiceClient.instance.request(App.instance.ENVIRONMENT.SERVICES.USERS.URL, "POST", payload, callback);

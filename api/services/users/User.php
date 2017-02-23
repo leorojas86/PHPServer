@@ -1,10 +1,10 @@
 <?php
 	class User
 	{
-		public static function Register($email, $password, $name, $rootGroupId)
+		public static function Register($guid, $email, $password, $name, $rootGroupId)
 		{
-			$sql    = "INSERT INTO users (name, password, email, rootGroupId)
-					   VALUES ('$name', '$password', '$email', '$rootGroupId')";
+			$sql    = "INSERT INTO users (guid,name, password, email, rootGroupId)
+					   VALUES ('$guid', '$name', '$password', '$email', '$rootGroupId')";
 			$result = MySQLManager::ExecuteInsert($sql);
 
 			return $result;
@@ -12,7 +12,7 @@
 
 		public static function ExistsUserWithEmail($email)
 		{
-			$sql    = "SELECT count(id) AS count FROM users WHERE email='$email'";
+			$sql    = "SELECT count(guid) AS count FROM users WHERE email='$email'";
 			$result = MySQLManager::ExecuteSelectRow($sql);
 
 			if($result->success)
@@ -21,7 +21,7 @@
 
 				return new ServiceResult(true, array("exists" => $exists));
 			}
-			
+
 			return $result;
 		}
 
@@ -29,24 +29,23 @@
 		{
 			$sql    = "SELECT * FROM users WHERE email='$email' AND password='$password'";
 			$result = MySQLManager::ExecuteSelectRow($sql);
-			
+
 			if($result->success)
 			{
 				if($result->data)
 					return new ServiceResult(true, $result->data);
-		
+
 				return new ServiceResult(false, "User name or password incorrect", UtilsConstants::USER_NAME_OR_PASSWORD_INCORRECT_ERROR_CODE);
 			}
-			
+
 			return $result;
 		}
 
-		public static function UpdateData($userId, $userData)
+		public static function UpdateData($userGuid, $userData)
 		{
-			$userId = $loggedInUserData["id"];
-			$sql    = "UPDATE users SET data='$userData' WHERE id='$userId'";
+			$sql    = "UPDATE users SET data='$userData' WHERE id='$userGuid'";
 			$result = MySQLManager::ExecuteUpdate($sql);
-			
+
 			return $result;
 		}
 	}
