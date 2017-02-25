@@ -2,6 +2,7 @@
 - Use S3 for UI and objects data
 - Add version descriptor
 - Make deploy scripts
+- Implement endpoints pagination.
 - Standardize files names
 - Make services independient
 - Secure Service
@@ -15,7 +16,6 @@
 	Android:
 		Make file picker work on android.
 		Handle connection errors.
-- Implement pagination.
 - Improve messaging (parameters and compression).
 - Manage routing
 - Improve error management.
