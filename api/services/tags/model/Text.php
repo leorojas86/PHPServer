@@ -1,29 +1,29 @@
-<?php 
+<?php
 	class Text
 	{
 		public static function GetSearchJoin()
 		{
-			return "INNER JOIN text_tags_per_id ON ids.id = text_tags_per_id.id
-					INNER JOIN text_tags ON text_tags_per_id.text_tag_id = text_tags.id";
+			return "INNER JOIN text_tags_per_guid ON guids.guid = text_tags_per_guid.id
+					INNER JOIN text_tags ON text_tags_per_guid.text_tag_id = text_tags.id";
 		}
 
 		public static function GetSearchWhere($searchText)
 		{
-			$text 		= $searchText->text;
+			$text 			= $searchText->text;
 			$typesText 	= MySQLManager::GetListSQL($searchText->types);
 
-			return "( text_tags_per_id.type IN ($typesText) AND text_tags.text = '$text' )";
+			return "( text_tags_per_guid.type IN ($typesText) AND text_tags.text = '$text' )";
 		}
 
-		public static function UpdateTextTags($id, $textTags, $type)
+		public static function UpdateTextTags($guid, $textTags, $type)
 		{
-			$result = Text::RemoveAllTextTagAssociations($id, $type);
+			$result = Text::RemoveAllTextTagAssociations($guid, $type);
 
 			if($result->success)
 			{
 				foreach($textTags as $text)
 				{
-	    			$result = Text::AssociateTextTag($id, $text, $type);
+	    			$result = Text::AssociateTextTag($guid, $text, $type);
 
 	    			if(!$result->success)
 	    				return $result;
@@ -43,29 +43,29 @@
 
 		private static function ExistsTextTag($text)
 		{
-			$sql    = "SELECT id FROM text_tags WHERE text='$text'";
+			$sql    = "SELECT guid FROM text_tags WHERE text='$text'";
 			$result = MySQLManager::ExecuteSelectRow($sql);
 
 			if($result->success)
 			{
 				$exists = $result->data != null;
-				$id     = $exists ? $result->data["id"] : -1;
+				$guid   = $exists ? $result->data["guid"] : -1;
 
-				return new ServiceResult(true, array("exists" => $exists, "id" => $id));
+				return new ServiceResult(true, array("exists" => $exists, "guid" => $guid));
 			}
-			
+
 			return $result;
 		}
 
-		private static function RemoveAllTextTagAssociations($id, $type)
+		private static function RemoveAllTextTagAssociations($guid, $type)
 		{
-			$sql 	= "DELETE FROM text_tags_per_id WHERE id = '$id' and type = '$type'";
+			$sql 	= "DELETE FROM text_tags_per_guid WHERE guid = '$guid' and type = '$type'";
 			$result = MySQLManager::ExecuteDelete($sql, false);
 
 			return $result;
 		}
 
-		private static function AssociateTextTag($id, $text, $type)
+		private static function AssociateTextTag($guid, $text, $type)
 		{
 			$result = Text::ExistsTextTag($text);
 
@@ -78,12 +78,12 @@
 					$result = Text::AddTextTag($text);
 
 					if($result->success)
-						$tagId = $result->data["insert_id"]; 
+						$tagId = $result->data["insert_id"];
 					else
 						return $result;
 				}
 
-				$sql 	= "INSERT INTO text_tags_per_id (id, text_tag_id, type) VALUES ('$id', '$tagId', '$type')";
+				$sql 	= "INSERT INTO text_tags_per_guid (guid, text_tag_id, type) VALUES ('$guid', '$tagId', '$type')";
 				$result = MySQLManager::ExecuteInsert($sql);
 			}
 

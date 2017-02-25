@@ -31,12 +31,12 @@ function UsersServiceClass()
 	{
 		if(result.success)
 		{
-			var payload 						= ServiceClient.instance.getPayload("User", "Register");
-			payload["guid"]  				= GUIDUtils.instance.generateNewGUID();
-			payload["name"]  				= name;
-			payload["email"]   			= email;
-			payload["password"] 		= password;
-			payload["rootGroupId"]	= result.data.insert_id;
+			var payload 							= ServiceClient.instance.getPayload("User", "Register");
+			payload["guid"]  					= GUIDUtils.instance.generateNewGUID();
+			payload["name"]  					= name;
+			payload["email"]   				= email;
+			payload["password"] 			= password;
+			payload["rootGroupGuid"]	= result.data.guid;
 
 			ServiceClient.instance.request(App.instance.ENVIRONMENT.SERVICES.USERS.URL, "POST", payload, callback);
 		}

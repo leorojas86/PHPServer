@@ -3,28 +3,28 @@ var InventoryContextMenuController = { instance : new InventoryContextMenuContro
 
 function InventoryContextMenuControllerClass()
 {
-	var _cuttingGroupId 		= null;
-	var _cuttingGroupParentId 	= null;
-	var _folderId 				= null;
+	var _cuttingGroupGuid 				= null;
+	var _cuttingGroupParentGuid 	= null;
+	var _folderGuid 							= null;
 
 	this.initContextMenu = function()
 	{
-		var scrollPanel 			= document.getElementById("folders_scroll_panel");
-		scrollPanel.oncontextmenu 	= function(event) { InventoryContextMenuController.instance.showContextMenu(event); return false; };
+		var scrollPanel 					= document.getElementById("folders_scroll_panel");
+		scrollPanel.oncontextmenu = function(event) { InventoryContextMenuController.instance.showContextMenu(event); return false; };
 
 		var isIOS = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
 
 		if(isIOS)//HACK: Fix iOS oncontextmenu event, TODO: move this to a utils class
-		{	
+		{
 			var startTime = null;
 
-			scrollPanel.addEventListener('touchstart', function(e) 
-			{ 
-				startTime = new Date(); 
+			scrollPanel.addEventListener('touchstart', function(e)
+			{
+				startTime = new Date();
 				return false;
 			}, true);
 
-			scrollPanel.addEventListener('touchend', function(e) 
+			scrollPanel.addEventListener('touchend', function(e)
 			{
 				var endTime     = new Date();
 				var elapsedTime = endTime - startTime;
@@ -33,9 +33,9 @@ function InventoryContextMenuControllerClass()
 				{
 					scrollPanel.style.pointerEvents = "none";
 					setTimeout(function()
-					{ 
+					{
 						var touch = e.changedTouches[0];
-						InventoryContextMenuController.instance.showContextMenu(touch); 
+						InventoryContextMenuController.instance.showContextMenu(touch);
 						scrollPanel.style.pointerEvents = "all";
 					}, 500);
 				}
@@ -67,38 +67,41 @@ function InventoryContextMenuControllerClass()
 			break;
 		}
 
-		_folderId  		= event.target.parentNode.id.replace("folder_", "");
+		_folderGuid  		= event.target.parentNode.id.replace("folder_", "");
 		var contextMenu = document.getElementById('context_menu_container');
 
-		var onContextMenuOptionSelected = function(option) { InventoryContextMenuController.instance.onContextMenuOptionSelected(option); } 
+		var onContextMenuOptionSelected = function(option) { InventoryContextMenuController.instance.onContextMenuOptionSelected(option); }
 		ContextMenuUtils.instance.showContextMenu(contextMenu, event, options, onContextMenuOptionSelected);
 	};
 
 	this.canPasteFolder = function()
 	{
-		return _cuttingGroupId != null;
+		return _cuttingGroupGuid != null;
 	};
 
 	this.onContextMenuOptionSelected = function(option)
 	{
 		switch(option)
 		{
-			case Constants.MENU_ITEM_ADD_ITEM: 		this.addItem(_folderId); 				break;
-			case Constants.MENU_ITEM_ADD_FOLDER: 	this.addFolder();      					break;
-			case Constants.MENU_ITEM_PASTE: 		this.pasteGroup();          			break;
-			case Constants.MENU_ITEM_RENAME:    	this.renameGroup(_folderId); 			break;
-			case Constants.MENU_ITEM_CUT: 			
-										_cuttingGroupId = _folderId; 
-										_cuttingGroupParentId = InventoryGroupController.instance.groupData.id;
-			break;
-			case Constants.MENU_ITEM_DELETE: 		this.removeSubgroupGroup(_folderId);	break;
+			case Constants.MENU_ITEM_ADD_ITEM: 		this.addItem(); 						break;
+			case Constants.MENU_ITEM_ADD_FOLDER: 	this.addFolder();      			break;
+			case Constants.MENU_ITEM_PASTE: 			this.pasteGroup();          break;
+			case Constants.MENU_ITEM_RENAME:    	this.renameGroup(); 				break;
+			case Constants.MENU_ITEM_CUT:					this.cutGroup(); 						break;
+			case Constants.MENU_ITEM_DELETE: 			this.removeSubgroupGroup();	break;
 		}
 	};
 
-	this.addItem = function(folderId)
+	this.cutGroup = function()
+	{
+		_cuttingGroupGuid 			= _folderGuid;
+		_cuttingGroupParentGuid = InventoryGroupController.instance.groupData.guid;
+	};
+
+	this.addItem = function()
 	{
 		var typeNewItemNameText = LocManager.instance.getLocalizedText("type_new_item_name");
-		var itemName 			= prompt(typeNewItemNameText, "");
+		var itemName 						= prompt(typeNewItemNameText, "");
 
 		if(itemName != null && itemName != "")
 		{
@@ -119,29 +122,29 @@ function InventoryContextMenuControllerClass()
 		}
 	};
 
-	this.renameGroup = function(folderId)
+	this.renameGroup = function()
 	{
 		var typeNewFolderName = LocManager.instance.getLocalizedText("type_new_name");
-		var folderName 		  = prompt(typeNewFolderName, "");
+		var folderName 		  	= prompt(typeNewFolderName, "");
 
-		if(folderName != null && folderName != "") 
+		if(folderName != null && folderName != "")
 		{
 			InventoryGroupController.instance.renderLoadingText();
 			var subgroups = InventoryGroupController.instance.groupData.sub_groups;
-			var subgroup =  InventoryUtils.instance.findSubGroup(subgroups, folderId);
-			GroupsService.instance.renameGroup(subgroup, InventoryGroupController.instance.groupData.id, folderName, this.refreshCurrentGroup);
+			var subgroup 	=  InventoryUtils.instance.findSubGroup(subgroups, _folderGuid);
+			GroupsService.instance.renameGroup(subgroup, InventoryGroupController.instance.groupData.guid, folderName, this.refreshCurrentGroup);
 		}
 	};
 
 	this.addGroup = function(newGroupName, type)
 	{
-		GroupsService.instance.addGroup(InventoryGroupController.instance.groupData.id, newGroupName, type, this.onAddGroupCallback);
+		GroupsService.instance.addGroup(InventoryGroupController.instance.groupData.guid, newGroupName, type, this.onAddGroupCallback);
 	};
 
 	this.onAddGroupCallback = function(resultData)
 	{
-		if(resultData.success) 
-			InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance.groupData.id);
+		if(resultData.success)
+			InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance.groupData.guid);
 		else
 			alert(resultData.data);
 	};
@@ -149,36 +152,36 @@ function InventoryContextMenuControllerClass()
 	this.pasteGroup = function()
 	{
 		InventoryGroupController.instance.renderLoadingText();
-		GroupsService.instance.moveGroup(_cuttingGroupId, InventoryGroupController.instance.groupData.id, _cuttingGroupParentId, this.refreshCurrentGroup);
-		_cuttingGroupId = null;
+		GroupsService.instance.moveGroup(_cuttingGroupGuid, InventoryGroupController.instance.groupData.guid, _cuttingGroupParentGuid, this.refreshCurrentGroup);
+		_cuttingGroupGuid = null;
 	};
 
 	this.refreshCurrentGroup = function(resultData)
 	{
 		if(resultData.success)
-			InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance.groupData.id);
+			InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance.groupData.guid);
 		else
 			alert(resultData.data);
 	};
 
-	this.removeSubgroupGroup = function(groupId)
+	this.removeSubgroupGroup = function()
 	{
-		var folderLabel 		= document.getElementById('folder_label_' + groupId);
+		var folderLabel 			= document.getElementById('folder_label_' + _folderGuid);
 		var deleteFolderText 	= LocManager.instance.getLocalizedText("sure_to_delete_folder");
-		deleteFolderText 		= deleteFolderText.replace("[folder]", folderLabel.textContent);
-		var remove      		= confirm(deleteFolderText);
+		deleteFolderText 			= deleteFolderText.replace("[folder]", folderLabel.textContent);
+		var remove      			= confirm(deleteFolderText);
 
-		if(remove) 
+		if(remove)
 		{
 			InventoryGroupController.instance.renderLoadingText();
-			GroupsService.instance.deleteGroup(groupId, InventoryGroupController.instance.groupData.id, this.onDeleteGroupCallback);
+			GroupsService.instance.deleteGroup(_folderGuid, InventoryGroupController.instance.groupData.guid, this.onDeleteGroupCallback);
 		}
 	};
 
 	this.onDeleteGroupCallback = function(resultData)
 	{
 		if(resultData.success)
-			InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance.groupData.id);
+			InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance.groupData.guid);
 		else
 			alert(resultData.data);
 	};

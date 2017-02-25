@@ -1,7 +1,7 @@
 <?php
 	require_once "general/Environment.php";
 	require_once "services/users/DBConfig.php";
-	require_once "services/users/User.php";
+	require_once "services/users/model/User.php";
 
 	class UsersService
 	{
@@ -36,11 +36,11 @@
 					$result = new ServiceResult(false, "User with email '$email' already exists", UtilsConstants::USER_ALREADY_EXISTS_ERROR_CODE);
 				else
 				{
-					$guid					= $payload->guid;
-					$password 		= $payload->password;//TODO: send password securely
-					$name     		= $payload->name;
-					$rootGroupId  = $payload->rootGroupId;
-					return User::Register($guid, $email, $password, $name, $rootGroupId);//TODO: send validation email
+					$guid						= $payload->guid;
+					$password 			= $payload->password;//TODO: send password securely
+					$name     			= $payload->name;
+					$rootGroupGuid  = $payload->rootGroupGuid;
+					return User::Register($guid, $email, $password, $name, $rootGroupGuid);//TODO: send validation email
 				}
 			}
 

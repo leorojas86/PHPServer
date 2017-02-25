@@ -9,10 +9,10 @@ function InventoryGroupHeaderControllerClass()
 		var backButtonText    = LocManager.instance.getLocalizedText("back_button_text");
 		var searchButtonText  = LocManager.instance.getLocalizedText("search_button_text");
 		var rootGroupText  	  = LocManager.instance.getLocalizedText("root_group_text");
-		
+
 		var groupPath     	= groupData.path.replace("RootGroup/", rootGroupText + "/");
-		var hasParentGroup 	= groupData.parent_group_id != 0;
-		var data 	 		= JSON.parse(groupData.data);
+		var hasParentGroup 	= groupData.parent_group_guid != 0;
+		var data 	 					= JSON.parse(groupData.data);
 		var subGroupType  	= data.type;
 		var isFolderGroup   = subGroupType == Constants.GROUP_ID_FOLDER;
 
@@ -28,20 +28,20 @@ function InventoryGroupHeaderControllerClass()
 		return html;
 	};
 
-	this.assignEvents = function(parentGroupId)
+	this.assignEvents = function(parentGroupGuid)
 	{
 		var backButton = document.getElementById("back_button");
 
 		if(backButton != null)
-			backButton.onclick = function() { onBackButtonClick(parentGroupId); }
+			backButton.onclick = function() { onBackButtonClick(parentGroupGuid); }
 
 		document.getElementById("search_button").onclick = onSearchButtonClick;
-		document.onkeyup 								 = onKeyUp;
+		document.onkeyup 																 = onKeyUp;
 	};
 
-	function onBackButtonClick(parentGroupId)
+	function onBackButtonClick(parentGroupGuid)
 	{
-		InventoryGroupController.instance.loadAjaxGroup(parentGroupId);
+		InventoryGroupController.instance.loadAjaxGroup(parentGroupGuid);
 	}
 
 	function onSearchButtonClick()
@@ -51,12 +51,12 @@ function InventoryGroupHeaderControllerClass()
 
 	function onKeyUp(event)
 	{
-		switch(event.which) 
+		switch(event.which)
 		{
 		    case 37://left arrow button
 		    	var backButton = document.getElementById("back_button");
 
-				if(backButton != null) 
+				if(backButton != null)
 					backButton.onclick.apply(backButton);
 		    break;
 		    default: /*console.log("pressed key = " + event.which);*/ break;

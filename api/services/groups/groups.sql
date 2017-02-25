@@ -2,10 +2,10 @@ CREATE DATABASE groups;
 
 USE groups;
 
-CREATE TABLE `groups` 
+CREATE TABLE `groups`
 (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `parent_group_id` bigint(20) DEFAULT NULL,
+  `guid` char(36) NOT NULL,
+  `parent_group_guid` char(36) DEFAULT NULL,
   `data` text DEFAULT NULL,
-  PRIMARY KEY (id)
+  PRIMARY KEY (guid)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -14,37 +14,38 @@ function GroupsServiceClass()
 
 	this.loadRootGroup = function(callback)
 	{
-		this.loadGroup(UsersService.instance.loggedUser.rootGroupId, callback);
+		this.loadGroup(UsersService.instance.loggedUser.rootGroupGuid, callback);
 	};
 
-	this.loadGroup = function(groupId, callback)
+	this.loadGroup = function(groupGuid, callback)
 	{
-		var cachedResult = ServiceCache.instance.getCachedGroupResult(groupId);
+		var cachedResult = ServiceCache.instance.getCachedGroupResult(groupGuid);
 
 		if(cachedResult != null)
 			callback(cachedResult);
 		else
 		{
-			var payload 	= ServiceClient.instance.getPayload("Group", "Get");
-			payload["id"]   = groupId;
+			var payload 		= ServiceClient.instance.getPayload("Group", "Get");
+			payload["guid"] = groupGuid;
 
-			ServiceClient.instance.request(App.instance.ENVIRONMENT.SERVICES.GROUPS.URL, "POST", payload, function(result) { onLoadGroupCallback(groupId, result, callback); });
+			ServiceClient.instance.request(App.instance.ENVIRONMENT.SERVICES.GROUPS.URL, "POST", payload, function(result) { onLoadGroupCallback(groupGuid, result, callback); });
 		}
 	};
 
-	function onLoadGroupCallback(groupId, result, callback)
+	function onLoadGroupCallback(groupGuid, result, callback)
 	{
-		ServiceCache.instance.cacheGroupResult(groupId, result);
+		ServiceCache.instance.cacheGroupResult(groupGuid, result);
 		callback(result);
 	}
 
-	this.addGroup = function(parentGroupId, name, type, callback)
+	this.addGroup = function(parentGroupGuid, name, type, callback)
 	{
-		var payload 				= ServiceClient.instance.getPayload("Group", "Add");
-		payload["parentGroupId"]   	= parentGroupId;
-		payload["data"]   			= "{ \"name\":\"" + name + "\", \"type\":\"" + type + "\", \"customData\":\"{}\", \"subgroups\":[] }";
+		var payload 								= ServiceClient.instance.getPayload("Group", "Add");
+		payload['guid']							= GUIDUtils.instance.generateNewGUID();
+		payload["parentGroupGuid"]  = parentGroupGuid;
+		payload["data"]   					= "{ \"name\":\"" + name + "\", \"type\":\"" + type + "\", \"customData\":\"{}\", \"subgroups\":[] }";
 
-		ServiceCache.instance.removeCachedGroupResult(parentGroupId);
+		ServiceCache.instance.removeCachedGroupResult(parentGroupGuid);
 		ServiceClient.instance.request(App.instance.ENVIRONMENT.SERVICES.GROUPS.URL, "POST", payload, function(result) { onAddGroupCallback(result, payload, callback); });
 	};
 
@@ -53,19 +54,20 @@ function GroupsServiceClass()
 		if(result.success)
 		{
 			var tagsData = payload["data"];
+			//TODO: UPDATE GUID
 			TagsService.instance.updateSearchTags(result.data.insert_id, tagsData, Constants.SEARCH_TAGS_TYPES.GROUP_NAME_TYPE);//TODO: queue this steps
 		}
 
 		callback(result);
 	};
 
-	this.deleteGroup = function(groupId, parentGroupId, callback)
+	this.deleteGroup = function(groupGuid, parentGroupGuid, callback)
 	{
-		var payload 	= ServiceClient.instance.getPayload("Group", "Delete");
-		payload["id"]   = groupId;
+		var payload 		= ServiceClient.instance.getPayload("Group", "Delete");
+		payload["guid"] = groupGuid;
 
-		ServiceCache.instance.removeCachedGroupResult(groupId);
-		ServiceCache.instance.removeCachedGroupResult(parentGroupId);
+		ServiceCache.instance.removeCachedGroupResult(groupGuid);
+		ServiceCache.instance.removeCachedGroupResult(parentGroupGuid);
 		ServiceClient.instance.request(App.instance.ENVIRONMENT.SERVICES.GROUPS.URL, "POST", payload, callback);
 	};
 
@@ -74,37 +76,37 @@ function GroupsServiceClass()
 		var data  = JSON.parse(groupData.data);
 		data.name = newName;
 
-		ServiceCache.instance.removeCachedGroupResult(parentGroupId);
-		this.updateGroupData(groupData.id, JSON.stringify(data), callback);
+		ServiceCache.instance.removeCachedGroupResult(parentGroupGuid);
+		this.updateGroupData(groupData.guid, JSON.stringify(data), callback);
 	};
 
-	this.moveGroup = function(groupId, parentGroupId, oldParentGroupId, callback)
+	this.moveGroup = function(groupGuid, parentGroupGuid, oldParentGroupGuid, callback)
 	{
-		var payload 				= ServiceClient.instance.getPayload("Group", "Move");
-		payload["id"]   			= groupId;
-		payload["parentGroupId"]   	= parentGroupId;
+		var payload 								= ServiceClient.instance.getPayload("Group", "Move");
+		payload["guid"]   					= groupGuid;
+		payload["parentGroupGuid"] 	= parentGroupGuid;
 
-		ServiceCache.instance.removeCachedGroupResult(groupId);
-		ServiceCache.instance.removeCachedGroupResult(parentGroupId);
-		ServiceCache.instance.removeCachedGroupResult(oldParentGroupId);
+		ServiceCache.instance.removeCachedGroupResult(groupGuid);
+		ServiceCache.instance.removeCachedGroupResult(parentGroupGuid);
+		ServiceCache.instance.removeCachedGroupResult(oldParentGroupGuid);
 		ServiceClient.instance.request(App.instance.ENVIRONMENT.SERVICES.GROUPS.URL, "POST", payload, callback);
 	};
 
-	this.updateGroupData = function(groupId, groupData, callback)
+	this.updateGroupData = function(groupGuid, groupData, callback)
 	{
-		var payload 	= ServiceClient.instance.getPayload("Group", "Update");
-		payload["id"]   = groupId;
+		var payload 		= ServiceClient.instance.getPayload("Group", "Update");
+		payload["guid"] = groupGuid;
 		payload["data"] = groupData;
 
-		ServiceCache.instance.removeCachedGroupResult(groupId);
+		ServiceCache.instance.removeCachedGroupResult(groupGuid);
 		ServiceClient.instance.request(App.instance.ENVIRONMENT.SERVICES.GROUPS.URL, "POST", payload, callback);
-		TagsService.instance.updateSearchTags(groupId, groupData, Constants.SEARCH_TAGS_TYPES.GROUP_DATA_TEXT_TYPE);//TODO: queue this steps
+		TagsService.instance.updateSearchTags(groupGuid, groupData, Constants.SEARCH_TAGS_TYPES.GROUP_DATA_TEXT_TYPE);//TODO: queue this steps
 	};
 
-	this.getGroupsByIds = function(ids, callback)//TODO: improve this
+	this.getGroupsByIds = function(guids, callback)//TODO: improve this
 	{
-		var payload 	 = ServiceClient.instance.getPayload("Group", "GetGroups");
-		payload["ids"]   = ids;
+		var payload 	 		= ServiceClient.instance.getPayload("Group", "GetGroups");
+		payload["guids"]  = guids;
 		ServiceClient.instance.request(App.instance.ENVIRONMENT.SERVICES.GROUPS.URL, "POST", payload, callback);
 	};
 }

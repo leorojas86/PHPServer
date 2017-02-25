@@ -6,7 +6,7 @@ function InventorySearchResultsControllerClass()
 	this.renderResults = function(searchText)
 	{
 		InventoryGroupController.instance.renderLoadingText();
-		
+
 		var types = [Constants.SEARCH_TAGS_TYPES.GROUP_DATA_TEXT_TYPE, Constants.SEARCH_TAGS_TYPES.GROUP_NAME_TYPE];
 		TagsService.instance.searchGroups(searchText, types, onSearchCallback);
 	};
@@ -20,25 +20,25 @@ function InventorySearchResultsControllerClass()
 	function renderSearchResults(groupData)
 	{
 		var html = getGroupHeaderHTML(groupData);
-		html += getGroupChildrenHTML(groupData);
+		html 		+= getGroupChildrenHTML(groupData);
 
 		document.getElementById("group_container").innerHTML 	= html;
-		document.getElementById("back_button").onclick 			= onBackButtonClick;
-		document.getElementById("search_button").onclick 		= onSearchButtonClick;
-		document.onkeyup 								 		= onKeyUp;
+		document.getElementById("back_button").onclick 				= onBackButtonClick;
+		document.getElementById("search_button").onclick 			= onSearchButtonClick;
+		document.onkeyup 								 											= onKeyUp;
 
 		for(var index in groupData)
 		{
-			var subGroup     = groupData[index];
-			var subGroupId	 = subGroup.id;
-			
-			assignButtonClick("folder_image_" + subGroupId, subGroupId);
+			var subGroup     	= groupData[index];
+			var subGroupGuid	= subGroup.guid;
+
+			assignButtonClick("folder_image_" + subGroupGuid, subGroupGuid);
 		}
 	}
 
-	function assignButtonClick(elementId, subGroupId)
+	function assignButtonClick(elementId, subGroupGuid)
 	{
-		document.getElementById(elementId).onclick 	= function() { onSubGroupButtonClick(subGroupId); };
+		document.getElementById(elementId).onclick 	= function() { onSubGroupButtonClick(subGroupGuid); };
 	}
 
 	function getGroupChildrenHTML(subGroups)
@@ -47,17 +47,17 @@ function InventorySearchResultsControllerClass()
 
 		for(var index in subGroups)
 		{
-			var subGroup     = subGroups[index];
-			var data 		 = JSON.parse(subGroup.data);
-			var subGroupName = data.name;
-			var subGroupId	 = subGroup.id;
-			var subGroupType = data.type;
-			var icon 		 = subGroupType == Constants.GROUP_ID_FOLDER ? Constants.IMAGE_FOLDER : Constants.IMAGE_FILE;
-			
-			html += "<div id='folder_" + subGroupId + "' class='folder_class'>"+
-						"<div id='folder_image_" + subGroupId + "' class='folder_image_class " + icon + "'> </div>"+
-						"<label id='folder_label_" + subGroupId + "' >" + subGroupName + "</label>"+
-					"</div>";
+			var subGroup     	= subGroups[index];
+			var data 		 			= JSON.parse(subGroup.data);
+			var subGroupName 	= data.name;
+			var subGroupGuid	= subGroup.guid;
+			var subGroupType 	= data.type;
+			var icon 		 			= subGroupType == Constants.GROUP_ID_FOLDER ? Constants.IMAGE_FOLDER : Constants.IMAGE_FILE;
+
+			html += "<div id='folder_" + subGroupGuid + "' class='folder_class'>"+
+								"<div id='folder_image_" + subGroupGuid + "' class='folder_image_class " + icon + "'> </div>"+
+								"<label id='folder_label_" + subGroupGuid + "' >" + subGroupName + "</label>"+
+							"</div>";
 		}
 
 		html += "</div>";
@@ -65,9 +65,9 @@ function InventorySearchResultsControllerClass()
 		return html;
 	}
 
-	function onSubGroupButtonClick(groupId)
+	function onSubGroupButtonClick(groupGuid)
 	{
-		InventoryGroupController.instance.loadAjaxGroup(groupId);
+		InventoryGroupController.instance.loadAjaxGroup(groupGuid);
 	}
 
 	function getGroupHeaderHTML(groupData)
@@ -76,7 +76,7 @@ function InventorySearchResultsControllerClass()
 		var backButtonText    = LocManager.instance.getLocalizedText("back_button_text");
 		var searchResultsText = LocManager.instance.getLocalizedText("search_results_text");
 		var searchButtonText  = LocManager.instance.getLocalizedText("search_button_text");
-		
+
 		var html = "<div id='group_header' class='group_header_class'>";
 				//html += "<div id='search_results_text'>" + searchResultsText + "</div>";
 				html += "<div id='group_path' class='group_path_class'>" + searchResultsText + "</div>";
@@ -94,7 +94,7 @@ function InventorySearchResultsControllerClass()
 
 	function onKeyUp(event)
 	{
-		switch(event.which) 
+		switch(event.which)
 		{
 		    case 37://left arrow button
 		    	var backButton = document.getElementById("back_button");

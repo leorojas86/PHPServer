@@ -1,7 +1,7 @@
-<?php 
+<?php
 	require_once "general/Environment.php";
 	require_once "services/groups/DBConfig.php";
-	require_once "services/groups/Group.php";
+	require_once "services/groups/model/Group.php";
 
 	class GroupsService
 	{
@@ -11,17 +11,17 @@
 
 			if($result->success)
 			{
-				switch($payload->method) 
+				switch($payload->method)
 				{
-					case "Add":			$result = GroupsService::AddGroup($payload);		break;
-					case "Get": 		$result = GroupsService::GetGroup($payload);		break;
-					case "Update":		$result = GroupsService::UpdateGroupData($payload);	break;
-					case "Delete":		$result = GroupsService::DeleteGroup($payload);		break;
-					case "Move":		$result = GroupsService::MoveGroup($payload);		break;
-					case "Rename":		$result = GroupsService::RenameGroup($payload);		break;
-					case "GetGroups": 	$result = GroupsService::GetGroups($payload);		break;
-					default: 		 
-						$result = new ServiceResult(false, "Unsupported Groups service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE); 
+					case "Add":					$result = GroupsService::AddGroup($payload);				break;
+					case "Get": 				$result = GroupsService::GetGroup($payload);				break;
+					case "Update":			$result = GroupsService::UpdateGroupData($payload);	break;
+					case "Delete":			$result = GroupsService::DeleteGroup($payload);			break;
+					case "Move":				$result = GroupsService::MoveGroup($payload);				break;
+					case "Rename":			$result = GroupsService::RenameGroup($payload);			break;
+					case "GetGroups": 	$result = GroupsService::GetGroups($payload);				break;
+					default:
+						$result = new ServiceResult(false, "Unsupported Groups service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE);
 					break;
 				}
 			}
@@ -31,56 +31,57 @@
 
 		private static function RenameGroup($payload)
 		{
-			$groupId   = $payload->id;
+			$groupGuid = $payload->guid;
 			$groupName = $payload->name;
 
-			return Group::Rename($groupId, $groupName);
+			return Group::Rename($groupGuid, $groupName);
 		}
 
 		private static function MoveGroup($payload)
 		{
-			$groupId 	   = $payload->id;
-			$parentGroupId = $payload->parentGroupId;
+			$groupGuid 				= $payload->guid;
+			$parentGroupGuid 	= $payload->parentGroupGuid;
 
-			return Group::Move($groupId, $parentGroupId);
+			return Group::Move($groupGuid, $parentGroupGuid);
 		}
 
 		private static function DeleteGroup($payload)
 		{
-			$groupId = $payload->id;
-			return Group::Delete($groupId);
+			$groupGuid = $payload->guid;
+			return Group::Delete($groupGuid);
 		}
 
 		private static function GetGroup($payload)
 		{
-			$groupId = $payload->id;
+			$groupGuid = $payload->guid;
 
-			return Group::GetGroup($groupId);
+			return Group::GetGroup($groupGuid);
 		}
 
 		private static function UpdateGroupData($payload)
 		{
-			$groupId 	= $payload->id;
-			$data    	= $payload->data;
-			$result 	= Group::UpdateData($groupId, $data);
+			$groupGuid = $payload->guid;
+			$data    	 = $payload->data;
+			$result 	 = Group::UpdateData($groupGuid, $data);
 
 			return $result;
 		}
 
 		private static function AddGroup($payload)
 		{
-			$parentGroupId    = $payload->parentGroupId;
-			$data    		  = $payload->data;
+			$guid 						= $payload->guid;
+			$parentGroupGuid  = $payload->parentGroupGuid;
+			$data    		  		= $payload->data;
 
-			return Group::AddGroup($parentGroupId, $data);
+			return Group::AddGroup($guid, $parentGroupGuid, $data);
 		}
 
 		private static function GetGroups($payload)
 		{
-			$ids = $payload->ids;
+			$guids = $payload->guids;
 
-			return Group::GetGroupsData($ids);
+			return Group::GetGroupsData($guids);
 		}
-		
+
 	}
 ?>

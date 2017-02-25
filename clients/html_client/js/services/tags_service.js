@@ -3,16 +3,16 @@ var TagsService = { instance : new TagsServiceClass() };
 
 function TagsServiceClass()
 {
-	this.updateSearchTags = function(groupId, data, type)
+	this.updateSearchTags = function(groupGuid, data, type)
 	{
 		var text 	= data.replace(new RegExp("]|{|}|,|:|<|>|=|\t|\"", 'g'), ' ');
-		text        = text.replace(/\[/g,' ');
-		text 		= text.replace(new RegExp(" +", 'g'), ',');
-		text 		= text.toLowerCase();
+		text      = text.replace(/\[/g,' ');
+		text 			= text.replace(new RegExp(" +", 'g'), ',');
+		text 			= text.toLowerCase();
 
 		//alert(tags);
-		var payload 	  = ServiceClient.instance.getPayload("Tag", "UpdateTags");
-		payload["id"]     = groupId;
+		var payload 	  	= ServiceClient.instance.getPayload("Tag", "UpdateTags");
+		payload["guid"]   = groupGuid;
 		payload["texts"]  = { text : text, type : type };
 		/*var currentDate   = new Date();
 		payload["dates"]  = [ { date : currentDate, type : 3 } ];

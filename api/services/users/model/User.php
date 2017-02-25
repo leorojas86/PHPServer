@@ -1,10 +1,10 @@
 <?php
 	class User
 	{
-		public static function Register($guid, $email, $password, $name, $rootGroupId)
+		public static function Register($guid, $email, $password, $name, $rootGroupGuid)
 		{
-			$sql    = "INSERT INTO users (guid,name, password, email, rootGroupId)
-					   VALUES ('$guid', '$name', '$password', '$email', '$rootGroupId')";
+			$sql    = "INSERT INTO users (guid,name, password, email, rootGroupGuid)
+					   VALUES ('$guid', '$name', '$password', '$email', '$rootGroupGuid')";
 			$result = MySQLManager::ExecuteInsert($sql);
 
 			return $result;

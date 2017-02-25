@@ -9,8 +9,8 @@ function InventoryUtilsClass()
 
 		for(var index in subGroups)
 		{
-			var subGroup = subGroups[index];
-			var data 	 = JSON.parse(subGroup.data);//TODO: improve this
+			var subGroup 	= subGroups[index];
+			var data 	 		= JSON.parse(subGroup.data);//TODO: improve this
 
 			if(data.type == Constants.GROUP_ID_FOLDER)
 				folders.push(subGroup);
@@ -21,13 +21,13 @@ function InventoryUtilsClass()
 		return folders.concat(items);
 	};
 
-	this.findSubGroup = function(subgroups, groupId)
+	this.findSubGroup = function(subgroups, groupGuid)
 	{
 		for(var i = 0; i < subgroups.length; i++)
 		{
 			var currentSubGroup = subgroups[i];
 
-			if(currentSubGroup.id == groupId)
+			if(currentSubGroup.guid == groupGuid)
 				return currentSubGroup;
 		}
 

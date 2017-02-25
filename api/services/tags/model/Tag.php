@@ -1,9 +1,9 @@
-<?php 
+<?php
 	class Tag
 	{
-		public static function UpdateTags($id, $textTags, $datesTags, $valuesTags)
+		public static function UpdateTags($guid, $textTags, $datesTags, $valuesTags)
 		{
-			$result = Tag::AddId($id);
+			$result = Tag::AddGuid($guid);
 
 			if($result->success)
 			{
@@ -11,7 +11,7 @@
 				{
 					$texts  = explode(',', $textTags->text);
 					$type   = $textTags->type;
-					$result = Text::UpdateTextTags($id, $texts, $type);
+					$result = Text::UpdateTextTags($guid, $texts, $type);
 
 					if(!$result->success)
 						return $result;
@@ -19,14 +19,14 @@
 
 				if($datesTags != null)
 				{
-					$result = Date::UpdateDateTags($id, $datesTags);
+					$result = Date::UpdateDateTags($guid, $datesTags);
 
 					if(!$result->success)
 						return $result;
 				}
 
 				if($valuesTags != null)
-					$result = Value::UpdateValueTags($id, $valuesTags);
+					$result = Value::UpdateValueTags($guid, $valuesTags);
 			}
 
 			return $result;
@@ -45,11 +45,11 @@
 
 			if($searchDates != null)
 			{
-				$joins .= " 
+				$joins .= "
 							" . Date::GetSearchJoin($searchDates);
 
 				if($where != "")
-					$where .= " AND 
+					$where .= " AND
 								";
 
 				$where .= Date::GetSearchWhere($searchDates);
@@ -57,32 +57,30 @@
 
 			if($searchValues != null)
 			{
-				$joins .= " 
+				$joins .= "
 							" . Value::GetSearchJoin($searchValues);
 
 				if($where != "")
-					$where .= " AND 
+					$where .= " AND
 								";
 
 				$where .= Value::GetSearchWhere($searchValues);
 			}
 
-			$sql = "SELECT ids.id AS id 
-					FROM ids
-					$joins
-					$where
-					LIMIT 500";
-
-			//error_log("TEST ->  $sql");
+			$sql = "SELECT guids.id AS guid
+							FROM guids
+							$joins
+							$where
+							LIMIT 500";
 
 			$result = MySQLManager::ExecuteSelectRows($sql);
-			
+
 			return $result;
 		}
 
-		private static function AddId($id)
+		private static function AddGuid($guid)
 		{
-			$sql    = "INSERT IGNORE INTO ids (id) VALUES ('$id')";
+			$sql    = "INSERT IGNORE INTO guids (guid) VALUES ('$guid')";
 			$result = MySQLManager::ExecuteInsert($sql);
 
 			return $result;
