@@ -2,9 +2,9 @@
 	require_once "utils/ServiceResult.php";
 	require_once "utils/UtilsConstants.php";
 
-	if(isset($_POST["payload"]))
+	if(isset($_REQUEST["payload"]))
 	{
-		$payload = json_decode($_POST["payload"]);
+		$payload = json_decode($_REQUEST["payload"]);
 
 		switch($payload->service)
 		{
