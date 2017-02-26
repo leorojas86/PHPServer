@@ -22,7 +22,7 @@ function ServiceClientClass()
 
 	this.request = function(serviceURL, method, payload, callback)
 	{
-		var params = "payload=" + JSON.stringify(payload);
+		var params = { payload: JSON.stringify(payload) };
 
 		this.requestWithParams(serviceURL, method, params, callback);
 	};
@@ -34,10 +34,12 @@ function ServiceClientClass()
 
 	this.getPayload = function(service, method)
 	{
-		var payload 					= new Object();
-		payload["userGuid"] 	= UsersService.instance.loggedUser != null ? UsersService.instance.loggedUser.guid : null;
-		payload["service"] 	 	= service;
-		payload["method"]   	= method;
+		var payload =
+		{
+			userGuid: UsersService.instance.loggedUser != null ? UsersService.instance.loggedUser.guid : null,
+			service: service,
+			method: method
+		};
 
 		return payload;
 	};

@@ -20,20 +20,12 @@ function RequestUtilsClass()
 		{
 			case "POST":
 
-				if((typeof params) == "string")
-				{
-					xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//Send the proper header information along with the request
-					xmlhttp.send(params);
-				}
-				else
-				{
-					var formData = new FormData();
+				var formData = new FormData();
 
-			    for(var id in params)
-			    	formData.append(id, params[id]);
+		    for(var id in params)
+		    	formData.append(id, params[id]);
 
-				  xmlhttp.send(formData);
-				}
+			  xmlhttp.send(formData);
 
 			break;
 			case "GET":
