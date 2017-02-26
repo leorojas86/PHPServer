@@ -67,7 +67,7 @@
 				$where .= Value::GetSearchWhere($searchValues);
 			}
 
-			$sql = "SELECT guids.id AS guid
+			$sql = "SELECT guids.guid AS guid
 							FROM guids
 							$joins
 							$where

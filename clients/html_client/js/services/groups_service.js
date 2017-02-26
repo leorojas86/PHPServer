@@ -71,7 +71,7 @@ function GroupsServiceClass()
 		ServiceClient.instance.request(App.instance.ENVIRONMENT.SERVICES.GROUPS.URL, "POST", payload, callback);
 	};
 
-	this.renameGroup = function(groupData, parentGroupId, newName, callback)
+	this.renameGroup = function(groupData, parentGroupGuid, newName, callback)
 	{
 		var data  = JSON.parse(groupData.data);
 		data.name = newName;

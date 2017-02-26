@@ -37,7 +37,7 @@
 		public static function GetGroupsData($guids)
 		{
 			$guidsText 	= MySQLManager::GetListSQL($guids);
-			$sql    		= "SELECT * FROM groups WHERE $guid IN ($guidsText)";
+			$sql    		= "SELECT * FROM groups WHERE guid IN ($guidsText)";
 			$result 		= MySQLManager::ExecuteSelectRows($sql);
 
 			return $result;

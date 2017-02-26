@@ -3,8 +3,8 @@
 	{
 		public static function GetSearchJoin()
 		{
-			return "INNER JOIN text_tags_per_guid ON guids.guid = text_tags_per_guid.id
-					INNER JOIN text_tags ON text_tags_per_guid.text_tag_id = text_tags.id";
+			return "INNER JOIN text_tags_per_guid ON guids.guid = text_tags_per_guid.guid
+							INNER JOIN text_tags ON text_tags_per_guid.text_tag_id = text_tags.id";
 		}
 
 		public static function GetSearchWhere($searchText)
