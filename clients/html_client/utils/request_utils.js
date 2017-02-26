@@ -2,11 +2,11 @@ var RequestUtils = { instance : new RequestUtilsClass() };
 
 function RequestUtilsClass()
 {
-	this.request = function(url, method, callback, params, onProgress) 
+	this.request = function(url, method, callback, params, onProgress)
 	{
 		var startTime 	= new Date();
-		params 			= params || "";//Default parameter = ""
-		var xmlhttp 	= new XMLHttpRequest();
+		params 					= params || "";//Default parameter = ""
+		var xmlhttp 		= new XMLHttpRequest();
 		xmlhttp.onload	= function() { checkForReadyResponse(xmlhttp, callback, startTime); };
 		xmlhttp.onerror	= function() { checkForReadyResponse(xmlhttp, callback, startTime); };
 
@@ -14,41 +14,34 @@ function RequestUtilsClass()
 
 		var async = true;
 
+		xmlhttp.open(method, url, async);
+
 		switch(method)
 		{
 			case "POST":
 
 				if((typeof params) == "string")
 				{
-					xmlhttp.open(method, url, async);
-
-					//Send the proper header information along with the request
-					xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
+					xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//Send the proper header information along with the request
 					xmlhttp.send(params);
 				}
 				else
 				{
-					xmlhttp.open(method, url, async);
-
-					var fd = new FormData();
+					var formData = new FormData();
 
 				    for(var id in params)
-				    	fd.append(id, params[id]);
+				    	formData.append(id, params[id]);
 
-				    xmlhttp.send(fd);
+				    xmlhttp.send(formData);
 				}
-				
+
 			break;
 			case "GET":
-
-				xmlhttp.open(method, url, async);
 
 				if(params.length > 0)
 					url += "?" + params;
 
 				xmlhttp.send(params);
-
 			break;
 			default:
 				alert("Unsupported request method '" + method + "'");
