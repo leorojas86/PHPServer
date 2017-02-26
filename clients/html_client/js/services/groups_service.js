@@ -55,7 +55,7 @@ function GroupsServiceClass()
 		{
 			var tagsData = payload["data"];
 			//TODO: UPDATE GUID
-			TagsService.instance.updateSearchTags(result.data.insert_id, tagsData, Constants.SEARCH_TAGS_TYPES.GROUP_NAME_TYPE);//TODO: queue this steps
+			TagsService.instance.updateSearchTags(result.data.guid, tagsData, Constants.SEARCH_TAGS_TYPES.GROUP_NAME_TYPE);//TODO: queue this steps
 		}
 
 		callback(result);

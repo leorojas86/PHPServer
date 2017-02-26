@@ -5,11 +5,10 @@ function FilesServiceClass()
 {
 	this.uploadFile = function(fileData, extension, groupData, callback, onProgress)
 	{
-		var payload 			= ServiceClient.instance.getPayload("File", "Upload");
+		var payload 						= ServiceClient.instance.getPayload("File", "Upload");
 		payload["extension"]   	= extension;
-
-		var params 				= new Object();
-		params["payload"]   	= JSON.stringify(payload);
+		var params 							= new Object();
+		params["payload"]   		= JSON.stringify(payload);
 		params["fileToUpload"]  = fileData;
 
 		ServiceClient.instance.requestWithParams(App.instance.ENVIRONMENT.SERVICES.FILES.URL, "POST", params, function(result) { onFileUploadCompleted(result, groupData, callback); }, onProgress);
@@ -34,7 +33,7 @@ function FilesServiceClass()
 			files.push(result.data.file_name);
 			data.files = files;
 
-			GroupsService.instance.updateGroupData(groupData.id, JSON.stringify(data), callback);
+			GroupsService.instance.updateGroupData(groupData.guid, JSON.stringify(data), callback);
 		}
 		else
 			callback(result);

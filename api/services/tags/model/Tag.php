@@ -80,7 +80,8 @@
 
 		private static function AddGuid($guid)
 		{
-			$sql    = "INSERT IGNORE INTO guids (guid) VALUES ('$guid')";
+			$sql    = "INSERT IGNORE INTO guids (guid)
+								 VALUES ('$guid')";
 			$result = MySQLManager::ExecuteInsert($sql);
 
 			return $result;
