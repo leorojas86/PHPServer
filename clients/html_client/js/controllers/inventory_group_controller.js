@@ -150,7 +150,8 @@ function InventoryGroupControllerClass()
 	{
 		var canvas 	  = document.getElementById('imageContainer');
 		var imageData = canvas.toDataURL("image/jpeg", 0.95);
-		FilesService.instance.uploadFile(imageData, "jpg", InventoryGroupController.instance.groupData, onUploadCompleted, onProgress);
+		var fileName  = GUIDUtils.instance.generateNewGUID() + ".jpg";
+		FilesService.instance.uploadFile(imageData, fileName, InventoryGroupController.instance.groupData, onUploadCompleted, onProgress);
 	}
 
 	function onProgress(progress)

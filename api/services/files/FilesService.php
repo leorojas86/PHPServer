@@ -27,12 +27,9 @@
 
 		private static function Upload($payload)
 		{
-			$userGuid 	= $payload->userGuid;
-			$extension 	= $payload->extension;
-			$fileData 	= $_POST["fileToUpload"];
-			$guid 			= GUIDUtils::GetRandomGUID();
-			$fileName		= "$userGuid $guid.$extension";
-			$result  		= FileUploadManager::UploadFile($fileData, "uploads/$fileName");
+			$fileData = $_POST["fileToUpload"];
+			$fileName	= $payload->fileName;
+			$result  	= FileUploadManager::UploadFile($fileData, "uploads/$fileName");
 
 			if($result->success)
 				return new ServiceResult(true, array('file_name' => $fileName));

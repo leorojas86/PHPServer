@@ -3,11 +3,11 @@ var FilesService = { instance : new FilesServiceClass() };
 
 function FilesServiceClass()
 {
-	this.uploadFile = function(fileData, extension, groupData, callback, onProgress)
+	this.uploadFile = function(fileData, fileName, groupData, callback, onProgress)
 	{
-		var payload 					= ServiceClient.instance.getPayload("File", "Upload");
-		payload["extension"]	= extension;
-		var params 						=
+		var payload 				= ServiceClient.instance.getPayload("File", "Upload");
+		payload["fileName"]	= fileName;
+		var params 				  =
 		{
 			payload: JSON.stringify(payload),
 			fileToUpload: fileData
