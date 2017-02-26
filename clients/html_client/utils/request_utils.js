@@ -29,10 +29,10 @@ function RequestUtilsClass()
 				{
 					var formData = new FormData();
 
-				    for(var id in params)
-				    	formData.append(id, params[id]);
+			    for(var id in params)
+			    	formData.append(id, params[id]);
 
-				    xmlhttp.send(formData);
+				  xmlhttp.send(formData);
 				}
 
 			break;
