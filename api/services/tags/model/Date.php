@@ -22,11 +22,11 @@
 				if($i > 0)
 					$where .= " AND ";
 
-				$date = $searchDates[$i];
+				$date  = $searchDates[$i];
 				$type  = $date->type;
 				$min   = $date->min;
 				$max   = $date->max;
-				$where .= "(dtpi$i.type = '$type' AND dtpi$i.date >= '$min' AND dtpi$i.date <= '$max')";
+				$where .= "(dtpi$i.type = '$type' AND dtpi$i.timespan >= '$min' AND dtpi$i.timespan <= '$max')";
 			}
 
 			$where .= " )";
@@ -43,7 +43,7 @@
 				if(!$result->success)
     				return $result;
 
-    		$result = Date::AssociateDateTag($guid, $dateTag->date, $dateTag->type);
+    		$result = Date::AssociateDateTag($guid, $dateTag->timespan, $dateTag->type);
 
     		if(!$result->success)
     			return $result;
@@ -62,7 +62,7 @@
 
 		private static function AssociateDateTag($guid, $date, $type)
 		{
-			$sql 	= "INSERT INTO date_tags_per_guid (guid, date, type) VALUES ('$guid', '$date', '$type')";
+			$sql 	  = "INSERT INTO date_tags_per_guid (guid, timespan, type) VALUES ('$guid', '$date', '$type')";
 			$result = MySQLManager::ExecuteInsert($sql);
 
 			return $result;
