@@ -5,11 +5,13 @@ function FilesServiceClass()
 {
 	this.uploadFile = function(fileData, extension, groupData, callback, onProgress)
 	{
-		var payload 						= ServiceClient.instance.getPayload("File", "Upload");
-		payload["extension"]   	= extension;
-		var params 							= new Object();
-		params["payload"]   		= JSON.stringify(payload);
-		params["fileToUpload"]  = fileData;
+		var payload 					= ServiceClient.instance.getPayload("File", "Upload");
+		payload["extension"]	= extension;
+		var params 						=
+		{
+			payload: JSON.stringify(payload),
+			fileToUpload: fileData
+		};
 
 		ServiceClient.instance.requestWithParams(App.instance.ENVIRONMENT.SERVICES.FILES.URL, "POST", params, function(result) { onFileUploadCompleted(result, groupData, callback); }, onProgress);
 	};

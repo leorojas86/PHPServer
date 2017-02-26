@@ -5,7 +5,6 @@ function RequestUtilsClass()
 	this.request = function(url, method, callback, params, onProgress)
 	{
 		var startTime 	= new Date();
-		params 					= params || "";//Default parameter = ""
 		var xmlhttp 		= new XMLHttpRequest();
 		xmlhttp.onload	= function() { checkForReadyResponse(xmlhttp, callback, startTime); };
 		xmlhttp.onerror	= function() { checkForReadyResponse(xmlhttp, callback, startTime); };
@@ -29,6 +28,7 @@ function RequestUtilsClass()
 
 			break;
 			case "GET":
+				params = params || "";//Default parameter = ""
 
 				if(params.length > 0)
 					url += "?" + params;
