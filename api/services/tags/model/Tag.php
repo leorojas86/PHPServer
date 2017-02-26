@@ -67,8 +67,8 @@
 				$where .= Value::GetSearchWhere($searchValues);
 			}
 
-			$sql = "SELECT guids.guid AS guid
-							FROM guids
+			$sql = "SELECT objects.guid AS guid
+							FROM objects
 							$joins
 							$where
 							LIMIT 500";
@@ -80,7 +80,7 @@
 
 		private static function AddGuid($guid)
 		{
-			$sql    = "INSERT IGNORE INTO guids (guid)
+			$sql    = "INSERT IGNORE INTO objects (guid)
 								 VALUES ('$guid')";
 			$result = MySQLManager::ExecuteInsert($sql);
 

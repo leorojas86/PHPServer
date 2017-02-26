@@ -7,7 +7,7 @@
 			$length = count($searchValues);
 
 			for($i = 0; $i < $length; $i++)
-				$join .= "INNER JOIN value_tags_per_guid AS vtpi$i ON guids.guid = vtpi$i.guid ";
+				$join .= "INNER JOIN value_tags_per_guid AS vtpi$i ON objects.guid = vtpi$i.guid ";
 
 			return $join;
 		}

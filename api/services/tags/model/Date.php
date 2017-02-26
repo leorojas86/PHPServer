@@ -7,7 +7,7 @@
 			$length = count($searchDates);
 
 			for($i = 0; $i < $length; $i++)
-				$join .= "INNER JOIN date_tags_per_guid AS dtpi$i ON guids.guid = dtpi$i.guid ";
+				$join .= "INNER JOIN date_tags_per_guid AS dtpi$i ON objects.guid = dtpi$i.guid ";
 
 			return $join;
 		}

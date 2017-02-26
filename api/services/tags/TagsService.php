@@ -36,7 +36,7 @@
 
 			if($result->success)
 			{
-				$ids = array();
+				$guids = array();
 
 				foreach($result->data as $row)
 					$guids[] = $row['guid'];

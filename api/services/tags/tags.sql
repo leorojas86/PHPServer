@@ -2,7 +2,7 @@ CREATE DATABASE tags;
 
 USE tags;
 
-CREATE TABLE `guids`
+CREATE TABLE `objects`
 (
   `guid` char(36) NOT NULL,
   PRIMARY KEY (guid)
