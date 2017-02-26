@@ -43,15 +43,15 @@
 
 		private static function ExistsTextTag($text)
 		{
-			$sql    = "SELECT guid FROM text_tags WHERE text='$text'";
+			$sql    = "SELECT id FROM text_tags WHERE text='$text'";
 			$result = MySQLManager::ExecuteSelectRow($sql);
 
 			if($result->success)
 			{
 				$exists = $result->data != null;
-				$guid   = $exists ? $result->data["guid"] : -1;
+				$id 		= $exists ? $result->data["id"] : -1;
 
-				return new ServiceResult(true, array("exists" => $exists, "guid" => $guid));
+				return new ServiceResult(true, array("exists" => $exists, "id" => $id));
 			}
 
 			return $result;
