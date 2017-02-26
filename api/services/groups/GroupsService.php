@@ -18,7 +18,6 @@
 					case "Update":			$result = GroupsService::UpdateGroupData($payload);	break;
 					case "Delete":			$result = GroupsService::DeleteGroup($payload);			break;
 					case "Move":				$result = GroupsService::MoveGroup($payload);				break;
-					case "Rename":			$result = GroupsService::RenameGroup($payload);			break;
 					case "GetGroups": 	$result = GroupsService::GetGroups($payload);				break;
 					default:
 						$result = new ServiceResult(false, "Unsupported Groups service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE);
