@@ -166,7 +166,7 @@ function InventoryGroupControllerClass()
 	function onUploadCompleted(resultData)
 	{
 		if(resultData.success)
-			InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance.groupData.id);
+			InventoryGroupController.instance.loadAjaxGroup(InventoryGroupController.instance.groupData.guid);
 
 		alert("result = " + JSON.stringify(resultData));
 	}

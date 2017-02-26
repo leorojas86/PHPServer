@@ -9,7 +9,7 @@ function RequestUtilsClass()
 		xmlhttp.onload	= function() { checkForReadyResponse(xmlhttp, callback, startTime); };
 		xmlhttp.onerror	= function() { checkForReadyResponse(xmlhttp, callback, startTime); };
 
-		notifyProgress(xmlhttp, onProgress);
+		//notifyProgress(xmlhttp, onProgress);
 
 		var async = true;
 
@@ -43,7 +43,7 @@ function RequestUtilsClass()
 		return xmlhttp;
 	};
 
-
+	//TODO: FIX THIS
 	function notifyProgress(xmlhttp, onProgress)
 	{
 		if(onProgress != null)
