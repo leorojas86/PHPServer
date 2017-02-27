@@ -6,51 +6,53 @@
 		<title>Inventory</title>
 		<link rel="stylesheet" href="css/main_page.css">
 
-		<script src="js/constants.js" > </script>
-		<script src="js/config/environments.js" > </script>
-		<script src="js/app.js" > </script>
+		<!-- build:js js/app.js -->
+		<script src="js/constants.js"></script>
+		<script src="js/config/environments.js"></script>
+		<script src="js/app.js"></script>
 
-		<script src="../../utils/guid_utils.js" 				></script>
-		<script src="../../utils/cache_utils.js" 			></script>
-		<script src="../../utils/math_utils.js" 				></script>
-		<script src="../../utils/context_menu_utils.js" 		></script>
-		<script src="../../utils/request_utils.js" 			></script>
-		<script src="../../utils/url_utils.js"     			></script>
-		<script src="../../utils/localization_manager.js" 	></script>
-		<script src="../../utils/image_rendering_utils.js" 	></script>
+		<script src="../../utils/guid_utils.js"></script>
+		<script src="../../utils/cache_utils.js"></script>
+		<script src="../../utils/math_utils.js"></script>
+		<script src="../../utils/context_menu_utils.js"></script>
+		<script src="../../utils/request_utils.js"></script>
+		<script src="../../utils/url_utils.js"></script>
+		<script src="../../utils/localization_manager.js"></script>
+		<script src="../../utils/image_rendering_utils.js"></script>
 
-		<script src="js/components/image_container_component.js"> </script>
+		<script src="js/components/image_container_component.js"></script>
 
-		<script src="js/controllers/header_controller.js" 					> </script>
-		<script src="js/controllers/home_controller.js" 					> </script>
-		<script src="js/controllers/registration_controller.js" 			> </script>
-		<script src="js/controllers/inventory_controller.js" 				> </script>
-		<script src="js/controllers/inventory_group_controller.js" 			> </script>
-		<script src="js/controllers/inventory_group_header_controller.js" 	> </script>
-		<script src="js/controllers/inventory_context_menu_controller.js" 	> </script>
-		<script src="js/controllers/inventory_search_results_controller.js" > </script>
+		<script src="js/controllers/header_controller.js"></script>
+		<script src="js/controllers/home_controller.js"></script>
+		<script src="js/controllers/registration_controller.js"></script>
+		<script src="js/controllers/inventory_controller.js"></script>
+		<script src="js/controllers/inventory_group_controller.js"></script>
+		<script src="js/controllers/inventory_group_header_controller.js"></script>
+		<script src="js/controllers/inventory_context_menu_controller.js"></script>
+		<script src="js/controllers/inventory_search_results_controller.js"></script>
 
-		<script src="js/popups/login_popup.js" 			> </script>
-		<script src="js/popups/user_profile_popup.js" 	> </script>
-		<script src="js/popups/search_popup.js" 		> </script>
+		<script src="js/popups/login_popup.js"></script>
+		<script src="js/popups/user_profile_popup.js"></script>
+		<script src="js/popups/search_popup.js"></script>
 
-		<script src="js/utils/inventory_utils.js" 		> </script>
+		<script src="js/utils/inventory_utils.js"></script>
 
-		<script src="js/service_cache.js" 				> </script>
-		<script src="js/service_client.js" 				> </script>
-		<script src="js/services/users_service.js" 		> </script>
-		<script src="js/services/groups_service.js" 	> </script>
-		<script src="js/services/tags_service.js" 		> </script>
-		<script src="js/services/files_service.js" 		> </script>
+		<script src="js/service_cache.js"></script>
+		<script src="js/service_client.js"></script>
+		<script src="js/services/users_service.js"></script>
+		<script src="js/services/groups_service.js"></script>
+		<script src="js/services/tags_service.js"></script>
+		<script src="js/services/files_service.js"></script>
+		<!-- endbuild -->
 
 	</head>
 	<body class='body_class'>
 		<div id='background_container'>
 			<div id='header_container' 	class='header_container_class'></div>
-			<div id='page_container' 	class='page_container_class'>Loading...</div>
+			<div id='page_container' 		class='page_container_class'>Loading...</div>
 		</div>
 		<div id='foreground_container'>
-			<div id='context_menu_container' 		class='context_menu_container_class'></div>
+			<div id='context_menu_container' class='context_menu_container_class'></div>
 			<div id='login_popup_container'></div>
 			<div id='search_popup_container'></div>
 			<div id='user_profile_popup_container'></div>
