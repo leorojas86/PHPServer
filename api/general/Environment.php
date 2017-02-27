@@ -1,4 +1,4 @@
-<?php 
+<?php
 	require_once "general/EnvironmentConfig.php";
 	require_once "utils/MySQLManager.php";
 
@@ -9,8 +9,8 @@
 			if(EnvironmentConfig::FAKE_RESPONSE_DELAY)
 				sleep(3);
 
-			header('Access-Control-Allow-Origin: *');
-			header('Access-Control-Allow-Methods: GET, POST');
+			//header('Access-Control-Allow-Origin: *');
+			//header('Access-Control-Allow-Methods: GET, POST');
 
 			if($initDB)
 			{
