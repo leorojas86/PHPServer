@@ -7,7 +7,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     clean: ["deploy"],
     concat: {
-      generated: {
+      jss: {
         files: [{
           src: [
             '../html_client/utils/*.js',
@@ -18,16 +18,21 @@ module.exports = function (grunt) {
       }
     },
     concat_css: {
-      all: {
+      csss: {
         src: ['../html_client/css/**/*.css'],
         dest: 'deploy/index.css'
       },
     },
     copy: {
-      main: {
+      index: {
         expand: false,
         src: '../html_client/index.html',
         dest: 'deploy/index.html',
+      },
+      spritesheet: {
+        expand: false,
+        src: '../html_client/images/texture/spritesheet.png',
+        dest: 'deploy/images/texture/spritesheet.png',
       },
     },
     usemin: {
@@ -45,7 +50,7 @@ module.exports = function (grunt) {
     'clean',      //Deletes deploy folder
     'concat',     //Concats all js and generates 'deploy/index.js'
     'concat_css', //Concats all js and generates 'deploy/index.css'
-    'copy',       //Copies index.html to 'deploy/index.html'
+    'copy',       //Copies index.html to 'deploy/index.html',
     'usemin'      //Parses the index.html and replaces js,css references
   ]);
 };
