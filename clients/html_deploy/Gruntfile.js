@@ -26,24 +26,28 @@ module.exports = function (grunt) {
         dest: 'deploy/app.css'
       },
     },
-    useminPrepare: {
-      html: '../html_client/index.html',
-      dest: 'deploy/index.html'
+    copy: {
+      main: {
+        expand: false,
+        src: '../html_client/index.html',
+        dest: 'deploy/index.html',
+      },
     },
     usemin: {
-      html: '../html_client/index.html'
+      html: 'deploy/index.html'
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-concat-css');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-usemin');
 
   //https://github.com/yeoman/grunt-usemin
   grunt.registerTask('build', [
-    'useminPrepare', //Parses the index.html and generates 'deploy/index.html'
     'concat', //Concats all js and generates 'deploy/app.js'
     'concat_css', //Concats all js and generates 'deploy/app.css'
-    'usemin'
+    'copy',
+    'usemin' //Parses the index.html and generates 'deploy/index.html'
   ]);
 };
