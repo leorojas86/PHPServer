@@ -12,19 +12,27 @@ module.exports = function (grunt) {
     concat: {
       generated: {
         files: [{
-          dest: 'deploy/app.js',
           src: [
             '../html_client/js/**/*.js',
             '../html_client/utils/*.js'
-          ]
+          ],
+          dest: 'deploy/app.js'
         }]
       }
+    },
+    concat_css: {
+      all: {
+        src: ['../html_client/css/**/*.css'],
+        dest: 'deploy/app.css'
+      },
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-concat-css');
 
   grunt.registerTask('build', [
-    'concat'
+    'concat',
+    'concat_css'
   ]);
 };
