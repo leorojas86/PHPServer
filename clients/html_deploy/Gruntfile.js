@@ -13,8 +13,8 @@ module.exports = function (grunt) {
       generated: {
         files: [{
           src: [
-            '../html_client/js/**/*.js',
-            '../html_client/utils/*.js'
+            '../html_client/utils/*.js',
+            '../html_client/js/**/*.js'
           ],
           dest: 'deploy/app.js'
         }]
