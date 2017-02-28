@@ -21,7 +21,9 @@ require('time-grunt')(grunt);
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-concat');
+
   grunt.registerTask('build', [
-    'concat:generated'
+    'concat'
   ]);
 };
