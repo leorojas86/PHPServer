@@ -1,10 +1,11 @@
 module.exports = function (grunt) {
 
   // Load grunt tasks automatically
-require('load-grunt-tasks')(grunt);
+  //"load-grunt-tasks": "3.5.2",
+  //require('load-grunt-tasks')(grunt);
 
-// Time how long tasks take. Can help when optimizing build times
-require('time-grunt')(grunt);
+  // Time how long tasks take. Can help when optimizing build times
+  require('time-grunt')(grunt);
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -13,8 +14,7 @@ require('time-grunt')(grunt);
         files: [{
           dest: 'deploy/app.js',
           src: [
-            '../html_client/utils/context_menu_utils.js',
-            '../html_client/utils/cache_utils.js'
+            '../html_client/utils/*.js',
           ]
         }]
       }
