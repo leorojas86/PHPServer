@@ -14,7 +14,8 @@ module.exports = function (grunt) {
         files: [{
           dest: 'deploy/app.js',
           src: [
-            '../html_client/utils/*.js',
+            '../html_client/js/**/*.js',
+            '../html_client/utils/*.js'
           ]
         }]
       }
