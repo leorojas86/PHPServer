@@ -1,14 +1,11 @@
 module.exports = function (grunt) {
 
-  // Load grunt tasks automatically
-  //"load-grunt-tasks": "3.5.2",
-  //require('load-grunt-tasks')(grunt);
-
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
   // Define the configuration for all the tasks
   grunt.initConfig({
+    clean: ["deploy"],
     concat: {
       generated: {
         files: [{
@@ -16,14 +13,14 @@ module.exports = function (grunt) {
             '../html_client/utils/*.js',
             '../html_client/js/**/*.js'
           ],
-          dest: 'deploy/app.js'
+          dest: 'deploy/index.js'
         }]
       }
     },
     concat_css: {
       all: {
         src: ['../html_client/css/**/*.css'],
-        dest: 'deploy/app.css'
+        dest: 'deploy/index.css'
       },
     },
     copy: {
@@ -38,16 +35,17 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-concat-css');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-usemin');
 
-  //https://github.com/yeoman/grunt-usemin
   grunt.registerTask('build', [
-    'concat', //Concats all js and generates 'deploy/app.js'
-    'concat_css', //Concats all js and generates 'deploy/app.css'
-    'copy',
-    'usemin' //Parses the index.html and generates 'deploy/index.html'
+    'clean',      //Deletes deploy folder
+    'concat',     //Concats all js and generates 'deploy/index.js'
+    'concat_css', //Concats all js and generates 'deploy/index.css'
+    'copy',       //Copies index.html to 'deploy/index.html'
+    'usemin'      //Parses the index.html and replaces js,css references
   ]);
 };
