@@ -34,6 +34,11 @@ module.exports = function (grunt) {
         src: '../html_client/images/texture/spritesheet.png',
         dest: 'deploy/images/texture/spritesheet.png',
       },
+      jsons: {
+        expand: false,
+        src: '../html_client/jsons/english.json',
+        dest: 'deploy/jsons/english.json',
+      },
     },
     usemin: {
       html: 'deploy/index.html'
@@ -50,7 +55,7 @@ module.exports = function (grunt) {
     'clean',      //Deletes deploy folder
     'concat',     //Concats all js and generates 'deploy/index.js'
     'concat_css', //Concats all js and generates 'deploy/index.css'
-    'copy',       //Copies index.html to 'deploy/index.html',
+    'copy',       //Copies index.html, spritesheet.png and jsons to deploy folder
     'usemin'      //Parses the index.html and replaces js,css references
   ]);
 };
