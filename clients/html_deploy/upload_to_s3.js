@@ -9,28 +9,21 @@ var s3 = new AWS.S3();
 var myBucket = 'aws-website-crnegocioscom-yxnfk';
 var deployFolder = path.resolve('./deploy');
 
-//console.log("s3 -> ", s3);
-
-// Bucket names must be unique across all S3 users
-
-
+function createBucket() {
+  s3.createBucket({Bucket: myBucket}, function(err, data) {
+    if (err) { console.log(err); }
+  });
+}
 
 function uploadFileToS3(file, filePath) {
   console.log('Uploading file -> ' + file);
-  s3.createBucket({Bucket: myBucket}, function(err, data) {
-
-  if (err) {
-     console.log(err);
-     } else {
-       params = {Bucket: myBucket, Key: file, Body: fs.readFileSync(filePath)};
-       s3.putObject(params, function(err, data) {
-           if (err) {
-               console.log(err)
-           } else {
-               console.log("Successfully uploaded data to myBucket/myKey");
-           }
-        });
-     }
+  var params = { Bucket: myBucket, Key: file, Body: fs.readFileSync(filePath) };
+  s3.putObject(params, function(err, data) {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log("Successfully uploaded '" + file + "' data to S3");
+    }
   });
 }
 
@@ -47,4 +40,5 @@ function uploadFolder(folder) {
   });
 }
 
+createBucket();
 uploadFolder(deployFolder);
