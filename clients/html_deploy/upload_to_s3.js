@@ -1,4 +1,5 @@
 //https://aws.amazon.com/sdk-for-node-js/
+//http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html
 
 var AWS   = require('aws-sdk');
 var async = require('async');
