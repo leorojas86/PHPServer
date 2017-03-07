@@ -17,6 +17,16 @@ module.exports = function (grunt) {
         }]
       }
     },
+    minified : {
+      files: {
+        src: [ 'deploy/index.js' ],
+        dest: 'deploy/'
+      },
+      options : {
+        sourcemap: false,
+        allinone: false
+      }
+    },
     concat_css: {
       csss: {
         src: ['../html_client/css/**/*.css'],
@@ -47,6 +57,7 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-minified');
   grunt.loadNpmTasks('grunt-concat-css');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-usemin');
@@ -54,6 +65,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean',      //Deletes deploy folder
     'concat',     //Concats all js and generates 'deploy/index.js'
+    'minified',   //Minifies the deploy/index.js
     'concat_css', //Concats all js and generates 'deploy/index.css'
     'copy',       //Copies index.html, spritesheet.png and jsons to deploy folder
     'usemin'      //Parses the index.html and replaces js,css references
