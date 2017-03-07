@@ -1,15 +1,13 @@
-- Change all keys to be UUIDs
-- Use S3 for UI and objects data
 - Add version descriptor
-- Make deploy scripts
-- Implement endpoints pagination.
-- Standardize files names
 - Make services independient
-- Secure Service
+- Publish Services
+- Make services deploy scripts
+- Secure Services
 - Encrypt Passwords
 - Validate service/url parameters
 - Add services healthchecks
 - Add e2e tests
+- Implement endpoints pagination.
 - Implement mobile apps:
 	iOS:
 		Screen size does not match the view size.
@@ -17,10 +15,12 @@
 		Make file picker work on android.
 		Handle connection errors.
 - Improve messaging (parameters and compression).
+- Standardize files names
+- Use S3 images/objects data
 - Manage routing
 - Improve error management.
 - Improve UI code
-	Make renderes (wit callbacks)
+	Make renderes (with callbacks)
 - Code Cleanup.
 - Display multiplephotos.
 - Performance Analytics.
