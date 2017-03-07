@@ -27,6 +27,19 @@ module.exports = function (grunt) {
         allinone: false
       }
     },
+    obfuscator: {
+      options: {
+          // global options for the obfuscator
+      },
+      task1: {
+          options: {
+              // options for each sub task
+          },
+          files: {
+              'deploy/index.js': ['deploy/index.js']
+          }
+      }
+    },
     concat_css: {
       csss: {
         src: ['../html_client/css/**/*.css'],
@@ -58,6 +71,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-minified');
+  grunt.loadNpmTasks('grunt-contrib-obfuscator');
   grunt.loadNpmTasks('grunt-concat-css');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-usemin');
@@ -66,6 +80,7 @@ module.exports = function (grunt) {
     'clean',      //Deletes deploy folder
     'concat',     //Concats all js and generates 'deploy/index.js'
     'minified',   //Minifies the deploy/index.js
+    'obfuscator', //Obfuscate the deploy/index.js
     'concat_css', //Concats all js and generates 'deploy/index.css'
     'copy',       //Copies index.html, spritesheet.png and jsons to deploy folder
     'usemin'      //Parses the index.html and replaces js,css references
