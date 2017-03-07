@@ -9,7 +9,7 @@ var s3    = new AWS.S3();
 var BUCKET        = 'aws-website-crnegocioscom-yxnfk';
 var DEPLOY_FOLDER = path.resolve('./deploy');
 
-function createBucketFolder(bucketFolder) {
+/*function createBucketFolder(bucketFolder) {
   s3.createBucket({ Bucket: bucketFolder }, function(err, data) {
     if (err) {
       console.log(err);
@@ -17,7 +17,7 @@ function createBucketFolder(bucketFolder) {
       console.log("Successfully created bucket folder '" + bucketFolder + "'");
     }
   });
-}
+}*/
 
 function uploadFileToS3(file, fileSystemPath, bucketFolder) {
   console.log('Uploading file -> ' + file);
@@ -32,7 +32,7 @@ function uploadFileToS3(file, fileSystemPath, bucketFolder) {
 }
 
 function uploadFolder(fileSystemFolder, bucketFolder) {
-  createBucketFolder(bucketFolder);
+  //createBucketFolder(bucketFolder);
 
   var files = fs.readdirSync(fileSystemFolder);
   async.map(files, function (file, cb) {
