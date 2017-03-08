@@ -18,4 +18,4 @@ echo '
 
 
 -> Installing php'
-apt install php libapache2-mod-php
+sudo apt install php libapache2-mod-php
