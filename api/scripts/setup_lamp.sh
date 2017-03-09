@@ -8,7 +8,7 @@ echo '
 
 
 -> Installing apache'
-sudo apt install apache2
+sudo bash -c 'yes | sudo apt install apache2'
 echo '
 
 
