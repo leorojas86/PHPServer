@@ -13,7 +13,7 @@ echo '
 
 
 -> Installing mysql'
-sudo apt install mysql-server php7.0-mysql
+sudo bash -c 'yes | apt install mysql-server php7.0-mysql'
 echo '
 
 
