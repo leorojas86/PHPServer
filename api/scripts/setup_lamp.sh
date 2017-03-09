@@ -1,3 +1,4 @@
+#!/bin/bash
 # https://www.atlantic.net/community/howto/install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04/
 echo '
 
