@@ -17,7 +17,7 @@ echo '
 -> Installing mysql..'
 echo "mysql-server mysql-server/root_password password root123" | debconf-set-selections
 echo "mysql-server mysql-server/root_password_again password root123" | debconf-set-selections
-sudo bash -c 'yes | apt install mysql-server php7.0-mysql'
+sudo bash -c 'yes | apt -y install mysql-server php7.0-mysql'
 echo '
 
 
