@@ -3,8 +3,8 @@ echo '
 
 
 -> Updating apt-get'
-sudo apt update
-sudo apt upgrade
+sudo bash -c 'yes | sudo apt update'
+sudo bash -c 'yes | sudo apt upgrade'
 echo '
 
 
