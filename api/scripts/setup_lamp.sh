@@ -7,6 +7,7 @@ echo "
 
 Script location: ${BASEDIR}"
 cd "${BASEDIR}"
+pwd
 echo '
 
 
@@ -36,5 +37,5 @@ echo '
 
 -> Running MySQL Scripts...'
 mysql --user="root" --password="root123" < "../services/users/users.sql"
-#--database="databasename"
-#sudo mysql -h 127.0.0.1 -u root -p root123 < ../services/users/users.sql
+mysql --user="root" --password="root123" < "../services/tags/tags.sql"
+mysql --user="root" --password="root123" < "../services/groups/groups.sql"
