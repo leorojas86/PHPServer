@@ -1,10 +1,13 @@
 #!/bin/bash
 # https://www.atlantic.net/community/howto/install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04/
 BASEDIR=$(dirname $0)
-echo 'Script location: ${BASEDIR}'
-cd '${BASEDIR}'
+echo "
 
-echo 'sdsd
+
+
+Script location: ${BASEDIR}"
+cd "${BASEDIR}"
+echo '
 
 
 -> Updating apt-get...'
