@@ -15,7 +15,7 @@ echo '
 
 
 -> Installing mysql..'
-sudo dpkg --configure -a
+#sudo dpkg --configure -a
 sudo echo "mysql-server mysql-server/root_password password root123" | debconf-set-selections
 sudo echo "mysql-server mysql-server/root_password_again password root123" | debconf-set-selections
 sudo bash -c 'yes | apt -y install mysql-server php7.0-mysql'
