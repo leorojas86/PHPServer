@@ -4,6 +4,7 @@ echo '
 
 -> Updating apt-get'
 sudo apt update
+sudo apt upgrade
 echo '
 
 
@@ -13,6 +14,8 @@ echo '
 
 
 -> Installing mysql'
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password root123'
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root123'
 sudo bash -c 'yes | apt install mysql-server php7.0-mysql'
 echo '
 
