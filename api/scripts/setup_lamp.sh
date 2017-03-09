@@ -23,4 +23,4 @@ echo '
 
 
 -> Installing php...'
-sudo bash -c 'sudo apt install php libapache2-mod-php'
+sudo bash -c 'yes | sudo apt install php libapache2-mod-php'
