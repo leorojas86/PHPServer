@@ -17,6 +17,5 @@ sudo cp -rf "virtual_hosts/api.conf" "/etc/apache2/sites-available/api.conf"
 sudo cp -rf "virtual_hosts/inventory.conf" "/etc/apache2/sites-available/inventory.conf"
 PWD=`pwd`
 REPO_PATH="$PWD/../.."
-echo "REPO_PATH=$REPO_PATH"
 sudo sed -i "s#{{REPO_PATH}}#$REPO_PATH#g" "/etc/apache2/sites-available/api.conf"
 sudo sed -i "s#{{REPO_PATH}}#$REPO_PATH#g" "/etc/apache2/sites-available/inventory.conf"
