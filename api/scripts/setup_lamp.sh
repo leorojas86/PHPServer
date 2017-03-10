@@ -1,4 +1,5 @@
 #!/bin/bash
+clear && clear && clear && clear
 MY_PATH=`dirname "$0"`
 MY_NAME=`basename "$0"`
 echo "

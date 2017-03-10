@@ -1,5 +1,6 @@
 #!/bin/bash
 # https://www.atlantic.net/community/howto/install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04/
+clear && clear && clear && clear
 MY_PATH=`dirname "$0"`
 MY_NAME=`basename "$0"`
 echo "
