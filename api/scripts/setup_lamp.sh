@@ -23,8 +23,14 @@ echo "
 
 
 -> Updating hosts file..."
-sudo echo "
 
-127.0.0.1	api
-127.0.0.1	inventory
-" >> /etc/hosts
+if grep -Fxq "127.0.0.1	api" /etc/hosts
+then
+  echo "host file is already updated"
+else
+  sudo echo "
+
+  127.0.0.1	api
+  127.0.0.1	inventory
+  " >> /etc/hosts
+fi
