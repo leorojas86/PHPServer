@@ -33,3 +33,8 @@ else
   127.0.0.1	inventory
   " >> /etc/hosts
 fi
+echo "
+
+
+-> Restarting Apache..."
+sudo service apache2 restart
