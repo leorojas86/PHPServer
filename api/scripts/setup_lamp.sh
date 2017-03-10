@@ -19,7 +19,7 @@ MY_RELATIVE_PATH="/api/scripts"
 REPLACEMENT= "s/$MY_RELATIVE_PATH//"
 echo "MY_RELATIVE_PATH=$MY_RELATIVE_PATH"
 echo "REPLACEMENT=$REPLACEMENT"
-REPO_PATH=echo "$MY_PATH" | sed REPLACEMENT
+REPO_PATH=echo "$MY_PATH" | sed -e "$REPLACEMENT"
 echo "REPO_PATH=$REPO_PATH"
 sudo sed -i "s/{{REPO_PATH}}/$REPO_PATH/g" "/etc/apache2/sites-available/api.conf"
 sudo sed -i "s/{{REPO_PATH}}/$REPO_PATH/g" "/etc/apache2/sites-available/inventory.conf"
