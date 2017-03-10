@@ -20,6 +20,27 @@ sudo chmod -R 755 "$PWD"
 REPO_PATH=$(echo ${PWD} | sed 's#/api/scripts##g')
 sudo sed -i "s#{{REPO_PATH}}#$REPO_PATH#g" "/etc/apache2/sites-available/api.conf"
 sudo sed -i "s#{{REPO_PATH}}#$REPO_PATH#g" "/etc/apache2/sites-available/inventory.conf"
+
+if grep -Fxq "api.conf" /etc/apache2/ports.conf
+then
+  echo "ports.conf file is already updated"
+else
+  sudo echo "
+NameVirtualHost *:80
+
+<IfModule mod_ssl.c>
+  # SSL name based virtual hosts are not yet supported, therefore no
+  /etc/apache2/sites-available/api.conf
+  Listen 80
+</IfModule>
+<IfModule mod_ssl.c>
+  # SSL name based virtual hosts are not yet supported, therefore no
+  /etc/apache2/sites-available/inventory.conf
+  Listen 80
+</IfModule>
+  " >> /etc/apache2/ports.conf
+fi
+
 echo "
 
 
