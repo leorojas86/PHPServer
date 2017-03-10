@@ -1,12 +1,13 @@
 #!/bin/bash
 # https://www.atlantic.net/community/howto/install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04/
-BASEDIR=$(dirname $0)
+MY_PATH=`dirname "$0"`
+MY_NAME=`basename "$0"`
 echo "
 
 
 
-Script location: ${BASEDIR}"
-cd "${BASEDIR}"
+Script location: $MY_PATH"
+cd "$MY_PATH"
 pwd
 echo '
 

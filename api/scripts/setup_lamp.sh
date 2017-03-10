@@ -1,16 +1,21 @@
 #!/bin/bash
-# https://www.atlantic.net/community/howto/install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04/
-BASEDIR=$(dirname $0)
+MY_PATH=`dirname "$0"`
+MY_NAME=`basename "$0"`
 echo "
 
 
 
-Script location: ${BASEDIR}"
-cd "${BASEDIR}"
+Script location: $MY_PATH"
+cd "$MY_PATH"
 pwd
 echo '
 
 
 -> Updating virtual hosts...'
-sudo cp -rf 'virtual_hosts/api.conf' '/etc/apache2/sites-available/api.conf'
-sudo cp -rf 'virtual_hosts/inventory.conf' '/etc/apache2/sites-available/inventory.conf'
+sudo rm -rf '/etc/apache2/sites-available/api.conf'
+sudo rm -rf '/etc/apache2/sites-available/inventory.conf'
+#sudo cp -rf 'virtual_hosts/api.conf' '/etc/apache2/sites-available/api.conf'
+sudo sed -i "s/{{REPO_PATH}}/$REPO_PATH/g" '/etc/apache2/sites-available/api.conf'
+#sudo cp -rf 'virtual_hosts/inventory.conf' '/etc/apache2/sites-available/inventory.conf'
+sudo sed -i "s/{{REPO_PATH}}/$REPO_PATH/g" '/etc/apache2/sites-available/inventory.conf'
+REPO_PATH=echo "$MY_PATH" | sed "s/'api/scripts'//"
