@@ -19,3 +19,12 @@ PWD=`pwd`
 REPO_PATH="$PWD/../.."
 sudo sed -i "s#{{REPO_PATH}}#$REPO_PATH#g" "/etc/apache2/sites-available/api.conf"
 sudo sed -i "s#{{REPO_PATH}}#$REPO_PATH#g" "/etc/apache2/sites-available/inventory.conf"
+echo "
+
+
+-> Updating hosts file..."
+sudo echo "
+
+127.0.0.1	api
+127.0.0.1	inventory
+" >> /etc/hosts
