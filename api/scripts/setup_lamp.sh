@@ -12,10 +12,8 @@ echo '
 
 
 -> Updating virtual hosts...'
-sudo rm -rf '/etc/apache2/sites-available/api.conf'
-sudo rm -rf '/etc/apache2/sites-available/inventory.conf'
-#sudo cp -rf 'virtual_hosts/api.conf' '/etc/apache2/sites-available/api.conf'
+sudo cp -rf 'virtual_hosts/api.conf' '/etc/apache2/sites-available/api.conf'
+sudo cp -rf 'virtual_hosts/inventory.conf' '/etc/apache2/sites-available/inventory.conf'
 sudo sed -i "s/{{REPO_PATH}}/$REPO_PATH/g" '/etc/apache2/sites-available/api.conf'
-#sudo cp -rf 'virtual_hosts/inventory.conf' '/etc/apache2/sites-available/inventory.conf'
 sudo sed -i "s/{{REPO_PATH}}/$REPO_PATH/g" '/etc/apache2/sites-available/inventory.conf'
 REPO_PATH=echo "$MY_PATH" | sed "s/'api/scripts'//"
