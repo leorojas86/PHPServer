@@ -23,10 +23,9 @@ echo "
 
 
 -> Updating hosts file..."
-
 if grep -Fxq "127.0.0.1	api" /etc/hosts
 then
-  echo "host file is already updated"
+  echo "hosts file is already updated"
 else
   sudo echo "
 
