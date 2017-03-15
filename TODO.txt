@@ -6,6 +6,7 @@
 - Encrypt Passwords
 - Validate service/url parameters
 - Add services healthchecks
+- Implement monitoring service
 - Add e2e tests
 - Implement endpoints pagination.
 - Implement mobile apps:
