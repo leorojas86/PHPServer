@@ -21,6 +21,10 @@ REPO_PATH=$(echo ${PWD} | sed 's#/api/scripts##g')
 sudo sed -i "s#{{REPO_PATH}}#$REPO_PATH#g" "/etc/apache2/sites-available/api.conf"
 sudo sed -i "s#{{REPO_PATH}}#$REPO_PATH#g" "/etc/apache2/sites-available/inventory.conf"
 
+sudo a2ensite api.conf
+sudo a2ensite inventory.conf
+
+<<"COMMENT"
 if grep -Fxq "api.conf" /etc/apache2/ports.conf
 then
   echo "ports.conf file is already updated"
@@ -40,6 +44,7 @@ NameVirtualHost *:80
 </IfModule>
   " >> /etc/apache2/ports.conf
 fi
+COMMENT
 
 echo "
 
