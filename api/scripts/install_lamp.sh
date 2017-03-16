@@ -1,41 +1,40 @@
 #!/bin/bash
-# https://www.atlantic.net/community/howto/install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04/
 clear && clear && clear && clear
 MY_PATH=`dirname "$0"`
 MY_NAME=`basename "$0"`
+
 echo "
-
-
 
 Script location: $MY_PATH"
 cd "$MY_PATH"
 pwd
-echo "
 
+echo "
 
 -> Updating apt-get..."
 sudo bash -c "yes | sudo apt update"
 sudo bash -c "yes | sudo apt upgrade"
+
 echo "
 
 
 -> Installing apache..."
 sudo bash -c "yes | sudo apt install apache2"
-echo "
 
+echo "
 
 -> Installing mysql..."
 #sudo dpkg --configure -a
 echo "mysql-server mysql-server/root_password password root123" | sudo debconf-set-selections
 echo "mysql-server mysql-server/root_password_again password root123" | sudo debconf-set-selections
 sudo bash -c "yes | apt -y install mysql-server php7.0-mysql"
-echo "
 
+echo "
 
 -> Installing php..."
 sudo bash -c "yes | sudo apt install php libapache2-mod-php"
-echo "
 
+echo "
 
 -> Running MySQL Scripts..."
 mysql --user="root" --password="root123" < "../services/users/users.sql"
