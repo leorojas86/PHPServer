@@ -4,10 +4,10 @@ var ENVIRONMENTS =
   {
     SERVICES :
     {
-         USERS  : { URL : 'http://inventory/api' },
-         GROUPS : { URL : 'http://inventory/api' },
-         TAGS   : { URL : 'http://inventory/api' },
-         FILES  : { URL : 'http://inventory/api' }
+         USERS  : { URL : 'http://inventory/api/' },
+         GROUPS : { URL : 'http://inventory/api/' },
+         TAGS   : { URL : 'http://inventory/api/' },
+         FILES  : { URL : 'http://inventory/api/' }
     }
   },
   PUBLIC:
