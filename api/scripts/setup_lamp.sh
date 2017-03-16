@@ -33,28 +33,7 @@ sudo a2ensite inventory.conf
 #sudo a2dissite api.conf
 #sudo a2dissite inventory.conf
 
-#if grep -Fxq "api.conf" /etc/apache2/ports.conf
-#then
-#  echo "ports.conf file is already updated"
-#else
-#  sudo echo "
-#NameVirtualHost *:80
-
-#<IfModule mod_ssl.c>
-#  # SSL name based virtual hosts are not yet supported, therefore no
-#  /etc/apache2/sites-available/api.conf
-#  Listen 80
-#</IfModule>
-#<IfModule mod_ssl.c>
-  # SSL name based virtual hosts are not yet supported, therefore no
-  /etc/apache2/sites-available/inventory.conf
-  Listen 80
-#</IfModule>
-#  " >> /etc/apache2/ports.conf
-#fi
-
 echo "
-
 
 -> Updating hosts file..."
 if grep -Fxq "127.0.0.1	api" /etc/hosts
