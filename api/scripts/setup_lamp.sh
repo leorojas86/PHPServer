@@ -20,8 +20,8 @@ sudo sed -i "s#{{REPO_PATH}}#$REPO_PATH#g" "/etc/apache2/sites-available/000-def
 echo "
 
 -> Updating hosts file..."
-if grep -Fxq "inventory" /etc/hosts
-then
+
+if grep -q "inventory" "/etc/hosts"; then
   echo "hosts file is already updated"
 else
   sudo echo "
