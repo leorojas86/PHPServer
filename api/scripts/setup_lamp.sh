@@ -22,7 +22,7 @@ echo "
 -> Updating hosts file..."
 
 if grep -q "inventory" "/etc/hosts"; then
-  echo "hosts file is already updated"
+  echo "hosts file is already updated, nothing to do"
 else
   sudo echo "
 
