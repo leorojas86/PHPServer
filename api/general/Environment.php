@@ -9,15 +9,11 @@
 			if(EnvironmentConfig::FAKE_RESPONSE_DELAY)
 				sleep(3);
 
-			header('Access-Control-Allow-Origin: *');
+			header('Access-Control-Allow-Origin: ' . EnvironmentConfig::ALLOW_ORIGIN);
 			header('Access-Control-Allow-Methods: GET, POST');
 
 			if($initDB)
-			{
-				$result = MySQLManager::Connect(DBConfig::DB_SERVER, DBConfig::DB_USER, DBConfig::DB_PASS, DBConfig::DB_NAME, DBConfig::DB_PORT);
-
-				return $result;
-			}
+				return MySQLManager::Connect(DBConfig::DB_SERVER, DBConfig::DB_USER, DBConfig::DB_PASS, DBConfig::DB_NAME, DBConfig::DB_PORT);
 			else
 				return new ServiceResult(true);
 		}
