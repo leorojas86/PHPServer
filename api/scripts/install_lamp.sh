@@ -17,7 +17,6 @@ sudo bash -c "yes | sudo apt upgrade"
 
 echo "
 
-
 -> Installing apache..."
 sudo bash -c "yes | sudo apt install apache2"
 
