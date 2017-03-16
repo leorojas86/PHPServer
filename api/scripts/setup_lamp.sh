@@ -26,23 +26,19 @@ sudo chmod -R 755 "$PWD"
 REPO_PATH=$(echo ${PWD} | sed 's#/api/scripts##g')
 sudo sed -i "s#{{REPO_PATH}}#$REPO_PATH#g" "/etc/apache2/sites-available/000-default.conf"
 
-sudo a2dissite api.conf
-sudo a2dissite inventory.conf
-
 #echo "
 #
 #-> Updating hosts file..."
-#if grep -Fxq "127.0.0.1	api" /etc/hosts
+#if grep -Fxq "127.0.0.1	inventory" /etc/hosts
 #then
 #  echo "hosts file is already updated"
 #else
 #  sudo echo "
-#
-#  127.0.0.1	api
+
 #  127.0.0.1	inventory
 #  " >> /etc/hosts
 #fi
-#echo "
+echo "
 
 
 -> Restarting Apache..."
