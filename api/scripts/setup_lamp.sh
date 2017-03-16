@@ -28,11 +28,10 @@ REPO_PATH=$(echo ${PWD} | sed 's#/api/scripts##g')
 sudo sed -i "s#{{REPO_PATH}}#$REPO_PATH#g" "/etc/apache2/sites-available/api.conf"
 sudo sed -i "s#{{REPO_PATH}}#$REPO_PATH#g" "/etc/apache2/sites-available/inventory.conf"
 
-#sudo a2ensite api.conf
-#sudo a2ensite inventory.conf
-
-sudo a2dissite api.conf
-sudo a2dissite inventory.conf
+sudo a2ensite api.conf
+sudo a2ensite inventory.conf
+#sudo a2dissite api.conf
+#sudo a2dissite inventory.conf
 
 #if grep -Fxq "api.conf" /etc/apache2/ports.conf
 #then
