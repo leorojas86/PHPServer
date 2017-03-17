@@ -45,3 +45,6 @@ sudo bash -c "yes | sudo apt install docker-ce"
 echo "
 ---  Listing the available versions of docker-ee"
 apt-cache madison docker-ce
+echo "
+---  Installing docker-ee version 17.03.0"
+sudo bash -c "yes | sudo apt install docker-ce=17.03.0~ce-0~ubuntu-xenial"
