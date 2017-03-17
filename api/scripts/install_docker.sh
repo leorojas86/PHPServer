@@ -41,4 +41,4 @@ sudo add-apt-repository \
    stable"
  echo "
  --- Installing docker CE"
- sudo apt install docker-ce
+ sudo bash -c "yes | sudo apt install docker-ce"
