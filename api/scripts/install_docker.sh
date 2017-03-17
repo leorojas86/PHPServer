@@ -48,3 +48,6 @@ apt-cache madison docker-ce
 echo "
 ---  Installing docker-ee version 17.03.0"
 sudo bash -c "yes | sudo apt install docker-ce=17.03.0~ce-0~ubuntu-xenial --fix-missing"
+echo "
+---  Verifying that Docker CE is installed correctly by running the hello-world image"
+sudo docker run hello-world
