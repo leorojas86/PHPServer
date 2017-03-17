@@ -39,6 +39,9 @@ sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
- echo "
- --- Installing docker CE"
- sudo bash -c "yes | sudo apt install docker-ce"
+echo "
+--- Installing docker CE"
+sudo bash -c "yes | sudo apt install docker-ce"
+echo "
+---  Listing the available versions of docker-ee"
+apt-cache madison docker-ce
