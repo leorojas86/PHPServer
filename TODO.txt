@@ -10,6 +10,7 @@
 - Add e2e tests
 - Implement endpoints pagination.
 - Remove back button, add path links instead.
+- Change the UI to use promises and components.
 - Implement mobile apps:
 	iOS:
 		Screen size does not match the view size.
