@@ -10,11 +10,18 @@ pwd
 
 echo "
 
+-> Running MySQL Scripts to setup database..."
+mysql --user="root" --password="root123" < "../services/users/users.sql"
+mysql --user="root" --password="root123" < "../services/tags/tags.sql"
+mysql --user="root" --password="root123" < "../services/groups/groups.sql"
+
+echo "
+
 -> Updating virtual hosts..."
-sudo cp -rf "virtual_hosts/000-default.conf" "/etc/apache2/sites-available/000-default.conf"
+sudo cp -rf "000-default.conf" "/etc/apache2/sites-available/000-default.conf"
 PWD=`pwd`
 sudo chmod -R 755 "$PWD"
-REPO_PATH=$(echo ${PWD} | sed 's#/api/scripts##g')
+REPO_PATH=$(echo ${PWD} | sed 's#/scripts/lamp##g')
 sudo sed -i "s#{{REPO_PATH}}#$REPO_PATH#g" "/etc/apache2/sites-available/000-default.conf"
 
 echo "

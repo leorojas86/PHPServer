@@ -32,10 +32,3 @@ echo "
 
 -> Installing php..."
 sudo bash -c "yes | sudo apt install php libapache2-mod-php"
-
-echo "
-
--> Running MySQL Scripts..."
-mysql --user="root" --password="root123" < "../services/users/users.sql"
-mysql --user="root" --password="root123" < "../services/tags/tags.sql"
-mysql --user="root" --password="root123" < "../services/groups/groups.sql"
