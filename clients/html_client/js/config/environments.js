@@ -1,5 +1,6 @@
 var ENVIRONMENTS =
 {
+  CURRENT: 'LOCAL',
   LOCAL:
   {
     SERVICES :
