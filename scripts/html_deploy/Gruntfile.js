@@ -22,13 +22,11 @@ module.exports = function (grunt) {
         options: {
           patterns: [ {
             match: /SELECTED_ENVIRONMENT:/g,
-            replacement: function () {
-              return 'CURRENT: \'PUBLIC\',//'; // replaces "CURRENT" to "CURRENT: 'PUBLIC',//"
-            }
+            replacement: 'CURRENT: \'PUBLIC\',//' // replaces "CURRENT" to "CURRENT: 'PUBLIC',//"
           }]
         },
         files: [
-          { expand: true, flatten: true, src: ['deploy/index.js'], dest: 'deploy/temp/' }
+          { expand: true, flatten: true, src: ['deploy/index.js'], dest: 'deploy/' }
         ]
       }
     },
