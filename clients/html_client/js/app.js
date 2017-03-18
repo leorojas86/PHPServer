@@ -21,7 +21,7 @@ function AppClass()
 
 	function _loadEnvironment()
 	{
-		_this.ENVIRONMENT = ENVIRONMENTS[ENVIRONMENTS.CURRENT];
+		_this.ENVIRONMENT = ENVIRONMENTS[ENVIRONMENTS.SELECTED_ENVIRONMENT];
 		ServiceCache.instance.enabled = true;
 	}
 

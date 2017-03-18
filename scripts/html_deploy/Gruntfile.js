@@ -17,6 +17,21 @@ module.exports = function (grunt) {
         }]
       }
     },
+    replace: {
+      dist: {
+        options: {
+          patterns: [ {
+            match: /SELECTED_ENVIRONMENT:/g,
+            replacement: function () {
+              return 'CURRENT: \'PUBLIC\',//'; // replaces "CURRENT" to "CURRENT: 'PUBLIC',//"
+            }
+          }]
+        },
+        files: [
+          { expand: true, flatten: true, src: ['deploy/index.js'], dest: 'deploy/temp/' }
+        ]
+      }
+    },
     minified : {
       files: {
         src: [ 'deploy/index.js' ],
@@ -74,11 +89,13 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-obfuscator');
   grunt.loadNpmTasks('grunt-concat-css');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-usemin');
 
   grunt.registerTask('build', [
     'clean',      //Deletes deploy folder
     'concat',     //Concats all js and generates 'deploy/index.js'
+    'replace',    //Replaces selected environment
     'minified',   //Minifies the deploy/index.js
     'obfuscator', //Obfuscate the deploy/index.js
     'concat_css', //Concats all js and generates 'deploy/index.css'
