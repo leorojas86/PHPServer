@@ -94,8 +94,8 @@ module.exports = function (grunt) {
     'clean',      //Deletes deploy folder
     'concat',     //Concats all js and generates 'deploy/index.js'
     'replace',    //Replaces selected environment
-    'minified',   //Minifies the deploy/index.js
-    'obfuscator', //Obfuscate the deploy/index.js
+    //'minified',   //Minifies the deploy/index.js
+    //'obfuscator', //Obfuscate the deploy/index.js
     'concat_css', //Concats all js and generates 'deploy/index.css'
     'copy',       //Copies index.html, spritesheet.png and jsons to deploy folder
     'usemin'      //Parses the index.html and replaces js,css references

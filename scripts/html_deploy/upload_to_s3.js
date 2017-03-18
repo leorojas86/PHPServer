@@ -7,7 +7,7 @@ var fs    = require('fs');
 var path  = require("path");
 var s3    = new AWS.S3();
 
-var BUCKET        = 'aws-website-crnegocioscom-yxnfk';
+var BUCKET        = 'inventory-static';
 var DEPLOY_FOLDER = path.resolve('./deploy');
 
 /*function createBucketFolder(bucketFolder) {
@@ -23,12 +23,12 @@ var DEPLOY_FOLDER = path.resolve('./deploy');
 function uploadFileToS3(file, fileSystemPath, bucketFolder) {
   console.log('Uploading file -> ' + file);
   var params = { Bucket: bucketFolder, Key: file, Body: fs.readFileSync(fileSystemPath) };
-  s3.putObject(params, function(err, data) {
-    if (err) {
+  s3.putObject(params, function(err, data)
+  {
+    if (err)
       console.log(err)
-    } else {
+    else
       console.log("Successfully uploaded '" + file + "' data to S3");
-    }
   });
 }
 
@@ -36,15 +36,15 @@ function uploadFolder(fileSystemFolder, bucketFolder) {
   //createBucketFolder(bucketFolder);
 
   var files = fs.readdirSync(fileSystemFolder);
-  async.map(files, function (file, cb) {
+  async.map(files, function (file, cb)
+  {
     var fileSystemPath = path.join(fileSystemFolder, file);
-    if(fs.lstatSync(fileSystemPath).isFile()) {
+    if(fs.lstatSync(fileSystemPath).isFile())
       uploadFileToS3(file, fileSystemPath, bucketFolder);
-    }
-    else {
+    else
       uploadFolder(fileSystemPath, bucketFolder + "/" + file);
-    }
-  }, function (err, results) {
+  }, function (err, results)
+  {
     if (err) console.error(err);
     console.log(results);
   });
