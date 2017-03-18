@@ -10,8 +10,8 @@ module.exports = function (grunt) {
       jss: {
         files: [{
           src: [
-            '../html_client/utils/*.js',
-            '../html_client/js/**/*.js'
+            '../../clients/html_client/utils/*.js',
+            '../../clients/html_client/js/**/*.js'
           ],
           dest: 'deploy/index.js'
         }]
@@ -42,24 +42,24 @@ module.exports = function (grunt) {
     },
     concat_css: {
       csss: {
-        src: ['../html_client/css/**/*.css'],
+        src: ['../../clients/html_client/css/**/*.css'],
         dest: 'deploy/index.css'
       },
     },
     copy: {
       index: {
         expand: false,
-        src: '../html_client/index.html',
+        src: '../../clients/html_client/index.html',
         dest: 'deploy/index.html',
       },
       spritesheet: {
         expand: false,
-        src: '../html_client/images/texture/spritesheet.png',
+        src: '../../clients/html_client/images/texture/spritesheet.png',
         dest: 'deploy/images/texture/spritesheet.png',
       },
       jsons: {
         expand: false,
-        src: '../html_client/jsons/english.json',
+        src: '../../clients/html_client/jsons/english.json',
         dest: 'deploy/jsons/english.json',
       },
     },
