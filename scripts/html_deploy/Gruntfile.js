@@ -22,7 +22,7 @@ module.exports = function (grunt) {
         options: {
           patterns: [ {
             match: /SELECTED_ENVIRONMENT:/g,
-            replacement: 'CURRENT: \'PUBLIC\',//' // replaces "CURRENT" to "CURRENT: 'PUBLIC',//"
+            replacement: 'SELECTED_ENVIRONMENT: \'PUBLIC\',//' // replaces "CURRENT" to "CURRENT: 'PUBLIC',//"
           }]
         },
         files: [
