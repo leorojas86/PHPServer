@@ -19,10 +19,25 @@ var DEPLOY_FOLDER = path.resolve('./deploy');
     }
   });
 }*/
+function getContentType(file)
+{
+  if (file.includes('.html')) return 'text/html';
+  if (file.includes('.css'))  return 'text/css';
+  if (file.includes('.js'))   return 'text/javascript';
+  if (file.includes('.png'))  return 'image/png';
+  return 'application/octet-stream';
+}
 
-function uploadFileToS3(file, fileSystemPath, bucketFolder) {
+function uploadFileToS3(file, fileSystemPath, bucketFolder)
+{
   console.log('Uploading file -> ' + file);
-  var params = { Bucket: bucketFolder, Key: file, Body: fs.readFileSync(fileSystemPath) };
+  var params =
+  {
+    Bucket: bucketFolder,
+    Key: file,
+    Body: fs.readFileSync(fileSystemPath),
+    ContentType: getContentType(file),
+  };
   s3.putObject(params, function(err, data)
   {
     if (err)
@@ -32,9 +47,9 @@ function uploadFileToS3(file, fileSystemPath, bucketFolder) {
   });
 }
 
-function uploadFolder(fileSystemFolder, bucketFolder) {
+function uploadFolder(fileSystemFolder, bucketFolder)
+{
   //createBucketFolder(bucketFolder);
-
   var files = fs.readdirSync(fileSystemFolder);
   async.map(files, function (file, cb)
   {

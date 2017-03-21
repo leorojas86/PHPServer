@@ -4,6 +4,7 @@
 - Make services deploy scripts
 - Secure Services
 - Encrypt Passwords
+- Mover archivo de localización a js.
 - Validate service/url parameters
 - Add services healthchecks
 - Implement monitoring service
