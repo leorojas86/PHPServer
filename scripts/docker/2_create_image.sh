@@ -11,4 +11,5 @@ pwd
 
 echo "
 
--> Updating apt-get..."
+-> Building image..."
+docker build --tag leotest .
