@@ -12,7 +12,7 @@ pwd
 echo "
 
 -> Seeing all Docker images:"
-docker images --all
+sudo docker images --all
 echo "
 
 -> Running image..."
