@@ -16,4 +16,4 @@ sudo docker images --all
 echo "
 
 -> Running image..."
-sudo docker run leotest
+sudo docker run -it leotest2 bash 
