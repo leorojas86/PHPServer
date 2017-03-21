@@ -43,6 +43,6 @@ function FilesServiceClass()
 
 	this.getFileURL = function(fileName)
 	{
-		return App.instance.ENVIRONMENT.SERVICES.FILES.URL + "/uploads/" + fileName;
+		return App.instance.ENVIRONMENT.SERVICES.FILES.URL + "uploads/" + fileName;
 	}
 }
