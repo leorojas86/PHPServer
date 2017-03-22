@@ -41,3 +41,10 @@ echo "
 
 -> Restarting Apache..."
 sudo service apache2 restart
+
+echo "
+
+-> Setting up uploads folder..."
+#http://www.macinstruct.com/node/415
+sudo mkdir ../../uploads
+sudo chmod 777 ../../uploads
