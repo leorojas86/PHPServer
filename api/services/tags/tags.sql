@@ -11,7 +11,7 @@ CREATE TABLE `objects`
 CREATE TABLE `text_tags`
 (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `text` varchar(30) NOT NULL,
+  `text` text NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
