@@ -6,7 +6,7 @@
 	{
 		public static function UploadFile($fileData, $filePath)
 		{
-			$dir = dirname($filePath);
+			//$dir = dirname($filePath);
 
 			//if(!file_exists($dir) && !is_dir($dir))
     			//mkdir($dir);
