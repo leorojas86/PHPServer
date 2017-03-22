@@ -30,7 +30,7 @@
 			$fileData = $_POST["fileToUpload"];
 			$fileName	= $payload->fileName;
 			$path = dirname(__FILE__);
-			$uploadsFolder = "$path/../../uploads"
+			$uploadsFolder = "$path/../../uploads";
 			error_log("PATH = $path, uploadsFolder = $uploadsFolder");
 			$result  	= FileUploadManager::UploadFile($fileData, "$uploadsFolder/$fileName");
 
