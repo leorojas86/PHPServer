@@ -27,13 +27,11 @@
 
 		private static function Upload($payload)
 		{
-			$fileData = $_POST["fileToUpload"];
-			$fileName	= $payload->fileName;
-			//$path = dirname(__FILE__);
-			//$uploadsFolder = "$path/../../../uploads";
-			//$uploadsFolder = '/home/administrator/Repositories/phpserver/uploads';
-			//error_log("PATH = $path, uploadsFolder = $uploadsFolder");
-			$result  	= FileUploadManager::UploadFile($fileData, "uploads/$fileName");
+			$fileData 			= $_POST["fileToUpload"];
+			$fileName				= $payload->fileName;
+			$path 				 	= dirname(__FILE__);
+			$uploadsFolder 	= "$path/../../../uploads";
+			$result  				= FileUploadManager::UploadFile($fileData, "$uploadsFolder/$fileName");
 
 			if($result->success)
 				return new ServiceResult(true, array('file_name' => $fileName));
