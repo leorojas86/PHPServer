@@ -8,8 +8,8 @@
 		{
 			$dir = dirname($filePath);
 
-			if(!file_exists($dir) && !is_dir($dir))
-    			mkdir($dir);
+			//if(!file_exists($dir) && !is_dir($dir))
+    			//mkdir($dir);
 
 			file_put_contents($filePath, base64_decode(explode(",", $fileData)[1]));
 
