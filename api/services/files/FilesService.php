@@ -29,6 +29,8 @@
 		{
 			$fileData = $_POST["fileToUpload"];
 			$fileName	= $payload->fileName;
+			$path = dirname(__FILE__);
+			error_log('PATH = $path');
 			$result  	= FileUploadManager::UploadFile($fileData, "uploads/$fileName");
 
 			if($result->success)
