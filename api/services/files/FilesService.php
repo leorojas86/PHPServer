@@ -30,8 +30,9 @@
 			$fileData = $_POST["fileToUpload"];
 			$fileName	= $payload->fileName;
 			$path = dirname(__FILE__);
-			error_log("PATH = $path");
-			$result  	= FileUploadManager::UploadFile($fileData, "uploads/$fileName");
+			$uploadsFolder = "$path/../../uploads"
+			error_log("PATH = $path, uploadsFolder = $uploadsFolder");
+			$result  	= FileUploadManager::UploadFile($fileData, "$uploadsFolder/$fileName");
 
 			if($result->success)
 				return new ServiceResult(true, array('file_name' => $fileName));
