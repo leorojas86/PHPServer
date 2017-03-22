@@ -44,6 +44,6 @@ function FilesServiceClass()
 	this.getFileURL = function(fileName)
 	{
 		var payload = "{service:'File',fileName:'" + fileName + "'}";
-		return App.instance.ENVIRONMENT.SERVICES.FILES.URL + "?payload=" + btoa(payload);//App.instance.ENVIRONMENT.SERVICES.FILES.UPLOADS_FOLDER + fileName;
+		return App.instance.ENVIRONMENT.SERVICES.FILES.URL + "?payload=" + escape(payload);//App.instance.ENVIRONMENT.SERVICES.FILES.UPLOADS_FOLDER + fileName;
 	}
 }
