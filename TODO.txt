@@ -1,3 +1,4 @@
+- Update files service client to store in S3.
 - Add version descriptor
 - Make services independient
 - Publish Services
