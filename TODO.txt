@@ -23,6 +23,7 @@
 - Use S3 images/objects data
 - Manage routing
 - Improve error management.
+- Show upload button until there is a file selected
 - Improve UI code
 	Make renderes (with callbacks)
 - Code Cleanup.
