@@ -16,6 +16,10 @@
 					case "Upload":
 						$result = FilesService::Upload($payload);
 					break;
+					case "Download":
+						$result = FilesService::Donwload($payload);
+						die($result->data);//HACK reply the file
+					break;
 					default:
 						$result = new ServiceResult(false, "Unsupported Files service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE);
 					break;
@@ -25,17 +29,31 @@
 			return $result;
 		}
 
+		private static function GetFilePath($fileName)
+		{
+			$path 				 	= dirname(__FILE__);
+			$uploadsFolder 	= "$path/../../../uploads";
+			return "$uploadsFolder/$fileName";
+		}
+
 		private static function Upload($payload)
 		{
 			$fileData 			= $_POST["fileToUpload"];
 			$fileName				= $payload->fileName;
-			$path 				 	= dirname(__FILE__);
-			$uploadsFolder 	= "$path/../../../uploads";
-			$result  				= FileUploadManager::UploadFile($fileData, "$uploadsFolder/$fileName");
+			$filePath 			= FilesService::GetFilePath($fileName);
+			$result  				= FileUploadManager::UploadFile($fileData, $filePath);
 
 			if($result->success)
 				return new ServiceResult(true, array('file_name' => $fileName));
 
+			return $result;
+		}
+
+		private static function Download($payload)
+		{
+			$fileName	= $payload->fileName;
+			$filePath = FilesService::GetFilePath($fileName);
+			$result 	= FileUploadManager::DownloadFile($filePath);
 			return $result;
 		}
 	}
