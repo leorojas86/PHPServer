@@ -17,7 +17,7 @@
 						$result = FilesService::Upload($payload);
 					break;
 					case "Download":
-						$result = FilesService::Donwload($payload);
+						$result = FilesService::Download($payload);
 					break;
 					default:
 						$result = new ServiceResult(false, "Unsupported Files service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE);
