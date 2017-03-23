@@ -13,7 +13,7 @@
 
 		public static function DownloadFile($filePath)
 		{
-			$fileContent = file_get_contents($filePath);
+			$fileContent = base64_encode(file_get_contents($filePath));
 			return new ServiceResult(true, $fileContent);
 		}
 	}
