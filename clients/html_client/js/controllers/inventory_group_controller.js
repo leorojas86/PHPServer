@@ -149,7 +149,7 @@ function InventoryGroupControllerClass()
 	{
 		var canvas 	  = document.getElementById('imageContainer');
 		var dataURL 	= canvas.toDataURL("image/jpeg", 0.95);
-		var imageData = dataURL.split(',')[1];
+		var imageData = dataURL.split(',')[1]; //REMOVING 'data:image/jpeg;base64,'
 		var fileName  = GUIDUtils.instance.generateNewGUID() + ".jpg";
 		FilesService.instance.uploadFile(imageData, fileName, InventoryGroupController.instance.groupData, onUploadCompleted, onProgress);
 	}
