@@ -49,6 +49,7 @@ function ServiceClientClass()
 		this.profile(params, duration);
 
 		//alert(xmlhttp.responseText);
+		alert('xmlhttp.responseText' + xmlhttp.responseText);
 		var resultData = success ? JSON.parse(xmlhttp.responseText) : { success : false, data : xmlhttp.responseText };
 
 		callback(resultData);
