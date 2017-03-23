@@ -11,7 +11,7 @@
 			return new ServiceResult(true);
 		}
 
-		public static function DownloadFile($fileData, $filePath)
+		public static function DownloadFile($filePath)
 		{
 			$fileContent = file_get_contents($filePath);
 			return new ServiceResult(true, $fileContent);
