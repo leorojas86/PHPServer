@@ -40,7 +40,12 @@
 			$fileData = $_POST["fileToUpload"];
 			$fileName	= $payload->fileName;
 			$filePath = FilesService::GetFilePath($fileName);
-			return FileUploadManager::UploadFile($fileData, $filePath);
+			$result 	= FileUploadManager::UploadFile($fileData, $filePath);
+
+			if($result->success)
+				return new ServiceResult(true, array('file_name' => $fileName));
+
+			return $result;
 		}
 
 		private static function Download($payload)
