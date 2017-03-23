@@ -14,6 +14,7 @@
 		public static function DownloadFile($filePath)
 		{
 			$fileContent = file_get_contents($filePath);
+			die($fileContent);
 			return new ServiceResult(true, $fileContent);
 		}
 	}
