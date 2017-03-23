@@ -15,7 +15,8 @@ function ImageRenderingUtilsClass()
 	    setTimeout(function(){ alert('Selected file is not a valid image, extension = ' + ext); }, 100);
 	};
 
-	this.renderImageDataIntoCanvas = function(imageData, canvas, preferedCanvasSize, maxImageSize) {
+	this.renderImageDataIntoCanvas = function(imageData, canvas, preferedCanvasSize, maxImageSize)
+	{
 		var reader   	= new FileReader();
 		reader.onload = function(e)
 		{
@@ -25,6 +26,13 @@ function ImageRenderingUtilsClass()
 		}
 
 		reader.readAsDataURL(imageData);
+	};
+
+	this.renderImageSourceIntoCanvas = function(imageSource, canvas, preferedCanvasSize, maxImageSize)
+	{
+			var image 		= new Image();
+			image.onload 	= function() { ImageRenderingUtils.instance.loadImageIntoCanvas(image, canvas, preferedCanvasSize, maxImageSize); };
+			image.src	 		= imageSource;
 	};
 
 	this.loadImageIntoCanvas = function(image, canvas, preferedCanvasSize, maxImageSize)

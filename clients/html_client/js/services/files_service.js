@@ -45,13 +45,6 @@ function FilesServiceClass()
 	{
 		var payload 				= ServiceClient.instance.getPayload("File", "Download");
 		payload["fileName"]	= fileName;
-		//ServiceClient.instance.request(App.instance.ENVIRONMENT.SERVICES.FILES.URL, "POST", payload, callback, onProgress);
-		var params = { payload: JSON.stringify(payload) };
-		RequestUtils.instance.request(App.instance.ENVIRONMENT.SERVICES.FILES.URL, "POST", function(xmlhttp, success, duration) {
-			callback({
-				success: true,
-				data: xmlhttp.responseText
-			});
-		}, params, onProgress);
+		ServiceClient.instance.request(App.instance.ENVIRONMENT.SERVICES.FILES.URL, "POST", payload, callback, onProgress);
 	}
 }
