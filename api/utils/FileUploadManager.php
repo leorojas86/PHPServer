@@ -6,13 +6,15 @@
 	{
 		public static function UploadFile($fileData, $filePath)
 		{
+			//TODO: this is for images, handle differnt file types
 			file_put_contents($filePath, base64_decode(explode(",", $fileData)[1]));
-			return new ServiceResult(true);
+			return new ServiceResult(true, array('file_name' => $fileName));;
 		}
 
 		public static function DownloadFile($fileData, $filePath)
 		{
-			return new ServiceResult(true, file_get_contents($filePath));
+			$fileContent = file_get_contents($filePath);
+			return new ServiceResult(true, $fileContent);
 		}
 	}
 ?>

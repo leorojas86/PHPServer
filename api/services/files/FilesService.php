@@ -18,7 +18,6 @@
 					break;
 					case "Download":
 						$result = FilesService::Donwload($payload);
-						die($result->data);//HACK reply the file
 					break;
 					default:
 						$result = new ServiceResult(false, "Unsupported Files service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE);
@@ -38,23 +37,17 @@
 
 		private static function Upload($payload)
 		{
-			$fileData 			= $_POST["fileToUpload"];
-			$fileName				= $payload->fileName;
-			$filePath 			= FilesService::GetFilePath($fileName);
-			$result  				= FileUploadManager::UploadFile($fileData, $filePath);
-
-			if($result->success)
-				return new ServiceResult(true, array('file_name' => $fileName));
-
-			return $result;
+			$fileData = $_POST["fileToUpload"];
+			$fileName	= $payload->fileName;
+			$filePath = FilesService::GetFilePath($fileName);
+			return FileUploadManager::UploadFile($fileData, $filePath);
 		}
 
 		private static function Download($payload)
 		{
 			$fileName	= $payload->fileName;
 			$filePath = FilesService::GetFilePath($fileName);
-			$result 	= FileUploadManager::DownloadFile($filePath);
-			return $result;
+			return FileUploadManager::DownloadFile($filePath);
 		}
 	}
 

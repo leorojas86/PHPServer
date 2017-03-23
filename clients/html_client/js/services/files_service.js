@@ -41,9 +41,10 @@ function FilesServiceClass()
 			callback(result);
 	}
 
-	this.getFileURL = function(fileName)
+	this.downloadFile = function(fileName, callback, onProgress)
 	{
-		var payload = "{service:'File',fileName:'" + fileName + "'}";
-		return App.instance.ENVIRONMENT.SERVICES.FILES.URL + "?payload=" + escape(payload);//App.instance.ENVIRONMENT.SERVICES.FILES.UPLOADS_FOLDER + fileName;
+		var payload 				= ServiceClient.instance.getPayload("File", "Download");
+		payload["fileName"]	= fileName;
+		ServiceClient.instance.request(App.instance.ENVIRONMENT.SERVICES.FILES.URL, "POST", payload, callback, onProgress);
 	}
 }

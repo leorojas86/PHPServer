@@ -61,10 +61,9 @@ function InventoryGroupControllerClass()
 
 		if(data.files != null && data.files.length > 0)
 		{
-			var imageURL 			 					= FilesService.instance.getFileURL(data.files[0]);
 			var canvas 				 					= document.getElementById('imageContainer');
 			var imageContainerComponent = new ImageContainerComponent(canvas);
-			imageContainerComponent.loadImage(imageURL, onProgress);
+			imageContainerComponent.loadImage(data.files[0], onProgress);
 		}
 	}
 
@@ -178,7 +177,7 @@ function InventoryGroupControllerClass()
 		var canvas 			= document.getElementById('imageContainer');
 
 		var imageContainerComponent = new ImageContainerComponent(canvas);
-		imageContainerComponent.renderImage(fileInput);
+		imageContainerComponent.renderInputImage(fileInput);
 	}
 
 	function onSubGroupButtonClick(groupGuid)

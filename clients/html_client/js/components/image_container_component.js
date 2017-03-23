@@ -1,28 +1,20 @@
 function ImageContainerComponent(canvas)
 {
-	this.loadImage = function(imageURL, onProgress)
+	this.loadImage = function(fileName, onProgress)
 	{
-		var callback = function(xmlhttp, success, duration) { onImageLoadedCallback(imageURL, xmlhttp, success, duration); };
-		RequestUtils.instance.request(imageURL, 'GET', callback, null, onProgress);
+		FilesService.instance.downloadFile(fileName, onImageLoadedCallback, onProgress);
 	}
 
-	function onImageLoadedCallback(imageURL, xmlhttp, success, duration)
+	function onImageLoadedCallback(resultData)
 	{
-		if(success)
-		{
-			var image 	 = new Image();
-			image.onload = function() 
-			{ 
-				ImageRenderingUtils.instance.loadImageIntoCanvas(image, canvas, canvas.parentElement.offsetWidth * 0.9, Constants.IMAGE_MAX_SIZE); 
-			};
-			image.src = imageURL;
-		}
+		if(resultData.success)
+			ImageRenderingUtils.instance.renderImageDataIntoCanvas(resultData.data, canvas, canvas.parentElement.offsetWidth * 0.9, Constants.IMAGE_MAX_SIZE);
 		else
 			alert('error downloading image ' + imageURL);
 	}
 
-	this.renderImage = function(fileInput)
+	this.renderInputImage = function(fileInput)
 	{
-		ImageRenderingUtils.instance.renderImage(fileInput, canvas, canvas.parentElement.offsetWidth * 0.9, Constants.IMAGE_MAX_SIZE);
+		ImageRenderingUtils.instance.renderInputImage(fileInput, canvas, canvas.parentElement.offsetWidth * 0.9, Constants.IMAGE_MAX_SIZE);
 	}
 }
