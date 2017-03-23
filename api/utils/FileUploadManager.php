@@ -6,7 +6,7 @@
 	{
 		public static function UploadFile($fileData, $filePath)
 		{
-			//TODO: this is for images, handle differnt file types
+			//TODO: this is for images, handle differnt file types, get content type
 			file_put_contents($filePath, base64_decode(explode(",", $fileData)[1]));
 			return new ServiceResult(true);
 		}
