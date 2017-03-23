@@ -8,7 +8,7 @@ function ImageContainerComponent(canvas)
 	function onImageLoadedCallback(resultData)
 	{
 		if(resultData.success)
-			ImageRenderingUtils.instance.renderImageBinaryStringIntoCanvas(resultData.data, canvas, canvas.parentElement.offsetWidth * 0.9, Constants.IMAGE_MAX_SIZE);
+			ImageRenderingUtils.instance.renderImageDataIntoCanvas(resultData.data, canvas, canvas.parentElement.offsetWidth * 0.9, Constants.IMAGE_MAX_SIZE);
 		else
 			alert('error downloading image ' + imageURL);
 	}
