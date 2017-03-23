@@ -18,8 +18,10 @@
 					break;
 					case "Download":
 						$result = FilesService::Download($payload);
-						if($result->success)
+						if($result->success) {
+							header('Content-Type: image/jpeg');
 							die($result->data);//HACK, we can not convert an image into json format
+						}
 					break;
 					default:
 						$result = new ServiceResult(false, "Unsupported Files service method '$method'", UtilsConstants::UNSUPPORTED_SERVICE_METHOD_ERROR_CODE);
