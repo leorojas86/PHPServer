@@ -8,3 +8,6 @@ RUN apt-get install -y git
 
 CMD echo "----- Downloading repo"
 RUN git clone https://github.com/leorojas86/PHPServer.git
+
+CMD echo "----- Installing lamp"
+RUN sh PHPServer/scripts/lamp/1_setup_lamp.sh
