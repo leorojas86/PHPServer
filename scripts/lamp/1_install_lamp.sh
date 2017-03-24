@@ -12,23 +12,23 @@ pwd
 echo "
 
 -> Updating apt-get..."
-sudo bash -c "yes | sudo apt update"
-sudo bash -c "yes | sudo apt upgrade"
+bash -c "yes | apt update"
+bash -c "yes | apt upgrade"
 
 echo "
 
 -> Installing apache..."
-sudo bash -c "yes | sudo apt install apache2"
+bash -c "yes | apt install apache2"
 
 echo "
 
 -> Installing mysql..."
-#sudo dpkg --configure -a
-echo "mysql-server mysql-server/root_password password root123" | sudo debconf-set-selections
-echo "mysql-server mysql-server/root_password_again password root123" | sudo debconf-set-selections
-sudo bash -c "yes | apt -y install mysql-server php7.0-mysql"
+#dpkg --configure -a
+echo "mysql-server mysql-server/root_password password root123" | debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password root123" | debconf-set-selections
+bash -c "yes | apt -y install mysql-server php7.0-mysql"
 
 echo "
 
 -> Installing php..."
-sudo bash -c "yes | sudo apt install php libapache2-mod-php"
+bash -c "yes | apt install php libapache2-mod-php"
