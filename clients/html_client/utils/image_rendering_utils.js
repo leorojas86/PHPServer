@@ -58,5 +58,8 @@ function ImageRenderingUtilsClass()
 
 		canvas.style.width  = fitCanvasSize.w + "px";
 		canvas.style.height = fitCanvasSize.h + "px";
+
+		console.log('cavas size', downscaleImageSize);
+		console.log('cavas visual size', fitCanvasSize);
 	};
 }
