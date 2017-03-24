@@ -1,5 +1,4 @@
 FROM ubuntu
-CMD echo "This is a test 2."
 
-# Update aptitude with new repo
+CMD echo "Updating apt get"
 RUN apt update
