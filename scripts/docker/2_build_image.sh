@@ -12,5 +12,5 @@ pwd
 echo "
 
 -> Building image..."
-sudo docker rmi phpserver
-sudo docker build --tag phpserver .
+docker rmi phpserver
+docker build --tag phpserver .
