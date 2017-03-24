@@ -12,4 +12,5 @@ pwd
 echo "
 
 -> Building image..."
+sudo docker rmi leotest
 sudo docker build --tag leotest .
