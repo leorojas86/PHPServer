@@ -10,4 +10,4 @@ CMD echo "----- Downloading repo"
 RUN git clone https://github.com/leorojas86/PHPServer.git
 
 CMD echo "----- Installing lamp"
-RUN cd PHPServer/scripts/lamp && ls && sh /1_setup_lamp.sh
+RUN cd PHPServer/scripts/lamp && ls && /1_setup_lamp.sh
