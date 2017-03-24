@@ -12,5 +12,5 @@ pwd
 echo "
 
 -> Building image..."
-sudo docker rmi leotest
-sudo docker build --tag leotest .
+sudo docker rmi phpserver
+sudo docker build --tag phpserver .
