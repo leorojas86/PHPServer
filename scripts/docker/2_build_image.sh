@@ -12,4 +12,4 @@ pwd
 echo "
 
 -> Building image..."
-sudo docker build --tag leotest2 .
+sudo docker build --tag leotest .
