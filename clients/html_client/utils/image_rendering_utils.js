@@ -37,20 +37,12 @@ function ImageRenderingUtilsClass()
 
 	this.loadImageIntoCanvas = function(image, canvas, preferedCanvasSize, maxImageSize)
 	{
-	    //alert("image.width = " + image.width + " image.height = " + image.height + " maxImageSize = " + maxImageSize);
-		console.log("image.width = " + image.width + " image.height = " + image.height);
-
-		console.log('maxImageSize', maxImageSize);
-
 		var maxWidth  = Math.min(maxImageSize, image.width);
 		var maxHeight = Math.min(maxImageSize, image.height);
 	  maxImageSize  = Math.max(maxWidth, maxHeight);
 
-		console.log('maxImageSize', maxImageSize);
 		var downscaleImageScale = MathUtils.instance.getFitScale({ w:image.width, h:image.height }, { w:maxImageSize, h:maxImageSize }, "FitIn");
 		var downscaleImageSize  = { w:image.width * downscaleImageScale, h: image.height * downscaleImageScale};
-
-		//alert("downscaleImageScale " + downscaleImageScale + " downscaleImageSize = " + downscaleImageSize.w + "," + downscaleImageSize.h);
 
 		canvas.width 	= downscaleImageSize.w;
 		canvas.height = downscaleImageSize.h;
@@ -60,15 +52,10 @@ function ImageRenderingUtilsClass()
 
 		preferedCanvasSize = Math.min(preferedCanvasSize, maxImageSize * 1.5);
 
-		console.log('preferedCanvasSize', preferedCanvasSize);
-
 		var fitCanvasSizeScale = MathUtils.instance.getFitScale({ w:canvas.width, h:canvas.height }, { w:preferedCanvasSize, h:preferedCanvasSize }, "FitIn");
 		var fitCanvasSize      = { w: canvas.width * fitCanvasSizeScale, h: canvas.height * fitCanvasSizeScale};
 
 		canvas.style.width  = fitCanvasSize.w + "px";
 		canvas.style.height = fitCanvasSize.h + "px";
-
-		console.log('cavas size', downscaleImageSize);
-		console.log('cavas visual size', fitCanvasSize);
 	};
 }
