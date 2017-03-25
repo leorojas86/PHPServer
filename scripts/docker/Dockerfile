@@ -11,3 +11,6 @@ RUN git clone https://github.com/leorojas86/PHPServer.git
 
 CMD echo "----- Installing lamp"
 RUN sh PHPServer/scripts/lamp/1_install_lamp.sh
+
+CMD echo "----- Setting up lamp"
+RUN sh PHPServer/scripts/lamp/2_setup_lamp.sh
