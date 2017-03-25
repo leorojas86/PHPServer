@@ -19,11 +19,11 @@ mysql --user="root" --password="root123" < "$SERVICES_PATH/groups/groups.sql"
 echo "
 
 -> Updating virtual hosts..."
-sudo cp -rf "000-default.conf" "/etc/apache2/sites-available/000-default.conf"
+cp -rf "000-default.conf" "/etc/apache2/sites-available/000-default.conf"
 PWD=`pwd`
-sudo chmod -R 755 "$PWD"
+chmod -R 755 "$PWD"
 REPO_PATH=$(echo ${PWD} | sed 's#/scripts/lamp##g')
-sudo sed -i "s#{{REPO_PATH}}#$REPO_PATH#g" "/etc/apache2/sites-available/000-default.conf"
+sed -i "s#{{REPO_PATH}}#$REPO_PATH#g" "/etc/apache2/sites-available/000-default.conf"
 
 echo "
 
@@ -32,7 +32,7 @@ echo "
 if grep -q "inventory" "/etc/hosts"; then
   echo "hosts file is already updated, nothing to do"
 else
-  sudo echo "
+  echo "
 
   127.0.0.1	inventory
   " >> /etc/hosts
@@ -41,11 +41,11 @@ fi
 echo "
 
 -> Restarting Apache..."
-sudo service apache2 restart
+service apache2 restart
 
 echo "
 
 -> Setting up uploads folder..."
 #http://www.macinstruct.com/node/415
-sudo mkdir ../../uploads
-sudo chmod 777 ../../uploads
+mkdir ../../uploads
+chmod 777 ../../uploads
