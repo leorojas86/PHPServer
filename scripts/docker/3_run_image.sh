@@ -16,8 +16,9 @@ docker ps --all
 echo "
 
 -> Running image..."
-docker run --name=phpservercontainer --network=bridge phpserver
-docker start phpservercontainer
+docker run --name=phpservercontainer phpserver
+#--network=bridge
+#docker start phpservercontainer
 echo "
 
 -> Seeing all Docker containers:"
