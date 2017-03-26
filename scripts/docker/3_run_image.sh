@@ -16,4 +16,6 @@ docker images --all
 echo "
 
 -> Running image..."
-docker run --network=bridge phpserver
+docker stop phpservercontainer
+docker run --name=phpservercontainer --network=host phpserver
+docker start phpservercontainer
