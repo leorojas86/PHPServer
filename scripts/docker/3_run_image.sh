@@ -11,11 +11,14 @@ pwd
 
 echo "
 
--> Seeing all Docker images:"
-docker images --all
+-> Seeing all Docker containers:"
+docker ps --all
 echo "
 
 -> Running image..."
-docker stop phpservercontainer
 docker run --name=phpservercontainer --network=host phpserver
-docker start phpservercontainer
+#docker start phpservercontainer
+echo "
+
+-> Seeing all Docker containers:"
+docker ps --all
