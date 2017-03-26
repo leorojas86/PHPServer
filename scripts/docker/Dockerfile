@@ -3,6 +3,9 @@ FROM ubuntu
 CMD echo "----- Updating apt get"
 RUN apt update
 
+CMD echo "----- Installing net tools"
+RUN apt install net-tools
+
 CMD echo "----- Installing git"
 RUN apt-get install -y git
 

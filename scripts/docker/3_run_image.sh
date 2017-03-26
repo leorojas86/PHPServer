@@ -12,8 +12,8 @@ pwd
 echo "
 
 -> Seeing all Docker images:"
-sudo docker images --all
+docker images --all
 echo "
 
 -> Running image..."
-sudo docker run leotest2 
+docker run --network=bridge phpserver
