@@ -16,7 +16,12 @@ docker ps --all
 echo "
 
 -> Running image..."
-docker run -it --network=bridge --name=phpservercontainer phpserver bash
+docker run -itd \
+--network=isolated_nw \
+--name=phpservercontainer \
+-p 80:80 phpserver \
+bash
+
 docker start phpservercontainer
 echo "
 
