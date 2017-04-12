@@ -15,8 +15,9 @@ echo "
 docker ps --all
 echo "
 
--> Running image..."
+-> Running container..."
 docker run -itd \
+--ip 192.168.0.180 \
 --network=isolated_nw \
 --name=phpservercontainer \
 -p 80:80 phpserver \
