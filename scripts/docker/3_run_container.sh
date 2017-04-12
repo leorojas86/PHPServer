@@ -17,11 +17,16 @@ echo "
 
 -> Running container..."
 docker run \
--itd \
 --rm \
+--interactive \
+--tty \
+--detach \
 --name=phpservercontainer \
 --publish 80:80 phpserver \
 bash
+
+#--ip 192.168.0.180 \
+#--network=isolated_nw \
 
 docker start phpservercontainer
 echo "
