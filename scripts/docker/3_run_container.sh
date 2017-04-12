@@ -16,13 +16,11 @@ docker ps --all
 echo "
 
 -> Running container..."
-docker run
+docker run \
 -itd \
 --rm \
---ip 192.168.0.180 \
---network=isolated_nw \
 --name=phpservercontainer \
--p 80:80 phpserver \
+--publish 80:80 phpserver \
 bash
 
 docker start phpservercontainer

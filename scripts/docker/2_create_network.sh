@@ -12,4 +12,8 @@ pwd
 echo "
 
 -> Creating network:"
-docker network create --driver bridge isolated_nw
+docker network rm isolated_nw
+docker network create \
+--subnet 192.168.0.0/16 \
+--driver bridge \
+isolated_nw
