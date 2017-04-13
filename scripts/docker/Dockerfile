@@ -20,3 +20,7 @@ RUN sh PHPServer/scripts/lamp/1_install_lamp.sh
 
 CMD echo "----- Setting up lamp"
 RUN sh PHPServer/scripts/lamp/2_setup_lamp.sh
+
+CMD echo "----- Starting services"
+RUN service apache2 start
+RUN service mysql start
