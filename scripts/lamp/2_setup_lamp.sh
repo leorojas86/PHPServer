@@ -40,6 +40,19 @@ fi
 
 echo "
 
+-> Updating apache2.conf..."
+
+if grep -q "ServerName" "/etc/apache2/apache2.conf"; then
+  echo "apache2.conf already has ServerName, nothing to do"
+else
+  echo "
+
+  ServerName	inventory
+  " >> /etc/apache2/apache2.conf
+fi
+
+echo "
+
 -> Restarting Apache..."
 service apache2 restart
 

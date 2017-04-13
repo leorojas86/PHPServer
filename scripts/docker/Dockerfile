@@ -4,10 +4,13 @@ CMD echo "----- Updating apt get"
 RUN apt update
 
 CMD echo "----- Installing net tools"
-RUN apt install net-tools
+RUN apt install net-tools --yes
+
+CMD echo "----- Installing vim editor"
+RUN apt install vim --yes
 
 CMD echo "----- Installing git"
-RUN apt-get install -y git
+RUN apt install git --yes
 
 CMD echo "----- Downloading repo"
 RUN git clone https://github.com/leorojas86/PHPServer.git
