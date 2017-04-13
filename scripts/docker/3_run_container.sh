@@ -22,9 +22,9 @@ docker run \
 --detach \
 --name=phpservercontainer \
 --publish 80:80 phpserver \
-/bin/bash -c "service apache2 start | service mysql start"
+/bin/bash
 
-#
+#-c "service apache2 start | service mysql start"
 
 #--ip 192.168.0.180 \
 #--network=isolated_nw \
