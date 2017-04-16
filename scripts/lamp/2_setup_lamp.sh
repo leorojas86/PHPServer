@@ -11,7 +11,7 @@ SERVICES_PATH="$MY_PATH/../../api/services"
 
 echo "
 
--> Restarting Apache..."
+-> Restarting Mysql..."
 service mysql restart
 
 echo "
