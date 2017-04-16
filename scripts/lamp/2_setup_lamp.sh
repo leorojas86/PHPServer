@@ -11,6 +11,11 @@ SERVICES_PATH="$MY_PATH/../../api/services"
 
 echo "
 
+-> Restarting Apache..."
+service mysql restart
+
+echo "
+
 -> Running MySQL Scripts to setup database..."
 mysql --user="root" --password="root123" < "$SERVICES_PATH/users/users.sql"
 mysql --user="root" --password="root123" < "$SERVICES_PATH/tags/tags.sql"
