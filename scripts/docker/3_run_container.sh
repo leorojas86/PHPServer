@@ -17,7 +17,7 @@ echo "
 
 -> Running container..."
 docker run \
---rm
+--rm \
 --interactive \
 --tty \
 --detach \

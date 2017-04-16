@@ -7,7 +7,7 @@ echo "
 Script location: $MY_PATH"
 cd "$MY_PATH"
 pwd
-SERVICES_PATH="../../api/services"
+SERVICES_PATH="$MY_PATH/../../api/services"
 
 echo "
 
