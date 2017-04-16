@@ -2,6 +2,7 @@
 - Update files service client to store in S3.
 - Add version descriptor
 - UI
+	- Add loading spinner to login/etc
 	- Make generic dialog
 	- Make bordered dialogs
 - Update readme
