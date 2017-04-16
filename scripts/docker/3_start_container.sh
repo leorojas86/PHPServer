@@ -13,9 +13,10 @@ echo "
 
 -> Seeing all Docker containers:"
 docker ps --all
+
 echo "
 
--> Running container..."
+-> Running image..."
 docker run \
 --rm \
 --interactive \
@@ -25,13 +26,17 @@ docker run \
 --publish 80:80 phpserver \
 /bin/bash
 
-#-c "service apache2 start | service mysql start"
-#--ip 192.168.0.180 \
-#--network=isolated_nw \
+echo "
 
+-> Starting container..."
 docker start phpservercontainer
+
+echo "
+
+-> Running container services..."
 docker exec phpservercontainer service apache2 start
 docker exec phpservercontainer service mysql start
+
 echo "
 
 -> Seeing all Docker containers:"

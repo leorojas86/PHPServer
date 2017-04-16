@@ -13,11 +13,17 @@ echo "
 
 -> Seeing all Docker containers:"
 docker ps --all
+
 echo "
 
 -> Stopping container..."
 docker stop phpservercontainer
+
+echo "
+
+-> Removing container..."
 docker rm phpservercontainer
+
 echo "
 
 -> Seeing all Docker containers:"

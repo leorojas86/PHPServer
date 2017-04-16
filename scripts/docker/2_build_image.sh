@@ -11,6 +11,20 @@ pwd
 
 echo "
 
--> Building image..."
+-> Stopping container..."
+docker stop phpservercontainer
+
+echo "
+
+-> Removing container..."
+docker rm phpservercontainer
+
+echo "
+
+-> Removing image..."
 docker rmi phpserver
+
+echo "
+
+-> Building image..."
 docker build --tag phpserver .
