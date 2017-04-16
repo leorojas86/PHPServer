@@ -26,11 +26,12 @@ docker run \
 /bin/bash
 
 #-c "service apache2 start | service mysql start"
-
 #--ip 192.168.0.180 \
 #--network=isolated_nw \
 
 docker start phpservercontainer
+docker exec phpservercontainer service apache2 start
+docker exec phpservercontainer service mysql start
 echo "
 
 -> Seeing all Docker containers:"
