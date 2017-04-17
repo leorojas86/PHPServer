@@ -17,9 +17,14 @@ service mysql restart
 echo "
 
 -> Running MySQL Scripts to setup database..."
-mysql --user="root" --password="root123" < "$SERVICES_PATH/users/users.sql"
-mysql --user="root" --password="root123" < "$SERVICES_PATH/tags/tags.sql"
-mysql --user="root" --password="root123" < "$SERVICES_PATH/groups/groups.sql"
+ROOT_PASSWORD="root123"
+mysql --user="root" --password="$ROOT_PASSWORD" < "$SERVICES_PATH/users/users.sql"
+mysql --user="root" --password="$ROOT_PASSWORD" < "$SERVICES_PATH/tags/tags.sql"
+mysql --user="root" --password="$ROOT_PASSWORD" < "$SERVICES_PATH/groups/groups.sql"
+
+sed -i "s#const DB_PASS#const DB_PASS='$ROOT_PASSWORD'//#g" "$SERVICES_PATH/users/DBConfig.php"
+sed -i "s#const DB_PASS#const DB_PASS='$ROOT_PASSWORD'//#g" "$SERVICES_PATH/tags/DBConfig.php"
+sed -i "s#const DB_PASS#const DB_PASS='$ROOT_PASSWORD'//#g" "$SERVICES_PATH/groups/DBConfig.php"
 
 echo "
 
