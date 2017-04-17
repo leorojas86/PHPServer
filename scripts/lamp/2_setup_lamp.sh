@@ -27,7 +27,7 @@ mysql --user="root" --password="$ROOT_PASSWORD" < "$SERVICES_PATH/groups/groups.
 
 sed -i "" "s|const DB_PASS|const DB_PASS='$ROOT_PASSWORD';//|" "$REPO_PATH/api/services/users/DBConfig.php"
 sed -i "" "s|const DB_PASS|const DB_PASS='$ROOT_PASSWORD';//|" "$REPO_PATH/api/services/tags/DBConfig.php"
-sed -i "" "s|const DB_PASS|const DB_PASS='$ROOT_PASSWORD';//|" "$REPO_PATH/api/services/tags/DBConfig.php"
+sed -i "" "s|const DB_PASS|const DB_PASS='$ROOT_PASSWORD';//|" "$REPO_PATH/api/services/groups/DBConfig.php"
 
 echo "
 
