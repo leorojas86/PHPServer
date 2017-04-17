@@ -7,7 +7,6 @@ echo "
 Script location: $MY_PATH"
 cd "$MY_PATH"
 pwd
-SERVICES_PATH="$MY_PATH/../../api/services"
 
 echo "
 
@@ -18,6 +17,7 @@ echo "
 
 -> Running MySQL Scripts to setup database..."
 ROOT_PASSWORD="root123"
+SERVICES_PATH="$MY_PATH/../../api/services"
 mysql --user="root" --password="$ROOT_PASSWORD" < "$SERVICES_PATH/users/users.sql"
 mysql --user="root" --password="$ROOT_PASSWORD" < "$SERVICES_PATH/tags/tags.sql"
 mysql --user="root" --password="$ROOT_PASSWORD" < "$SERVICES_PATH/groups/groups.sql"
