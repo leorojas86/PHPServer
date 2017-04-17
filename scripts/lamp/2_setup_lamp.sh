@@ -7,6 +7,10 @@ echo "
 Script location: $MY_PATH"
 cd "$MY_PATH"
 pwd
+PWD=`pwd`
+chmod -R 755 "$PWD"
+REPO_PATH=$(echo ${PWD} | sed 's#/scripts/lamp##g')
+SERVICES_PATH="$MY_PATH/../../api/services"
 
 echo "
 
@@ -17,22 +21,18 @@ echo "
 
 -> Running MySQL Scripts to setup database..."
 ROOT_PASSWORD="root123"
-SERVICES_PATH="$MY_PATH/../../api/services"
 mysql --user="root" --password="$ROOT_PASSWORD" < "$SERVICES_PATH/users/users.sql"
 mysql --user="root" --password="$ROOT_PASSWORD" < "$SERVICES_PATH/tags/tags.sql"
 mysql --user="root" --password="$ROOT_PASSWORD" < "$SERVICES_PATH/groups/groups.sql"
 
-sed -i "s#const DB_PASS#const DB_PASS='$ROOT_PASSWORD'//#g" "$SERVICES_PATH/users/DBConfig.php"
-sed -i "s#const DB_PASS#const DB_PASS='$ROOT_PASSWORD'//#g" "$SERVICES_PATH/tags/DBConfig.php"
-sed -i "s#const DB_PASS#const DB_PASS='$ROOT_PASSWORD'//#g" "$SERVICES_PATH/groups/DBConfig.php"
+sed -i "" "s|const DB_PASS|const DB_PASS='$ROOT_PASSWORD';//|" "$REPO_PATH/api/services/users/DBConfig.php"
+sed -i "" "s|const DB_PASS|const DB_PASS='$ROOT_PASSWORD';//|" "$REPO_PATH/api/services/tags/DBConfig.php"
+sed -i "" "s|const DB_PASS|const DB_PASS='$ROOT_PASSWORD';//|" "$REPO_PATH/api/services/tags/DBConfig.php"
 
 echo "
 
 -> Updating virtual hosts..."
 cp -rf "000-default.conf" "/etc/apache2/sites-available/000-default.conf"
-PWD=`pwd`
-chmod -R 755 "$PWD"
-REPO_PATH=$(echo ${PWD} | sed 's#/scripts/lamp##g')
 sed -i "s#{{REPO_PATH}}#$REPO_PATH#g" "/etc/apache2/sites-available/000-default.conf"
 
 echo "
