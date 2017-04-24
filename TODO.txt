@@ -18,6 +18,7 @@
 - Implement endpoints pagination.
 - Remove back button, add path links instead.
 - Change the UI to use promises and components.
+- Add services healthchecks
 - Implement mobile apps:
 	iOS:
 		Screen size does not match the view size.
