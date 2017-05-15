@@ -12,8 +12,8 @@ pwd
 echo "
 
 -> Updating apt-get..."
-bash -c "yes | apt update"
-bash -c "yes | apt upgrade"
+apt update --yes
+apt upgrade --yes
 
 echo "
 
@@ -22,11 +22,12 @@ echo "
 #https://docs.docker.com/engine/installation/linux/ubuntu/#install-using-the-repository
 echo "
 --- Installing packages to allow apt to use a repository over HTTPS"
-bash -c "yes | apt install \
-  apt-transport-https \
-  ca-certificates \
-  curl \
-  software-properties-common"
+apt install \
+apt-transport-https \
+ca-certificates \
+curl \
+software-properties-common \
+--yes
 
 echo "
 --- Adding Docker’s official GPG key"
@@ -45,7 +46,7 @@ add-apt-repository \
 
 echo "
 --- Installing docker CE"
-bash -c "yes | apt install docker-ce"
+apt install docker-ce --yes
 
 echo "
 ---  Listing the available versions of docker-ee"
@@ -53,7 +54,9 @@ apt-cache madison docker-ce
 
 echo "
 ---  Installing docker-ee version 17.03.0"
-bash -c "yes | apt install docker-ce=17.03.0~ce-0~ubuntu-xenial --fix-missing"
+apt install docker-ce=17.03.0~ce-0~ubuntu-xenial \
+--fix-missing \
+--yes
 
 echo "
 ---  Verifying that Docker CE is installed correctly by running the hello-world image"
