@@ -17,7 +17,8 @@
 - Add e2e tests
 - Implement endpoints pagination.
 - Remove back button, add path links instead.
-- Change the UI to use promises and components.
+- Change the UI to use promises, class, template strings, const, let and components.
+- Use css icons instead of images
 - Add services healthchecks
 - Implement mobile apps:
 	iOS:
