@@ -1,14 +1,27 @@
-function UIComponent(model, view, controller)
+function AppView() {
+
+	this.build = () => 
+	{
+		headerController.build();
+		bodyController.build();
+		footerController.build();
+	};
+}
+
+function AppModel() {
+
+}
+
+
+function AppController()
 {
 	//Variables
-	this.model = model;
-	this.view = view;
-	this.controller = controller;
+	this.model = new AppModel();
+	this.view = new AppView();
 
 	//Initialization
-	this.view.listener = controller;
+	this.view.listener = this;
 	this.view.data = model.data;
-	this.controller.model = model;
 
 	//Methods
 	this.buildUI = function(elementId)
@@ -17,3 +30,24 @@ function UIComponent(model, view, controller)
 	};
 }
 
+var App = new AppController();
+
+
+/*
+
+App 
+	- Header
+		- PageTitle
+		- ScreenLinks
+			- Home
+			- Inventory
+			- ?
+		- User
+	- Body
+		- Home
+		- Inventory
+	- Footer
+		- Eula
+		- Version
+	- Modals
+*/
