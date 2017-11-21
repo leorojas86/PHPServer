@@ -8,30 +8,30 @@ function AppView() {
 	};
 }
 
-function AppModel() {
-
-}
-
 
 function AppController()
 {
 	//Variables
-	this.model = new AppModel();
-	this.view = new AppView();
+	this.model = {
+		user: null,
+		currentScreen: null
+	};
 
-	//Initialization
-	this.view.listener = this;
-	this.view.data = model.data;
+	this.children = [new Header(), new Body(), new Footer(), new Modals()];
+
+	this.view = (model) => {
+		this.children.foreach((child) => {
+			child.view();
+		});
+	};
 
 	//Methods
-	this.buildUI = function(elementId)
-	{
+	this.buildUI = () => {
 		return this.view.build(elementId);
 	};
 }
 
 var App = new AppController();
-
 
 /*
 
