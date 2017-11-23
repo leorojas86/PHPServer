@@ -9,10 +9,8 @@ function App()
 	this.children = [new Header(), new Body(), new Footer(), new Modals()];
 
 	//Methods
-	this.view = (model) => {
-		this.children.foreach((child) => {
-			child.view();
-		});
+	this.view = () => {
+		this.children.foreach((child) => child.view(this.model));
 	};
 }
 
