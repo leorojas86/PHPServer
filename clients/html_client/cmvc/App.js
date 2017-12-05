@@ -3,7 +3,7 @@ class AppModel()
 {
 	constructor()
 	{
-		this.data = { user: null, currentScreen: null };
+		this.data = { user: null, currentScreen: null };//Default values
 	}
 }
 
@@ -26,9 +26,15 @@ class AppView()
 	}
 }
 
-
 class App()
 {
+	static _instance = new App();
+
+	static instance() 
+	{
+		return _app;
+	}
+
 	constructor()
 	{
 		this.model = new AppModel();
@@ -36,15 +42,13 @@ class App()
 		this.children = [new Header(), new Screen(), new Footer(), new Modals()];
 	}
 
-	//Methods
 	buildUI()
 	{
 		this.view.build(this.children);
 	}
 }
 
-var App = new App();
-App.buildUI();
+App.instance.buildUI();
 
 /*
 
