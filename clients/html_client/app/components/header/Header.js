@@ -5,7 +5,7 @@ class HeaderModel {
 class HeaderView {
 
   build() {
-    return `<div>Inventory</div>`;
+    return `<div class='header'>Inventory</div>`;
   }
 }
 

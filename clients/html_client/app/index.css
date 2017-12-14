@@ -1,0 +1,9 @@
+html {
+	-webkit-touch-callout:none; -moz-user-select:none; -webkit-user-select:none; /*HACK: Fix iOS oncontextmenu event*/
+	background:rgba(198, 204, 213, 1);
+}
+
+body {
+	margin:0px;
+  color:#3D557E;
+}

@@ -14,13 +14,12 @@ class AppView {
 	constructor() {
 	}
 
-	build(children) {
-		const body = document.getElementById('app-body');
-		let bodyHTML = '';
-		children.forEach((child) => {
-			bodyHTML += child.view.build(this.model);
-		});
-		body.innerHTML = bodyHTML;
+	build(header) {
+		const body = document.getElementById('page-body');
+		body.innerHTML =
+		`<div class='app'>
+			${ header.build() }
+		</div>`;
 	}
 }
 
@@ -39,11 +38,11 @@ class App
 	constructor() {
 		this.model = new AppModel();
 		this.view = new AppView();
-		this.children = [new Header()/*, new Screen(), new Footer(), new Modals()*/];
+		this.header = new Header();
 	}
 
 	buildUI() {
-		this.view.build(this.children);
+		this.view.build(this.header.view);
 	}
 }
 
