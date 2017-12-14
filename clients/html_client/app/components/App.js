@@ -14,12 +14,12 @@ class AppView {
 	constructor() {
 	}
 
-	build(header) {
+	build(data, header) {
 		const body = document.getElementById('page-body');
-		body.innerHTML =
-		`<div class='app'>
-			${ header.build() }
-		</div>`;
+		const headerHTML = header.build(data);
+		body.innerHTML = `<div class='app'>
+												${ headerHTML }
+											</div>`;
 	}
 }
 
@@ -41,13 +41,13 @@ class App
 		this.header = new Header();
 	}
 
-	buildUI() {
-		this.view.build(this.header.view);
+	refreshUI() {
+		this.view.build(this.model.data, this.header.view);
 	}
 }
 
 window.onload = () => {
-	App.instance().buildUI();
+	App.instance().refreshUI();
 };
 
 
