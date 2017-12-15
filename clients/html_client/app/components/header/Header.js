@@ -23,7 +23,11 @@ class HeaderView {
 
   registerEvents() {
     document.getElementById('user_button_id').onclick = () => {
-      this.component.onUserButtonClicked();
+      if(this.component.model.data.user) {
+        this.component.onUserButtonClicked();
+      } else {
+        this.component.onLoginButtonClicked();
+      }
     };
   }
 }
@@ -37,5 +41,9 @@ class Header {
 
   onUserButtonClicked() {
     alert('User Button Clicked');
+  }
+
+  onLoginButtonClicked() {
+    alert('Login Button Clicked');
   }
 }
