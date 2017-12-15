@@ -22,7 +22,7 @@ class HeaderView {
   }
 
   refreshUI() {
-    document.getElementById('header').outerHTML = this.buildHTML();
+    Html.instance.updateElement('header', this.buildHTML());
     this.registerEvents();
   }
 

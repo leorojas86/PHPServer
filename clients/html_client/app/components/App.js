@@ -23,7 +23,7 @@ class AppView {
 	}
 
 	refreshUI() {
-		document.getElementById('app').outerHTML = this.buildHTML();
+		Html.instance.updateElement('app', this.buildHTML());
 		this.registerEvents();
 	}
 
@@ -44,6 +44,7 @@ class App
 
 }
 
+App.instance = new App();
 
 /*
 
