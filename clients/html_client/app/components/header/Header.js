@@ -6,6 +6,7 @@ class HeaderModel {
   get data() {
     return App.instance.model.data;
   }
+
 }
 
 class HeaderView {
@@ -35,6 +36,7 @@ class HeaderView {
       }
     };
   }
+
 }
 
 class Header {
@@ -51,4 +53,5 @@ class Header {
   onLoginButtonClicked() {
     alert('Login Button Clicked');
   }
+  
 }

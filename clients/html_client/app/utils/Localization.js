@@ -11,6 +11,7 @@ class Localization {
   localizeHTML(html) {
     return html;
   }
+  
 }
 
 Localization.instance = new Localization();
