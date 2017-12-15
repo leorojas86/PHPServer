@@ -12,47 +12,36 @@ class AppModel {
 
 class AppView {
 
-	constructor() {
+	constructor(component) {
+		this.component = component;
 	}
 
-	buildUI(data, header) {
+	buildUI() {
 		const body = document.getElementById('page-body');
-		const headerHTML = header.buildUI(data);
+		const headerHTML = this.component.header.view.buildUI();
 		body.innerHTML = `<div class='app'>
 												${ headerHTML }
 											</div>`;
 
-		header.registerEvents();
+		this.component.header.view.registerEvents();
 	}
-	
-}
 
-let _instance = null;
+}
 
 class App
 {
 
-	static instance() {
-		if(!_instance) {
-			_instance = new App();
-		}
-		return _instance;
-	}
-
 	constructor() {
 		this.model = new AppModel();
-		this.view = new AppView();
+		this.view = new AppView(this);
 		this.header = new Header();
-	}
-
-	refreshUI() {
-		this.view.buildUI(this.model.data, this.header.view);
 	}
 
 }
 
 window.onload = () => {
-	App.instance().refreshUI();
+	App.instance = new App();
+	App.instance.view.buildUI();
 };
 
 

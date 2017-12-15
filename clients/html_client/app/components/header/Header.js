@@ -1,25 +1,29 @@
 class HeaderModel {
 
-  constructor(data) {
+  constructor() {
   }
 
+  get data() {
+    return App.instance.model.data;
+  }
 }
 
 class HeaderView {
 
-  constructor(observer) {
-    this.observer = observer;
+  constructor(component) {
+    this.component = component;
   }
 
-  buildUI(data) {
+  buildUI() {
+    const user = this.component.model.data.user;
     return `<div class='header'>
-              <button id='user_button_id' class='user_button'>${ data.user ? data.user.name : 'Login' }</button>
+              <button id='user_button_id' class='user_button'>${ user ? user.name : 'Login' }</button>
             </div>`;
   }
 
   registerEvents() {
     document.getElementById('user_button_id').onclick = () => {
-      this.observer.onUserButtonClicked();
+      this.component.onUserButtonClicked();
     };
   }
 }
