@@ -16,13 +16,18 @@ class AppView {
 		this.component = component;
 	}
 
-	buildUI() {
-		const body = document.getElementById('page-body');
-		const headerHTML = this.component.header.view.buildUI();
-		body.innerHTML = `<div class='app'>
-												${ headerHTML }
-											</div>`;
+	buildHTML() {
+		return `<div id='app' class='app'>
+							${ this.component.header.view.buildHTML() }
+						</div>`;
+	}
 
+	refreshUI() {
+		document.getElementById('app').outerHTML = this.buildHTML();
+		this.registerEvents();
+	}
+
+	registerEvents() {
 		this.component.header.view.registerEvents();
 	}
 
@@ -38,11 +43,6 @@ class App
 	}
 
 }
-
-window.onload = () => {
-	App.instance = new App();
-	App.instance.view.buildUI();
-};
 
 
 /*

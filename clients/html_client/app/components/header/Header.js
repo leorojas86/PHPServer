@@ -14,15 +14,20 @@ class HeaderView {
     this.component = component;
   }
 
-  buildUI() {
+  buildHTML() {
     const user = this.component.model.data.user;
-    return `<div class='header'>
-              <button id='user_button_id' class='user_button'>${ user ? user.name : 'Login' }</button>
+    return `<div id='header' class='header'>
+              <button id='user_button' class='user_button'>${ user ? user.name : 'Login' }</button>
             </div>`;
   }
 
+  refreshUI() {
+    document.getElementById('header').outerHTML = this.buildHTML();
+    this.registerEvents();
+  }
+
   registerEvents() {
-    document.getElementById('user_button_id').onclick = () => {
+    document.getElementById('user_button').onclick = () => {
       if(this.component.model.data.user) {
         this.component.onUserButtonClicked();
       } else {
