@@ -18,7 +18,7 @@ class HeaderView {
   buildHTML() {
     const user = this.component.model.data.user;
     return `<div id='header' class='header'>
-              <button id='user_button' class='user_button'>${ user ? user.name : 'Login' }</button>
+              <button id='user_button' class='user_button'>${ user ? user.name : '[@LOGIN_TEXT@]' }</button>
             </div>`;
   }
 
@@ -53,5 +53,5 @@ class Header {
   onLoginButtonClicked() {
     alert('Login Button Clicked');
   }
-  
+
 }
