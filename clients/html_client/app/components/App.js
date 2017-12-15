@@ -7,6 +7,7 @@ class AppModel {
 			currentScreen: null
 		};//Default values
 	}
+
 }
 
 class AppView {
@@ -14,13 +15,16 @@ class AppView {
 	constructor() {
 	}
 
-	build(data, header) {
+	buildUI(data, header) {
 		const body = document.getElementById('page-body');
-		const headerHTML = header.build(data);
+		const headerHTML = header.buildUI(data);
 		body.innerHTML = `<div class='app'>
 												${ headerHTML }
 											</div>`;
+
+		header.registerEvents();
 	}
+	
 }
 
 let _instance = null;
@@ -42,8 +46,9 @@ class App
 	}
 
 	refreshUI() {
-		this.view.build(this.model.data, this.header.view);
+		this.view.buildUI(this.model.data, this.header.view);
 	}
+
 }
 
 window.onload = () => {
