@@ -23,8 +23,7 @@ class AppView {
 	}
 
 	refreshUI() {
-		Html.instance.updateElement('app', this.buildHTML());
-		this.registerEvents();
+		Html.instance.updateElement('app', this);
 	}
 
 	registerEvents() {

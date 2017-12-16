@@ -24,11 +24,6 @@ class HeaderView {
             </div>`;
   }
 
-  refreshUI() {
-    Html.instance.updateElement('header', this.buildHTML());
-    this.registerEvents();
-  }
-
   registerEvents() {
     document.getElementById('user_button').onclick = () => {
       if(this.component.model.user) {
@@ -37,6 +32,10 @@ class HeaderView {
         this.component.onLoginButtonClicked();
       }
     };
+  }
+
+  refreshUI() {
+    Html.instance.updateElement('header', this);
   }
 
 }
