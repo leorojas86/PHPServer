@@ -19,7 +19,6 @@ class LoginPopupView {
       return `<div id='login_popup' class='login_popup popup_container'>
   						  <p class='margin_class'>[@email_text@]</p>
   						  <input type='text' id='user_email' class='input_class margin_class' value='${ defaultValues }'>
-                <br/><br/>
   			  			<p class='margin_class'>[@password_text@]</p>
   			  			<input type='text' id='user_password' class='input_class margin_class' value='${ defaultValues }'>
                 <br/><br/>
