@@ -32,6 +32,11 @@ class LoginPopupView {
     return `<div id='login_popup'/>`;
   }
 
+  registerEvents() {
+    document.getElementById('login_button').onclick = () => this.component.onLoginButtonClick();
+    document.getElementById('register_button').onclick = () => this.component.onRegisterButtonClick();
+  }
+
   refreshUI() {
     Html.instance.updateElement('login_popup', this);
   }
@@ -51,8 +56,16 @@ class LoginPopup {
   }
 
   hide() {
-    this.model.isShown = true;
+    this.model.isShown = false;
     this.view.refreshUI();
+  }
+
+  onLoginButtonClick() {
+    this.hide();
+  }
+
+  onRegisterButtonClick() {
+    this.hide();
   }
 
 }
