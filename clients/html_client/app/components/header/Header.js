@@ -3,8 +3,8 @@ class HeaderModel {
   constructor() {
   }
 
-  get data() {
-    return App.instance.model.data;
+  get user() {
+    return App.instance.model.data.user;
   }
 
 }
@@ -16,9 +16,11 @@ class HeaderView {
   }
 
   buildHTML() {
-    const user = this.component.model.data.user;
+    const user = this.component.model.user;
     return `<div id='header' class='header'>
-              <button id='user_button' class='user_button'>${ user ? user.name : '[@LOGIN_TEXT@]' }</button>
+              <button id='user_button' class='user_button'>
+                <span class="lsf symbol">user</span> ${ user ? '' : '?' }
+              </button>
             </div>`;
   }
 
@@ -29,7 +31,7 @@ class HeaderView {
 
   registerEvents() {
     document.getElementById('user_button').onclick = () => {
-      if(this.component.model.data.user) {
+      if(this.component.model.user) {
         this.component.onUserButtonClicked();
       } else {
         this.component.onLoginButtonClicked();

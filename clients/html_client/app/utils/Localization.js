@@ -22,12 +22,16 @@ class Localization {
   localizeHTML(html) {
     const regex = /\[@+\w+\@\]/;
     const matches = html.match(regex);
-    matches.forEach((match) => {
-      const localizedText = this._getLocalizedText(match);
-      if(localizedText) {
-        html = html.replace(match, localizedText);
-      }
-    });
+
+    if(matches) {
+      matches.forEach((match) => {
+        const localizedText = this._getLocalizedText(match);
+        if(localizedText) {
+          html = html.replace(match, localizedText);
+        }
+      });
+    }
+
     return html;
   }
 
