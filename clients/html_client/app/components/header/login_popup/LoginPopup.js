@@ -23,9 +23,9 @@ class LoginPopupView {
   			  			<p class='margin_class'>[@password_text@]</p>
   			  			<input type='text' id='user_password' class='input_class margin_class' value='${ defaultValues }'>
                 <br/><br/>
-  			  			<button id='login_button'	class='button_class margin_class'>[@login_button_text@]</button>
+  			  			<button id='login_button'	class='login_button button_class margin_class'><span class="lsf symbol">in</span> [@login_button_text@]</button>
   			  			<br><br>
-  			  			<button id='register_button'	class='button_class margin_class'>[@register_button_text@]</button>
+  			  			<button id='register_button'	class='register_button button_class margin_class'><span class="lsf symbol">plus</span> [@register_button_text@]</button>
   			  		</div>`;
     }
 

@@ -19,7 +19,7 @@ class HeaderView {
     const user = this.component.model.user;
     return `<div id='header' class='header'>
               <button id='user_button' class='user_button'>
-                <span class="lsf symbol">user</span> ${ user ? '' : '?' }
+                <span class="lsf symbol">${ user ? 'in' : 'out' }user</span> 
               </button>
               ${ this.component.loginPopup.view.buildHTML() }
             </div>`;
