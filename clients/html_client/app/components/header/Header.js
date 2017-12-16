@@ -26,13 +26,13 @@ class HeaderView {
   }
 
   registerEvents() {
-    document.getElementById('user_button').onclick = () => {
+    Html.instance.registerElementClick('user_button', () => {
       if(this.component.model.user) {
         this.component.onUserButtonClicked();
       } else {
         this.component.onLoginButtonClicked();
       }
-    };
+    });
   }
 
   refreshUI() {

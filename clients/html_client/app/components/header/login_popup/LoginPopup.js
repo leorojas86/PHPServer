@@ -33,8 +33,8 @@ class LoginPopupView {
   }
 
   registerEvents() {
-    document.getElementById('login_button').onclick = () => this.component.onLoginButtonClick();
-    document.getElementById('register_button').onclick = () => this.component.onRegisterButtonClick();
+    Html.instance.registerElementClick('login_button', () => this.component.onLoginButtonClick());
+    Html.instance.registerElementClick('register_button', () => this.component.onRegisterButtonClick());
   }
 
   refreshUI() {

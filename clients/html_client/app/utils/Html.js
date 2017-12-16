@@ -8,6 +8,13 @@ class Html {
     view.registerEvents();
   }
 
+  registerElementClick(id, onClick) {
+    const element = document.getElementById(id);
+    if(element) {
+      element.onclick = onClick;
+    }
+  }
+
 }
 
 Html.instance = new Html();
