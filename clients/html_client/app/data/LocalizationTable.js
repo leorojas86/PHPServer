@@ -2,7 +2,10 @@ class LocalizationTable {
 
   static get() {
     return {
-      LOGIN_TEXT: { en: 'Login', es: 'Autenticar' }
+      "email_text": { en: 'Email', es: 'Correo Electrónico' },
+      "password_text": { en: 'Password', es: 'Contraseña' },
+      "login_button_text": { en: 'Login', es: 'Ingresar' },
+      "register_button_text": { en: 'Register', es: 'Registrarse' },
     };
   }
 

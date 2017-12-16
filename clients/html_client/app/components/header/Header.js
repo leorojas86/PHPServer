@@ -21,6 +21,7 @@ class HeaderView {
               <button id='user_button' class='user_button'>
                 <span class="lsf symbol">user</span> ${ user ? '' : '?' }
               </button>
+              ${ this.component.loginPopup.view.buildHTML() }
             </div>`;
   }
 
@@ -45,6 +46,7 @@ class Header {
   constructor() {
 		this.model = new HeaderModel();
 		this.view = new HeaderView(this);
+    this.loginPopup = new LoginPopup();
 	}
 
   onUserButtonClicked() {
@@ -52,7 +54,7 @@ class Header {
   }
 
   onLoginButtonClicked() {
-    alert('Login Button Clicked');
+    this.loginPopup.show();
   }
 
 }
