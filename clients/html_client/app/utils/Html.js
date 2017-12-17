@@ -5,8 +5,7 @@ class Html {
 
     if(element) {
       const htmlText = view.buildHTML();
-      const localizedHTML = Localization.instance.localizeHTML(htmlText);
-      element.outerHTML = localizedHTML;
+      element.outerHTML = Localization.instance.localizeHTML(htmlText);
       view.registerEvents();
     }
   }
