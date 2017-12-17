@@ -32,7 +32,11 @@ class LoginPopupView {
   }
 
   registerEvents() {
-    Html.instance.registerElementClick('login_button', () => this.component.onLoginButtonClick());
+    Html.instance.registerElementClick('login_button', () => {
+      const email = document.getElementById('user_email').value;
+      const password = document.getElementById('user_password').value;
+      this.component.onLoginButtonClick(email, password);
+    });
     Html.instance.registerElementClick('register_button', () => this.component.onRegisterButtonClick());
   }
 
@@ -59,8 +63,16 @@ class LoginPopup {
     this.view.refreshUI();
   }
 
-  onLoginButtonClick() {
-    this.hide();
+  onLoginButtonClick(email, password) {
+    ApiClient.instance.userService.login(email, password)
+      .then((response) => {
+        App.instance.model.updateLoggedUser(response);
+        App.instance.view.refreshUI();
+        this.hide();
+      })
+      .catch((reason) => {
+        alert(reason);
+      });
   }
 
   onRegisterButtonClick() {

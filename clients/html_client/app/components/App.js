@@ -8,6 +8,10 @@ class AppModel {
 		};//Default values
 	}
 
+	updateLoggedUser(user) {
+		this.data.user = user;
+	}
+
 }
 
 class AppView {
