@@ -18,9 +18,9 @@ class LoginPopupView {
     if(this.component.model.isShown) {
       return `<div id='login_popup' class='login_popup popup_container'>
   						  <p class='margin_class'>[@email_text@]</p>
-  						  <input type='text' id='user_email' class='input_class margin_class' value='${ defaultValues }'>
+  						  <input type='text' id='user_email' class='margin_class' value='${ defaultValues }'>
   			  			<p class='margin_class'>[@password_text@]</p>
-  			  			<input type='text' id='user_password' class='input_class margin_class' value='${ defaultValues }'>
+  			  			<input type='text' id='user_password' class='margin_class' value='${ defaultValues }'>
                 <br/><br/>
   			  			<button id='login_button'	class='login_button button_class margin_class'><span class="lsf symbol">in</span> [@login_button_text@]</button>
   			  			<br><br>

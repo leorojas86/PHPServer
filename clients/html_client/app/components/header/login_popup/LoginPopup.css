@@ -5,12 +5,7 @@
 	padding:10px;
 }
 
-.button_class {
-	font-size:15px;
-	width:120px;
-}
-
-.register_button {
+.login_popup button {
 	font-size:15px;
 	width:120px;
 }
