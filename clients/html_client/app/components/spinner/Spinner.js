@@ -34,7 +34,7 @@ class Spinner {
   constructor(id) {
     this.model = new SpinnerModel(id);
     this.view = new SpinnerView(this);
-    alert(this.model);
+    this.model.elementId = `${ id }_spinner`;
   }
 
   show() {
