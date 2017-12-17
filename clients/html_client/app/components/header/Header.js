@@ -19,9 +19,10 @@ class HeaderView {
     const user = this.component.model.user;
     return `<div id='header' class='header'>
               <button id='user_button' class='user_button'>
-                <span class="lsf symbol">${ user ? 'in' : 'out' }user</span> 
+                <span class="lsf symbol">${ user ? '' : 'in' }user</span>
               </button>
               ${ this.component.loginPopup.view.buildHTML() }
+              ${ this.component.userPopup.view.buildHTML() }
             </div>`;
   }
 
@@ -47,10 +48,11 @@ class Header {
 		this.model = new HeaderModel();
 		this.view = new HeaderView(this);
     this.loginPopup = new LoginPopup();
+    this.userPopup = new UserPopup();
 	}
 
   onUserButtonClicked() {
-    alert('User Button Clicked');
+    this.userPopup.show();
   }
 
   onLoginButtonClicked() {

@@ -33,4 +33,13 @@ class UserServiceMock {
     });
   }
 
+  logout() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        this.loggedUser = null;
+        resolve();
+      }, 4000);
+    });
+  }
+
 }
