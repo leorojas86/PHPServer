@@ -22,6 +22,7 @@ class Localization {
   localizeHTML(html) {
     const regex = /\[@+\w+\@\]/g;
     const matches = html.match(regex);
+    //console.log('html', html);
 
     if(matches) {
       matches.forEach((match) => {

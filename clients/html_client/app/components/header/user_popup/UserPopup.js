@@ -22,11 +22,13 @@ class UserPopupView {
       return `<div id='user_popup' class='user_popup popup_container'>
   						 <p class='margin_class'>${ user.name }</p>
   						 <br/><br/>
-  			  	   <button id='logout_button'	class='margin_class'><span class="lsf symbol">out</span> [@logout_button_text@]</button>
+  			  	   <button id='logout_button'	class='margin_class'>
+                <span class="lsf symbol">out</span> [@logout_button_text@]
+               </button>
   			  		</div>`;
     }
 
-    return `<div id='user_popup'/>`;
+    return `<div id='user_popup'></div>`;
   }
 
   registerEvents() {

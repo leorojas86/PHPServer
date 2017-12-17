@@ -4,6 +4,11 @@ class Html {
     const htmlText = view.buildHTML();
     const localizedHTML = Localization.instance.localizeHTML(htmlText);
     const element = document.getElementById(id);
+
+    if(!element) {
+      console.log('element not found for ' + id);
+    }
+
     element.outerHTML = localizedHTML;
     view.registerEvents();
   }

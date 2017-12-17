@@ -22,13 +22,18 @@ class LoginPopupView {
   			  		 <p class='margin_class'>[@password_text@]</p>
   			  		 <input type='text' id='user_password' class='margin_class' value='${ defaultValues }'>
                <br/><br/>
-  			  		 <button id='login_button'	class='margin_class'><span class="lsf symbol">in</span> [@login_button_text@]</button>
+  			  		 <button id='login_button'	class='margin_class'>
+                <span class="lsf symbol">in</span> [@login_button_text@]
+               </button>
   			  		 <br/><br/>
-  			  		 <button id='register_button'	class='margin_class'><span class="lsf symbol">plus</span> [@register_button_text@]</button>
+  			  		 <button id='register_button'	class='margin_class'>
+                <span class="lsf symbol">plus</span> [@register_button_text@]
+               </button>
+               ${ this.component.spinner.view.buildHTML() }
   			  		</div>`;
     }
 
-    return `<div id='login_popup'/>`;
+    return `<div id='login_popup'></div>`;
   }
 
   registerEvents() {
@@ -51,6 +56,7 @@ class LoginPopup {
   constructor() {
 		this.model = new LoginPopupMode();
 		this.view = new LoginPopupView(this);
+    this.spinner = new Spinner('LoginPopupSpinner');
 	}
 
   show() {
@@ -64,6 +70,7 @@ class LoginPopup {
   }
 
   onLoginButtonClick(email, password) {
+    this.spinner.show();
     ApiClient.instance.userService.login(email, password)
       .then((response) => {
         this.hide();
@@ -72,7 +79,8 @@ class LoginPopup {
       })
       .catch((reason) => {
         alert(reason);
-      });
+      })
+      .finally(() => this.spinner.hide());
   }
 
   onRegisterButtonClick() {
