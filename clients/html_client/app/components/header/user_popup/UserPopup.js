@@ -25,6 +25,7 @@ class UserPopupView {
   			  	   <button id='logout_button'	class='margin_class'>
                 <span class="lsf symbol">out</span> [@logout_button_text@]
                </button>
+               ${ this.component.spinner.view.buildHTML() }
   			  		</div>`;
     }
 
@@ -46,6 +47,7 @@ class UserPopup {
   constructor() {
 		this.model = new UserPopupModel();
 		this.view = new UserPopupView(this);
+    this.spinner = new Spinner('UserPopupSpinner');
 	}
 
   show() {
@@ -59,8 +61,10 @@ class UserPopup {
   }
 
   onLogoutButtonClick() {
+    this.spinner.show();
     ApiClient.instance.userService.logout()
       .finally(() => {
+        this.spinner.hide();
         this.hide();
         App.instance.model.updateLoggedUser(null);
         App.instance.view.refreshUI();
