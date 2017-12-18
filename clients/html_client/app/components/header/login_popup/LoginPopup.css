@@ -1,7 +1,5 @@
-.login_popup
-{
+.login_popup .container {
 	top:40px; right:5px;
-	padding:10px;
 }
 
 .login_popup button {
@@ -11,4 +9,9 @@
 
 .login_popup .spinner {
 	border: medium none; border-radius:10px;
+}
+
+.popup div.grayout
+{
+	background: rgba(0, 0, 0, 0);
 }

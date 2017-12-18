@@ -18,20 +18,23 @@ class LoginPopupView {
 
   buildHTML() {
     if(this.component.model.isShown) {
-      return `<div id='login_popup' class='login_popup popup_container'>
-  					   <p class='margin_class'>[@email_text@]</p>
-  						 <input type='text' id='user_email' class='margin_class' value='${ this.component.model.inputValues.email }'>
-  			  		 <p class='margin_class'>[@password_text@]</p>
-  			  		 <input type='text' id='user_password' class='margin_class' value='${ this.component.model.inputValues.password }'>
-               <br/><br/>
-  			  		 <button id='login_button'	class='margin_class'>
-                <span class="lsf symbol">in</span> [@login_button_text@]
-               </button>
-  			  		 <br/><br/>
-  			  		 <button id='register_button'	class='margin_class'>
-                <span class="lsf symbol">plus</span> [@register_button_text@]
-               </button>
-               ${ this.component.spinner.view.buildHTML() }
+      return `<div id='login_popup' class='login_popup popup'>
+               <div class='grayout'></div>
+               <div class='container'>
+    					   <p class='margin_class'>[@email_text@]</p>
+    						 <input type='text' id='user_email' class='margin_class' value='${ this.component.model.inputValues.email }'>
+    			  		 <p class='margin_class'>[@password_text@]</p>
+    			  		 <input type='text' id='user_password' class='margin_class' value='${ this.component.model.inputValues.password }'>
+                 <br/><br/>
+    			  		 <button id='login_button'	class='margin_class'>
+                  <span class="lsf symbol">in</span> [@login_button_text@]
+                 </button>
+    			  		 <br/><br/>
+    			  		 <button id='register_button'	class='margin_class'>
+                  <span class="lsf symbol">plus</span> [@register_button_text@]
+                 </button>
+                 ${ this.component.spinner.view.buildHTML() }
+               </div>
   			  		</div>`;
     }
 
