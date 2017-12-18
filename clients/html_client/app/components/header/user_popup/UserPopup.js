@@ -20,12 +20,15 @@ class UserPopupView {
     if(this.component.model.isShown) {
       const user = this.component.model.user;
       return `<div id='user_popup' class='user_popup popup'>
-  						 <p class='margin_class'>${ user.name }</p>
-  						 <br/><br/>
-  			  	   <button id='logout_button'	class='margin_class'>
-                <span class="lsf symbol">out</span> [@logout_button_text@]
-               </button>
-               ${ this.component.spinner.view.buildHTML() }
+                <div class='grayout'></div>
+                <div class='container'>
+    						 <p class='margin_class'>${ user.name }</p>
+    						 <br/><br/>
+    			  	   <button id='logout_button'	class='margin_class'>
+                  <span class="lsf symbol">out</span> [@logout_button_text@]
+                 </button>
+                 ${ this.component.spinner.view.buildHTML() }
+                </div>
   			  		</div>`;
     }
 
