@@ -7,8 +7,7 @@
 .user_button {
 	position:absolute;
 	right:0px;
-	width:60px;
-	height:30px;
+	width:60px; height:30px;
 	margin:5px;
 	font-size:22px;
 }

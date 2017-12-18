@@ -21,6 +21,8 @@ button
 
 .popup_container
 {
-	position:absolute; background:rgba(198, 204, 213, 0.5);
-	border: medium none; border-radius:10px; box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.14), 0px 4px 8px rgba(0, 0, 0, 0.28);
+	position:absolute;
+	background:rgba(198, 204, 213, 0.5);
+	border: medium none; border-radius:10px;
+	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.14), 0px 4px 8px rgba(0, 0, 0, 0.28);
 }
