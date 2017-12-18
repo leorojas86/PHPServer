@@ -4,6 +4,10 @@ class LoginPopupMode {
     this.isShown = false;
   }
 
+  get inputValues() {
+    return App.instance.model.data.env === 'prod' ? { email: '', password: ''} : { email: 'test@test.com', password: 'test'};
+  }
+
 }
 
 class LoginPopupView {
@@ -13,14 +17,12 @@ class LoginPopupView {
   }
 
   buildHTML() {
-    const defaultValues = "leo";//TODO: Pull this from a config file
-
     if(this.component.model.isShown) {
       return `<div id='login_popup' class='login_popup popup_container'>
   					   <p class='margin_class'>[@email_text@]</p>
-  						 <input type='text' id='user_email' class='margin_class' value='${ defaultValues }'>
+  						 <input type='text' id='user_email' class='margin_class' value='${ this.component.model.inputValues.email }'>
   			  		 <p class='margin_class'>[@password_text@]</p>
-  			  		 <input type='text' id='user_password' class='margin_class' value='${ defaultValues }'>
+  			  		 <input type='text' id='user_password' class='margin_class' value='${ this.component.model.inputValues.password }'>
                <br/><br/>
   			  		 <button id='login_button'	class='margin_class'>
                 <span class="lsf symbol">in</span> [@login_button_text@]

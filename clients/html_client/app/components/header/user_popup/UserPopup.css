@@ -8,3 +8,7 @@
 	font-size:15px;
 	width:120px;
 }
+
+.user_popup .spinner {
+	border: medium none; border-radius:10px;
+}

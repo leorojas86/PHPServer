@@ -1,10 +1,10 @@
 class UserServiceMock {
 
   constructor() {
-    this.users = [
-      { name: 'leo', email: 'leo', password: 'leo' }
-    ];
+    this.users = [{ name: 'test', email: 'test@test.com', password: 'test' }];
     this.loggedUser = null;
+    this.mockEnvironment = Environments.get()['mock'];
+    this.responseMiliSec = this.mockEnvironment.responseSec * 1000;
   }
 
   register(name, email, password) {
@@ -13,7 +13,7 @@ class UserServiceMock {
         const newUser = { name: name, email: email, password: password };
         this.users.push(newUser);
         resolve(newUser);
-      }, 4000);
+      }, this.responseMiliSec);
     });
   }
 
@@ -29,7 +29,7 @@ class UserServiceMock {
         else {
           reject('user not found');
         }
-      }, 4000);
+      }, this.responseMiliSec);
     });
   }
 
@@ -38,7 +38,7 @@ class UserServiceMock {
       setTimeout(() => {
         this.loggedUser = null;
         resolve();
-      }, 4000);
+      }, this.responseMiliSec);
     });
   }
 

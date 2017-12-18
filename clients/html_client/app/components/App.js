@@ -3,6 +3,7 @@ class AppModel {
 
 	constructor() {
 		this.data = {
+			env: 'mock',
 			user: null,
 			currentScreen: null
 		};//Default values
