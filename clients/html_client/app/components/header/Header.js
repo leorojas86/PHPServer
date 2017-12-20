@@ -13,12 +13,13 @@ class HeaderView {
 
   constructor(component) {
     this.component = component;
+    this.id = 'header';
   }
 
   buildHTML() {
     const user = this.component.model.user;
-    return `<div id='header' class='header'>
-              <button id='user_button' class='user_button'>
+    return `<div id='${this.id}' class='${this.id}'>
+              <button id='${this.id}_user_button' class='user_button'>
                 <span class="lsf symbol">${ user ? '' : 'in' }user</span>
               </button>
               ${ this.component.loginPopup.view.buildHTML() }
@@ -27,7 +28,7 @@ class HeaderView {
   }
 
   registerEvents() {
-    Html.instance.registerClick('user_button', () => {
+    Html.instance.registerClick(`${this.id}_user_button`, () => {
       if(this.component.model.user) {
         this.component.onUserButtonClicked();
       } else {
@@ -37,7 +38,7 @@ class HeaderView {
   }
 
   refreshUI() {
-    Html.instance.updateElement('header', this);
+    Html.instance.updateElement(this.id, this);
   }
 
 }

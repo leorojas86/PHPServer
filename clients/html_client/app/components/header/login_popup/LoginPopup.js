@@ -23,9 +23,9 @@ class LoginPopupView {
                <div id='${this.id}_grayout' class='grayout'></div>
                <div class='container'>
     					   <p class='margin_class'>[@email_text@]</p>
-    						 <input type='text' id='${this.id}_user_email' class='margin_class' value='${ this.component.model.inputValues.email }'>
+    						 <input type='text' id='${this.id}_user_email' class='margin_class' value='${this.component.model.inputValues.email}'>
     			  		 <p class='margin_class'>[@password_text@]</p>
-    			  		 <input type='text' id='${this.id}_user_password' class='margin_class' value='${ this.component.model.inputValues.password }'>
+    			  		 <input type='text' id='${this.id}_user_password' class='margin_class' value='${this.component.model.inputValues.password}'>
                  <br/><br/>
     			  		 <button id='${this.id}_login_button'	class='margin_class'>
                   <span class="lsf symbol">in</span> [@login_button_text@]
@@ -63,7 +63,7 @@ class LoginPopup {
   constructor() {
 		this.model = new LoginPopupMode();
 		this.view = new LoginPopupView(this);
-    this.spinner = new Spinner('LoginPopupSpinner');
+    this.spinner = new Spinner('login_popup_spinner');
 	}
 
   show() {

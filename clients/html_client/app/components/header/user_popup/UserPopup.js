@@ -25,7 +25,7 @@ class UserPopupView {
                 <div class='container'>
     						 <p class='margin_class'>${ user.name }</p>
     						 <br/><br/>
-    			  	   <button id='${this.id}_logout_button'	class='margin_class'>
+    			  	   <button id='${this.id}_logout_button' class='margin_class'>
                   <span class="lsf symbol">out</span> [@logout_button_text@]
                  </button>
                  ${ this.component.spinner.view.buildHTML() }
@@ -52,7 +52,7 @@ class UserPopup {
   constructor() {
 		this.model = new UserPopupModel();
 		this.view = new UserPopupView(this);
-    this.spinner = new Spinner('UserPopupSpinner');
+    this.spinner = new Spinner('user_popup_spinner');
 	}
 
   show() {
