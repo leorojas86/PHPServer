@@ -20,7 +20,7 @@ class UserPopupView {
     if(this.component.model.isShown) {
       const user = this.component.model.user;
       return `<div id='user_popup' class='user_popup popup'>
-                <div class='grayout'></div>
+                <div id='logout_popup_grayout' class='grayout'></div>
                 <div class='container'>
     						 <p class='margin_class'>${ user.name }</p>
     						 <br/><br/>
@@ -36,7 +36,8 @@ class UserPopupView {
   }
 
   registerEvents() {
-    Html.instance.registerElementClick('logout_button', () => this.component.onLogoutButtonClick());
+    Html.instance.registerClick('logout_button', () => this.component.onLogoutButtonClick());
+    Html.instance.registerMouseDown('logout_popup_grayout', (event) => this.component.hide());
   }
 
   refreshUI() {

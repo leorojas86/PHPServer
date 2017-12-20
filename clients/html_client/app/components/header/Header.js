@@ -27,7 +27,7 @@ class HeaderView {
   }
 
   registerEvents() {
-    Html.instance.registerElementClick('user_button', () => {
+    Html.instance.registerClick('user_button', () => {
       if(this.component.model.user) {
         this.component.onUserButtonClicked();
       } else {

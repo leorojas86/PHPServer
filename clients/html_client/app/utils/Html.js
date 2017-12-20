@@ -10,10 +10,17 @@ class Html {
     }
   }
 
-  registerElementClick(id, onClick) {
+  registerClick(id, onClick) {
     const element = document.getElementById(id);
     if(element) {
       element.onclick = onClick;
+    }
+  }
+
+  registerMouseDown(id, onClick) {
+    const element = document.getElementById(id);
+    if(element) {
+      element.onmousedown = onClick;
     }
   }
 
