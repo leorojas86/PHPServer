@@ -27,7 +27,7 @@ class UserServiceMock {
           resolve(foundUser);
         }
         else {
-          reject('user not found');
+          reject('Invalid email or password');
         }
       }, this.responseMiliSec);
     });

@@ -10,20 +10,21 @@ class SpinnerModel {
 class SpinnerView {
   constructor(component) {
     this.component = component;
+    this.id = component.model.elementId;
   }
 
   buildHTML() {
     if(this.component.model.isShown) {
-      return `<div id='${ this.component.model.elementId }' class='spinner'>
-                <div id='${ this.component.model.elementId }_animation' class='spinner_animation'></div>
+      return `<div id='${this.id}' class='spinner'>
+                <div id='${this.id}_animation' class='spinner_animation'></div>
               </div>`;
     }
 
-    return `<div id='${ this.component.model.elementId }'></div>`;
+    return `<div id='${this.id}'></div>`;
   }
 
   refreshUI() {
-    Html.instance.updateElement(this.component.model.elementId, this);
+    Html.instance.updateElement(this.id, this);
   }
 
   registerEvents() {

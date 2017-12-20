@@ -14,23 +14,24 @@ class LoginPopupView {
 
   constructor(component) {
     this.component = component;
+    this.id = 'login_popup';
   }
 
   buildHTML() {
     if(this.component.model.isShown) {
-      return `<div id='login_popup' class='login_popup popup'>
-               <div id='login_popup_grayout' class='grayout'></div>
+      return `<div id='${this.id}' class='${this.id} popup'>
+               <div id='${this.id}_grayout' class='grayout'></div>
                <div class='container'>
     					   <p class='margin_class'>[@email_text@]</p>
-    						 <input type='text' id='user_email' class='margin_class' value='${ this.component.model.inputValues.email }'>
+    						 <input type='text' id='${this.id}_user_email' class='margin_class' value='${ this.component.model.inputValues.email }'>
     			  		 <p class='margin_class'>[@password_text@]</p>
-    			  		 <input type='text' id='user_password' class='margin_class' value='${ this.component.model.inputValues.password }'>
+    			  		 <input type='text' id='${this.id}_user_password' class='margin_class' value='${ this.component.model.inputValues.password }'>
                  <br/><br/>
-    			  		 <button id='login_button'	class='margin_class'>
+    			  		 <button id='${this.id}_login_button'	class='margin_class'>
                   <span class="lsf symbol">in</span> [@login_button_text@]
                  </button>
     			  		 <br/><br/>
-    			  		 <button id='register_button'	class='margin_class'>
+    			  		 <button id='${this.id}_register_button'	class='margin_class'>
                   <span class="lsf symbol">plus</span> [@register_button_text@]
                  </button>
                  ${ this.component.spinner.view.buildHTML() }
@@ -38,21 +39,21 @@ class LoginPopupView {
   			  		</div>`;
     }
 
-    return `<div id='login_popup'></div>`;
+    return `<div id='${this.id}'></div>`;
   }
 
   registerEvents() {
-    Html.instance.registerClick('login_button', () => {
-      const email = document.getElementById('user_email').value;
-      const password = document.getElementById('user_password').value;
+    Html.instance.registerClick(`${this.id}_login_button`, () => {
+      const email = document.getElementById(`${this.id}_user_email`).value;
+      const password = document.getElementById(`${this.id}_user_password`).value;
       this.component.onLoginButtonClick(email, password);
     });
-    Html.instance.registerClick('register_button', () => this.component.onRegisterButtonClick());
-    Html.instance.registerMouseDown('login_popup_grayout', (event) => this.component.hide());
+    Html.instance.registerClick(`${this.id}_register_button`, () => this.component.onRegisterButtonClick());
+    Html.instance.registerMouseDown(`${this.id}_grayout`, (event) => this.component.hide());
   }
 
   refreshUI() {
-    Html.instance.updateElement('login_popup', this);
+    Html.instance.updateElement(this.id, this);
   }
 
 }

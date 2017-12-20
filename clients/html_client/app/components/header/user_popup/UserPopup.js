@@ -14,17 +14,18 @@ class UserPopupView {
 
   constructor(component) {
     this.component = component;
+    this.id = 'user_popup';
   }
 
   buildHTML() {
     if(this.component.model.isShown) {
       const user = this.component.model.user;
-      return `<div id='user_popup' class='user_popup popup'>
-                <div id='logout_popup_grayout' class='grayout'></div>
+      return `<div id='${this.id}' class='${this.id} popup'>
+                <div id='${this.id}_grayout' class='grayout'></div>
                 <div class='container'>
     						 <p class='margin_class'>${ user.name }</p>
     						 <br/><br/>
-    			  	   <button id='logout_button'	class='margin_class'>
+    			  	   <button id='${this.id}_logout_button'	class='margin_class'>
                   <span class="lsf symbol">out</span> [@logout_button_text@]
                  </button>
                  ${ this.component.spinner.view.buildHTML() }
@@ -36,12 +37,12 @@ class UserPopupView {
   }
 
   registerEvents() {
-    Html.instance.registerClick('logout_button', () => this.component.onLogoutButtonClick());
-    Html.instance.registerMouseDown('logout_popup_grayout', (event) => this.component.hide());
+    Html.instance.registerClick(`${this.id}_logout_button`, () => this.component.onLogoutButtonClick());
+    Html.instance.registerMouseDown(`${this.id}_grayout`, () => this.component.hide());
   }
 
   refreshUI() {
-    Html.instance.updateElement('user_popup', this);
+    Html.instance.updateElement(this.id, this);
   }
 
 }
