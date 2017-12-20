@@ -85,7 +85,7 @@ class LoginPopup {
         App.instance.view.refreshUI();
       })
       .catch((reason) => {
-        alert(reason);
+        App.instance.messagePopup.show('[@login_failed_text@]', reason);
       })
       .finally(() => this.spinner.hide());
   }

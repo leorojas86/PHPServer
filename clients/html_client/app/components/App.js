@@ -24,6 +24,7 @@ class AppView {
 	buildHTML() {
 		return `<div id='app' class='app'>
 							${ this.component.header.view.buildHTML() }
+							${ this.component.messagePopup.view.buildHTML() }
 						</div>`;
 	}
 
@@ -44,6 +45,7 @@ class App
 		this.model = new AppModel();
 		this.view = new AppView(this);
 		this.header = new Header();
+		this.messagePopup = new MessagePopup();
 	}
 
 }

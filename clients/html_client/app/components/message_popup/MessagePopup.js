@@ -23,7 +23,7 @@ class MessagePopupView {
                  <p class='margin_class'>${this.component.model.message}</p>
     						 <br/><br/>
     			  	   <button id='${this.id}_ok_button'	class='margin_class'>
-                  <span class="lsf symbol">out</span> [@logout_button_text@]
+                  <span class="lsf symbol">ok</span> [@ok_text@]
                  </button>
                 </div>
   			  		</div>`;

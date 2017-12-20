@@ -11,7 +11,7 @@
 	border: medium none; border-radius:10px;
 }
 
-.popup div.grayout
+.login_popup div.grayout
 {
 	background: rgba(0, 0, 0, 0);
 }
