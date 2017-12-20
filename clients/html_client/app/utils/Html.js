@@ -1,6 +1,6 @@
 class Html {
 
-  updateElement(id, view) {
+  static updateElement(id, view) {
     const element = document.getElementById(id);
 
     if(element) {
@@ -10,14 +10,14 @@ class Html {
     }
   }
 
-  registerClick(id, onClick) {
+  static registerClick(id, onClick) {
     const element = document.getElementById(id);
     if(element) {
       element.onclick = onClick;
     }
   }
 
-  registerMouseDown(id, onClick) {
+  static registerMouseDown(id, onClick) {
     const element = document.getElementById(id);
     if(element) {
       element.onmousedown = onClick;
@@ -25,5 +25,3 @@ class Html {
   }
 
 }
-
-Html.instance = new Html();

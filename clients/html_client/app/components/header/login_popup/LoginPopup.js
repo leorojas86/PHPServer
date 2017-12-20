@@ -43,17 +43,17 @@ class LoginPopupView {
   }
 
   registerEvents() {
-    Html.instance.registerClick(`${this.id}_login_button`, () => {
+    Html.registerClick(`${this.id}_login_button`, () => {
       const email = document.getElementById(`${this.id}_user_email`).value;
       const password = document.getElementById(`${this.id}_user_password`).value;
       this.component.onLoginButtonClick(email, password);
     });
-    Html.instance.registerClick(`${this.id}_register_button`, () => this.component.onRegisterButtonClick());
-    Html.instance.registerMouseDown(`${this.id}_grayout`, (event) => this.component.hide());
+    Html.registerClick(`${this.id}_register_button`, () => this.component.onRegisterButtonClick());
+    Html.registerMouseDown(`${this.id}_grayout`, (event) => this.component.hide());
   }
 
   refreshUI() {
-    Html.instance.updateElement(this.id, this);
+    Html.updateElement(this.id, this);
   }
 
 }

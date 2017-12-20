@@ -37,12 +37,12 @@ class UserPopupView {
   }
 
   registerEvents() {
-    Html.instance.registerClick(`${this.id}_logout_button`, () => this.component.onLogoutButtonClick());
-    Html.instance.registerMouseDown(`${this.id}_grayout`, () => this.component.hide());
+    Html.registerClick(`${this.id}_logout_button`, () => this.component.onLogoutButtonClick());
+    Html.registerMouseDown(`${this.id}_grayout`, () => this.component.hide());
   }
 
   refreshUI() {
-    Html.instance.updateElement(this.id, this);
+    Html.updateElement(this.id, this);
   }
 
 }

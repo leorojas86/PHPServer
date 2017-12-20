@@ -18,12 +18,13 @@ class MessagePopupView {
       return `<div id='${this.id}' class='${this.id} popup'>
                 <div id='${this.id}_grayout' class='grayout'></div>
                 <div class='container'>
-    						 <p class='margin_class'>${user.name}</p>
+    						 <p class='margin_class'>${this.component.model.title}</p>
+                 <br/><br/>
+                 <p class='margin_class'>${this.component.model.message}</p>
     						 <br/><br/>
     			  	   <button id='${this.id}_ok_button'	class='margin_class'>
                   <span class="lsf symbol">out</span> [@logout_button_text@]
                  </button>
-                 ${ this.component.spinner.view.buildHTML() }
                 </div>
   			  		</div>`;
     }
@@ -32,12 +33,12 @@ class MessagePopupView {
   }
 
   registerEvents() {
-    Html.instance.registerClick(`${this.id}_ok_button`, () => this.component.onLogoutButtonClick());
-    Html.instance.registerMouseDown(`${this.id}_grayout`, (event) => this.component.hide());
+    Html.registerClick(`${this.id}_ok_button`, () => this.component.hide());
+    Html.registerMouseDown(`${this.id}_grayout`, (event) => this.component.hide());
   }
 
   refreshUI() {
-    Html.instance.updateElement(this.id, this);
+    Html.updateElement(this.id, this);
   }
 }
 
@@ -48,7 +49,9 @@ class MessagePopup {
 		this.view = new MessagePopupView(this);
   }
 
-  show() {
+  show(title, message) {
+    this.model.title = title;
+    this.model.message = message;
     this.model.isShown = true;
     this.view.refreshUI();
   }

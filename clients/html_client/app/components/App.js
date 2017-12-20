@@ -28,7 +28,7 @@ class AppView {
 	}
 
 	refreshUI() {
-		Html.instance.updateElement('app', this);
+		Html.updateElement('app', this);
 	}
 
 	registerEvents() {

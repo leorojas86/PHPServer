@@ -28,7 +28,7 @@ class HeaderView {
   }
 
   registerEvents() {
-    Html.instance.registerClick(`${this.id}_user_button`, () => {
+    Html.registerClick(`${this.id}_user_button`, () => {
       if(this.component.model.user) {
         this.component.onUserButtonClicked();
       } else {
@@ -38,7 +38,7 @@ class HeaderView {
   }
 
   refreshUI() {
-    Html.instance.updateElement(this.id, this);
+    Html.updateElement(this.id, this);
   }
 
 }

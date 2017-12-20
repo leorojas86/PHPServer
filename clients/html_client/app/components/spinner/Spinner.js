@@ -24,7 +24,7 @@ class SpinnerView {
   }
 
   refreshUI() {
-    Html.instance.updateElement(this.id, this);
+    Html.updateElement(this.id, this);
   }
 
   registerEvents() {
