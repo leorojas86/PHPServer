@@ -1,35 +1,28 @@
 class MessagePopupModel {
 
   constructor() {
-    this.isShown = false;
+    this.id = 'message_popup';
   }
 
 }
 
 class MessagePopupView {
+
   constructor(component) {
     this.component = component;
-    this.id = 'message_popup';
+    this.id = this.component.model.id;
   }
 
   buildHTML() {
-    if(this.component.model.isShown) {
-      const user = this.component.model.user;
-      return `<div id='${this.id}' class='${this.id} popup'>
-                <div id='${this.id}_grayout' class='grayout'></div>
-                <div class='container'>
-    						 <p class='margin_class'>${this.component.model.title}</p>
-                 <br/><br/>
-                 <p class='margin_class'>${this.component.model.message}</p>
-    						 <br/><br/>
-    			  	   <button id='${this.id}_ok_button'	class='margin_class'>
-                  <span class="lsf symbol">ok</span> [@ok_text@]
-                 </button>
-                </div>
-  			  		</div>`;
-    }
-
-    return `<div id='${this.id}'></div>`;
+      return this.component.popup.view.buildHTML(
+        `<p class='margin_class'>${this.component.model.title}</p>
+          <br/><br/>
+          <p class='margin_class'>${this.component.model.message}</p>
+          <br/><br/>
+          <button id='${this.id}_ok_button'	class='margin_class'>
+           <span class="lsf symbol">ok</span> [@ok_text@]
+          </button>`
+      );
   }
 
   registerEvents() {
@@ -40,6 +33,7 @@ class MessagePopupView {
   refreshUI() {
     Html.updateElement(this.id, this);
   }
+
 }
 
 class MessagePopup {
@@ -47,17 +41,18 @@ class MessagePopup {
   constructor() {
     this.model = new MessagePopupModel();
 		this.view = new MessagePopupView(this);
+    this.popup = new Popup(this.model.id);
   }
 
   show(title, message) {
     this.model.title = title;
     this.model.message = message;
-    this.model.isShown = true;
+    this.popup.model.isShown = true;
     this.view.refreshUI();
   }
 
   hide() {
-    this.model.isShown = false;
+    this.popup.model.isShown = false;
     this.view.refreshUI();
   }
 
