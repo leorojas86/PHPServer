@@ -5,6 +5,11 @@
 	padding:30px !important;
 }
 
+.message_popup .message
+{
+	margin-top: 40px; margin-bottom: 40px;
+}
+
 .message_popup button {
 	font-size:15px;
 	width:120px;
