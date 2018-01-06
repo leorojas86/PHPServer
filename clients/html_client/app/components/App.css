@@ -1,11 +1,11 @@
 html {
-	-webkit-touch-callout: none; -moz-user-select: none; -webkit-user-select: none; /*HACK: Fix iOS oncontextmenu event*/
-	background: rgba(198, 204, 213, 1);
+	-webkit-touch-callout:none; -moz-user-select:none; -webkit-user-select:none; /*HACK: Fix iOS oncontextmenu event*/
+	background:rgba(198, 204, 213, 1);
 }
 
 body {
-	margin: 0px;
-  color: #3D557E;
+	margin:0px;
+  color:#3D557E;
 }
 
 input {
@@ -14,7 +14,8 @@ input {
 
 button
 {
-	color: #3D557E; margin:5px; width:70px; height:30px; background-color: white;
-	border: none; border-radius: 5px; box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
-	cursor: pointer; cursor:hand;
+	margin:5px; width:70px; height:30px;
+	color:#3D557E; background-color:white;
+	border:none; border-radius:5px; box-shadow:0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+	cursor:pointer; cursor:hand;
 }

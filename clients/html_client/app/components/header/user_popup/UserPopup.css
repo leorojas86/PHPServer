@@ -1,7 +1,6 @@
 .user_popup .modal_content
 {
-	right:5px; top:40px;
-	padding:10px;
+	right:5px; top:40px; padding:10px;
 }
 
 .user_popup button {
@@ -10,10 +9,10 @@
 }
 
 .user_popup .spinner {
-	border: medium none; border-radius:10px;
+	border:medium none; border-radius:10px;
 }
 
 .user_popup div.grayout
 {
-	background: rgba(0, 0, 0, 0);
+	background:rgba(0, 0, 0, 0);
 }

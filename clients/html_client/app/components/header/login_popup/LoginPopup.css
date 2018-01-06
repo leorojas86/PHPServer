@@ -3,17 +3,15 @@
 }
 
 .login_popup button {
-	display: block;
+	display:block; width:120px; margin-top:25px;
 	font-size:15px;
-	width:120px;
-	margin-top: 25px;
 }
 
 .login_popup .spinner {
-	border: medium none; border-radius:10px;
+	border:medium none; border-radius:10px;
 }
 
 .login_popup div.grayout
 {
-	background: rgba(0, 0, 0, 0);
+	background:rgba(0, 0, 0, 0);
 }
