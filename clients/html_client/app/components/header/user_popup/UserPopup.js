@@ -24,7 +24,6 @@ class UserPopupView {
                 <div id='${this.id}_grayout' class='grayout'></div>
                 <div class='container'>
     						 <p class='margin_class'>${ user.name }</p>
-    						 <br/><br/>
     			  	   <button id='${this.id}_logout_button' class='margin_class'>
                   <span class="lsf symbol">out</span> [@logout_button_text@]
                  </button>

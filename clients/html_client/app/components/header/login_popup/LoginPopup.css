@@ -3,8 +3,10 @@
 }
 
 .login_popup button {
+	display: block;
 	font-size:15px;
 	width:120px;
+	margin-top: 25px;
 }
 
 .login_popup .spinner {

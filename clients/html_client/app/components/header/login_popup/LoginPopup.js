@@ -26,14 +26,14 @@ class LoginPopupView {
     						 <input type='text' id='${this.id}_user_email' class='margin_class' value='${this.component.model.inputValues.email}'>
     			  		 <p class='margin_class'>[@password_text@]</p>
     			  		 <input type='text' id='${this.id}_user_password' class='margin_class' value='${this.component.model.inputValues.password}'>
-                 <br/><br/>
-    			  		 <button id='${this.id}_login_button'	class='margin_class'>
-                  <span class="lsf symbol">in</span> [@login_button_text@]
-                 </button>
-    			  		 <br/><br/>
-    			  		 <button id='${this.id}_register_button'	class='margin_class'>
-                  <span class="lsf symbol">plus</span> [@register_button_text@]
-                 </button>
+                 <div>
+                   <button id='${this.id}_login_button'	class='margin_class'>
+                    <span class="lsf symbol">in</span> [@login_button_text@]
+                   </button>
+      			  		 <button id='${this.id}_register_button'	class='margin_class'>
+                    <span class="lsf symbol">plus</span> [@register_button_text@]
+                   </button>
+                 </div>
                  ${ this.component.spinner.view.buildHTML() }
                </div>
   			  		</div>`;
