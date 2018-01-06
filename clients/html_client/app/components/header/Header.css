@@ -4,7 +4,7 @@
   box-shadow:0 0 3px #112A56,0 3px 6px #112A56;
 }
 
-.user_button {
+.header .user_button {
 	position:absolute;
 	right:0px;
 	width:60px; height:30px;
