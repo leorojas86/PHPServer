@@ -67,7 +67,7 @@ class LoginPopup {
       .catch((reason) => {
         App.instance.messagePopup.show({
           title: '[@login_failed_text@]',
-          message: reason
+          message: `[@${reason.errorCode}_text@]`
         });
       })
       .finally(() => this.spinner.hide());

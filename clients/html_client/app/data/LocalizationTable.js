@@ -9,6 +9,7 @@ class LocalizationTable {
       "logout_button_text": { en: 'Logout', es: 'Salir' },
       "login_failed_text": { en: 'Login Failed', es: 'Fallo en autenticación' },
       "ok_text": { en: 'Ok', es: 'Ok' },
+      "invalid_credentials_text": { en: 'Invalid email or password', es: 'Correo o password invalido(s)' }
     };
   }
 

@@ -27,7 +27,7 @@ class UserServiceMock {
           resolve(foundUser);
         }
         else {
-          reject('Invalid email or password');
+          reject({ errorCode: 'invalid_credentials' });
         }
       }, this.responseMiliSec);
     });
