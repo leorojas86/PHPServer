@@ -48,8 +48,8 @@ class Header {
   constructor() {
 		this.model = new HeaderModel();
 		this.view = new HeaderView(this);
-    this.loginPopup = new LoginPopup();
-    this.userPopup = new UserPopup();
+    this.loginPopup = new Popup(new LoginPopup());
+    this.userPopup = new Popup(new UserPopup());
 	}
 
   onUserButtonClicked() {

@@ -45,7 +45,7 @@ class App
 		this.model = new AppModel();
 		this.view = new AppView(this);
 		this.header = new Header();
-		this.messagePopup = new MessagePopup();
+		this.messagePopup = new Popup(new MessagePopup());
 	}
 
 }

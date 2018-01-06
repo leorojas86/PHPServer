@@ -7,18 +7,18 @@ class PopupModel {
 }
 
 class PopupView {
-  constructor(component, id) {
+  constructor(component, contentComponent) {
     this.component = component;
-    this.id = id;
+    this.contentComponent = contentComponent;
+    this.id = contentComponent.view.id;
   }
 
-  buildHTML(content) {
+  buildHTML() {
     if(this.component.model.isShown) {
-      const user = this.component.model.user;
       return `<div id='${this.id}' class='${this.id} popup'>
                 <div id='${this.id}_grayout' class='grayout'></div>
                 <div class='container'>
-    						 ${content}
+    						 ${ this.contentComponent.view.buildHTML() }
                 </div>
   			  		</div>`;
     }
@@ -27,8 +27,8 @@ class PopupView {
   }
 
   registerEvents() {
-    Html.registerClick(`${this.id}_ok_button`, () => this.component.hide());
     Html.registerMouseDown(`${this.id}_grayout`, (event) => this.component.hide());
+    this.contentComponent.view.registerEvents();
   }
 
   refreshUI() {
@@ -38,12 +38,15 @@ class PopupView {
 
 class Popup {
 
-  constructor(id) {
+  constructor(contentComponent) {
     this.model = new PopupModel();
-		this.view = new PopupView(this, id);
+		this.view = new PopupView(this, contentComponent);
+    this.contentComponent = contentComponent;
+    this.contentComponent.popup = this;
   }
 
-  show() {
+  show(popupData) {
+    this.contentComponent.model.data = popupData;
     this.model.isShown = true;
     this.view.refreshUI();
   }
