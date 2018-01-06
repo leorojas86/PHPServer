@@ -17,7 +17,7 @@ class PopupView {
     if(this.component.model.isShown) {
       return `<div id='${this.id}' class='${this.id} popup'>
                 <div id='${this.id}_grayout' class='grayout'></div>
-                <div class='container'>
+                <div class='modal_content'>
     						 ${ this.contentComponent.view.buildHTML() }
                 </div>
   			  		</div>`;

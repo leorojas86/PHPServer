@@ -1,4 +1,4 @@
-.message_popup .container
+.message_popup .modal_content
 {
 	position: fixed; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
