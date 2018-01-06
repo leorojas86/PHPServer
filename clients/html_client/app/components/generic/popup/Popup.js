@@ -1,8 +1,7 @@
 class PopupModel {
 
-  constructor(id) {
+  constructor() {
     this.isShown = false;
-    this.elementId = id;
   }
 
 }
@@ -10,7 +9,7 @@ class PopupModel {
 class PopupView {
   constructor(component, id) {
     this.component = component;
-    this.id = component.model.elementId;
+    this.id = id;
   }
 
   buildHTML(content) {
@@ -40,8 +39,8 @@ class PopupView {
 class Popup {
 
   constructor(id) {
-    this.model = new PopupModel(id);
-		this.view = new PopupView(this);
+    this.model = new PopupModel();
+		this.view = new PopupView(this, id);
   }
 
   show() {
