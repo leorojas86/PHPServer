@@ -4,3 +4,4 @@ clients/html_deploy/deploy
 clients/html_deploy/.tmp
 scripts/html_deploy/node_modules
 scripts/html_deploy/deploy
+extra/LigatureSymbols 2
