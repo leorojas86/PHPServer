@@ -1,7 +1,6 @@
 class MessagePopupModel {
 
   constructor() {
-    this.id = 'message_popup';
   }
 
 }
@@ -10,17 +9,17 @@ class MessagePopupView {
 
   constructor(component) {
     this.component = component;
-    this.id = this.component.model.id;
+    this.id = 'message_popup';
   }
 
   buildHTML() {
-      return this.component.popup.view.buildHTML(
-        `<p class='margin_class'>${this.component.model.title}</p>
-         <p class='margin_class message'>${this.component.model.message}</p>
-         <button id='${this.id}_ok_button'	class='margin_class'>
-           <span class="lsf symbol">ok</span> [@ok_text@]
-         </button>`
-      );
+    return this.component.popup.view.buildHTML(
+      `<p class='margin_class'>${this.component.model.title}</p>
+       <p class='margin_class message'>${this.component.model.message}</p>
+       <button id='${this.id}_ok_button'	class='margin_class'>
+         <span class="lsf symbol">ok</span> [@ok_text@]
+       </button>`
+     );
   }
 
   registerEvents() {
@@ -39,7 +38,7 @@ class MessagePopup {
   constructor() {
     this.model = new MessagePopupModel();
 		this.view = new MessagePopupView(this);
-    this.popup = new Popup(this.model.id);
+    this.popup = new Popup(this.view.id);
   }
 
   show(title, message) {

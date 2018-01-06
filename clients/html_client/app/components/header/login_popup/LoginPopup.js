@@ -18,28 +18,21 @@ class LoginPopupView {
   }
 
   buildHTML() {
-    if(this.component.model.isShown) {
-      return `<div id='${this.id}' class='${this.id} popup'>
-               <div id='${this.id}_grayout' class='grayout'></div>
-               <div class='container'>
-    					   <p class='margin_class'>[@email_text@]</p>
-    						 <input type='text' id='${this.id}_user_email' class='margin_class' value='${this.component.model.inputValues.email}'>
-    			  		 <p class='margin_class'>[@password_text@]</p>
-    			  		 <input type='text' id='${this.id}_user_password' class='margin_class' value='${this.component.model.inputValues.password}'>
-                 <div>
-                   <button id='${this.id}_login_button'	class='margin_class'>
-                    <span class="lsf symbol">in</span> [@login_button_text@]
-                   </button>
-      			  		 <button id='${this.id}_register_button'	class='margin_class'>
-                    <span class="lsf symbol">plus</span> [@register_button_text@]
-                   </button>
-                 </div>
-                 ${ this.component.spinner.view.buildHTML() }
-               </div>
-  			  		</div>`;
-    }
-
-    return `<div id='${this.id}'></div>`;
+    return this.component.popup.view.buildHTML(
+       `<p class='margin_class'>[@email_text@]</p>
+        <input type='text' id='${this.id}_user_email' class='margin_class' value='${this.component.model.inputValues.email}'>
+        <p class='margin_class'>[@password_text@]</p>
+        <input type='text' id='${this.id}_user_password' class='margin_class' value='${this.component.model.inputValues.password}'>
+        <div>
+          <button id='${this.id}_login_button'	class='margin_class'>
+           <span class="lsf symbol">in</span> [@login_button_text@]
+          </button>
+          <button id='${this.id}_register_button'	class='margin_class'>
+           <span class="lsf symbol">plus</span> [@register_button_text@]
+          </button>
+        </div>
+        ${ this.component.spinner.view.buildHTML() }`
+     );
   }
 
   registerEvents() {
@@ -64,16 +57,17 @@ class LoginPopup {
 		this.model = new LoginPopupMode();
 		this.view = new LoginPopupView(this);
     this.spinner = new Spinner('login_popup_spinner');
+    this.popup = new Popup(this.view.id);
 	}
 
   show() {
-    this.model.isShown = true;
+    this.popup.model.isShown = true;
     this.view.refreshUI();
   }
 
   hide() {
-    this.model.isShown = false;
-    this.view.refreshUI();
+    this.popup.model.isShown = false;
+    this.popup.view.refreshUI();
   }
 
   onLoginButtonClick(email, password) {
@@ -84,9 +78,7 @@ class LoginPopup {
         App.instance.model.updateLoggedUser(response);
         App.instance.view.refreshUI();
       })
-      .catch((reason) => {
-        App.instance.messagePopup.show('[@login_failed_text@]', reason);
-      })
+      .catch((reason) => App.instance.messagePopup.show('[@login_failed_text@]', reason))
       .finally(() => this.spinner.hide());
   }
 
