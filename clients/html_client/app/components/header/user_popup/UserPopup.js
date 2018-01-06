@@ -18,21 +18,14 @@ class UserPopupView {
   }
 
   buildHTML() {
-    if(this.component.model.isShown) {
-      const user = this.component.model.user;
-      return `<div id='${this.id}' class='${this.id} popup'>
-                <div id='${this.id}_grayout' class='grayout'></div>
-                <div class='container'>
-    						 <p class='margin_class'>${ user.name }</p>
-    			  	   <button id='${this.id}_logout_button' class='margin_class'>
-                  <span class="lsf symbol">out</span> [@logout_button_text@]
-                 </button>
-                 ${ this.component.spinner.view.buildHTML() }
-                </div>
-  			  		</div>`;
-    }
-
-    return `<div id='user_popup'></div>`;
+    const user = this.component.model.user || {};
+    return this.component.popup.view.buildHTML(
+       `<p class='margin_class'>${user.name}</p>
+        <button id='${this.id}_logout_button' class='margin_class'>
+         <span class="lsf symbol">out</span> [@logout_button_text@]
+        </button>
+        ${ this.component.spinner.view.buildHTML() }`
+     );
   }
 
   registerEvents() {
@@ -52,16 +45,17 @@ class UserPopup {
 		this.model = new UserPopupModel();
 		this.view = new UserPopupView(this);
     this.spinner = new Spinner('user_popup_spinner');
+    this.popup = new Popup(this.view.id);
 	}
 
   show() {
-    this.model.isShown = true;
+    this.popup.model.isShown = true;
     this.view.refreshUI();
   }
 
   hide() {
     this.model.isShown = false;
-    this.view.refreshUI();
+    this.popup.view.refreshUI();
   }
 
   onLogoutButtonClick() {

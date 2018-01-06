@@ -67,7 +67,7 @@ class LoginPopup {
 
   hide() {
     this.popup.model.isShown = false;
-    this.popup.view.refreshUI();
+    this.view.refreshUI();
   }
 
   onLoginButtonClick(email, password) {
