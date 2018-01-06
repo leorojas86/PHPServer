@@ -27,7 +27,7 @@ class PopupView {
   }
 
   registerEvents() {
-    Html.registerMouseDown(`${this.id}_grayout`, (event) => this.component.hide());
+    Html.registerMouseDown(`${this.id}_grayout`, () => this.component.hide());
     this.contentComponent.view.registerEvents();
   }
 
