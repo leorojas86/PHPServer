@@ -1,16 +1,13 @@
-.message_popup .modal_content
-{
+.message_popup .modal_content {
 	position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); /*Center on screen*/
 	padding:30px;
 }
 
-.message_popup .title
-{
+.message_popup .title {
 	font-size:20px;
 }
 
-.message_popup .message
-{
+.message_popup .message {
 	margin-top:40px; margin-bottom:40px;
 	font-size:15px;
 }

@@ -12,8 +12,7 @@ input {
 	color:#3D557E;
 }
 
-button
-{
+button {
 	margin:5px; width:70px; height:30px;
 	color:#3D557E; background-color:white;
 	border:none; border-radius:5px; box-shadow:0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
