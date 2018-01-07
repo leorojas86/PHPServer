@@ -9,6 +9,10 @@
 }
 
 .header button {
-	width:50px; height:30px; margin-left:0px;
+	width:50px; height:30px; margin-right:1px; margin-left:1px;
 	font-size:22px;
+}
+
+.header .header_user_button {
+	margin-right:5px;
 }
