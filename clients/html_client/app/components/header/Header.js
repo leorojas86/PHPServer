@@ -37,10 +37,6 @@ class HeaderView {
     });
   }
 
-  refreshUI() {
-    Html.updateElement(this);
-  }
-
 }
 
 class Header {

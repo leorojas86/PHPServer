@@ -42,10 +42,6 @@ class LoginPopupView {
     Html.registerClick(`${this.id}_register_button`, () => this.component.onRegisterButtonClick());
   }
 
-  refreshUI() {
-    Html.updateElement(this);
-  }
-
 }
 
 class LoginPopup {
@@ -62,12 +58,12 @@ class LoginPopup {
       .then((response) => {
         this.popup.hide();
         App.instance.model.updateLoggedUser(response);
-        App.instance.view.refreshUI();
+        Html.updateElement(App.instance.view);
       })
       .catch((reason) => {
         App.instance.messagePopup.show({
           title: '[@login_failed_text@]',
-          message: `[@${reason.errorCode}_text@]`
+          message: `[@${reason.errorCode}@]`
         });
       })
       .finally(() => this.spinner.hide());

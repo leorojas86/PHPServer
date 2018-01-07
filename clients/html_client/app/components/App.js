@@ -29,10 +29,6 @@ class AppView {
 						</div>`;
 	}
 
-	refreshUI() {
-		Html.updateElement(this);
-	}
-
 	registerEvents() {
 		this.component.header.view.registerEvents();
 	}

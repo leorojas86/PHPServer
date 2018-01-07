@@ -22,10 +22,6 @@ class SpinnerView {
     return `<div id='${this.id}'></div>`;
   }
 
-  refreshUI() {
-    Html.updateElement(this);
-  }
-
   registerEvents() {
 
   }
@@ -40,12 +36,12 @@ class Spinner {
 
   show() {
     this.model.isShown = true;
-    this.view.refreshUI();
+    Html.updateElement(this.view);
   }
 
   hide() {
     this.model.isShown = false;
-    this.view.refreshUI();
+    Html.updateElement(this.view);
   }
 
 }

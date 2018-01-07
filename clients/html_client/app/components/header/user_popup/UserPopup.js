@@ -30,10 +30,6 @@ class UserPopupView {
     Html.registerClick(`${this.id}_logout_button`, () => this.component.onLogoutButtonClick());
   }
 
-  refreshUI() {
-    Html.updateElement(this);
-  }
-
 }
 
 class UserPopup {
@@ -51,7 +47,7 @@ class UserPopup {
         this.spinner.hide();
         this.popup.hide();
         App.instance.model.updateLoggedUser(null);
-        App.instance.view.refreshUI();
+        Html.updateElement(App.instance.view);
       });
   }
 

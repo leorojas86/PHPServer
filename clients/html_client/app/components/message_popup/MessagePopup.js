@@ -31,10 +31,6 @@ class MessagePopupView {
     Html.registerClick(`${this.id}_ok_button`, () => this.component.popup.hide());
   }
 
-  refreshUI() {
-    Html.updateElement(this);
-  }
-
 }
 
 class MessagePopup {

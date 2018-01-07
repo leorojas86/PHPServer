@@ -31,9 +31,6 @@ class PopupView {
     this.contentComponent.view.registerEvents();
   }
 
-  refreshUI() {
-    Html.updateElement(this);
-  }
 }
 
 class Popup {
@@ -48,12 +45,12 @@ class Popup {
   show(popupData) {
     this.contentComponent.model.data = popupData;
     this.model.isShown = true;
-    this.view.refreshUI();
+    Html.updateElement(this.view);
   }
 
   hide() {
     this.model.isShown = false;
-    this.view.refreshUI();
+    Html.updateElement(this.view);
   }
 
 }
