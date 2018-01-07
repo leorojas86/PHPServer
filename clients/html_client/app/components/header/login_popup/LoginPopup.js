@@ -43,7 +43,7 @@ class LoginPopupView {
   }
 
   refreshUI() {
-    Html.updateElement(this.id, this);
+    Html.updateElement(this);
   }
 
 }

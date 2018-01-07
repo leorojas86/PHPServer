@@ -19,17 +19,18 @@ class AppView {
 
 	constructor(component) {
 		this.component = component;
+		this.id = 'app';
 	}
 
 	buildHTML() {
-		return `<div id='app' class='app'>
+		return `<div id='${this.id}' class='${this.id}'>
 							${ this.component.header.view.buildHTML() }
 							${ this.component.messagePopup.view.buildHTML() }
 						</div>`;
 	}
 
 	refreshUI() {
-		Html.updateElement('app', this);
+		Html.updateElement(this);
 	}
 
 	registerEvents() {

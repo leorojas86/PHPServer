@@ -31,7 +31,7 @@ class UserPopupView {
   }
 
   refreshUI() {
-    Html.updateElement(this.id, this);
+    Html.updateElement(this);
   }
 
 }
