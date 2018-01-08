@@ -18,18 +18,20 @@ class HeaderView {
 
   buildHTML() {
     const user = this.component.model.user;
-    const loggedUserButtons = user ?  `<button id='${this.id}_options_button'>
-                                         <span class="lsf symbol">menu</span>
-                                       </button>
-                                       <button id='${this.id}_notifications_button'>
+    const loggedUserButtons = user ?  `<button id='${this.id}_notifications_button'>
                                          <span class="lsf symbol">globe</span>
                                        </button>` : '';
 
     return `<div id='${this.id}' class='${this.id}'>
+              <div class='left_buttons_container'>
+                <button id='${this.id}_menu_button'>
+                 <span class="lsf symbol">menu</span>
+                </button>
+              </div>
               <div class='right_buttons_container'>
                 ${loggedUserButtons}
                 <button id='${this.id}_user_button' class='header_user_button'>
-                  <span class="lsf symbol">${ user ? '' : 'in' }user</span>
+                  <span class="lsf symbol">${ user ? 'user' : 'in' }</span>
                 </button>
               </div>
             </div>`;
