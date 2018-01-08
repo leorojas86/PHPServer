@@ -25,6 +25,7 @@ class AppView {
 	buildHTML() {
 		return `<div id='${this.id}' class='${this.id}'>
 							${ this.component.header.view.buildHTML() }
+							${ this.component.inventory.view.buildHTML() }
 							${ this.component.loginPopup.view.buildHTML() }
               ${ this.component.userPopup.view.buildHTML() }
 							${ this.component.messagePopup.view.buildHTML() }
@@ -44,6 +45,7 @@ class App
 		this.model = new AppModel();
 		this.view = new AppView(this);
 		this.header = new Header();
+		this.inventory = new Inventory();
 		this.loginPopup = new Popup(new LoginPopup());
     this.userPopup = new Popup(new UserPopup());
 		this.messagePopup = new Popup(new MessagePopup());

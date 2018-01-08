@@ -24,12 +24,13 @@ class InventoryView {
   buildHTML() {
     if(this.isLoading) {
       return `<div id='${this.id}' class='${this.id}'>
-                ${ this.spinner.view.buildHTML() }
+                ${ this.component.spinner.view.buildHTML() }
               </div>`;
     }
 
     return `<div id='${this.id}' class='${this.id}'>
-              ${ this.header.view.buildHTML() }
+              ${ this.component.header.view.buildHTML() }
+              <div class='inventory_item'></div>
             </div>`;
   }
 
