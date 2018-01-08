@@ -49,6 +49,14 @@ class App
 		this.messagePopup = new Popup(new MessagePopup());
 	}
 
+	handleError(errorData, title) {
+		const message = errorData.errorCode ? `[@${errorData.errorCode}@]` : `[@something_wrong_text@]`;
+		App.instance.messagePopup.show({
+			title:title,
+			message:message
+		});
+	}
+
 }
 
 App.instance = new App();

@@ -60,12 +60,7 @@ class LoginPopup {
         App.instance.model.updateLoggedUser(response);
         Html.updateElement(App.instance.view);
       })
-      .catch((reason) => {
-        App.instance.messagePopup.show({
-          title: '[@login_failed_text@]',
-          message: `[@${reason.errorCode}@]`
-        });
-      })
+      .catch((reason) => App.instance.handleError(reason, '[@login_failed_text@]'))
       .finally(() => this.spinner.hide());
   }
 
