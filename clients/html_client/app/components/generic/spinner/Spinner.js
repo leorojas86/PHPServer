@@ -21,10 +21,7 @@ class SpinnerView {
 
     return `<div id='${this.id}'></div>`;
   }
-
-  registerEvents() {
-
-  }
+  
 }
 
 class Spinner {

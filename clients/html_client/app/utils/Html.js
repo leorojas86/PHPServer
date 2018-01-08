@@ -6,7 +6,10 @@ class Html {
     if(element) {
       const htmlText = view.buildHTML();
       element.outerHTML = Localization.instance.localizeHTML(htmlText);
-      view.registerEvents();
+
+      if(view.registerEvents) {
+        view.registerEvents();
+      }
     }
   }
 

@@ -46,7 +46,7 @@ class UserPopup {
       .finally(() => {
         this.spinner.hide();
         this.popup.hide();
-        App.instance.model.updateLoggedUser(null);
+        App.instance.updateLoggedUser(null);
         Html.updateElement(App.instance.view);
       });
   }

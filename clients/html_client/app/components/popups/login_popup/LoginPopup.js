@@ -57,7 +57,7 @@ class LoginPopup {
     ApiClient.instance.userService.login(email, password)
       .then((response) => {
         this.popup.hide();
-        App.instance.model.updateLoggedUser(response);
+        App.instance.updateLoggedUser(response);
         Html.updateElement(App.instance.view);
       })
       .catch((reason) => App.instance.handleError(reason, '[@login_failed_text@]'))

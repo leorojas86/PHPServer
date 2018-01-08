@@ -2,14 +2,16 @@ class InventoryModel {
 
   constructor() {
     this.isLoading = true;
+    this.currentItem = undefined;
   }
 
   getCurrentItem() {
-
+    return this.currentItem;
   }
 
   loadCurrentItem() {
-
+    return ApiClient.instance.inventoryService.getRootGroup()
+      .then((rootGroup) => this.currentItem = rootGroup);
   }
 
 }
@@ -22,7 +24,7 @@ class InventoryView {
   }
 
   buildHTML() {
-    if(this.isLoading) {
+    if(this.component.model.isLoading) {
       return `<div id='${this.id}' class='${this.id}'>
                 ${ this.component.spinner.view.buildHTML() }
               </div>`;
@@ -46,9 +48,13 @@ class Inventory {
   }
 
   load() {
+    this.spinner.show();
     this.model.loadCurrentItem()
       .catch((reason) => App.instance.instance.handleError(reason, '[@load_error_text@]'))
-      .finally(() => Html.updateElement(this.view));
+      .finally(() => {
+        this.spinner.hide();
+        Html.updateElement(this.view);
+      });
   }
 
 }

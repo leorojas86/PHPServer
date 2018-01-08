@@ -57,6 +57,12 @@ class App
 			title:title,
 			message:message
 		});
+		console.error(errorData);
+	}
+
+	updateLoggedUser(user) {
+		this.model.updateLoggedUser(user);
+		this.inventory.load();
 	}
 
 }
