@@ -12,8 +12,12 @@ class InventoryServiceMock {
   getRootGroup() {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        const rootGroup = this.groups.find((group) => group.parentId === null);
-        resolve(rootGroup);
+        if(ApiClient.instance.userService.loggedUser) {
+          const rootGroup = this.groups.find((group) => group.parentId === null);
+          resolve(rootGroup);
+        } else {
+          resolve(null);
+        }
       }, this.responseMiliSec);
     });
   }

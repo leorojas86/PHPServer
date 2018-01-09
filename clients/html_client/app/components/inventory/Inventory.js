@@ -2,7 +2,7 @@ class InventoryModel {
 
   constructor() {
     this.isLoading = true;
-    this.currentItem = undefined;
+    this.currentItem = null;
   }
 
   getCurrentItem() {
@@ -25,7 +25,7 @@ class InventoryView {
   }
 
   buildHTML() {
-    if(this.component.model.isLoading) {
+    if(this.component.model.isLoading || this.currentItem === null) {
       return `<div id='${this.id}' class='${this.id}'>
                 ${ this.component.spinner.view.buildHTML() }
               </div>`;

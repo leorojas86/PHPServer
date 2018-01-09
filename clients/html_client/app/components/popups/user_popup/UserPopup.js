@@ -47,7 +47,6 @@ class UserPopup {
         this.spinner.hide();
         this.popup.hide();
         App.instance.updateLoggedUser(null);
-        Html.updateElement(App.instance.view);
       });
   }
 
