@@ -13,7 +13,7 @@ class InventoryServiceMock {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         const rootGroup = this.groups.find((group) => group.parentId === null);
-        resolve(rootGroup);
+        //resolve(rootGroup);
       }, this.responseMiliSec);
     });
   }
