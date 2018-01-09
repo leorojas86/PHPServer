@@ -19,10 +19,9 @@ class InventoryHeaderView {
 
   buildHTML() {
     const currentItem = this.component.model.getCurrentItem();
-    console.log('currentItem', currentItem);
 
     return `<div id='${this.id}' class='${this.id}'>
-              <span class='item_path'>${ currentItem ? currentItem.path : '[@loading_text@]' }</span>
+              <span class='item_path'>${ currentItem ? currentItem.path : '' }</span>
             </div>`;
   }
 
