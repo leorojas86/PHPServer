@@ -5,7 +5,8 @@ class AppModel {
 		this.data = {
 			env: 'mock',
 			user: null,
-			currentScreen: null
+			currentScreen: null,
+			currentInventoryItem: null
 		};//Default values
 	}
 

@@ -2,16 +2,11 @@ class InventoryModel {
 
   constructor() {
     this.isLoading = true;
-    this.currentItem = null;
-  }
-
-  getCurrentItem() {
-    return this.currentItem;
   }
 
   loadCurrentItem() {
     return ApiClient.instance.inventoryService.getRootGroup()
-      .then((rootGroup) => this.currentItem = rootGroup)
+      .then((rootGroup) => App.instance.model.data.currentInventoryItem = rootGroup)
       .finally(() => this.isLoading = false);
   }
 
@@ -25,7 +20,7 @@ class InventoryView {
   }
 
   buildHTML() {
-    if(this.component.model.isLoading || this.currentItem === null) {
+    if(this.component.model.isLoading || App.instance.model.data.currentInventoryItem === null) {
       return `<div id='${this.id}' class='${this.id}'>
                 ${ this.component.spinner.view.buildHTML() }
               </div>`;
@@ -42,7 +37,7 @@ class InventoryView {
 class Inventory {
 
   constructor() {
-    this.model = new InventoryModel();
+    this.model = new InventoryModel(this);
     this.view = new InventoryView(this);
     this.header = new InventoryHeader();
     this.spinner = new Spinner('inventory_spinner');
