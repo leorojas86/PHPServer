@@ -11,6 +11,7 @@ class LocalizationTable {
       "load_error_text": { en: 'Loading error', es: 'Error cargando' },
       "something_wrong_text": { en: 'Something went wrong', es: 'Algo salió mal' },
       "ok_text": { en: 'Ok', es: 'Aceptar' },
+      "loading_text": { en: 'Loading', es: 'Cargando' },
       /*Error Codes*/
       "invalid_credentials": { en: 'Invalid email or password.', es: 'Correo o password invalido(s).' }
     };

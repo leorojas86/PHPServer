@@ -10,6 +10,10 @@ class InventoryModel {
       .finally(() => this.isLoading = false);
   }
 
+  isLoadingCurrentItem() {
+    return this.isLoading || App.instance.model.data.currentInventoryItem === null;
+  }
+
 }
 
 class InventoryView {
@@ -20,7 +24,7 @@ class InventoryView {
   }
 
   buildHTML() {
-    if(this.component.model.isLoading || App.instance.model.data.currentInventoryItem === null) {
+    if(this.component.model.isLoadingCurrentItem()) {
       return `<div id='${this.id}' class='${this.id}'>
                 ${ this.component.spinner.view.buildHTML() }
               </div>`;
@@ -43,7 +47,7 @@ class Inventory {
     this.spinner = new Spinner('inventory_spinner');
   }
 
-  load() {
+  refresh() {
     this.spinner.show();
     this.model.loadCurrentItem()
       .catch((reason) => App.instance.instance.handleError(reason, '[@load_error_text@]'))

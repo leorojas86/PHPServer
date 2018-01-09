@@ -61,7 +61,7 @@ class App
 	updateLoggedUser(user) {
 		this.model.updateLoggedUser(user);
 		Html.updateElement(App.instance.view);
-		this.inventory.load();
+		this.inventory.refresh();
 	}
 
 }
