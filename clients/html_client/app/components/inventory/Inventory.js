@@ -11,7 +11,8 @@ class InventoryModel {
 
   loadCurrentItem() {
     return ApiClient.instance.inventoryService.getRootGroup()
-      .then((rootGroup) => this.currentItem = rootGroup);
+      .then((rootGroup) => this.currentItem = rootGroup)
+      .finally(() => this.isLoading = false);
   }
 
 }

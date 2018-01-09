@@ -18,9 +18,16 @@ class HeaderView {
 
   buildHTML() {
     const user = this.component.model.user;
-    const loggedUserButtons = user ?  `<button id='${this.id}_notifications_button'>
-                                         <span class="lsf symbol">globe</span>
-                                       </button>` : '';
+    const rightButtons = user ?   `<button id='${this.id}_notifications_button'>
+                                     <span class="lsf symbol">globe</span>
+                                   </button>
+                                   <button id='${this.id}_user_button' class='header_user_button'>
+                                     <span class="lsf symbol">user</span>
+                                   </button>`
+                                   :
+                                   `<button id='${this.id}_login_button' class='header_user_button'>
+                                     <span class="lsf symbol">in</span>
+                                   </button>`;
 
     return `<div id='${this.id}' class='${this.id}'>
               <div class='left_buttons_container'>
@@ -29,22 +36,14 @@ class HeaderView {
                 </button>
               </div>
               <div class='right_buttons_container'>
-                ${loggedUserButtons}
-                <button id='${this.id}_user_button' class='header_user_button'>
-                  <span class="lsf symbol">${ user ? 'user' : 'in' }</span>
-                </button>
+                ${rightButtons}
               </div>
             </div>`;
   }
 
   registerEvents() {
-    Html.registerClick(`${this.id}_user_button`, () => {
-      if(this.component.model.user) {
-        this.component.onUserButtonClicked();
-      } else {
-        this.component.onLoginButtonClicked();
-      }
-    });
+    Html.registerClick(`${this.id}_user_button`, () => this.component.onUserButtonClicked());
+    Html.registerClick(`${this.id}_login_button`, () => this.component.onLoginButtonClicked());
   }
 
 }
