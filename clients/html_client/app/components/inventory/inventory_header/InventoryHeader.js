@@ -19,7 +19,7 @@ class InventoryHeaderView {
 
   buildHTML() {
     return `<div id='${this.id}' class='${this.id}'>
-              <span id='item_path'>${ this.component.model.getCurrentItem().name }</span>
+              <span class='item_path'>${ this.component.model.getCurrentItem().name }</span>
             </div>`;
   }
 
