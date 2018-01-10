@@ -13,12 +13,13 @@ class AppModel {
 
 	updateLoggedUser(user) {
 		this.data.user = user;
+		this.data.currentScreen = user ? 'Inventory' : 'Welcome';
 	}
 
 	get currentScreen() {
 		const currentScreen = this.component.screens[this.data.currentScreen];
 
-		if (currentScreen) {
+		if(currentScreen) {
  			return currentScreen;
 		}
 
@@ -47,6 +48,7 @@ class AppView {
 
 	registerEvents() {
 		this.component.header.view.registerEvents();
+		this.component.model.currentScreen.view.registerEvents();
 	}
 
 }
@@ -64,8 +66,8 @@ class App
 		this.messagePopup = new Popup(new MessagePopup());
 
 		this.screens = {
-			Welcome: new Welcome(),
-			Inventory: new Inventory()
+			'Welcome': new Welcome(),
+			'Inventory': new Inventory()
 		};
 	}
 
@@ -78,7 +80,6 @@ class App
 	updateLoggedUser(user) {
 		this.model.updateLoggedUser(user);
 		Html.updateElement(App.instance.view);
-		this.inventory.refresh();
 	}
 
 }

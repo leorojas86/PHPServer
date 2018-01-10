@@ -10,6 +10,10 @@ class WelcomeView {
             </div>`;
   }
 
+  registerEvents() {
+
+  }
+
 }
 
 class Welcome {

@@ -25,6 +25,10 @@ class InventoryView {
             </div>`;
   }
 
+  registerEvents() {
+
+  }
+
 }
 
 class Inventory {
