@@ -1,17 +1,29 @@
 
 class AppModel {
 
-	constructor() {
+	constructor(component) {
 		this.data = {
 			env: 'mock',
 			user: null,
-			currentScreen: null,
+			currentScreen: 'Welcome',
 			currentInventoryItem: null
 		};//Default values
+		this.component = component;
 	}
 
 	updateLoggedUser(user) {
 		this.data.user = user;
+	}
+
+	get currentScreen() {
+		const currentScreen = this.component.screens[this.data.currentScreen];
+
+		if (currentScreen) {
+ 			return currentScreen;
+		}
+
+		console.error('Unknown screen: ', this.data.currentScreen);//TODO: Improve this redirecting to an error page/screen
+		return this.component.screens['Welcome'];
 	}
 
 }
@@ -26,7 +38,7 @@ class AppView {
 	buildHTML() {
 		return `<div id='${this.id}' class='${this.id}'>
 							${ this.component.header.view.buildHTML() }
-							${ this.component.inventory.view.buildHTML() }
+							${ this.component.model.currentScreen.view.buildHTML() }
 							${ this.component.loginPopup.view.buildHTML() }
               ${ this.component.userPopup.view.buildHTML() }
 							${ this.component.messagePopup.view.buildHTML() }
@@ -43,13 +55,18 @@ class App
 {
 
 	constructor() {
-		this.model = new AppModel();
+		this.model = new AppModel(this);
 		this.view = new AppView(this);
 		this.header = new Header();
 		this.inventory = new Inventory();
 		this.loginPopup = new Popup(new LoginPopup());
     this.userPopup = new Popup(new UserPopup());
 		this.messagePopup = new Popup(new MessagePopup());
+
+		this.screens = {
+			Welcome: new Welcome(),
+			Inventory: new Inventory()
+		};
 	}
 
 	handleError(errorData, title) {
