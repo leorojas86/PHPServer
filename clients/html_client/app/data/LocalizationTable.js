@@ -12,6 +12,9 @@ class LocalizationTable {
       "something_wrong_text": { en: 'Something went wrong', es: 'Algo salió mal' },
       "ok_text": { en: 'Ok', es: 'Aceptar' },
       "loading_text": { en: 'Loading', es: 'Cargando' },
+      "cart_text": { en: 'Cart', es: 'Carrito' },
+      "notifications_text": { en: 'Notifications', es: 'Notificaciones' },
+      "language_text": { en: 'Language', es: 'Lenguage' },
       /*Error Codes*/
       "invalid_credentials": { en: 'Invalid email or password.', es: 'Correo o password invalido(s).' }
     };

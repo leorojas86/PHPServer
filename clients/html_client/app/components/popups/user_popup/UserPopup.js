@@ -22,8 +22,14 @@ class UserPopupView {
     return `<p>
               <span class="lsf symbol">user</span> ${user.name}
             </p>
+            <button id='${this.id}_cart_button'>
+              <span class="lsf symbol">cart</span> [@cart_text@]
+            </button>
             <button id='${this.id}_notifications_button'>
-              <span class="lsf symbol">globe</span> Notifications
+              <span class="lsf symbol">globe</span> [@notifications_text@]
+            </button>
+            <button id='${this.id}_language_button'>
+              <span class="lsf symbol">flag</span> [@language_text@]
             </button>
             <button id='${this.id}_logout_button'>
              <span class="lsf symbol">out</span> [@logout_button_text@]
