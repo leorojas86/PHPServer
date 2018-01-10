@@ -1,3 +1,7 @@
+.login_popup p {
+	margin:0px; margin-top:10px; margin-bottom:10px;
+}
+
 .login_popup .modal_content {
 	top:40px; right:5px;
 }

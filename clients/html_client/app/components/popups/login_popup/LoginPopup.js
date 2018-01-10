@@ -18,15 +18,15 @@ class LoginPopupView {
   }
 
   buildHTML() {
-    return `<p class='margin_class'>[@email_text@]</p>
-            <input type='text' id='${this.id}_user_email' class='margin_class' value='${this.component.model.inputValues.email}'>
-            <p class='margin_class'>[@password_text@]</p>
-            <input type='text' id='${this.id}_user_password' class='margin_class' value='${this.component.model.inputValues.password}'>
+    return `<p>[@email_text@]</p>
+            <input type='text' id='${this.id}_user_email' value='${this.component.model.inputValues.email}'>
+            <p>[@password_text@]</p>
+            <input type='text' id='${this.id}_user_password' value='${this.component.model.inputValues.password}'>
             <div>
-              <button id='${this.id}_login_button' class='margin_class'>
+              <button id='${this.id}_login_button'>
                <span class="lsf symbol">in</span> [@login_button_text@]
               </button>
-              <button id='${this.id}_register_button'	class='margin_class'>
+              <button id='${this.id}_register_button'>
                <span class="lsf symbol">plus</span> [@register_button_text@]
               </button>
             </div>
