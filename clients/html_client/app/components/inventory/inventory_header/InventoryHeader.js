@@ -4,7 +4,7 @@ class InventoryHeaderModel {
 
   }
 
-  getCurrentItem() {
+  get currentItem() {
     return App.instance.model.data.currentInventoryItem;
   }
 
@@ -18,10 +18,8 @@ class InventoryHeaderView {
   }
 
   buildHTML() {
-    const currentItem = this.component.model.getCurrentItem();
-
     return `<div id='${this.id}' class='${this.id}'>
-              <span class='item_path'>${ currentItem ? currentItem.path : '' }</span>
+              <span class='item_path'>${ this.component.model.currentItem ? this.component.model.currentItem.path : '' }</span>
             </div>`;
   }
 

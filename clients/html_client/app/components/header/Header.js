@@ -1,6 +1,7 @@
 class HeaderModel {
 
   constructor() {
+
   }
 
   get user() {
@@ -17,14 +18,14 @@ class HeaderView {
   }
 
   buildHTML() {
-    const user = this.component.model.user;
-    const rightButtons = user ?   `<button id='${this.id}_user_button' class='header_user_button'>
-                                     <span class="lsf symbol">user</span>
-                                   </button>`
-                                   :
-                                   `<button id='${this.id}_login_button' class='header_user_button'>
-                                     <span class="lsf symbol">in</span>
-                                   </button>`;
+    const rightButtons = this.component.model.user ?
+     `<button id='${this.id}_user_button' class='header_user_button'>
+       <span class="lsf symbol">user</span>
+      </button>`
+     :
+     `<button id='${this.id}_login_button' class='header_user_button'>
+       <span class="lsf symbol">in</span>
+      </button>`;
 
     return `<div id='${this.id}' class='${this.id}'>
               <div class='left_buttons_container'>
