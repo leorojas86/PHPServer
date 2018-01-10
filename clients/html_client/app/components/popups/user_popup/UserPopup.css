@@ -1,10 +1,12 @@
 .user_popup .modal_content {
 	right:5px; top:40px; padding:10px;
+	text-align:left;
 }
 
 .user_popup button {
+	display:block; width:120px;
 	font-size:15px;
-	width:120px;
+	text-align:left;
 }
 
 .user_popup .spinner {

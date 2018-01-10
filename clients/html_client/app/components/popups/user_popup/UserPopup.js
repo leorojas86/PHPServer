@@ -19,7 +19,12 @@ class UserPopupView {
 
   buildHTML() {
     const user = this.component.model.user;
-    return `<p class='margin_class'>${user.name}</p>
+    return `<p class='margin_class'>
+              <span class="lsf symbol">user</span> ${user.name}
+            </p>
+            <button id='${this.id}_notifications_button'>
+              <span class="lsf symbol">globe</span> Notifications
+            </button>
             <button id='${this.id}_logout_button' class='margin_class'>
              <span class="lsf symbol">out</span> [@logout_button_text@]
             </button>

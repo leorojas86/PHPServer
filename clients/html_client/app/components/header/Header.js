@@ -18,10 +18,7 @@ class HeaderView {
 
   buildHTML() {
     const user = this.component.model.user;
-    const rightButtons = user ?   `<button id='${this.id}_notifications_button'>
-                                     <span class="lsf symbol">globe</span>
-                                   </button>
-                                   <button id='${this.id}_user_button' class='header_user_button'>
+    const rightButtons = user ?   `<button id='${this.id}_user_button' class='header_user_button'>
                                      <span class="lsf symbol">user</span>
                                    </button>`
                                    :
