@@ -16,6 +16,7 @@ class LocalizationTable {
       "notifications_text": { en: 'Notifications', es: 'Notificaciones' },
       "language_text": { en: 'Language', es: 'Lenguage' },
       "login_to_get_started_text": { en: 'Login to get started', es: 'Autentíquese para iniciar' },
+      "settings_text": { en: 'Settings', es: 'Configuración' },
       /*Error Codes*/
       "invalid_credentials": { en: 'Invalid email or password.', es: 'Correo o password invalido(s).' }
     };
