@@ -27,7 +27,7 @@
 }
 
 .header .screen_title_container {
-	position:absolute; width:100%; height:40px; padding: 3px;
+	position:absolute; width:100%; height:40px; padding: 2px;
 }
 
 .header .screen_title_container span {
