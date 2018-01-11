@@ -1,6 +1,11 @@
 class InventoryModel {
 
   constructor() {
+
+  }
+
+  get currentItem() {
+    return App.instance.model.data.currentInventoryItem;
   }
 
   loadCurrentItem() {
@@ -18,9 +23,13 @@ class InventoryView {
   }
 
   buildHTML() {
+    const currentItem = this.component.model.currentItem;
+
     return `<div id='${this.id}' class='${this.id}'>
               ${ this.component.header.view.buildHTML() }
-              <div class='inventory_item'></div>
+              <div class='inventory_item'>
+                ${ currentItem ? currentItem.type : '...' }
+              </div>
               ${ this.component.spinner.view.buildHTML() }
             </div>`;
   }
