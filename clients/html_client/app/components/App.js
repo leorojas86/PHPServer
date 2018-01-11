@@ -73,7 +73,7 @@ class App
 
 	handleError(errorData, title) {
 		const message = errorData.errorCode ? `[@${errorData.errorCode}@]` : `[@something_wrong_text@]`;
-		App.instance.messagePopup.show({ title:title, message:message });
+		App.instance.messagePopup.show({ symbol:'trouble', title:title, message:message });
 		console.error(errorData);
 	}
 

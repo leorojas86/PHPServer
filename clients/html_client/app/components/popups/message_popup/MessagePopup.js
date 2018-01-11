@@ -17,7 +17,7 @@ class MessagePopupView {
     const data = this.component.model.data;
     return  `<div align='center'>
                <p class='title'>
-                <span class="lsf symbol">trouble</span> ${data.title}
+                <span class="lsf symbol">${data.symbol}</span> ${data.title}
                </p>
                <p class='message'>${data.message}</p>
                <button id='${this.id}_ok_button'>

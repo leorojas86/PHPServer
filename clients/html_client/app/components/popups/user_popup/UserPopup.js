@@ -66,7 +66,7 @@ class UserPopup {
   }
 
   onSettingButtonClicked() {
-    App.instance.messagePopup.show({ title:'Settings', message:"<p>Settings modal will show:</p><p>Language, Styles, ?</p>" });
+    App.instance.messagePopup.show({ symbol:'setting', title:'Settings', message:"<p>Settings modal will show:</p><p>Language, Skin, ?</p>" });
   }
 
 }
