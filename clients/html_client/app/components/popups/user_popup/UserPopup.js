@@ -42,6 +42,7 @@ class UserPopupView {
 
   registerEvents() {
     Html.registerClick(`${this.id}_logout_button`, () => this.component.onLogoutButtonClick());
+    Html.registerClick(`${this.id}_settings_button`, () => this.component.onSettingButtonClicked());
   }
 
 }
@@ -62,6 +63,10 @@ class UserPopup {
         this.popup.hide();
         App.instance.updateLoggedUser(null);
       });
+  }
+
+  onSettingButtonClicked() {
+    App.instance.messagePopup.show({ title:'Settings', message:"<p>Settings modal will show:</p><p>Language, Styles, ?</p>" });
   }
 
 }
