@@ -46,9 +46,9 @@ class AppView {
 						</div>`;
 	}
 
-	registerEvents() {
-		this.component.header.view.registerEvents();
-		this.component.model.currentScreen.view.registerEvents();
+	onDomUpdated() {
+		this.component.header.view.onDomUpdated();
+		this.component.model.currentScreen.view.onDomUpdated();
 	}
 
 }

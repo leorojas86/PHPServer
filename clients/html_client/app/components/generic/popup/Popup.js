@@ -26,9 +26,9 @@ class PopupView {
     return `<div id='${this.id}'></div>`;
   }
 
-  registerEvents() {
+  onDomUpdated() {
     Html.registerMouseDown(`${this.id}_grayout`, () => this.component.hide());
-    this.contentComponent.view.registerEvents();
+    this.contentComponent.view.onDomUpdated();
   }
 
 }

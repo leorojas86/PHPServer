@@ -25,7 +25,7 @@ class InventoryView {
             </div>`;
   }
 
-  registerEvents() {
+  onDomUpdated() {
     if(!App.instance.model.data.currentInventoryItem) {
       this.component.refresh();
     }

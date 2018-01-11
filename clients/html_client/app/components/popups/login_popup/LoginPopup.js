@@ -4,9 +4,7 @@ class LoginPopupMode {
     this.isShown = false;
   }
 
-  get inputValues() {
-    return App.instance.model.data.env === 'prod' ? { email: '', password: ''} : { email: 'test@test.com', password: 'test'};
-  }
+  get inputValues() { return App.instance.model.data.env === 'prod' ? { email: '', password: ''} : { email: 'test@test.com', password: 'test'}; }
 
 }
 
@@ -33,7 +31,7 @@ class LoginPopupView {
             ${ this.component.spinner.view.buildHTML() }`;
   }
 
-  registerEvents() {
+  onDomUpdated() {
     Html.registerClick(`${this.id}_login_button`, () => {
       const email = document.getElementById(`${this.id}_user_email`).value;
       const password = document.getElementById(`${this.id}_user_password`).value;

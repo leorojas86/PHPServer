@@ -10,7 +10,7 @@ class WelcomeView {
             </div>`;
   }
 
-  registerEvents() {
+  onDomUpdated() {
 
   }
 

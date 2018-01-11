@@ -26,7 +26,7 @@ class MessagePopupView {
              </div>`;
   }
 
-  registerEvents() {
+  onDomUpdated() {
     Html.registerMouseDown(`${this.id}_grayout`, () => {});//Do nothing
     Html.registerClick(`${this.id}_ok_button`, () => this.component.popup.hide());
   }

@@ -4,9 +4,7 @@ class UserPopupModel {
     this.isShown = false;
   }
 
-  get user() {
-    return App.instance.model.data.user;
-  }
+  get user() { return App.instance.model.data.user; }
 
 }
 
@@ -40,7 +38,7 @@ class UserPopupView {
             ${ this.component.spinner.view.buildHTML() }`;
   }
 
-  registerEvents() {
+  onDomUpdated() {
     Html.registerClick(`${this.id}_logout_button`, () => this.component.onLogoutButtonClick());
     Html.registerClick(`${this.id}_settings_button`, () => this.component.onSettingButtonClicked());
   }

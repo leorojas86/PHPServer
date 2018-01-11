@@ -7,8 +7,8 @@ class Html {
       const htmlText = view.buildHTML();
       element.outerHTML = Localization.instance.localizeHTML(htmlText);
 
-      if(view.registerEvents) {
-        view.registerEvents();
+      if(view.onDomUpdated) {
+        view.onDomUpdated();
       }
     }
   }

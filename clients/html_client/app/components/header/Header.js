@@ -4,13 +4,8 @@ class HeaderModel {
 
   }
 
-  get user() {
-    return App.instance.model.data.user;
-  }
-
-  get currentScreen() {
-    return App.instance.model.data.currentScreen;
-  }
+  get user() { return App.instance.model.data.user; }
+  get currentScreen() { return App.instance.model.data.currentScreen; }
 
 }
 
@@ -47,7 +42,7 @@ class HeaderView {
             </div>`;
   }
 
-  registerEvents() {
+  onDomUpdated() {
     Html.registerClick(`${this.id}_user_button`, () => this.component.onUserButtonClicked());
     Html.registerClick(`${this.id}_login_button`, () => this.component.onLoginButtonClicked());
   }
