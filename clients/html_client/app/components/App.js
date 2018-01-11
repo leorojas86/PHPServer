@@ -5,7 +5,7 @@ class AppModel {
 		this.data = {
 			env: 'mock',
 			user: null,
-			currentScreen: 'Welcome',
+			currentScreen: 'welcome',
 			currentInventoryItem: null
 		};//Default values
 		this.component = component;
@@ -13,7 +13,7 @@ class AppModel {
 
 	updateLoggedUser(user) {
 		this.data.user = user;
-		this.data.currentScreen = user ? 'Inventory' : 'Welcome';
+		this.data.currentScreen = user ? 'inventory' : 'welcome';
 	}
 
 	get currentScreen() {
@@ -24,7 +24,7 @@ class AppModel {
 		}
 
 		console.error('Unknown screen: ', this.data.currentScreen);//TODO: Improve this redirecting to an error page/screen
-		return this.component.screens['Welcome'];
+		return this.component.screens['welcome'];
 	}
 
 }
@@ -66,8 +66,8 @@ class App
 		this.messagePopup = new Popup(new MessagePopup());
 
 		this.screens = {
-			'Welcome': new Welcome(),
-			'Inventory': new Inventory()
+			'welcome': new Welcome(),
+			'inventory': new Inventory()
 		};
 	}
 

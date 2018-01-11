@@ -8,6 +8,10 @@ class HeaderModel {
     return App.instance.model.data.user;
   }
 
+  get currentScreen() {
+    return App.instance.model.data.currentScreen;
+  }
+
 }
 
 class HeaderView {
@@ -18,6 +22,7 @@ class HeaderView {
   }
 
   buildHTML() {
+    const currentScreenTitleText = this.component.model.currentScreen + '_text';
     const rightButtons = this.component.model.user ?
      `<button id='${this.id}_user_button' class='header_user_button'>
        <span class="lsf symbol">user</span>
@@ -32,6 +37,9 @@ class HeaderView {
                 <button id='${this.id}_menu_button'>
                  <span class="lsf symbol">menu</span>
                 </button>
+              </div>
+              <div class='screen_title_container'>
+                <span>[@${currentScreenTitleText}@]</span>
               </div>
               <div class='right_buttons_container'>
                 ${rightButtons}
