@@ -20,16 +20,15 @@ class InventoryView {
   constructor(component) {
     this.id = 'inventory';
     this.component = component;
+    this.inventoryItem = null;
   }
 
   buildHTML() {
-    const currentItem = this.component.model.currentItem;
+    const currentItem = this.component.model.currentItem ? this.component.inventoryItems[this.component.model.currentItem.type] : null;
 
     return `<div id='${this.id}' class='${this.id}'>
               ${ this.component.header.view.buildHTML() }
-              <div class='inventory_item'>
-                ${ currentItem ? currentItem.type : '...' }
-              </div>
+              ${ currentItem ? currentItem.view.buildHTML() : '' }
               ${ this.component.spinner.view.buildHTML() }
             </div>`;
   }
@@ -49,6 +48,10 @@ class Inventory {
     this.view = new InventoryView(this);
     this.header = new InventoryHeader();
     this.spinner = new Spinner('inventory_spinner');
+    this.inventoryItems = {
+      'folder': new InventoryFolder(),
+      'file': new InventoryFile()
+    };
   }
 
   refresh() {
