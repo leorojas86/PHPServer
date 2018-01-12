@@ -48,6 +48,7 @@ class InventoryFolder {
     this.spinner.show();
     this.model.loadCurrentItemChildren()
       .then(() => {
+        this.children = [];
         this.model.children.forEach((child) => this.children.push(new InventoryFolderChild(`folder_child_${child.id}`, child)));
       })
       .catch((reason) => App.instance.handleError(reason, '[@load_error_text@]'))

@@ -59,7 +59,7 @@ class UserPopup {
       .finally(() => {
         this.spinner.hide();
         this.popup.hide();
-        App.instance.updateLoggedUser(null);
+        App.instance.onLoggedUserChanged(null);
       });
   }
 

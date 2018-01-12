@@ -2,16 +2,21 @@
 class AppModel {
 
 	constructor(component) {
+		this.component = component;
+		this.loadDefaultAppData();
+	}
+
+	loadDefaultAppData() {
 		this.data = {
 			env: 'mock',
 			user: null,
 			currentScreen: 'welcome',
 			currentInventoryItem: null
 		};//Default values
-		this.component = component;
 	}
 
 	updateLoggedUser(user) {
+		this.loadDefaultAppData();
 		this.data.user = user;
 		this.data.currentScreen = user ? 'inventory' : 'welcome';
 	}
@@ -77,7 +82,7 @@ class App
 		console.error(errorData);
 	}
 
-	updateLoggedUser(user) {
+	onLoggedUserChanged(user) {
 		this.model.updateLoggedUser(user);
 		Html.updateElement(App.instance.view);
 	}
