@@ -1,6 +1,7 @@
 .inventory_folder_child {
   float:left; width:70px; height:80px; margin:5px;
   text-align:center;
+  text-overflow:ellipsis; overflow:hidden; white-space:nowrap;
 }
 
 .inventory_folder_child .symbol {
