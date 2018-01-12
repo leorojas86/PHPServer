@@ -13,10 +13,8 @@ class InventoryFolderChildView {
 
   buildHTML() {
     return `<div id='${this.id}' class='inventory_folder_child'>
-              <p>
-                <span class="lsf symbol">${this.component.model.data.type}</span>
-              </p>
-              <span>${this.component.model.data.name}</span>
+              <span class='lsf symbol'>${this.component.model.data.type}</span>
+              <span class-'name'>${this.component.model.data.name}</span>
             </div>`;
   }
 
