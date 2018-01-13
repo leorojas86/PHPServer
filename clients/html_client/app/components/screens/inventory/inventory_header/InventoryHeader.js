@@ -1,11 +1,15 @@
 class InventoryHeaderModel {
 
-  constructor() {
-
+  constructor(component) {
+    this.component = component;
   }
 
   get currentItem() {
     return App.instance.model.data.currentInventoryItem;
+  }
+
+  updateBreadcrumbData() {
+    this.component.breadcrumb.model.data.path = this.currentItem ? this.currentItem.path : [];
   }
 
 }
@@ -18,42 +22,16 @@ class InventoryHeaderView {
   }
 
   buildHTML() {
-
-    let path = '';
-    if(this.component.model.currentItem) {
-      const pathNames = this.component.model.currentItem.path;
-      let index = 0;
-      pathNames.forEach((currentItemName) => {
-        if(index === 0) { //First one
-          path += `<span id='path_${index}' class="lsf symbol home">home</span>`;
-        } else if(index === pathNames.length - 1) { //Last one
-          path += `<span class="lsf symbol arrow">right</span><span id='path_${index}'>${currentItemName}</span>`;
-        } else {
-          path += `<span class="lsf symbol arrow">right</span><span id='path_${index}' class='clickable_path_item'>${currentItemName}</span>`;
-        }
-        index++;
-      });
-    }
+    this.component.model.updateBreadcrumbData();
 
     return `<div id='${this.id}' class='${this.id}'>
-              <div class='item_path'>
-                ${path}
-              </div>
+              ${ this.component.breadcrumb.view.buildHTML() }
               <span class="lsf symbol search">search</span>
             </div>`;
   }
 
   onDomUpdated() {
-    if(this.component.model.currentItem) {
-      let index = 0;
-      const pathNames = this.component.model.currentItem.path;
-      pathNames.forEach((currentItemName) => {
-        if(index < pathNames.length - 1) { //Last one
-          Html.registerClick(`path_${index}`, () => this.component.onPathItemClicked(index));
-        }
-        index++;
-      });
-    }
+    this.component.breadcrumb.view.onDomUpdated();
   }
 
 }
@@ -61,8 +39,9 @@ class InventoryHeaderView {
 class InventoryHeader {
 
   constructor() {
-    this.model = new InventoryHeaderModel();
+    this.model = new InventoryHeaderModel(this);
     this.view = new InventoryHeaderView(this);
+    this.breadcrumb = new Breadcrumb('inventory_breadcrumb', (index) => this.onPathItemClicked(index));
   }
 
   onPathItemClicked(index) {

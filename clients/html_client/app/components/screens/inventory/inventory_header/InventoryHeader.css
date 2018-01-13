@@ -4,7 +4,7 @@
   margin:0px;
 }
 
-.inventory_header .item_path {
+.inventory_header .inventory_breadcrumb {
   display:inline; margin:3px;
   font-size:25px;
 }
