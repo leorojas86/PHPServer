@@ -9,7 +9,7 @@ class InventoryModel {
     return inventoryItem ? this.component.itemComponents[inventoryItem.type] : null;
   }
 
-  loadCurrentItem() {
+  loadRootItem() {
     return ApiClient.instance.inventoryService.getRootItem()
       .then((rootItem) => App.instance.model.data.currentInventoryItem = rootItem);
   }
@@ -42,7 +42,7 @@ class InventoryView {
     if(this.component.model.currentItemComponent) {
       this.component.model.currentItemComponent.view.onDomUpdated();
     } else {
-      this.component.load();
+      this.component.loadRootItem();
     }
 
     this.component.header.view.onDomUpdated();
@@ -63,9 +63,13 @@ class Inventory {
     };
   }
 
-  load() {
+  loadRootItem() {
+    if(this.model.currentItemComponent) {
+      this.model.currentItemComponent.clear();
+    }
+
     this.spinner.show();
-    this.model.loadCurrentItem()
+    this.model.loadRootItem()
       .catch((reason) => App.instance.handleError(reason, '[@load_error_text@]'))
       .finally(() => {
         this.spinner.hide();
@@ -74,6 +78,10 @@ class Inventory {
   }
 
   loadItem(id) {
+    if(this.model.currentItemComponent) {
+      this.model.currentItemComponent.clear();
+    }
+
     this.spinner.show();
     this.model.loadItem(id)
       .catch((reason) => App.instance.handleError(reason, '[@load_error_text@]'))

@@ -13,6 +13,10 @@ class InventoryFileView {
     return `<div id='${this.id}' class='${this.id}'>File</div>`;
   }
 
+  onDomUpdated() {
+
+  }
+
 }
 
 class InventoryFile {
@@ -20,6 +24,10 @@ class InventoryFile {
   constructor() {
     this.model = new InventoryFileModel();
     this.view = new InventoryFileView(this);
+  }
+
+  clear() {
+    
   }
 
 }

@@ -60,4 +60,9 @@ class InventoryFolder {
       });
   }
 
+  clear() {
+    this.children = [];
+    this.model.children = null;
+  }
+
 }
