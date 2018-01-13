@@ -44,6 +44,8 @@ class InventoryView {
     } else {
       this.component.load();
     }
+
+    this.component.header.view.onDomUpdated();
   }
 
 }

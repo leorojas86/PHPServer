@@ -44,14 +44,16 @@ class InventoryHeaderView {
   }
 
   onDomUpdated() {
-    let index = 0;
-    const pathNames = this.component.model.currentItem.path;
-    pathNames.forEach((currentItemName) => {
-      if(index < pathNames.length - 1) { //Last one
-        Html.registerClick(`path_${index}`, () => this.componet.onPathItemClicked(index));
-      }
-      index++;
-    });
+    if(this.component.model.currentItem) {
+      let index = 0;
+      const pathNames = this.component.model.currentItem.path;
+      pathNames.forEach((currentItemName) => {
+        if(index < pathNames.length - 1) { //Last one
+          Html.registerClick(`path_${index}`, () => this.component.onPathItemClicked(index));
+        }
+        index++;
+      });
+    }
   }
 
 }
@@ -64,7 +66,7 @@ class InventoryHeader {
   }
 
   onPathItemClicked(index) {
-    const clickedPathItemId = this.component.model.currentItem.pathIds[index];
+    const clickedPathItemId = this.model.currentItem.pathIds[index];
     App.instance.inventory.loadItem(clickedPathItemId);
   }
 
