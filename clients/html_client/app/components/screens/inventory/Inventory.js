@@ -9,12 +9,6 @@ class InventoryModel {
     return inventoryItem ? this.component.itemComponents[inventoryItem.type] : null;
   }
 
-  clearCurrentItemComponent() {
-    if (this.currentItemComponent) {
-      this.currentItemComponent.clear();
-    }
-  }
-
   loadItem(id) {
     return (id ? ApiClient.instance.inventoryService.getItemById(id) : ApiClient.instance.inventoryService.getRootItem())
       .then((item) => App.instance.model.data.currentInventoryItem = item);
@@ -65,9 +59,9 @@ class Inventory {
   }
 
   loadItem(id) {
-    this.model.clearCurrentItemComponent();
     this.spinner.show();
     this.model.loadItem(id)
+      .then(() => this.model.currentItemComponent.load())
       .catch((reason) => App.instance.handleError(reason, '[@load_error_text@]'))
       .finally(() => {
         this.spinner.hide();

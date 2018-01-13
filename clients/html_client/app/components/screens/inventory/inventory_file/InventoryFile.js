@@ -26,8 +26,10 @@ class InventoryFile {
     this.view = new InventoryFileView(this);
   }
 
-  clear() {
-    
+  load() {
+    return new Promise((resolve, reject) => {
+      resolve();
+    });
   }
 
 }

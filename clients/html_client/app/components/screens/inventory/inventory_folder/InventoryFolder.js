@@ -29,10 +29,6 @@ class InventoryFolderView {
   }
 
   onDomUpdated() {
-    if(!this.component.model.children) {
-      this.component.load();
-    }
-
     this.component.children.forEach((child) => child.view.onDomUpdated());
   }
 
@@ -49,21 +45,10 @@ class InventoryFolder {
 
   load() {
     this.children = [];
-    this.spinner.show();
-    this.model.loadCurrentItemChildren()
+    return this.model.loadCurrentItemChildren()
       .then(() => {
         this.model.children.forEach((child) => this.children.push(new InventoryFolderChild(`folder_child_${child.id}`, child)));
-      })
-      .catch((reason) => App.instance.handleError(reason, '[@load_error_text@]'))
-      .finally(() => {
-        this.spinner.hide();
-        Html.updateElement(this.view);
       });
-  }
-
-  clear() {
-    this.children = [];
-    this.model.children = null;
   }
 
 }
