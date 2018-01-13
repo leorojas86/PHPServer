@@ -34,13 +34,12 @@ class BreadcrumbView {
   }
 
   onDomUpdated() {
-    let index = 0;
-    const pathNames = this.component.model.data.path;
-    pathNames.forEach((currentItemName) => {
-      if(index < pathNames.length - 1) { //Last one
+    const path = this.component.model.data.path;
+    path.forEach((currentItemName) => {
+      const index = path.indexOf(currentItemName);
+      if(index < path.length - 1) { //Not the last one
         Html.registerClick(`path_${index}`, () => this.component.model.onPathNameClicked(index));
       }
-      index++;
     });
   }
 
