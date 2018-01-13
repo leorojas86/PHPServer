@@ -9,7 +9,20 @@
   font-size:28px;
 }
 
+.inventory_header .home {
+  font-size:28px;
+}
+
+.inventory_header .arrow {
+  margin:5px;
+  font-size:20px;
+}
+
 .inventory_header .item_path {
   font-size:25px;
   margin:3px;
+}
+
+.inventory_header .clickable_path_item {
+  text-decoration:underline;
 }
