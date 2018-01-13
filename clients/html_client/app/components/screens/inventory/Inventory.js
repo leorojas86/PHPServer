@@ -15,13 +15,8 @@ class InventoryModel {
     }
   }
 
-  loadRootItem() {
-    return ApiClient.instance.inventoryService.getRootItem()
-      .then((rootItem) => App.instance.model.data.currentInventoryItem = rootItem);
-  }
-
   loadItem(id) {
-    return ApiClient.instance.inventoryService.getItemById(id)
+    return (id ? ApiClient.instance.inventoryService.getItemById(id) : ApiClient.instance.inventoryService.getRootItem())
       .then((item) => App.instance.model.data.currentInventoryItem = item);
   }
 
@@ -48,7 +43,7 @@ class InventoryView {
     if(this.component.model.currentItemComponent) {
       this.component.model.currentItemComponent.view.onDomUpdated();
     } else {
-      this.component.loadRootItem();
+      this.component.loadItem();
     }
 
     this.component.header.view.onDomUpdated();
@@ -67,17 +62,6 @@ class Inventory {
       'folder': new InventoryFolder(),
       'file': new InventoryFile()
     };
-  }
-
-  loadRootItem() {
-    this.model.clearCurrentItemComponent();
-    this.spinner.show();
-    this.model.loadRootItem()
-      .catch((reason) => App.instance.handleError(reason, '[@load_error_text@]'))
-      .finally(() => {
-        this.spinner.hide();
-        Html.updateElement(this.view);
-      });
   }
 
   loadItem(id) {
