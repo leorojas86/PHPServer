@@ -31,6 +31,8 @@ class InventoryFolderView {
     if(!this.component.model.children) {
       this.component.load();
     }
+
+    this.component.children.forEach((child) => child.view.onDomUpdated());
   }
 
 }

@@ -2,6 +2,10 @@ class InventoryFolderChildModel {
   constructor(data) {
     this.data = data;
   }
+
+  setCurrentInventoryItem() {
+    App.instance.model.data.currentInventoryItem = this.data;
+  }
 }
 
 class InventoryFolderChildView {
@@ -18,6 +22,10 @@ class InventoryFolderChildView {
             </div>`;
   }
 
+  onDomUpdated() {
+    Html.registerClick(this.id, () => this.component.onClick());
+  }
+
 }
 
 class InventoryFolderChild {
@@ -25,6 +33,11 @@ class InventoryFolderChild {
   constructor(id, data) {
     this.model = new InventoryFolderChildModel(data);
     this.view = new InventoryFolderChildView(this, id);
+  }
+
+  onClick() {
+    this.model.setCurrentInventoryItem();
+    Html.updateElement(App.instance.inventory.view);
   }
 
 }
