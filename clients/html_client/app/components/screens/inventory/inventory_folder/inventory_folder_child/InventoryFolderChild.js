@@ -36,8 +36,7 @@ class InventoryFolderChild {
   }
 
   onClick() {
-    this.model.setCurrentInventoryItem();
-    Html.updateElement(App.instance.inventory.view);
+    App.instance.inventory.loadItem(this.model.data.id);
   }
 
 }

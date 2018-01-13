@@ -5,6 +5,7 @@ class InventoryFolderModel {
   }
 
   loadCurrentItemChildren() {
+    this.children = null;
     return ApiClient.instance.inventoryService.getItemChildren(App.instance.model.data.currentInventoryItem)
       .then((children) => this.children = children);
   }
@@ -47,10 +48,10 @@ class InventoryFolder {
   }
 
   load() {
+    this.children = [];
     this.spinner.show();
     this.model.loadCurrentItemChildren()
       .then(() => {
-        this.children = [];
         this.model.children.forEach((child) => this.children.push(new InventoryFolderChild(`folder_child_${child.id}`, child)));
       })
       .catch((reason) => App.instance.handleError(reason, '[@load_error_text@]'))
