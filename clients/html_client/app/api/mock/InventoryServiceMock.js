@@ -1,7 +1,6 @@
 class InventoryServiceMock {
 
   constructor() {
-
     this.items = [
       { id:'0', name:'#', type:'folder', children:['1','2'], path:['#'], pathIds:['0'] },
       { id:'1', name:'folder 1', type:'folder', children:['3'], path:['#', 'folder 1'], pathIds:['0'] },
