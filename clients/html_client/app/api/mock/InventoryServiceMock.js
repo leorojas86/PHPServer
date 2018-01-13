@@ -16,7 +16,7 @@ class InventoryServiceMock {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if(ApiClient.instance.userService.loggedUser) {
-          const rootItem = this.items.find((group) => group.name === '#');
+          const rootItem = this.items.find((currentItem) => currentItem.name === '#');
           resolve(rootItem);
         } else {
           resolve(null);
@@ -35,6 +35,15 @@ class InventoryServiceMock {
           }
         });
         resolve(children);
+      }, this.responseMiliSec);
+    });
+  }
+
+  getItemById(id) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const item = this.items.find((currentItem) => currentItem.id === id);
+        resolve(item);
       }, this.responseMiliSec);
     });
   }

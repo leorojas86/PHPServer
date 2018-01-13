@@ -11,7 +11,12 @@ class InventoryModel {
 
   loadCurrentItem() {
     return ApiClient.instance.inventoryService.getRootItem()
-      .then((rootGroup) => App.instance.model.data.currentInventoryItem = rootGroup);
+      .then((rootItem) => App.instance.model.data.currentInventoryItem = rootItem);
+  }
+
+  loadItem(id) {
+    return ApiClient.instance.inventoryService.getItemById(id)
+      .then((item) => App.instance.model.data.currentInventoryItem = item);
   }
 
 }
@@ -59,6 +64,16 @@ class Inventory {
   load() {
     this.spinner.show();
     this.model.loadCurrentItem()
+      .catch((reason) => App.instance.handleError(reason, '[@load_error_text@]'))
+      .finally(() => {
+        this.spinner.hide();
+        Html.updateElement(this.view);
+      });
+  }
+
+  loadItem(id) {
+    this.spinner.show();
+    this.model.loadItem(id)
       .catch((reason) => App.instance.handleError(reason, '[@load_error_text@]'))
       .finally(() => {
         this.spinner.hide();

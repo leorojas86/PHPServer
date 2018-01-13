@@ -23,13 +23,13 @@ class InventoryHeaderView {
     if(this.component.model.currentItem) {
       const pathNames = this.component.model.currentItem.path;
       let index = 0;
-      pathNames.forEach((itemName) => {
+      pathNames.forEach((currentItemName) => {
         if(index === 0) { //First one
           path += `<span id='path_${index}' class="lsf symbol home">home</span>`;
         } else if(index === pathNames.length - 1) { //Last one
-          path += `<span class="lsf symbol arrow">right</span><span id='path_${index}'>${itemName}</span>`;
+          path += `<span class="lsf symbol arrow">right</span><span id='path_${index}'>${currentItemName}</span>`;
         } else {
-          path += `<span class="lsf symbol arrow">right</span><span id='path_${index}' class='clickable_path_item'>${itemName}</span>`;
+          path += `<span class="lsf symbol arrow">right</span><span id='path_${index}' class='clickable_path_item'>${currentItemName}</span>`;
         }
         index++;
       });
@@ -43,6 +43,17 @@ class InventoryHeaderView {
             </div>`;
   }
 
+  onDomUpdated() {
+    let index = 0;
+    const pathNames = this.component.model.currentItem.path;
+    pathNames.forEach((currentItemName) => {
+      if(index < pathNames.length - 1) { //Last one
+        Html.registerClick(`path_${index}`, () => this.componet.onPathItemClicked(index));
+      }
+      index++;
+    });
+  }
+
 }
 
 class InventoryHeader {
@@ -50,6 +61,11 @@ class InventoryHeader {
   constructor() {
     this.model = new InventoryHeaderModel();
     this.view = new InventoryHeaderView(this);
+  }
+
+  onPathItemClicked(index) {
+    const clickedPathItemId = this.component.model.currentItem.pathIds[index];
+    App.instance.inventory.loadItem(clickedPathItemId);
   }
 
 }
