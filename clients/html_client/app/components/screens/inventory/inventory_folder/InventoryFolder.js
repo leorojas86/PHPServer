@@ -24,7 +24,7 @@ class InventoryFolderView {
 
     return `<div id='${this.id}' class='${this.id}'>
               ${children}
-              ${ this.component.spinner.view.buildHTML() }
+              ${ this.component.dropdownMenu.view.buildHTML() }
             </div>`;
   }
 
@@ -40,7 +40,7 @@ class InventoryFolder {
     this.model = new InventoryFolderModel();
     this.view = new InventoryFolderView(this);
     this.children = [];
-    this.spinner = new Spinner('inventory_folder_spinner');
+    this.dropdownMenu = new DropdownMenu('inventory_folder_dropdown_menu');
   }
 
   load() {
