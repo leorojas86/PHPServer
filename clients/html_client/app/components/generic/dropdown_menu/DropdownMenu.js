@@ -23,7 +23,7 @@ class DropdownMenuView {
     }
     return `<div id='${this.id}' class='${this.id} dropdown_menu'>
               ${optionsHTML}
-            <div>`;
+            </div>`;
   }
 
   onDomUpdated() {
