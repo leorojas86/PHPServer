@@ -15,21 +15,21 @@ class BreadcrumbView {
   }
 
   buildHTML() {
-    let path = '';
+    let pathHTML = '';
     let index = 0;
     this.component.model.data.path.forEach((currentItemName) => {
       if(index === 0) { //First one
-        path += `<span id='path_${index}' class="lsf symbol home">home</span>`;
+        pathHTML += `<span id='path_${index}' class="lsf symbol home">home</span>`;
       } else if(index === this.component.model.data.path.length - 1) { //Last one
-        path += `<span class="lsf symbol arrow">right</span><span id='path_${index}'>${currentItemName}</span>`;
+        pathHTML += `<span class="lsf symbol arrow">right</span><span id='path_${index}'>${currentItemName}</span>`;
       } else {
-        path += `<span class="lsf symbol arrow">right</span><span id='path_${index}' class='clickable_path_item'>${currentItemName}</span>`;
+        pathHTML += `<span class="lsf symbol arrow">right</span><span id='path_${index}' class='clickable_path_item'>${currentItemName}</span>`;
       }
       index++;
     });
 
     return `<div id='${this.id}' class='${this.id} breadcrumb'>
-              ${path}
+              ${pathHTML}
             </div>`;
   }
 

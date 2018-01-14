@@ -19,11 +19,10 @@ class InventoryFolderView {
   }
 
   buildHTML() {
-    let children = '';
-    this.component.children.forEach((child) => children += child.view.buildHTML() );
-
+    let childrenHTML = '';
+    this.component.children.forEach((child) => childrenHTML += child.view.buildHTML() );
     return `<div id='${this.id}' class='${this.id}'>
-              ${children}
+              ${childrenHTML}
               ${ this.component.dropdownMenu.view.buildHTML() }
             </div>`;
   }

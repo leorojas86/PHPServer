@@ -15,16 +15,16 @@ class DropdownMenuView {
   }
 
   buildHTML() {
-    let options = '';
+    let optionsHTML = '';
 
     if(this.isShown) {
       this.component.model.data.options.forEach((option) => {
-        options += `<button id='${option.id}' class='${option.id} option'>${option.text}</button>`;
+        optionsHTML += `<button id='${option.id}' class='${option.id} option'>${option.text}</button>`;
       });
     }
 
     return `<div id='${this.id}' class='${this.id} dropdown_menu'>
-              ${options}
+              ${optionsHTML}
             <div>`;
   }
 
