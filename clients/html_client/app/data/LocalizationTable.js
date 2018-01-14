@@ -19,6 +19,8 @@ class LocalizationTable {
       "settings_text": { en: 'Settings', es: 'Configuración' },
       "welcome_text": { en: 'Welcome', es: 'Bienvenid@' },
       "inventory_text": { en: 'Inventory', es: 'Inventario' },
+      "add_file_text": { en: 'Add File', es: 'Agregar Archivo' },
+      "add_folder_text": { en: 'Add Folder', es: 'Agregar Folder' },
       /*Error Codes*/
       "invalid_credentials": { en: 'Invalid email or password.', es: 'Correo o password invalido(s).' }
     };

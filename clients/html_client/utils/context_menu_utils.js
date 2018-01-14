@@ -63,4 +63,3 @@ function onContextMenuButtonClick(option)//TODO: move this to the class
 	ContextMenuUtils.instance.hideContextMenu();
 	ContextMenuUtils.instance.onOptionSelectecCallback(option);
 }
-

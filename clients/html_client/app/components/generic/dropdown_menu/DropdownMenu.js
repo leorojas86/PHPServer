@@ -16,30 +16,27 @@ class DropdownMenuView {
 
   buildHTML() {
     let optionsHTML = '';
-
-    if(this.isShown) {
+    if(this.component.model.isShown) {
       this.component.model.data.options.forEach((option) => {
         optionsHTML += `<button id='${option.id}' class='${option.id} option'>${option.text}</button>`;
       });
     }
-
     return `<div id='${this.id}' class='${this.id} dropdown_menu'>
               ${optionsHTML}
             <div>`;
   }
 
   onDomUpdated() {
-    if(this.isShown) {
-      this.component.model.data.options.forEach((option) => {
-        Html.registerClick(option.id, () => {
-          this.component.hide();
-          option.onClick();
-        });
+    this.component.model.data.options.forEach((option) => {
+      Html.registerClick(option.id, () => {
+        this.component.hide();
+        option.onClick();
       });
-    }
+    });
   }
 
   setPosition(position) {
+    console.log('position', position);
     const element = document.getElementById(this.id);
     element.style.position = "absolute";
     element.style.display  = 'inline';
@@ -58,13 +55,14 @@ class DropdownMenu {
 
   show(options, position) {
     this.model.data.options = options;
-    this.isShown = true;
+    this.model.isShown = true;
     Html.updateElement(this.view);
     this.view.setPosition(position);
+    //document.onclick = () => this.hide();//TODO: Improve this
   }
 
   hide() {
-    this.isShown = false;
+    this.model.isShown = false;
     Html.updateElement(this.view);
   }
 

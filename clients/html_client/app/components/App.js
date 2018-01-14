@@ -69,7 +69,6 @@ class App
 		this.loginPopup = new Popup(new LoginPopup());
     this.userPopup = new Popup(new UserPopup());
 		this.messagePopup = new Popup(new MessagePopup());
-
 		this.screens = {
 			'welcome': new Welcome(),
 			'inventory': new Inventory()

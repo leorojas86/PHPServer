@@ -9,6 +9,17 @@ class InventoryFolderModel {
     return ApiClient.instance.inventoryService.getItemChildren(App.instance.model.data.currentInventoryItem)
       .then((children) => this.children = children);
   }
+
+  getMenuOptions() {
+    return [
+      { id:'add_file', text:'[@add_file_text@]', onClick: () => this.onClick('add_file') },
+      { id:'add_folder', text:'[@add_folder_text@]', onClick: () => this.onClick('add_folder') }
+    ];
+  }
+
+  onClick(action) {
+    alert(action);
+  }
 }
 
 class InventoryFolderView {
@@ -29,6 +40,12 @@ class InventoryFolderView {
 
   onDomUpdated() {
     this.component.children.forEach((child) => child.view.onDomUpdated());
+    const element = document.getElementById(this.id);
+    element.oncontextmenu = (event) => {
+      const position = { x:event.offsetX, y:event.offsetY + 25};
+      this.component.dropdownMenu.show(this.component.model.getMenuOptions(), position);
+      return false;
+    }
   }
 
 }
