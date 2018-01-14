@@ -4,25 +4,7 @@
   margin:0px;
 }
 
-.inventory_header .inventory_breadcrumb {
-  display:inline; margin:3px;
-  font-size:25px;
-}
-
 .inventory_header .search {
   position:absolute; right:0px; margin-right:5px;
   font-size:28px;
-}
-
-.inventory_header .home {
-  font-size:28px;
-}
-
-.inventory_header .arrow {
-  margin:5px;
-  font-size:20px;
-}
-
-.inventory_header .clickable_path_item {
-  text-decoration:underline;
 }

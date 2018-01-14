@@ -28,7 +28,7 @@ class BreadcrumbView {
       index++;
     });
 
-    return `<div id='${this.id}' class='${this.id}'>
+    return `<div id='${this.id}' class='${this.id} breadcrumb'>
               ${path}
             </div>`;
   }
