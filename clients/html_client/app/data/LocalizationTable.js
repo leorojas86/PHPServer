@@ -21,6 +21,9 @@ class LocalizationTable {
       "inventory_text": { en: 'Inventory', es: 'Inventario' },
       "add_file_text": { en: 'Add File', es: 'Agregar Archivo' },
       "add_folder_text": { en: 'Add Folder', es: 'Agregar Folder' },
+      "rename_text": { en: 'Rename', es: 'Renombrar' },
+      "cut_text": { en: 'Cut', es: 'Cortar' },
+      "delete_text": { en: 'Delete', es: 'Borrar' },
       /*Error Codes*/
       "invalid_credentials": { en: 'Invalid email or password.', es: 'Correo o password invalido(s).' }
     };

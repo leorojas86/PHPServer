@@ -10,15 +10,23 @@ class InventoryFolderModel {
       .then((children) => this.children = children);
   }
 
-  getMenuOptions() {
+  getMenuOptions(targetElement) {
+    if(targetElement.id.includes('folder_') || targetElement.id.includes('file_')) {
+      return [
+        { id:'rename', text:'[@rename_text@]', onClick: () => this.onClick('rename', targetElement) },
+        { id:'cut', text:'[@cut_text@]', onClick: () => this.onClick('cut', targetElement) },
+        { id:'delete', text:'[@delete_text@]', onClick: () => this.onClick('delete', targetElement) }
+      ];
+    }
+
     return [
-      { id:'add_file', text:'[@add_file_text@]', onClick: () => this.onClick('add_file') },
-      { id:'add_folder', text:'[@add_folder_text@]', onClick: () => this.onClick('add_folder') }
+      { id:'add_file', text:'[@add_file_text@]', onClick: () => this.onClick('add_file', targetElement) },
+      { id:'add_folder', text:'[@add_folder_text@]', onClick: () => this.onClick('add_folder', targetElement) }
     ];
   }
 
-  onClick(action) {
-    alert(action);
+  onClick(action, targetElement) {
+    alert(action, targetElement);
   }
 }
 
@@ -41,7 +49,7 @@ class InventoryFolderView {
     this.component.children.forEach((child) => child.view.onDomUpdated());
     const element = document.getElementById(this.id);
     element.oncontextmenu = (event) => {
-      App.instance.contextMenu.show(this.component.model.getMenuOptions(), { x:event.clientX, y:event.clientY });
+      App.instance.contextMenu.show(this.component.model.getMenuOptions(event.target), { x:event.clientX, y:event.clientY });
       return false;
     }
   }
