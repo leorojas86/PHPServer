@@ -60,7 +60,7 @@ class InventoryFolder {
     this.children = [];
     return this.model.loadCurrentItemChildren()
       .then(() => {
-        this.model.children.forEach((child) => this.children.push(new InventoryFolderChild(`folder_child_${child.id}`, child)));
+        this.model.children.forEach((child) => this.children.push(new InventoryFolderChild(`${child.type}_${child.id}`, child)));
       });
   }
 

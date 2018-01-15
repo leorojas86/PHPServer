@@ -17,8 +17,8 @@ class InventoryFolderChildView {
 
   buildHTML() {
     return `<div id='${this.id}' class='inventory_folder_child'>
-              <span class='lsf symbol'>${this.component.model.data.type}</span>
-              <span class='name'>${this.component.model.data.name}</span>
+              <span id='${this.id}_icon' class='lsf symbol'>${this.component.model.data.type}</span>
+              <span id='${this.id}_name' class='name'>${this.component.model.data.name}</span>
             </div>`;
   }
 
