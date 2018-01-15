@@ -45,6 +45,7 @@ class AppView {
 		return `<div id='${this.id}' class='${this.id}'>
 							${ this.component.header.view.buildHTML() }
 							${ this.component.model.currentScreen.view.buildHTML() }
+							${ this.component.contextMenu.view.buildHTML() }
 							${ this.component.loginPopup.view.buildHTML() }
               ${ this.component.userPopup.view.buildHTML() }
 							${ this.component.messagePopup.view.buildHTML() }
@@ -66,13 +67,16 @@ class App
 		this.view = new AppView(this);
 		this.header = new Header();
 		this.inventory = new Inventory();
+		this.screens = {
+			'welcome': new Welcome(),
+			'inventory': this.inventory
+		};
+		this.contextMenu = new DropdownMenu('context_menu');
 		this.loginPopup = new Popup(new LoginPopup());
     this.userPopup = new Popup(new UserPopup());
 		this.messagePopup = new Popup(new MessagePopup());
-		this.screens = {
-			'welcome': new Welcome(),
-			'inventory': new Inventory()
-		};
+
+		document.onclick = () => this.contextMenu.hide();
 	}
 
 	handleError(errorData, title) {

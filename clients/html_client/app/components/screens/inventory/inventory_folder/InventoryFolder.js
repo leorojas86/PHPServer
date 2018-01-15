@@ -34,7 +34,6 @@ class InventoryFolderView {
     this.component.children.forEach((child) => childrenHTML += child.view.buildHTML() );
     return `<div id='${this.id}' class='${this.id}'>
               ${childrenHTML}
-              ${ this.component.dropdownMenu.view.buildHTML() }
             </div>`;
   }
 
@@ -42,8 +41,7 @@ class InventoryFolderView {
     this.component.children.forEach((child) => child.view.onDomUpdated());
     const element = document.getElementById(this.id);
     element.oncontextmenu = (event) => {
-      const position = { x:event.offsetX, y:event.offsetY + 25};
-      this.component.dropdownMenu.show(this.component.model.getMenuOptions(), position);
+      App.instance.contextMenu.show(this.component.model.getMenuOptions(), { x:event.clientX, y:event.clientY });
       return false;
     }
   }
@@ -56,7 +54,6 @@ class InventoryFolder {
     this.model = new InventoryFolderModel();
     this.view = new InventoryFolderView(this);
     this.children = [];
-    this.dropdownMenu = new DropdownMenu('inventory_folder_dropdown_menu');
   }
 
   load() {

@@ -58,7 +58,6 @@ class DropdownMenu {
     this.model.isShown = true;
     Html.updateElement(this.view);
     this.view.setPosition(position);
-    //document.onclick = () => this.hide();//TODO: Improve this
   }
 
   hide() {
