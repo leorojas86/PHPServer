@@ -24,6 +24,7 @@ class LocalizationTable {
       "rename_text": { en: 'Rename', es: 'Renombrar' },
       "cut_text": { en: 'Cut', es: 'Cortar' },
       "delete_text": { en: 'Delete', es: 'Borrar' },
+      "paste_text": { en: 'Paste', es: 'Pegar' },
       /*Error Codes*/
       "invalid_credentials": { en: 'Invalid email or password.', es: 'Correo o password invalido(s).' }
     };
