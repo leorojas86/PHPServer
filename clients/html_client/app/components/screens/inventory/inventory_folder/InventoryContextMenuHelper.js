@@ -40,11 +40,16 @@ class InventoryContextMenuHelper {
     switch (action) {
       case 'cut': this.cutingItemId=itemId; break;
       case 'rename':  break;
-      case 'delete':  break;
+      case 'delete': this.deleteItem(itemId);  break;
       case 'add_file':  break;
       case 'add_folder':  break;
       case 'paste':  break;
     }
+  }
+
+  deleteItem(itemId) {
+    const action = () => ApiClient.instance.inventoryService.deleteItem(itemId);
+    App.instance.inventory.exectuteAction(action);
   }
 
 }

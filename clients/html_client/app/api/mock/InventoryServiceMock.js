@@ -48,4 +48,14 @@ class InventoryServiceMock {
     });
   }
 
+  deleteItem(id) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const item = this.items.find((currentItem) => currentItem.id === id);
+        this.items.splice(this.items.indexOf(item), 1);
+        resolve();
+      }, this.responseMiliSec);
+    });
+  }
+
 }
