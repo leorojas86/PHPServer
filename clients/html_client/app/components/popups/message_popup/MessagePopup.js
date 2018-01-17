@@ -16,9 +16,9 @@ class MessagePopupView {
   buildHTML() {
     const data = this.component.model.data;
     return  `<div align='center'>
-               <p class='title'>
+               <span class='title'>
                 <span class="lsf symbol">${data.symbol}</span> ${data.title}
-               </p>
+               </span>
                <p class='message'>${data.message}</p>
                <button id='${this.id}_ok_button'>
                  <span class="lsf symbol">ok</span> [@ok_text@]

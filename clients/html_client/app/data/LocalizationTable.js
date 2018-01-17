@@ -25,6 +25,10 @@ class LocalizationTable {
       "cut_text": { en: 'Cut', es: 'Cortar' },
       "delete_text": { en: 'Delete', es: 'Borrar' },
       "paste_text": { en: 'Paste', es: 'Pegar' },
+      "cancel_text":  { en: 'Cancel', es: 'Cancelar' },
+      "add_file_text": { en: 'Add file', es: 'Agregar archivo' },
+      "add_folder_text": { en: 'Add folder', es: 'Agregar directorio' },
+      "name_text": { en: 'Name', es: 'Nombre' },
       /*Error Codes*/
       "invalid_credentials": { en: 'Invalid email or password.', es: 'Correo o password invalido(s).' }
     };

@@ -41,10 +41,14 @@ class InventoryContextMenuHelper {
       case 'cut': this.cutingItemId=itemId; break;
       case 'rename':  break;
       case 'delete': this.deleteItem(itemId);  break;
-      case 'add_file':  break;
-      case 'add_folder':  break;
+      case 'add_file': this.addItem('file');  break;
+      case 'add_folder': this.addItem('folder');  break;
       case 'paste':  break;
     }
+  }
+
+  addItem(itemType) {
+    App.instance.textPromptPopup.show({ title:`[@add_${itemType}_text@]`, placeholder:'[@name_text@]' });
   }
 
   deleteItem(itemId) {

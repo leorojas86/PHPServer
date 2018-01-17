@@ -49,6 +49,7 @@ class AppView {
 							${ this.component.loginPopup.view.buildHTML() }
               ${ this.component.userPopup.view.buildHTML() }
 							${ this.component.messagePopup.view.buildHTML() }
+							${ this.component.textPromptPopup.view.buildHTML() }
 						</div>`;
 	}
 
@@ -75,6 +76,7 @@ class App
 		this.loginPopup = new Popup(new LoginPopup());
     this.userPopup = new Popup(new UserPopup());
 		this.messagePopup = new Popup(new MessagePopup());
+		this.textPromptPopup = new Popup(new TextPromptPopup());
 
 		document.onclick = () => this.contextMenu.hide();
 	}
