@@ -31,7 +31,11 @@ class TextPromptPopupView {
 
   onDomUpdated() {
     Html.registerMouseDown(`${this.id}_grayout`, () => {});//Do nothing
-    Html.registerClick(`${this.id}_ok_button`, () => this.component.popup.hide());
+    Html.registerClick(`${this.id}_ok_button`, () => {
+      const inputValue = Html.getValue(`${this.id}_input_text`);
+      this.component.popup.hide();
+      this.component.model.data.onTextEntered(inputValue);
+    });
     Html.registerClick(`${this.id}_cancel_button`, () => this.component.popup.hide());
     Html.setDisabled(`${this.id}_ok_button`, true);
     Html.onKeyUp(`${this.id}_input_text`, () => {

@@ -48,7 +48,14 @@ class InventoryContextMenuHelper {
   }
 
   addItem(itemType) {
-    App.instance.textPromptPopup.show({ title:`[@add_${itemType}_text@]`, placeholder:'[@name_text@]' });
+    App.instance.textPromptPopup.show({
+      title:`[@add_${itemType}_text@]`,
+      placeholder:'[@name_text@]',
+      onTextEntered: (text) => {
+        const action = () => ApiClient.instance.inventoryService.addItem(itemType, text, App.instance.model.data.currentInventoryItem);
+        App.instance.inventory.exectuteAction(action);
+      }
+    });
   }
 
   deleteItem(itemId) {

@@ -9,7 +9,7 @@ class InventoryServiceMock {
     ];
     this.mockEnvironment = Environments.get()['mock'];
     this.responseMiliSec = this.mockEnvironment.responseSec * 1000;
-    this.currentId = 2;
+    this.currentId = 3;
   }
 
   getRootItem() {
@@ -53,6 +53,21 @@ class InventoryServiceMock {
       setTimeout(() => {
         const item = this.items.find((currentItem) => currentItem.id === id);
         this.items.splice(this.items.indexOf(item), 1);
+        resolve();
+      }, this.responseMiliSec);
+    });
+  }
+
+  addItem(type, name, parentItem) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        this.currentId++;
+        const path = JSON.parse(JSON.stringify(parentItem.path));
+        path.push(name);
+        const pathIds = JSON.parse(JSON.stringify(parentItem.pathIds));
+        pathIds.push(this.currentId);
+        this.items.push({ id:`${this.currentId}`, name:name, type:type, children:[], path:path, pathIds:pathIds });
+        parentItem.children.push(`${this.currentId}`);
         resolve();
       }, this.responseMiliSec);
     });
