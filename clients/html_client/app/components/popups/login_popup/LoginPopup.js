@@ -33,8 +33,8 @@ class LoginPopupView {
 
   onDomUpdated() {
     Html.registerClick(`${this.id}_login_button`, () => {
-      const email = document.getElementById(`${this.id}_user_email`).value;
-      const password = document.getElementById(`${this.id}_user_password`).value;
+      const email = Html.getValue(`${this.id}_user_email`);
+      const password = Html.getValue(`${this.id}_user_password`);
       this.component.onLoginButtonClick(email, password);
     });
     Html.registerClick(`${this.id}_register_button`, () => this.component.onRegisterButtonClick());
