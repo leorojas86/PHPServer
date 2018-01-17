@@ -45,7 +45,6 @@ class InventoryHeader {
   }
 
   onPathItemClicked(index) {
-    console.log('index', index);
     const clickedPathItemId = this.model.currentItem.pathIds[index];
     App.instance.inventory.loadItem(clickedPathItemId);
   }

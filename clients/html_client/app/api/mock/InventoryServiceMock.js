@@ -62,12 +62,13 @@ class InventoryServiceMock {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         this.currentId++;
+        const id = `${this.currentId}`;
         const path = JSON.parse(JSON.stringify(parentItem.path));
         path.push(name);
         const pathIds = JSON.parse(JSON.stringify(parentItem.pathIds));
-        pathIds.push(this.currentId);
-        this.items.push({ id:`${this.currentId}`, name:name, type:type, children:[], path:path, pathIds:pathIds });
-        parentItem.children.push(`${this.currentId}`);
+        pathIds.push(id);
+        this.items.push({ id:id, name:name, type:type, children:[], path:path, pathIds:pathIds });
+        parentItem.children.push(id);
         resolve();
       }, this.responseMiliSec);
     });
