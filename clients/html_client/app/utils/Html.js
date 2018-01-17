@@ -27,4 +27,25 @@ class Html {
     }
   }
 
+  static setDisabled(id, disabled) {
+    const element = document.getElementById(id);
+    if(element) {
+      element.disabled = disabled;
+    }
+  }
+
+  static onKeyUp(id, onKeyUp) {
+    const element = document.getElementById(id);
+    if(element) {
+      element.onkeyup = onKeyUp;
+    }
+  }
+
+  static getValue(id) {
+    const element = document.getElementById(id);
+    if(element) {
+      return element.value;
+    }
+  }
+
 }
