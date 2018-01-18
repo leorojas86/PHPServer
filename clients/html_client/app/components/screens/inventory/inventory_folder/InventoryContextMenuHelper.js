@@ -1,13 +1,14 @@
 class InventoryContextMenuHelper {
 
-  constructor() {
+  constructor(inventoryFolder) {
     this.cutingItem = null;
+    this.inventoryFolder = inventoryFolder;
   }
 
   registerOnContextMenuEvent(inventoryElement) {
     inventoryElement.oncontextmenu = (event) => {
       const itemId = event.target.getAttribute('itemId');
-      const item = itemId ? App.instance.inventory.model.currentItemComponent.model.children.find((currentItem) => currentItem.id === itemId) : null;
+      const item = itemId ? this.inventoryFolder.model.children.find((currentItem) => currentItem.id === itemId) : null;
       App.instance.contextMenu.show(this.getMenuOptions(item), { x:event.clientX, y:event.clientY });
       return false;
     }

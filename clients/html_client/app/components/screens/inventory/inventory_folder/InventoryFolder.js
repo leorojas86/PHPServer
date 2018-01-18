@@ -42,8 +42,8 @@ class InventoryFolder {
   constructor() {
     this.model = new InventoryFolderModel(this);
     this.view = new InventoryFolderView(this);
+    this.contextMenuHelper = new InventoryContextMenuHelper(this);
     this.children = [];
-    this.contextMenuHelper = new InventoryContextMenuHelper();
   }
 
   load() {
