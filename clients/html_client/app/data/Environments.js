@@ -2,7 +2,7 @@ class Environments {
   static get() {
     return {
       mock: {
-        responseSec: 0.2
+        responseSec: 0.1
       },
       dev: {
 

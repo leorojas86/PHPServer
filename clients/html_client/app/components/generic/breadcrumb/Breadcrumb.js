@@ -17,13 +17,13 @@ class BreadcrumbView {
   buildHTML() {
     let pathHTML = '';
     let index = 0;
-    this.component.model.data.path.forEach((currentItemName) => {
+    this.component.model.data.path.forEach((currentPathItem) => {
       if(index === 0) { //First one
         pathHTML += `<span id='path_${index}' class="lsf symbol home">home</span>`;
       } else if(index === this.component.model.data.path.length - 1) { //Last one
-        pathHTML += `<span class="lsf symbol arrow">right</span><span id='path_${index}'>${currentItemName}</span>`;
+        pathHTML += `<span class="lsf symbol arrow">right</span><span id='path_${index}'>${currentPathItem.name}</span>`;
       } else {
-        pathHTML += `<span class="lsf symbol arrow">right</span><span id='path_${index}' class='clickable_path_item'>${currentItemName}</span>`;
+        pathHTML += `<span class="lsf symbol arrow">right</span><span id='path_${index}' class='clickable_path_item'>${currentPathItem.name}</span>`;
       }
       index++;
     });
@@ -35,10 +35,10 @@ class BreadcrumbView {
 
   onDomUpdated() {
     const path = this.component.model.data.path;
-    path.forEach((currentItemName) => {
-      const index = path.indexOf(currentItemName);
+    path.forEach((currentPathItem) => {
+      const index = path.indexOf(currentPathItem);
       if(index < path.length - 1) { //Not the last one
-        Html.registerClick(`path_${index}`, () => this.component.model.onPathNameClicked(index));
+        Html.registerClick(`path_${index}`, () => this.component.model.onPathNameClicked(currentPathItem));
       }
     });
   }

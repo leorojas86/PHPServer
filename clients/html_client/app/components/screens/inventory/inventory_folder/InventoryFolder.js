@@ -1,14 +1,11 @@
 class InventoryFolderModel {
 
   constructor(component) {
-    this.children = null;
     this.component = component;
   }
 
   loadCurrentItemChildren() {
-    this.children = null;
-    return ApiClient.instance.inventoryService.getItemChildren(App.instance.model.data.currentInventoryItem)
-      .then((children) => this.children = children);
+    return ApiClient.instance.inventoryService.getItemChildren(App.instance.model.data.currentInventoryItem);
   }
 
 }
@@ -45,10 +42,9 @@ class InventoryFolder {
   }
 
   load() {
-    this.children = [];
     return this.model.loadCurrentItemChildren()
-      .then(() => {
-        this.model.children.forEach((child) => this.children.push(new InventoryFolderChild(`${child.id}`, child)));
+      .then((children) => {
+        this.children = children.map((child) => new InventoryFolderChild(`${child.id}`, child));
       });
   }
 

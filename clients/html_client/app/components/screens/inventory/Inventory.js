@@ -65,6 +65,7 @@ class Inventory {
   exectuteAction(actionPromise) {
     this.spinner.show();
     actionPromise()
+      .then(() => this.header.load())
       .then(() => this.model.currentItemComponent.load())
       .catch((reason) => App.instance.handleError(reason, '[@load_error_text@]'))
       .finally(() => {

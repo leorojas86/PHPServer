@@ -49,7 +49,18 @@ class InventoryServiceMock {
   }
 
   getItemPath(item) {
-
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const path = [];
+        let pathItem = item;
+        do {
+          path.push({ id:pathItem.id, name:pathItem.name });
+          pathItem = this.items.find((currentItem) => currentItem.id === pathItem.parentId);
+        } while(pathItem);
+        path.reverse();
+        resolve(path);
+      }, this.responseMiliSec);
+    });
   }
 
   deleteItem(id) {

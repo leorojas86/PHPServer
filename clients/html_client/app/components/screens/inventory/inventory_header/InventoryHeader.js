@@ -4,12 +4,8 @@ class InventoryHeaderModel {
     this.component = component;
   }
 
-  get currentItem() {
-    return App.instance.model.data.currentInventoryItem;
-  }
-
-  updateBreadcrumbData() {
-    this.component.breadcrumb.model.data.path = this.currentItem ? this.currentItem.path : [];
+  loadCurrentItemPath() {
+    return ApiClient.instance.inventoryService.getItemPath(App.instance.model.data.currentInventoryItem);
   }
 
 }
@@ -22,8 +18,6 @@ class InventoryHeaderView {
   }
 
   buildHTML() {
-    this.component.model.updateBreadcrumbData();
-
     return `<div id='${this.id}' class='${this.id}'>
               ${ this.component.breadcrumb.view.buildHTML() }
               <span class="lsf symbol search">search</span>
@@ -44,9 +38,13 @@ class InventoryHeader {
     this.breadcrumb = new Breadcrumb('inventory_breadcrumb', (index) => this.onPathItemClicked(index));
   }
 
-  onPathItemClicked(index) {
-    const clickedPathItemId = this.model.currentItem.pathIds[index];
-    App.instance.inventory.loadItem(clickedPathItemId);
+  load() {
+    return this.model.loadCurrentItemPath()
+      .then((path) => this.breadcrumb.model.data.path = path);
+  }
+
+  onPathItemClicked(pathItem) {
+    App.instance.inventory.loadItem(pathItem.id);
   }
 
 }
