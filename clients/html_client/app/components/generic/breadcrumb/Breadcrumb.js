@@ -19,7 +19,7 @@ class BreadcrumbView {
     let index = 0;
     this.component.model.data.path.forEach((currentPathItem) => {
       if(index === 0) { //First one
-        pathHTML += `<span id='path_${index}' class="lsf symbol home">home</span>`;
+        pathHTML += `<span id='path_${index}' class="lsf symbol home">${currentPathItem.name}</span>`;
       } else if(index === this.component.model.data.path.length - 1) { //Last one
         pathHTML += `<span class="lsf symbol arrow">right</span><span id='path_${index}'>${currentPathItem.name}</span>`;
       } else {

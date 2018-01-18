@@ -2,10 +2,10 @@ class InventoryServiceMock {
 
   constructor() {
     this.items = [
-      { id:'0', name:'#', type:'folder', children:['1','2'], path:['#'], pathIds:['0'], parentId:null },
-      { id:'1', name:'folder 1', type:'folder', children:['3'], path:['#', 'folder 1'], pathIds:['0'], parentId:'0' },
-      { id:'2', name:'file 1', type:'file', path:['#', 'file 1'], pathIds:['0'], parentId:'0' },
-      { id:'3', name:'folder 2', type:'folder', children:[], path:['#', 'folder 1', 'folder 2'], pathIds:['0','1'], parentId:'1' },
+      { id:'0', name:'home', type:'folder', parentId:null, children:['1','2'] },
+      { id:'1', name:'folder 1', type:'folder', parentId:'0', children:['3'] },
+      { id:'2', name:'file 1', type:'file', parentId:'0' },
+      { id:'3', name:'folder 2', type:'folder', parentId:'1', children:[] },
     ];
     this.mockEnvironment = Environments.get()['mock'];
     this.responseMiliSec = this.mockEnvironment.responseSec * 1000;
@@ -16,7 +16,7 @@ class InventoryServiceMock {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if(ApiClient.instance.userService.loggedUser) {
-          const rootItem = this.items.find((currentItem) => currentItem.name === '#');
+          const rootItem = this.items.find((currentItem) => currentItem.parentId === null);
           resolve(rootItem);
         } else {
           resolve(null);
@@ -53,10 +53,10 @@ class InventoryServiceMock {
       setTimeout(() => {
         const path = [];
         let pathItem = item;
-        do {
+        while(pathItem) {
           path.push({ id:pathItem.id, name:pathItem.name });
           pathItem = this.items.find((currentItem) => currentItem.id === pathItem.parentId);
-        } while(pathItem);
+        }
         path.reverse();
         resolve(path);
       }, this.responseMiliSec);
@@ -68,6 +68,8 @@ class InventoryServiceMock {
       setTimeout(() => {
         const item = this.items.find((currentItem) => currentItem.id === id);
         this.items.splice(this.items.indexOf(item), 1);
+        const parentItem = this.items.find((currentItem) => currentItem.id === item.parentId);
+        parentItem.children.splice(parentItem.children.indexOf(item.id), 1);
         resolve();
       }, this.responseMiliSec);
     });
@@ -78,11 +80,7 @@ class InventoryServiceMock {
       setTimeout(() => {
         this.currentId++;
         const id = `${this.currentId}`;
-        const path = JSON.parse(JSON.stringify(parentItem.path));
-        path.push(name);
-        const pathIds = JSON.parse(JSON.stringify(parentItem.pathIds));
-        pathIds.push(id);
-        this.items.push({ id:id, name:name, type:type, children:[], path:path, pathIds:pathIds, parentId:parentItem.id });
+        this.items.push({ id:id, name:name, type:type, parentId:parentItem.id, children:[] });
         parentItem.children.push(id);
         resolve();
       }, this.responseMiliSec);
