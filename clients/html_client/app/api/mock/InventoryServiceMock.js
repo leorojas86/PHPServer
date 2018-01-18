@@ -63,10 +63,9 @@ class InventoryServiceMock {
     });
   }
 
-  deleteItem(id) {
+  deleteItem(item) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        const item = this.items.find((currentItem) => currentItem.id === id);
         this.items.splice(this.items.indexOf(item), 1);
         const parentItem = this.items.find((currentItem) => currentItem.id === item.parentId);
         parentItem.children.splice(parentItem.children.indexOf(item.id), 1);
@@ -82,6 +81,15 @@ class InventoryServiceMock {
         const id = `${this.currentId}`;
         this.items.push({ id:id, name:name, type:type, parentId:parentItem.id, children:[] });
         parentItem.children.push(id);
+        resolve();
+      }, this.responseMiliSec);
+    });
+  }
+
+  renameItem(item, newName) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        item.name = newName;
         resolve();
       }, this.responseMiliSec);
     });

@@ -1,49 +1,45 @@
 class InventoryContextMenuHelper {
 
   constructor() {
-    this.cutingItemId = null;
+    this.cutingItem = null;
   }
 
   registerOnContextMenuEvent(inventoryElement) {
     inventoryElement.oncontextmenu = (event) => {
-      const itemType = event.target.getAttribute('itemType');
       const itemId = event.target.getAttribute('itemId');
-      App.instance.contextMenu.show(this.getMenuOptions(itemType, itemId), { x:event.clientX, y:event.clientY });
+      const item = itemId ? App.instance.inventory.model.currentItemComponent.model.children.find((currentItem) => currentItem.id === itemId) : null;
+      App.instance.contextMenu.show(this.getMenuOptions(item), { x:event.clientX, y:event.clientY });
       return false;
     }
   }
 
-  getMenuOptions(itemType, itemId) {
-    switch (itemType) {
-      case 'folder':
-      case 'file':
-        return [
-          { id:'rename', text:'[@rename_text@]', onClick: () => this.onClick('rename', itemId) },
-          { id:'cut', text:'[@cut_text@]', onClick: () => this.onClick('cut', itemId) },
-          { id:'delete', text:'[@delete_text@]', onClick: () => this.onClick('delete', itemId) }
-        ];
-      break;
-      default:
-        const defaultOptions = [
-          { id:'add_file', text:'[@add_file_text@]', onClick: () => this.onClick('add_file', itemId) },
-          { id:'add_folder', text:'[@add_folder_text@]', onClick: () => this.onClick('add_folder', itemId) }
-        ];
-        if(this.cutingItemId) {
-          defaultOptions.push({ id:'paste', text:'[@paste_text@]', onClick: () => this.onClick('paste', itemId) });
-        }
-        return defaultOptions;
-      break;
+  getMenuOptions(item) {
+    if(item) {
+      return [
+        { id:'rename', text:'[@rename_text@]', onClick: () => this.onClick('rename', item) },
+        { id:'cut', text:'[@cut_text@]', onClick: () => this.onClick('cut', item) },
+        { id:'delete', text:'[@delete_text@]', onClick: () => this.onClick('delete', item) }
+      ];
+    } else {
+      const defaultOptions = [
+        { id:'add_file', text:'[@add_file_text@]', onClick: () => this.onClick('add_file', item) },
+        { id:'add_folder', text:'[@add_folder_text@]', onClick: () => this.onClick('add_folder', item) }
+      ];
+      if(this.cutingItem) {
+        defaultOptions.push({ id:'paste', text:'[@paste_text@]', onClick: () => this.onClick('paste', item) });
+      }
+      return defaultOptions;
     }
   }
 
-  onClick(action, itemId) {
+  onClick(action, item) {
     switch (action) {
-      case 'cut': this.cutingItemId=itemId; break;
-      case 'rename':  break;
-      case 'delete': this.deleteItem(itemId);  break;
+      case 'cut': this.cutingItem=item; break;
+      case 'rename': this.renameItem(item);  break;
+      case 'delete': this.deleteItem(item);  break;
       case 'add_file': this.addItem('file');  break;
       case 'add_folder': this.addItem('folder');  break;
-      case 'paste':  break;
+      case 'paste': this.pastItem(item);  break;
     }
   }
 
@@ -58,9 +54,25 @@ class InventoryContextMenuHelper {
     });
   }
 
-  deleteItem(itemId) {
-    const action = () => ApiClient.instance.inventoryService.deleteItem(itemId);
+  deleteItem(item) {
+    const action = () => ApiClient.instance.inventoryService.deleteItem(item);
     App.instance.inventory.exectuteAction(action);
+  }
+
+  renameItem(item) {
+    App.instance.textPromptPopup.show({
+      title:`[@change_name_text@]`,
+      placeholder:'[@name_text@]',
+      value: item.name,
+      onTextEntered: (text) => {
+        const action = () => ApiClient.instance.inventoryService.renameItem(item, text);
+        App.instance.inventory.exectuteAction(action);
+      }
+    });
+  }
+
+  pasteItem(item) {
+
   }
 
 }

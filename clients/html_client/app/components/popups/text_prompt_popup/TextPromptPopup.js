@@ -18,7 +18,7 @@ class TextPromptPopupView {
     return  `<div align='center'>
                <span class='title'>${data.title}</span>
                <p>
-                <input type='text' id='${this.id}_input_text' placeholder='${data.placeholder}' value=''>
+                <input type='text' id='${this.id}_input_text' placeholder='${data.placeholder}' value='${data.value ? data.value : ''}'>
                </p>
                <button id='${this.id}_ok_button'>
                  <span class="lsf symbol">ok</span> [@ok_text@]

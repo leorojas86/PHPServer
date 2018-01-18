@@ -2,10 +2,15 @@ class InventoryFolderModel {
 
   constructor(component) {
     this.component = component;
+    this.children = [];
   }
 
   loadCurrentItemChildren() {
-    return ApiClient.instance.inventoryService.getItemChildren(App.instance.model.data.currentInventoryItem);
+    return ApiClient.instance.inventoryService.getItemChildren(App.instance.model.data.currentInventoryItem)
+      .then((children) => {
+        this.children = children;
+        return children;
+      });
   }
 
 }

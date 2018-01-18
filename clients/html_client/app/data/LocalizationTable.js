@@ -28,6 +28,7 @@ class LocalizationTable {
       "cancel_text":  { en: 'Cancel', es: 'Cancelar' },
       "add_file_text": { en: 'Add file', es: 'Agregar archivo' },
       "add_folder_text": { en: 'Add folder', es: 'Agregar directorio' },
+      "change_name_text": { en: 'Change name', es: 'Cambio de nombre' },
       "name_text": { en: 'Name', es: 'Nombre' },
       /*Error Codes*/
       "invalid_credentials": { en: 'Invalid email or password.', es: 'Correo o password invalido(s).' }
