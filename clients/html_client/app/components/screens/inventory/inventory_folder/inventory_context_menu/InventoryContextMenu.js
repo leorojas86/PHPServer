@@ -17,7 +17,9 @@ class InventoryContextMenuModel {
         { id:'add_file', text:'[@add_file_text@]', symbol:'file', onClick:() => this.onClick('add_file', item) },
         { id:'add_folder', text:'[@add_folder_text@]', symbol:'folder', onClick:() => this.onClick('add_folder', item) }
       ];
-      if(this.cutingItem) {
+      if(this.cutingItem &&
+         this.cutingItem.parentId != App.instance.model.data.currentInventoryItem.id &&
+         !App.instance.inventory.header.breadcrumb.model.isInPath(this.cutingItem.id)) {
         defaultOptions.push({ id:'paste', text:'[@paste_text@]', symbol:'copy', onClick:() => this.onClick('paste', item) });
       }
       return defaultOptions;

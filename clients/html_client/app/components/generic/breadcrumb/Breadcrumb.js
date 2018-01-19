@@ -5,6 +5,11 @@ class BreadcrumbModel {
     this.onPathNameClicked = onPathNameClicked;
   }
 
+  isInPath(itemId) {
+    const pathItem = this.data.path.find((currentPathItem) => currentPathItem.id === itemId);
+    return pathItem != null;
+  }
+
 }
 
 class BreadcrumbView {
