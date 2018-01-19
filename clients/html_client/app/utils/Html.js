@@ -2,11 +2,9 @@ class Html {
 
   static updateElement(view) {
     const element = document.getElementById(view.id);
-
     if(element) {
       const htmlText = view.buildHTML();
       element.outerHTML = Localization.instance.localizeHTML(htmlText);
-
       if(view.onDomUpdated) {
         view.onDomUpdated();
       }
@@ -18,39 +16,23 @@ class Html {
   }
 
   static registerMouseDown(id, onClick) {
-    const element = document.getElementById(id);
-    if(element) {
-      element.onmousedown = onClick;
-    }
+    document.getElementById(id).onmousedown = onClick;
   }
 
   static setDisabled(id, disabled) {
-    const element = document.getElementById(id);
-    if(element) {
-      element.disabled = disabled;
-    }
+    document.getElementById(id).disabled = disabled;
   }
 
   static isDisabled(id) {
-    const element = document.getElementById(id);
-    if(element) {
-      return element.disabled;
-    }
-    return true;
+    return document.getElementById(id).disabled;
   }
 
   static onKeyUp(id, onKeyUp) {
-    const element = document.getElementById(id);
-    if(element) {
-      element.onkeyup = onKeyUp;
-    }
+    document.getElementById(id).onkeyup = onKeyUp;
   }
 
   static getValue(id) {
-    const element = document.getElementById(id);
-    if(element) {
-      return element.value;
-    }
+    return document.getElementById(id).value;
   }
 
 }
