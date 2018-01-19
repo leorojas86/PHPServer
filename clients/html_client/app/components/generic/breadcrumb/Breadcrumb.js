@@ -43,7 +43,7 @@ class BreadcrumbView {
     path.forEach((currentPathItem) => {
       const index = path.indexOf(currentPathItem);
       if(index < path.length - 1) { //Not the last one
-        Html.registerClick(`path_${index}`, () => this.component.model.onPathNameClicked(currentPathItem));
+        Html.onClick(`path_${index}`, () => this.component.model.onPathNameClicked(currentPathItem));
       }
     });
   }

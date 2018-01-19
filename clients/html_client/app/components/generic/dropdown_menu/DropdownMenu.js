@@ -32,7 +32,7 @@ class DropdownMenuView {
   onDomUpdated() {
     if(this.component.model.isShown) {
       this.component.model.data.options.forEach((option) => {
-        Html.registerClick(option.id, () => {
+        Html.onClick(option.id, () => {
           this.component.hide();
           option.onClick();
         });

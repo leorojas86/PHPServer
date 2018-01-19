@@ -30,9 +30,9 @@ class TextPromptPopupView {
   }
 
   onDomUpdated() {
-    Html.registerMouseDown(`${this.id}_grayout`, () => {});//Do not automatically close modal when clicked outside the modal
-    Html.registerClick(`${this.id}_ok_button`, () => this.submit());
-    Html.registerClick(`${this.id}_cancel_button`, () => this.component.popup.hide());
+    Html.onMouseDown(`${this.id}_grayout`, () => {});//Do not automatically close modal when clicked outside the modal
+    Html.onClick(`${this.id}_ok_button`, () => this.submit());
+    Html.onClick(`${this.id}_cancel_button`, () => this.component.popup.hide());
     Html.setDisabled(`${this.id}_ok_button`, true);
     Html.onKeyUp(`${this.id}_input_text`, (key) => {
       const inputValue = Html.getValue(`${this.id}_input_text`);

@@ -27,8 +27,8 @@ class MessagePopupView {
   }
 
   onDomUpdated() {
-    Html.registerMouseDown(`${this.id}_grayout`, () => {});//Do nothing
-    Html.registerClick(`${this.id}_ok_button`, () => this.component.popup.hide());
+    Html.onMouseDown(`${this.id}_grayout`, () => {});//Do nothing
+    Html.onClick(`${this.id}_ok_button`, () => this.component.popup.hide());
   }
 
 }

@@ -23,7 +23,7 @@ class InventoryFolderChildView {
   }
 
   onDomUpdated() {
-    Html.registerClick(this.id, () => this.component.onClick());
+    Html.onClick(this.id, () => this.component.onClick());
   }
 
 }

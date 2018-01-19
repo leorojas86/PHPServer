@@ -38,9 +38,9 @@ class HeaderView {
 
   onDomUpdated() {
     if(this.component.model.user) {
-      Html.registerClick(`${this.id}_user_button`, () => this.component.onUserButtonClicked());
+      Html.onClick(`${this.id}_user_button`, () => this.component.onUserButtonClicked());
     } else {
-      Html.registerClick(`${this.id}_login_button`, () => this.component.onLoginButtonClicked());
+      Html.onClick(`${this.id}_login_button`, () => this.component.onLoginButtonClicked());
     }
   }
 

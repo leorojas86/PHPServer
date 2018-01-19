@@ -11,11 +11,11 @@ class Html {
     }
   }
 
-  static registerClick(id, onClick) {
+  static onClick(id, onClick) {
     document.getElementById(id).onclick = onClick;
   }
 
-  static registerMouseDown(id, onClick) {
+  static onMouseDown(id, onClick) {
     document.getElementById(id).onmousedown = onClick;
   }
 

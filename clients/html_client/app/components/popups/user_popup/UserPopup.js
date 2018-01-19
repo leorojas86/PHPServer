@@ -39,8 +39,8 @@ class UserPopupView {
   }
 
   onDomUpdated() {
-    Html.registerClick(`${this.id}_logout_button`, () => this.component.onLogoutButtonClick());
-    Html.registerClick(`${this.id}_settings_button`, () => this.component.onSettingButtonClicked());
+    Html.onClick(`${this.id}_logout_button`, () => this.component.onLogoutButtonClick());
+    Html.onClick(`${this.id}_settings_button`, () => this.component.onSettingButtonClicked());
   }
 
 }
