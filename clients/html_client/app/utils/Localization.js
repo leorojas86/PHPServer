@@ -11,18 +11,15 @@ class Localization {
   _getLocalizedText(match) {
     const localizeKey = match.replace('[@', '').replace('@]', '');
     const localizedText = this.localizationTable[localizeKey];
-
     if(localizedText) {
       return localizedText[this.currentLanguage];
     }
-
     return null;
   }
 
   localizeHTML(html) {
     const regex = /\[@+\w+\@\]/g;
     const matches = html.match(regex);
-    //console.log('html', html);
 
     if(matches) {
       matches.forEach((match) => {

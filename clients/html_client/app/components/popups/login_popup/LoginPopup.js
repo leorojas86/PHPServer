@@ -37,7 +37,7 @@ class LoginPopupView {
       const password = Html.getValue(`${this.id}_user_password`);
       this.component.onLoginButtonClick(email, password);
     });
-    Html.registerClick(`${this.id}_register_button`, () => this.component.onRegisterButtonClick());
+    Html.registerClick(`${this.id}_register_button`, () => this.component.popup.hide());
   }
 
 }
@@ -59,10 +59,6 @@ class LoginPopup {
       })
       .catch((reason) => App.instance.handleError(reason, '[@login_failed_text@]'))
       .finally(() => this.spinner.hide());
-  }
-
-  onRegisterButtonClick() {
-    this.popup.hide();
   }
 
 }
