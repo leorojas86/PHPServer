@@ -1,6 +1,6 @@
 html {
 	-webkit-touch-callout:none; -moz-user-select:none; -webkit-user-select:none; /*HACK: Fix iOS oncontextmenu event*/
-	background:rgba(198, 204, 213, 1);
+	background:#c6ccd5;
 }
 
 body {
@@ -10,6 +10,7 @@ body {
 
 input {
 	color:#3D557E;
+	border:none; border-radius:3px;
 }
 
 button {
@@ -17,6 +18,7 @@ button {
 	color:#3D557E; background-color:white;
 	border:none; border-radius:5px; box-shadow:0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
 	cursor:pointer; cursor:hand;
+	font-size:15px;
 }
 
 button:disabled {

@@ -5,7 +5,6 @@
 
 .user_popup button {
 	display:block; width:120px; margin-top:15px;
-	font-size:15px;
 	text-align:left;
 }
 
@@ -14,5 +13,5 @@
 }
 
 .user_popup div.grayout {
-	background:rgba(0, 0, 0, 0);
+	background:transparent;
 }

@@ -8,7 +8,6 @@
 
 .login_popup button {
 	display:block; width:120px; margin-top:25px;
-	font-size:15px;
 	text-align:left;
 }
 
@@ -17,5 +16,5 @@
 }
 
 .login_popup div.grayout {
-	background:rgba(0, 0, 0, 0);
+	background:transparent;
 }
