@@ -1,7 +1,7 @@
 class UserServiceMock {
 
   constructor() {
-    this.users = [{ name: 'test', email: 'test@test.com', password: 'test' }];
+    this.users = [{ name: 'test', email: 'test@test.com', password: 'test',  rootInventoryItemId:'0'}];
     this.loggedUser = null;
     this.mockEnvironment = Environments.get()['mock'];
     this.responseMiliSec = this.mockEnvironment.responseSec * 1000;
@@ -21,7 +21,6 @@ class UserServiceMock {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         const foundUser = this.users.find((user) => user.email === email && user.password === password);
-
         if(foundUser) {
           this.loggedUser = foundUser;
           resolve(foundUser);

@@ -13,16 +13,7 @@ class InventoryServiceMock {
   }
 
   getRootItem() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if(ApiClient.instance.userService.loggedUser) {
-          const rootItem = this.items.find((currentItem) => currentItem.parentId === null);
-          resolve(rootItem);
-        } else {
-          resolve(null);
-        }
-      }, this.responseMiliSec);
-    });
+    return this.getItemById(ApiClient.instance.userService.loggedUser.rootInventoryItemId);
   }
 
   getItemById(id) {
