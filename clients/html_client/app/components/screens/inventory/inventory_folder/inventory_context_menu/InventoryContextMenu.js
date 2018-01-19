@@ -1,7 +1,7 @@
 class InventoryContextMenuModel {
 
   constructor(component) {
-    this.cutingItem = null;
+    this.cuttingItem = null;
     this.component = component;
   }
 
@@ -17,9 +17,9 @@ class InventoryContextMenuModel {
         { id:'add_file', text:'[@add_file_text@]', symbol:'file', onClick:() => this.onClick('add_file', item) },
         { id:'add_folder', text:'[@add_folder_text@]', symbol:'folder', onClick:() => this.onClick('add_folder', item) }
       ];
-      if(this.cutingItem &&
-         this.cutingItem.parentId != App.instance.model.data.currentInventoryItem.id &&
-         !App.instance.inventory.header.breadcrumb.model.isInPath(this.cutingItem.id)) {
+      if(this.cuttingItem &&
+         this.cuttingItem.parentId != App.instance.model.data.currentInventoryItem.id &&
+         !App.instance.inventory.header.breadcrumb.model.isInPath(this.cuttingItem.id)) {
         defaultOptions.push({ id:'paste', text:'[@paste_text@]', symbol:'copy', onClick:() => this.onClick('paste', item) });
       }
       return defaultOptions;
@@ -28,12 +28,12 @@ class InventoryContextMenuModel {
 
   onClick(action, item) {
     switch (action) {
-      case 'cut': this.cutingItem=item; break;
+      case 'cut': this.cuttingItem=item; break;
       case 'rename': this.component.renameItem(item);  break;
       case 'delete': this.component.deleteItem(item);  break;
       case 'add_file': this.component.addItem('file');  break;
       case 'add_folder': this.component.addItem('folder');  break;
-      case 'paste': this.component.pastItem(item);  break;
+      case 'paste': this.component.pasteItem();  break;
     }
   }
 
@@ -93,7 +93,8 @@ class InventoryContextMenu {
     });
   }
 
-  pasteItem(item) {
-
+  pasteItem() {
+    const action = () => ApiClient.instance.inventoryService.moveItem(this.model.cuttingItem, App.instance.model.data.currentInventoryItem);
+    App.instance.inventory.exectuteAction(action);
   }
 }

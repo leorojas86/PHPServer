@@ -86,4 +86,16 @@ class InventoryServiceMock {
     });
   }
 
+  moveItem(item, newParent) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const parentItem = this.items.find((currentItem) => currentItem.id === item.parentId);
+        parentItem.children.splice(parentItem.children.indexOf(item.id), 1);
+        newParent.children.push(item.id);
+        item.parentId = newParent.id;
+        resolve();
+      }, this.responseMiliSec);
+    });
+  }
+
 }
