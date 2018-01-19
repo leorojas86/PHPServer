@@ -32,7 +32,7 @@ class InventoryFolderView {
 
   onDomUpdated() {
     this.component.children.forEach((child) => child.view.onDomUpdated());
-    this.component.contextMenuHelper.registerOnContextMenuEvent(document.getElementById(this.id));
+    this.component.contextMenu.view.onDomUpdated();
   }
 
 }
@@ -42,7 +42,7 @@ class InventoryFolder {
   constructor() {
     this.model = new InventoryFolderModel(this);
     this.view = new InventoryFolderView(this);
-    this.contextMenuHelper = new InventoryContextMenuHelper(this);
+    this.contextMenu = new InventoryContextMenu(this);
     this.children = [];
   }
 

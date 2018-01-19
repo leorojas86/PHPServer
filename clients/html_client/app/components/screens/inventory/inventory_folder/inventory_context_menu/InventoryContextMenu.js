@@ -58,9 +58,9 @@ class InventoryContextMenuView {
 
 class InventoryContextMenu {
 
-  constructor() {
-    this.model = new InventoryContextMenuModel(this);
-    this.view = new InventoryContextMenuView(this);
+  constructor(inventoryFolder) {
+    this.model = new InventoryContextMenuModel(this, inventoryFolder);
+    this.view = new InventoryContextMenuView(this, inventoryFolder);
   }
 
   addItem(itemType) {
