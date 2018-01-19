@@ -13,6 +13,6 @@
 }
 
 .inventory_folder_child .name {
-  position:relative;
+  position:relative; padding:1px;
   font-size:17px;
 }

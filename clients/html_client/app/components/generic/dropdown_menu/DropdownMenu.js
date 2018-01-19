@@ -18,7 +18,9 @@ class DropdownMenuView {
     if(this.component.model.isShown) {
       let optionsHTML = '';
       this.component.model.data.options.forEach((option) => {
-        optionsHTML += `<button id='${option.id}' class='${option.id} option'>${option.text}</button>`;
+        optionsHTML += `<button id='${option.id}' class='${option.id} option'>
+                          <span class="lsf symbol">${option.symbol}</span> ${option.text}
+                        </button>`;
       });
       return `<div id='${this.id}' class='${this.id} dropdown_menu'>
                 ${optionsHTML}

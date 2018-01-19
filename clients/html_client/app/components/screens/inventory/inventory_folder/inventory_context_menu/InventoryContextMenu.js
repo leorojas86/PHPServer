@@ -8,17 +8,17 @@ class InventoryContextMenuModel {
   getMenuOptions(item) {
     if(item) {
       return [
-        { id:'rename', text:'[@rename_text@]', onClick: () => this.onClick('rename', item) },
-        { id:'cut', text:'[@cut_text@]', onClick: () => this.onClick('cut', item) },
-        { id:'delete', text:'[@delete_text@]', onClick: () => this.onClick('delete', item) }
+        { id:'rename', text:'[@rename_text@]', symbol: 'edit', onClick: () => this.onClick('rename', item) },
+        { id:'cut', text:'[@cut_text@]', symbol: 'copy', onClick: () => this.onClick('cut', item) },
+        { id:'delete', text:'[@delete_text@]', symbol: 'delete', onClick: () => this.onClick('delete', item) }
       ];
     } else {
       const defaultOptions = [
-        { id:'add_file', text:'[@add_file_text@]', onClick: () => this.onClick('add_file', item) },
-        { id:'add_folder', text:'[@add_folder_text@]', onClick: () => this.onClick('add_folder', item) }
+        { id:'add_file', text:'[@add_file_text@]', symbol: 'file', onClick: () => this.onClick('add_file', item) },
+        { id:'add_folder', text:'[@add_folder_text@]', symbol: 'folder', onClick: () => this.onClick('add_folder', item) }
       ];
       if(this.cutingItem) {
-        defaultOptions.push({ id:'paste', text:'[@paste_text@]', onClick: () => this.onClick('paste', item) });
+        defaultOptions.push({ id:'paste', text:'[@paste_text@]', symbol: 'copy', onClick: () => this.onClick('paste', item) });
       }
       return defaultOptions;
     }
