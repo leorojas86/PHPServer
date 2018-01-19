@@ -34,6 +34,14 @@ class Html {
     }
   }
 
+  static isDisabled(id) {
+    const element = document.getElementById(id);
+    if(element) {
+      return element.disabled;
+    }
+    return true;
+  }
+
   static onKeyUp(id, onKeyUp) {
     const element = document.getElementById(id);
     if(element) {

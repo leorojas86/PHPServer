@@ -35,11 +35,10 @@ class TextPromptPopupView {
     Html.registerClick(`${this.id}_cancel_button`, () => this.component.popup.hide());
     Html.setDisabled(`${this.id}_ok_button`, true);
     Html.onKeyUp(`${this.id}_input_text`, (key) => {
-      if(key.code === 'Enter') {
+      const inputValue = Html.getValue(`${this.id}_input_text`);
+      Html.setDisabled(`${this.id}_ok_button`, !inputValue);
+      if(inputValue && key.code === 'Enter') {
         this.submit();
-      } else {
-        const inputValue = Html.getValue(`${this.id}_input_text`);
-        Html.setDisabled(`${this.id}_ok_button`, !inputValue);
       }
     });
   }
