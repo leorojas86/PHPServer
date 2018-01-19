@@ -18,27 +18,21 @@ class HeaderView {
 
   buildHTML() {
     const currentScreenTitleText = this.component.model.currentScreen + '_text';
-    const rightButtons = this.component.model.user ?
-     `<button id='${this.id}_user_button' class='header_user_button'>
+    const rightButton = this.component.model.user ?
+     `<button id='${this.id}_user_button' class='header_user_button right'>
        <span class="lsf symbol">user</span>
       </button>`
      :
-     `<button id='${this.id}_login_button' class='header_user_button'>
+     `<button id='${this.id}_login_button' class='header_user_button right'>
        <span class="lsf symbol">in</span>
       </button>`;
 
     return `<div id='${this.id}' class='${this.id}'>
-              <div class='left_buttons_container'>
-                <button id='${this.id}_menu_button'>
-                 <span class="lsf symbol">menu</span>
-                </button>
-              </div>
-              <div class='screen_title_container'>
-                <span>[@${currentScreenTitleText}@]</span>
-              </div>
-              <div class='right_buttons_container'>
-                ${rightButtons}
-              </div>
+              <button id='${this.id}_menu_button' class='left'>
+               <span class="lsf symbol">menu</span>
+              </button>
+              <span class='screen_title'>[@${currentScreenTitleText}@]</span>
+              ${rightButton}
             </div>`;
   }
 
