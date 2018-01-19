@@ -30,12 +30,14 @@ class DropdownMenuView {
   }
 
   onDomUpdated() {
-    this.component.model.data.options.forEach((option) => {
-      Html.registerClick(option.id, () => {
-        this.component.hide();
-        option.onClick();
+    if(this.component.model.isShown) {
+      this.component.model.data.options.forEach((option) => {
+        Html.registerClick(option.id, () => {
+          this.component.hide();
+          option.onClick();
+        });
       });
-    });
+    }
   }
 
   setPosition(position) {

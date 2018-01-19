@@ -27,8 +27,10 @@ class PopupView {
   }
 
   onDomUpdated() {
-    Html.registerMouseDown(`${this.id}_grayout`, () => this.component.hide());
-    this.contentComponent.view.onDomUpdated();
+    if(this.component.model.isShown) {
+      Html.registerMouseDown(`${this.id}_grayout`, () => this.component.hide());
+      this.contentComponent.view.onDomUpdated();
+    }
   }
 
 }

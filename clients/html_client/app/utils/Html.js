@@ -14,10 +14,7 @@ class Html {
   }
 
   static registerClick(id, onClick) {
-    const element = document.getElementById(id);
-    if(element) {
-      element.onclick = onClick;
-    }
+    document.getElementById(id).onclick = onClick;
   }
 
   static registerMouseDown(id, onClick) {

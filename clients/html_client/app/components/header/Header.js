@@ -37,8 +37,11 @@ class HeaderView {
   }
 
   onDomUpdated() {
-    Html.registerClick(`${this.id}_user_button`, () => this.component.onUserButtonClicked());
-    Html.registerClick(`${this.id}_login_button`, () => this.component.onLoginButtonClicked());
+    if(this.component.model.user) {
+      Html.registerClick(`${this.id}_user_button`, () => this.component.onUserButtonClicked());
+    } else {
+      Html.registerClick(`${this.id}_login_button`, () => this.component.onLoginButtonClicked());
+    }
   }
 
 }
