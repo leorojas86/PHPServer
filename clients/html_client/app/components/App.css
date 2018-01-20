@@ -10,7 +10,7 @@ body {
 }
 
 input {
-	width:130px;
+	width:130px; margin:5px;
 	color:#3D557E;
 	border:none; border-radius:3px;
 	font-size:15px;
