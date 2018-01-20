@@ -15,8 +15,16 @@ class Html {
     document.getElementById(id).onclick = onClick;
   }
 
-  static onMouseDown(id, onClick) {
-    document.getElementById(id).onmousedown = onClick;
+  static onMouseDown(id, onMouseDown) {
+    document.getElementById(id).onmousedown = onMouseDown;
+  }
+
+  static onKeyUp(id, onKeyUp) {
+    document.getElementById(id).onkeyup = onKeyUp;
+  }
+
+  static onChange(id, onChange) {
+    document.getElementById(id).onchange = onChange;
   }
 
   static setDisabled(id, disabled) {
@@ -25,10 +33,6 @@ class Html {
 
   static isDisabled(id) {
     return document.getElementById(id).disabled;
-  }
-
-  static onKeyUp(id, onKeyUp) {
-    document.getElementById(id).onkeyup = onKeyUp;
   }
 
   static getValue(id) {

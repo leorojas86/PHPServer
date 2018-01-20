@@ -8,8 +8,8 @@ class AppModel {
 
 	loadDefaultAppData() {
 		this.data = {
-			env: 'mock',
 			user: null,
+			language:'en',
 			currentScreen: 'welcome',
 			currentInventoryItem: null
 		};//Default values

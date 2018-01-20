@@ -10,15 +10,16 @@ class SettingsPopupView {
   }
 
   buildHTML() {
+    const currentLanguage = App.instance.model.data.language;
     return `<div align='center'>
               <span class='title'>
                <span class="lsf symbol">setting</span> [@settings_text@]
               </span>
               <div class='setting'>
                 <span>[@language_text@]:</span>
-                <select>
-                  <option value="en">English</option>
-                  <option value="es">Español</option>
+                <select id='${this.id}_language_select'>
+                  <option value="en" ${ currentLanguage === 'en' ? 'selected' : '' }>English</option>
+                  <option value="es" ${ currentLanguage === 'es' ? 'selected' : '' }>Español</option>
                 </select>
               </div>
               <div class='setting'>
@@ -37,6 +38,7 @@ class SettingsPopupView {
   onDomUpdated() {
     Html.onMouseDown(`${this.id}_grayout`, () => {});//Do nothing
     Html.onClick(`${this.id}_ok_button`, () => this.component.popup.hide());
+    Html.onChange(`${this.id}_language_select`, (event) => this.component.selectLanguage(event.target.value));
   }
 
 }
@@ -46,6 +48,12 @@ class SettingsPopup {
   constructor() {
     this.model = new SettingsPopupModel(this);
     this.view = new SettingsPopupView(this);
+  }
+
+  selectLanguage(value) {
+    App.instance.model.data.language = value;
+    Localization.instance.currentLanguage = App.instance.model.data.language;
+    Html.updateElement(App.instance.view);
   }
 
 }

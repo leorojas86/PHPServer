@@ -4,7 +4,7 @@ class LoginPopupMode {
     this.isShown = false;
   }
 
-  get inputValues() { return App.instance.model.data.env === 'prod' ? { email: '', password: ''} : { email: 'test@test.com', password: 'test'}; }
+  get inputValues() { return Config.get().environment === 'prod' ? { email: '', password: ''} : { email: 'test@test.com', password: 'test'}; }
 
 }
 

@@ -1,4 +1,4 @@
 window.onload = () => {
-	Localization.instance.initialize(LocalizationTable.get(), Config.get().defaultLanguage);
+	Localization.instance.initialize(LocalizationTable.get(), App.instance.model.data.language);
 	Html.updateElement(App.instance.view);
 };
