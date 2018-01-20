@@ -1,7 +1,7 @@
 .inventory_folder_child {
-  float:left; width:70px; height:80px; margin:5px;
+  float:left; width:80px; height:80px; margin:5px; padding:5px;
   text-align:center;
-  text-overflow:ellipsis; overflow:hidden; white-space:nowrap;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
   background-color:white;
   border:none; border-radius:5px; box-shadow:0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
   cursor:pointer; cursor:hand;
@@ -12,7 +12,7 @@
   font-size:50px;
 }
 
-.inventory_folder_child .name {
-  position:relative; padding:1px;
-  font-size:17px;
+.inventory_folder_child .name  {
+  position:relative;
+  font-size:20px;
 }
