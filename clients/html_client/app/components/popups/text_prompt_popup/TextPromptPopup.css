@@ -1,4 +1,4 @@
-.text_prompt_popup .modal_content {
+.text_prompt_popup .popup_content {
 	position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); /*Center on screen*/
 	padding:30px;
 }

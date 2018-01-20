@@ -1,0 +1,18 @@
+.settings_popup .popup_content {
+	position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); /*Center on screen*/
+	padding:30px;
+}
+
+.settings_popup .title {
+	font-size:20px;
+}
+
+.settings_popup .setting {
+	margin-top:20px; margin-bottom:20px;
+	text-align:left;
+	width:145px;
+}
+
+.settings_popup .setting select {
+	position:absolute; right:30px; width:75px;
+}

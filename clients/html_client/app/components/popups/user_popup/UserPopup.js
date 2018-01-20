@@ -26,9 +26,6 @@ class UserPopupView {
             <button id='${this.id}_notifications_button'>
               <span class="lsf symbol">globe</span> [@notifications_text@]
             </button>
-            <button id='${this.id}_language_button'>
-              <span class="lsf symbol">flag</span> [@language_text@]
-            </button>
             <button id='${this.id}_settings_button'>
               <span class="lsf symbol">setting</span> [@settings_text@]
             </button>
@@ -64,7 +61,7 @@ class UserPopup {
   }
 
   onSettingButtonClicked() {
-    App.instance.messagePopup.show({ symbol:'setting', title:'Settings', message:"<p>Settings modal will show:</p><p>Language, Skin, ?</p>" });
+    App.instance.settingsPopup.show();
   }
 
 }
