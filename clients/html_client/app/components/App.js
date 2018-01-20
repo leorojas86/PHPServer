@@ -57,6 +57,7 @@ class AppView {
 	onDomUpdated() {
 		this.component.header.view.onDomUpdated();
 		this.component.model.currentScreen.view.onDomUpdated();
+		this.component.settingsPopup.view.onDomUpdated();
 	}
 
 }
