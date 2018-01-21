@@ -70,8 +70,9 @@ class App
 		this.view = new AppView(this);
 		this.header = new Header();
 		this.inventory = new Inventory();
+		this.welcome = new Welcome();
 		this.screens = {
-			'welcome': new Welcome(),
+			'welcome': this.welcome,
 			'inventory': this.inventory
 		};
 		this.contextMenu = new DropdownMenu('context_menu');
@@ -92,7 +93,7 @@ class App
 
 	onLoggedUserChanged(user) {
 		this.model.updateLoggedUser(user);
-		Html.updateElement(App.instance.view);
+		Html.refresh(App.instance.view);
 	}
 
 }

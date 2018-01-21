@@ -47,12 +47,12 @@ class Popup {
   show(popupData) {
     this.contentComponent.model.data = popupData;
     this.model.isShown = true;
-    Html.updateElement(this.view);
+    Html.refresh(this.view);
   }
 
   hide() {
     this.model.isShown = false;
-    Html.updateElement(this.view);
+    Html.refresh(this.view);
   }
 
 }

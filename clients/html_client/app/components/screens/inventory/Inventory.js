@@ -69,7 +69,7 @@ class Inventory {
       .catch((reason) => App.instance.handleError(reason, '[@load_error_text@]'))
       .finally(() => {
         this.spinner.hide();
-        Html.updateElement(this.view);
+        Html.refresh(this.view);
       });
   }
 

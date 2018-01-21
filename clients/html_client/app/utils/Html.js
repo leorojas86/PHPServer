@@ -1,6 +1,6 @@
 class Html {
 
-  static updateElement(view) {
+  static refresh(view) {
     const element = document.getElementById(view.id);
     if(element) {
       const htmlText = view.buildHTML();

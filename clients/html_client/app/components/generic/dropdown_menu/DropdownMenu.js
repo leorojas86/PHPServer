@@ -60,13 +60,13 @@ class DropdownMenu {
   show(options, position) {
     this.model.data.options = options;
     this.model.isShown = true;
-    Html.updateElement(this.view);
+    Html.refresh(this.view);
     this.view.setPosition(position);
   }
 
   hide() {
     this.model.isShown = false;
-    Html.updateElement(this.view);
+    Html.refresh(this.view);
   }
 
 }
