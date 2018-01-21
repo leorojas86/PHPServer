@@ -34,12 +34,9 @@ class InventoryView {
   }
 
   onDomUpdated() {
-    if(this.component.model.currentItemComponent) {
-      this.component.model.currentItemComponent.view.onDomUpdated();
-    } else {
+    if(!this.component.model.currentItemComponent) {
       this.component.loadItem();
     }
-    this.component.header.view.onDomUpdated();
   }
 
 }
@@ -49,11 +46,13 @@ class Inventory {
   constructor() {
     this.model = new InventoryModel(this);
     this.view = new InventoryView(this);
-    this.header = new InventoryHeader();
-    this.spinner = new Spinner('inventory_spinner');
+    this.header = Html.addChild(new InventoryHeader(), this);
+    this.spinner = Html.addChild(new Spinner('inventory_spinner'), this);
+    this.inventoryFolder = Html.addChild(new InventoryFolder(), this);
+    this.inventoryFile = Html.addChild(new InventoryFile(), this);
     this.itemComponents = {
-      'folder': new InventoryFolder(),
-      'file': new InventoryFile()
+      'folder': this.inventoryFolder,
+      'file': this.inventoryFile
     };
   }
 

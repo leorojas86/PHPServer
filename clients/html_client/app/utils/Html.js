@@ -6,10 +6,11 @@ class Html {
     } else {
       parent.childrenComponents = [component];
     }
+    return component;
   }
 
   static notifyOnDomUpdatedRecursively(component) {
-    if(component.view.onDomUpdated) {
+    if(component.view.onDomUpdated && document.getElementById(component.view.id)) {
       component.view.onDomUpdated();
     }
     if(component.childrenComponents) {
@@ -24,6 +25,10 @@ class Html {
       element.outerHTML = Localization.instance.localizeHTML(htmlText);
       Html.notifyOnDomUpdatedRecursively(component);
     }
+  }
+
+  static getElement(id) {
+    return document.getElementById(id);
   }
 
   static onClick(id, onClick) {

@@ -22,14 +22,7 @@ class AppModel {
 	}
 
 	get currentScreen() {
-		const currentScreen = this.component.screens[this.data.currentScreen];
-
-		if(currentScreen) {
- 			return currentScreen;
-		}
-
-		console.error('Unknown screen: ', this.data.currentScreen);//TODO: Improve this redirecting to an error page/screen
-		return this.component.screens['welcome'];
+ 		return this.component.screens[this.data.currentScreen];
 	}
 
 }
@@ -54,12 +47,6 @@ class AppView {
 						</div>`;
 	}
 
-	onDomUpdated() {
-		this.component.header.view.onDomUpdated();
-		this.component.model.currentScreen.view.onDomUpdated();
-		this.component.settingsPopup.view.onDomUpdated();
-	}
-
 }
 
 class App
@@ -68,21 +55,19 @@ class App
 	constructor() {
 		this.model = new AppModel(this);
 		this.view = new AppView(this);
-		this.header = new Header();
-		this.inventory = new Inventory();
-		this.welcome = new Welcome();
+		this.header = Html.addChild(new Header(), this);
+		this.inventory = Html.addChild(new Inventory(), this);
+		this.welcome = Html.addChild(new Welcome(), this);
 		this.screens = {
 			'welcome': this.welcome,
 			'inventory': this.inventory
 		};
-		this.contextMenu = new DropdownMenu('context_menu');
-		this.loginPopup = new Popup(new LoginPopup());
-    this.userPopup = new Popup(new UserPopup());
-		this.messagePopup = new Popup(new MessagePopup());
-		this.textPromptPopup = new Popup(new TextPromptPopup());
-		this.settingsPopup = new Popup(new SettingsPopup());
-
-		document.onclick = () => this.contextMenu.hide();
+		this.contextMenu = Html.addChild(new DropdownMenu('context_menu'), this);
+		this.loginPopup = Html.addChild(new Popup(new LoginPopup()), this);
+    this.userPopup = Html.addChild(new Popup(new UserPopup()), this);
+		this.messagePopup = Html.addChild(new Popup(new MessagePopup()), this);
+		this.textPromptPopup = Html.addChild(new Popup(new TextPromptPopup()), this);
+		this.settingsPopup = Html.addChild(new Popup(new SettingsPopup()), this);
 	}
 
 	handleError(errorData, title) {

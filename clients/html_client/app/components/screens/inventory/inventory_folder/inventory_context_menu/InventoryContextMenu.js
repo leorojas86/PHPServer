@@ -54,6 +54,7 @@ class InventoryContextMenuView {
       App.instance.contextMenu.show(this.component.model.getMenuOptions(item), { x:event.clientX, y:event.clientY });
       return false;
     }
+    document.onclick = () => App.instance.contextMenu.hide();
   }
 
 }
