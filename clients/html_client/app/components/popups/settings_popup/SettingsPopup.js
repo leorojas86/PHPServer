@@ -53,7 +53,7 @@ class SettingsPopup {
   selectLanguage(value) {
     App.instance.model.data.language = value;
     Localization.instance.currentLanguage = App.instance.model.data.language;
-    Html.refresh(App.instance.view);
+    Html.refresh(App.instance);
   }
 
 }

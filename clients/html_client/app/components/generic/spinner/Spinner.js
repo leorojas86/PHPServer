@@ -21,7 +21,7 @@ class SpinnerView {
 
     return `<div id='${this.id}'></div>`;
   }
-  
+
 }
 
 class Spinner {
@@ -33,12 +33,12 @@ class Spinner {
 
   show() {
     this.model.isShown = true;
-    Html.refresh(this.view);
+    Html.refresh(this);
   }
 
   hide() {
     this.model.isShown = false;
-    Html.refresh(this.view);
+    Html.refresh(this);
   }
 
 }

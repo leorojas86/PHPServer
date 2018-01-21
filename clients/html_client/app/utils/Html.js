@@ -1,13 +1,28 @@
 class Html {
 
-  static refresh(view) {
-    const element = document.getElementById(view.id);
+  static addChild(component, parent) {
+    if(parent.childrenComponents) {
+      parent.childrenComponents.push(component);
+    } else {
+      parent.childrenComponents = [component];
+    }
+  }
+
+  static notifyOnDomUpdatedRecursively(component) {
+    if(component.view.onDomUpdated) {
+      component.view.onDomUpdated();
+    }
+    if(component.childrenComponents) {
+      component.childrenComponents.forEach((currentChild) => Html.notifyOnDomUpdatedRecursively(currentChild));
+    }
+  }
+
+  static refresh(component) {
+    const element = document.getElementById(component.view.id);
     if(element) {
-      const htmlText = view.buildHTML();
+      const htmlText = component.view.buildHTML();
       element.outerHTML = Localization.instance.localizeHTML(htmlText);
-      if(view.onDomUpdated) {
-        view.onDomUpdated();
-      }
+      Html.notifyOnDomUpdatedRecursively(component);
     }
   }
 

@@ -93,7 +93,7 @@ class App
 
 	onLoggedUserChanged(user) {
 		this.model.updateLoggedUser(user);
-		Html.refresh(App.instance.view);
+		Html.refresh(App.instance);
 	}
 
 }
