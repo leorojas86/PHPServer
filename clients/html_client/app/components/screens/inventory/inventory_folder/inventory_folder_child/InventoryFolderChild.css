@@ -16,3 +16,7 @@
   position:relative;
   font-size:20px;
 }
+
+.inventory_folder_child:hover {
+	background-color:#f5f1e0
+}
