@@ -10,26 +10,24 @@ class PopupView {
   constructor(component, contentComponent) {
     this.component = component;
     this.contentComponent = contentComponent;
-    this.id = contentComponent.view.id;
+    this.id = `${contentComponent.view.id}_main`;
   }
 
   buildHTML() {
     if(this.component.model.isShown) {
-      return `<div id='${this.id}' class='${this.id} popup'>
-                <div id='${this.id}_grayout' class='grayout'></div>
+      return `<div id='${this.id}' class='${this.contentComponent.view.id} popup'>
+                <div id='${this.contentComponent.view.id}_grayout' class='grayout'></div>
                 <div class='popup_content'>
     						 ${ this.contentComponent.view.buildHTML() }
                 </div>
   			  		</div>`;
     }
-
     return `<div id='${this.id}'></div>`;
   }
 
   onDomUpdated() {
     if(this.component.model.isShown) {
-      Html.onMouseDown(`${this.id}_grayout`, () => this.component.hide());
-      this.contentComponent.view.onDomUpdated();
+      Html.onMouseDown(`${this.contentComponent.view.id}_grayout`, () => this.component.hide());
     }
   }
 
@@ -40,7 +38,7 @@ class Popup {
   constructor(contentComponent) {
     this.model = new PopupModel();
 		this.view = new PopupView(this, contentComponent);
-    this.contentComponent = contentComponent;
+    this.contentComponent = Html.addChild(contentComponent, this);
     this.contentComponent.popup = this;
   }
 

@@ -16,19 +16,21 @@ class LoginPopupView {
   }
 
   buildHTML() {
-    return `<p>[@email_text@]</p>
-            <input type='text' id='${this.id}_user_email' value='${this.component.model.inputValues.email}'>
-            <p>[@password_text@]</p>
-            <input type='text' id='${this.id}_user_password' value='${this.component.model.inputValues.password}'>
-            <div>
-              <button id='${this.id}_login_button'>
-               <span class="lsf symbol">in</span> [@login_button_text@]
-              </button>
-              <button id='${this.id}_register_button'>
-               <span class="lsf symbol">plus</span> [@register_button_text@]
-              </button>
-            </div>
-            ${ this.component.spinner.view.buildHTML() }`;
+    return `<div id='${this.id}'>
+              <p>[@email_text@]</p>
+              <input type='text' id='${this.id}_user_email' value='${this.component.model.inputValues.email}'>
+              <p>[@password_text@]</p>
+              <input type='text' id='${this.id}_user_password' value='${this.component.model.inputValues.password}'>
+              <div>
+                <button id='${this.id}_login_button'>
+                 <span class="lsf symbol">in</span> [@login_button_text@]
+                </button>
+                <button id='${this.id}_register_button'>
+                 <span class="lsf symbol">plus</span> [@register_button_text@]
+                </button>
+              </div>
+              ${ this.component.spinner.view.buildHTML() }
+            </div>`;
   }
 
   onDomUpdated() {
@@ -47,7 +49,7 @@ class LoginPopup {
   constructor() {
 		this.model = new LoginPopupMode();
 		this.view = new LoginPopupView(this);
-    this.spinner = new Spinner('login_popup_spinner');
+    this.spinner = Html.addChild(new Spinner('login_popup_spinner'), this);
 	}
 
   onLoginButtonClick(email, password) {

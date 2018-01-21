@@ -41,7 +41,7 @@ class DropdownMenuView {
   }
 
   setPosition(position) {
-    const element = document.getElementById(this.id);
+    const element = Html.getElement(this.id);
     element.style.position = "absolute";
     element.style.display  = 'inline';
 		element.style.left 	   = position.x + "px";

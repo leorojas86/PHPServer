@@ -10,10 +10,6 @@ class WelcomeView {
             </div>`;
   }
 
-  onDomUpdated() {
-
-  }
-
 }
 
 class Welcome {

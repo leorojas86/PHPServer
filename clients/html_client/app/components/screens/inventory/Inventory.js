@@ -19,16 +19,14 @@ class InventoryModel {
 class InventoryView {
 
   constructor(component) {
-    this.id = 'inventory';
     this.component = component;
+    this.id = 'inventory';
   }
 
   buildHTML() {
-    const component = this.component.model.currentItemComponent;
-
     return `<div id='${this.id}' class='${this.id}'>
               ${ this.component.header.view.buildHTML() }
-              ${ component ? component.view.buildHTML() : '' }
+              ${ this.component.model.currentItemComponent ? this.component.model.currentItemComponent.view.buildHTML() : '' }
               ${ this.component.spinner.view.buildHTML() }
             </div>`;
   }

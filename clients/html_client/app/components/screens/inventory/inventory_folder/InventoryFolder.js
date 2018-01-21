@@ -27,12 +27,8 @@ class InventoryFolderView {
     this.component.children.forEach((child) => childrenHTML += child.view.buildHTML() );
     return `<div id='${this.id}' class='${this.id}'>
               ${childrenHTML}
+              ${ this.component.contextMenu.view.buildHTML() }
             </div>`;
-  }
-
-  onDomUpdated() {
-    this.component.children.forEach((child) => child.view.onDomUpdated());
-    this.component.contextMenu.view.onDomUpdated();
   }
 
 }
@@ -42,14 +38,14 @@ class InventoryFolder {
   constructor() {
     this.model = new InventoryFolderModel(this);
     this.view = new InventoryFolderView(this);
-    this.contextMenu = new InventoryContextMenu(this);
+    this.contextMenu = Html.addChild(new InventoryContextMenu(this), this);
     this.children = [];
   }
 
   load() {
     return this.model.loadCurrentItemChildren()
       .then((children) => {
-        this.children = children.map((child) => new InventoryFolderChild(`${child.id}`, child));
+        this.children = children.map((child) => Html.addChild(new InventoryFolderChild(`${child.id}`, child), this));
       });
   }
 

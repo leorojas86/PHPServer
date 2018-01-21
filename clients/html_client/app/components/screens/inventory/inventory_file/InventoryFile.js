@@ -13,10 +13,6 @@ class InventoryFileView {
     return `<div id='${this.id}' class='${this.id}'>File</div>`;
   }
 
-  onDomUpdated() {
-
-  }
-
 }
 
 class InventoryFile {

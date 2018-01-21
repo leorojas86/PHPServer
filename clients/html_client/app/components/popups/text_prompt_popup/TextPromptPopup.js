@@ -1,9 +1,5 @@
 class TextPromptPopupModel {
 
-  constructor() {
-
-  }
-
 }
 
 class TextPromptPopupView {
@@ -15,7 +11,7 @@ class TextPromptPopupView {
 
   buildHTML() {
     const data = this.component.model.data;
-    return  `<div align='center'>
+    return  `<div id='${this.id}' align='center'>
                <span class='title'>${data.title}</span>
                <p>
                 <input type='text' id='${this.id}_input_text' placeholder='${data.placeholder}' value='${data.value ? data.value : ''}'>

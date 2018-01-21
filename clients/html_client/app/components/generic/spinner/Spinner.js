@@ -18,7 +18,6 @@ class SpinnerView {
                 <div id='${this.id}_animation' class='spinner_animation'></div>
               </div>`;
     }
-
     return `<div id='${this.id}'></div>`;
   }
 

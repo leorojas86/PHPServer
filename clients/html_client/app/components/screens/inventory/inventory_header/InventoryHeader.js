@@ -24,10 +24,6 @@ class InventoryHeaderView {
             </div>`;
   }
 
-  onDomUpdated() {
-    this.component.breadcrumb.view.onDomUpdated();
-  }
-
 }
 
 class InventoryHeader {
@@ -35,7 +31,7 @@ class InventoryHeader {
   constructor() {
     this.model = new InventoryHeaderModel(this);
     this.view = new InventoryHeaderView(this);
-    this.breadcrumb = new Breadcrumb('inventory_breadcrumb', (index) => this.onPathItemClicked(index));
+    this.breadcrumb = Html.addChild(new Breadcrumb('inventory_breadcrumb', (index) => this.onPathItemClicked(index)), this);
   }
 
   load() {

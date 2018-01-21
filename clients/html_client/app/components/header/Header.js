@@ -26,7 +26,6 @@ class HeaderView {
      `<button id='${this.id}_login_button' class='header_user_button right'>
        <span class="lsf symbol">in</span>
       </button>`;
-
     return `<div id='${this.id}' class='${this.id}'>
               <button id='${this.id}_menu_button' class='left'>
                <span class="lsf symbol">menu</span>

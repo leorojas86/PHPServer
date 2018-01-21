@@ -1,9 +1,5 @@
 class MessagePopupModel {
 
-  constructor() {
-
-  }
-
 }
 
 class MessagePopupView {
@@ -15,7 +11,7 @@ class MessagePopupView {
 
   buildHTML() {
     const data = this.component.model.data;
-    return  `<div align='center'>
+    return  `<div id='${this.id}' align='center'>
                <span class='title'>
                 <span class="lsf symbol">${data.symbol}</span> ${data.title}
                </span>

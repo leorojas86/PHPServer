@@ -1,8 +1,5 @@
 class Localization {
 
-  constructor() {
-  }
-
   initialize(localizationTable, currentLanguage) {
     this.localizationTable = localizationTable;
     this.currentLanguage = currentLanguage;
@@ -20,7 +17,6 @@ class Localization {
   localizeHTML(html) {
     const regex = /\[@+\w+\@\]/g;
     const matches = html.match(regex);
-
     if(matches) {
       matches.forEach((match) => {
         const localizedText = this._getLocalizedText(match);
@@ -29,7 +25,6 @@ class Localization {
         }
       });
     }
-
     return html;
   }
 

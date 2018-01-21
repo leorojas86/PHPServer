@@ -44,6 +44,11 @@ class InventoryContextMenuView {
   constructor(component, inventoryFolder) {
     this.component = component;
     this.inventoryFolder = inventoryFolder;
+    this.id = 'inventory_context_menu';
+  }
+
+  buildHTML() {
+    return `<div id='${this.id}'></div>`;
   }
 
   onDomUpdated() {
