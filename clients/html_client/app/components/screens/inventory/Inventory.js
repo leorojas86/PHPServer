@@ -5,8 +5,13 @@ class InventoryModel {
   }
 
   get currentItemComponent() {
-    const inventoryItem = App.instance.model.data.currentInventoryItem;
-    return inventoryItem ? this.component.itemComponents[inventoryItem.type] : null;
+    if(App.instance.model.data.currentInventoryItem) {
+      switch(App.instance.model.data.currentInventoryItem.type) {
+        case 'folder': return this.component.inventoryFolder; break;
+        case 'file': return this.component.inventoryFile; break;
+      }
+    }
+    return null;
   }
 
   loadItem(id) {
@@ -48,10 +53,6 @@ class Inventory {
     this.spinner = Html.addChild(new Spinner('inventory_spinner'), this);
     this.inventoryFolder = Html.addChild(new InventoryFolder(), this);
     this.inventoryFile = Html.addChild(new InventoryFile(), this);
-    this.itemComponents = {
-      'folder': this.inventoryFolder,
-      'file': this.inventoryFile
-    };
   }
 
   loadItem(id) {

@@ -22,7 +22,11 @@ class AppModel {
 	}
 
 	get currentScreen() {
- 		return this.component.screens[this.data.currentScreen];
+		switch (this.data.currentScreen) {
+			case 'welcome': return this.component.welcome; break;
+			case 'inventory': return this.component.inventory; break;
+		}
+ 		return null;
 	}
 
 }
@@ -58,10 +62,6 @@ class App
 		this.header = Html.addChild(new Header(), this);
 		this.inventory = Html.addChild(new Inventory(), this);
 		this.welcome = Html.addChild(new Welcome(), this);
-		this.screens = {
-			'welcome': this.welcome,
-			'inventory': this.inventory
-		};
 		this.contextMenu = Html.addChild(new DropdownMenu('context_menu'), this);
 		this.loginPopup = Html.addChild(new Popup(new LoginPopup()), this);
     this.userPopup = Html.addChild(new Popup(new UserPopup()), this);
