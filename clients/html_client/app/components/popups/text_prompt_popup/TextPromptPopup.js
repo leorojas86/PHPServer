@@ -37,6 +37,7 @@ class TextPromptPopupView {
         this.submit();
       }
     });
+    Html.setFocus(`${this.id}_input_text`);
   }
 
   submit() {

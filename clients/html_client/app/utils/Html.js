@@ -59,4 +59,8 @@ class Html {
     return document.getElementById(id).value;
   }
 
+  static setFocus(id) {
+    return document.getElementById(id).focus();
+  }
+
 }

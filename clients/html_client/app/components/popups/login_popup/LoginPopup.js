@@ -40,6 +40,7 @@ class LoginPopupView {
       this.component.onLoginButtonClick(email, password);
     });
     Html.onClick(`${this.id}_register_button`, () => this.component.popup.hide());
+    Html.setFocus(`${this.id}_user_email`);
   }
 
 }

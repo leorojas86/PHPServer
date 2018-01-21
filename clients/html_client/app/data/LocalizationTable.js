@@ -27,8 +27,8 @@ class LocalizationTable {
       "delete_text": { en: 'Delete', es: 'Borrar' },
       "paste_text": { en: 'Paste', es: 'Pegar' },
       "cancel_text":  { en: 'Cancel', es: 'Cancelar' },
-      "add_file_text": { en: 'Add file', es: 'Agregar archivo' },
-      "add_folder_text": { en: 'Add folder', es: 'Agregar directorio' },
+      "add_file_text": { en: 'Add file', es: '+ Archivo' },
+      "add_folder_text": { en: 'Add folder', es: '+ Directorio' },
       "change_name_text": { en: 'Change name', es: 'Cambio de nombre' },
       "name_text": { en: 'Name', es: 'Nombre' },
       /*Error Codes*/
