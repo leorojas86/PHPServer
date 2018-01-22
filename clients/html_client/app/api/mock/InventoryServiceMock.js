@@ -12,10 +12,6 @@ class InventoryServiceMock {
     this.currentId = 3;
   }
 
-  getRootItem() {
-    return this.getItemById(ApiClient.instance.userService.loggedUser.rootInventoryItemId);
-  }
-
   getItemById(id) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {

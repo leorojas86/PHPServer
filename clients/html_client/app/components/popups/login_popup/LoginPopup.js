@@ -1,9 +1,5 @@
 class LoginPopupMode {
 
-  constructor() {
-    this.isShown = false;
-  }
-
   get inputValues() { return Config.get().environment === 'prod' ? { email: '', password: ''} : { email: 'test@test.com', password: 'test'}; }
 
 }

@@ -15,7 +15,8 @@ class InventoryModel {
   }
 
   loadItem(id) {
-    return (id ? ApiClient.instance.inventoryService.getItemById(id) : ApiClient.instance.inventoryService.getRootItem())
+    id = id || AppData.instance.getUser().rootInventoryItemId;
+    return ApiClient.instance.inventoryService.getItemById(id)
       .then((item) => AppData.instance.setCurrentInventoryItem(item));
   }
 
