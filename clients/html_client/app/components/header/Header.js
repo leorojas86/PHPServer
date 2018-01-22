@@ -1,12 +1,5 @@
 class HeaderModel {
 
-  constructor() {
-
-  }
-
-  get user() { return App.instance.model.data.user; }
-  get currentScreen() { return App.instance.model.data.currentScreen; }
-
 }
 
 class HeaderView {
@@ -17,8 +10,8 @@ class HeaderView {
   }
 
   buildHTML() {
-    const currentScreenTitleText = this.component.model.currentScreen + '_text';
-    const rightButton = this.component.model.user ?
+    const currentScreenTitleText = AppData.instance.getCurrentScreen() + '_text';
+    const rightButton = AppData.instance.getUser() ?
      `<button id='${this.id}_user_button' class='header_user_button right'>
        <span class="lsf symbol">user</span>
       </button>`
@@ -36,7 +29,7 @@ class HeaderView {
   }
 
   onDomUpdated() {
-    if(this.component.model.user) {
+    if(AppData.instance.getUser()) {
       Html.onClick(`${this.id}_user_button`, () => this.component.onUserButtonClicked());
     } else {
       Html.onClick(`${this.id}_login_button`, () => this.component.onLoginButtonClicked());

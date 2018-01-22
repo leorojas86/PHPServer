@@ -5,8 +5,8 @@ class InventoryModel {
   }
 
   get currentItemComponent() {
-    if(App.instance.model.data.currentInventoryItem) {
-      switch(App.instance.model.data.currentInventoryItem.type) {
+    if(AppData.instance.getCurrentInventoryItem()) {
+      switch(AppData.instance.getCurrentInventoryItem().type) {
         case 'folder': return this.component.inventoryFolder; break;
         case 'file': return this.component.inventoryFile; break;
       }
@@ -16,7 +16,7 @@ class InventoryModel {
 
   loadItem(id) {
     return (id ? ApiClient.instance.inventoryService.getItemById(id) : ApiClient.instance.inventoryService.getRootItem())
-      .then((item) => App.instance.model.data.currentInventoryItem = item);
+      .then((item) => AppData.instance.setCurrentInventoryItem(item));
   }
 
 }

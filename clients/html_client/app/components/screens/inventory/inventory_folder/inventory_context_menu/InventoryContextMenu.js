@@ -18,7 +18,7 @@ class InventoryContextMenuModel {
         { id:'add_folder', text:'[@add_folder_text@]', symbol:'folder', onClick:() => this.onClick('add_folder', item) }
       ];
       if(this.cuttingItem &&
-         this.cuttingItem.parentId != App.instance.model.data.currentInventoryItem.id &&
+         this.cuttingItem.parentId != AppData.instance.getCurrentInventoryItem().id &&
          !App.instance.inventory.header.breadcrumb.model.isInPath(this.cuttingItem.id)) {
         defaultOptions.push({ id:'paste', text:'[@paste_text@]', symbol:'copy', onClick:() => this.onClick('paste', item) });
       }
@@ -76,7 +76,7 @@ class InventoryContextMenu {
       title:`[@add_${itemType}_text@]`,
       placeholder:'[@name_text@]',
       onTextEntered: (text) => {
-        const action = () => ApiClient.instance.inventoryService.addItem(itemType, text, App.instance.model.data.currentInventoryItem);
+        const action = () => ApiClient.instance.inventoryService.addItem(itemType, text, AppData.instance.getCurrentInventoryItem());
         App.instance.inventory.exectuteAction(action);
       }
     });
@@ -100,7 +100,7 @@ class InventoryContextMenu {
   }
 
   pasteItem() {
-    const action = () => ApiClient.instance.inventoryService.moveItem(this.model.cuttingItem, App.instance.model.data.currentInventoryItem);
+    const action = () => ApiClient.instance.inventoryService.moveItem(this.model.cuttingItem, AppData.instance.getCurrentInventoryItem());
     App.instance.inventory.exectuteAction(action);
   }
 }

@@ -5,7 +5,7 @@ class InventoryHeaderModel {
   }
 
   loadCurrentItemPath() {
-    return ApiClient.instance.inventoryService.getItemPath(App.instance.model.data.currentInventoryItem);
+    return ApiClient.instance.inventoryService.getItemPath(AppData.instance.getCurrentInventoryItem());
   }
 
 }

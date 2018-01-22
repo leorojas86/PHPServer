@@ -10,7 +10,6 @@ class SettingsPopupView {
   }
 
   buildHTML() {
-    const currentLanguage = App.instance.model.data.language;
     return `<div id='${this.id}' align='center'>
               <span class='title'>
                <span class="lsf symbol">setting</span> [@settings_text@]
@@ -18,8 +17,8 @@ class SettingsPopupView {
               <div class='setting'>
                 <span>[@language_text@]:</span>
                 <select id='${this.id}_language_select'>
-                  <option value="en" ${ currentLanguage === 'en' ? 'selected' : '' }>English</option>
-                  <option value="es" ${ currentLanguage === 'es' ? 'selected' : '' }>Español</option>
+                  <option value="en" ${ AppData.instance.getCurrentLanguage() === 'en' ? 'selected' : '' }>English</option>
+                  <option value="es" ${ AppData.instance.getCurrentLanguage() === 'es' ? 'selected' : '' }>Español</option>
                 </select>
               </div>
               <div class='setting'>
@@ -51,8 +50,7 @@ class SettingsPopup {
   }
 
   selectLanguage(value) {
-    App.instance.model.data.language = value;
-    Localization.instance.currentLanguage = value;
+    AppData.instance.setCurrentLanguage(value);
     Html.refresh(App.instance);
   }
 

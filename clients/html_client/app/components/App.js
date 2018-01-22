@@ -3,26 +3,15 @@ class AppModel {
 
 	constructor(component) {
 		this.component = component;
-		this.loadDefaultAppData();
-	}
-
-	loadDefaultAppData() {
-		this.data = {
-			user: null,
-			language:'en',
-			currentScreen: 'welcome',
-			currentInventoryItem: null
-		};//Default values
 	}
 
 	updateLoggedUser(user) {
-		this.loadDefaultAppData();
-		this.data.user = user;
-		this.data.currentScreen = user ? 'inventory' : 'welcome';
+		AppData.instance.setUser(user);
+		AppData.instance.setCurrentScreen(user ? 'inventory' : 'welcome');
 	}
 
 	get currentScreen() {
-		switch (this.data.currentScreen) {
+		switch (AppData.instance.getCurrentScreen()) {
 			case 'welcome': return this.component.welcome; break;
 			case 'inventory': return this.component.inventory; break;
 		}

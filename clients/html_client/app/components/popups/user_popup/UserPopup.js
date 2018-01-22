@@ -1,11 +1,5 @@
 class UserPopupModel {
 
-  constructor() {
-    this.isShown = false;
-  }
-
-  get user() { return App.instance.model.data.user; }
-
 }
 
 class UserPopupView {
@@ -16,7 +10,7 @@ class UserPopupView {
   }
 
   buildHTML() {
-    const user = this.component.model.user;
+    const user = AppData.instance.getUser();
     return `<div id='${this.id}'>
               <p>
                 <span class="lsf symbol">user</span> ${user.name}

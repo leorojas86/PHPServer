@@ -6,7 +6,7 @@ class InventoryFolderModel {
   }
 
   loadCurrentItemChildren() {
-    return ApiClient.instance.inventoryService.getItemChildren(App.instance.model.data.currentInventoryItem)
+    return ApiClient.instance.inventoryService.getItemChildren(AppData.instance.getCurrentInventoryItem())
       .then((children) => {
         this.children = children;
         return children;

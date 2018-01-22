@@ -1,11 +1,9 @@
 class InventoryFolderChildModel {
+
   constructor(data) {
     this.data = data;
   }
 
-  setCurrentInventoryItem() {
-    App.instance.model.data.currentInventoryItem = this.data;
-  }
 }
 
 class InventoryFolderChildView {
