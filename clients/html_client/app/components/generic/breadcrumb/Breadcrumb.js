@@ -6,8 +6,7 @@ class BreadcrumbModel {
   }
 
   isInPath(itemId) {
-    const pathItem = this.data.path.find((currentPathItem) => currentPathItem.id === itemId);
-    return pathItem != null;
+    return this.data.path.find((currentPathItem) => currentPathItem.id === itemId) != null;
   }
 
 }
