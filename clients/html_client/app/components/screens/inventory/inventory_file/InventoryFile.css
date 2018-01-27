@@ -1,3 +1,7 @@
 .inventory_file {
   min-height:270px;
 }
+
+.inventory_file .select_image_button {
+  width:170px;
+}

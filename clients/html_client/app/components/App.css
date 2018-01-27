@@ -5,16 +5,13 @@ html {
 
 body {
 	margin:0px;
-  color:#3D557E;
-	font-family: "Times New Roman", Times, serif;
+  color:#3D557E; font-family: "Times New Roman", Times, serif;
 }
 
 input {
 	width:130px; margin:5px;
-	color:#3D557E;
 	border:none; border-radius:3px;
-	font-size:15px;
-	font-family: "Times New Roman", Times, serif;
+	font-size:15px; color:#3D557E; font-family: "Times New Roman", Times, serif;
 }
 
 p {
@@ -22,12 +19,10 @@ p {
 }
 
 button {
-	margin:5px; width:120px; height:30px;
-	color:#3D557E; background-color:white;
-	border:none; border-radius:5px; box-shadow:0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+	margin:5px; height:30px;
+	font-size:18px; color:#3D557E; font-family: "Times New Roman", Times, serif;
+	background-color:white; border:none; border-radius:5px; box-shadow:0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
 	cursor:pointer; cursor:hand;
-	font-size:18px;
-	font-family: "Times New Roman", Times, serif;
 }
 
 button:disabled {
