@@ -63,4 +63,14 @@ class Html {
     return document.getElementById(id).focus();
   }
 
+  static getImageData(id) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {//TODO: Handle error case
+        resolve(e.target.result);
+      };
+      reader.readAsDataURL(document.getElementById(id).files[0]);
+    });
+  }
+
 }
