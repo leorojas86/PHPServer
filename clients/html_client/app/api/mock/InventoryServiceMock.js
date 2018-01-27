@@ -94,4 +94,13 @@ class InventoryServiceMock {
     });
   }
 
+  saveItem(item) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        //Do nothing since the item is a reference and it is already updated
+        resolve();
+      }, this.responseMiliSec);
+    });
+  }
+
 }
