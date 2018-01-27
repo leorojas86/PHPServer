@@ -15,3 +15,7 @@
 .settings_popup .setting select {
 	position:absolute; right:30px; width:75px;
 }
+
+.settings_popup button {
+	min-width:80px;
+}
