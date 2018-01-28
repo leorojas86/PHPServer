@@ -4,7 +4,7 @@ html {
 }
 
 body {
-	margin:0px;
+	margin:0px; padding:0px;
   color:#3D557E; font-family: "Times New Roman", Times, serif;
 }
 
