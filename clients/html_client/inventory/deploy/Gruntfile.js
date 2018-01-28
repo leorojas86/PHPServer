@@ -62,7 +62,7 @@ module.exports = function (grunt) {
     'clean',      //Deletes output folder
     'copy',       //Copies index.html, spritesheet.png and jsons to output folder
     //'replace',    //Replaces selected environment
-    'minified',   //Minifies the output/index.js
-    'obfuscator', //Obfuscate the output/index.js
+    //'minified',   //Minifies the output/index.js
+    //'obfuscator', //Obfuscate the output/index.js
   ]);
 };
