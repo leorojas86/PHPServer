@@ -1,5 +1,6 @@
 //https://aws.amazon.com/sdk-for-node-js/
 //http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html
+//https://stackoverflow.com/questions/21440709/how-do-i-get-aws-access-key-id-for-amazon
 
 var AWS   = require('aws-sdk');
 var async = require('async');
