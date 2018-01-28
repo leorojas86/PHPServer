@@ -8,7 +8,7 @@ var path  = require("path");
 var s3    = new AWS.S3();
 
 var BUCKET        = 'inventory-static';
-var DEPLOY_FOLDER = path.resolve('./deploy');
+var DEPLOY_FOLDER = path.resolve('./output');
 
 /*function createBucketFolder(bucketFolder) {
   s3.createBucket({ Bucket: bucketFolder }, function(err, data) {

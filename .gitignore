@@ -7,3 +7,6 @@ scripts/html_deploy/deploy
 extra/LigatureSymbols 2
 clients/html_client/inventory/deploy/deploy
 clients/html_client/inventory/deploy/node_modules
+clients/html_client/inventory/build/node_modules
+clients/html_client/inventory/build/output
+clients/html_client/inventory/deploy/output

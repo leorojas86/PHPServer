@@ -5,13 +5,13 @@ module.exports = function (grunt) {
 
   // Define the configuration for all the tasks
   grunt.initConfig({
-    clean: ["deploy"],
+    clean: ["output"],
     copy: {
       output: {
         expand: true,
         cwd: '../build/output',
         src: '**',
-        dest: 'deploy',
+        dest: 'output',
       },
     },
     /*replace: {
@@ -23,14 +23,14 @@ module.exports = function (grunt) {
           }]
         },
         files: [
-          { expand: true, flatten: true, src: ['deploy/index.js'], dest: 'deploy/' }
+          { expand: true, flatten: true, src: ['output/index.js'], dest: 'output/' }
         ]
       }
     },*/
     minified : {
       files: {
-        src: [ 'deploy/index.js' ],
-        dest: 'deploy/'
+        src: [ 'output/index.js' ],
+        dest: 'output/'
       },
       options : {
         sourcemap: false,
@@ -46,24 +46,23 @@ module.exports = function (grunt) {
               // options for each sub task
           },
           files: {
-              'deploy/index.js': ['deploy/index.js']
+              'output/index.js': ['output/index.js']
           }
       }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-minified');
-  grunt.loadNpmTasks('grunt-contrib-obfuscator');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-replace');
-  grunt.loadNpmTasks('grunt-usemin');
+  grunt.loadNpmTasks('grunt-minified');
+  grunt.loadNpmTasks('grunt-contrib-obfuscator');
 
   grunt.registerTask('obfuscate', [
-    'clean',      //Deletes deploy folder
-    'copy',       //Copies index.html, spritesheet.png and jsons to deploy folder
+    'clean',      //Deletes output folder
+    'copy',       //Copies index.html, spritesheet.png and jsons to output folder
     //'replace',    //Replaces selected environment
-    'minified',   //Minifies the deploy/index.js
-    'obfuscator', //Obfuscate the deploy/index.js
+    'minified',   //Minifies the output/index.js
+    'obfuscator', //Obfuscate the output/index.js
   ]);
 };
