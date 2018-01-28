@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "deploy": "cd build && npm run build && cd ../deploy && npm run deploy"
+  }
+}
