@@ -79,18 +79,24 @@ class Html {
       onContextMenu(event);
       return false;
     };
-		if(Platform.isiOS())//HACK: Fix iOS oncontextmenu event
-		{
+		if(Platform.isiOS()) {//HACK: Fix iOS oncontextmenu event
 			let holdTimeoutId = null;
+      let wasHold = false;
 			element.addEventListener('touchstart', (e) => {
-				holdTimeoutId = holdTimeoutId || setTimeout(() => onContextMenu(e.changedTouches[0]), 500);
-        element.style.pointerEvents = "none";
+				holdTimeoutId = holdTimeoutId || setTimeout(() => {
+          element.style.pointerEvents = "none";
+          wasHold = true;
+        }, 500);
 				return false;
 			}, true);
 			element.addEventListener('touchend', (e) => {
         clearTimeout(holdTimeoutId);
         holdTimeoutId = null;
-        element.style.pointerEvents = "all";
+        if(wasHold) {
+          element.style.pointerEvents = "all";
+          onContextMenu(e.changedTouches[0]);
+          wasHold = false;
+        }
 				return false;
 			}, true);
 		}
