@@ -93,8 +93,8 @@ class Html {
         clearTimeout(holdTimeoutId);
         holdTimeoutId = null;
         if(wasHold) {
-          element.style.pointerEvents = "all";
-          onContextMenu(e.changedTouches[0]);
+          setTimeout(() => element.style.pointerEvents = "all", 50);
+          setTimeout(() => onContextMenu(e.changedTouches[0]), 100);
           wasHold = false;
         }
 				return false;
