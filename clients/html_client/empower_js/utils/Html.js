@@ -74,28 +74,23 @@ class Html {
   }
 
   static onContextMenu(id, onContextMenu) {
-    document.getElementById(id).oncontextmenu = (event) => {
+    const element = document.getElementById(id);
+    element.oncontextmenu = (event) => {
       onContextMenu(event);
       return false;
     };
 		if(Platform.isiOS())//HACK: Fix iOS oncontextmenu event
 		{
-			let startTime = null;
-			scrollPanel.addEventListener('touchstart', (e) => {
-				startTime = new Date();
+			let holdTimeoutId = null;
+			element.addEventListener('touchstart', (e) => {
+				holdTimeoutId = holdTimeoutId || setTimeout(() => onContextMenu(e.changedTouches[0]), 500);
+        element.style.pointerEvents = "none";
 				return false;
 			}, true);
-			scrollPanel.addEventListener('touchend', (e) => {
-				const elapsedTime = new Date() - startTime;
-				if(startTime != null && elapsedTime > 500)//Hold for half a second
-				{
-					//scrollPanel.style.pointerEvents = "none";
-					setTimeout(() => {
-						onContextMenu(e.changedTouches[0]);
-            startTime = null;
-						//scrollPanel.style.pointerEvents = "all";
-					}, 500);
-				}
+			element.addEventListener('touchend', (e) => {
+        clearTimeout(holdTimeoutId);
+        holdTimeoutId = null;
+        element.style.pointerEvents = "all";
 				return false;
 			}, true);
 		}
