@@ -23,6 +23,7 @@ class DropdownMenuView {
                         </button>`;
       });
       return `<div id='${this.id}' class='${this.id} dropdown_menu'>
+              <div id='${this.id}_grayout' class='grayout'></div>
                 ${optionsHTML}
               </div>`;
     }
@@ -37,6 +38,7 @@ class DropdownMenuView {
           option.onClick();
         });
       });
+      Html.onMouseDown(`${this.id}_grayout`, () => this.component.hide());
     }
   }
 

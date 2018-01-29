@@ -59,7 +59,6 @@ class InventoryContextMenuView {
       App.instance.contextMenu.show(this.component.model.getMenuOptions(item), contextMenuPosition);
       return false;
     });
-    document.onclick = () => App.instance.contextMenu.hide();//TODO: Improve this
   }
 
 }
