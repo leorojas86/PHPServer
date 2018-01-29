@@ -78,7 +78,7 @@ class Html {
       onContextMenu(event);
       return false;
     };
-		if(Platform.isIOS())//HACK: Fix iOS oncontextmenu event
+		if(Platform.isiOS())//HACK: Fix iOS oncontextmenu event
 		{
 			let startTime = null;
 			scrollPanel.addEventListener('touchstart', (e) => {
