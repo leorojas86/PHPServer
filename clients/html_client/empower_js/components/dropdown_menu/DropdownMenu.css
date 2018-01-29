@@ -1,3 +1,7 @@
+.dropdown_menu .options {
+  position:absolute;
+}
+
 .dropdown_menu button {
   display:block; width:120px;
   text-align:left;

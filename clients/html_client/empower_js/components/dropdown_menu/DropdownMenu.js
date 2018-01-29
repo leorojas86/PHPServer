@@ -23,8 +23,10 @@ class DropdownMenuView {
                         </button>`;
       });
       return `<div id='${this.id}' class='${this.id} dropdown_menu'>
-              <div id='${this.id}_grayout' class='grayout'></div>
-                ${optionsHTML}
+                <div id='${this.id}_grayout' class='grayout'></div>
+                <div class='options'>
+                  ${optionsHTML}
+                </div>
               </div>`;
     }
     return `<div id='${this.id}'></div>`;
