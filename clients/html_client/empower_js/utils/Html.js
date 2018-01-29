@@ -96,4 +96,12 @@ class Html {
 		}
   }
 
+  static convertToScrolledPosition(point) {
+    const pageScrolledXOffset = window.pageXOffset || document.documentElement.scrollLeft;
+		const pageScrolledYOffset = window.pageYOffset || document.documentElement.scrollTop;
+		point.x += pageScrolledXOffset;
+		point.y += pageScrolledYOffset;
+    return point;
+  }
+
 }

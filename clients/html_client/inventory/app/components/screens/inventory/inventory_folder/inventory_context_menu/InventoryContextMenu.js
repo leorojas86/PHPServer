@@ -55,7 +55,8 @@ class InventoryContextMenuView {
     Html.onContextMenu(this.inventoryFolder.view.id, (event) => {
       const itemId = event.target.getAttribute('itemId');
       const item = itemId ? this.inventoryFolder.model.children.find((currentItem) => currentItem.id === itemId) : null;
-      App.instance.contextMenu.show(this.component.model.getMenuOptions(item), { x:event.clientX, y:event.clientY });
+      const contextMenuPosition = Html.convertToScrolledPosition({ x:event.clientX, y:event.clientY });
+      App.instance.contextMenu.show(this.component.model.getMenuOptions(item), contextMenuPosition);
       return false;
     });
     document.onclick = () => App.instance.contextMenu.hide();//TODO: Improve this
