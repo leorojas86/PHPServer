@@ -73,4 +73,32 @@ class Html {
     });
   }
 
+  static onContextMenu(id, onContextMenu) {
+    document.getElementById(id).oncontextmenu = (event) => {
+      onContextMenu(event);
+      return false;
+    };
+		if(Platform.isIOS())//HACK: Fix iOS oncontextmenu event
+		{
+			let startTime = null;
+			scrollPanel.addEventListener('touchstart', (e) => {
+				startTime = new Date();
+				return false;
+			}, true);
+			scrollPanel.addEventListener('touchend', (e) => {
+				const elapsedTime = new Date() - startTime;
+				if(startTime != null && elapsedTime > 500)//Hold for half a second
+				{
+					//scrollPanel.style.pointerEvents = "none";
+					setTimeout(() => {
+						onContextMenu(e.changedTouches[0]);
+            startTime = null;
+						//scrollPanel.style.pointerEvents = "all";
+					}, 500);
+				}
+				return false;
+			}, true);
+		}
+  }
+
 }

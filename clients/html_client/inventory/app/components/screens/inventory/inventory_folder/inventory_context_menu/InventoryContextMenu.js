@@ -52,14 +52,13 @@ class InventoryContextMenuView {
   }
 
   onDomUpdated() {
-    const inventoryElement = document.getElementById(this.inventoryFolder.view.id);
-    inventoryElement.oncontextmenu = (event) => {
+    Html.onContextMenu(this.inventoryFolder.view.id, (event) => {
       const itemId = event.target.getAttribute('itemId');
       const item = itemId ? this.inventoryFolder.model.children.find((currentItem) => currentItem.id === itemId) : null;
       App.instance.contextMenu.show(this.component.model.getMenuOptions(item), { x:event.clientX, y:event.clientY });
       return false;
-    }
-    document.onclick = () => App.instance.contextMenu.hide();
+    });
+    document.onclick = () => App.instance.contextMenu.hide();//TODO: Improve this
   }
 
 }
