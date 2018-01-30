@@ -13,4 +13,5 @@
 
 .text_prompt_popup button {
 	text-align:center;
+	min-width:80px;
 }
