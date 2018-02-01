@@ -30,5 +30,17 @@ class S3 {
         });
       });
     }
-    
+
+    deleteItem(itemKey, data) {
+      return new Promise((resolve, reject) => {
+        s3.deleteObject({Key: itemKey}, (err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        });
+      });
+    }
+
 }
