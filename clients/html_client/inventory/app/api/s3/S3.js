@@ -14,4 +14,21 @@ class S3 {
         params: { Bucket: albumBucketName }
       });
     }
+
+    addItem(itemKey, data) {
+      return new Promise((resolve, reject) => {
+        this.s3.upload({
+          Key: itemKey,
+          Body: data,
+          ACL: 'public-read'
+        }, (err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        });
+      });
+    }
+    
 }
