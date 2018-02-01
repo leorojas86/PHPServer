@@ -1,3 +1,4 @@
 .inventory_folder {
-  display:inline-block;
+  display:flow-root;
+  min-height:300px;
 }
