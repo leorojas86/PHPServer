@@ -1,3 +1,5 @@
+//https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/s3-example-photo-album.html
+//https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html
 class S3 {
     constructor() {
       this.s3 = null;
@@ -28,6 +30,18 @@ class S3 {
             resolve();
           }
         });
+      });
+    }
+
+    getItem(itemKey) {
+      return new Promise((resolve, reject) => {
+        this.s3.getObject({Key: itemKey}, (err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(data);
+          }
+         });
       });
     }
 
