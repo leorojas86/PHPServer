@@ -1,19 +1,15 @@
 //https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/s3-example-photo-album.html
 //https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html
 class S3 {
-    constructor() {
-      this.s3 = null;
-    }
-
-    initialize(albumBucketName, bucketRegion, IdentityPoolId) {
+    constructor(config) {
       AWS.config.update({
-        region: bucketRegion,
-        credentials: new AWS.CognitoIdentityCredentials({ IdentityPoolId: IdentityPoolId })
+        region: config.bucketRegion,
+        credentials: new AWS.CognitoIdentityCredentials({ IdentityPoolId: config.identityPoolId })
       });
 
       this.s3 = new AWS.S3({
         apiVersion: '2006-03-01',
-        params: { Bucket: albumBucketName }
+        params: { Bucket: config.bucketName }
       });
     }
 
