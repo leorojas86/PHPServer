@@ -7,10 +7,10 @@ class UserServiceMock {
     this.responseMiliSec = this.mockEnvironment.responseSec * 1000;
   }
 
-  register(name, email, password) {
+  register(email, password, confirmPassword) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        const newUser = { name: name, email: email, password: password };
+        const newUser = { name: email, email: email, password: password };
         this.users.push(newUser);
         resolve(newUser);
       }, this.responseMiliSec);

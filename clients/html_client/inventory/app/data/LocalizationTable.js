@@ -4,6 +4,7 @@ class LocalizationTable {
     return {
       "email_text": { en: 'Email', es: 'Correo Electrónico' },
       "password_text": { en: 'Password', es: 'Contraseña' },
+      "confirm_password_text": { en: 'Confirm Password', es: 'Confirmar Contraseña' },
       "login_button_text": { en: 'Login', es: 'Ingresar' },
       "register_button_text": { en: 'Register', es: 'Registrarse' },
       "logout_button_text": { en: 'Logout', es: 'Salir' },
@@ -19,6 +20,7 @@ class LocalizationTable {
       "settings_text": { en: 'Settings', es: 'Configuración' },
       "skin_text": { en: 'Skin', es: 'Apariencia' },
       "welcome_text": { en: 'Welcome', es: 'Bienvenid@' },
+      "registration_text": { en: 'Registration', es: 'Registro' },
       "inventory_text": { en: 'Inventory', es: 'Inventario' },
       "add_file_text": { en: 'Add File', es: 'Agregar Archivo' },
       "add_folder_text": { en: 'Add Folder', es: 'Agregar Folder' },
