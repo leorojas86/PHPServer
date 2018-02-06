@@ -10,7 +10,7 @@ class UserServiceMock {
   register(email, password, confirmPassword) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        const newUser = { name: email, email: email, password: password };
+        const newUser = { name: email, email: email, password: password, rootInventoryItemId:'0' };
         this.users.push(newUser);
         resolve(newUser);
       }, this.responseMiliSec);

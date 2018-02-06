@@ -66,12 +66,12 @@ class Registration {
     this.spinner.show();
     this.model.validateRegistrationData(email, password, confirmPassword)
       .then(() => {
-        ApiClient.instance.userService.register(email, password, confirmPassword)
-          .then((response) => App.instance.onLoggedUserChanged(response))
+        return ApiClient.instance.userService.register(email, password, confirmPassword)
+          //.then((response) => App.instance.onLoggedUserChanged(response))
           .catch((reason) => App.instance.handleError(reason, '[@login_failed_text@]'))
       })
       .catch((reason) => App.instance.messagePopup.show({ symbol:'trouble', title:'Registration Failed', message:reason }))//TODO: Localize this
-      .finally(() => this.spinner.hide());
+      //.finally(() => this.spinner.hide());
   }
 
 }
