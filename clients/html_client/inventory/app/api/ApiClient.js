@@ -1,6 +1,6 @@
 class ApiClient {
   constructor() {
-    switch(Config.get().environment) {
+    switch(Config.get().CURRENT_ENVIRONMENT) {
       case 'mock':
         this.userService = new UserServiceMock();
         this.inventoryService = new InventoryServiceMock();

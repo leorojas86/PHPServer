@@ -21,8 +21,8 @@ module.exports = (grunt) => {
       dist: {
         options: {
           patterns: [ {
-            match: /environment:/g,
-            replacement: `environment:'${target}',//`
+            match: /CURRENT_ENVIRONMENT:/g,
+            replacement: `CURRENT_ENVIRONMENT:'${target}',//`
           }]
         },
         files: [
