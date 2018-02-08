@@ -7,10 +7,10 @@ class RegistrationModel {
   validateRegistrationData(email, password, confirmPassword) {
     return new Promise((resolve, reject) => {
       if(!email || !password || !confirmPassword) {
-        reject('Fields can not be empty.');//TODO: Use error code to localize this
+        reject('[@fields_cant_be_empty@]');
       }
       else if(password !== confirmPassword) {
-        reject('Passwords must match.');//TODO: Use error code to localize this
+        reject('[@passwords_dont_match@]');
       } else {
         resolve();
       }
@@ -67,11 +67,11 @@ class Registration {
     this.model.validateRegistrationData(email, password, confirmPassword)
       .then(() => {
         return ApiClient.instance.userService.register(email, password, confirmPassword)
-          //.then((response) => App.instance.onLoggedUserChanged(response))
-          .catch((reason) => App.instance.handleError(reason, '[@login_failed_text@]'))
+          .then((response) => App.instance.onLoggedUserChanged(response))
+          .catch((reason) => App.instance.handleError(reason, '[@registration_failed_text@]'))
       })
-      .catch((reason) => App.instance.messagePopup.show({ symbol:'trouble', title:'Registration Failed', message:reason }))//TODO: Localize this
-      //.finally(() => this.spinner.hide());
+      .catch((reason) => App.instance.messagePopup.show({ symbol:'trouble', title:'[@registration_failed_text@]', message:reason }))
+      .finally(() => this.spinner.hide());
   }
 
 }

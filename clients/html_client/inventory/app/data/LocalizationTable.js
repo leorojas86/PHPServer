@@ -9,6 +9,7 @@ class LocalizationTable {
       "register_button_text": { en: 'Register', es: 'Registrarse' },
       "logout_button_text": { en: 'Logout', es: 'Salir' },
       "login_failed_text": { en: 'Login Failed', es: 'Fallo en autenticación' },
+      "registration_failed_text": { en: 'Registration Failed', es: 'Fallo en registro' },
       "load_error_text": { en: 'Loading error', es: 'Error cargando' },
       "something_wrong_text": { en: 'Something went wrong', es: 'Algo salió mal' },
       "ok_text": { en: 'Ok', es: 'Aceptar' },
@@ -35,6 +36,8 @@ class LocalizationTable {
       "name_text": { en: 'Name', es: 'Nombre' },
       "save_text": { en: 'Save', es: 'Salvar' },
       "select_image_text": { en: 'Select image', es: 'Seleccionar imagen' },
+      "fields_cant_be_empty": { en: 'Fields can not be empty.', es: 'Los campos no pueden estar vacíos.' },
+      "passwords_dont_match": { en: 'Passwords must match.', es: 'Los campos no pueden estar vacíos.' },
       /*Error Codes*/
       "invalid_credentials": { en: 'Invalid email or password.', es: 'Correo o password invalido(s).' }
     };
