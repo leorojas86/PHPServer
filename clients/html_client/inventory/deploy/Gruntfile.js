@@ -1,7 +1,10 @@
-module.exports = function (grunt) {
+module.exports = (grunt) => {
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
+
+  const target = grunt.option('target');
+  console.log('target', target);
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -14,19 +17,19 @@ module.exports = function (grunt) {
         dest: 'output',
       },
     },
-    /*replace: {
+    replace: {
       dist: {
         options: {
           patterns: [ {
-            match: /SELECTED_ENVIRONMENT:/g,
-            replacement: 'SELECTED_ENVIRONMENT: \'PUBLIC\',//' // replaces "CURRENT" to "CURRENT: 'PUBLIC',//"
+            match: /environment:/g,
+            replacement: `environment:'${target}',//`
           }]
         },
         files: [
           { expand: true, flatten: true, src: ['output/index.js'], dest: 'output/' }
         ]
       }
-    },*/
+    },
     minified : {
       files: {
         src: [ 'output/index.js' ],
@@ -58,10 +61,10 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-minified');
   grunt.loadNpmTasks('grunt-contrib-obfuscator');
 
-  grunt.registerTask('obfuscate', [
+  grunt.registerTask('prepare', [
     'clean',      //Deletes output folder
     'copy',       //Copies index.html, spritesheet.png and jsons to output folder
-    //'replace',    //Replaces selected environment
+    'replace',    //Replaces selected environment
     //'minified',   //Minifies the output/index.js
     //'obfuscator', //Obfuscate the output/index.js
   ]);

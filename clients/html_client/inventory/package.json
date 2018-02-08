@@ -1,5 +1,6 @@
 {
   "scripts": {
-    "deploy": "cd build && npm run build && cd ../deploy && npm run deploy"
+    "deploy:mock": "cd build && npm run build && cd ../deploy && npm run deploy:mock",
+    "deploy:dev": "cd build && npm run build && cd ../deploy && npm run deploy:dev"
   }
 }

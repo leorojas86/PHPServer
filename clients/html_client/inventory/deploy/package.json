@@ -10,6 +10,7 @@
     "aws-sdk": "2.22.0"
   },
   "scripts": {
-    "deploy": "grunt obfuscate && node upload_to_s3.js"
+    "deploy:mock": "grunt prepare --target=mock && node upload_to_s3.js",
+    "deploy:dev": "grunt prepare --target=dev && node upload_to_s3.js"
   }
 }
