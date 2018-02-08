@@ -66,7 +66,7 @@ class Registration {
     this.spinner.show();
     this.model.validateRegistrationData(email, password, confirmPassword)
       .then(() => {
-        return ApiClient.instance.userService.register(email, password, confirmPassword)
+        return ApiClient.instance.userService.register(email, password)
           .then((response) => App.instance.onLoggedUserChanged(response))
           .catch((reason) => App.instance.handleError(reason, '[@registration_failed_text@]'))
       })

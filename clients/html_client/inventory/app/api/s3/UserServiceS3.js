@@ -1,24 +1,24 @@
-class UserServiceMock {
+class UserServiceS3 {
 
   constructor() {
-    this.users = [{ name: 'test', email: 'test@test.com', password: 'test', rootInventoryItemId:'0'}];
     this.loggedUser = null;
-    this.mockEnvironment = Environments.get()['mock'];
-    this.responseMiliSec = this.mockEnvironment.responseSec * 1000;
   }
 
   register(email, password) {
-    return new Promise((resolve, reject) => {
+    const key = `user_${email}`;
+    const data = JSON.stringify({ name: email, email: email, password: password, rootInventoryItemId:'0'});
+    return S3.instance.addItem(key, data);
+    /*return new Promise((resolve, reject) => {
       setTimeout(() => {
         const newUser = { name: email, email: email, password: password, rootInventoryItemId:'0' };
         this.users.push(newUser);
         resolve(newUser);
       }, this.responseMiliSec);
-    });
+    });*/
   }
 
   login(email, password) {
-    return new Promise((resolve, reject) => {
+    /*return new Promise((resolve, reject) => {
       setTimeout(() => {
         const foundUser = this.users.find((user) => user.email === email && user.password === password);
         if(foundUser) {
@@ -29,16 +29,16 @@ class UserServiceMock {
           reject({ errorCode: 'invalid_credentials' });
         }
       }, this.responseMiliSec);
-    });
+    });*/
   }
 
   logout() {
-    return new Promise((resolve, reject) => {
+    /*return new Promise((resolve, reject) => {
       setTimeout(() => {
         this.loggedUser = null;
         resolve();
       }, this.responseMiliSec);
-    });
+    });*/
   }
 
 }
