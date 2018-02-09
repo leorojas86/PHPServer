@@ -17,6 +17,8 @@ class RegistrationModel {
     });
   }
 
+  get inputValues() { return Config.get().CURRENT_ENVIRONMENT === 'prod' ? { email: '', password: ''} : AppData.instance.testAccount; }
+
 }
 
 class RegistrationView {
@@ -30,11 +32,11 @@ class RegistrationView {
     return `<div id='${this.id}' class='${this.id}' align='center'>
               <div class='container'>
                 <p>[@email_text@]</p>
-                <input type='text' id='${this.id}_user_email' value=''>
+                <input type='text' id='${this.id}_user_email' value='${this.component.model.inputValues.email}'>
                 <p>[@password_text@]</p>
-                <input type='text' id='${this.id}_user_password' value=''>
+                <input type='text' id='${this.id}_user_password' value='${this.component.model.inputValues.password}'>
                 <p>[@confirm_password_text@]</p>
-                <input type='text' id='${this.id}_confirm_user_password' value=''>
+                <input type='text' id='${this.id}_confirm_user_password' value='${this.component.model.inputValues.password}'>
                 <button id='${this.id}_register_button'>
                   <span class="lsf symbol">plus</span> [@register_button_text@]
                 </button>

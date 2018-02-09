@@ -12,6 +12,7 @@ class UserServiceMock {
       setTimeout(() => {
         const newUser = { name: email, email: email, password: password, rootInventoryItemId:'0' };
         this.users.push(newUser);
+        this.loggedUser = newUser;
         resolve(newUser);
       }, this.responseMiliSec);
     });

@@ -5,31 +5,19 @@ class UserServiceS3 {
   }
 
   register(email, password) {
-    const key = `user_${email}`;
     const data = JSON.stringify({ name: email, email: email, password: password, rootInventoryItemId:'0'});
-    return S3.instance.addItem(key, data);
-    /*return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const newUser = { name: email, email: email, password: password, rootInventoryItemId:'0' };
-        this.users.push(newUser);
-        resolve(newUser);
-      }, this.responseMiliSec);
-    });*/
+    return S3.instance.addItem(`user_${email}`, data, 'application/json')
+      .then(() => {
+        return this.login(email, password);
+      });
   }
 
   login(email, password) {
-    /*return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const foundUser = this.users.find((user) => user.email === email && user.password === password);
-        if(foundUser) {
-          this.loggedUser = foundUser;
-          resolve(foundUser);
-        }
-        else {
-          reject({ errorCode: 'invalid_credentials' });
-        }
-      }, this.responseMiliSec);
-    });*/
+    return S3.instance.getItem(`user_${email}`)
+      .then((data) => {
+        this.loggedUser = data.Body.toString();
+        return this.loggedUser;
+      });
   }
 
   logout() {

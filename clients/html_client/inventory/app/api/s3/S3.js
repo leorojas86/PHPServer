@@ -13,12 +13,13 @@ class S3 {
       });
     }
 
-    addItem(itemKey, data) {
+    addItem(itemKey, data, contentType) {
       return new Promise((resolve, reject) => {
         this.s3.upload({
           Key: itemKey,
           Body: data,
-          ACL: 'public-read'
+          ACL: 'public-read',
+          ContentType: contentType
         }, (err, data) => {
           if (err) {
             reject(err);

@@ -1,6 +1,6 @@
 class LoginPopupMode {
 
-  get inputValues() { return Config.get().CURRENT_ENVIRONMENT === 'prod' ? { email: '', password: ''} : { email: 'test@test.com', password: 'test'}; }
+  get inputValues() { return Config.get().CURRENT_ENVIRONMENT === 'prod' ? { email: '', password: ''} : AppData.instance.testAccount; }
 
 }
 
