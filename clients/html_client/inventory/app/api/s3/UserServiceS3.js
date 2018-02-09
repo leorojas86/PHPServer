@@ -4,6 +4,11 @@ class UserServiceS3 {
     this.loggedUser = null;
   }
 
+  getUser(email) {
+    return S3.instance.getItem(`user_${email}`)
+      .then((data) => JSON.parse(data.Body.toString()) )
+  }
+
   register(email, password) {
     const data = JSON.stringify({ name: email, email: email, password: password, rootInventoryItemId:'0'});
     return S3.instance.addItem(`user_${email}`, data, 'application/json')
@@ -13,10 +18,14 @@ class UserServiceS3 {
   }
 
   login(email, password) {
-    return S3.instance.getItem(`user_${email}`)
-      .then((data) => {
-        this.loggedUser = JSON.parse(data.Body.toString());
-        return this.loggedUser;
+    return this.getUser(email)
+      .then((user) => {
+        if(user.password === password) { //TODO: Encript password
+          this.loggedUser = user;
+          return user;
+        } else {
+          throw { errorCode: 'invalid_credentials' };
+        }
       });
   }
 
