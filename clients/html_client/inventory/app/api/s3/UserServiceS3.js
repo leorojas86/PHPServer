@@ -15,18 +15,16 @@ class UserServiceS3 {
   login(email, password) {
     return S3.instance.getItem(`user_${email}`)
       .then((data) => {
-        this.loggedUser = data.Body.toString();
+        this.loggedUser = JSON.parse(data.Body.toString());
         return this.loggedUser;
       });
   }
 
   logout() {
-    /*return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        this.loggedUser = null;
-        resolve();
-      }, this.responseMiliSec);
-    });*/
+    return new Promise((resolve, reject) => {
+      this.loggedUser = null;
+      resolve();
+    });
   }
 
 }
