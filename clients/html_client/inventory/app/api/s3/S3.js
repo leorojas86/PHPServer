@@ -44,11 +44,27 @@ class S3 {
 
     deleteItem(itemKey, data) {
       return new Promise((resolve, reject) => {
-        s3.deleteObject({Key: itemKey}, (err, data) => {
+        this.s3.deleteObject({Key: itemKey}, (err, data) => {
           if (err) {
             reject(err);
           } else {
             resolve();
+          }
+        });
+      });
+    }
+
+    hasItem(itemKey) {
+      return new Promise((resolve, reject) => {
+        this.s3.headObject({Key: itemKey}, (err, metadata) => {
+          if (err) {
+            if(err.code === 'NotFound' || err.code === 'Forbidden') {
+              resolve(false); //TODO: find the best way to handle this
+            } else {
+              reject(err);
+            }
+          } else {
+            resolve(true);
           }
         });
       });

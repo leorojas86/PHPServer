@@ -4,17 +4,26 @@ class UserServiceS3 {
     this.loggedUser = null;
   }
 
+  _checkForExistingUser(email) {
+    return new Promise((resolve, reject) => {
+      S3.instance.hasItem(`user_${email}`)
+        .then((hasItem) => hasItem ? reject({ errorCode: 'user_already_exists' }) : resolve())
+        .catch((reason) => reject(reason));
+      });
+  }
+
   getUser(email) {
     return S3.instance.getItem(`user_${email}`)
       .then((data) => JSON.parse(data.Body.toString()) )
   }
 
   register(email, password) {
-    const data = JSON.stringify({ name: email, email: email, password: password, rootInventoryItemId:'0'});
-    return S3.instance.addItem(`user_${email}`, data, 'application/json')
-      .then(() => {
-        return this.login(email, password);
-      });
+      return this._checkForExistingUser(email)
+        .then(() => {
+            const data = JSON.stringify({ name: email, email: email, password: password, rootInventoryItemId:'0'});
+            return S3.instance.addItem(`user_${email}`, data, 'application/json')
+              .then(() => this.login(email, password));
+        });
   }
 
   login(email, password) {
