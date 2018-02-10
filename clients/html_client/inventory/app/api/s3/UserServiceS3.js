@@ -12,22 +12,17 @@ class UserServiceS3 {
       });
   }
 
-  getUser(email) {
-    return S3.instance.getItem(`user_${email}`)
-      .then((data) => JSON.parse(data.Body.toString()) )
-  }
-
   register(email, password) {
       return this._checkForExistingUser(email)
         .then(() => {
-            const data = JSON.stringify({ name: email, email: email, password: password, rootInventoryItemId:'0'});
-            return S3.instance.addItem(`user_${email}`, data, 'application/json')
+            const item = { name:email, email:email, password:password, rootInventoryItemId:'0' };
+            return S3.instance.saveItem(`user_${email}`, item, 'application/json')
               .then(() => this.login(email, password));
         });
   }
 
   login(email, password) {
-    return this.getUser(email)
+    return S3.instance.getItem(`user_${email}`)
       .then((user) => {
         if(user.password === password) { //TODO: Encript password
           this.loggedUser = user;
