@@ -13,10 +13,12 @@ class UserServiceS3 {
   }
 
   register(email, password) {
+      const rootItem = { id:GUIDUtils.generateNewGUID(), name:'home', type:'folder', parentId:null, children:[] };
       return this._checkForExistingUser(email)
+        .then(() => ApiClient.instance.inventoryService.saveItem(rootItem))//Create root/home item
         .then(() => {
-            const item = { name:email, email:email, password:password, rootInventoryItemId:'0' };
-            return S3.instance.saveItem(`user_${email}`, item, 'application/json')
+            const userItem = { name:email, email:email, password:password, rootInventoryItemId:rootItem.id };
+            return S3.instance.saveItem(`user_${email}`, userItem, 'application/json')
               .then(() => this.login(email, password));
         });
   }

@@ -22,7 +22,7 @@ class InventoryServiceS3 {
   }
 
   getItemPath(item) {
-    return _getPathItemRecursively(item);
+    return this._getPathItemRecursively(item);
   }
 
   deleteItem(item) {
@@ -34,10 +34,13 @@ class InventoryServiceS3 {
       .then(() => S3.instance.deleteItem(item.id));
   }
 
-  addItem(type, name, parentItem) {
-    const id = GUIDUtils.generateNewGUID();
-    const item = { id:id, name:name, type:type, parentId:parentItem.id, children:[] };
-    return S3.instance.saveItem(`item_${item.parentId}`, item);
+  addChildItem(type, name, parentItem) {
+    const newItem = { id:GUIDUtils.generateNewGUID(), name:name, type:type, parentId:parentItem.id, children:[] };
+    saveItem(newItem)
+      .then(() => {
+        parentItem.children.push(newItem.id);
+        return S3.instance.saveItem(parentItem);
+      });
   }
 
   /*renameItem(item, newName) {

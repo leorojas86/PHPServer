@@ -8,7 +8,7 @@ class ApiClient {
       case 'dev':
         S3.instance = new S3(Environments.get()['dev'].s3);
         this.userService = new UserServiceS3();
-        this.inventoryService = new InventoryServiceMock();//new InventoryServiceS3();
+        this.inventoryService = new InventoryServiceS3();
       break;
       default:
         console.error(`Unknown environment '${environment}'`);
