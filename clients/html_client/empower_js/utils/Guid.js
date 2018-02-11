@@ -5,7 +5,7 @@ class Guid {
 	}
 
 	static generateNewGUID() {
-	   return (GUIDUtils._s4() + GUIDUtils._s4() + "-" + GUIDUtils._s4() + "-" + GUIDUtils._s4() + "-" + GUIDUtils._s4() + "-" + GUIDUtils._s4() + GUIDUtils._s4() + GUIDUtils._s4()).toLowerCase();
+	   return (Guid._s4() + Guid._s4() + "-" + Guid._s4() + "-" + Guid._s4() + "-" + Guid._s4() + "-" + Guid._s4() + Guid._s4() + Guid._s4()).toLowerCase();
 	}
 
 }
