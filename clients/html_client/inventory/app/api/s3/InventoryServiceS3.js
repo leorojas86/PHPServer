@@ -36,7 +36,7 @@ class InventoryServiceS3 {
   }
 
   addChildItem(type, name, parentItem) {
-    const newItem = { id:GUIDUtils.generateNewGUID(), name:name, type:type, parentId:parentItem.id, children:[] };
+    const newItem = { id:GUIDUtils.Guid(), name:name, type:type, parentId:parentItem.id, children:[] };
     parentItem.children.push(newItem.id);
     return this.saveItem(newItem)
       .then(() => this.saveItem(parentItem));

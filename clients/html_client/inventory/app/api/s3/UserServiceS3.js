@@ -12,6 +12,10 @@ class UserServiceS3 {
       });
   }
 
+  restore() {
+    this.loggedUser = Storage.getObject('LOGGED_USER');
+  }
+
   register(email, password) {
       const rootItem = { id:GUIDUtils.generateNewGUID(), name:'home', type:'folder', parentId:null, children:[] };
       return this._checkForExistingUser(email)
@@ -28,6 +32,8 @@ class UserServiceS3 {
       .then((user) => {
         if(user.password === password) { //TODO: Encript password
           this.loggedUser = user;
+          user.password = undefined;
+          Storage.setObject('LOGGED_USER', user);
           return user;
         } else {
           throw { errorCode: 'invalid_credentials' };

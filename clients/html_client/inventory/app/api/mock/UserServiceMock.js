@@ -7,6 +7,10 @@ class UserServiceMock {
     this.responseMiliSec = this.mockEnvironment.responseSec * 1000;
   }
 
+  restore() {
+    //Do not restore logged user for mock
+  }
+
   register(email, password) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
