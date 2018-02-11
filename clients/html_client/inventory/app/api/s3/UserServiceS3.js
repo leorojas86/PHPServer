@@ -14,6 +14,8 @@ class UserServiceS3 {
 
   restore() {
     this.loggedUser = Storage.getObject('LOGGED_USER');
+    Storage.clear();
+    Storage.setObject('LOGGED_USER', this.loggedUser);
   }
 
   register(email, password) {
@@ -44,6 +46,7 @@ class UserServiceS3 {
   logout() {
     return new Promise((resolve, reject) => {
       this.loggedUser = null;
+      Storage.clear();
       resolve();
     });
   }
