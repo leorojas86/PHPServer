@@ -24,6 +24,7 @@ class S3 {
           if (err) {
             reject(err);
           } else {
+            Storage.set(itemKey, null);
             resolve();
           }
         });
@@ -32,13 +33,20 @@ class S3 {
 
     getItem(itemKey) {
       return new Promise((resolve, reject) => {
-        this.s3.getObject({ Key:itemKey }, (err, data) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(JSON.parse(data.Body.toString()));
-          }
-         });
+        const item = Storage.getObject(itemKey);
+        if(item) {
+          resolve(item);
+        } else {
+          this.s3.getObject({ Key:itemKey }, (err, data) => {
+            if (err) {
+              reject(err);
+            } else {
+              const itemJSON = data.Body.toString();
+              resolve(JSON.parse(itemJSON));
+              Storage.set(itemKey, itemJSON);
+            }
+           });
+        }
       });
     }
 
@@ -48,6 +56,7 @@ class S3 {
           if (err) {
             reject(err);
           } else {
+            Storage.set(itemKey, null);
             resolve();
           }
         });
