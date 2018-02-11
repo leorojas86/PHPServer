@@ -11,7 +11,7 @@ class ApiClient {
         S3.instance = new S3(Environments.get()[env].s3);
         this.userService = new UserServiceS3();
         this.inventoryService = new InventoryServiceS3();
-        this.imageService = new ImageServiceMock();
+        this.imageService = new ImageServiceS3();
       break;
     }
   }
