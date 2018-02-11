@@ -4,6 +4,7 @@ class ApiClient {
       case 'mock':
         this.userService = new UserServiceMock();
         this.inventoryService = new InventoryServiceMock();
+        this.imageService = new ImageServiceMock();
       break;
       case 'dev':
         S3.instance = new S3(Environments.get()['dev'].s3);
