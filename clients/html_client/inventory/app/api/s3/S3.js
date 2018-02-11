@@ -33,7 +33,7 @@ class S3 {
           if (err) {
             reject(err);
           } else {
-            Storage.setData(dataKey, null);
+            Storage.remove(dataKey);
             resolve();
           }
         });
@@ -65,7 +65,7 @@ class S3 {
           if (err) {
             reject(err);
           } else {
-            Storage.setData(itemKey, null);
+            Storage.remove(itemKey);
             resolve();
           }
         });

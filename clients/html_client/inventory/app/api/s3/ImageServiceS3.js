@@ -1,13 +1,11 @@
 class ImageServiceS3 {
 
   saveImage(id, imageData) {
-    return S3.instance.saveItem(`image_${id}`, imageData, 'application/json')
+    return S3.instance.saveData(`image_${id}.jpg`, imageData, 'image/jpeg');
   }
 
   getImage(id) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => resolve(this.images[id]), this.responseMiliSec);
-    });
+    return S3.instance.getData(`image_${id}.jpg`);
   }
 
 }
