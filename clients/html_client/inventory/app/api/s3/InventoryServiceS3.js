@@ -5,7 +5,10 @@ class InventoryServiceS3 {
     if(item.parentId) {
       return this.getItemById(item.parentId)
         .then((parentItem) => this._getPathItemRecursively(parentItem))
-        .then((path) => path.push(pathItem));
+        .then((path) => {
+          path.push(pathItem);
+          return path;
+        });
     }
     return Promise.resolve([pathItem]);
   }
