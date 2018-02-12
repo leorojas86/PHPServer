@@ -3,7 +3,7 @@ class AppData {
   constructor() {
     this.data = {//Default values
 			user: null,
-			currentLanguage:'en',
+			currentLanguage:'es',
 			currentScreen: 'welcome',
 			currentInventoryItem: null
 		};

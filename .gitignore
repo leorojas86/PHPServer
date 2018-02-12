@@ -10,3 +10,7 @@ clients/html_client/inventory/deploy/node_modules
 clients/html_client/inventory/build/node_modules
 clients/html_client/inventory/build/output
 clients/html_client/inventory/deploy/output
+clients/html_client/super/build/node_modules
+clients/html_client/super/build/output
+clients/html_client/super/deploy/node_modules
+clients/html_client/super/deploy/output
