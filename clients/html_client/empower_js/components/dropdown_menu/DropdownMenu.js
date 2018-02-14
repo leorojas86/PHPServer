@@ -46,8 +46,10 @@ class DropdownMenuView {
 
   setPosition(position) {
     const element = Html.getElement(`${this.id}_options`);
-    const maxX = window.innerWidth - element.offsetWidth;
-    const maxY = window.innerHeight - element.offsetHeight;
+    const windowScrolledXOffset = window.pageXOffset || document.documentElement.scrollLeft;
+		const windowScrolledYOffset = window.pageYOffset || document.documentElement.scrollTop;
+    const maxX = window.innerWidth + windowScrolledXOffset - element.offsetWidth;
+    const maxY = window.innerHeight + windowScrolledYOffset - element.offsetHeight;
     position.x = position.x < maxX ? position.x : maxX;
     position.y = position.y < maxY ? position.y : maxY;
     element.style.position = "absolute";
