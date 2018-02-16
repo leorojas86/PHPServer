@@ -4,12 +4,16 @@ class InventoryFileModel {
     this.imageData = null;
   }
 
-  getImageId() {
+  _getImageId() {
     return AppData.instance.getCurrentInventoryItem().image;
   }
 
+  get description() {
+    return AppData.instance.getCurrentInventoryItem().description || '';
+  }
+
   saveImageData() {
-    let imageId = this.getImageId();
+    let imageId = this._getImageId();
     if(imageId) {
       return ApiClient.instance.imageService.saveImage(imageId, this.imageData)
     } else {
@@ -25,7 +29,7 @@ class InventoryFileModel {
 
   loadImageData() {
     this.imageData = null;
-    const imageId = this.getImageId();
+    const imageId = this._getImageId();
     if(imageId) {
       return ApiClient.instance.imageService.getImage(imageId)
         .then((imageData) => this.imageData = imageData);
@@ -48,19 +52,23 @@ class InventoryFileView {
       :
       `<span class='lsf symbol'>image</span>`;
     return `<div id='${this.id}' class='${this.id}'>
-              <button id='${this.id}_image_button' class='select_image_button'>
-                <span class='lsf symbol'>image</span>
-                <span>[@select_image_text@]</span>
-                <input  id='${this.id}_image_input'
-                        type='file'
-                        accept="image/gif, image/jpeg, image/jpg, image/png, image/bmp, image/tif"
-                        style="display:none;">
-              </button>
-              <button id='${this.id}_save_button'>
-                <span class='lsf symbol'>save</span> [@save_text@]
-              </button>
+              <div class='file_header'>
+                <span>[@description_text@]</span>
+                <input type='text' id='${this.id}_input_text' placeholder='' value='${ this.component.model.description }'>
+                <button id='${this.id}_save_button' class='save_button'>
+                  <span class='lsf symbol'>save</span> [@save_text@]
+                </button>
+              </div>
               <div class='image' align='center'>
                 ${imageHtml}
+                <button id='${this.id}_image_button' class='select_image_button'>
+                  <span class='lsf symbol'>image</span>
+                  <span>[@select_image_text@]</span>
+                  <input  id='${this.id}_image_input'
+                          type='file'
+                          accept="image/gif, image/jpeg, image/jpg, image/png, image/bmp, image/tif"
+                          style="display:none;">
+                </button>
               </div>
               ${ this.component.spinner.view.buildHTML() }
             </div>`;

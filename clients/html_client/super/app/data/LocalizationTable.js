@@ -41,6 +41,7 @@ class LocalizationTable {
       "select_image_text": { en: 'Select image', es: 'Seleccionar imagen' },
       "fields_cant_be_empty": { en: 'Fields can not be empty.', es: 'Los campos no pueden estar vacíos.' },
       "passwords_dont_match": { en: 'Passwords must match.', es: 'Los campos no pueden estar vacíos.' },
+      "description_text": { en: 'Description', es: 'Descripción' },
       /*Error Codes*/
       "invalid_credentials": { en: 'Invalid email or password.', es: 'Correo o password invalido(s).' },
       "user_already_exists": { en: 'User already exists.', es: 'El usuario ya existe.' }

@@ -6,14 +6,14 @@ class SearchServiceMock {
   }
 
   updateSearchData(item) {
-    item.text = item.name;//TODO: remove this
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        const itemSearchData = this.searchData.find((searchData) => searchData.itemId === item);
+        const searchText = item.description || item.name;
+        const itemSearchData = this.searchData.find((searchData) => searchData.itemId === item.id);
         if (itemSearchData) {
-          itemSearchData.text = item.text.toLowerCase();
+          itemSearchData.text = searchText.toLowerCase();
         } else {
-           this.searchData.push({ itemId:item.id, text:item.text.toLowerCase() });
+           this.searchData.push({ itemId:item.id, text:searchText.toLowerCase() });
         }
         resolve();
       }, this.responseMiliSec);

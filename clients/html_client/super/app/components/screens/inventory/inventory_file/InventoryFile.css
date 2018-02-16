@@ -10,3 +10,23 @@
 .inventory_file img {
   max-width:80%; max-height:80%;
 }
+
+.inventory_file .select_image_button {
+  display:block;
+}
+
+.inventory_file .save_button {
+  position:absolute; right:0px;
+}
+
+.inventory_file .file_header {
+  height:50px;
+}
+
+.inventory_file .file_header span {
+  margin-left:5px; margin-top:15px;
+}
+
+.inventory_file .file_header input {
+  margin-top:15px; width:150px;
+}
