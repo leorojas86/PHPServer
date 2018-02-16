@@ -3,8 +3,7 @@ class UserServiceMock {
   constructor() {
     this.users = [{ name: 'test', email: 'test@test.com', password: 'test', rootInventoryItemId:'0'}];
     this.loggedUser = null;
-    this.mockEnvironment = Environments.get()['mock'];
-    this.responseMiliSec = this.mockEnvironment.responseSec * 1000;
+    this.responseMiliSec = Environments.get()['mock'].responseSec * 1000;
   }
 
   restore() {

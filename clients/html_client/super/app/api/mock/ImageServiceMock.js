@@ -2,8 +2,7 @@ class ImageServiceMock {
 
   constructor() {
     this.images = {};
-    this.mockEnvironment = Environments.get()['mock'];
-    this.responseMiliSec = this.mockEnvironment.responseSec * 1000;
+    this.responseMiliSec = Environments.get()['mock'].responseSec * 1000;
   }
 
   saveImage(id, imageData) {

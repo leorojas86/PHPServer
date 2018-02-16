@@ -6,6 +6,8 @@ class ApiClient {
         this.userService = new UserServiceMock();
         this.inventoryService = new InventoryServiceMock();
         this.imageService = new ImageServiceMock();
+        this.searchService = new SearchServiceMock();
+        this.inventoryService.items.forEach((item) => this.searchService.updateSearchData(item));
       break;
       default:
         S3.instance = new S3(Environments.get()[env].s3);

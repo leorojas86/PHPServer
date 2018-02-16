@@ -7,8 +7,7 @@ class InventoryServiceMock {
       { id:'2', name:'file 1', type:'file', parentId:'0' },
       { id:'3', name:'folder 2', type:'folder', parentId:'1', children:[] },
     ];
-    this.mockEnvironment = Environments.get()['mock'];
-    this.responseMiliSec = this.mockEnvironment.responseSec * 1000;
+    this.responseMiliSec = Environments.get()['mock'].responseSec * 1000;
     this.currentId = 3;
   }
 
