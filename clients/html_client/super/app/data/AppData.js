@@ -10,7 +10,7 @@ class AppData {
         productsInfo:[]
       }
 		};
-    this.testAccount = { email: 'test@test.com', password: 'test'};
+    this.testAccount = { email:'test@test.com', password:'test'};
   }
 
   getUser() { return this.data.user; }
