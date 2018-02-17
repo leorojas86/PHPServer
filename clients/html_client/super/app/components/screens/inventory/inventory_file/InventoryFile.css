@@ -1,5 +1,8 @@
 .inventory_file {
   min-height:300px;
+}
+
+.inventory_file .description_container {
   text-align:center;
 }
 

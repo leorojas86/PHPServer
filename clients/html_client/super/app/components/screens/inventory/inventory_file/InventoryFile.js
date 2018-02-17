@@ -46,12 +46,17 @@ class InventoryFileView {
   buildHTML() {
     return `<div id='${this.id}' class='${this.id}'>
               <div class='file_header'>
+                <button id='${this.id}_add_to_cart_button'>
+                  <span class='lsf symbol'>cart</span> [@add_to_cart_text@]
+                </button>
                 <button id='${this.id}_save_button' class='save_button'>
                   <span class='lsf symbol'>save</span> [@save_text@]
                 </button>
               </div>
-              <span>[@description_text@]</span>
-              <input type='text' id='${this.id}_input_text' placeholder='' value='${ this.component.model.description }'>
+              <div class='description_container'>
+                <span>[@description_text@]</span>
+                <input type='text' id='${this.id}_input_text' placeholder='' value='${ this.component.model.description }'>
+              </div>
               ${ this.component.imageChooser.view.buildHTML() }
               ${ this.component.spinner.view.buildHTML() }
             </div>`;
