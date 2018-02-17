@@ -1,5 +1,6 @@
 .inventory_file {
   min-height:300px;
+  text-align:center;
 }
 
 .inventory_file .image {
@@ -28,5 +29,5 @@
 }
 
 .inventory_file .file_header input {
-  margin-top:15px; width:150px;
+  display:block; margin-top:15px; width:160px;
 }

@@ -53,12 +53,13 @@ class InventoryFileView {
       `<span class='lsf symbol'>image</span>`;
     return `<div id='${this.id}' class='${this.id}'>
               <div class='file_header'>
-                <span>[@description_text@]</span>
-                <input type='text' id='${this.id}_input_text' placeholder='' value='${ this.component.model.description }'>
+
                 <button id='${this.id}_save_button' class='save_button'>
                   <span class='lsf symbol'>save</span> [@save_text@]
                 </button>
               </div>
+              <span>[@description_text@]</span>
+              <input type='text' id='${this.id}_input_text' placeholder='' value='${ this.component.model.description }'>
               <div class='image' align='center'>
                 ${imageHtml}
                 <button id='${this.id}_image_button' class='select_image_button'>
