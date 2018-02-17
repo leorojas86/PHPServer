@@ -1,18 +1,27 @@
 class InventoryFileModel {
 
-  constructor() {
-    this.imageData = null;
+  constructor(component) {
+    this.component = component;
   }
 
   _getImageId() {
     return AppData.instance.getCurrentInventoryItem().image;
   }
 
+  get imageData() {
+    return this.component.imageChooser.model.imageData;
+  }
+
   get description() {
     return AppData.instance.getCurrentInventoryItem().description || '';
   }
 
-  saveImageData() {
+  loadImageData() {
+    const imageId = this._getImageId();
+    return imageId ? ApiClient.instance.imageService.getImage(imageId) : Promise.resolve(null);
+  }
+
+  saveImageData(imageData) {
     let imageId = this._getImageId();
     if(imageId) {
       return ApiClient.instance.imageService.saveImage(imageId, this.imageData)
@@ -23,18 +32,8 @@ class InventoryFileModel {
           AppData.instance.getCurrentInventoryItem().image = imageId;
           return ApiClient.instance.inventoryService.saveItem(AppData.instance.getCurrentInventoryItem());
         })
-        .then(() => this.loadImageData());
+        .then(() => this.component.load());
     }
-  }
-
-  loadImageData() {
-    this.imageData = null;
-    const imageId = this._getImageId();
-    if(imageId) {
-      return ApiClient.instance.imageService.getImage(imageId)
-        .then((imageData) => this.imageData = imageData);
-    }
-    return Promise.resolve();
   }
 
 }
@@ -47,10 +46,6 @@ class InventoryFileView {
   }
 
   buildHTML() {
-    const imageHtml = this.component.model.imageData ?
-      `<img src='${this.component.model.imageData}'/>`
-      :
-      `<span class='lsf symbol'>image</span>`;
     return `<div id='${this.id}' class='${this.id}'>
               <div class='file_header'>
                 <button id='${this.id}_save_button' class='save_button'>
@@ -59,24 +54,12 @@ class InventoryFileView {
               </div>
               <span>[@description_text@]</span>
               <input type='text' id='${this.id}_input_text' placeholder='' value='${ this.component.model.description }'>
-              <div class='image' align='center'>
-                ${imageHtml}
-                <button id='${this.id}_image_button' class='select_image_button'>
-                  <span class='lsf symbol'>image</span>
-                  <span>[@select_image_text@]</span>
-                  <input  id='${this.id}_image_input'
-                          type='file'
-                          accept="image/gif, image/jpeg, image/jpg, image/png, image/bmp, image/tif"
-                          style="display:none;">
-                </button>
-              </div>
+              ${ this.component.imageChooser.view.buildHTML() }
               ${ this.component.spinner.view.buildHTML() }
             </div>`;
   }
 
   onDomUpdated() {
-    Html.onClick(`${this.id}_image_button`, () => Html.getElement(`${this.id}_image_input`).click());
-    Html.onChange(`${this.id}_image_input`, () => this.component.onImageSelected());
     Html.setDisabled(`${this.id}_save_button`, this.component.model.imageData === null);
     Html.onClick(`${this.id}_save_button`,() => this.component.onSaveButtonClick());
     Html.onKeyUp(`${this.id}_input_text`, (key) => Html.setDisabled(`${this.id}_save_button`, false));
@@ -87,24 +70,20 @@ class InventoryFileView {
 class InventoryFile {
 
   constructor() {
-    this.model = new InventoryFileModel();
+    this.model = new InventoryFileModel(this);
     this.view = new InventoryFileView(this);
+    this.imageChooser = Html.addChild(new ImageChooser('inventory_file_image_chooser'), this);
     this.spinner = Html.addChild(new Spinner('inventory_file_spinner'), this);
   }
 
   load() {
-    return this.model.loadImageData();
+    const onImageChoosed = () => this.onImageChoosed();
+    return this.model.loadImageData()
+      .then((imageData) => this.imageChooser.load(imageData, onImageChoosed));
   }
 
-  onImageSelected() {
-    this.spinner.show();
-    Html.getImageData(`${this.view.id}_image_input`)
-      .then((imageData) => this.model.imageData = imageData)
-      .catch((reason) => App.instance.handleError(reason, '[@load_error_text@]'))
-      .finally(() => {
-        this.spinner.hide();
-        Html.refresh(this);
-      });
+  onImageChoosed() {
+    Html.refresh(this);
   }
 
   onSaveButtonClick() {

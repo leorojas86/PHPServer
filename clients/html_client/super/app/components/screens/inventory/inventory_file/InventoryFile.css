@@ -3,19 +3,6 @@
   text-align:center;
 }
 
-.inventory_file .image {
-  margin:10px;
-  font-size:200px;
-}
-
-.inventory_file img {
-  max-width:80%; max-height:80%;
-}
-
-.inventory_file .select_image_button {
-  display:block;
-}
-
 .inventory_file .save_button {
   position:absolute; right:0px;
 }
