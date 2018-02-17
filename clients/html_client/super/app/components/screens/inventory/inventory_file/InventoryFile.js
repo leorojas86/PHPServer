@@ -53,7 +53,6 @@ class InventoryFileView {
       `<span class='lsf symbol'>image</span>`;
     return `<div id='${this.id}' class='${this.id}'>
               <div class='file_header'>
-
                 <button id='${this.id}_save_button' class='save_button'>
                   <span class='lsf symbol'>save</span> [@save_text@]
                 </button>
@@ -80,6 +79,7 @@ class InventoryFileView {
     Html.onChange(`${this.id}_image_input`, () => this.component.onImageSelected());
     Html.setDisabled(`${this.id}_save_button`, this.component.model.imageData === null);
     Html.onClick(`${this.id}_save_button`,() => this.component.onSaveButtonClick());
+    Html.onKeyUp(`${this.id}_input_text`, (key) => Html.setDisabled(`${this.id}_save_button`, false));
   }
 
 }

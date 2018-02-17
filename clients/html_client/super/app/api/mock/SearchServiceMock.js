@@ -8,7 +8,7 @@ class SearchServiceMock {
   updateSearchData(item) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        const searchText = item.description || item.name;
+        const searchText = item.description != null ? `${item.description} ${item.name}` : item.name;
         const itemSearchData = this.searchData.find((searchData) => searchData.itemId === item.id);
         if (itemSearchData) {
           itemSearchData.text = searchText.toLowerCase();
