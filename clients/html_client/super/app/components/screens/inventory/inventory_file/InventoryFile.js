@@ -4,7 +4,7 @@ class InventoryFileModel {
     this.component = component;
   }
 
-  _getImageId() {
+  get imageId() {
     return AppData.instance.getCurrentInventoryItem().image;
   }
 
@@ -17,16 +17,14 @@ class InventoryFileModel {
   }
 
   loadImageData() {
-    const imageId = this._getImageId();
-    return imageId ? ApiClient.instance.imageService.getImage(imageId) : Promise.resolve(null);
+    return this.imageId ? ApiClient.instance.imageService.getImage(this.imageId) : Promise.resolve(null);
   }
 
   saveImageData(imageData) {
-    let imageId = this._getImageId();
-    if(imageId) {
-      return ApiClient.instance.imageService.saveImage(imageId, this.imageData)
+    if(this.imageId) {
+      return ApiClient.instance.imageService.saveImage(this.imageId, this.imageData)
     } else {
-      imageId = Guid.generateNewGUID();
+      const imageId = Guid.generateNewGUID();
       return ApiClient.instance.imageService.saveImage(imageId, this.imageData)
         .then(() => {
           AppData.instance.getCurrentInventoryItem().image = imageId;
@@ -77,9 +75,8 @@ class InventoryFile {
   }
 
   load() {
-    const onImageChoosed = () => this.onImageChoosed();
     return this.model.loadImageData()
-      .then((imageData) => this.imageChooser.load(imageData, onImageChoosed));
+      .then((imageData) => this.imageChooser.load(imageData, () => this.onImageChoosed()));
   }
 
   onImageChoosed() {
