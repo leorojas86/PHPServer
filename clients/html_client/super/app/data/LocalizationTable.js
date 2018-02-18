@@ -39,6 +39,9 @@ class LocalizationTable {
       "fields_cant_be_empty": { en: 'Fields can not be empty.', es: 'Los campos no pueden estar vacíos.' },
       "passwords_dont_match": { en: 'Passwords must match.', es: 'Los campos no pueden estar vacíos.' },
       "description_text": { en: 'Description', es: 'Descripción' },
+      "quantity_text":  { en: 'Quantity', es: 'Cantidad' },
+      "p_u_text":  { en: 'P/U', es: 'P/U' },
+      "total_text":  { en: 'Total', es: 'Total' },
       "add_to_cart_text": { en: 'Add to Cart', es: 'Agregar a carrito'},
       /* Screens */
       "welcome_text": { en: 'Welcome', es: 'Bienvenid@' },
