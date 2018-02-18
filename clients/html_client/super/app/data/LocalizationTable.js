@@ -20,9 +20,6 @@ class LocalizationTable {
       "login_to_get_started_text": { en: 'Login to get started', es: 'Autentíquese para iniciar' },
       "settings_text": { en: 'Settings', es: 'Configuración' },
       "skin_text": { en: 'Skin', es: 'Apariencia' },
-      "welcome_text": { en: 'Welcome', es: 'Bienvenid@' },
-      "registration_text": { en: 'Registration', es: 'Registro' },
-      "inventory_text": { en: 'Inventory', es: 'Inventario' },
       "add_file_text": { en: 'Add File', es: 'Agregar Archivo' },
       "add_folder_text": { en: 'Add Folder', es: 'Agregar Folder' },
       "rename_text": { en: 'Rename', es: 'Renombrar' },
@@ -43,7 +40,12 @@ class LocalizationTable {
       "passwords_dont_match": { en: 'Passwords must match.', es: 'Los campos no pueden estar vacíos.' },
       "description_text": { en: 'Description', es: 'Descripción' },
       "add_to_cart_text": { en: 'Add to Cart', es: 'Agregar a carrito'},
-      /*Error Codes*/
+      /* Screens */
+      "welcome_text": { en: 'Welcome', es: 'Bienvenid@' },
+      "registration_text": { en: 'Registration', es: 'Registro' },
+      "inventory_text": { en: 'Inventory', es: 'Inventario' },
+      "cart_text": { en: 'Cart', es: 'Carrito' },
+      /* Error Codes */
       "invalid_credentials": { en: 'Invalid email or password.', es: 'Correo o password invalido(s).' },
       "user_already_exists": { en: 'User already exists.', es: 'El usuario ya existe.' }
     };

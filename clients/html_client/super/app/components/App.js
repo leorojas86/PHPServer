@@ -15,6 +15,7 @@ class AppModel {
 			case 'welcome': return this.component.welcome; break;
 			case 'inventory': return this.component.inventory; break;
 			case 'registration': return this.component.registration; break;
+			case 'cart': return this.component.cart; break;
 		}
  		return null;
 	}
@@ -54,6 +55,7 @@ class App
 		this.welcome = Html.addChild(new Welcome(), this);
 		this.registration = Html.addChild(new Registration(), this);
 		this.inventory = Html.addChild(new Inventory(), this);
+		this.cart = Html.addChild(new Cart(), this);
 		this.contextMenu = Html.addChild(new DropdownMenu('context_menu'), this);
 		this.loginPopup = Html.addChild(new Popup(new LoginPopup()), this);
     this.userPopup = Html.addChild(new Popup(new UserPopup()), this);
@@ -75,22 +77,3 @@ class App
 	}
 
 }
-
-/*
-
-App
-	- Header
-		- ScreenTitle
-		- ScreenLinks
-			- Home
-			- Inventory
-			- ?
-		- User
-	- Body
-		- Home
-		- Inventory
-	- Footer
-		- Eula
-		- Version
-	- Modals
-*/

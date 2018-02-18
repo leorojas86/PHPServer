@@ -34,6 +34,7 @@ class UserPopupView {
   onDomUpdated() {
     Html.onClick(`${this.id}_logout_button`, () => this.component.onLogoutButtonClick());
     Html.onClick(`${this.id}_settings_button`, () => this.component.onSettingButtonClicked());
+    Html.onClick(`${this.id}_cart_button`, () => this.component.onCartButtonClicked());
   }
 
 }
@@ -58,6 +59,11 @@ class UserPopup {
 
   onSettingButtonClicked() {
     App.instance.settingsPopup.show();
+  }
+
+  onCartButtonClicked() {
+    AppData.instance.setCurrentScreen('cart');
+    Html.refresh(App.instance);
   }
 
 }
