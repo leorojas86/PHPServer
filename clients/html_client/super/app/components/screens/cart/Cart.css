@@ -1,0 +1,18 @@
+.cart {
+  padding:10px; padding-left:5px; padding-right:5px;
+}
+
+.cart table {
+  border-collapse: collapse;
+  width:100%;
+}
+
+.cart td, th {
+    border:1px solid #dddddd;
+    text-align:left;
+    padding:8px;
+}
+
+.cart tr:nth-child(even) {
+    background-color:#dddddd;
+}
