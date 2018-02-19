@@ -3,16 +3,16 @@
 }
 
 .cart table {
-  border-collapse: collapse;
+  border-collapse:collapse;
   width:100%;
 }
 
 .cart td, th {
-    border:1px solid #dddddd;
-    text-align:left;
-    padding:8px;
+  border:#3d557eab; border-width:1px; border-radius:5px; border-style:solid;
+  text-align:left;
+  padding:8px;
 }
 
 .cart tr:nth-child(even) {
-    background-color:#dddddd;
+  background-color:#dddddd;
 }

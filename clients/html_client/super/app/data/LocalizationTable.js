@@ -41,8 +41,10 @@ class LocalizationTable {
       "description_text": { en: 'Description', es: 'Descripción' },
       "quantity_text":  { en: 'Quantity', es: 'Cantidad' },
       "p_u_text":  { en: 'P/U', es: 'P/U' },
-      "total_text":  { en: 'Total', es: 'Total' },
+      "price_text":  { en: 'Price', es: 'Precio' },
       "add_to_cart_text": { en: 'Add to Cart', es: 'Agregar a carrito'},
+      "cart_is_empty_text": { en: 'Cart is empty.', es: 'El carrito está vacío.'},
+      "total_text": { en: 'Total', es: 'Total'},
       /* Screens */
       "welcome_text": { en: 'Welcome', es: 'Bienvenid@' },
       "registration_text": { en: 'Registration', es: 'Registro' },

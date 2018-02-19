@@ -62,6 +62,7 @@ class UserPopup {
   }
 
   onCartButtonClicked() {
+    this.popup.hide();
     AppData.instance.setCurrentScreen('cart');
     Html.refresh(App.instance);
   }
