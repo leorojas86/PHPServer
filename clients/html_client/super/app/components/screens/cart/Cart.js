@@ -46,6 +46,17 @@ class CartView {
                   <th></th><th></th><th>[@total_text@]</th><th>${this.component.model.total}</th>
                 </tr>
                 </table>
+                <div>
+                  <button id='${this.id}_order_button' class='header_user_button right'>
+                    <span class="lsf symbol">share</span> [@share_text@]
+                  </button>
+                  <button id='${this.id}_history_button' class='header_user_button right'>
+                    <span class="lsf symbol">book</span> [@history_text@]
+                  </button>
+                  <button id='${this.id}_history_button' class='header_user_button right'>
+                    <span class="lsf symbol">check</span> [@order_text@]
+                  </button>
+                </div>
               </div>`;
     }
     return `<div id='${this.id}' class='${this.id}'>
