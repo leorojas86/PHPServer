@@ -17,6 +17,19 @@
   background-color:#dddddd;
 }
 
-.cart .order_button {
+.cart .right {
   position:absolute; right:0px; margin-right:10px;
+}
+
+.cart .status_table {
+  max-width:50%; margin-bottom:10px;
+  background-color:#f5f1e0;
+}
+
+.cart .cart_header {
+  height:50px;
+}
+
+.cart .status_text {
+  position:relative; margin:3px; top:20px;
 }

@@ -1,5 +1,12 @@
 class CartModel {
 
+  get cartInfo() {
+    return {
+      status: 'preparing',
+      date: new Date().toDateString()
+    };
+  }
+
   get cartItems() {
     return [{
       quantity: '2k',
@@ -26,6 +33,7 @@ class CartView {
 
   buildHTML() {
     const cartItems = this.component.model.cartItems;
+    const cartInfo = this.component.model.cartInfo;
     if(cartItems.length > 0) {
       let cartItemsRows = '';
       cartItems.forEach((cartItem) => {
@@ -34,26 +42,32 @@ class CartView {
                           </tr>`;
       });
       return `<div id='${this.id}' class='${this.id}'>
-                <table>
-                <tr>
-                  <th>[@quantity_text@]</th><th>[@description_text@]</th><th>[@p_u_text@]</th><th>[@price_text@]</th>
-                </tr>
-                ${cartItemsRows}
-                <tr>
-                  <th></th><th></th><th></th><th></th>
-                </tr>
-                <tr>
-                  <th></th><th></th><th>[@total_text@]</th><th>${this.component.model.total}</th>
-                </tr>
-                </table>
-                <div>
-                  <button id='${this.id}_order_button'>
-                    <span class="lsf symbol">share</span> [@share_text@]
-                  </button>
-                  <button id='${this.id}_history_button'>
+                <div class='cart_header'>
+                  <span class='status_text'>[@status_text@]: [@${cartInfo.status}_text@]</span>
+                  <button id='${this.id}_history_button' class='right'>
                     <span class="lsf symbol">book</span> [@history_text@]
                   </button>
-                  <button id='${this.id}_history_button' class='order_button'>
+                </div>
+                <table>
+                  <tr>
+                    <th>[@quantity_text@]</th><th>[@description_text@]</th><th>[@p_u_text@]</th><th>[@price_text@]</th>
+                  </tr>
+                  ${cartItemsRows}
+                  <tr>
+                    <th></th><th></th><th></th><th></th>
+                  </tr>
+                  <tr>
+                    <th></th><th></th><th>[@total_text@]</th><th>${this.component.model.total}</th>
+                  </tr>
+                </table>
+                <div>
+                  <button id='${this.id}_add_button'>
+                    <span class="lsf symbol">add</span> [@add_text@]
+                  </button>
+                  <button id='${this.id}_order_button'>
+                    <span class="lsf symbol">menu</span> [@options_text@]
+                  </button>
+                  <button id='${this.id}_history_button' class='right'>
                     <span class="lsf symbol">check</span> [@order_text@]
                   </button>
                 </div>
