@@ -47,13 +47,13 @@ class CartView {
                 </tr>
                 </table>
                 <div>
-                  <button id='${this.id}_order_button' class='header_user_button right'>
+                  <button id='${this.id}_order_button'>
                     <span class="lsf symbol">share</span> [@share_text@]
                   </button>
-                  <button id='${this.id}_history_button' class='header_user_button right'>
+                  <button id='${this.id}_history_button'>
                     <span class="lsf symbol">book</span> [@history_text@]
                   </button>
-                  <button id='${this.id}_history_button' class='header_user_button right'>
+                  <button id='${this.id}_history_button' class='order_button'>
                     <span class="lsf symbol">check</span> [@order_text@]
                   </button>
                 </div>

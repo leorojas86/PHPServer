@@ -16,3 +16,7 @@
 .cart tr:nth-child(even) {
   background-color:#dddddd;
 }
+
+.cart .order_button {
+  position:absolute; right:0px; margin-right:10px;
+}
