@@ -34,6 +34,7 @@ class AppView {
 							${ this.component.header.view.buildHTML() }
 							${ this.component.model.currentScreen.view.buildHTML() }
 							${ this.component.contextMenu.view.buildHTML() }
+							${ this.component.menuPopup.view.buildHTML() }
 							${ this.component.loginPopup.view.buildHTML() }
               ${ this.component.userPopup.view.buildHTML() }
 							${ this.component.messagePopup.view.buildHTML() }
@@ -57,6 +58,7 @@ class App
 		this.inventory = Html.addChild(new Inventory(), this);
 		this.cart = Html.addChild(new Cart(), this);
 		this.contextMenu = Html.addChild(new DropdownMenu('context_menu'), this);
+		this.menuPopup = Html.addChild(new Popup(new MenuPopup()), this);
 		this.loginPopup = Html.addChild(new Popup(new LoginPopup()), this);
     this.userPopup = Html.addChild(new Popup(new UserPopup()), this);
 		this.messagePopup = Html.addChild(new Popup(new MessagePopup()), this);
