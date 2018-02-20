@@ -16,7 +16,7 @@ class MenuPopupView {
                 <span class="lsf symbol">cart</span> [@cart_text@]
               </button>
               <button id='${this.id}_inventory_button'>
-                <span class="lsf symbol">photo</span> [@inventory_text@]
+                <span class="lsf symbol">folder</span> [@inventory_text@]
               </button>
             </div>`;
   }

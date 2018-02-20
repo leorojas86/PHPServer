@@ -1,0 +1,13 @@
+.menu_popup .popup_content {
+	left:5px; top:40px; padding:10px;
+	text-align:left;
+}
+
+.menu_popup button {
+	display:block; width:140px; margin-top:15px;
+	text-align:left;
+}
+
+.menu_popup div.grayout {
+	background:transparent;
+}
