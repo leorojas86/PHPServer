@@ -34,6 +34,21 @@ class InventoryFileModel {
     }
   }
 
+  addToCart() {
+    ApiClient.instance.cartService.getCurrentCart(AppData.instance.data.user.id)
+      .then((currentCart) => {
+        const currentItem = AppData.instance.getCurrentInventoryItem();
+        currentCart.productsInfo.push({
+          id: currentItem.id,
+          quantity: 2,
+          description: currentItem.description || currentItem.name,
+          pricePerUnit: currentItem.pricePerUnit || 1000,
+          price: currentItem.price || 2000
+        });
+        return ApiClient.instance.cartService.saveCart(currentCart);
+      })
+  }
+
 }
 
 class InventoryFileView {
@@ -63,6 +78,7 @@ class InventoryFileView {
   }
 
   onDomUpdated() {
+    Html.onClick(`${this.id}_add_to_cart_button`,() => this.component.onAddToCartButtonClicked());
     Html.setDisabled(`${this.id}_save_button`, this.component.model.imageData === null);
     Html.onClick(`${this.id}_save_button`,() => this.component.onSaveButtonClick());
     Html.onKeyUp(`${this.id}_input_text`, (key) => Html.setDisabled(`${this.id}_save_button`, false));
@@ -96,6 +112,10 @@ class InventoryFile {
         this.spinner.hide();
         Html.refresh(this);
       });
+  }
+
+  onAddToCartButtonClicked() {
+    this.model.addToCart();
   }
 
 }
