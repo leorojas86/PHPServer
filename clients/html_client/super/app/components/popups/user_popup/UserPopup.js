@@ -38,7 +38,7 @@ class UserPopupView {
 class UserPopup {
 
   constructor() {
-		this.model = new UserPopupModel();
+		this.model = new UserPopupModel(this);
 		this.view = new UserPopupView(this);
     this.spinner = Html.addChild(new Spinner('user_popup_spinner'), this);
 	}

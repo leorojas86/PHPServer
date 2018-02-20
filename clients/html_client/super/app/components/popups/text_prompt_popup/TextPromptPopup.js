@@ -54,7 +54,7 @@ class TextPromptPopupView {
 class TextPromptPopup {
 
   constructor() {
-    this.model = new TextPromptPopupModel();
+    this.model = new TextPromptPopupModel(this);
 		this.view = new TextPromptPopupView(this);
   }
 

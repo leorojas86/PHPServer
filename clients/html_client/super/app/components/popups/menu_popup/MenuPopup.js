@@ -10,7 +10,6 @@ class MenuPopupView {
   }
 
   buildHTML() {
-    const user = AppData.instance.getUser();
     return `<div id='${this.id}'>
               <button id='${this.id}_cart_button'>
                 <span class="lsf symbol">cart</span> [@cart_text@]
@@ -31,7 +30,7 @@ class MenuPopupView {
 class MenuPopup {
 
   constructor() {
-		this.model = new MenuPopupModel();
+		this.model = new MenuPopupModel(this);
 		this.view = new MenuPopupView(this);
 	}
 

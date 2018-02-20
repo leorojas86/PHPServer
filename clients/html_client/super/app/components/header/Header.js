@@ -52,7 +52,7 @@ class HeaderView {
 class Header {
 
   constructor() {
-		this.model = new HeaderModel();
+		this.model = new HeaderModel(this);
 		this.view = new HeaderView(this);
 	}
 

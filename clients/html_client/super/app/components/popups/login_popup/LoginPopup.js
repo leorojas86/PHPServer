@@ -42,7 +42,7 @@ class LoginPopupView {
 class LoginPopup {
 
   constructor() {
-		this.model = new LoginPopupMode();
+		this.model = new LoginPopupMode(this);
 		this.view = new LoginPopupView(this);
     this.spinner = Html.addChild(new Spinner('login_popup_spinner'), this);
 	}
