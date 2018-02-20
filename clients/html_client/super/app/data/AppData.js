@@ -6,9 +6,7 @@ class AppData {
 			currentLanguage:'es',
 			currentScreen: 'welcome',
 			currentInventoryItem: null,
-      cart: {
-        productsInfo:[]
-      }
+      cart: null
 		};
     this.testAccount = { email:'test@test.com', password:'test'};
   }

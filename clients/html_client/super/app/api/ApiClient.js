@@ -7,6 +7,7 @@ class ApiClient {
         this.inventoryService = new InventoryServiceMock();
         this.imageService = new ImageServiceMock();
         this.searchService = new SearchServiceMock();
+        this.cartService = new CartServiceMock();
         this.inventoryService.items.forEach((item) => this.searchService.updateSearchData(item));
       break;
       default:

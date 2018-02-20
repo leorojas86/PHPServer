@@ -52,7 +52,7 @@ class LocalizationTable {
       'status_text': { en:'Status', es: 'Estado'},
       'preparing_text': { en:'Preparing', es: 'Preparando'},
       'date_text': { en:'Date', es: 'Fecha'},
-      'add_text': { en:'Add', es: 'Agregar'}, 
+      'add_text': { en:'Add', es: 'Agregar'},
       /* Screens */
       'welcome_text': { en: 'Welcome', es: 'Bienvenid@' },
       'registration_text': { en: 'Registration', es: 'Registro' },
