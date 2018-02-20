@@ -15,9 +15,6 @@ class UserPopupView {
               <span class='user_name'>
                 <span class="lsf symbol">user</span> ${user.name}
               </span>
-              <button id='${this.id}_cart_button'>
-                <span class="lsf symbol">cart</span> [@cart_text@]
-              </button>
               <button id='${this.id}_notifications_button'>
                 <span class="lsf symbol">globe</span> [@notifications_text@]
               </button>
@@ -34,7 +31,6 @@ class UserPopupView {
   onDomUpdated() {
     Html.onClick(`${this.id}_logout_button`, () => this.component.onLogoutButtonClick());
     Html.onClick(`${this.id}_settings_button`, () => this.component.onSettingButtonClicked());
-    Html.onClick(`${this.id}_cart_button`, () => this.component.onCartButtonClicked());
   }
 
 }
@@ -59,12 +55,6 @@ class UserPopup {
 
   onSettingButtonClicked() {
     App.instance.settingsPopup.show();
-  }
-
-  onCartButtonClicked() {
-    this.popup.hide();
-    AppData.instance.setCurrentScreen('cart');
-    Html.refresh(App.instance);
   }
 
 }
