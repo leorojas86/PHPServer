@@ -43,8 +43,8 @@ class CartView {
     return `<div id='${this.id}' class='${this.id}'>
               <div class='cart_header'>
                 <span class='status_text'>[@status_text@]: [@${this.component.model.status}_text@]</span>
-                <button id='${this.id}_history_button' class='right'>
-                  <span class="lsf symbol">book</span> [@history_text@]
+                <button id='${this.id}_options_button' class='right'>
+                  <span class="lsf symbol">menu</span> [@options_text@]
                 </button>
               </div>
               <table>
@@ -63,10 +63,7 @@ class CartView {
                 <button id='${this.id}_add_button'>
                   <span class="lsf symbol">add</span> [@add_text@]
                 </button>
-                <button id='${this.id}_order_button'>
-                  <span class="lsf symbol">menu</span> [@options_text@]
-                </button>
-                <button id='${this.id}_history_button' class='right'>
+                <button id='${this.id}_order_button' class='right'>
                   <span class="lsf symbol">check</span> [@order_text@]
                 </button>
               </div>
@@ -75,7 +72,13 @@ class CartView {
   }
 
   onDomUpdated() {
-    if(!this.component.model.currentCartInfo) {
+    if(this.component.model.currentCartInfo) {
+      Html.setVisible(`${this.id}_add_button`, this.component.model.status === 'preparing');
+      Html.setVisible(`${this.id}_order_button`, this.component.model.status === 'preparing');
+      Html.onClick(`${this.id}_add_button`,() => this.component.onAddButtonClicked());
+      Html.onClick(`${this.id}_order_button`,() => this.component.onOrderButtonClicked());
+      Html.onClick(`${this.id}_options_button`,() => this.component.onOptionsButtonClicked());
+    } else {
       this.component.loadCart();
     }
   }
@@ -98,6 +101,18 @@ class Cart {
         this.spinner.hide();
         Html.refresh(this);
       });
+  }
+
+  onAddButtonClicked() {
+
+  }
+
+  onOrderButtonClicked() {
+
+  }
+
+  onOptionsButtonClicked() {
+    App.instance.cartOptionsPopup.show();
   }
 
 }

@@ -41,6 +41,7 @@ class AppView {
 							${ this.component.textPromptPopup.view.buildHTML() }
 							${ this.component.settingsPopup.view.buildHTML() }
 							${ this.component.confirmationPopup.view.buildHTML() }
+							${ this.component.cartOptionsPopup.view.buildHTML() }
 						</div>`;
 	}
 
@@ -65,6 +66,7 @@ class App
 		this.textPromptPopup = Html.addChild(new Popup(new TextPromptPopup()), this);
 		this.settingsPopup = Html.addChild(new Popup(new SettingsPopup()), this);
 		this.confirmationPopup = Html.addChild(new Popup(new ConfirmationPopup()), this);
+		this.cartOptionsPopup = Html.addChild(new Popup(new CartOptionsPopup()), this);
 	}
 
 	handleError(errorData, title) {

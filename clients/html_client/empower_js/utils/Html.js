@@ -55,6 +55,14 @@ class Html {
     return document.getElementById(id).disabled;
   }
 
+  static setVisible(id, visible) {
+    document.getElementById(id).style.visibility = visible ? 'visible' : 'hidden';
+  }
+
+  static isVisible(id) {
+    return document.getElementById(id).style.visibility == 'visible';
+  }
+
   static getValue(id) {
     return document.getElementById(id).value;
   }

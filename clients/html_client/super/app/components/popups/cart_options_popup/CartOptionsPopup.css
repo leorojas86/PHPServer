@@ -1,0 +1,13 @@
+.cart_options_popup .popup_content {
+	right:5px; top:90px; padding:10px;
+	text-align:left;
+}
+
+.cart_options_popup button {
+	display:block; width:140px; margin-top:15px;
+	text-align:left;
+}
+
+.cart_options_popup div.grayout {
+	background:transparent;
+}
