@@ -112,7 +112,7 @@ class Cart {
   }
 
   onOptionsButtonClicked() {
-    App.instance.cartOptionsPopup.show();
+    App.instance.cartOptionsPopup.show({ cart: this.model.currentCartInfo });
   }
 
 }

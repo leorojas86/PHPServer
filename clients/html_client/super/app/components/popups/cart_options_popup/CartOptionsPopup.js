@@ -21,6 +21,7 @@ class CartOptionsPopupView {
   }
 
   onDomUpdated() {
+    Html.setVisible(`${this.id}_clear_cart_button`, this.component.model.data.cart.status === 'preparing');
     Html.onClick(`${this.id}_cart_history_button`, () => this.component.onHistoryButtonClicked());
     Html.onClick(`${this.id}_clear_cart_button`, () => this.component.onClearCartButtonClicked());
   }
