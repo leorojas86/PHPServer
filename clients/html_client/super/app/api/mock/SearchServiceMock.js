@@ -8,12 +8,14 @@ class SearchServiceMock {
   updateSearchData(item) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        const searchText = item.description != null ? `${item.description} ${item.name}` : item.name;
-        const itemSearchData = this.searchData.find((searchData) => searchData.itemId === item.id);
-        if (itemSearchData) {
-          itemSearchData.description = searchText.toLowerCase();
-        } else {
-           this.searchData.push({ itemId:item.id, description:searchText.toLowerCase() });
+        if(item.type === 'file') {
+          const searchText = item.description != null ? `${item.description} ${item.name}` : item.name;
+          const itemSearchData = this.searchData.find((searchData) => searchData.itemId === item.id);
+          if (itemSearchData) {
+            itemSearchData.description = searchText.toLowerCase();
+          } else {
+             this.searchData.push({ itemId:item.id, description:searchText.toLowerCase() });
+          }
         }
         resolve();
       }, this.responseMiliSec);
