@@ -120,4 +120,11 @@ class Html {
     return point;
   }
 
+  static startTimeout(callback, milliseconds, currentTimeoutHandler) {
+    if(currentTimeoutHandler) {
+      clearTimeout(currentTimeoutHandler);
+    }
+    return setTimeout(callback, milliseconds);
+  }
+
 }
