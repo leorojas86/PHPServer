@@ -68,7 +68,12 @@ class Html {
   }
 
   static setFocus(id) {
-    return document.getElementById(id).focus();
+    const element = document.getElementById(id);
+    if(element.type && element.type === 'text') {//Move the cursor to the end of text for input texts
+      element.selectionStart = element.value.length;
+      element.selectionEnd = element.value.length;
+    }
+    element.focus();
   }
 
   static getImageData(id) {
