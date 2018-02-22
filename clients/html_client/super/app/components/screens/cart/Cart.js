@@ -104,7 +104,7 @@ class Cart {
   }
 
   onAddButtonClicked() {
-
+    App.instance.addToCartPopup.show();
   }
 
   onOrderButtonClicked() {
