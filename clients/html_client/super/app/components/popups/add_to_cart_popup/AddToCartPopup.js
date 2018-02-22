@@ -1,7 +1,7 @@
 class AddToCartPopupModel {
 
   constructor() {
-    this.items = null;
+    this.items = [];
     this.searchText = '';
   }
 
@@ -24,10 +24,13 @@ class AddToCartPopupView {
   }
 
   _getSearchResultsHTML() {
-    if(this.component.model.items) {
+    if(this.component.model.searchText === '') {
+      return `<p class='search_result'>[@enter_search_text@]</p>`;
+    }
+    if(this.component.model.items.length > 0) {
       return `<div>ITEMS HERE<div>`;
     }
-    return `<p class='enter_search_text'>[@enter_search_text@]</p>`;
+    return `<p class='search_result'>[@nothing_to_show_text@]</p>`;
   }
 
   buildHTML() {

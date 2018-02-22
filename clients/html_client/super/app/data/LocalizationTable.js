@@ -56,6 +56,7 @@ class LocalizationTable {
       'clear_text': { en:'Clear', es: 'Vaciar'},
       'search_text': { en:'Search text', es: 'Texto de búsqueda'},
       'enter_search_text': { en:'Enter search text', es: 'Ingrese texto de búsqueda'},
+      'nothing_to_show_text': { en:'No results found', es: 'No se encontraron resultados'}, 
       /* Screens */
       'welcome_text': { en: 'Welcome', es: 'Bienvenid@' },
       'registration_text': { en: 'Registration', es: 'Registro' },
