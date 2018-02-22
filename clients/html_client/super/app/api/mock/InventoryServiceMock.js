@@ -2,10 +2,12 @@ class InventoryServiceMock {
 
   constructor() {
     this.items = [
-      { id:'0', name:'home', type:'folder', parentId:null, children:['1','2'] },
-      { id:'1', name:'folder 1', type:'folder', parentId:'0', children:['3'] },
+      { id:'0', name:'home', type:'folder', parentId:null, children:['1','2', '3', '4'] },
+      { id:'1', name:'folder 1', type:'folder', parentId:'0', children:['5'] },
       { id:'2', name:'file 1', type:'file', parentId:'0' },
-      { id:'3', name:'folder 2', type:'folder', parentId:'1', children:[] },
+      { id:'3', name:'file 2', type:'file', parentId:'0' },
+      { id:'4', name:'file 3', type:'file', parentId:'0' },
+      { id:'5', name:'folder 2', type:'folder', parentId:'1', children:[] },
     ];
     this.responseMiliSec = Environments.get()['mock'].responseSec * 1000;
     this.currentId = 3;
