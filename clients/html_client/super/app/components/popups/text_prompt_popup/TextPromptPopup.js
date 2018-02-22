@@ -31,7 +31,7 @@ class TextPromptPopupView {
     Html.onKeyUp(`${this.id}_input_text`, (key) => {
       const inputValue = Html.getValue(`${this.id}_input_text`);
       Html.setDisabled(`${this.id}_ok_button`, !inputValue);
-      switch (key.code) {
+      switch(key.code) {
         case 'Enter':
           if(inputValue) {
             this.submit();

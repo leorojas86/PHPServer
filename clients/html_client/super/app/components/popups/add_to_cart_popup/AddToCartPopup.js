@@ -7,10 +7,8 @@ class AddToCartPopupModel {
 
   search(text) {
     this.searchText = text;
-    return new Promise((resolve, reject) => {
-      this.items = [];
-      Html.startTimeout(resolve, 200);
-    });
+    return ApiClient.instance.searchService.searchForItems(text)
+      .then((items) => this.items = items);
   }
 
 }
@@ -28,7 +26,13 @@ class AddToCartPopupView {
       return `<p class='search_result'>[@enter_search_text@]</p>`;
     }
     if(this.component.model.items.length > 0) {
-      return `<div>ITEMS HERE<div>`;
+      let items = '';
+      this.component.model.items.forEach((item) => {
+        items += `<button class='item'>${item.description}</button>`;
+      });
+      return `<div>
+                ${items}
+              <div>`;
     }
     return `<p class='search_result'>[@nothing_to_show_text@]</p>`;
   }
@@ -44,7 +48,12 @@ class AddToCartPopupView {
 
   onDomUpdated() {
     Html.onKeyUp(`${this.id}_search_input_text`, (key) => {
-      this.searchTimeout = Html.startTimeout(() => this.component.searchForItems(Html.getValue(`${this.id}_search_input_text`)), 300, this.searchTimeout);
+      switch(key.code) {
+        case 'Escape': this.component.popup.hide(); break;
+        default:
+          this.searchTimeout = Html.startTimeout(() => this.component.searchForItems(Html.getValue(`${this.id}_search_input_text`)), 300, this.searchTimeout);
+        break;
+      }
     });
     Html.setFocus(`${this.id}_search_input_text`);
   }

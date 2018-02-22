@@ -11,9 +11,9 @@ class SearchServiceMock {
         const searchText = item.description != null ? `${item.description} ${item.name}` : item.name;
         const itemSearchData = this.searchData.find((searchData) => searchData.itemId === item.id);
         if (itemSearchData) {
-          itemSearchData.text = searchText.toLowerCase();
+          itemSearchData.description = searchText.toLowerCase();
         } else {
-           this.searchData.push({ itemId:item.id, text:searchText.toLowerCase() });
+           this.searchData.push({ itemId:item.id, description:searchText.toLowerCase() });
         }
         resolve();
       }, this.responseMiliSec);
@@ -24,7 +24,7 @@ class SearchServiceMock {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         const searchText = text.toLowerCase();
-        const matchingItemIds = this.searchData.filter((itemSearchData) => itemSearchData.text.includes(searchText));
+        const matchingItemIds = this.searchData.filter((itemSearchData) => itemSearchData.description.includes(searchText));
         resolve(matchingItemIds);
       }, this.responseMiliSec);
     });

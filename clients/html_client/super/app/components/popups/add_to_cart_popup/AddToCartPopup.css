@@ -15,3 +15,8 @@
 .add_to_cart_popup .lsf.symbol {
   font-size:20px;
 }
+
+.add_to_cart_popup .item {
+	display:block; width:100%; margin:0px; margin-top:10px;
+	text-align:left;
+}
