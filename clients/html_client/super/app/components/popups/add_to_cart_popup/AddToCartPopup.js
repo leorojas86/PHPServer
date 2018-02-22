@@ -10,10 +10,11 @@ class AddToCartPopupView {
   }
 
   buildHTML() {
-    const data = this.component.model.data;
+    const searchResults = `<p class='enter_search_text'>[@enter_search_text@]</p>`;
     return  `<div id='${this.id}'>
                 <span class="lsf symbol">search</span>
                 <input type='text' id='${this.id}_search_input_text' placeholder='[@search_text@]' value=''>
+                ${ searchResults }
              </div>`;
   }
 
@@ -21,7 +22,6 @@ class AddToCartPopupView {
     Html.onKeyUp(`${this.id}_search_input_text`, (key) => {
       const inputValue = Html.getValue(`${this.id}_search_input_text`);
       Html.setDisabled(`${this.id}_ok_button`, !inputValue);
-
     });
     Html.setFocus(`${this.id}_search_input_text`);
   }

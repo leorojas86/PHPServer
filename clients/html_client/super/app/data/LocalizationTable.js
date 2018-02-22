@@ -54,7 +54,8 @@ class LocalizationTable {
       'date_text': { en:'Date', es: 'Fecha'},
       'add_text': { en:'Add', es: 'Agregar'},
       'clear_text': { en:'Clear', es: 'Vaciar'},
-      'search_text': { en:'Search text', es: 'Texto de búsqueda'}, 
+      'search_text': { en:'Search text', es: 'Texto de búsqueda'},
+      'enter_search_text': { en:'Enter search text', es: 'Ingrese texto de búsqueda'},
       /* Screens */
       'welcome_text': { en: 'Welcome', es: 'Bienvenid@' },
       'registration_text': { en: 'Registration', es: 'Registro' },
