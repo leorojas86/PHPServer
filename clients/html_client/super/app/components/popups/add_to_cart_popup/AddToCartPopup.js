@@ -28,7 +28,7 @@ class AddToCartPopupView {
     if(this.component.model.items.length > 0) {
       let items = '';
       this.component.model.items.forEach((item) => {
-        items += `<button class='item'>${item.description}</button>`;
+        items += `<button id='search_item_${item.itemId}' class='item'>${item.description}</button>`;
       });
       return `<div>
                 ${items}
@@ -56,6 +56,9 @@ class AddToCartPopupView {
       }
     });
     Html.setFocus(`${this.id}_search_input_text`);
+    this.component.model.items.forEach((item) => {
+      Html.onClick(`search_item_${item.itemId}`, () => this.component.onItemClicked(item));
+    });
   }
 
 
@@ -77,6 +80,10 @@ class AddToCartPopup {
         this.spinner.hide();
         Html.refresh(this);
       });
+  }
+
+  onItemClicked(item) {
+    alert(item.description);
   }
 
 }
