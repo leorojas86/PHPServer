@@ -83,7 +83,20 @@ class AddToCartPopup {
   }
 
   onItemClicked(item) {
-    alert(item.description);
+    this.spinner.show();
+    ApiClient.instance.cartService.isInCurrentCart(AppData.instance.data.user.id, item)
+      .then((isInCurrentCart) => {
+        if(isInCurrentCart) {
+          App.instance.messagePopup.show({ symbol:'surprise', title:'[@item_is_already_in_cart@]', message:'modify_item_quantity_if_needed' });
+        } else {
+          return ApiClient.instance.cartService.addToCurrentCart(AppData.instance.data.user.id, item, 1);
+        }
+      })
+      .catch((reason) => App.instance.handleError(reason, '[@load_error_text@]'))
+      .finally(() => {
+        this.spinner.hide();
+        Html.refresh(App.instance.cart);
+      });
   }
 
 }

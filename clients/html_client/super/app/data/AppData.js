@@ -5,8 +5,7 @@ class AppData {
 			user: null,
 			currentLanguage:'es',
 			currentScreen: 'welcome',
-			currentInventoryItem: null,
-      cart: null
+			currentInventoryItem: null
 		};
     this.testAccount = { email:'test@test.com', password:'test'};
   }
