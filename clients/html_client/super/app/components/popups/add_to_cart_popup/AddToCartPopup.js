@@ -89,7 +89,8 @@ class AddToCartPopup {
         if(isInCurrentCart) {
           App.instance.messagePopup.show({ symbol:'surprise', title:'[@item_is_already_in_cart@]', message:'modify_item_quantity_if_needed' });
         } else {
-          return ApiClient.instance.cartService.addToCurrentCart(AppData.instance.data.user.id, item, 1);
+          return ApiClient.instance.inventoryService.getItemById(item.itemId)
+            .then((inventoryItem) => ApiClient.instance.cartService.addToCurrentCart(AppData.instance.data.user.id, inventoryItem, 1));
         }
       })
       .catch((reason) => App.instance.handleError(reason, '[@load_error_text@]'))

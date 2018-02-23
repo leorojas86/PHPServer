@@ -60,7 +60,7 @@ class CartServiceMock {
   addToCurrentCart(userId, item, quantity) {
     return this.getCurrentCart(userId)
       .then((cart) => {
-        cart.productsInfo.push({ itemId:item.id, quantity:quantity, unit:item.unit, description:item.description, pricePerUnit: item.pricePerUnit});
+        cart.productsInfo.push({ itemId:item.id, quantity:quantity, unit:item.unit, description:item.description || item.name, pricePerUnit: item.pricePerUnit});
       });
   }
 

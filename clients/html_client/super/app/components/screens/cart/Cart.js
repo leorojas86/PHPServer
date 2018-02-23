@@ -10,7 +10,9 @@ class CartModel {
 
   get total() {
     let total = 0;
-    this.cartItems.forEach((cartItem) => total += cartItem.price);
+    this.cartItems.forEach((cartItem) => {
+      total += cartItem.quantity * cartItem.pricePerUnit;
+    });
     return total;
   }
 
