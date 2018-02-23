@@ -37,12 +37,12 @@ class AppView {
 							${ this.component.menuPopup.view.buildHTML() }
 							${ this.component.loginPopup.view.buildHTML() }
               ${ this.component.userPopup.view.buildHTML() }
-							${ this.component.messagePopup.view.buildHTML() }
-							${ this.component.textPromptPopup.view.buildHTML() }
 							${ this.component.settingsPopup.view.buildHTML() }
-							${ this.component.confirmationPopup.view.buildHTML() }
 							${ this.component.cartOptionsPopup.view.buildHTML() }
 							${ this.component.addToCartPopup.view.buildHTML() }
+							${ this.component.messagePopup.view.buildHTML() }
+							${ this.component.textPromptPopup.view.buildHTML() }
+							${ this.component.confirmationPopup.view.buildHTML() }
 						</div>`;
 	}
 

@@ -61,6 +61,15 @@ class CartServiceMock {
     return this.getCurrentCart(userId)
       .then((cart) => {
         cart.productsInfo.push({ itemId:item.id, quantity:quantity, unit:item.unit, description:item.description || item.name, pricePerUnit: item.pricePerUnit});
+        return this.saveCart(cart);
+      });
+  }
+
+  clearCurrentCart(userId) {
+    return this.getCurrentCart(userId)
+      .then((currentCart) => {
+        currentCart.productsInfo = [];
+        return this.saveCart(currentCart);
       });
   }
 

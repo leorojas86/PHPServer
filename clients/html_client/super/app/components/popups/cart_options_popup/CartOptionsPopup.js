@@ -41,6 +41,7 @@ class CartOptionsPopup {
 
   onClearCartButtonClicked() {
     this.popup.hide();
+    App.instance.cart.empty();
   }
 
 }

@@ -117,4 +117,14 @@ class Cart {
     App.instance.cartOptionsPopup.show({ cart: this.model.currentCartInfo });
   }
 
+  empty() {
+    this.spinner.show();
+    ApiClient.instance.cartService.clearCurrentCart(AppData.instance.data.user.id)
+      .catch((reason) => App.instance.handleError(reason, '[@load_error_text@]'))
+      .finally(() => {
+        this.spinner.hide();
+        Html.refresh(this);
+      });
+  }
+
 }
