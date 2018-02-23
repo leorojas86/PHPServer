@@ -56,7 +56,9 @@ class LocalizationTable {
       'clear_text': { en:'Clear', es: 'Vaciar'},
       'search_text': { en:'Search text', es: 'Texto de búsqueda'},
       'enter_search_text': { en:'Enter search text', es: 'Ingrese texto de búsqueda'},
-      'nothing_to_show_text': { en:'No results found', es: 'No se encontraron resultados'}, 
+      'nothing_to_show_text': { en:'No results found', es: 'No se encontraron resultados'},
+      'item_is_already_in_cart': { en:'Selected product is already in cart', es: 'El producto seleccionado ya está en el carrito'},
+      'modify_item_quantity_if_needed': { en:'Increase product quantity if needed', es: 'Modifique la cantidad del producto si necesita'},
       /* Screens */
       'welcome_text': { en: 'Welcome', es: 'Bienvenid@' },
       'registration_text': { en: 'Registration', es: 'Registro' },
