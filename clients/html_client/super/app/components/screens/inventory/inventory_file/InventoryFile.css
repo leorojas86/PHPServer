@@ -6,15 +6,11 @@
   margin-top:12px;
 }
 
-/*.inventory_file td, th {
+.inventory_file tr {
   border:#3d557eab; border-width:1px; border-radius:5px; border-style:solid;
   text-align:left;
   padding:8px;
 }
-
-.inventory_file tr:nth-child(even) {
-  background-color:#dddddd;
-}*/
 
 .inventory_file .save_button {
   position:absolute; right:0px;
