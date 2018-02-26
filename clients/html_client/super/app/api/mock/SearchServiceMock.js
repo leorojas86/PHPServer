@@ -5,16 +5,27 @@ class SearchServiceMock {
     this.responseMiliSec = Environments.get()['mock'].responseSec * 1000;
   }
 
+  _prepareTextForSearch(text) {
+    let searchText = text.toLowerCase();
+    searchText = searchText.replace(/á/g, 'a');
+    searchText = searchText.replace(/é/g, 'e');
+    searchText = searchText.replace(/í/g, 'i');
+    searchText = searchText.replace(/ó/g, 'o');
+    searchText = searchText.replace(/ú/g, 'u');
+    searchText = searchText.replace(/ñ/g, 'n');
+    return searchText;
+  }
+
   updateSearchData(item) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if(item.type === 'file') {
-          const searchText = item.description != null ? `${item.description} ${item.name}` : item.name;
+          const searchText = item.description != null ? item.description : item.name;
           const itemSearchData = this.searchData.find((searchData) => searchData.itemId === item.id);
           if (itemSearchData) {
-            itemSearchData.description = searchText.toLowerCase();
+            itemSearchData.description = searchText;
           } else {
-             this.searchData.push({ itemId:item.id, description:searchText.toLowerCase() });
+             this.searchData.push({ itemId:item.id, description:searchText });
           }
         }
         resolve();
@@ -28,8 +39,10 @@ class SearchServiceMock {
         if(text === '') {
           resolve([]);
         } else {
-          const searchText = text.toLowerCase();
-          const matchingItemIds = this.searchData.filter((itemSearchData) => itemSearchData.description.includes(searchText));
+          const searchText = this._prepareTextForSearch(text);
+          const matchingItemIds = this.searchData.filter((itemSearchData) => {
+            return this._prepareTextForSearch(itemSearchData.description).includes(searchText);
+          });
           resolve(matchingItemIds);
         }
       }, this.responseMiliSec);
