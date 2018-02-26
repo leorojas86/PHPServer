@@ -30,9 +30,7 @@ class AddToCartPopupView {
       this.component.model.items.forEach((item) => {
         items += `<button id='search_item_${item.itemId}' class='item'>${item.description}</button>`;
       });
-      return `<div>
-                ${items}
-              <div>`;
+      return items;
     }
     return `<p class='search_result'>[@nothing_to_show_text@]</p>`;
   }
@@ -41,7 +39,9 @@ class AddToCartPopupView {
     return  `<div id='${this.id}'>
                 <span class="lsf symbol">search</span>
                 <input type='text' id='${this.id}_search_input_text' placeholder='[@search_text@]' value='${this.component.model.searchText}'>
-                ${ this._getSearchResultsHTML() }
+                <div class='search_results'>
+                  ${ this._getSearchResultsHTML() }
+                </div>
                 ${ this.component.spinner.view.buildHTML() }
              </div>`;
   }

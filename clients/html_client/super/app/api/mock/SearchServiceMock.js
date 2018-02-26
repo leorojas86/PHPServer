@@ -25,9 +25,13 @@ class SearchServiceMock {
   searchForItems(text) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        const searchText = text.toLowerCase();
-        const matchingItemIds = this.searchData.filter((itemSearchData) => itemSearchData.description.includes(searchText));
-        resolve(matchingItemIds);
+        if(text === '') {
+          resolve([]);
+        } else {
+          const searchText = text.toLowerCase();
+          const matchingItemIds = this.searchData.filter((itemSearchData) => itemSearchData.description.includes(searchText));
+          resolve(matchingItemIds);
+        }
       }, this.responseMiliSec);
     });
   }
