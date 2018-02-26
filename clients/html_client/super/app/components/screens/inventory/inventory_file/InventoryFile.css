@@ -2,9 +2,19 @@
   min-height:300px;
 }
 
-.inventory_file .description_container {
-  text-align:center;
+.inventory_file table {
+  margin-top:12px;
 }
+
+/*.inventory_file td, th {
+  border:#3d557eab; border-width:1px; border-radius:5px; border-style:solid;
+  text-align:left;
+  padding:8px;
+}
+
+.inventory_file tr:nth-child(even) {
+  background-color:#dddddd;
+}*/
 
 .inventory_file .save_button {
   position:absolute; right:0px;
@@ -14,10 +24,6 @@
   height:50px;
 }
 
-.inventory_file .file_header span {
-  margin-left:5px; margin-top:15px;
-}
-
-.inventory_file .file_header input {
-  display:block; margin-top:15px; width:160px;
+.inventory_file input {
+  width:200px;
 }
