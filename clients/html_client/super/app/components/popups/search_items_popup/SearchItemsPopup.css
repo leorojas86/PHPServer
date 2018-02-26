@@ -1,27 +1,27 @@
-.add_to_cart_popup .popup_content {
+.search_items_popup .popup_content {
 	position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); /*Center on screen*/
 	padding:15px; min-width:200px;
 }
 
-.add_to_cart_popup .search_results {
+.search_items_popup .search_results {
 	min-height:190px; margin-top:5px; padding:2px;
 	border:#3d557eab; border-width:2px; border-radius:5px; border-style:solid;
 }
 
-.add_to_cart_popup .search_result {
+.search_items_popup .search_result {
 	margin-top:80px;
 	text-align: center;
 }
 
-.add_to_cart_popup input {
+.search_items_popup input {
   min-width:190px;
 }
 
-.add_to_cart_popup .lsf.symbol {
+.search_items_popup .lsf.symbol {
   font-size:20px;
 }
 
-.add_to_cart_popup .item {
+.search_items_popup .item {
 	display:block; width:100%; margin:0px; margin-bottom:10px;
 	text-align:left;
 }

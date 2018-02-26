@@ -1,4 +1,4 @@
-class AddToCartPopupModel {
+class SearchItemsPopupModel {
 
   constructor() {
     this.items = [];
@@ -13,11 +13,11 @@ class AddToCartPopupModel {
 
 }
 
-class AddToCartPopupView {
+class SearchItemsPopupView {
 
   constructor(component) {
     this.component = component;
-    this.id = 'add_to_cart_popup';
+    this.id = 'search_items_popup';
     this.searchTimeout = null;
   }
 
@@ -64,12 +64,12 @@ class AddToCartPopupView {
 
 }
 
-class AddToCartPopup {
+class SearchItemsPopup {
 
   constructor() {
-    this.model = new AddToCartPopupModel(this);
-		this.view = new AddToCartPopupView(this);
-    this.spinner = Html.addChild(new Spinner('add_to_cart_popup_spinner'), this);
+    this.model = new SearchItemsPopupModel(this);
+		this.view = new SearchItemsPopupView(this);
+    this.spinner = Html.addChild(new Spinner('search_items_popup_spinner'), this);
   }
 
   searchForItems(searchText) {
