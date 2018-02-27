@@ -1,7 +1,12 @@
 class AddToCartPopupModel {
 
   addToCart(quantity) {
-    return ApiClient.instance.cartService.addToCurrentCart(AppData.instance.data.user.id, this.data.item, quantity);
+    return ApiClient.instance.cartService.addToCurrentCart(AppData.instance.data.user.id, this.data.item, quantity)
+      .then(() => {
+        if(this.data.onItemAdded) {
+          this.data.onItemAdded();
+        }
+      });
   }
 
 }

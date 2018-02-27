@@ -25,7 +25,7 @@ class TextPromptPopupView {
 
   onDomUpdated() {
     Html.onMouseDown(`${this.id}_grayout`, () => {});//Do not automatically close modal when clicked outside the modal
-    Html.onClick(`${this.id}_ok_button`, () => this.submit());
+    Html.onClick(`${this.id}_ok_button`, () => this.component.submit(Html.getValue(`${this.id}_input_text`)));
     Html.onClick(`${this.id}_cancel_button`, () => this.component.popup.hide());
     Html.setDisabled(`${this.id}_ok_button`, true);
     Html.onKeyUp(`${this.id}_input_text`, (key) => {
@@ -34,19 +34,13 @@ class TextPromptPopupView {
       switch(key.code) {
         case 'Enter':
           if(inputValue) {
-            this.submit();
+            this.component.submit(inputValue);
           }
         break;
         case 'Escape': this.component.popup.hide(); break;
       }
     });
     Html.setFocus(`${this.id}_input_text`);
-  }
-
-  submit() {
-    const inputValue = Html.getValue(`${this.id}_input_text`);
-    this.component.popup.hide();
-    this.component.model.data.onTextEntered(inputValue);
   }
 
 }
@@ -56,6 +50,11 @@ class TextPromptPopup {
   constructor() {
     this.model = new TextPromptPopupModel(this);
 		this.view = new TextPromptPopupView(this);
+  }
+
+  submit(text) {
+    this.popup.hide();
+    this.model.data.onTextEntered(text);
   }
 
 }

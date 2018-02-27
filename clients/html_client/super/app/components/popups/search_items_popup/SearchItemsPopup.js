@@ -91,7 +91,7 @@ class SearchItemsPopup {
             if(isInCart) {
               App.instance.messagePopup.show({ symbol:'surprise', title:'[@item_is_already_in_cart@]', message:'[@modify_item_quantity_if_needed@]' });
             } else {
-              App.instance.addToCartPopup.show({ item:inventoryItem });
+              App.instance.addToCartPopup.show({ item:inventoryItem, onItemAdded:this.model.data.onItemAdded });
             }
           });
       })

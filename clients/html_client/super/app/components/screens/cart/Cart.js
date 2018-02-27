@@ -39,7 +39,7 @@ class CartView {
     let cartItemsRows = '';
     this.component.model.cartItems.forEach((cartItem) => {
       cartItemsRows += `<tr>
-                          <th>${cartItem.quantity} ${cartItem.unit}</th><th>${cartItem.description}</th><th>${cartItem.pricePerUnit}</th><th>${cartItem.quantity * cartItem.pricePerUnit}</th>
+                          <th>${cartItem.quantity}</th><th>${cartItem.description} (${cartItem.unit})</th><th>${cartItem.pricePerUnit}</th><th>${cartItem.quantity * cartItem.pricePerUnit}</th>
                         </tr>`;
     });
     return `<div id='${this.id}' class='${this.id}'>
@@ -106,7 +106,7 @@ class Cart {
   }
 
   onAddButtonClicked() {
-    App.instance.searchItemsPopup.show();
+    App.instance.searchItemsPopup.show({ onItemAdded: () => Html.refresh(this) });
   }
 
   onOrderButtonClicked() {
