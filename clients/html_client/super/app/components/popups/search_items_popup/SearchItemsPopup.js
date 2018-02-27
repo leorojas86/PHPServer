@@ -91,7 +91,7 @@ class SearchItemsPopup {
             if(isInCart) {
               App.instance.messagePopup.show({ symbol:'surprise', title:'[@item_is_already_in_cart@]', message:'[@modify_item_quantity_if_needed@]' });
             } else {
-              return ApiClient.instance.cartService.addToCurrentCart(AppData.instance.data.user.id, inventoryItem, 1);
+              App.instance.addToCartPopup.show({ item:inventoryItem });
             }
           });
       })
