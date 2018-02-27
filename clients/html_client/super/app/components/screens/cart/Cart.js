@@ -50,7 +50,7 @@ class CartView {
                 </button>
               </div>
               <table>
-                <tr class='header'>
+                <tr class='cart_table_header'>
                   <th>[@quantity_text@]</th><th>[@description_text@]</th><th>[@p_u_text@]</th><th>[@price_text@]</th>
                 </tr>
                 ${cartItemsRows}
