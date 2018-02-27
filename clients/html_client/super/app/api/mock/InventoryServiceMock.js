@@ -3,11 +3,11 @@ class InventoryServiceMock {
   constructor() {
     this.items = [
       { id:'0', name:'home', type:'folder', parentId:null, children:['1','2', '3', '4'] },
-      { id:'1', name:'folder 1', type:'folder', parentId:'0', children:['5'] },
-      { id:'2', name:'arroz', type:'file', parentId:'0', unit:'kg', pricePerUnit:1.5 },
-      { id:'3', name:'atún', type:'file', parentId:'0', unit:'g', pricePerUnit:2 },
-      { id:'4', name:'escoba', type:'file', parentId:'0', unit:'uni', pricePerUnit:3 },
-      { id:'5', name:'folder 2', type:'folder', parentId:'1', children:[] },
+      { id:'1', name:'Folder 1', type:'folder', parentId:'0', children:['5'] },
+      { id:'2', name:'Arroz', type:'file', parentId:'0', unit:'3 kg', pricePerUnit:3300 },
+      { id:'3', name:'Atún', type:'file', parentId:'0', unit:'200 g', pricePerUnit:900 },
+      { id:'4', name:'Escoba', type:'file', parentId:'0', unit:'uni', pricePerUnit:2500 },
+      { id:'5', name:'Folder 2', type:'folder', parentId:'1', children:[] },
     ];
     this.responseMiliSec = Environments.get()['mock'].responseSec * 1000;
     this.currentId = 3;

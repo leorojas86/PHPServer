@@ -40,6 +40,7 @@ class AppView {
 							${ this.component.settingsPopup.view.buildHTML() }
 							${ this.component.cartOptionsPopup.view.buildHTML() }
 							${ this.component.searchItemsPopup.view.buildHTML() }
+							${ this.component.addToCartPopup.view.buildHTML() }
 							${ this.component.messagePopup.view.buildHTML() }
 							${ this.component.textPromptPopup.view.buildHTML() }
 							${ this.component.confirmationPopup.view.buildHTML() }
@@ -69,6 +70,7 @@ class App
 		this.confirmationPopup = Html.addChild(new Popup(new ConfirmationPopup()), this);
 		this.cartOptionsPopup = Html.addChild(new Popup(new CartOptionsPopup()), this);
 		this.searchItemsPopup = Html.addChild(new Popup(new SearchItemsPopup()), this);
+		this.addToCartPopup = Html.addChild(new Popup(new AddToCartPopup()), this);
 	}
 
 	handleError(errorData, title) {

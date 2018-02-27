@@ -114,7 +114,8 @@ class InventoryFile {
   }
 
   onAddToCartButtonClicked() {
-    this.model.addToCart();
+    const data = { item:AppData.instance.getCurrentInventoryItem() };
+    App.instance.addToCartPopup.show(data);
   }
 
 }
