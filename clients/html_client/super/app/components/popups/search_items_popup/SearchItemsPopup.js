@@ -36,17 +36,21 @@ class SearchItemsPopupView {
   }
 
   buildHTML() {
-    return  `<div id='${this.id}'>
+    return  `<div id='${this.id}' align='center'>
                 <span class="lsf symbol">search</span>
                 <input type='text' id='${this.id}_search_input_text' placeholder='[@search_text@]' value='${this.component.model.searchText}'>
                 <div class='search_results'>
                   ${ this._getSearchResultsHTML() }
                 </div>
+                <button id='${this.id}_cancel_button'>
+                  <span class="lsf symbol">close</span> [@cancel_text@]
+                </button>
                 ${ this.component.spinner.view.buildHTML() }
              </div>`;
   }
 
   onDomUpdated() {
+    Html.onClick(`${this.id}_cancel_button`, () => this.component.popup.hide());
     Html.onKeyUp(`${this.id}_search_input_text`, (key) => {
       switch(key.code) {
         case 'Escape': this.component.popup.hide(); break;

@@ -19,7 +19,7 @@ class AddToCartPopupView {
   }
 
   buildHTML() {
-    return `<div id='${this.id}'>
+    return `<div id='${this.id}' align='center'>
               <table>
                 <tr>
                   <th>[@description_text@]</th>
