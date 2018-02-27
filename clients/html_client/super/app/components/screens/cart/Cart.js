@@ -106,7 +106,7 @@ class Cart {
   }
 
   onAddButtonClicked() {
-    App.instance.SearchItemsPopup.show();
+    App.instance.searchItemsPopup.show();
   }
 
   onOrderButtonClicked() {

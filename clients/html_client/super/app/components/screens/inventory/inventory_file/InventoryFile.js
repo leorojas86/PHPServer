@@ -35,18 +35,7 @@ class InventoryFileModel {
   }
 
   addToCart() {
-    ApiClient.instance.cartService.getCurrentCart(AppData.instance.data.user.id)
-      .then((currentCart) => {
-        const currentItem = AppData.instance.getCurrentInventoryItem();
-        currentCart.productsInfo.push({
-          id: currentItem.id,
-          quantity: 2,
-          description: currentItem.description || currentItem.name,
-          pricePerUnit: currentItem.pricePerUnit || 1000,
-          price: currentItem.price || 2000
-        });
-        return ApiClient.instance.cartService.saveCart(currentCart);
-      })
+    return ApiClient.instance.cartService.addToCurrentCart(AppData.instance.data.user.id, AppData.instance.getCurrentInventoryItem(), 1);
   }
 
 }
