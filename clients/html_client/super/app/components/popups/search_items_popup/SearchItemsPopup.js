@@ -1,11 +1,12 @@
 class SearchItemsPopupModel {
 
-  constructor() {
+  constructor(component) {
+    this.component = component;
     this.items = [];
   }
 
   search(text) {
-    //this.component.searchTextInput.model.data.inputText = text;
+    this.component.searchTextInput.model.data.inputText = text;
     return ApiClient.instance.searchService.searchForItems(text)
       .then((items) => this.items = items);
   }
@@ -55,7 +56,7 @@ class SearchItemsPopupView {
     Html.onMouseDown(`${this.id}_grayout`, () => {});//Do not automatically close modal when clicked outside the modal
     Html.onClick(`${this.id}_cancel_button`, () => this.component.popup.hide());
     Html.onKeyUp(this.component.searchTextInput.view.inputId, (key) => {
-      this.searchTimeout = Html.startTimeout(() => this.component.searchForItems(Html.getValue(`${this.id}_search_input_text`)), 300, this.searchTimeout);
+      this.searchTimeout = Html.startTimeout(() => this.component.searchForItems(this.component.searchTextInput.view.inputText), 300, this.searchTimeout);
     });
     Html.setFocus(this.component.searchTextInput.view.inputId);
     this.component.model.items.forEach((item) => {
