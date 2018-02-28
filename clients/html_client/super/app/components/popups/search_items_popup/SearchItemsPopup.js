@@ -52,14 +52,10 @@ class SearchItemsPopupView {
   }
 
   onDomUpdated() {
+    Html.onMouseDown(`${this.id}_grayout`, () => {});//Do not automatically close modal when clicked outside the modal
     Html.onClick(`${this.id}_cancel_button`, () => this.component.popup.hide());
     Html.onKeyUp(this.component.searchTextInput.view.inputId, (key) => {
-      switch(key.code) {
-        case 'Escape': this.component.popup.hide(); break;
-        default:
-          this.searchTimeout = Html.startTimeout(() => this.component.searchForItems(Html.getValue(`${this.id}_search_input_text`)), 300, this.searchTimeout);
-        break;
-      }
+      this.searchTimeout = Html.startTimeout(() => this.component.searchForItems(Html.getValue(`${this.id}_search_input_text`)), 300, this.searchTimeout);
     });
     Html.setFocus(this.component.searchTextInput.view.inputId);
     this.component.model.items.forEach((item) => {
