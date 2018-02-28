@@ -37,8 +37,10 @@ class SearchItemsPopupView {
 
   buildHTML() {
     return  `<div id='${this.id}' align='center'>
-                <span class="lsf symbol">search</span>
-                <input type='text' id='${this.id}_search_input_text' placeholder='[@search_text@]' value='${this.component.model.searchText}'>
+                <div class='text_input_field'>
+                  <span class="lsf symbol">search</span>
+                  <input type='text' id='${this.id}_search_input_text' placeholder='[@search_text@]' value='${this.component.model.searchText}'>
+                </div>
                 <div class='search_results'>
                   ${ this._getSearchResultsHTML() }
                 </div>
