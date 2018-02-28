@@ -2,13 +2,16 @@ class SearchItemsPopupModel {
 
   constructor() {
     this.items = [];
-    this.searchText = '';
   }
 
   search(text) {
-    this.searchText = text;
+    //this.component.searchTextInput.model.data.inputText = text;
     return ApiClient.instance.searchService.searchForItems(text)
       .then((items) => this.items = items);
+  }
+
+  getSearchTextInputData() {
+    return { symbol:'search', placeHolderText:'[@search_text@]', inputText:'' };
   }
 
 }
@@ -22,7 +25,7 @@ class SearchItemsPopupView {
   }
 
   _getSearchResultsHTML() {
-    if(this.component.model.searchText === '') {
+    if(this.component.searchTextInput.inputText === '') {
       return `<p class='search_result'>[@enter_search_text@]</p>`;
     }
     if(this.component.model.items.length > 0) {
@@ -37,10 +40,7 @@ class SearchItemsPopupView {
 
   buildHTML() {
     return  `<div id='${this.id}' align='center'>
-                <div id='${this.id}_search_text' class='text_input_field'>
-                  <span class="lsf symbol">search</span>
-                  <input type='text' id='${this.id}_search_input_text' placeholder='[@search_text@]' value='${this.component.model.searchText}'>
-                </div>
+                ${ this.component.searchTextInput.view.buildHTML() }
                 <div class='search_results'>
                   ${ this._getSearchResultsHTML() }
                 </div>
@@ -53,8 +53,7 @@ class SearchItemsPopupView {
 
   onDomUpdated() {
     Html.onClick(`${this.id}_cancel_button`, () => this.component.popup.hide());
-    Html.onClick(`${this.id}_search_text`, () => Html.setFocus(`${this.id}_search_input_text`));
-    Html.onKeyUp(`${this.id}_search_input_text`, (key) => {
+    Html.onKeyUp(this.component.searchTextInput.view.inputId, (key) => {
       switch(key.code) {
         case 'Escape': this.component.popup.hide(); break;
         default:
@@ -62,7 +61,7 @@ class SearchItemsPopupView {
         break;
       }
     });
-    Html.setFocus(`${this.id}_search_input_text`);
+    Html.setFocus(this.component.searchTextInput.view.inputId);
     this.component.model.items.forEach((item) => {
       Html.onClick(`search_item_${item.itemId}`, () => this.component.onItemClicked(item));
     });
@@ -77,6 +76,8 @@ class SearchItemsPopup {
     this.model = new SearchItemsPopupModel(this);
 		this.view = new SearchItemsPopupView(this);
     this.spinner = Html.addChild(new Spinner('search_items_popup_spinner'), this);
+    this.searchTextInput = Html.addChild(new TextInput('search_items_text_input'), this);
+    this.searchTextInput.model.data = this.model.getSearchTextInputData();
   }
 
   searchForItems(searchText) {
