@@ -37,7 +37,7 @@ class SearchItemsPopupView {
 
   buildHTML() {
     return  `<div id='${this.id}' align='center'>
-                <div class='text_input_field'>
+                <div id='${this.id}_search_text' class='text_input_field'>
                   <span class="lsf symbol">search</span>
                   <input type='text' id='${this.id}_search_input_text' placeholder='[@search_text@]' value='${this.component.model.searchText}'>
                 </div>
@@ -53,6 +53,7 @@ class SearchItemsPopupView {
 
   onDomUpdated() {
     Html.onClick(`${this.id}_cancel_button`, () => this.component.popup.hide());
+    Html.onClick(`${this.id}_search_text`, () => Html.setFocus(`${this.id}_search_input_text`));
     Html.onKeyUp(`${this.id}_search_input_text`, (key) => {
       switch(key.code) {
         case 'Escape': this.component.popup.hide(); break;

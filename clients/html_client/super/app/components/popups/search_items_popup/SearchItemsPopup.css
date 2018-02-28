@@ -12,6 +12,11 @@
 	font-size:18px;
 }
 
+.search_items_popup .text_input_field input:focus {
+	outline:none;
+}
+
+
 .search_items_popup .text_input_field .lsf.symbol {
 	margin-left:5px;
   font-size:20px;
