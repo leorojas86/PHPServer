@@ -38,7 +38,7 @@ class CartView {
     const cartItems = this.component.model.cartItems;
     let cartItemsRows = '';
     this.component.model.cartItems.forEach((cartItem) => {
-      cartItemsRows += `<tr>
+      cartItemsRows += `<tr tabindex='0'>
                           <th>${cartItem.quantity}</th><th>${cartItem.description} (${cartItem.unit})</th><th>${cartItem.pricePerUnit}</th><th>${cartItem.quantity * cartItem.pricePerUnit}</th>
                         </tr>`;
     });
