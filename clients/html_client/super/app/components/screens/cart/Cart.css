@@ -3,28 +3,36 @@
 }
 
 .cart table {
-  border-collapse:collapse;
   width:100%;
 }
 
-.cart table .cart_table_header th {
-  background-color:#3D557E; border-style:hidden; border-radius:unset;
+.cart th {
+  padding:7px;
+  text-align:left;
+  border:none; border-radius:5px;
+}
+
+.cart .cart_table_item {
+  color:#3D557E;
+  background-color:#f3f3f3;
+}
+
+.cart .cart_table_item:nth-child(even) {
+  background-color:#dddddd;
+}
+
+.cart .cart_table_item:focus  {
+  outline-color:#fbb306; background-color:#fff0ca;
+}
+
+.cart .cart_table_header th {
+  background-color:#3D557E;
   color:white;
 }
 
-.cart th {
-  border:#3d557eab; border-width:1px; border-radius:5px; border-style:solid;
-  text-align:left;
-  padding:8px;
-}
-
-.cart table tr:focus  {
-  outline-color:#f5f1e0;
-	background-color:#f5f1e0;
-}
-
-.cart tr:nth-child(even) {
-  background-color:#dddddd;
+.cart .cart_table_footer th {
+  background-color:#3D557E;
+  color:white;
 }
 
 .cart .right {
