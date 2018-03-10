@@ -63,7 +63,7 @@ class SearchServiceS3 {
     return this._getSearchItems()
       .then((searchItems) => {
         if(text === '') {
-          resolve([]);
+          return [];
         } else {
           const searchText = this._prepareTextForSearch(text);
           const matchingItemIds = searchItems.filter((itemSearchData) => {
