@@ -1,7 +1,7 @@
 class UserServiceMock {
 
   constructor() {
-    this.users = [{ name: 'test', email: 'test@test.com', password: 'test', rootInventoryItemId:'0'}];
+    this.users = [{ name:'test', email:'test@test.com', password:'test'}];
     this.loggedUser = null;
     this.responseMiliSec = Environments.get()['mock'].responseSec * 1000;
   }
@@ -13,7 +13,7 @@ class UserServiceMock {
   register(email, password) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        const newUser = { name: email, email: email, password: password, rootInventoryItemId:'0' };
+        const newUser = { name:email, email:email, password:password };
         this.users.push(newUser);
         this.loggedUser = newUser;
         resolve(newUser);

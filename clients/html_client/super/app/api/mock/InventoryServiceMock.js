@@ -13,6 +13,15 @@ class InventoryServiceMock {
     this.currentId = 3;
   }
 
+  getRootItem() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const rootItem = this.items.find((currentItem) => currentItem.parentId === null);
+        resolve(rootItem);
+      }, this.responseMiliSec);
+    });
+  }
+
   getItemById(id) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {

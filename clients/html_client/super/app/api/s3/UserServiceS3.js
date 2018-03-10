@@ -19,11 +19,9 @@ class UserServiceS3 {
   }
 
   register(email, password) {
-      const rootItem = { id:Guid.generateNewGUID(), name:'home', type:'folder', parentId:null, children:[] };
       return this._checkForExistingUser(email)
-        .then(() => ApiClient.instance.inventoryService.saveItem(rootItem))//Create root/home item
         .then(() => {
-            const userItem = { id:Guid.generateNewGUID(), name:email, email:email, password:password, rootInventoryItemId:rootItem.id };
+            const userItem = { id:Guid.generateNewGUID(), name:email, email:email, password:password };
             return S3.instance.saveItem(`user_${email}`, userItem, 'application/json')
               .then(() => this.login(email, password));
         });

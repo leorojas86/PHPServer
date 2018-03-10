@@ -13,6 +13,22 @@ class InventoryServiceS3 {
     return Promise.resolve([pathItem]);
   }
 
+  _checkForExistingRootItem() {
+    return S3.instance.hasItem('inventory_root_item')
+      .then((hasItem) => {
+        //TODO: Check when should this be created
+        /*if(!hasItem) {
+          const newItem = { id:'inventory_root_item', name:'home', type:'folder', parentId:null, children:[] };
+          return S3.instance.saveItem('inventory_root_item', newItem);
+        }*/
+      });
+  }
+
+  getRootItem() {
+    return this._checkForExistingRootItem()
+      .then(() => S3.instance.getItem('inventory_root_item'));
+  }
+
   getItemById(id) {
     return S3.instance.getItem(`item_${id}`);
   }
