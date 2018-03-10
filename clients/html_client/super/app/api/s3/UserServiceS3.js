@@ -23,7 +23,7 @@ class UserServiceS3 {
       return this._checkForExistingUser(email)
         .then(() => ApiClient.instance.inventoryService.saveItem(rootItem))//Create root/home item
         .then(() => {
-            const userItem = { name:email, email:email, password:password, rootInventoryItemId:rootItem.id };
+            const userItem = { id:Guid.generateNewGUID(), name:email, email:email, password:password, rootInventoryItemId:rootItem.id };
             return S3.instance.saveItem(`user_${email}`, userItem, 'application/json')
               .then(() => this.login(email, password));
         });

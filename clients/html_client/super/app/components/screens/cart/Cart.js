@@ -21,7 +21,7 @@ class CartModel {
   }
 
   loadCurrentCart() {
-    return ApiClient.instance.cartService.getCurrentCart(AppData.instance.data.user.id)
+    return ApiClient.instance.cartService.getCurrentCart(AppData.instance.data.user.id || AppData.instance.data.user.email)//TODO: remove email
       .then((cartInfo) => this.currentCartInfo = cartInfo);
   }
 

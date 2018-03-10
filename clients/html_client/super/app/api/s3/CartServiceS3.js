@@ -30,7 +30,7 @@ class CartServiceS3 {
   }
 
   getCartsHistory(userId) {
-    this._checkForExistingCartsHistory(userId)
+    return this._checkForExistingCartsHistory(userId)
       .then(() => S3.instance.getItem(`carts_${userId}`));
   }
 

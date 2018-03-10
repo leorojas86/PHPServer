@@ -4,10 +4,6 @@ class InventoryFileModel {
     this.component = component;
   }
 
-  get imageId() {
-    return AppData.instance.getCurrentInventoryItem().image;
-  }
-
   get imageData() {
     return this.component.imageChooser.model.imageData;
   }
@@ -16,21 +12,35 @@ class InventoryFileModel {
     return AppData.instance.getCurrentInventoryItem();
   }
 
+  get imageId() {
+    return this.item.image;
+  }
+
+  _saveImageData() {
+    if(this.imageId) {
+      return ApiClient.instance.imageService.saveImage(this.imageId, this.imageData)
+        .then(() => this.imageId);
+    } else {
+      const imageId = Guid.generateNewGUID();
+      return ApiClient.instance.imageService.saveImage(imageId, this.imageData)
+        .then(() => imageId);
+    }
+  }
+
   loadImageData() {
     return this.imageId ? ApiClient.instance.imageService.getImage(this.imageId) : Promise.resolve(null);
   }
 
-  saveImageData(imageData) {
-    if(this.imageId) {
-      return ApiClient.instance.imageService.saveImage(this.imageId, this.imageData)
+  saveData() {
+    if(this.imageData) {
+      return this._saveImageData()
+        .then((imageId) => {
+          this.item.image = imageId;
+          return ApiClient.instance.inventoryService.saveItem(this.item);
+        });
     } else {
-      const imageId = Guid.generateNewGUID();
-      return ApiClient.instance.imageService.saveImage(imageId, this.imageData)
-        .then(() => {
-          AppData.instance.getCurrentInventoryItem().image = imageId;
-          return ApiClient.instance.inventoryService.saveItem(AppData.instance.getCurrentInventoryItem());
-        })
-        .then(() => this.component.load());
+      this.item.image = undefined;
+      return ApiClient.instance.inventoryService.saveItem(this.item);
     }
   }
 
@@ -64,11 +74,11 @@ class InventoryFileView {
                 </tr>
                 <tr>
                   <th>[@unit_text@]</th>
-                  <th><input type='text' id='${this.id}_unit_input_text' placeholder='' value='${ this.component.model.item.unit }'></th>
+                  <th><input type='text' id='${this.id}_unit_input_text' placeholder='' value='${ this.component.model.item.unit || ''  }'></th>
                 </tr>
                 <tr>
                   <th>[@price_per_unit_text@]</th>
-                  <th><input type='text' id='${this.id}_price_per_unit_input_text' placeholder='' value='${ this.component.model.item.pricePerUnit }'></th>
+                  <th><input type='text' id='${this.id}_price_per_unit_input_text' placeholder='' value='${ this.component.model.item.pricePerUnit || ''  }'></th>
                 </tr>
               </table>
               ${ this.component.imageChooser.view.buildHTML() }
@@ -105,7 +115,7 @@ class InventoryFile {
 
   onSaveButtonClick() {
     this.spinner.show();
-    this.model.saveImageData()
+    this.model.saveData()
       .catch((reason) => App.instance.handleError(reason, '[@load_error_text@]'))
       .finally(() => {
         this.spinner.hide();
