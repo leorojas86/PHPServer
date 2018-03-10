@@ -28,17 +28,25 @@ class UserServiceS3 {
   }
 
   login(email, password) {
-    return S3.instance.getItem(`user_${email}`)
-      .then((user) => {
-        if(user.password === password) { //TODO: Encript password
-          this.loggedUser = user;
-          user.password = undefined;
-          Storage.setObject('LOGGED_USER', user);
-          return user;
+    return S3.instance.hasItem(`user_${email}`)
+      .then((userExists) => {
+        if(userExists) {
+          return S3.instance.getItem(`user_${email}`)
+            .then((user) => {
+              if(user.password === password) { //TODO: Encript password
+                this.loggedUser = user;
+                user.password = undefined;
+                Storage.setObject('LOGGED_USER', user);
+                return user;
+              } else {
+                throw { errorCode: 'invalid_credentials' };
+              }
+            });
         } else {
           throw { errorCode: 'invalid_credentials' };
         }
       });
+
   }
 
   logout() {
