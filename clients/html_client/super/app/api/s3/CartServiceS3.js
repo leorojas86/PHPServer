@@ -1,10 +1,28 @@
 class CartServiceS3 {
 
   constructor() {
+
+  }
+
+  _getNewCart() {
+    return { id:Guid.generateNewGUID(), status:'preparing', productsInfo:[], creationDate:new Date().toUTCString() };
+  }
+
+  _checkForExistingCartsHistory(userId) {
+    return S3.instance.hasItem(`carts_${userId}`)
+      .then((hasItem) => {
+        if(!hasItem) {
+          const newCart = this._getNewCart();
+          return this.saveCart(newCart)
+            .then(() => {
+              return this.saveCartsHistory(userId, { carts:[{ cartId:newCart.id, creationDate:newCart.creationDate }] });
+            });
+        }
+      });
   }
 
   addNewCart(userId) {
-    const newCart = { id:Guid.generateNewGUID(), status:'preparing', productsInfo:[], creationDate:Date.now().toUTCString() };
+    const newCart = this._getNewCart();
     return this.saveCart(newCart)
       .then(() => {
         return this.getCartsHistory(userId)
@@ -18,15 +36,6 @@ class CartServiceS3 {
   getCurrentCart(userId) {
     return this.getCartsHistory(userId)
       .then((cartsHistory) => this.getCartById(cartsHistory.carts[0].cartId));
-  }
-
-  _checkForExistingCartsHistory(userId) {
-    return S3.instance.hasItem(`carts_${userId}`)
-      .then((hasItem) => {
-        if(!hasItem) {
-          return this.saveCartsHistory(userId, { carts:[] });
-        }
-      });
   }
 
   getCartsHistory(userId) {
