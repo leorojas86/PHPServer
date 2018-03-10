@@ -22,6 +22,11 @@ class S3 {
         .then((data) => JSON.parse(data));
     }
 
+    getItemWithDefault(itemKey, defaultData) {
+      return this.hasItem(itemKey)
+        .then((hasItem) => hasItem ? this.getItem(itemKey) : defaultData);
+    }
+
     saveData(dataKey, data, contentType) {//TODO: do not cache images
       return new Promise((resolve, reject) => {
         this.s3.upload({

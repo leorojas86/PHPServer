@@ -20,4 +20,30 @@ class ApiClient {
       break;
     }
   }
+
+  _saveImageData(item, imageData) {
+    if(item.image) {
+      return this.imageService.saveImage(item.image, imageData)
+        .then(() => item.image);
+    } else {
+      const imageId = Guid.generateNewGUID();
+      return this.imageService.saveImage(imageId, imageData)
+        .then(() => imageId);
+    }
+  }
+
+  saveItem(item, imageData) {
+    if(imageData) {
+      return this._saveImageData(imageData)
+        .then((imageId) => {
+          item.image = imageId;
+          this.searchService.updateSearchData(item);//TODO: should we queue this to the promise?
+          return this.inventoryService.saveItem(item);
+        });
+    } else {
+      item.image = undefined;
+      this.searchService.updateSearchData(item);//TODO: should we queue this to the promise?
+      return this.inventoryService.saveItem(item);
+    }
+  }
 }

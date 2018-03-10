@@ -20,7 +20,7 @@ class SearchServiceS3 {
       if(this.searchItems) {
         resolve(this.searchItems);
       } else {
-        S3.instance.getItem('search_data')
+        S3.instance.getItemWithDefault('search_data', { items:[] })
           .then((data) => {
             this.searchItems = data.items;
             resolve(this.searchItems);
@@ -31,14 +31,16 @@ class SearchServiceS3 {
   }
 
   _saveSearchItems(searchItems) {
+    this.searchItems = searchItems;
     return S3.instance.saveItem('search_data', { items:searchItems });
   }
 
   updateSearchData(item) {
     return new Promise((resolve, reject) => {
       if(item.type === 'file') {
-        this._getSearchItems()
-          .then((searchItems) => {
+        S3.instance.getItemWithDefault('search_data', { items:[] })
+          .then((data) => {
+            const searchItems = data.items;
             const itemSearchData = searchItems.find((searchData) => searchData.itemId === item.id);
             const searchText = item.description || item.name;
             if (itemSearchData) {

@@ -16,32 +16,12 @@ class InventoryFileModel {
     return this.item.image;
   }
 
-  _saveImageData() {
-    if(this.imageId) {
-      return ApiClient.instance.imageService.saveImage(this.imageId, this.imageData)
-        .then(() => this.imageId);
-    } else {
-      const imageId = Guid.generateNewGUID();
-      return ApiClient.instance.imageService.saveImage(imageId, this.imageData)
-        .then(() => imageId);
-    }
-  }
-
   loadImageData() {
     return this.imageId ? ApiClient.instance.imageService.getImage(this.imageId) : Promise.resolve(null);
   }
 
   saveData() {
-    if(this.imageData) {
-      return this._saveImageData()
-        .then((imageId) => {
-          this.item.image = imageId;
-          return ApiClient.instance.inventoryService.saveItem(this.item);
-        });
-    } else {
-      this.item.image = undefined;
-      return ApiClient.instance.inventoryService.saveItem(this.item);
-    }
+    return ApiClient.instance.saveItem(this.item, this.imageData);
   }
 
   addToCart() {
@@ -88,9 +68,12 @@ class InventoryFileView {
 
   onDomUpdated() {
     Html.onClick(`${this.id}_add_to_cart_button`,() => this.component.onAddToCartButtonClicked());
-    Html.setDisabled(`${this.id}_save_button`, this.component.model.imageData === null);
-    Html.onClick(`${this.id}_save_button`,() => this.component.onSaveButtonClick());
-    Html.onKeyUp(`${this.id}_description_input_text`, (key) => Html.setDisabled(`${this.id}_save_button`, false));
+    Html.onClick(`${this.id}_save_button`,() => {
+      this.component.model.item.description = Html.getValue(`${this.id}_description_input_text`);
+      this.component.model.item.unit = Html.getValue(`${this.id}_unit_input_text`);
+      this.component.model.item.pricePerUnit = Html.getValue(`${this.id}_price_per_unit_input_text`);
+      this.component.onSaveButtonClick();
+    });
   }
 
 }
