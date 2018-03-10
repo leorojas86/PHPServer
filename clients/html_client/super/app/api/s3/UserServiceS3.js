@@ -46,7 +46,6 @@ class UserServiceS3 {
           throw { errorCode: 'invalid_credentials' };
         }
       });
-
   }
 
   logout() {

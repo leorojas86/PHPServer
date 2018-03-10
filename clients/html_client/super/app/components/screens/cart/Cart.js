@@ -103,7 +103,7 @@ class Cart {
   }
 
   onAddButtonClicked() {
-    App.instance.searchItemsPopup.show({ onItemAdded: () => Html.refresh(this) });
+    App.instance.searchItemsPopup.show({ onItemAdded: () => this.loadCart() });
   }
 
   onOrderButtonClicked() {
