@@ -1,7 +1,7 @@
 class SearchServiceMock {
 
   constructor() {
-    this.searchData = [];
+    this.searchItems = [];
     this.responseMiliSec = Environments.get()['mock'].responseSec * 1000;
   }
 
@@ -20,12 +20,12 @@ class SearchServiceMock {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if(item.type === 'file') {
-          const searchText = item.description != null ? item.description : item.name;
-          const itemSearchData = this.searchData.find((searchData) => searchData.itemId === item.id);
+          const itemSearchData = this.searchItems.find((searchData) => searchData.itemId === item.id);
+          const searchText = item.description || item.name;
           if (itemSearchData) {
             itemSearchData.description = searchText;
           } else {
-             this.searchData.push({ itemId:item.id, description:searchText });
+             this.searchItems.push({ itemId:item.id, description:searchText });
           }
         }
         resolve();
@@ -40,7 +40,7 @@ class SearchServiceMock {
           resolve([]);
         } else {
           const searchText = this._prepareTextForSearch(text);
-          const matchingItemIds = this.searchData.filter((itemSearchData) => {
+          const matchingItemIds = this.searchItems.filter((itemSearchData) => {
             return this._prepareTextForSearch(itemSearchData.description).includes(searchText);
           });
           resolve(matchingItemIds);

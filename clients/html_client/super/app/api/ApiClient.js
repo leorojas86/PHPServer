@@ -15,6 +15,8 @@ class ApiClient {
         this.userService = new UserServiceS3();
         this.inventoryService = new InventoryServiceS3();
         this.imageService = new ImageServiceS3();
+        this.searchService = new SearchServiceS3();
+        this.cartService = new CartServiceS3();
       break;
     }
   }
