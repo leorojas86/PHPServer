@@ -7,8 +7,8 @@ var async = require('async');
 var fs    = require('fs');
 var path  = require("path");
 var s3    = new AWS.S3({
-  accessKeyId: 'AKIAIIBKXFDEJIH72KKQ',
-  secretAccessKey: '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'
+  accessKeyId: 'AKIAJ7UAO64FK4PK5HOQ',
+  secretAccessKey: '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'
 });
 
 var BUCKET        = 'inventory-static';
