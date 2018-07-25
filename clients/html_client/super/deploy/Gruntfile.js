@@ -63,7 +63,7 @@ module.exports = (grunt) => {
 
   grunt.registerTask('prepare', [
     'clean',      //Deletes output folder
-    'copy',       //Copies index.html, spritesheet.png and jsons to output folder
+    'copy',       //Copies copies all the build ouput folder
     'replace',    //Replaces selected environment
     //'minified',   //Minifies the output/index.js
     //'obfuscator', //Obfuscate the output/index.js
