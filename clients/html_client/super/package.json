@@ -1,6 +1,7 @@
 {
   "scripts": {
     "install": "cd build && npm install && cd ../deploy && npm install",
+    "build": "cd build && npm run build",
     "deploy:mock": "cd build && npm run build && cd ../deploy && npm run deploy:mock",
     "deploy:dev": "cd build && npm run build && cd ../deploy && npm run deploy:dev"
   }

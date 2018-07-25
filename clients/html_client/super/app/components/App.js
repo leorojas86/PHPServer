@@ -52,6 +52,13 @@ class AppView {
 class App
 {
 
+	static get instance() {
+		if (App._instance) {
+			return App._instance;
+		}
+		return App._instance = new App();
+	}
+
 	constructor() {
 		this.model = new AppModel(this);
 		this.view = new AppView(this);
@@ -63,7 +70,7 @@ class App
 		this.contextMenu = Html.addChild(new DropdownMenu('context_menu'), this);
 		this.menuPopup = Html.addChild(new Popup(new MenuPopup()), this);
 		this.loginPopup = Html.addChild(new Popup(new LoginPopup()), this);
-    this.userPopup = Html.addChild(new Popup(new UserPopup()), this);
+    	this.userPopup = Html.addChild(new Popup(new UserPopup()), this);
 		this.messagePopup = Html.addChild(new Popup(new MessagePopup()), this);
 		this.textPromptPopup = Html.addChild(new Popup(new TextPromptPopup()), this);
 		this.settingsPopup = Html.addChild(new Popup(new SettingsPopup()), this);

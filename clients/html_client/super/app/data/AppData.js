@@ -1,5 +1,12 @@
 class AppData {
 
+  static get instance() {
+    if (AppData._instance) {
+      return AppData._instance;
+    }
+    return AppData._instance = new AppData();
+  }
+
   constructor() {
     this.data = {//Default values
 			user: null,

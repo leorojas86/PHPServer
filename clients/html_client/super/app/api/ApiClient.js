@@ -1,4 +1,12 @@
 class ApiClient {
+
+  static get instance() {
+    if (ApiClient._instance) {
+      return ApiClient._instance;
+    }
+    return ApiClient._instance = new ApiClient();
+  }
+
   constructor() {
     const env = Config.get().CURRENT_ENVIRONMENT;
     switch(env) {
