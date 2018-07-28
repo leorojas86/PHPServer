@@ -86,8 +86,8 @@ class App
 		console.error(errorData);
 	}
 
-	onLoggedUserChanged(user) {
-		this.model.updateLoggedUser(user);
+	onLoggedUserChanged() {
+		this.model.updateLoggedUser(ApiClient.instance.userService.loggedUser);
 		Html.refresh(App.instance);
 	}
 
