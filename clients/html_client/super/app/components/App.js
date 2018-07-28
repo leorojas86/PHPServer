@@ -31,20 +31,20 @@ class AppView {
 
 	buildHTML() {
 		return `<div id='${this.id}' class='${this.id}'>
-							${ this.component.header.view.buildHTML() }
-							${ this.component.model.currentScreen.view.buildHTML() }
-							${ this.component.contextMenu.view.buildHTML() }
-							${ this.component.menuPopup.view.buildHTML() }
-							${ this.component.loginPopup.view.buildHTML() }
-              ${ this.component.userPopup.view.buildHTML() }
-							${ this.component.settingsPopup.view.buildHTML() }
-							${ this.component.cartOptionsPopup.view.buildHTML() }
-							${ this.component.searchItemsPopup.view.buildHTML() }
-							${ this.component.addToCartPopup.view.buildHTML() }
-							${ this.component.messagePopup.view.buildHTML() }
-							${ this.component.textPromptPopup.view.buildHTML() }
-							${ this.component.confirmationPopup.view.buildHTML() }
-						</div>`;
+					${ this.component.header.view.buildHTML() }
+					${ this.component.model.currentScreen.view.buildHTML() }
+					${ this.component.contextMenu.view.buildHTML() }
+					${ this.component.menuPopup.view.buildHTML() }
+					${ this.component.loginPopup.view.buildHTML() }
+					${ this.component.userPopup.view.buildHTML() }
+					${ this.component.settingsPopup.view.buildHTML() }
+					${ this.component.cartOptionsPopup.view.buildHTML() }
+					${ this.component.searchItemsPopup.view.buildHTML() }
+					${ this.component.addToCartPopup.view.buildHTML() }
+					${ this.component.messagePopup.view.buildHTML() }
+					${ this.component.textPromptPopup.view.buildHTML() }
+					${ this.component.confirmationPopup.view.buildHTML() }
+				</div>`;
 	}
 
 }

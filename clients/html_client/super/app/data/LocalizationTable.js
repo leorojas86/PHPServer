@@ -1,5 +1,4 @@
 class LocalizationTable {
-
   static get() {
     return {
       'email_text': { en: 'Email', es: 'Correo Electrónico' },
@@ -71,5 +70,4 @@ class LocalizationTable {
       'user_already_exists': { en: 'User already exists.', es: 'El usuario ya existe.' }
     };
   }
-
 }
