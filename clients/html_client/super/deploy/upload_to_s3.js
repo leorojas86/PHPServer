@@ -6,10 +6,7 @@ var AWS   = require('aws-sdk');
 var async = require('async');
 var fs    = require('fs');
 var path  = require("path");
-var s3    = new AWS.S3({
-  accessKeyId: 'AKIAJ7UAO64FK4PK5HOQ',
-  secretAccessKey: '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'
-});
+var s3    = new AWS.S3();
 
 var BUCKET        = 'inventory-static';
 var DEPLOY_FOLDER = path.resolve('./output');
